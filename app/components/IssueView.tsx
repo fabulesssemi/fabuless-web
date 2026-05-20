@@ -112,7 +112,10 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
 
         {showEarnings && issue.earnings.length > 0 && (
           <div className="border border-gray-100 rounded-lg p-4">
-            <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-3">Upcoming Earnings</div>
+            <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-1">Upcoming Earnings</div>
+            <div className="text-[10px] text-gray-400 mb-3 leading-snug">
+              Avg = 2-day post-earnings stock move over the past 20 quarters
+            </div>
             <div className="space-y-3">
               {issue.earnings.map((e) => (
                 <div key={e.ticker} className="border-b border-gray-50 pb-3 last:border-0 last:pb-0">
@@ -123,7 +126,7 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                   <div className="text-[11px] text-gray-400">{e.date}</div>
                   <div className="flex gap-3 mt-0.5 text-[11px] text-gray-500">
                     <span>EPS est. {e.eps}</span>
-                    <span>{e.avgMove} avg</span>
+                    <span>{e.avgMove} post-ER</span>
                   </div>
                 </div>
               ))}

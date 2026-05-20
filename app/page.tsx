@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const latestStories = [
   {
     category: "COMPUTE",
@@ -34,6 +38,27 @@ const latestStories = [
 ];
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    const res = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      setStatus("success");
+      setEmail("");
+    } else if (res.status === 409) {
+      setStatus("duplicate");
+    } else {
+      setStatus("error");
+    }
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-6">
       {/* Hero */}
@@ -47,20 +72,33 @@ export default function Home() {
           through PhD-level technical writing.
         </p>
 
-        {/* Subscribe form */}
-        <form className="flex gap-3 max-w-md">
-          <input
-            type="email"
-            placeholder="your@email.com"
-            className="flex-1 px-4 py-2.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#0E7490] transition-colors"
-          />
-          <button
-            type="submit"
-            className="px-5 py-2.5 bg-[#0E7490] text-white text-sm rounded hover:bg-[#0c6480] transition-colors whitespace-nowrap"
-          >
-            Subscribe free
-          </button>
-        </form>
+        {status === "success" ? (
+          <p className="text-sm text-emerald-600 font-medium">You&apos;re in. See you Friday.</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex gap-3 max-w-md">
+            <input
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-1 px-4 py-2.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#0E7490] transition-colors"
+            />
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="px-5 py-2.5 bg-[#0E7490] text-white text-sm rounded hover:bg-[#0c6480] transition-colors whitespace-nowrap disabled:opacity-60"
+            >
+              {status === "loading" ? "..." : "Subscribe free"}
+            </button>
+          </form>
+        )}
+        {status === "duplicate" && (
+          <p className="mt-2 text-sm text-gray-400">That email is already subscribed.</p>
+        )}
+        {status === "error" && (
+          <p className="mt-2 text-sm text-red-500">Something went wrong — try again.</p>
+        )}
       </section>
 
       {/* Latest issue */}

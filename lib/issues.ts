@@ -24,6 +24,7 @@ export type Podcast = {
   show: string;
   title: string;
   url: string;
+  oneliner?: string;
 };
 
 export type Issue = {
@@ -118,16 +119,19 @@ export const issues: Issue[] = [
         show: "The Circuit",
         title: "Ep. 165: Cerebras IPO, Premium Tokens, Neo Clouds, and the Angstrom Era",
         url: "https://share.transistor.fm/s/8357dfce",
+        oneliner: "Ben Bajarin and Jay Goldberg break down the Cerebras IPO, the rise of neo cloud providers, and what the angstrom era means for foundry economics.",
       },
       {
         show: "Chip Stock Investor",
         title: "Faraj Aalaei on Why AI Will Let Anyone Design a Chip — and What Happens When the Semiconductor Industry Hits the Wall",
         url: "https://open.spotify.com/show/4QSHBYlMjTwwy1qK2mlM1F",
+        oneliner: "Veteran chip exec Faraj Aalaei argues AI-assisted design will democratize custom silicon, and weighs where the industry's physical scaling limits will bite.",
       },
       {
         show: "Invest Like the Best",
         title: "Gavin Baker — Watts and Wafers (Ep. 473)",
         url: "https://www.joincolossus.com/episodes",
+        oneliner: "Investor Gavin Baker connects AI compute demand to power and wafer supply, framing energy as the binding constraint on the chip buildout.",
       },
     ],
     earnings: [

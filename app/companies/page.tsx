@@ -81,7 +81,7 @@ export default async function CompaniesIndex() {
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-[11px] text-slate-500">
                   {quote?.marketCap != null
-                    ? `Mkt cap ${fmtMarketCap(quote.marketCap)}`
+                    ? `Mkt cap ${fmtMarketCap(quote.marketCap, quote.currency ?? "USD")}`
                     : ""}
                 </span>
                 {hasDeepDive ? (

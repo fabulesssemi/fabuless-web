@@ -37,8 +37,9 @@ function pct(n: number | null, sign = true): string {
   if (n == null) return "—";
   return `${sign && n > 0 ? "+" : ""}${n.toFixed(1)}%`;
 }
-function money(n: number | null): string {
+function money(n: number | null, ticker: string): string {
   if (n == null) return "—";
+  if (ticker.endsWith(".KS")) return `₩${Math.round(n).toLocaleString()}`;
   return `$${n.toFixed(0)}`;
 }
 
@@ -94,7 +95,9 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
             >
               <td className="px-3 py-3">
                 <Link href={`/companies/${r.slug}`} className="group">
-                  <span className="font-mono text-amber-400 text-xs">{r.ticker}</span>
+                  <span className="font-mono text-amber-400 text-xs">
+                    {r.ticker.endsWith(".KS") ? "KRX" : r.ticker}
+                  </span>
                   <span className="block text-slate-300 group-hover:text-amber-300 transition-colors text-[13px]">
                     {r.name}
                   </span>
@@ -102,7 +105,7 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
               </td>
               <td className="px-3 py-3 text-slate-300">{r.rating}</td>
               <td className="px-3 py-3 text-right tabular-nums text-slate-200">
-                {money(r.avgPT)}
+                {money(r.avgPT, r.ticker)}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.upside)}`}>
                 {pct(r.upside)}

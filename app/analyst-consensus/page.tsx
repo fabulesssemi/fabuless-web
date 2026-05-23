@@ -208,7 +208,9 @@ function RankCard({
                   <div className="flex items-center gap-3 min-w-0">
                     <span className="text-[11px] text-slate-600 w-3">{i + 1}</span>
                     <div className="min-w-0">
-                      <span className="font-mono text-amber-400 text-xs">{v.ticker}</span>
+                      <span className="font-mono text-amber-400 text-xs">
+                      {v.ticker.endsWith(".KS") ? "KRX" : v.ticker}
+                    </span>
                       <span className="block text-[13px] text-slate-300 group-hover:text-amber-300 transition-colors truncate">
                         {v.name}
                       </span>

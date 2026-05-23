@@ -3,12 +3,13 @@ import type { ReactNode } from "react";
 // ---------------------------------------------------------------------------
 // Formatters
 // ---------------------------------------------------------------------------
-export function fmtMarketCap(n?: number): string {
+export function fmtMarketCap(n?: number, currency = "USD"): string {
   if (n == null) return "—";
-  if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-  if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
-  return `$${n.toLocaleString()}`;
+  const sym = currency === "KRW" ? "₩" : "$";
+  if (n >= 1e12) return `${sym}${(n / 1e12).toFixed(2)}T`;
+  if (n >= 1e9) return `${sym}${(n / 1e9).toFixed(1)}B`;
+  if (n >= 1e6) return `${sym}${(n / 1e6).toFixed(1)}M`;
+  return `${sym}${n.toLocaleString()}`;
 }
 
 export function fmtPrice(n?: number, currency = "USD"): string {

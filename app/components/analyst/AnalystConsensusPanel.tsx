@@ -133,13 +133,22 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
               <div className={`text-2xl font-semibold tabular-nums ${changeTone(view.impliedUpsidePct)}`}>
                 {view.impliedUpsidePct != null ? fmtPercent(view.impliedUpsidePct) : "—"}
               </div>
-              {view.lowPriceTarget != null && view.highPriceTarget != null && (
-                <div className="text-[11px] text-slate-500">
-                  {fmtPrice(view.lowPriceTarget, currency)}–{fmtPrice(view.highPriceTarget, currency)}
-                </div>
-              )}
             </div>
           </div>
+
+          {/* PT RANGE BAR */}
+          {view.lowPriceTarget != null &&
+            view.highPriceTarget != null &&
+            view.avgPriceTarget != null &&
+            view.currentPrice != null && (
+              <PTRangeBar
+                low={view.lowPriceTarget}
+                current={view.currentPrice}
+                avg={view.avgPriceTarget}
+                high={view.highPriceTarget}
+                currency={currency}
+              />
+            )}
 
           {view.distribution && (
             <div>
@@ -272,6 +281,80 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
         </div>
       )}
     </Section>
+  );
+}
+
+function PTRangeBar({
+  low, current, avg, high, currency,
+}: {
+  low: number; current: number; avg: number; high: number; currency: string;
+}) {
+  const range = high - low;
+  if (range <= 0) return null;
+  const pct = (v: number) => Math.max(0, Math.min(100, ((v - low) / range) * 100));
+  const curPct = pct(current);
+  const avgPct = pct(avg);
+
+  return (
+    <div>
+      <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-3">
+        Price Target Range
+      </div>
+      <div className="relative">
+        {/* Track */}
+        <div className="h-1 rounded-full bg-white/10 relative">
+          {/* Gray: low → current */}
+          <div
+            className="absolute inset-y-0 left-0 bg-slate-600 rounded-l-full"
+            style={{ width: `${curPct}%` }}
+          />
+          {/* Emerald: current → avg (the upside) */}
+          {avgPct > curPct && (
+            <div
+              className="absolute inset-y-0 bg-emerald-500"
+              style={{ left: `${curPct}%`, width: `${avgPct - curPct}%` }}
+            />
+          )}
+          {/* Faint: avg → high */}
+          <div
+            className="absolute inset-y-0 bg-emerald-500/20 rounded-r-full"
+            style={{ left: `${Math.max(curPct, avgPct)}%`, width: `${100 - Math.max(curPct, avgPct)}%` }}
+          />
+          {/* Current price dot */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white ring-2 ring-slate-900 z-10"
+            style={{ left: `${curPct}%` }}
+          />
+          {/* Avg PT dot */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-900 z-10"
+            style={{ left: `${avgPct}%` }}
+          />
+        </div>
+        {/* Low / High endpoint labels */}
+        <div className="flex justify-between mt-2 text-[10px] text-slate-500">
+          <span>{fmtPrice(low, currency)} Low</span>
+          <span>High {fmtPrice(high, currency)}</span>
+        </div>
+      </div>
+      {/* Legend */}
+      <div className="flex gap-5 mt-3 text-[11px]">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-white inline-block shrink-0" />
+          <span className="text-slate-400">
+            Current{" "}
+            <span className="text-white tabular-nums">{fmtPrice(current, currency)}</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shrink-0" />
+          <span className="text-slate-400">
+            Avg PT{" "}
+            <span className="text-emerald-400 tabular-nums">{fmtPrice(avg, currency)}</span>
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 

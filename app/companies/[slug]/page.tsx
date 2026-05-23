@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { allCompanySlugs, getCompanyMeta, getEditorial } from "@/lib/companies";
 import { getCompanyData } from "@/lib/providers";
+import { getAnalystView } from "@/lib/analyst";
 import { CompanyDashboard } from "@/app/components/company/CompanyDashboard";
 
 // Pre-render all known companies at build; refresh data hourly (ISR).
@@ -36,7 +37,17 @@ export default async function CompanyPage({
   if (!meta) notFound();
 
   const editorial = getEditorial(meta.slug);
-  const data = await getCompanyData(meta.yahooSymbol);
+  const [data, analyst] = await Promise.all([
+    getCompanyData(meta.yahooSymbol),
+    getAnalystView(meta),
+  ]);
 
-  return <CompanyDashboard meta={meta} editorial={editorial} data={data} />;
+  return (
+    <CompanyDashboard
+      meta={meta}
+      editorial={editorial}
+      data={data}
+      analyst={analyst}
+    />
+  );
 }

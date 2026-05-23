@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { CompanyEditorial, CompanyMeta } from "@/lib/companies";
 import { COMPANY_UNIVERSE, getCompanyMeta } from "@/lib/companies";
 import type { CompanyMarketData } from "@/lib/providers/types";
+import type { AnalystView } from "@/lib/analyst/types";
+import { AnalystConsensusPanel } from "@/app/components/analyst/AnalystConsensusPanel";
 import {
   ChipGroup,
   Pill,
@@ -20,12 +22,14 @@ export function CompanyDashboard({
   meta,
   editorial,
   data,
+  analyst,
 }: {
   meta: CompanyMeta;
   editorial?: CompanyEditorial;
   data: CompanyMarketData;
+  analyst?: AnalystView;
 }) {
-  const { profile, quote, earnings, consensus, news } = data;
+  const { profile, quote, earnings, news } = data;
   const currency = quote?.currency ?? "USD";
 
   return (
@@ -253,6 +257,9 @@ export function CompanyDashboard({
                 </div>
               </Section>
             )}
+
+            {/* 8. ANALYST CONSENSUS (rich) */}
+            {analyst && <AnalystConsensusPanel view={analyst} />}
           </div>
 
           {/* SIDEBAR */}
@@ -295,88 +302,6 @@ export function CompanyDashboard({
                 </div>
               ) : (
                 <Unavailable what="Earnings data" />
-              )}
-            </Section>
-
-            {/* 8. ANALYST CONSENSUS */}
-            <Section eyebrow="Wall Street" title="Analyst Consensus">
-              {consensus ? (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-2xl font-semibold text-white">
-                        {consensus.rating ?? "—"}
-                      </div>
-                      {consensus.numberOfAnalysts != null && (
-                        <div className="text-[11px] text-slate-500">
-                          {consensus.numberOfAnalysts} analysts
-                        </div>
-                      )}
-                    </div>
-                    {consensus.targetMean != null && (
-                      <div className="text-right">
-                        <div className="text-[11px] uppercase tracking-wider text-slate-500">
-                          Avg. Price Target
-                        </div>
-                        <div className="text-lg font-semibold text-white tabular-nums">
-                          {fmtPrice(consensus.targetMean, currency)}
-                        </div>
-                        {consensus.upsidePercent != null && (
-                          <div
-                            className={`text-xs font-medium ${changeTone(consensus.upsidePercent)}`}
-                          >
-                            {fmtPercent(consensus.upsidePercent)} vs. current
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  {consensus.distribution && (
-                    <RatingBar dist={consensus.distribution} />
-                  )}
-
-                  {consensus.targetLow != null && consensus.targetHigh != null && (
-                    <div className="flex justify-between text-[11px] text-slate-500">
-                      <span>Low {fmtPrice(consensus.targetLow, currency)}</span>
-                      <span>High {fmtPrice(consensus.targetHigh, currency)}</span>
-                    </div>
-                  )}
-
-                  {consensus.recentActions && consensus.recentActions.length > 0 && (
-                    <div className="border-t border-white/10 pt-3">
-                      <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
-                        Recent Analyst Actions
-                      </div>
-                      <ul className="space-y-1.5">
-                        {consensus.recentActions.slice(0, 4).map((a, i) => (
-                          <li
-                            key={`${a.firm}-${i}`}
-                            className="flex items-center justify-between gap-2 text-[12px]"
-                          >
-                            <span className="text-slate-300 truncate">{a.firm}</span>
-                            <span className="text-slate-500 shrink-0">
-                              {a.toGrade ?? a.action ?? ""}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {(editorial?.consensusBullThemes || editorial?.consensusBearThemes) && (
-                    <div className="border-t border-white/10 pt-3 space-y-2">
-                      {editorial?.consensusBullThemes && (
-                        <ThemeLine label="Bull themes" tone="emerald" items={editorial.consensusBullThemes} />
-                      )}
-                      {editorial?.consensusBearThemes && (
-                        <ThemeLine label="Bear themes" tone="rose" items={editorial.consensusBearThemes} />
-                      )}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Unavailable what="Analyst data" />
               )}
             </Section>
 
@@ -463,60 +388,6 @@ function CaseColumn({
           </li>
         ))}
       </ul>
-    </div>
-  );
-}
-
-function RatingBar({
-  dist,
-}: {
-  dist: { strongBuy: number; buy: number; hold: number; sell: number; strongSell: number };
-}) {
-  const total =
-    dist.strongBuy + dist.buy + dist.hold + dist.sell + dist.strongSell || 1;
-  const segs = [
-    { v: dist.strongBuy + dist.buy, c: "bg-emerald-500", label: "Buy" },
-    { v: dist.hold, c: "bg-slate-500", label: "Hold" },
-    { v: dist.sell + dist.strongSell, c: "bg-rose-500", label: "Sell" },
-  ];
-  return (
-    <div>
-      <div className="flex h-2 w-full overflow-hidden rounded-full bg-white/5">
-        {segs.map((s) => (
-          <div
-            key={s.label}
-            className={s.c}
-            style={{ width: `${(s.v / total) * 100}%` }}
-          />
-        ))}
-      </div>
-      <div className="mt-1.5 flex justify-between text-[11px] text-slate-500">
-        <span className="text-emerald-400">{segs[0].v} Buy</span>
-        <span>{segs[1].v} Hold</span>
-        <span className="text-rose-400">{segs[2].v} Sell</span>
-      </div>
-    </div>
-  );
-}
-
-function ThemeLine({
-  label,
-  items,
-  tone,
-}: {
-  label: string;
-  items: string[];
-  tone: "emerald" | "rose";
-}) {
-  const color = tone === "emerald" ? "text-emerald-400/80" : "text-rose-400/80";
-  return (
-    <div>
-      <div className={`text-[11px] uppercase tracking-wider mb-1 ${color}`}>
-        {label}
-      </div>
-      <p className="text-[12px] text-slate-400 leading-relaxed">
-        {items.join(" · ")}
-      </p>
     </div>
   );
 }

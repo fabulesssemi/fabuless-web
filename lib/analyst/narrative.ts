@@ -94,6 +94,11 @@ function pct(n?: number, withSign = true): string {
 /**
  * Build the grounded narrative sentence(s). `themes` come from the curated
  * editorial layer so the prose names real drivers (e.g. "Blackwell ramp").
+ *
+ * Does NOT include a "TICKER:" prefix — callers are responsible for labeling
+ * context (e.g. the dashboard NarrativeColumn shows the company name separately).
+ * Does NOT repeat sentiment direction or themes — those are rendered as badges
+ * and separate sections in the UI.
  */
 export function buildNarrative(args: {
   ticker: string;
@@ -104,48 +109,124 @@ export function buildNarrative(args: {
   bullThemes: string[];
   bearThemes: string[];
 }): string {
-  const { ticker, snap, delta, direction, estimate, bullThemes, bearThemes } =
-    args;
+  const { snap, delta, direction, estimate } = args;
 
-  const facts: string[] = [];
-  if (snap.consensusRating)
-    facts.push(`consensus ${snap.consensusRating.toLowerCase()}`);
-  if (snap.impliedUpsidePct != null)
-    facts.push(`${pct(snap.impliedUpsidePct)} implied upside`);
-
-  // Action facts (last 30d)
+  const bs = snap.distribution ? buyShare(snap.distribution) : undefined;
+  const bsRounded = bs != null ? Math.round(bs) : undefined;
   const up = snap.upgrades30d ?? 0;
   const down = snap.downgrades30d ?? 0;
-  if (up || down) {
-    if (up && down) facts.push(`${up} upgrade${up > 1 ? "s" : ""} vs ${down} downgrade${down > 1 ? "s" : ""} (30d)`);
-    else if (up) facts.push(`${up} upgrade${up > 1 ? "s" : ""} (30d)`);
-    else facts.push(`${down} downgrade${down > 1 ? "s" : ""} (30d)`);
+  const upside = snap.impliedUpsidePct;
+  const n = snap.numberOfAnalysts;
+  const hasPTMove =
+    delta?.ptChangePct != null && Math.abs(delta.ptChangePct) >= 0.5;
+
+  // ── IMPROVING ────────────────────────────────────────────────────────────
+  if (direction === "improving") {
+    if (up >= 2 && bsRounded != null) {
+      const tail = hasPTMove && delta!.ptChangePct! > 0
+        ? `, with the average price target up ${pct(delta!.ptChangePct)}.`
+        : estimate === "rising"
+          ? " as EPS estimates continue drifting higher."
+          : ".";
+      return (
+        `${up} upgrade${up > 1 ? "s" : ""} in the last month — ` +
+        `${bsRounded}% of analysts now carry a buy rating` +
+        tail
+      );
+    }
+    if (hasPTMove && delta!.ptChangePct! > 0) {
+      const tail = upside != null
+        ? `, implying ${pct(upside, false)} upside at current levels.`
+        : ".";
+      return (
+        `Average price target up ${pct(delta!.ptChangePct)} since ${delta!.priorSnapshotDate}` +
+        tail
+      );
+    }
+    if (bsRounded != null && bsRounded >= 70) {
+      const extra = estimate === "rising"
+        ? ", with EPS estimates trending higher."
+        : up > 0
+          ? `, with ${up} upgrade${up > 1 ? "s" : ""} in the past month.`
+          : ".";
+      return `${bsRounded}% of covering analysts carry a buy rating${extra}`;
+    }
+    // fallback improving
+    if (estimate === "rising") {
+      return bsRounded != null
+        ? `Estimates are drifting higher — ${bsRounded}% buy-rated${n != null ? ` across ${n} analysts` : ""}.`
+        : "Estimates are drifting higher as analyst activity picks up.";
+    }
+    return bsRounded != null
+      ? `Street activity is picking up — ${bsRounded}% buy-rated${n != null ? ` among ${n} analysts` : ""}.`
+      : "Analyst sentiment is trending in a more constructive direction.";
   }
 
-  // PT change fact (only when we have stored history)
-  if (delta?.ptChangePct != null && Math.abs(delta.ptChangePct) >= 0.1) {
-    facts.push(`avg PT ${pct(delta.ptChangePct)} since ${delta.priorSnapshotDate}`);
+  // ── WEAKENING ────────────────────────────────────────────────────────────
+  if (direction === "weakening") {
+    if (down >= 2 && bsRounded != null) {
+      const tail = estimate === "falling"
+        ? ", with EPS estimates also moving lower."
+        : ".";
+      return (
+        `${down} downgrade${down > 1 ? "s" : ""} in the last month — ` +
+        `buy share has slipped to ${bsRounded}%` +
+        tail
+      );
+    }
+    if (hasPTMove && delta!.ptChangePct! < 0) {
+      const tail = bsRounded != null
+        ? ` — ${bsRounded}% of analysts still carry a buy rating.`
+        : ".";
+      return (
+        `Average price target down ${pct(delta!.ptChangePct)} since ${delta!.priorSnapshotDate}` +
+        tail
+      );
+    }
+    if (estimate === "falling") {
+      const revDown = snap.revisions?.epsDownLast30d;
+      const base = revDown != null && revDown > 0
+        ? `${revDown} downward EPS revision${revDown > 1 ? "s" : ""} in the past 30 days`
+        : "EPS estimates are drifting lower";
+      const tail = bsRounded != null ? ` — buy share now at ${bsRounded}%.` : ".";
+      return base + tail;
+    }
+    // fallback weakening
+    const tail = down > 0
+      ? `, with ${down} downgrade${down > 1 ? "s" : ""} over the past month.`
+      : ".";
+    return bsRounded != null
+      ? `Buy share has drifted lower to ${bsRounded}%${tail}`
+      : `Analyst sentiment has softened${tail}`;
   }
 
-  // Estimate fact
-  if (estimate === "rising") facts.push("EPS estimates trending up");
-  else if (estimate === "falling") facts.push("EPS estimates trending down");
+  // ── STABLE ───────────────────────────────────────────────────────────────
+  if (bsRounded != null && bsRounded >= 75) {
+    const extra = estimate === "rising"
+      ? ", with EPS estimates still trending higher."
+      : estimate === "falling"
+        ? ", though estimates have been ticking lower."
+        : n != null
+          ? ` across ${n} analysts — no material rating shifts in the past month.`
+          : " — no material rating shifts in the past month.";
+    return `Consensus is firmly buy-rated at ${bsRounded}%${extra}`;
+  }
+  if (bsRounded != null) {
+    const estClause = estimate === "rising"
+      ? ", with estimates still trending higher"
+      : estimate === "falling"
+        ? ", though estimates have been drifting lower"
+        : "";
+    return (
+      `Rating mix unchanged — ${bsRounded}% buy-rated` +
+      (n != null ? ` among ${n} analysts` : "") +
+      estClause +
+      "."
+    );
+  }
 
-  const lead =
-    direction === "improving"
-      ? "Sentiment improving"
-      : direction === "weakening"
-        ? "Sentiment weakening"
-        : "Sentiment broadly stable";
-
-  const themes = direction === "weakening" ? bearThemes : bullThemes;
-  const themeLabel = direction === "weakening" ? "Key concerns" : "Key themes";
-  const themeClause =
-    themes.length > 0
-      ? ` ${themeLabel}: ${themes.slice(0, 2).join("; ")}.`
-      : "";
-
-  const factClause = facts.length ? ` — ${facts.join(", ")}.` : ".";
-
-  return `${ticker}: ${lead}${factClause}${themeClause}`;
+  // absolute fallback
+  return snap.consensusRating
+    ? `Consensus holds at ${snap.consensusRating.toLowerCase()}${upside != null ? ` with ${pct(upside, false)} implied upside` : ""}.`
+    : "Analyst data is refreshed hourly.";
 }

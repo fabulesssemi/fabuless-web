@@ -281,14 +281,21 @@ function NarrativeColumn({
         <p className="text-[13px] text-slate-500 italic">Nothing notable right now.</p>
       ) : (
         <ul className="space-y-3">
-          {views.map((v) => (
-            <li
-              key={v.ticker}
-              className="rounded-xl border border-white/10 bg-white/[0.02] p-3"
-            >
-              <p className="text-[13px] text-slate-300 leading-relaxed">{v.narrative}</p>
-            </li>
-          ))}
+          {views.map((v) => {
+            const slug = slugByTicker.get(v.ticker) ?? v.ticker.toLowerCase();
+            const name = nameByTicker.get(v.ticker) ?? v.ticker;
+            return (
+              <li key={v.ticker} className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
+                <Link href={`/companies/${slug}`} className="group block">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="font-mono text-[11px] text-amber-400">{displayTicker(v.ticker)}</span>
+                    <span className="text-[11px] text-slate-500 truncate group-hover:text-amber-300 transition-colors">{name}</span>
+                  </div>
+                  <p className="text-[13px] text-slate-300 leading-relaxed">{v.narrative}</p>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

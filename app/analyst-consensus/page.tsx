@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 };
 
 const slugByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.slug]));
+const nameByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.name]));
 
 export default async function AnalystConsensusDashboard() {
   const views = await getAllAnalystViews();
@@ -243,7 +244,9 @@ function HeatTile({ view }: { view: AnalystView }) {
       style={{ background: `hsl(${hue}, 45%, 22%)` }}
     >
       <div className="flex items-center justify-between">
-        <span className="font-mono text-xs text-white/90">{view.ticker}</span>
+        <span className="font-mono text-xs text-white/90">
+          {nameByTicker.get(view.ticker) ?? view.ticker}
+        </span>
         <span className="text-white/70 text-xs">{arrow}</span>
       </div>
       <div className="mt-2 text-2xl font-semibold text-white tabular-nums">

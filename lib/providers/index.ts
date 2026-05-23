@@ -93,15 +93,20 @@ async function collectConsensus(
 async function collectNews(
   symbol: string,
   limit: number,
+  keywords?: string[],
 ): Promise<NewsItem[]> {
   const lists = await Promise.all(
-    newsProviders.map((p) => safe(() => p.getNews(symbol, { limit }))),
+    newsProviders.map((p) => safe(() => p.getNews(symbol, { limit: limit * 3 }))),
   );
   const seen = new Set<string>();
   const out: NewsItem[] = [];
   for (const list of lists) {
     for (const item of list ?? []) {
       if (!item.url || seen.has(item.url)) continue;
+      if (keywords?.length) {
+        const title = (item.title ?? "").toLowerCase();
+        if (!keywords.some((kw) => title.includes(kw.toLowerCase()))) continue;
+      }
       seen.add(item.url);
       out.push(item);
     }
@@ -112,13 +117,13 @@ async function collectNews(
 
 // Uncached aggregation. Runs every category in parallel and records which ones
 // came back empty so the UI can show a graceful "unavailable" state.
-async function fetchCompanyData(symbol: string): Promise<CompanyMarketData> {
+async function fetchCompanyData(symbol: string, newsKeywords?: string[]): Promise<CompanyMarketData> {
   const [profile, quote, earnings, consensus, news] = await Promise.all([
     collectProfile(symbol),
     collectQuote(symbol),
     collectEarnings(symbol),
     collectConsensus(symbol),
-    collectNews(symbol, 8),
+    collectNews(symbol, 8, newsKeywords),
   ]);
 
   const failures: string[] = [];
@@ -136,9 +141,9 @@ async function fetchCompanyData(symbol: string): Promise<CompanyMarketData> {
  * `company:<symbol>` so it can be revalidated on demand later (e.g. after the
  * newsletter pipeline runs). Suitable for ISR pages.
  */
-export function getCompanyData(symbol: string): Promise<CompanyMarketData> {
+export function getCompanyData(symbol: string, newsKeywords?: string[]): Promise<CompanyMarketData> {
   const cached = unstable_cache(
-    () => fetchCompanyData(symbol),
+    () => fetchCompanyData(symbol, newsKeywords),
     ["company-data", symbol],
     { tags: [`company:${symbol}`], revalidate: 3600 },
   );

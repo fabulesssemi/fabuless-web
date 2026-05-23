@@ -13,6 +13,7 @@ export type CompanyMeta = {
   yahooSymbol: string; // symbol the data layer queries
   sector: string; // sublabel under the name
   exchangeLabel?: string; // optional, for foreign listings
+  newsKeywords: string[]; // title must contain at least one (case-insensitive) for news to show
 };
 
 export type CompanyEditorial = {
@@ -47,18 +48,18 @@ export type CompanyEditorial = {
 // The universe — 12 companies. Live data works for ALL of these immediately.
 // ---------------------------------------------------------------------------
 export const COMPANY_UNIVERSE: CompanyMeta[] = [
-  { slug: "nvda", ticker: "NVDA", name: "NVIDIA", yahooSymbol: "NVDA", sector: "AI GPUs / Accelerated Computing" },
-  { slug: "amd", ticker: "AMD", name: "AMD", yahooSymbol: "AMD", sector: "CPUs & AI GPUs (x86 + Instinct)" },
-  { slug: "avgo", ticker: "AVGO", name: "Broadcom", yahooSymbol: "AVGO", sector: "Custom AI ASICs & Networking" },
-  { slug: "mrvl", ticker: "MRVL", name: "Marvell", yahooSymbol: "MRVL", sector: "Custom AI Silicon & Optical Interconnect" },
-  { slug: "tsm", ticker: "TSM", name: "TSMC", yahooSymbol: "TSM", sector: "Leading-Edge Foundry" },
-  { slug: "asml", ticker: "ASML", name: "ASML", yahooSymbol: "ASML", sector: "EUV Lithography Equipment" },
-  { slug: "arm", ticker: "ARM", name: "Arm Holdings", yahooSymbol: "ARM", sector: "CPU IP & Instruction Set" },
-  { slug: "mu", ticker: "MU", name: "Micron", yahooSymbol: "MU", sector: "HBM & DRAM/NAND Memory" },
-  { slug: "intc", ticker: "INTC", name: "Intel", yahooSymbol: "INTC", sector: "x86 CPUs & Foundry (IDM)" },
-  { slug: "qcom", ticker: "QCOM", name: "Qualcomm", yahooSymbol: "QCOM", sector: "Mobile SoCs & Edge AI" },
-  { slug: "skhynix", ticker: "000660.KS", name: "SK Hynix", yahooSymbol: "000660.KS", sector: "HBM & DRAM Memory", exchangeLabel: "KRX: 000660" },
-  { slug: "samsung", ticker: "005930.KS", name: "Samsung Electronics", yahooSymbol: "005930.KS", sector: "Memory, Foundry & Devices", exchangeLabel: "KRX: 005930" },
+  { slug: "nvda", ticker: "NVDA", name: "NVIDIA", yahooSymbol: "NVDA", sector: "AI GPUs / Accelerated Computing", newsKeywords: ["nvidia", "nvda"] },
+  { slug: "amd", ticker: "AMD", name: "AMD", yahooSymbol: "AMD", sector: "CPUs & AI GPUs (x86 + Instinct)", newsKeywords: ["amd", "advanced micro devices", "advanced micro"] },
+  { slug: "avgo", ticker: "AVGO", name: "Broadcom", yahooSymbol: "AVGO", sector: "Custom AI ASICs & Networking", newsKeywords: ["broadcom", "avgo"] },
+  { slug: "mrvl", ticker: "MRVL", name: "Marvell", yahooSymbol: "MRVL", sector: "Custom AI Silicon & Optical Interconnect", newsKeywords: ["marvell", "mrvl"] },
+  { slug: "tsm", ticker: "TSM", name: "TSMC", yahooSymbol: "TSM", sector: "Leading-Edge Foundry", newsKeywords: ["tsmc", "taiwan semiconductor"] },
+  { slug: "asml", ticker: "ASML", name: "ASML", yahooSymbol: "ASML", sector: "EUV Lithography Equipment", newsKeywords: ["asml"] },
+  { slug: "arm", ticker: "ARM", name: "Arm Holdings", yahooSymbol: "ARM", sector: "CPU IP & Instruction Set", newsKeywords: ["arm holdings", "arm chips", "arm-based", "arm's", "arm stock", "arm ipo"] },
+  { slug: "mu", ticker: "MU", name: "Micron", yahooSymbol: "MU", sector: "HBM & DRAM/NAND Memory", newsKeywords: ["micron", "micron technology"] },
+  { slug: "intc", ticker: "INTC", name: "Intel", yahooSymbol: "INTC", sector: "x86 CPUs & Foundry (IDM)", newsKeywords: ["intel", "intc"] },
+  { slug: "qcom", ticker: "QCOM", name: "Qualcomm", yahooSymbol: "QCOM", sector: "Mobile SoCs & Edge AI", newsKeywords: ["qualcomm", "qcom"] },
+  { slug: "skhynix", ticker: "000660.KS", name: "SK Hynix", yahooSymbol: "000660.KS", sector: "HBM & DRAM Memory", exchangeLabel: "KRX: 000660", newsKeywords: ["sk hynix", "hynix"] },
+  { slug: "samsung", ticker: "005930.KS", name: "Samsung Electronics", yahooSymbol: "005930.KS", sector: "Memory, Foundry & Devices", exchangeLabel: "KRX: 005930", newsKeywords: ["samsung"] },
 ];
 
 const metaBySlug = new Map(COMPANY_UNIVERSE.map((c) => [c.slug, c]));

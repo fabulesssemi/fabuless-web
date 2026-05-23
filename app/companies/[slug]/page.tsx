@@ -38,7 +38,7 @@ export default async function CompanyPage({
 
   const editorial = getEditorial(meta.slug);
   const [data, analyst] = await Promise.all([
-    getCompanyData(meta.yahooSymbol),
+    getCompanyData(meta.yahooSymbol, meta.newsKeywords),
     getAnalystView(meta),
   ]);
 

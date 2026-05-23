@@ -3,6 +3,7 @@
 // (the daily snapshot capture).
 import { getEditorial, type CompanyMeta } from "@/lib/companies";
 import { finnhubAnalystProvider } from "./providers/finnhub";
+import { fmpAnalystProvider } from "./providers/fmp";
 import { yahooAnalystProvider } from "./providers/yahoo";
 import {
   buildNarrative,
@@ -11,12 +12,14 @@ import {
   deriveSentiment,
 } from "./narrative";
 import { computeDelta, getPriorSnapshot } from "./snapshots";
-import type { AnalystProvider, AnalystSnapshot, AnalystView } from "./types";
+import type { AnalystAction, AnalystProvider, AnalystSnapshot, AnalystView } from "./types";
 
-// Providers in PRIORITY ORDER. Add FMP/TipRanks here later — no UI changes.
+// Providers in PRIORITY ORDER. Yahoo wins on consensus data; FMP enriches
+// recentActions with analyst names + per-action price targets.
 export const providers: AnalystProvider[] = [
   yahooAnalystProvider,
   finnhubAnalystProvider, // dormant until FINNHUB_API_KEY is set
+  fmpAnalystProvider,     // dormant until FMP_API_KEY is set
 ];
 
 async function safe<T>(fn: () => Promise<T>): Promise<T | null> {
@@ -28,6 +31,23 @@ async function safe<T>(fn: () => Promise<T>): Promise<T | null> {
 }
 
 // Merge partial snapshots: earlier providers win per field; sources concatenate.
+// Special case: recentActions is concatenated across all providers and deduped.
+function mergeActions(parts: (Partial<AnalystSnapshot> | null)[]): AnalystAction[] {
+  const all = parts.flatMap((p) => p?.recentActions ?? []);
+  // Deduplicate by firm+date; prefer entry with analyst name or newTarget
+  const map = new Map<string, AnalystAction>();
+  for (const a of all) {
+    const key = `${a.firm}|${a.date?.slice(0, 10) ?? ""}`;
+    const existing = map.get(key);
+    if (!existing) {
+      map.set(key, a);
+    } else if ((!existing.analyst && a.analyst) || (!existing.newTarget && a.newTarget)) {
+      map.set(key, { ...existing, ...a });
+    }
+  }
+  return [...map.values()].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+}
+
 function merge(
   parts: (Partial<AnalystSnapshot> | null)[],
   fallbackTicker: string,
@@ -39,15 +59,17 @@ function merge(
     if (!part) continue;
     if (part.sources) sources.push(...part.sources);
     for (const [k, v] of Object.entries(part)) {
-      if (k === "sources") continue;
+      if (k === "sources" || k === "recentActions") continue;
       if (v !== undefined && v !== null && out[k] === undefined) out[k] = v;
     }
   }
+  const recentActions = mergeActions(parts);
   return {
     ...(out as AnalystSnapshot),
     ticker: (out.ticker as string) ?? fallbackTicker,
     name: (out.name as string) ?? fallbackName,
     sources: [...new Set(sources)],
+    recentActions: recentActions.length ? recentActions : undefined,
     lastUpdated: (out.lastUpdated as string) ?? new Date().toISOString(),
   };
 }

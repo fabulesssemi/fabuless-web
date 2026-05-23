@@ -240,7 +240,9 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                   return (
                     <li key={`${a.firm}-${i}`} className="py-2 flex items-center justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="text-sm text-slate-200 truncate">{a.firm}</div>
+                        <div className="text-sm text-slate-200 truncate">
+                          {a.analyst ? `${a.analyst}, ` : ""}{a.firm}
+                        </div>
                         <div className="text-[11px] text-slate-500">
                           {a.fromGrade && a.toGrade && a.fromGrade !== a.toGrade
                             ? `${a.fromGrade} → ${a.toGrade}`

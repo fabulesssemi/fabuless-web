@@ -3,6 +3,10 @@
     {
       "path": "/api/analyst/snapshot",
       "schedule": "0 9 * * 1-5"
+    },
+    {
+      "path": "/api/editorial/refresh",
+      "schedule": "0 6 * * 0"
     }
   ]
 }

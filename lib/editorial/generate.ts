@@ -1,0 +1,156 @@
+// Editorial generation via Claude Sonnet 4.6.
+// Builds a grounded prompt from live analyst data + RSS context, then calls
+// the API and parses the JSON response. Falls back to the static editorial
+// if anything goes wrong — never throws.
+
+import Anthropic from "@anthropic-ai/sdk";
+import type { CompanyMeta, CompanyEditorial } from "@/lib/companies";
+import type { AnalystView } from "@/lib/analyst/types";
+import { filterByKeywords, fetchAllNewsItems, fetchPodcastEpisodes, type RssItem } from "./sources";
+
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+function fmtActions(view: AnalystView): string {
+  const actions = view.recentActions?.slice(0, 8) ?? [];
+  if (actions.length === 0) return "  None in the past 30 days.";
+  return actions
+    .map((a) => {
+      const parts = [`  - ${a.firm}: ${a.action ?? "note"}`];
+      if (a.toGrade) parts.push(`to ${a.toGrade}`);
+      if (a.newTarget) parts.push(`(PT: $${a.newTarget})`);
+      if (a.analyst) parts.push(`[${a.analyst}]`);
+      if (a.date) parts.push(a.date.slice(0, 10));
+      return parts.join(" ");
+    })
+    .join("\n");
+}
+
+function fmtNews(items: RssItem[]): string {
+  if (items.length === 0) return "  No recent headlines found.";
+  return items
+    .slice(0, 12)
+    .map((i) => `  - ${i.title}${i.description ? ` — ${i.description.slice(0, 150)}` : ""}`)
+    .join("\n");
+}
+
+function fmtPodcasts(episodes: RssItem[], keywords: string[]): string {
+  // Include episodes that mention the company, or just the most recent ones if none match
+  const kw = keywords.map((k) => k.toLowerCase());
+  const relevant = episodes.filter((e) =>
+    kw.some((k) => `${e.title} ${e.description}`.toLowerCase().includes(k)),
+  );
+  const toShow = relevant.length > 0 ? relevant.slice(0, 3) : episodes.slice(0, 2);
+  if (toShow.length === 0) return "  No recent podcast coverage found.";
+  return toShow
+    .map((e) => `  Episode: "${e.title}"\n  ${e.description.slice(0, 500)}`)
+    .join("\n\n");
+}
+
+const OUTPUT_SCHEMA = `{
+  "quickTake": "2-3 sentences on what the company does, why it matters in AI semis, and the core investment tension right now.",
+  "ecosystemRole": "1-2 sentences on how it fits in the broader AI supply chain.",
+  "investorFocus": "1-2 sentences on what the market is currently focused on — name the specific product, cycle, or risk driving the narrative.",
+  "whyItMatters": {
+    "business": "2-3 sentences on business model dynamics — moats, concentrations, key levers.",
+    "investment": "2-3 sentences on what drives the stock — catalysts, risks, valuation context.",
+    "ecosystem": "2-3 sentences on supply chain and ecosystem implications."
+  },
+  "keyThemes": [{"title": "short title", "detail": "1-2 sentences on the theme and why it matters"}],
+  "bullCase": ["one sentence per point — specific, not generic"],
+  "bearCase": ["one sentence per point — specific, not generic"],
+  "guidanceCommentary": "1-2 sentences on what to watch and listen for on earnings calls.",
+  "consensusBullThemes": ["short phrase"],
+  "consensusBearThemes": ["short phrase"]
+}`;
+
+export async function generateEditorial(
+  meta: CompanyMeta,
+  analystView: AnalystView,
+  baseline: CompanyEditorial,
+  allNewsItems: RssItem[],
+  podcastEpisodes: RssItem[],
+): Promise<CompanyEditorial> {
+  const companyNews = filterByKeywords(allNewsItems, meta.newsKeywords);
+  const bs = analystView.buyShare != null ? `${analystView.buyShare.toFixed(0)}%` : "N/A";
+  const pt = analystView.avgPriceTarget != null ? `$${analystView.avgPriceTarget.toFixed(0)}` : "N/A";
+  const upside = analystView.impliedUpsidePct != null
+    ? `${analystView.impliedUpsidePct > 0 ? "+" : ""}${analystView.impliedUpsidePct.toFixed(1)}%`
+    : "N/A";
+
+  const prompt = `You are a senior equity research analyst writing for Fabuless, a semiconductor investment intelligence service read by professional investors.
+
+Your task: Generate timely, accurate editorial content for ${meta.name} (${meta.ticker}) — ${meta.sector}.
+
+RULES:
+- Every number you cite must come from the data below. Do not invent figures.
+- Write like an analyst, not marketing copy. Be direct about risks.
+- Be specific. "Buy share has risen to 84%" beats "analysts are increasingly bullish".
+- If recent news or podcast commentary mentions something notable about this company, incorporate it.
+- The keyThemes array should have 4–7 items. bullCase and bearCase should have 3–5 items each.
+- consensusBullThemes and consensusBearThemes should be 2–4 short phrases (not full sentences) suitable for analyst-consensus badges.
+
+## Prior editorial baseline (for context and structural continuity — update as needed):
+quickTake: ${baseline.quickTake}
+ecosystemRole: ${baseline.ecosystemRole}
+investorFocus: ${baseline.investorFocus}
+Current key themes: ${baseline.keyThemes.map((t) => t.title).join(", ")}
+
+## Live Analyst Data (as of today, ${new Date().toISOString().slice(0, 10)}):
+- Buy share: ${bs} (${analystView.numberOfAnalysts ?? "?"} analysts)
+- Average price target: ${pt} | Implied upside: ${upside}
+- Sentiment direction: ${analystView.sentimentDirection ?? "stable"} (${analystView.sentimentScore ?? 0}pp change in buy share)
+- Upgrades last 30d: ${analystView.upgrades30d ?? 0} | Downgrades last 30d: ${analystView.downgrades30d ?? 0}
+- Recent rating actions:
+${fmtActions(analystView)}
+
+## Recent News Headlines (last 14 days):
+${fmtNews(companyNews)}
+
+## The Circuit & Chip Stock Investor Podcast (recent episodes):
+${fmtPodcasts(podcastEpisodes, meta.newsKeywords)}
+
+Return ONLY valid JSON matching this exact schema (no markdown, no explanation):
+${OUTPUT_SCHEMA}`;
+
+  try {
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 2048,
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    const raw = message.content.find((b) => b.type === "text")?.text ?? "";
+    // Strip any markdown code fences if present
+    const jsonStr = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim();
+    const parsed = JSON.parse(jsonStr);
+
+    return {
+      slug: meta.slug,
+      quickTake: parsed.quickTake ?? baseline.quickTake,
+      ecosystemRole: parsed.ecosystemRole ?? baseline.ecosystemRole,
+      investorFocus: parsed.investorFocus ?? baseline.investorFocus,
+      whyItMatters: {
+        business: parsed.whyItMatters?.business ?? baseline.whyItMatters.business,
+        investment: parsed.whyItMatters?.investment ?? baseline.whyItMatters.investment,
+        ecosystem: parsed.whyItMatters?.ecosystem ?? baseline.whyItMatters.ecosystem,
+      },
+      keyThemes: Array.isArray(parsed.keyThemes) ? parsed.keyThemes : baseline.keyThemes,
+      bullCase: Array.isArray(parsed.bullCase) ? parsed.bullCase : baseline.bullCase,
+      bearCase: Array.isArray(parsed.bearCase) ? parsed.bearCase : baseline.bearCase,
+      guidanceCommentary: parsed.guidanceCommentary ?? baseline.guidanceCommentary,
+      consensusBullThemes: Array.isArray(parsed.consensusBullThemes)
+        ? parsed.consensusBullThemes
+        : baseline.consensusBullThemes,
+      consensusBearThemes: Array.isArray(parsed.consensusBearThemes)
+        ? parsed.consensusBearThemes
+        : baseline.consensusBearThemes,
+      // Preserve structural fields from the curated static editorial
+      supplyChain: baseline.supplyChain,
+      related: baseline.related,
+      updated: new Date().toISOString().slice(0, 10),
+    };
+  } catch {
+    // Any failure (API error, JSON parse error) returns the baseline unchanged
+    return { ...baseline, updated: new Date().toISOString().slice(0, 10) };
+  }
+}

@@ -24,7 +24,7 @@ export async function getStoredEditorial(slug: string): Promise<CompanyEditorial
   }
 }
 
-export async function saveEditorial(editorial: CompanyEditorial): Promise<{ ok: boolean }> {
+export async function saveEditorial(editorial: CompanyEditorial): Promise<{ ok: boolean; error?: string }> {
   try {
     const row: Omit<EditorialRow, "generated_at"> = {
       slug: editorial.slug,
@@ -33,8 +33,8 @@ export async function saveEditorial(editorial: CompanyEditorial): Promise<{ ok: 
     const { error } = await supabase
       .from("company_editorial")
       .upsert({ ...row, generated_at: new Date().toISOString() }, { onConflict: "slug" });
-    return { ok: !error };
-  } catch {
-    return { ok: false };
+    return { ok: !error, error: error?.message };
+  } catch (e) {
+    return { ok: false, error: String(e) };
   }
 }

@@ -35,9 +35,9 @@ export async function GET(request: Request) {
         keyThemes: [], bullCase: [], bearCase: [], supplyChain: {}, related: [], updated: "",
       };
       const editorial = await generateEditorial(meta, analystView, baseline, allNewsItems, podcastEpisodes);
-      const { ok } = await saveEditorial(editorial);
+      const { ok, error: saveError } = await saveEditorial(editorial);
       if (ok) revalidatePath(`/companies/${meta.slug}`);
-      return { ticker: meta.ticker, ok };
+      return { ticker: meta.ticker, ok, saveError };
     }),
   );
 
@@ -46,18 +46,18 @@ export async function GET(request: Request) {
   const succeeded = results.flatMap((r) =>
     r.status === "fulfilled" && r.value.ok ? [r.value.ticker] : [],
   );
-  const failed = results.flatMap((r) =>
-    r.status === "rejected" || (r.status === "fulfilled" && !r.value.ok)
-      ? [r.status === "fulfilled" ? r.value.ticker : "?"]
-      : [],
-  );
+  const errors = results.flatMap((r) => {
+    if (r.status === "rejected") return [{ ticker: "?", error: String(r.reason) }];
+    if (!r.value.ok) return [{ ticker: r.value.ticker, error: r.value.saveError ?? "unknown" }];
+    return [];
+  });
 
   return NextResponse.json({
     date: new Date().toISOString().slice(0, 10),
     succeeded,
     succeededCount: succeeded.length,
-    failed,
-    failedCount: failed.length,
+    failedCount: errors.length,
+    errors,
     newsItemsFetched: allNewsItems.length,
     podcastEpisodesFetched: podcastEpisodes.length,
   });

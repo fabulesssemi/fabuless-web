@@ -15,6 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fabuless.ai"),
   title: "Fabuless — Semiconductor Intelligence",
   description:
     "A weekly briefing on the fabless semiconductor industry — for investors who track chips seriously.",
@@ -55,6 +56,9 @@ export default function RootLayout({
                 Fabuless
               </Link>
               <div className="flex gap-8 text-sm text-gray-400">
+                <Link href="/companies" className="hover:text-white transition-colors">
+                  Companies
+                </Link>
                 <Link href="/about" className="hover:text-white transition-colors">
                   About
                 </Link>

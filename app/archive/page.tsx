@@ -2,6 +2,12 @@ import Link from "next/link";
 
 const issues = [
   {
+    number: 2,
+    date: "May 22, 2026",
+    title: "AMD's $10B Taiwan Bet, Nvidia's Investor Fatigue, and the High-NA EUV Delay",
+    slug: "issue-2",
+  },
+  {
     number: 1,
     date: "May 20, 2026",
     title: "Cerebras vs. Nvidia, TSMC's TAM Expansion, and the AMD Upgrade",

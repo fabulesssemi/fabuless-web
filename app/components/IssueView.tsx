@@ -70,22 +70,33 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                       : i % 2 === 1 ? "pl-8" : "",
                   ].filter(Boolean).join(" ")}
                 >
-                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
-                    {p.show}
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                        {p.show}
+                      </div>
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-serif text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
+                      >
+                        {p.title}
+                      </a>
+                      {p.oneliner && (
+                        <p className="text-[13px] text-gray-500 leading-snug mt-1 italic">
+                          {p.oneliner}
+                        </p>
+                      )}
+                    </div>
+                    {p.image && (
+                      <img
+                        src={p.image}
+                        alt=""
+                        className="w-[112px] h-[72px] object-cover shrink-0"
+                      />
+                    )}
                   </div>
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-serif text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
-                  >
-                    {p.title}
-                  </a>
-                  {p.oneliner && (
-                    <p className="text-[13px] text-gray-500 leading-snug mt-1 italic">
-                      {p.oneliner}
-                    </p>
-                  )}
                 </div>
               ))}
             </div>

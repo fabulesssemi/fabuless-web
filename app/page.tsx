@@ -74,7 +74,7 @@ export default function Home() {
                 disabled={status === "loading"}
                 className="px-4 py-2 bg-[#111827] text-white text-sm hover:bg-[#1f2937] transition-colors whitespace-nowrap disabled:opacity-60"
               >
-                {status === "loading" ? "..." : "Subscribe free"}
+                {status === "loading" ? "..." : "Subscribe"}
               </button>
             </form>
           )}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { ConsensusRow } from "@/lib/analyst/dashboard";
+import { displayTicker } from "@/app/components/company/primitives";
 
 type SortKey =
   | "ticker"
@@ -96,7 +97,7 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
               <td className="px-3 py-3">
                 <Link href={`/companies/${r.slug}`} className="group">
                   <span className="font-mono text-amber-400 text-xs">
-                    {r.ticker.endsWith(".KS") ? "KRX" : r.ticker}
+                    {displayTicker(r.ticker)}
                   </span>
                   <span className="block text-slate-300 group-hover:text-amber-300 transition-colors text-[13px]">
                     {r.name}

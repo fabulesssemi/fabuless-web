@@ -5,6 +5,7 @@ import { getQuoteCached } from "@/lib/providers";
 import {
   Pill,
   changeTone,
+  displayTicker,
   fmtMarketCap,
   fmtPercent,
   fmtPrice,
@@ -54,7 +55,7 @@ export default async function CompaniesIndex() {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="font-mono text-xs text-amber-400">
-                    {meta.ticker}
+                    {displayTicker(meta.ticker)}
                   </div>
                   <div className="font-serif text-xl text-white tracking-tight group-hover:text-amber-300 transition-colors">
                     {meta.name}

@@ -44,6 +44,11 @@ export function changeTone(n?: number): string {
   return n > 0 ? "text-emerald-400" : n < 0 ? "text-rose-400" : "text-slate-400";
 }
 
+// Converts Yahoo Finance symbols to display format: "005930.KS" → "005930 KS"
+export function displayTicker(ticker: string): string {
+  return ticker.includes(".") ? ticker.replace(".", " ") : ticker;
+}
+
 export function timeAgo(iso?: string): string {
   if (!iso) return "";
   const then = new Date(iso).getTime();

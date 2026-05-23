@@ -16,7 +16,7 @@ import {
 } from "@/lib/analyst/dashboard";
 import { COMPANY_UNIVERSE } from "@/lib/companies";
 import { ConsensusTable } from "@/app/components/analyst/ConsensusTable";
-import { Section, changeTone, fmtPercent, fmtPrice } from "@/app/components/company/primitives";
+import { Section, changeTone, displayTicker, fmtPercent, fmtPrice } from "@/app/components/company/primitives";
 
 export const revalidate = 3600;
 
@@ -209,7 +209,7 @@ function RankCard({
                     <span className="text-[11px] text-slate-600 w-3">{i + 1}</span>
                     <div className="min-w-0">
                       <span className="font-mono text-amber-400 text-xs">
-                      {v.ticker.endsWith(".KS") ? "KRX" : v.ticker}
+                      {displayTicker(v.ticker)}
                     </span>
                       <span className="block text-[13px] text-slate-300 group-hover:text-amber-300 transition-colors truncate">
                         {v.name}
@@ -247,7 +247,7 @@ function HeatTile({ view }: { view: AnalystView }) {
     >
       <div className="flex items-center justify-between">
         <span className="font-mono text-xs text-white/90">
-          {nameByTicker.get(view.ticker) ?? view.ticker}
+          {displayTicker(view.ticker)}
         </span>
         <span className="text-white/70 text-xs">{arrow}</span>
       </div>

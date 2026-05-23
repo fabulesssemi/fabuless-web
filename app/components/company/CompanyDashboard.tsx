@@ -12,6 +12,7 @@ import {
   Unavailable,
   changeTone,
   fmtFraction,
+  displayTicker,
   fmtMarketCap,
   fmtPercent,
   fmtPrice,
@@ -49,7 +50,7 @@ export function CompanyDashboard({
             <div>
               <div className="flex items-center gap-3">
                 <span className="font-mono text-amber-400 text-lg font-semibold">
-                  {meta.ticker}
+                  {displayTicker(meta.ticker)}
                 </span>
                 {meta.exchangeLabel && (
                   <span className="text-xs text-slate-500">
@@ -323,7 +324,7 @@ export function CompanyDashboard({
                         </div>
                       </div>
                       <span className="font-mono text-[11px] text-slate-500 shrink-0">
-                        {r.ticker}
+                        {displayTicker(r.ticker)}
                       </span>
                     </Link>
                   </li>

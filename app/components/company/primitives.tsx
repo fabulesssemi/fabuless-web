@@ -17,7 +17,6 @@ export function fmtPrice(n?: number, currency = "USD"): string {
     return n.toLocaleString("en-US", {
       style: "currency",
       currency,
-      maximumFractionDigits: 2,
     });
   } catch {
     return `${n.toFixed(2)}`;

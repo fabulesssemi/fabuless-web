@@ -86,7 +86,7 @@ function actionVerb(action?: string): { label: string; tone: "emerald" | "rose" 
 }
 
 export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
-  const currency = "USD";
+  const currency = view.ticker.endsWith(".KS") ? "KRW" : "USD";
   const hasConsensus =
     view.consensusRating != null || view.avgPriceTarget != null || view.distribution != null;
 
@@ -219,7 +219,12 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
             )}
 
           {/* 2. RECENT ANALYST ACTIONS */}
-          {view.recentActions && view.recentActions.length > 0 && (
+          {view.recentActions && view.recentActions.length > 0 && (() => {
+            const namedActions = view.recentActions.filter(
+              (a) => a.firm && a.firm !== "—",
+            );
+            if (namedActions.length === 0) return null;
+            return (
             <div>
               <div className="flex items-center justify-between mb-2">
                 <div className="text-[11px] uppercase tracking-wider text-slate-500">
@@ -230,7 +235,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                 </div>
               </div>
               <ul className="divide-y divide-white/5">
-                {view.recentActions.slice(0, 6).map((a, i) => {
+                {namedActions.slice(0, 6).map((a, i) => {
                   const v = actionVerb(a.action);
                   return (
                     <li key={`${a.firm}-${i}`} className="py-2 flex items-center justify-between gap-3">
@@ -256,7 +261,8 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                 })}
               </ul>
             </div>
-          )}
+            );
+          })()}
 
           <div className="text-[11px] text-slate-600">
             Source: {view.sources.join(", ") || "—"} · cached hourly

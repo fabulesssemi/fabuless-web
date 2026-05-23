@@ -255,7 +255,7 @@ function HeatTile({ view }: { view: AnalystView }) {
       <div className="text-[10px] uppercase tracking-wider text-white/60">Buy share</div>
       {view.impliedUpsidePct != null && (
         <div className="mt-1 text-[11px] text-white/80">
-          {fmtPrice(view.avgPriceTarget, "USD")} PT · {fmtPercent(view.impliedUpsidePct)}
+          {fmtPrice(view.avgPriceTarget, view.ticker.endsWith(".KS") ? "KRW" : "USD")} PT · {fmtPercent(view.impliedUpsidePct)}
         </div>
       )}
     </Link>

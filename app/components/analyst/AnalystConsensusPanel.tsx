@@ -7,6 +7,7 @@ import {
   fmtPrice,
   timeAgo,
 } from "@/app/components/company/primitives";
+import { PTSparkline } from "./PTSparkline";
 
 export function SentimentBadge({
   direction,
@@ -156,6 +157,15 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                 Rating Breakdown
               </div>
               <DistributionBar d={view.distribution} />
+            </div>
+          )}
+
+          {view.ptHistory && view.ptHistory.length >= 2 && (
+            <div>
+              <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
+                Price Target Trend
+              </div>
+              <PTSparkline data={view.ptHistory} />
             </div>
           )}
 

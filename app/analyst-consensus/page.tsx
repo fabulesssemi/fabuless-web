@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllAnalystViews } from "@/lib/analyst";
 import type { AnalystView } from "@/lib/analyst/types";
+import { getLatestWeeklySummary } from "@/lib/analyst/weekly";
 import {
   narrativeCounts,
   rankBearish,
@@ -30,7 +31,10 @@ const slugByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.slug]));
 const nameByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.name]));
 
 export default async function AnalystConsensusDashboard() {
-  const views = await getAllAnalystViews();
+  const [views, weeklySummary] = await Promise.all([
+    getAllAnalystViews(),
+    getLatestWeeklySummary(),
+  ]);
   const counts = narrativeCounts(views);
   const rows = toRows(views);
 
@@ -70,6 +74,19 @@ export default async function AnalystConsensusDashboard() {
             </span>
           </div>
         </header>
+
+        {/* What Changed This Week */}
+        {weeklySummary && (
+          <section className="mb-8 rounded-2xl border border-amber-400/20 bg-amber-400/[0.03] p-6">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-400/80 mb-1">
+              What Changed This Week
+            </div>
+            <p className="text-slate-300 leading-relaxed text-[15px]">{weeklySummary.summary}</p>
+            <div className="mt-3 text-[11px] text-slate-600">
+              Week of {weeklySummary.week_of}
+            </div>
+          </section>
+        )}
 
         {/* Ranking cards 1-7 */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">

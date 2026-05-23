@@ -11,7 +11,7 @@ import {
   deriveEstimateDirection,
   deriveSentiment,
 } from "./narrative";
-import { computeDelta, getPriorSnapshot } from "./snapshots";
+import { computeDelta, getPriorSnapshot, getPTHistory } from "./snapshots";
 import type { AnalystAction, AnalystProvider, AnalystSnapshot, AnalystView } from "./types";
 
 // Providers in PRIORITY ORDER. Yahoo wins on consensus data; FMP enriches
@@ -99,7 +99,10 @@ export async function fetchRawSnapshot(
 export async function assembleView(meta: CompanyMeta): Promise<AnalystView> {
   const snap = await fetchRawSnapshot(meta);
 
-  const prior = await getPriorSnapshot(meta.ticker);
+  const [prior, ptHistory] = await Promise.all([
+    getPriorSnapshot(meta.ticker),
+    getPTHistory(meta.ticker, 30),
+  ]);
   const delta = computeDelta(snap, prior);
 
   const { direction, score } = deriveSentiment(snap.recTrend, delta);
@@ -128,5 +131,6 @@ export async function assembleView(meta: CompanyMeta): Promise<AnalystView> {
     narrative,
     bullThemes: bull,
     bearThemes: bear,
+    ptHistory: ptHistory.length >= 2 ? ptHistory : undefined,
   };
 }

@@ -128,6 +128,101 @@ export async function getPriorSnapshotMap(): Promise<Record<string, SnapshotRow>
   }
 }
 
+/** Last N snapshots for one ticker, sorted oldest→newest. Used for PT sparkline. */
+export async function getPTHistory(
+  ticker: string,
+  limit = 30,
+): Promise<Array<{ date: string; pt: number; price: number | null }>> {
+  try {
+    const { data, error } = await supabase
+      .from("analyst_snapshots")
+      .select("snapshot_date, avg_price_target, current_price")
+      .eq("ticker", ticker)
+      .not("avg_price_target", "is", null)
+      .order("snapshot_date", { ascending: true })
+      .limit(limit);
+    if (error || !data) return [];
+    return (data as Array<{ snapshot_date: string; avg_price_target: number; current_price: number | null }>).map(
+      (r) => ({ date: r.snapshot_date, pt: r.avg_price_target, price: r.current_price }),
+    );
+  } catch {
+    return [];
+  }
+}
+
+export type WeeklyDelta = {
+  ticker: string;
+  name: string;
+  ptChangePct: number | null;
+  ptChangeAbs: number | null;
+  currentPT: number | null;
+  buyShareChange: number | null;
+  currentBuyShare: number | null;
+  upgrades30d: number;
+  downgrades30d: number;
+};
+
+/** Compares most-recent vs oldest-available snapshot in the last 14 days, per ticker. */
+export async function getWeeklySnapshotDeltas(
+  nameByTicker: Record<string, string>,
+): Promise<WeeklyDelta[]> {
+  try {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 14);
+    const { data, error } = await supabase
+      .from("analyst_snapshots")
+      .select("*")
+      .gte("snapshot_date", cutoff.toISOString().slice(0, 10))
+      .order("snapshot_date", { ascending: false });
+    if (error || !data) return [];
+
+    const byTicker = new Map<string, SnapshotRow[]>();
+    for (const row of data as SnapshotRow[]) {
+      if (!byTicker.has(row.ticker)) byTicker.set(row.ticker, []);
+      byTicker.get(row.ticker)!.push(row);
+    }
+
+    const deltas: WeeklyDelta[] = [];
+    for (const [ticker, rows] of byTicker) {
+      const latest = rows[0];
+      const oldest = rows[rows.length - 1];
+      if (latest === oldest) continue;
+
+      const curPT = latest.avg_price_target;
+      const priPT = oldest.avg_price_target;
+      const ptChangePct =
+        curPT != null && priPT != null && priPT > 0
+          ? ((curPT - priPT) / priPT) * 100
+          : null;
+
+      const curBS = buyShareOf(rowToDistribution(latest));
+      const priBS = buyShareOf(rowToDistribution(oldest));
+      const buyShareChange =
+        curBS != null && priBS != null ? curBS - priBS : null;
+
+      deltas.push({
+        ticker,
+        name: nameByTicker[ticker] ?? ticker,
+        ptChangePct: ptChangePct != null ? Math.round(ptChangePct * 10) / 10 : null,
+        ptChangeAbs: curPT != null && priPT != null ? Math.round((curPT - priPT) * 100) / 100 : null,
+        currentPT: curPT,
+        buyShareChange: buyShareChange != null ? Math.round(buyShareChange * 10) / 10 : null,
+        currentBuyShare: curBS != null ? Math.round(curBS) : null,
+        upgrades30d: latest.upgrades_30d ?? 0,
+        downgrades30d: latest.downgrades_30d ?? 0,
+      });
+    }
+
+    return deltas.sort((a, b) => {
+      const ma = Math.abs(a.ptChangePct ?? 0) + Math.abs(a.buyShareChange ?? 0);
+      const mb = Math.abs(b.ptChangePct ?? 0) + Math.abs(b.buyShareChange ?? 0);
+      return mb - ma;
+    });
+  } catch {
+    return [];
+  }
+}
+
 /** Compute the delta between a live snapshot and a stored prior row. */
 export function computeDelta(
   snap: AnalystSnapshot,

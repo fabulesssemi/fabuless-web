@@ -88,6 +88,7 @@ export type AnalystView = AnalystSnapshot & {
   narrative: string;
   bullThemes: string[];
   bearThemes: string[];
+  ptHistory?: { date: string; pt: number; price: number | null }[]; // for sparkline
 };
 
 // ---------------------------------------------------------------------------

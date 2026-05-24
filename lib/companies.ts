@@ -6,6 +6,12 @@
 // below is curated, AI-drafted-then-edited, and refreshed on a schedule.
 // No financial figures are hard-coded here that would go stale.
 
+export type CEOProfile = {
+  name: string;
+  since: string; // year as string, e.g. "2014"
+  photo?: string; // URL to headshot (Wikipedia/Wikimedia Commons)
+};
+
 export type CompanyMeta = {
   slug: string; // URL segment, e.g. "nvda"
   ticker: string; // display ticker
@@ -14,6 +20,7 @@ export type CompanyMeta = {
   sector: string; // sublabel under the name
   exchangeLabel?: string; // optional, for foreign listings
   newsKeywords: string[]; // title must contain at least one (case-insensitive) for news to show
+  ceo?: CEOProfile;
 };
 
 export type CompanyEditorial = {
@@ -40,6 +47,10 @@ export type CompanyEditorial = {
   guidanceCommentary?: string;
   consensusBullThemes?: string[];
   consensusBearThemes?: string[];
+  // Quarterly gross margin trend — populated by the editorial refresh cron.
+  // Each entry: q = "Q1 FY27" style label, gm = gross margin as % (e.g. 74.1).
+  // Newest entry last. [] until the first cron run after this field was added.
+  quarterlyGM?: { q: string; gm: number }[];
   related: { slug: string; reason: string }[];
   updated: string; // when the editorial layer was last refreshed
 };
@@ -48,18 +59,80 @@ export type CompanyEditorial = {
 // The universe — 12 companies. Live data works for ALL of these immediately.
 // ---------------------------------------------------------------------------
 export const COMPANY_UNIVERSE: CompanyMeta[] = [
-  { slug: "nvda", ticker: "NVDA", name: "NVIDIA", yahooSymbol: "NVDA", sector: "AI GPUs / Accelerated Computing", newsKeywords: ["nvidia", "nvda"] },
-  { slug: "amd", ticker: "AMD", name: "AMD", yahooSymbol: "AMD", sector: "CPUs & AI GPUs (x86 + Instinct)", newsKeywords: ["amd", "advanced micro devices", "advanced micro"] },
-  { slug: "avgo", ticker: "AVGO", name: "Broadcom", yahooSymbol: "AVGO", sector: "Custom AI ASICs & Networking", newsKeywords: ["broadcom", "avgo"] },
-  { slug: "mrvl", ticker: "MRVL", name: "Marvell", yahooSymbol: "MRVL", sector: "Custom AI Silicon & Optical Interconnect", newsKeywords: ["marvell", "mrvl"] },
-  { slug: "tsm", ticker: "TSM", name: "TSMC", yahooSymbol: "TSM", sector: "Leading-Edge Foundry", newsKeywords: ["tsmc", "taiwan semiconductor"] },
-  { slug: "asml", ticker: "ASML", name: "ASML", yahooSymbol: "ASML", sector: "EUV Lithography Equipment", newsKeywords: ["asml"] },
-  { slug: "arm", ticker: "ARM", name: "Arm Holdings", yahooSymbol: "ARM", sector: "CPU IP & Instruction Set", newsKeywords: ["arm holdings", "arm chips", "arm-based", "arm's", "arm stock", "arm ipo"] },
-  { slug: "mu", ticker: "MU", name: "Micron", yahooSymbol: "MU", sector: "HBM & DRAM/NAND Memory", newsKeywords: ["micron", "micron technology"] },
-  { slug: "intc", ticker: "INTC", name: "Intel", yahooSymbol: "INTC", sector: "x86 CPUs & Foundry (IDM)", newsKeywords: ["intel", "intc"] },
-  { slug: "qcom", ticker: "QCOM", name: "Qualcomm", yahooSymbol: "QCOM", sector: "Mobile SoCs & Edge AI", newsKeywords: ["qualcomm", "qcom"] },
-  { slug: "skhynix", ticker: "000660.KS", name: "SK Hynix", yahooSymbol: "000660.KS", sector: "HBM & DRAM Memory", exchangeLabel: "KRX: 000660", newsKeywords: ["sk hynix", "hynix"] },
-  { slug: "samsung", ticker: "005930.KS", name: "Samsung Electronics", yahooSymbol: "005930.KS", sector: "Memory, Foundry & Devices", exchangeLabel: "KRX: 005930", newsKeywords: ["samsung"] },
+  {
+    slug: "nvda", ticker: "NVDA", name: "NVIDIA", yahooSymbol: "NVDA",
+    sector: "AI GPUs / Accelerated Computing",
+    newsKeywords: ["nvidia", "nvda"],
+    ceo: { name: "Jensen Huang", since: "1993", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Jen-Hsun_Huang_2025.jpg/500px-Jen-Hsun_Huang_2025.jpg" },
+  },
+  {
+    slug: "amd", ticker: "AMD", name: "AMD", yahooSymbol: "AMD",
+    sector: "CPUs & AI GPUs (x86 + Instinct)",
+    newsKeywords: ["amd", "advanced micro devices", "advanced micro"],
+    ceo: { name: "Lisa Su", since: "2014", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/SXSW-2024-alih-OB7A0861-Lisa_Su_%28cropped_2%29.jpg/500px-SXSW-2024-alih-OB7A0861-Lisa_Su_%28cropped_2%29.jpg" },
+  },
+  {
+    slug: "avgo", ticker: "AVGO", name: "Broadcom", yahooSymbol: "AVGO",
+    sector: "Custom AI ASICs & Networking",
+    newsKeywords: ["broadcom", "avgo"],
+    ceo: { name: "Hock Tan", since: "2006", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hock_Tan_2022.png/500px-Hock_Tan_2022.png" },
+  },
+  {
+    slug: "mrvl", ticker: "MRVL", name: "Marvell", yahooSymbol: "MRVL",
+    sector: "Custom AI Silicon & Optical Interconnect",
+    newsKeywords: ["marvell", "mrvl"],
+    ceo: { name: "Matt Murphy", since: "2016" },
+  },
+  {
+    slug: "tsm", ticker: "TSM", name: "TSMC", yahooSymbol: "TSM",
+    sector: "Leading-Edge Foundry",
+    newsKeywords: ["tsmc", "taiwan semiconductor"],
+    ceo: { name: "C.C. Wei", since: "2018" },
+  },
+  {
+    slug: "asml", ticker: "ASML", name: "ASML", yahooSymbol: "ASML",
+    sector: "EUV Lithography Equipment",
+    newsKeywords: ["asml"],
+    ceo: { name: "Christophe Fouquet", since: "2024" },
+  },
+  {
+    slug: "arm", ticker: "ARM", name: "Arm Holdings", yahooSymbol: "ARM",
+    sector: "CPU IP & Instruction Set",
+    newsKeywords: ["arm holdings", "arm chips", "arm-based", "arm's", "arm stock", "arm ipo"],
+    ceo: { name: "Rene Haas", since: "2022", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Rene_Haas_at_SXSW_2025.jpg/500px-Rene_Haas_at_SXSW_2025.jpg" },
+  },
+  {
+    slug: "mu", ticker: "MU", name: "Micron", yahooSymbol: "MU",
+    sector: "HBM & DRAM/NAND Memory",
+    newsKeywords: ["micron", "micron technology"],
+    ceo: { name: "Sanjay Mehrotra", since: "2017", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Sanjay_Mehrotra_2025_%28cropped%29.jpg/500px-Sanjay_Mehrotra_2025_%28cropped%29.jpg" },
+  },
+  {
+    slug: "intc", ticker: "INTC", name: "Intel", yahooSymbol: "INTC",
+    sector: "x86 CPUs & Foundry (IDM)",
+    newsKeywords: ["intel", "intc"],
+    ceo: { name: "Lip-Bu Tan", since: "2025", photo: "https://upload.wikimedia.org/wikipedia/commons/1/10/Howard_Lutnick_with_Intel_CEO_Lip-Bu_Tan_%282025%29_%28cropped3%29.jpg" },
+  },
+  {
+    slug: "qcom", ticker: "QCOM", name: "Qualcomm", yahooSymbol: "QCOM",
+    sector: "Mobile SoCs & Edge AI",
+    newsKeywords: ["qualcomm", "qcom"],
+    ceo: { name: "Cristiano Amon", since: "2021", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Cristiano_Amon_%28President_%26_CEOQualcomm%29_%2854916855494%29_%28cropped%29.jpg/500px-Cristiano_Amon_%28President_%26_CEOQualcomm%29_%2854916855494%29_%28cropped%29.jpg" },
+  },
+  {
+    slug: "skhynix", ticker: "000660.KS", name: "SK Hynix", yahooSymbol: "000660.KS",
+    sector: "HBM & DRAM Memory",
+    exchangeLabel: "KRX: 000660",
+    newsKeywords: ["sk hynix", "hynix"],
+    ceo: { name: "Kwak Noh-jung", since: "2021" },
+  },
+  {
+    slug: "samsung", ticker: "005930.KS", name: "Samsung Electronics", yahooSymbol: "005930.KS",
+    sector: "Memory, Foundry & Devices",
+    exchangeLabel: "KRX: 005930",
+    newsKeywords: ["samsung"],
+    ceo: { name: "Jong-Hee Han", since: "2022" },
+  },
 ];
 
 const metaBySlug = new Map(COMPANY_UNIVERSE.map((c) => [c.slug, c]));

@@ -1,5 +1,8 @@
 import Link from "next/link";
-import type { CompanyEditorial, CompanyMeta } from "@/lib/companies";
+import type { CEOProfile, CompanyEditorial, CompanyMeta } from "@/lib/companies";
+import type { PricePoint } from "@/lib/providers/history";
+import { PriceChart } from "./PriceChart";
+import { GrossMarginChart } from "./GrossMarginChart";
 import { COMPANY_UNIVERSE, getCompanyMeta } from "@/lib/companies";
 import type { CompanyMarketData } from "@/lib/providers/types";
 import type { AnalystView } from "@/lib/analyst/types";
@@ -24,11 +27,13 @@ export function CompanyDashboard({
   editorial,
   data,
   analyst,
+  priceHistory = [],
 }: {
   meta: CompanyMeta;
   editorial?: CompanyEditorial;
   data: CompanyMarketData;
   analyst?: AnalystView;
+  priceHistory?: PricePoint[];
 }) {
   const { profile, quote, earnings, news } = data;
   const currency = quote?.currency ?? "USD";
@@ -114,6 +119,18 @@ export function CompanyDashboard({
             />
           </div>
         </header>
+
+        {/* ---------------- PRICE CHART ---------------- */}
+        {priceHistory.length >= 10 && (
+          <PriceChart
+            data={priceHistory}
+            symbol={meta.yahooSymbol}
+            currency={quote?.currency ?? (meta.ticker.endsWith(".KS") ? "KRW" : "USD")}
+          />
+        )}
+
+        {/* ---------------- CEO CARD ---------------- */}
+        {meta.ceo && <CEOCard ceo={meta.ceo} />}
 
         {/* ---------------- 1. QUICK TAKE ---------------- */}
         {editorial ? (
@@ -267,6 +284,10 @@ export function CompanyDashboard({
           <div className="space-y-6 lg:sticky lg:top-6">
             {/* 7. EARNINGS SNAPSHOT */}
             <Section eyebrow="Live + KPIs" title="Earnings Snapshot">
+              <GrossMarginChart
+                quarters={editorial?.quarterlyGM}
+                currentGM={earnings?.grossMargin ?? undefined}
+              />
               {earnings ? (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -411,4 +432,35 @@ function relatedFor(meta: CompanyMeta, editorial?: CompanyEditorial) {
       return { slug: m.slug, name: m.name, ticker: m.ticker, reason: p.reason };
     })
     .filter((x): x is { slug: string; name: string; ticker: string; reason: string } => x !== null);
+}
+
+function CEOCard({ ceo }: { ceo: CEOProfile }) {
+  const initials = ceo.name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  return (
+    <div className="mb-6 flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3">
+      {ceo.photo ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={ceo.photo}
+          alt={ceo.name}
+          className="h-14 w-14 rounded-full object-cover object-top shrink-0 ring-1 ring-white/10"
+        />
+      ) : (
+        <div className="h-14 w-14 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 font-semibold text-base shrink-0">
+          {initials}
+        </div>
+      )}
+      <div>
+        <div className="text-[10px] uppercase tracking-widest text-slate-500">Chief Executive Officer</div>
+        <div className="text-sm font-semibold text-white mt-0.5">{ceo.name}</div>
+        <div className="text-[11px] text-slate-500">CEO since {ceo.since}</div>
+      </div>
+    </div>
+  );
 }

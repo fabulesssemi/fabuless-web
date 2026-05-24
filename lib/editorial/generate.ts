@@ -60,7 +60,8 @@ const OUTPUT_SCHEMA = `{
   "bearCase": ["one sentence per point — specific, not generic"],
   "guidanceCommentary": "1-2 sentences on what to watch and listen for on earnings calls.",
   "consensusBullThemes": ["short phrase"],
-  "consensusBearThemes": ["short phrase"]
+  "consensusBearThemes": ["short phrase"],
+  "quarterlyGM": [{"q": "Q1 FY25", "gm": 78.4}, {"q": "Q2 FY25", "gm": 75.1}]
 }`;
 
 export async function generateEditorial(
@@ -88,6 +89,7 @@ RULES:
 - If recent news or podcast commentary mentions something notable about this company, incorporate it.
 - The keyThemes array should have 4–7 items. bullCase and bearCase should have 3–5 items each.
 - consensusBullThemes and consensusBearThemes should be 2–4 short phrases (not full sentences) suitable for analyst-consensus badges.
+- For quarterlyGM: extract the last 4–6 quarters of GAAP gross margin percentages from the earnings headlines and podcast notes below. Use format "Q1 FY26" (fiscal year label). gm is a number 0–100 (e.g. 74.1 not 0.741). Order oldest → newest. If you cannot find at least 2 confirmed quarters in the data below, return []. Never invent numbers.
 
 ## Prior editorial baseline (for context and structural continuity — update as needed):
 quickTake: ${baseline.quickTake}
@@ -144,6 +146,11 @@ ${OUTPUT_SCHEMA}`;
       consensusBearThemes: Array.isArray(parsed.consensusBearThemes)
         ? parsed.consensusBearThemes
         : baseline.consensusBearThemes,
+      // Use freshly extracted quarters if Claude found them, else keep existing
+      quarterlyGM:
+        Array.isArray(parsed.quarterlyGM) && parsed.quarterlyGM.length >= 2
+          ? parsed.quarterlyGM
+          : baseline.quarterlyGM,
       // Preserve structural fields from the curated static editorial
       supplyChain: baseline.supplyChain,
       related: baseline.related,

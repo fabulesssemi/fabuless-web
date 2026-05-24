@@ -5,6 +5,7 @@ import { getCompanyData } from "@/lib/providers";
 import { getAnalystView } from "@/lib/analyst";
 import { getEditorialForSlug } from "@/lib/editorial";
 import { CompanyDashboard } from "@/app/components/company/CompanyDashboard";
+import { getPriceHistory } from "@/lib/providers/history";
 
 // Pre-render all known companies at build; refresh data hourly (ISR).
 export const revalidate = 3600;
@@ -37,10 +38,11 @@ export default async function CompanyPage({
   const meta = getCompanyMeta(slug);
   if (!meta) notFound();
 
-  const [editorial, data, analyst] = await Promise.all([
+  const [editorial, data, analyst, priceHistory] = await Promise.all([
     getEditorialForSlug(meta.slug),
     getCompanyData(meta.yahooSymbol, meta.newsKeywords),
     getAnalystView(meta),
+    getPriceHistory(meta.yahooSymbol),
   ]);
 
   return (
@@ -49,6 +51,7 @@ export default async function CompanyPage({
       editorial={editorial}
       data={data}
       analyst={analyst}
+      priceHistory={priceHistory}
     />
   );
 }

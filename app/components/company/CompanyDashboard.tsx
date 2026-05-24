@@ -117,11 +117,8 @@ export function CompanyDashboard({
         </div>
       )}
 
-      {/* ── TWO-COLUMN BODY ── */}
-      <div className="grid lg:grid-cols-3 gap-12 items-start">
-
-        {/* MAIN COLUMN */}
-        <div className="lg:col-span-2 space-y-10">
+      {/* ── MAIN CONTENT ── */}
+      <div className="space-y-10">
 
           {/* 1. QUICK TAKE */}
           {editorial ? (
@@ -264,39 +261,28 @@ export function CompanyDashboard({
           {/* 8. ANALYST CONSENSUS */}
           {analyst && <AnalystConsensusPanel view={analyst} />}
 
-        </div>
-
-        {/* SIDEBAR — related companies only */}
-        <div className="space-y-8">
-          <Section title="Related Companies">
-            <ul className="space-y-4">
+          {/* Related companies — horizontal strip */}
+          <div className="pt-6 border-t border-gray-100">
+            <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-4">Related Companies</div>
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
               {relatedFor(meta, editorial).map((r) => (
-                <li key={r.slug}>
-                  <Link
-                    href={`/companies/${r.slug}`}
-                    className="group flex items-baseline justify-between gap-3"
-                  >
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-medium text-gray-800 group-hover:text-[#B45309] transition-colors">
-                        {r.name}
-                      </div>
-                      <div className="text-[11px] text-gray-400 truncate mt-0.5">{r.reason}</div>
-                    </div>
-                    <span className="font-mono text-[11px] text-gray-400 shrink-0">
-                      {displayTicker(r.ticker)}
-                    </span>
-                  </Link>
-                </li>
+                <Link
+                  key={r.slug}
+                  href={`/companies/${r.slug}`}
+                  className="group flex items-baseline gap-1.5"
+                >
+                  <span className="font-mono text-[10px] text-gray-400">{displayTicker(r.ticker)}</span>
+                  <span className="text-[13px] font-medium text-gray-700 group-hover:text-[#B45309] transition-colors">{r.name}</span>
+                </Link>
               ))}
-            </ul>
-          </Section>
+            </div>
+          </div>
 
           {editorial && (
             <p className="text-[11px] text-gray-400 leading-relaxed">
               Editorial updated {editorial.updated}. Market data via Yahoo Finance, cached hourly.
             </p>
           )}
-        </div>
 
       </div>
     </div>

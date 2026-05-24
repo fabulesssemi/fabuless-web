@@ -15,10 +15,7 @@ export function fmtMarketCap(n?: number, currency = "USD"): string {
 export function fmtPrice(n?: number, currency = "USD"): string {
   if (n == null) return "—";
   try {
-    return n.toLocaleString("en-US", {
-      style: "currency",
-      currency,
-    });
+    return n.toLocaleString("en-US", { style: "currency", currency });
   } catch {
     return `${n.toFixed(2)}`;
   }
@@ -44,7 +41,6 @@ export function changeTone(n?: number): string {
   return n > 0 ? "text-emerald-600" : n < 0 ? "text-rose-600" : "text-gray-400";
 }
 
-// Converts Yahoo Finance symbols to display format: "005930.KS" → "005930 KS"
 export function displayTicker(ticker: string): string {
   return ticker.includes(".") ? ticker.replace(".", " ") : ticker;
 }
@@ -62,8 +58,10 @@ export function timeAgo(iso?: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Layout primitives (light editorial surface)
+// Layout primitives
 // ---------------------------------------------------------------------------
+
+// Section — no card border. Just typography + thin rule.
 export function Section({
   title,
   eyebrow,
@@ -76,22 +74,24 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section
-      className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm ${className}`}
-    >
-      <div className="mb-5 pb-3 border-b border-gray-100">
+    <section className={className}>
+      <div className="mb-5">
         {eyebrow && (
-          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-0.5">
+          <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-0.5">
             {eyebrow}
           </div>
         )}
-        <h2 className="font-serif text-xl font-bold text-gray-900 tracking-tight">{title}</h2>
+        <h2 className="font-serif text-[1.05rem] font-semibold text-gray-900 tracking-tight">
+          {title}
+        </h2>
+        <div className="mt-3 h-px bg-gray-100" />
       </div>
       {children}
     </section>
   );
 }
 
+// Pill — minimal, no border. Light background tint only.
 export function Pill({
   children,
   tone = "neutral",
@@ -100,21 +100,20 @@ export function Pill({
   tone?: "neutral" | "amber" | "emerald" | "rose" | "cyan";
 }) {
   const tones: Record<string, string> = {
-    neutral: "bg-transparent text-gray-500 border-gray-300",
-    amber: "bg-amber-50 text-amber-700 border-amber-200",
-    emerald: "bg-teal-50 text-teal-700 border-teal-200",
-    rose: "bg-rose-50 text-rose-800 border-rose-200",
-    cyan: "bg-sky-50 text-sky-700 border-sky-200",
+    neutral: "bg-gray-100 text-gray-600",
+    amber:   "bg-amber-50 text-amber-700",
+    emerald: "bg-teal-50 text-teal-700",
+    rose:    "bg-rose-50 text-rose-700",
+    cyan:    "bg-sky-50 text-sky-700",
   };
   return (
-    <span
-      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${tones[tone]}`}
-    >
+    <span className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ${tones[tone]}`}>
       {children}
     </span>
   );
 }
 
+// Stat — label / value pair. No box, no border.
 export function Stat({
   label,
   value,
@@ -126,39 +125,34 @@ export function Stat({
 }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wider text-gray-400">
+      <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">
         {label}
       </div>
-      <div className={`text-sm font-semibold ${tone ?? "text-gray-900"}`}>
+      <div className={`text-sm font-semibold tabular-nums ${tone ?? "text-gray-900"}`}>
         {value}
       </div>
     </div>
   );
 }
 
-// A labelled group of chips, used throughout the supply-chain section.
+// ChipGroup — plain comma-separated text, no badge spam.
 export function ChipGroup({
   label,
   items,
-  tone = "neutral",
 }: {
   label: string;
   items?: string[];
-  tone?: "neutral" | "amber" | "emerald" | "rose" | "cyan";
+  tone?: string; // kept for API compat, unused
 }) {
   if (!items || items.length === 0) return null;
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wider text-gray-400 mb-1.5">
+      <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-1">
         {label}
       </div>
-      <div className="flex flex-wrap gap-1.5">
-        {items.map((it) => (
-          <Pill key={it} tone={tone}>
-            {it}
-          </Pill>
-        ))}
-      </div>
+      <p className="text-[13px] text-gray-600 leading-relaxed">
+        {items.join(", ")}
+      </p>
     </div>
   );
 }
@@ -166,7 +160,7 @@ export function ChipGroup({
 export function Unavailable({ what }: { what: string }) {
   return (
     <p className="text-sm text-gray-400 italic">
-      {what} is temporarily unavailable. Other sections are unaffected.
+      {what} temporarily unavailable.
     </p>
   );
 }

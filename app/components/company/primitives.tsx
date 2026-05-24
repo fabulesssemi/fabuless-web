@@ -149,7 +149,7 @@ export function ChipGroup({
   if (!items || items.length === 0) return null;
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-1">
+      <div className="text-[13px] font-semibold text-gray-900 mb-0.5">
         {label}
       </div>
       <p className="text-[13px] text-gray-600 leading-relaxed">

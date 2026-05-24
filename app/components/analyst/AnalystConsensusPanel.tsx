@@ -52,20 +52,20 @@ export function DistributionBar({
   const total = d.strongBuy + d.buy + d.hold + d.sell + d.strongSell || 1;
   const segs = [
     { v: d.strongBuy + d.buy, c: "bg-emerald-500", label: "Buy" },
-    { v: d.hold, c: "bg-slate-500", label: "Hold" },
+    { v: d.hold, c: "bg-gray-300", label: "Hold" },
     { v: d.sell + d.strongSell, c: "bg-rose-500", label: "Sell" },
   ];
   return (
     <div>
-      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-white/5">
+      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-gray-100">
         {segs.map((s) => (
           <div key={s.label} className={s.c} style={{ width: `${(s.v / total) * 100}%` }} />
         ))}
       </div>
-      <div className="mt-1.5 flex justify-between text-[11px] text-slate-500">
-        <span className="text-emerald-400">{segs[0].v} Buy</span>
+      <div className="mt-1.5 flex justify-between text-[11px] text-gray-400">
+        <span className="text-emerald-600">{segs[0].v} Buy</span>
         <span>{segs[1].v} Hold</span>
-        <span className="text-rose-400">{segs[2].v} Sell</span>
+        <span className="text-rose-600">{segs[2].v} Sell</span>
       </div>
     </div>
   );
@@ -94,31 +94,31 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
   return (
     <Section eyebrow="Wall Street" title="Analyst Consensus">
       {!hasConsensus ? (
-        <p className="text-sm text-slate-500 italic">
+        <p className="text-sm text-gray-400 italic">
           Analyst data is temporarily unavailable for {view.ticker}.
         </p>
       ) : (
         <div className="space-y-6">
           {/* 1. CONSENSUS SNAPSHOT */}
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <div className="text-[11px] uppercase tracking-wider text-slate-500">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <div className="text-[11px] uppercase tracking-wider text-gray-400">
                 Consensus
               </div>
-              <div className="text-2xl font-semibold text-white">
+              <div className="text-2xl font-semibold text-gray-900">
                 {view.consensusRating ?? "—"}
               </div>
               {view.numberOfAnalysts != null && (
-                <div className="text-[11px] text-slate-500">
+                <div className="text-[11px] text-gray-400">
                   {view.numberOfAnalysts} analysts
                 </div>
               )}
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <div className="text-[11px] uppercase tracking-wider text-slate-500">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <div className="text-[11px] uppercase tracking-wider text-gray-400">
                 Avg Price Target
               </div>
-              <div className="text-2xl font-semibold text-white tabular-nums">
+              <div className="text-2xl font-semibold text-gray-900 tabular-nums">
                 {view.avgPriceTarget != null ? fmtPrice(view.avgPriceTarget, currency) : "—"}
               </div>
               {view.delta?.ptChangePct != null && Math.abs(view.delta.ptChangePct) >= 0.05 && (
@@ -127,8 +127,8 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                 </div>
               )}
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <div className="text-[11px] uppercase tracking-wider text-slate-500">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <div className="text-[11px] uppercase tracking-wider text-gray-400">
                 Implied Upside
               </div>
               <div className={`text-2xl font-semibold tabular-nums ${changeTone(view.impliedUpsidePct)}`}>
@@ -153,7 +153,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
 
           {view.distribution && (
             <div>
-              <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
+              <div className="text-[11px] uppercase tracking-wider text-gray-400 mb-2">
                 Rating Breakdown
               </div>
               <DistributionBar d={view.distribution} />
@@ -162,7 +162,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
 
           {view.ptHistory && view.ptHistory.length >= 2 && (
             <div>
-              <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
+              <div className="text-[11px] uppercase tracking-wider text-gray-400 mb-2">
                 Price Target Trend
               </div>
               <PTSparkline data={view.ptHistory} />
@@ -170,33 +170,33 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
           )}
 
           {/* 3. CONSENSUS NARRATIVE */}
-          <div className="rounded-xl border border-amber-400/20 bg-amber-400/[0.03] p-4">
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <SentimentBadge direction={view.sentimentDirection} score={view.sentimentScore} />
               <EstimateBadge direction={view.estimateDirection} />
             </div>
-            <div className="text-[11px] uppercase tracking-wider text-amber-400/80 mb-1">
+            <div className="text-[11px] uppercase tracking-wider text-[#B45309] mb-1">
               What changed
             </div>
-            <p className="text-sm text-slate-200 leading-relaxed">{view.narrative}</p>
+            <p className="text-sm text-gray-700 leading-relaxed">{view.narrative}</p>
             {(view.bullThemes.length > 0 || view.bearThemes.length > 0) && (
               <div className="mt-3 grid sm:grid-cols-2 gap-3">
                 {view.bullThemes.length > 0 && (
                   <div>
-                    <div className="text-[11px] uppercase tracking-wider text-emerald-400/80 mb-1">
+                    <div className="text-[11px] uppercase tracking-wider text-emerald-700 mb-1">
                       Bullish themes
                     </div>
-                    <p className="text-[12px] text-slate-400 leading-relaxed">
+                    <p className="text-[12px] text-gray-500 leading-relaxed">
                       {view.bullThemes.slice(0, 3).join(" · ")}
                     </p>
                   </div>
                 )}
                 {view.bearThemes.length > 0 && (
                   <div>
-                    <div className="text-[11px] uppercase tracking-wider text-rose-400/80 mb-1">
+                    <div className="text-[11px] uppercase tracking-wider text-rose-700 mb-1">
                       Bearish themes
                     </div>
-                    <p className="text-[12px] text-slate-400 leading-relaxed">
+                    <p className="text-[12px] text-gray-500 leading-relaxed">
                       {view.bearThemes.slice(0, 3).join(" · ")}
                     </p>
                   </div>
@@ -211,13 +211,13 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
               view.revisions.epsDownLast30d != null ||
               view.revisions.epsCurrent != null) && (
               <div>
-                <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
+                <div className="text-[11px] uppercase tracking-wider text-gray-400 mb-2">
                   Estimate Revisions (next quarter EPS)
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <RevStat label="Up (7d)" value={view.revisions.epsUpLast7d} tone="text-emerald-400" />
-                  <RevStat label="Up (30d)" value={view.revisions.epsUpLast30d} tone="text-emerald-400" />
-                  <RevStat label="Down (30d)" value={view.revisions.epsDownLast30d} tone="text-rose-400" />
+                  <RevStat label="Up (7d)" value={view.revisions.epsUpLast7d} tone="text-emerald-600" />
+                  <RevStat label="Up (30d)" value={view.revisions.epsUpLast30d} tone="text-emerald-600" />
+                  <RevStat label="Down (30d)" value={view.revisions.epsDownLast30d} tone="text-rose-600" />
                   <RevStat
                     label="Est. vs 90d ago"
                     value={
@@ -230,7 +230,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                     tone={
                       view.revisions.epsCurrent != null && view.revisions.eps90dAgo != null
                         ? changeTone(view.revisions.epsCurrent - view.revisions.eps90dAgo)
-                        : "text-slate-300"
+                        : "text-gray-400"
                     }
                   />
                 </div>
@@ -246,23 +246,23 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
             return (
             <div>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-[11px] uppercase tracking-wider text-slate-500">
+                <div className="text-[11px] uppercase tracking-wider text-gray-400">
                   Recent Analyst Actions
                 </div>
-                <div className="text-[11px] text-slate-500">
+                <div className="text-[11px] text-gray-400">
                   {view.upgrades30d ?? 0} up · {view.downgrades30d ?? 0} down (30d)
                 </div>
               </div>
-              <ul className="divide-y divide-white/5">
+              <ul className="divide-y divide-gray-100">
                 {namedActions.slice(0, 6).map((a, i) => {
                   const v = actionVerb(a.action);
                   return (
                     <li key={`${a.firm}-${i}`} className="py-2 flex items-center justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="text-sm text-slate-200 truncate">
+                        <div className="text-sm text-gray-800 truncate">
                           {a.analyst ? `${a.analyst}, ` : ""}{a.firm}
                         </div>
-                        <div className="text-[11px] text-slate-500">
+                        <div className="text-[11px] text-gray-400">
                           {a.fromGrade && a.toGrade && a.fromGrade !== a.toGrade
                             ? `${a.fromGrade} → ${a.toGrade}`
                             : (a.toGrade ?? "")}
@@ -274,7 +274,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                       <div className="text-right shrink-0">
                         <Pill tone={v.tone}>{v.label}</Pill>
                         {a.date && (
-                          <div className="text-[10px] text-slate-600 mt-0.5">{timeAgo(a.date)}</div>
+                          <div className="text-[10px] text-gray-400 mt-0.5">{timeAgo(a.date)}</div>
                         )}
                       </div>
                     </li>
@@ -285,7 +285,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
             );
           })()}
 
-          <div className="text-[11px] text-slate-600">
+          <div className="text-[11px] text-gray-400">
             Source: {view.sources.join(", ") || "—"} · cached hourly
           </div>
         </div>
@@ -307,15 +307,15 @@ function PTRangeBar({
 
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-3">
+      <div className="text-[11px] uppercase tracking-wider text-gray-400 mb-3">
         Price Target Range
       </div>
       <div className="relative">
         {/* Track */}
-        <div className="h-1 rounded-full bg-white/10 relative">
+        <div className="h-1 rounded-full bg-gray-100 relative">
           {/* Gray: low → current */}
           <div
-            className="absolute inset-y-0 left-0 bg-slate-600 rounded-l-full"
+            className="absolute inset-y-0 left-0 bg-gray-300 rounded-l-full"
             style={{ width: `${curPct}%` }}
           />
           {/* Emerald: current → avg (the upside) */}
@@ -327,22 +327,22 @@ function PTRangeBar({
           )}
           {/* Faint: avg → high */}
           <div
-            className="absolute inset-y-0 bg-emerald-500/20 rounded-r-full"
+            className="absolute inset-y-0 bg-emerald-200 rounded-r-full"
             style={{ left: `${Math.max(curPct, avgPct)}%`, width: `${100 - Math.max(curPct, avgPct)}%` }}
           />
           {/* Current price dot */}
           <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white ring-2 ring-slate-900 z-10"
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gray-700 ring-2 ring-white z-10"
             style={{ left: `${curPct}%` }}
           />
           {/* Avg PT dot */}
           <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-900 z-10"
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white z-10"
             style={{ left: `${avgPct}%` }}
           />
         </div>
         {/* Low / High endpoint labels */}
-        <div className="flex justify-between mt-2 text-[10px] text-slate-500">
+        <div className="flex justify-between mt-2 text-[10px] text-gray-400">
           <span>{fmtPrice(low, currency)} Low</span>
           <span>High {fmtPrice(high, currency)}</span>
         </div>
@@ -350,17 +350,17 @@ function PTRangeBar({
       {/* Legend */}
       <div className="flex gap-5 mt-3 text-[11px]">
         <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-white inline-block shrink-0" />
-          <span className="text-slate-400">
+          <span className="w-2 h-2 rounded-full bg-gray-700 inline-block shrink-0" />
+          <span className="text-gray-500">
             Current{" "}
-            <span className="text-white tabular-nums">{fmtPrice(current, currency)}</span>
+            <span className="text-gray-900 tabular-nums">{fmtPrice(current, currency)}</span>
           </span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shrink-0" />
-          <span className="text-slate-400">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block shrink-0" />
+          <span className="text-gray-500">
             Avg PT{" "}
-            <span className="text-emerald-400 tabular-nums">{fmtPrice(avg, currency)}</span>
+            <span className="text-emerald-600 tabular-nums">{fmtPrice(avg, currency)}</span>
           </span>
         </div>
       </div>
@@ -378,8 +378,8 @@ function RevStat({
   tone: string;
 }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3">
-      <div className="text-[10px] uppercase tracking-wider text-slate-500">{label}</div>
+    <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+      <div className="text-[10px] uppercase tracking-wider text-gray-400">{label}</div>
       <div className={`text-lg font-semibold tabular-nums ${tone}`}>
         {value == null ? "—" : value}
       </div>

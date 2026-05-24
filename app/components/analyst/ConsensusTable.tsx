@@ -31,8 +31,8 @@ const COLS: { key: SortKey; label: string; numeric: boolean }[] = [
 ];
 
 function tone(n: number | null | undefined): string {
-  if (n == null) return "text-slate-400";
-  return n > 0 ? "text-emerald-400" : n < 0 ? "text-rose-400" : "text-slate-400";
+  if (n == null) return "text-gray-400";
+  return n > 0 ? "text-emerald-600" : n < 0 ? "text-rose-600" : "text-gray-400";
 }
 function pct(n: number | null, sign = true): string {
   if (n == null) return "—";
@@ -68,21 +68,21 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.02]">
+    <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-white/10 text-[11px] uppercase tracking-wider text-slate-500">
+          <tr className="border-b border-gray-200 text-[11px] uppercase tracking-wider text-gray-500">
             {COLS.map((c) => (
               <th
                 key={c.key}
                 onClick={() => onSort(c.key)}
-                className={`cursor-pointer select-none px-3 py-3 font-semibold hover:text-amber-300 ${
+                className={`cursor-pointer select-none px-3 py-3 font-semibold hover:text-[#B45309] ${
                   c.numeric ? "text-right" : "text-left"
                 }`}
               >
                 {c.label}
                 {sortKey === c.key && (
-                  <span className="ml-1 text-amber-400">{asc ? "▲" : "▼"}</span>
+                  <span className="ml-1 text-[#B45309]">{asc ? "▲" : "▼"}</span>
                 )}
               </th>
             ))}
@@ -92,36 +92,36 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
           {sorted.map((r) => (
             <tr
               key={r.ticker}
-              className="border-b border-white/5 last:border-0 hover:bg-white/[0.03]"
+              className="border-b border-gray-100 last:border-0 hover:bg-gray-50"
             >
               <td className="px-3 py-3">
                 <Link href={`/companies/${r.slug}`} className="group">
-                  <span className="font-mono text-amber-400 text-xs">
+                  <span className="font-mono text-[#B45309] text-xs">
                     {displayTicker(r.ticker)}
                   </span>
-                  <span className="block text-slate-300 group-hover:text-amber-300 transition-colors text-[13px]">
+                  <span className="block text-gray-700 group-hover:text-[#B45309] transition-colors text-[13px]">
                     {r.name}
                   </span>
                 </Link>
               </td>
-              <td className="px-3 py-3 text-slate-300">{r.rating}</td>
-              <td className="px-3 py-3 text-right tabular-nums text-slate-200">
+              <td className="px-3 py-3 text-gray-700">{r.rating}</td>
+              <td className="px-3 py-3 text-right tabular-nums text-gray-800">
                 {money(r.avgPT, r.ticker)}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.upside)}`}>
                 {pct(r.upside)}
               </td>
-              <td className="px-3 py-3 text-right tabular-nums text-slate-200">
+              <td className="px-3 py-3 text-right tabular-nums text-gray-800">
                 {r.buyShare != null ? `${r.buyShare.toFixed(0)}%` : "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.sentimentScore)}`}>
                 {r.sentimentScore > 0 ? "+" : ""}
                 {r.sentimentScore}
               </td>
-              <td className="px-3 py-3 text-right tabular-nums text-emerald-400">
+              <td className="px-3 py-3 text-right tabular-nums text-emerald-600">
                 {r.upgrades30d || "—"}
               </td>
-              <td className="px-3 py-3 text-right tabular-nums text-rose-400">
+              <td className="px-3 py-3 text-right tabular-nums text-rose-600">
                 {r.downgrades30d || "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.ptChangePct)}`}>

@@ -40,8 +40,8 @@ export function fmtPercent(pct?: number, withSign = true): string {
 }
 
 export function changeTone(n?: number): string {
-  if (n == null) return "text-slate-400";
-  return n > 0 ? "text-emerald-400" : n < 0 ? "text-rose-400" : "text-slate-400";
+  if (n == null) return "text-gray-400";
+  return n > 0 ? "text-emerald-600" : n < 0 ? "text-rose-600" : "text-gray-400";
 }
 
 // Converts Yahoo Finance symbols to display format: "005930.KS" → "005930 KS"
@@ -62,7 +62,7 @@ export function timeAgo(iso?: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Layout primitives (dark "intelligence product" surface)
+// Layout primitives (light editorial surface)
 // ---------------------------------------------------------------------------
 export function Section({
   title,
@@ -77,15 +77,15 @@ export function Section({
 }) {
   return (
     <section
-      className={`rounded-2xl border border-white/10 bg-white/[0.02] p-6 ${className}`}
+      className={`rounded-2xl border border-gray-200 bg-white p-6 ${className}`}
     >
       <div className="mb-4">
         {eyebrow && (
-          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-400/80">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B45309]">
             {eyebrow}
           </div>
         )}
-        <h2 className="font-serif text-xl text-white tracking-tight">{title}</h2>
+        <h2 className="font-serif text-xl text-gray-900 tracking-tight">{title}</h2>
       </div>
       {children}
     </section>
@@ -100,11 +100,11 @@ export function Pill({
   tone?: "neutral" | "amber" | "emerald" | "rose" | "cyan";
 }) {
   const tones: Record<string, string> = {
-    neutral: "bg-white/5 text-slate-300 border-white/10",
-    amber: "bg-amber-400/10 text-amber-300 border-amber-400/20",
-    emerald: "bg-emerald-400/10 text-emerald-300 border-emerald-400/20",
-    rose: "bg-rose-400/10 text-rose-300 border-rose-400/20",
-    cyan: "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
+    neutral: "bg-gray-100 text-gray-600 border-gray-200",
+    amber: "bg-amber-50 text-amber-700 border-amber-200",
+    emerald: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    rose: "bg-rose-50 text-rose-700 border-rose-200",
+    cyan: "bg-cyan-50 text-cyan-700 border-cyan-200",
   };
   return (
     <span
@@ -126,10 +126,10 @@ export function Stat({
 }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wider text-slate-500">
+      <div className="text-[11px] uppercase tracking-wider text-gray-400">
         {label}
       </div>
-      <div className={`text-sm font-semibold ${tone ?? "text-slate-100"}`}>
+      <div className={`text-sm font-semibold ${tone ?? "text-gray-900"}`}>
         {value}
       </div>
     </div>
@@ -149,7 +149,7 @@ export function ChipGroup({
   if (!items || items.length === 0) return null;
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-1.5">
+      <div className="text-[11px] uppercase tracking-wider text-gray-400 mb-1.5">
         {label}
       </div>
       <div className="flex flex-wrap gap-1.5">
@@ -165,7 +165,7 @@ export function ChipGroup({
 
 export function Unavailable({ what }: { what: string }) {
   return (
-    <p className="text-sm text-slate-500 italic">
+    <p className="text-sm text-gray-400 italic">
       {what} is temporarily unavailable. Other sections are unaffected.
     </p>
   );

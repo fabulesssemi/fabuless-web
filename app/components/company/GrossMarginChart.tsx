@@ -12,9 +12,9 @@ const PW = W - PAD_L - PAD_R;
 const PH = H - PAD_T - PAD_B;
 
 function barColor(gm: number): string {
-  if (gm >= 60) return "#34d399"; // emerald — high-margin fabless
-  if (gm >= 40) return "#fbbf24"; // amber — mid-tier
-  return "#f87171";               // rose — memory trough / commodity
+  if (gm >= 60) return "#059669"; // emerald-600 — high-margin fabless
+  if (gm >= 40) return "#d97706"; // amber-600 — mid-tier
+  return "#e11d48";               // rose-600 — memory trough / commodity
 }
 
 type Quarter = { q: string; gm: number };
@@ -34,14 +34,14 @@ export function GrossMarginChart({
     const pct = (currentGM * 100).toFixed(1);
     const color = barColor(currentGM * 100);
     return (
-      <div className="mb-6 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center gap-4">
+      <div className="mb-6 rounded-xl border border-gray-200 bg-white px-4 py-3 flex items-center gap-4">
         <div>
-          <div className="text-[10px] uppercase tracking-widest text-slate-500">Gross Margin (TTM)</div>
+          <div className="text-[10px] uppercase tracking-widest text-gray-400">Gross Margin (TTM)</div>
           <div className="text-2xl font-semibold tabular-nums mt-0.5" style={{ color }}>
             {pct}%
           </div>
         </div>
-        <p className="text-[11px] text-slate-600 italic">
+        <p className="text-[11px] text-gray-500 italic">
           Quarterly trend populates after the next editorial refresh.
         </p>
       </div>
@@ -73,15 +73,15 @@ export function GrossMarginChart({
   return (
     <div className="mb-6">
       <div className="flex items-center justify-between mb-2 px-0.5">
-        <span className="text-[11px] uppercase tracking-widest text-slate-500">
+        <span className="text-[11px] uppercase tracking-widest text-gray-400">
           Gross Margin · Quarterly
         </span>
-        <span className={`text-sm font-semibold tabular-nums ${delta >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+        <span className={`text-sm font-semibold tabular-nums ${delta >= 0 ? "text-emerald-600" : "text-rose-600"}`}>
           {delta >= 0 ? "+" : ""}{delta.toFixed(1)}pp
-          <span className="text-slate-500 font-normal text-[11px] ml-1">vs {quarters[0].q}</span>
+          <span className="text-gray-400 font-normal text-[11px] ml-1">vs {quarters[0].q}</span>
         </span>
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
+      <div className="rounded-xl border border-gray-200 bg-white p-3">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full"
@@ -105,7 +105,7 @@ export function GrossMarginChart({
                   height={bh.toFixed(1)}
                   rx="3"
                   fill={color}
-                  fillOpacity={isLast ? 1 : 0.55}
+                  fillOpacity={isLast ? 1 : 0.45}
                 />
                 {/* Value label above bar */}
                 <text
@@ -114,7 +114,7 @@ export function GrossMarginChart({
                   textAnchor="middle"
                   fontSize="11"
                   fontWeight={isLast ? "600" : "400"}
-                  fill={isLast ? color : "rgba(148,163,184,0.7)"}
+                  fill={isLast ? color : "rgba(107,114,128,0.7)"}
                 >
                   {q.gm.toFixed(1)}%
                 </text>
@@ -124,7 +124,7 @@ export function GrossMarginChart({
                   y={(H - 4).toFixed(1)}
                   textAnchor="middle"
                   fontSize="10"
-                  fill="rgba(148,163,184,0.45)"
+                  fill="rgba(107,114,128,0.6)"
                 >
                   {q.q}
                 </text>

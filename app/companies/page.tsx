@@ -29,16 +29,16 @@ export default async function CompaniesIndex() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B1120] text-slate-200">
+    <div className="min-h-screen">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <header className="mb-10">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-400/80">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309]">
             Company Intelligence
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl text-white tracking-tight mt-2">
+          <h1 className="font-serif text-4xl sm:text-5xl text-gray-900 tracking-tight mt-2">
             The AI Silicon Stack
           </h1>
-          <p className="mt-3 max-w-2xl text-slate-400 leading-relaxed">
+          <p className="mt-3 max-w-2xl text-gray-500 leading-relaxed">
             The easiest way to understand a semiconductor or AI-infrastructure
             company — what changed, why it matters, and where it sits in the AI
             ecosystem. Live market data, refreshed hourly.
@@ -50,20 +50,20 @@ export default async function CompaniesIndex() {
             <Link
               key={meta.slug}
               href={`/companies/${meta.slug}`}
-              className="group rounded-2xl border border-white/10 bg-white/[0.02] p-5 hover:border-amber-400/30 hover:bg-white/[0.04] transition-colors"
+              className="group rounded-2xl border border-gray-200 bg-white p-5 hover:border-amber-300 hover:bg-amber-50/30 transition-colors"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="font-mono text-xs text-amber-400">
+                  <div className="font-mono text-xs text-[#B45309]">
                     {displayTicker(meta.ticker)}
                   </div>
-                  <div className="font-serif text-xl text-white tracking-tight group-hover:text-amber-300 transition-colors">
+                  <div className="font-serif text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
                     {meta.name}
                   </div>
                 </div>
                 {quote?.price != null && (
                   <div className="text-right shrink-0">
-                    <div className="text-sm font-semibold text-white tabular-nums">
+                    <div className="text-sm font-semibold text-gray-900 tabular-nums">
                       {fmtPrice(quote.price, quote.currency ?? "USD")}
                     </div>
                     <div
@@ -75,12 +75,12 @@ export default async function CompaniesIndex() {
                 )}
               </div>
 
-              <p className="mt-3 text-[13px] text-slate-400 leading-snug">
+              <p className="mt-3 text-[13px] text-gray-500 leading-snug">
                 {meta.sector}
               </p>
 
               <div className="mt-4 flex items-center justify-between">
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-gray-400">
                   {quote?.marketCap != null
                     ? `Mkt cap ${fmtMarketCap(quote.marketCap, quote.currency ?? "USD")}`
                     : ""}

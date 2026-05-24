@@ -39,31 +39,31 @@ export function CompanyDashboard({
   const currency = quote?.currency ?? "USD";
 
   return (
-    <div className="min-h-screen bg-[#0B1120] text-slate-200">
+    <div className="min-h-screen">
       <div className="max-w-6xl mx-auto px-6 py-10">
         {/* Back link */}
         <Link
           href="/companies"
-          className="text-xs uppercase tracking-widest text-slate-500 hover:text-amber-300 transition-colors"
+          className="text-xs uppercase tracking-widest text-gray-400 hover:text-[#B45309] transition-colors"
         >
           ← All Companies
         </Link>
 
         {/* ---------------- HERO HEADER ---------------- */}
-        <header className="mt-4 mb-8 pb-8 border-b border-white/10">
+        <header className="mt-4 mb-8 pb-8 border-b border-gray-200">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-3">
-                <span className="font-mono text-amber-400 text-lg font-semibold">
+                <span className="font-mono text-[#B45309] text-lg font-semibold">
                   {displayTicker(meta.ticker)}
                 </span>
                 {meta.exchangeLabel && (
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-gray-400">
                     {meta.exchangeLabel}
                   </span>
                 )}
               </div>
-              <h1 className="font-serif text-4xl sm:text-5xl text-white tracking-tight mt-1">
+              <h1 className="font-serif text-4xl sm:text-5xl text-gray-900 tracking-tight mt-1">
                 {meta.name}
               </h1>
               <div className="mt-2">
@@ -75,7 +75,7 @@ export function CompanyDashboard({
             <div className="text-right">
               {quote?.price != null ? (
                 <>
-                  <div className="text-3xl font-semibold text-white tabular-nums">
+                  <div className="text-3xl font-semibold text-gray-900 tabular-nums">
                     {fmtPrice(quote.price, currency)}
                   </div>
                   <div
@@ -86,13 +86,13 @@ export function CompanyDashboard({
                       : ""}
                     ({fmtPercent(quote.changePercent)})
                   </div>
-                  <div className="mt-1 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-slate-500">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="mt-1 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-gray-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     Live · Yahoo Finance
                   </div>
                 </>
               ) : (
-                <span className="text-sm text-slate-500">Price unavailable</span>
+                <span className="text-sm text-gray-400">Price unavailable</span>
               )}
             </div>
           </div>
@@ -115,7 +115,7 @@ export function CompanyDashboard({
             <Stat
               label="Next Earnings"
               value={earnings?.nextEarningsDate ?? "—"}
-              tone="text-amber-300"
+              tone="text-amber-700"
             />
           </div>
         </header>
@@ -135,23 +135,23 @@ export function CompanyDashboard({
         {/* ---------------- 1. QUICK TAKE ---------------- */}
         {editorial ? (
           <Section eyebrow="The 30-Second Read" title="Quick Take" className="mb-6">
-            <p className="text-[15px] leading-relaxed text-slate-300">
+            <p className="text-[15px] leading-relaxed text-gray-700">
               {editorial.quickTake}
             </p>
             <div className="mt-5 grid sm:grid-cols-2 gap-4">
-              <div className="rounded-xl bg-white/[0.02] border border-white/10 p-4">
-                <div className="text-[11px] uppercase tracking-wider text-cyan-400/80 mb-1">
+              <div className="rounded-xl bg-gray-50 border border-gray-200 p-4">
+                <div className="text-[11px] uppercase tracking-wider text-cyan-700 mb-1">
                   Role in the AI ecosystem
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-gray-700 leading-relaxed">
                   {editorial.ecosystemRole}
                 </p>
               </div>
-              <div className="rounded-xl bg-white/[0.02] border border-white/10 p-4">
-                <div className="text-[11px] uppercase tracking-wider text-amber-400/80 mb-1">
+              <div className="rounded-xl bg-gray-50 border border-gray-200 p-4">
+                <div className="text-[11px] uppercase tracking-wider text-[#B45309] mb-1">
                   What investors care about now
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-gray-700 leading-relaxed">
                   {editorial.investorFocus}
                 </p>
               </div>
@@ -159,7 +159,7 @@ export function CompanyDashboard({
           </Section>
         ) : (
           <Section title="Quick Take" eyebrow="Deep-dive in progress" className="mb-6">
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed">
               {profile?.description
                 ? profile.description
                 : `Our full editorial deep-dive for ${meta.name} is in progress. Live market data, earnings, analyst consensus, and news below are fully active.`}
@@ -174,7 +174,7 @@ export function CompanyDashboard({
             {/* 2. LATEST DEVELOPMENTS */}
             <Section eyebrow="Live" title="Latest Developments">
               {news.length > 0 ? (
-                <ul className="divide-y divide-white/5">
+                <ul className="divide-y divide-gray-100">
                   {news.map((n) => (
                     <li key={n.url} className="py-3 first:pt-0 last:pb-0">
                       <a
@@ -183,11 +183,11 @@ export function CompanyDashboard({
                         rel="noopener noreferrer"
                         className="group flex items-baseline justify-between gap-4"
                       >
-                        <span className="text-[15px] text-slate-200 group-hover:text-amber-300 transition-colors leading-snug">
+                        <span className="text-[15px] text-gray-800 group-hover:text-[#B45309] transition-colors leading-snug">
                           {n.title}
                         </span>
                       </a>
-                      <div className="mt-1 flex items-center gap-2 text-[11px] text-slate-500">
+                      <div className="mt-1 flex items-center gap-2 text-[11px] text-gray-400">
                         {n.source && <span>{n.source}</span>}
                         {n.source && n.publishedAt && <span>·</span>}
                         {n.publishedAt && <span>{timeAgo(n.publishedAt)}</span>}
@@ -206,17 +206,17 @@ export function CompanyDashboard({
                 <div className="space-y-4">
                   <WhyBlock
                     label="Business implications"
-                    tone="text-cyan-300"
+                    tone="text-cyan-700"
                     text={editorial.whyItMatters.business}
                   />
                   <WhyBlock
                     label="Investment implications"
-                    tone="text-amber-300"
+                    tone="text-[#B45309]"
                     text={editorial.whyItMatters.investment}
                   />
                   <WhyBlock
                     label="Ecosystem implications"
-                    tone="text-emerald-300"
+                    tone="text-emerald-700"
                     text={editorial.whyItMatters.ecosystem}
                   />
                 </div>
@@ -230,12 +230,12 @@ export function CompanyDashboard({
                   {editorial.keyThemes.map((t) => (
                     <div
                       key={t.title}
-                      className="rounded-xl border border-white/10 bg-white/[0.02] p-4"
+                      className="rounded-xl border border-gray-200 bg-gray-50 p-4"
                     >
-                      <div className="text-sm font-semibold text-white mb-1">
+                      <div className="text-sm font-semibold text-gray-900 mb-1">
                         {t.title}
                       </div>
-                      <p className="text-[13px] text-slate-400 leading-relaxed">
+                      <p className="text-[13px] text-gray-500 leading-relaxed">
                         {t.detail}
                       </p>
                     </div>
@@ -314,8 +314,8 @@ export function CompanyDashboard({
                     />
                   </div>
                   {editorial?.guidanceCommentary && (
-                    <p className="text-[13px] text-slate-400 leading-relaxed border-t border-white/10 pt-3">
-                      <span className="text-amber-400/80 font-medium">
+                    <p className="text-[13px] text-gray-500 leading-relaxed border-t border-gray-200 pt-3">
+                      <span className="text-[#B45309] font-medium">
                         What to watch:{" "}
                       </span>
                       {editorial.guidanceCommentary}
@@ -334,17 +334,17 @@ export function CompanyDashboard({
                   <li key={r.slug}>
                     <Link
                       href={`/companies/${r.slug}`}
-                      className="group flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 hover:border-amber-400/30 transition-colors"
+                      className="group flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2 hover:border-amber-300 transition-colors"
                     >
                       <div className="min-w-0">
-                        <div className="text-sm font-medium text-slate-200 group-hover:text-amber-300 transition-colors">
+                        <div className="text-sm font-medium text-gray-800 group-hover:text-[#B45309] transition-colors">
                           {r.name}
                         </div>
-                        <div className="text-[11px] text-slate-500 truncate">
+                        <div className="text-[11px] text-gray-400 truncate">
                           {r.reason}
                         </div>
                       </div>
-                      <span className="font-mono text-[11px] text-slate-500 shrink-0">
+                      <span className="font-mono text-[11px] text-gray-400 shrink-0">
                         {displayTicker(r.ticker)}
                       </span>
                     </Link>
@@ -354,7 +354,7 @@ export function CompanyDashboard({
             </Section>
 
             {editorial && (
-              <p className="text-[11px] text-slate-600 px-1">
+              <p className="text-[11px] text-gray-400 px-1">
                 Editorial analysis updated {editorial.updated}. Market data via
                 Yahoo Finance, cached hourly.
               </p>
@@ -380,7 +380,7 @@ function WhyBlock({
       <div className={`text-[11px] uppercase tracking-wider mb-1 ${tone}`}>
         {label}
       </div>
-      <p className="text-sm text-slate-300 leading-relaxed">{text}</p>
+      <p className="text-sm text-gray-700 leading-relaxed">{text}</p>
     </div>
   );
 }
@@ -396,15 +396,15 @@ function CaseColumn({
 }) {
   const ring =
     tone === "emerald"
-      ? "border-emerald-400/20 bg-emerald-400/[0.03]"
-      : "border-rose-400/20 bg-rose-400/[0.03]";
-  const dot = tone === "emerald" ? "text-emerald-400" : "text-rose-400";
+      ? "border-emerald-200 bg-emerald-50"
+      : "border-rose-200 bg-rose-50";
+  const dot = tone === "emerald" ? "text-emerald-700" : "text-rose-700";
   return (
     <div className={`rounded-xl border p-4 ${ring}`}>
       <div className={`text-sm font-semibold mb-2 ${dot}`}>{title}</div>
       <ul className="space-y-2">
         {points.map((p, i) => (
-          <li key={i} className="flex gap-2 text-[13px] text-slate-300 leading-relaxed">
+          <li key={i} className="flex gap-2 text-[13px] text-gray-700 leading-relaxed">
             <span className={`shrink-0 ${dot}`}>{tone === "emerald" ? "▲" : "▼"}</span>
             <span>{p}</span>
           </li>
@@ -443,23 +443,23 @@ function CEOCard({ ceo }: { ceo: CEOProfile }) {
     .toUpperCase();
 
   return (
-    <div className="mb-6 flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3">
+    <div className="mb-6 flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-3">
       {ceo.photo ? (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={ceo.photo}
           alt={ceo.name}
-          className="h-14 w-14 rounded-full object-cover object-top shrink-0 ring-1 ring-white/10"
+          className="h-14 w-14 rounded-full object-cover object-top shrink-0 ring-1 ring-gray-200"
         />
       ) : (
-        <div className="h-14 w-14 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 font-semibold text-base shrink-0">
+        <div className="h-14 w-14 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-[#B45309] font-semibold text-base shrink-0">
           {initials}
         </div>
       )}
       <div>
-        <div className="text-[10px] uppercase tracking-widest text-slate-500">Chief Executive Officer</div>
-        <div className="text-sm font-semibold text-white mt-0.5">{ceo.name}</div>
-        <div className="text-[11px] text-slate-500">CEO since {ceo.since}</div>
+        <div className="text-[10px] uppercase tracking-widest text-gray-400">Chief Executive Officer</div>
+        <div className="text-sm font-semibold text-gray-900 mt-0.5">{ceo.name}</div>
+        <div className="text-[11px] text-gray-400">CEO since {ceo.since}</div>
       </div>
     </div>
   );

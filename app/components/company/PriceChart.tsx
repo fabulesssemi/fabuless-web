@@ -41,7 +41,7 @@ export function PriceChart({
   const firstClose = closes[0];
   const lastClose = closes[closes.length - 1];
   const isUp = lastClose >= firstClose;
-  const lineColor = isUp ? "#34d399" : "#f87171";
+  const lineColor = isUp ? "#059669" : "#e11d48"; // emerald-600 or rose-600
   const changePct = ((lastClose - firstClose) / firstClose) * 100;
   const gradientId = `pg-${symbol.replace(/[^a-z0-9]/gi, "")}`;
 
@@ -84,15 +84,15 @@ export function PriceChart({
   return (
     <div className="mb-6">
       <div className="flex items-center justify-between mb-2 px-0.5">
-        <span className="text-[11px] uppercase tracking-widest text-slate-500">
+        <span className="text-[11px] uppercase tracking-widest text-gray-400">
           1-Year Price
         </span>
-        <span className={`text-sm font-semibold tabular-nums ${isUp ? "text-emerald-400" : "text-rose-400"}`}>
+        <span className={`text-sm font-semibold tabular-nums ${isUp ? "text-emerald-600" : "text-rose-600"}`}>
           {isUp ? "+" : ""}
           {changePct.toFixed(1)}%
         </span>
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
+      <div className="rounded-xl border border-gray-200 bg-white p-3">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full"
@@ -101,7 +101,7 @@ export function PriceChart({
         >
           <defs>
             <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={lineColor} stopOpacity="0.2" />
+              <stop offset="0%" stopColor={lineColor} stopOpacity="0.15" />
               <stop offset="100%" stopColor={lineColor} stopOpacity="0.01" />
             </linearGradient>
           </defs>
@@ -114,7 +114,7 @@ export function PriceChart({
               y1={l.y.toFixed(1)}
               x2={W - PAD_R}
               y2={l.y.toFixed(1)}
-              stroke="rgba(148,163,184,0.07)"
+              stroke="rgba(107,114,128,0.1)"
               strokeWidth="1"
             />
           ))}
@@ -148,7 +148,7 @@ export function PriceChart({
               y={(l.y + 4).toFixed(1)}
               textAnchor="end"
               fontSize="11"
-              fill="rgba(148,163,184,0.45)"
+              fill="rgba(107,114,128,0.7)"
             >
               {fmtY(l.value, currency)}
             </text>
@@ -162,7 +162,7 @@ export function PriceChart({
               y={(H - 4).toFixed(1)}
               textAnchor="middle"
               fontSize="11"
-              fill="rgba(148,163,184,0.45)"
+              fill="rgba(107,114,128,0.7)"
             >
               {l.label}
             </text>

@@ -30,7 +30,7 @@ export function PTSparkline({ data }: { data: Point[] }) {
   const latestPT = data[data.length - 1].pt;
   const earliestPT = data[0].pt;
   const ptUp = latestPT >= earliestPT;
-  const lineColor = ptUp ? "#34d399" : "#f87171"; // emerald or rose
+  const lineColor = ptUp ? "#059669" : "#e11d48"; // emerald-600 or rose-600
 
   const latestPrice = data[data.length - 1].price;
 
@@ -49,7 +49,7 @@ export function PTSparkline({ data }: { data: Point[] }) {
             y1={toY(latestPrice).toFixed(1)}
             x2={W - PAD}
             y2={toY(latestPrice).toFixed(1)}
-            stroke="rgba(148,163,184,0.25)"
+            stroke="rgba(107,114,128,0.3)"
             strokeWidth="1"
             strokeDasharray="3,3"
           />
@@ -64,9 +64,9 @@ export function PTSparkline({ data }: { data: Point[] }) {
           fill={lineColor}
         />
       </svg>
-      <div className="flex justify-between text-[10px] text-slate-500 mt-0.5">
+      <div className="flex justify-between text-[10px] text-gray-400 mt-0.5">
         <span>{data[0].date.slice(5)}</span>
-        <span className={ptUp ? "text-emerald-400" : "text-rose-400"}>
+        <span className={ptUp ? "text-emerald-600" : "text-rose-600"}>
           PT ${latestPT.toFixed(0)} {ptUp ? "▲" : "▼"}
         </span>
         <span>{data[data.length - 1].date.slice(5)}</span>

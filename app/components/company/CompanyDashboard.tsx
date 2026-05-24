@@ -135,7 +135,7 @@ export function CompanyDashboard({
         {/* ---------------- 1. QUICK TAKE ---------------- */}
         {editorial ? (
           <Section eyebrow="The 30-Second Read" title="Quick Take" className="mb-6">
-            <p className="text-[15px] leading-relaxed text-gray-700">
+            <p className="text-[15px] leading-relaxed text-gray-700 italic">
               {editorial.quickTake}
             </p>
             <div className="mt-5 grid sm:grid-cols-2 gap-4">
@@ -143,7 +143,7 @@ export function CompanyDashboard({
                 <div className="text-[11px] uppercase tracking-wider text-cyan-700 mb-1">
                   Role in the AI ecosystem
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
+                <p className="text-sm text-gray-700 leading-relaxed italic">
                   {editorial.ecosystemRole}
                 </p>
               </div>
@@ -151,7 +151,7 @@ export function CompanyDashboard({
                 <div className="text-[11px] uppercase tracking-wider text-[#B45309] mb-1">
                   What investors care about now
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
+                <p className="text-sm text-gray-700 leading-relaxed italic">
                   {editorial.investorFocus}
                 </p>
               </div>

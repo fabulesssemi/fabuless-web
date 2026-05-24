@@ -80,7 +80,7 @@ export default async function AnalystConsensusDashboard() {
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-1">
               What Changed This Week
             </div>
-            <p className="text-gray-700 leading-relaxed text-[15px]">{weeklySummary.summary}</p>
+            <p className="text-gray-700 leading-relaxed text-[15px] italic">{weeklySummary.summary}</p>
             <div className="mt-3 text-[11px] text-gray-400">
               Week of {weeklySummary.week_of}
             </div>
@@ -100,21 +100,21 @@ export default async function AnalystConsensusDashboard() {
             title="Biggest Bullish Moves"
             eyebrow="Sentiment ▲"
             items={rankBullish(views)}
-            metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "text-amber-700" })}
+            metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "font-semibold text-gray-900" })}
             emptyHint="No clear bullish shifts right now."
           />
           <RankCard
             title="Biggest Bearish Moves"
             eyebrow="Sentiment ▼"
             items={rankBearish(views)}
-            metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "text-slate-500" })}
+            metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "font-semibold text-gray-500" })}
             emptyHint="No clear bearish shifts right now."
           />
           <RankCard
             title="Most Upgraded"
             eyebrow="Actions · 30d"
             items={rankUpgrades(views)}
-            metric={(v) => ({ text: `${v.upgrades30d} ↑`, tone: "text-amber-700" })}
+            metric={(v) => ({ text: `${v.upgrades30d} ↑`, tone: "font-semibold text-gray-900" })}
             emptyHint="No upgrades in the last 30 days."
           />
         </div>
@@ -172,7 +172,7 @@ function RankCard({
                       <span className="font-mono text-[#B45309] text-[11px] font-medium">
                         {displayTicker(v.ticker)}
                       </span>
-                      <span className="block text-[13px] text-gray-700 group-hover:text-[#B45309] transition-colors truncate">
+                      <span className="block font-serif text-[14px] text-gray-800 group-hover:text-[#B45309] transition-colors truncate">
                         {v.name}
                       </span>
                     </div>
@@ -230,11 +230,11 @@ function NarrativeColumn({
                     <span className="font-mono text-[11px] font-semibold text-[#B45309]">
                       {displayTicker(v.ticker)}
                     </span>
-                    <span className="text-[12px] text-gray-400 group-hover:text-gray-700 transition-colors">
+                    <span className="font-serif text-[13px] text-gray-500 group-hover:text-gray-800 transition-colors">
                       {name}
                     </span>
                   </div>
-                  <p className="text-[14px] text-gray-700 leading-relaxed">{v.narrative}</p>
+                  <p className="text-[14px] text-gray-700 leading-relaxed italic">{v.narrative}</p>
                 </Link>
               </li>
             );

@@ -178,7 +178,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
             <div className="text-[11px] uppercase tracking-wider text-[#B45309] mb-1">
               What changed
             </div>
-            <p className="text-sm text-gray-700 leading-relaxed">{view.narrative}</p>
+            <p className="text-sm text-gray-700 leading-relaxed italic">{view.narrative}</p>
             {(view.bullThemes.length > 0 || view.bearThemes.length > 0) && (
               <div className="mt-3 grid sm:grid-cols-2 gap-3">
                 {view.bullThemes.length > 0 && (
@@ -259,7 +259,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                   return (
                     <li key={`${a.firm}-${i}`} className="py-2 flex items-center justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="text-sm text-gray-800 truncate">
+                        <div className="font-serif text-sm text-gray-800 truncate">
                           {a.analyst ? `${a.analyst}, ` : ""}{a.firm}
                         </div>
                         <div className="text-[11px] text-gray-400">

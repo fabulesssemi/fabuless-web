@@ -77,11 +77,11 @@ export function Section({
 }) {
   return (
     <section
-      className={`rounded-2xl border border-gray-200 bg-white p-6 ${className}`}
+      className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm ${className}`}
     >
-      <div className="mb-4">
+      <div className="mb-5 pb-3 border-b border-gray-100">
         {eyebrow && (
-          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B45309]">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-0.5">
             {eyebrow}
           </div>
         )}
@@ -100,11 +100,11 @@ export function Pill({
   tone?: "neutral" | "amber" | "emerald" | "rose" | "cyan";
 }) {
   const tones: Record<string, string> = {
-    neutral: "bg-gray-100 text-gray-600 border-gray-200",
+    neutral: "bg-transparent text-gray-500 border-gray-300",
     amber: "bg-amber-50 text-amber-700 border-amber-200",
-    emerald: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    rose: "bg-rose-50 text-rose-700 border-rose-200",
-    cyan: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    emerald: "bg-teal-50 text-teal-700 border-teal-200",
+    rose: "bg-rose-50 text-rose-800 border-rose-200",
+    cyan: "bg-sky-50 text-sky-700 border-sky-200",
   };
   return (
     <span

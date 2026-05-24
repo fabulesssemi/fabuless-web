@@ -56,16 +56,21 @@ export default async function AnalystConsensusDashboard() {
             semiconductors. Sentiment, price targets, upgrades, and estimate
             revisions — refreshed hourly.
           </p>
-          <div className="mt-4 flex flex-wrap gap-2 text-xs">
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 px-3 py-1">
-              {counts.improving} improving
-            </span>
-            <span className="rounded-full border border-rose-200 bg-rose-50 text-rose-700 px-3 py-1">
-              {counts.weakening} weakening
-            </span>
-            <span className="rounded-full border border-gray-200 bg-gray-100 text-gray-600 px-3 py-1">
-              {counts.stable} stable
-            </span>
+          <div className="mt-6 flex items-center gap-5 pt-4 border-t border-gray-100">
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-serif text-2xl font-semibold text-amber-700 tabular-nums">{counts.improving}</span>
+              <span className="text-[11px] uppercase tracking-widest text-gray-400">improving</span>
+            </div>
+            <span className="w-px h-4 bg-gray-200" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-serif text-2xl font-semibold text-slate-500 tabular-nums">{counts.weakening}</span>
+              <span className="text-[11px] uppercase tracking-widest text-gray-400">weakening</span>
+            </div>
+            <span className="w-px h-4 bg-gray-200" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-serif text-2xl font-semibold text-gray-300 tabular-nums">{counts.stable}</span>
+              <span className="text-[11px] uppercase tracking-widest text-gray-400">stable</span>
+            </div>
           </div>
         </header>
 
@@ -95,21 +100,21 @@ export default async function AnalystConsensusDashboard() {
             title="Biggest Bullish Moves"
             eyebrow="Sentiment ▲"
             items={rankBullish(views)}
-            metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "text-emerald-600" })}
+            metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "text-amber-700" })}
             emptyHint="No clear bullish shifts right now."
           />
           <RankCard
             title="Biggest Bearish Moves"
             eyebrow="Sentiment ▼"
             items={rankBearish(views)}
-            metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "text-rose-600" })}
+            metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "text-slate-500" })}
             emptyHint="No clear bearish shifts right now."
           />
           <RankCard
             title="Most Upgraded"
             eyebrow="Actions · 30d"
             items={rankUpgrades(views)}
-            metric={(v) => ({ text: `${v.upgrades30d} ▲`, tone: "text-emerald-600" })}
+            metric={(v) => ({ text: `${v.upgrades30d} ↑`, tone: "text-amber-700" })}
             emptyHint="No upgrades in the last 30 days."
           />
         </div>
@@ -159,14 +164,14 @@ function RankCard({
               <li key={v.ticker}>
                 <Link
                   href={`/companies/${slug}`}
-                  className="group flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2 hover:border-amber-300 transition-colors"
+                  className="group flex items-center justify-between gap-3 py-2.5 border-b border-gray-100 last:border-0 hover:opacity-70 transition-opacity"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <span className="text-[11px] text-gray-400 w-3">{i + 1}</span>
+                    <span className="text-[11px] text-gray-300 tabular-nums w-4 text-center shrink-0">{i + 1}</span>
                     <div className="min-w-0">
-                      <span className="font-mono text-[#B45309] text-xs">
-                      {displayTicker(v.ticker)}
-                    </span>
+                      <span className="font-mono text-[#B45309] text-[11px] font-medium">
+                        {displayTicker(v.ticker)}
+                      </span>
                       <span className="block text-[13px] text-gray-700 group-hover:text-[#B45309] transition-colors truncate">
                         {v.name}
                       </span>
@@ -194,25 +199,42 @@ function NarrativeColumn({
   tone: "emerald" | "rose";
   views: AnalystView[];
 }) {
-  const color = tone === "emerald" ? "text-emerald-700" : "text-rose-700";
+  const isPositive = tone === "emerald";
+  const titleColor = isPositive ? "text-amber-700" : "text-slate-500";
+  const ruleBg = isPositive ? "bg-amber-200" : "bg-gray-200";
+  const accentBorder = isPositive ? "border-amber-300 hover:border-amber-500" : "border-gray-200 hover:border-gray-400";
+  const indicator = isPositive ? "↑" : "↓";
+
   return (
     <div>
-      <div className={`text-sm font-semibold mb-3 ${color}`}>{title}</div>
+      <div className="flex items-center gap-3 mb-0">
+        <span className={`text-[11px] font-semibold uppercase tracking-widest ${titleColor}`}>
+          {indicator} {title}
+        </span>
+        <div className={`flex-1 h-px ${ruleBg}`} />
+      </div>
       {views.length === 0 ? (
-        <p className="text-[13px] text-gray-500 italic">Nothing notable right now.</p>
+        <p className="text-[13px] text-gray-400 italic mt-4">Nothing notable right now.</p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="mt-3">
           {views.map((v) => {
             const slug = slugByTicker.get(v.ticker) ?? v.ticker.toLowerCase();
             const name = nameByTicker.get(v.ticker) ?? v.ticker;
             return (
-              <li key={v.ticker} className="rounded-xl border border-gray-200 bg-white p-3">
+              <li
+                key={v.ticker}
+                className={`border-l-[2.5px] ${accentBorder} pl-4 py-3.5 transition-colors`}
+              >
                 <Link href={`/companies/${slug}`} className="group block">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="font-mono text-[11px] text-[#B45309]">{displayTicker(v.ticker)}</span>
-                    <span className="text-[11px] text-gray-400 truncate group-hover:text-[#B45309] transition-colors">{name}</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-mono text-[11px] font-semibold text-[#B45309]">
+                      {displayTicker(v.ticker)}
+                    </span>
+                    <span className="text-[12px] text-gray-400 group-hover:text-gray-700 transition-colors">
+                      {name}
+                    </span>
                   </div>
-                  <p className="text-[13px] text-gray-700 leading-relaxed">{v.narrative}</p>
+                  <p className="text-[14px] text-gray-700 leading-relaxed">{v.narrative}</p>
                 </Link>
               </li>
             );

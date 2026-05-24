@@ -50,7 +50,7 @@ export default async function CompaniesIndex() {
             <Link
               key={meta.slug}
               href={`/companies/${meta.slug}`}
-              className="group rounded-2xl border border-gray-200 bg-white p-5 hover:border-amber-300 hover:bg-amber-50/30 transition-colors"
+              className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">

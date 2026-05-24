@@ -56,19 +56,19 @@ export default function RootLayout({
                 Fabuless
               </Link>
               <div className="flex gap-8 text-sm text-gray-400">
-                <Link href="/companies" className="hover:text-white transition-colors">
+                <Link href="/companies" className="hover:text-amber-400 transition-colors">
                   Companies
                 </Link>
-                <Link href="/analyst-consensus" className="hover:text-white transition-colors">
+                <Link href="/analyst-consensus" className="hover:text-amber-400 transition-colors">
                   Analysts
                 </Link>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-amber-400 transition-colors">
                   About
                 </Link>
-                <Link href="/archive" className="hover:text-white transition-colors">
+                <Link href="/archive" className="hover:text-amber-400 transition-colors">
                   Archive
                 </Link>
-                <Link href="/earnings" className="hover:text-white transition-colors">
+                <Link href="/earnings" className="hover:text-amber-400 transition-colors">
                   Earnings
                 </Link>
               </div>

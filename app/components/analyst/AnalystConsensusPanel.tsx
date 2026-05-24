@@ -17,9 +17,9 @@ export function SentimentBadge({
   score?: number;
 }) {
   const map = {
-    improving: { tone: "emerald" as const, arrow: "▲", label: "Improving" },
-    weakening: { tone: "rose" as const, arrow: "▼", label: "Weakening" },
-    stable: { tone: "neutral" as const, arrow: "→", label: "Stable" },
+    improving: { tone: "amber" as const, arrow: "↑", label: "Improving" },
+    weakening: { tone: "rose" as const, arrow: "↓", label: "Weakening" },
+    stable: { tone: "neutral" as const, arrow: "–", label: "Stable" },
   };
   const m = map[direction];
   return (
@@ -36,7 +36,7 @@ export function EstimateBadge({
   direction: AnalystView["estimateDirection"];
 }) {
   const map = {
-    rising: { tone: "emerald" as const, label: "Estimates Rising" },
+    rising: { tone: "amber" as const, label: "Estimates Rising" },
     falling: { tone: "rose" as const, label: "Estimates Falling" },
     stable: { tone: "neutral" as const, label: "Estimates Stable" },
   };
@@ -51,9 +51,9 @@ export function DistributionBar({
 }) {
   const total = d.strongBuy + d.buy + d.hold + d.sell + d.strongSell || 1;
   const segs = [
-    { v: d.strongBuy + d.buy, c: "bg-emerald-500", label: "Buy" },
-    { v: d.hold, c: "bg-gray-300", label: "Hold" },
-    { v: d.sell + d.strongSell, c: "bg-rose-500", label: "Sell" },
+    { v: d.strongBuy + d.buy, c: "bg-amber-400", label: "Buy" },
+    { v: d.hold, c: "bg-gray-200", label: "Hold" },
+    { v: d.sell + d.strongSell, c: "bg-rose-400", label: "Sell" },
   ];
   return (
     <div>
@@ -63,9 +63,9 @@ export function DistributionBar({
         ))}
       </div>
       <div className="mt-1.5 flex justify-between text-[11px] text-gray-400">
-        <span className="text-emerald-600">{segs[0].v} Buy</span>
+        <span className="text-amber-700">{segs[0].v} Buy</span>
         <span>{segs[1].v} Hold</span>
-        <span className="text-rose-600">{segs[2].v} Sell</span>
+        <span className="text-rose-700">{segs[2].v} Sell</span>
       </div>
     </div>
   );
@@ -183,7 +183,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
               <div className="mt-3 grid sm:grid-cols-2 gap-3">
                 {view.bullThemes.length > 0 && (
                   <div>
-                    <div className="text-[11px] uppercase tracking-wider text-emerald-700 mb-1">
+                    <div className="text-[11px] uppercase tracking-wider text-amber-700 mb-1">
                       Bullish themes
                     </div>
                     <p className="text-[12px] text-gray-500 leading-relaxed">
@@ -193,7 +193,7 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                 )}
                 {view.bearThemes.length > 0 && (
                   <div>
-                    <div className="text-[11px] uppercase tracking-wider text-rose-700 mb-1">
+                    <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-1">
                       Bearish themes
                     </div>
                     <p className="text-[12px] text-gray-500 leading-relaxed">

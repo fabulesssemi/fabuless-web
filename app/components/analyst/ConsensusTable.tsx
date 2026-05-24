@@ -68,21 +68,21 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+    <div className="overflow-x-auto border border-gray-100">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 text-[11px] uppercase tracking-wider text-gray-500">
+          <tr className="border-b border-gray-200 text-[11px] uppercase tracking-wider text-gray-400 bg-gray-50">
             {COLS.map((c) => (
               <th
                 key={c.key}
                 onClick={() => onSort(c.key)}
-                className={`cursor-pointer select-none px-3 py-3 font-semibold hover:text-[#B45309] ${
+                className={`cursor-pointer select-none px-3 py-2.5 font-semibold hover:text-gray-700 transition-colors ${
                   c.numeric ? "text-right" : "text-left"
                 }`}
               >
                 {c.label}
                 {sortKey === c.key && (
-                  <span className="ml-1 text-[#B45309]">{asc ? "▲" : "▼"}</span>
+                  <span className="ml-1 text-gray-500">{asc ? "▲" : "▼"}</span>
                 )}
               </th>
             ))}
@@ -94,34 +94,34 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
               key={r.ticker}
               className="border-b border-gray-100 last:border-0 hover:bg-gray-50"
             >
-              <td className="px-3 py-3">
+              <td className="px-3 py-2.5">
                 <Link href={`/companies/${r.slug}`} className="group">
-                  <span className="font-mono text-[#B45309] text-xs">
+                  <span className="font-mono text-gray-400 text-[10px]">
                     {displayTicker(r.ticker)}
                   </span>
-                  <span className="block text-gray-700 group-hover:text-[#B45309] transition-colors text-[13px]">
+                  <span className="block text-gray-800 group-hover:text-gray-900 transition-colors text-[13px] font-medium">
                     {r.name}
                   </span>
                 </Link>
               </td>
-              <td className="px-3 py-3 text-gray-700">{r.rating}</td>
-              <td className="px-3 py-3 text-right tabular-nums text-gray-800">
+              <td className="px-3 py-2.5text-gray-700">{r.rating}</td>
+              <td className="px-3 py-2.5text-right tabular-nums text-gray-800">
                 {money(r.avgPT, r.ticker)}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.upside)}`}>
                 {pct(r.upside)}
               </td>
-              <td className="px-3 py-3 text-right tabular-nums text-gray-800">
+              <td className="px-3 py-2.5text-right tabular-nums text-gray-800">
                 {r.buyShare != null ? `${r.buyShare.toFixed(0)}%` : "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.sentimentScore)}`}>
                 {r.sentimentScore > 0 ? "+" : ""}
                 {r.sentimentScore}
               </td>
-              <td className="px-3 py-3 text-right tabular-nums text-emerald-600">
+              <td className="px-3 py-2.5text-right tabular-nums text-emerald-600">
                 {r.upgrades30d || "—"}
               </td>
-              <td className="px-3 py-3 text-right tabular-nums text-rose-600">
+              <td className="px-3 py-2.5text-right tabular-nums text-rose-600">
                 {r.downgrades30d || "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.ptChangePct)}`}>

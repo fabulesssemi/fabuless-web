@@ -65,11 +65,13 @@ export function timeAgo(iso?: string): string {
 export function Section({
   title,
   eyebrow,
+  eyebrowColor = "text-[#B45309]",
   children,
   className = "",
 }: {
   title: string;
   eyebrow?: string;
+  eyebrowColor?: string;
   children: ReactNode;
   className?: string;
 }) {
@@ -77,7 +79,7 @@ export function Section({
     <section className={className}>
       <div className="mb-5">
         {eyebrow && (
-          <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-0.5">
+          <div className={`text-[10px] font-bold uppercase tracking-[0.18em] mb-0.5 ${eyebrowColor}`}>
             {eyebrow}
           </div>
         )}

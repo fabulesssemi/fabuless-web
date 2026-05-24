@@ -66,12 +66,14 @@ export function Section({
   title,
   eyebrow,
   eyebrowColor = "text-[#B45309]",
+  live = false,
   children,
   className = "",
 }: {
   title: string;
   eyebrow?: string;
   eyebrowColor?: string;
+  live?: boolean;
   children: ReactNode;
   className?: string;
 }) {
@@ -79,7 +81,8 @@ export function Section({
     <section className={className}>
       <div className="mb-5">
         {eyebrow && (
-          <div className={`text-[10px] font-bold uppercase tracking-[0.18em] mb-0.5 ${eyebrowColor}`}>
+          <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] mb-0.5 ${eyebrowColor}`}>
+            {live && <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shrink-0" />}
             {eyebrow}
           </div>
         )}

@@ -155,7 +155,7 @@ export function CompanyDashboard({
           )}
 
           {/* 2. LATEST DEVELOPMENTS */}
-          <Section eyebrow="Live" title="Latest Developments">
+          <Section eyebrow="Live" title="Latest Developments" live>
             {news.length > 0 ? (
               <ul className="divide-y divide-gray-100">
                 {news.map((n) => (
@@ -166,7 +166,7 @@ export function CompanyDashboard({
                       rel="noopener noreferrer"
                       className="group"
                     >
-                      <span className="text-[14px] text-gray-800 group-hover:text-[#B45309] transition-colors leading-snug block">
+                      <span className="text-[14px] text-gray-800 group-hover:text-[#B45309] group-hover:underline underline-offset-2 decoration-[#B45309]/50 transition-colors leading-snug block">
                         {n.title}
                       </span>
                     </a>

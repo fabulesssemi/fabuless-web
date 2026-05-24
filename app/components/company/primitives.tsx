@@ -85,7 +85,7 @@ export function Section({
             {eyebrow}
           </div>
         )}
-        <h2 className="font-serif text-xl text-gray-900 tracking-tight">{title}</h2>
+        <h2 className="font-serif text-xl font-bold text-gray-900 tracking-tight">{title}</h2>
       </div>
       {children}
     </section>

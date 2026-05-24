@@ -48,7 +48,7 @@ export default async function AnalystConsensusDashboard() {
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309]">
             Wall Street Intelligence
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl text-gray-900 tracking-tight mt-2">
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mt-2">
             Analyst Consensus
           </h1>
           <p className="mt-3 max-w-2xl text-gray-500 leading-relaxed">
@@ -58,17 +58,17 @@ export default async function AnalystConsensusDashboard() {
           </p>
           <div className="mt-6 flex items-center gap-5 pt-4 border-t border-gray-100">
             <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-2xl font-semibold text-amber-700 tabular-nums">{counts.improving}</span>
+              <span className="font-serif text-3xl font-bold text-amber-700 tabular-nums">{counts.improving}</span>
               <span className="text-[11px] uppercase tracking-widest text-gray-400">improving</span>
             </div>
-            <span className="w-px h-4 bg-gray-200" />
+            <span className="w-px h-5 bg-gray-200" />
             <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-2xl font-semibold text-slate-500 tabular-nums">{counts.weakening}</span>
+              <span className="font-serif text-3xl font-bold text-slate-400 tabular-nums">{counts.weakening}</span>
               <span className="text-[11px] uppercase tracking-widest text-gray-400">weakening</span>
             </div>
-            <span className="w-px h-4 bg-gray-200" />
+            <span className="w-px h-5 bg-gray-200" />
             <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-2xl font-semibold text-gray-300 tabular-nums">{counts.stable}</span>
+              <span className="font-serif text-3xl font-bold text-gray-200 tabular-nums">{counts.stable}</span>
               <span className="text-[11px] uppercase tracking-widest text-gray-400">stable</span>
             </div>
           </div>
@@ -100,21 +100,21 @@ export default async function AnalystConsensusDashboard() {
             title="Biggest Bullish Moves"
             eyebrow="Sentiment ▲"
             items={rankBullish(views)}
-            metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "font-semibold text-gray-900" })}
+            metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "text-gray-900" })}
             emptyHint="No clear bullish shifts right now."
           />
           <RankCard
             title="Biggest Bearish Moves"
             eyebrow="Sentiment ▼"
             items={rankBearish(views)}
-            metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "font-semibold text-gray-500" })}
+            metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "text-gray-400" })}
             emptyHint="No clear bearish shifts right now."
           />
           <RankCard
             title="Most Upgraded"
             eyebrow="Actions · 30d"
             items={rankUpgrades(views)}
-            metric={(v) => ({ text: `${v.upgrades30d} ↑`, tone: "font-semibold text-gray-900" })}
+            metric={(v) => ({ text: `${v.upgrades30d} ↑`, tone: "text-gray-900" })}
             emptyHint="No upgrades in the last 30 days."
           />
         </div>
@@ -164,20 +164,22 @@ function RankCard({
               <li key={v.ticker}>
                 <Link
                   href={`/companies/${slug}`}
-                  className="group flex items-center justify-between gap-3 py-2.5 border-b border-gray-100 last:border-0 hover:opacity-70 transition-opacity"
+                  className="group flex items-center justify-between gap-3 py-3 border-b border-gray-100 last:border-0 -mx-2 px-2 rounded-lg hover:bg-amber-50/50 transition-colors"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <span className="text-[11px] text-gray-300 tabular-nums w-4 text-center shrink-0">{i + 1}</span>
+                    <span className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-semibold text-gray-400 shrink-0">
+                      {i + 1}
+                    </span>
                     <div className="min-w-0">
                       <span className="font-mono text-[#B45309] text-[11px] font-medium">
                         {displayTicker(v.ticker)}
                       </span>
-                      <span className="block font-serif text-[14px] text-gray-800 group-hover:text-[#B45309] transition-colors truncate">
+                      <span className="block font-serif text-[14px] font-semibold text-gray-800 group-hover:text-[#B45309] group-hover:underline underline-offset-2 decoration-amber-300 transition-colors truncate">
                         {v.name}
                       </span>
                     </div>
                   </div>
-                  <span className={`text-sm font-semibold tabular-nums shrink-0 ${m.tone}`}>
+                  <span className={`text-2xl font-bold tabular-nums shrink-0 ${m.tone}`}>
                     {m.text}
                   </span>
                 </Link>
@@ -226,15 +228,15 @@ function NarrativeColumn({
                 className={`border-l-[2.5px] ${accentBorder} pl-4 py-3.5 transition-colors`}
               >
                 <Link href={`/companies/${slug}`} className="group block">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1.5">
                     <span className="font-mono text-[11px] font-semibold text-[#B45309]">
                       {displayTicker(v.ticker)}
                     </span>
-                    <span className="font-serif text-[13px] text-gray-500 group-hover:text-gray-800 transition-colors">
+                    <span className="font-serif text-[14px] font-semibold text-gray-800 group-hover:underline underline-offset-2 decoration-amber-300 transition-colors">
                       {name}
                     </span>
                   </div>
-                  <p className="text-[14px] text-gray-700 leading-relaxed italic">{v.narrative}</p>
+                  <p className="text-[13px] text-gray-600 leading-relaxed italic">{v.narrative}</p>
                 </Link>
               </li>
             );

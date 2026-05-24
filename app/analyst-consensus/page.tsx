@@ -179,7 +179,7 @@ function RankCard({
                       </span>
                     </div>
                   </div>
-                  <span className={`text-2xl font-bold tabular-nums shrink-0 ${m.tone}`}>
+                  <span className={`text-base font-bold tabular-nums shrink-0 ${m.tone}`}>
                     {m.text}
                   </span>
                 </Link>

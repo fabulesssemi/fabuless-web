@@ -8,7 +8,7 @@ export default function Issue1Page() {
   if (!issue) notFound();
 
   return (
-    <div className="max-w-6xl mx-auto px-6 pt-12 pb-16">
+    <div className="max-w-3xl mx-auto px-6 pt-12 pb-16">
       <div className="mb-8 pb-6 border-b border-gray-200">
         <Link href="/archive" className="text-xs text-[#0E7490] hover:underline uppercase tracking-widest">
           ← Archive

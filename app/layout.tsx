@@ -45,8 +45,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#18181B] font-sans">
         <header>
-          {/* Amber accent line — publication masthead signature */}
-          <div className="h-[3px] bg-[#B45309]" />
+          <div className="h-px bg-[#B45309]" />
           <div className="bg-[#111827]">
             <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
               <Link

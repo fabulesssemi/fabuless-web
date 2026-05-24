@@ -1,135 +1,103 @@
 import type { Issue } from "@/lib/issues";
 
-export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEarnings?: boolean }) {
-  const hasSidebar = showEarnings && issue.earnings.length > 0;
+const CATEGORY_COLOR: Record<string, string> = {
+  "Compute": "text-violet-600",
+  "Capital Flows": "text-emerald-700",
+  "Geopolitics & Policy": "text-amber-700",
+  "Memory & Networking": "text-sky-700",
+  "Other": "text-gray-500",
+};
 
-  // Flatten stories from all sections into a single ordered list
-  const allStories = issue.sections.flatMap((s) => s.stories);
+export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEarnings?: boolean }) {
+  void showEarnings; // reserved for future sidebar use
+  const sections = issue.sections.filter((s) => s.stories.length > 0);
 
   return (
-    <div className={hasSidebar ? "flex gap-10 items-start" : ""}>
-      <div className={hasSidebar ? "flex-1 min-w-0" : ""}>
+    <div>
 
-        {/* 2-column story grid */}
-        <div className="grid grid-cols-2">
-          {allStories.map((story, i) => (
-            <div
-              key={story.url}
-              className={[
-                "py-5",
-                i % 2 === 0 ? "pr-8 border-r border-gray-200" : "pl-8",
-                i >= 2 ? "border-t border-gray-100" : "",
-              ].filter(Boolean).join(" ")}
-            >
-              <div className="flex gap-3 items-start">
-                <div className="flex-1 min-w-0">
-                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+      {/* Stories grouped by category */}
+      <div>
+        {sections.map((section, idx) => (
+          <div
+            key={section.category}
+            className={idx === 0 ? "pb-7" : "py-7 border-t border-gray-100"}
+          >
+            {/* Category header */}
+            <div className="flex items-center gap-3 mb-5">
+              <span className={`text-[10px] font-bold uppercase tracking-[0.18em] ${CATEGORY_COLOR[section.category] ?? "text-gray-500"}`}>
+                {section.category}
+              </span>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+
+            {/* Stories */}
+            <div className="space-y-6">
+              {section.stories.map((story) => (
+                <div key={story.url}>
+                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">
                     {story.source}
                   </div>
                   <a
                     href={story.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-serif text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
+                    className="font-serif text-[1.05rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors duration-150 block mb-1.5"
                   >
                     {story.headline}
                   </a>
-                  <p className="text-[13px] text-gray-500 italic leading-relaxed mt-1">
+                  <p className="text-[13px] text-gray-500 italic leading-relaxed">
                     {story.oneliner}
                   </p>
                 </div>
-                {story.image && (
-                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="shrink-0">
-                    <img
-                      src={story.image}
-                      alt={story.headline}
-                      className="w-20 object-cover"
-                      style={{ height: "56px" }}
-                    />
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Podcasts */}
-        {issue.podcasts.length > 0 && (
-          <div className="mt-1 pt-5 border-t-2 border-[#B45309]">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-[#B45309] mb-3">
-              Podcasts
-            </div>
-            <div className="grid grid-cols-2">
-              {issue.podcasts.map((p, i) => (
-                <div
-                  key={p.url}
-                  className={[
-                    "py-2",
-                    i % 2 === 0 && i < issue.podcasts.length - 1
-                      ? "pr-8 border-r border-gray-200"
-                      : i % 2 === 1 ? "pl-8" : "",
-                  ].filter(Boolean).join(" ")}
-                >
-                  <div className="flex gap-3 items-start">
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
-                        {p.show}
-                      </div>
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-serif text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
-                      >
-                        {p.title}
-                      </a>
-                      {p.oneliner && (
-                        <p className="text-[13px] text-gray-500 leading-snug mt-1 italic">
-                          {p.oneliner}
-                        </p>
-                      )}
-                    </div>
-                    {p.image && (
-                      <img
-                        src={p.image}
-                        alt=""
-                        className="w-[112px] h-[72px] object-cover shrink-0"
-                      />
-                    )}
-                  </div>
-                </div>
               ))}
             </div>
           </div>
-        )}
+        ))}
       </div>
 
-      {/* Sidebar — only rendered when showing earnings */}
-      {hasSidebar && (
-        <div className="w-60 shrink-0">
-          <div className="border border-gray-200 p-4">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Upcoming Earnings</div>
-            <div className="text-[10px] text-gray-400 mb-3 leading-snug">
-              Avg = 2-day post-earnings move, last 20 quarters
-            </div>
-            <div className="space-y-3">
-              {issue.earnings.map((e) => (
-                <div key={e.ticker} className="border-b border-gray-100 pb-3 last:border-0 last:pb-0">
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-semibold text-sm text-[#111827]">{e.company}</span>
-                    <span className="text-xs font-mono text-[#B45309]">{e.ticker}</span>
+      {/* Podcasts */}
+      {issue.podcasts.length > 0 && (
+        <div className="pt-7 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400">
+              Podcasts
+            </span>
+            <div className="flex-1 h-px bg-gray-100" />
+          </div>
+          <div className="space-y-6">
+            {issue.podcasts.map((p) => (
+              <div key={p.url} className="flex gap-4 items-start">
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt=""
+                    className="w-11 h-11 object-cover shrink-0 rounded-sm"
+                  />
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                    {p.show}
                   </div>
-                  <div className="text-[11px] text-gray-400">{e.date}</div>
-                  <div className="flex gap-3 mt-0.5 text-[11px] text-gray-500">
-                    <span>EPS est. {e.eps}</span>
-                    <span>{e.avgMove} post-ER</span>
-                  </div>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-serif text-[1.05rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors duration-150 block mb-1.5"
+                  >
+                    {p.title}
+                  </a>
+                  {p.oneliner && (
+                    <p className="text-[13px] text-gray-500 italic leading-relaxed">
+                      {p.oneliner}
+                    </p>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
+
     </div>
   );
 }

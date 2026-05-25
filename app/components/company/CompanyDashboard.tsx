@@ -125,18 +125,18 @@ export function CompanyDashboard({
         </div>
       )}
 
-      {/* ── ROW 1: EDITORIAL LEFT · ANALYST DATA RIGHT ── */}
-      {/* Mirrors the Morningstar "Company Report | Price vs Fair Value" split */}
-      <div className="grid sm:grid-cols-2 items-start border border-gray-300 mb-6">
+      {/* ── ROW 1: EDITORIAL + BULL CASE LEFT · ANALYST DATA + BEAR CASE RIGHT ── */}
+      {/* Mirrors Morningstar's Bulls Say / Bears Say inside the main card */}
+      <div className="grid sm:grid-cols-2 border border-gray-300 mb-6">
 
-        {/* LEFT — editorial teaser */}
-        <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-200 flex flex-col items-start">
+        {/* LEFT — editorial teaser + bull case */}
+        <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-300 flex flex-col">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-3">
             Fabuless Analysis{editorial ? ` · ${editorial.updated}` : ""}
           </div>
           {editorial ? (
             <>
-              <p className="text-[14px] leading-relaxed text-gray-700 italic mb-5 line-clamp-5">
+              <p className="text-[14px] leading-relaxed text-gray-700 italic mb-4 line-clamp-4">
                 {editorial.quickTake}
               </p>
               {/* Key themes as compact chips */}
@@ -149,12 +149,12 @@ export function CompanyDashboard({
                   ))}
                 </div>
               )}
-              <a
-                href="#bull-bear"
-                className="inline-flex items-center gap-1.5 bg-[#B45309] text-white text-[11px] font-semibold uppercase tracking-widest px-4 py-2 hover:bg-amber-800 transition-colors"
-              >
-                Bull &amp; Bear Case ↓
-              </a>
+              {/* Bull Case — fills white space naturally */}
+              {editorial.bullCase.length > 0 && (
+                <div className="border-t border-gray-100 pt-4">
+                  <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
+                </div>
+              )}
             </>
           ) : (
             <p className="text-sm text-gray-500 leading-relaxed line-clamp-6">
@@ -164,8 +164,8 @@ export function CompanyDashboard({
           )}
         </div>
 
-        {/* RIGHT — analyst consensus + key financials */}
-        <div className="p-6">
+        {/* RIGHT — analyst consensus + key financials + bear case */}
+        <div className="p-6 flex flex-col">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
             Wall Street · Analyst View
           </div>
@@ -204,8 +204,8 @@ export function CompanyDashboard({
             </>
           ) : null}
 
-          {/* Earnings chart + stats — shared regardless of analyst data */}
-          <div className="mt-4 pt-4 border-t border-gray-100">
+          {/* Earnings chart + stats */}
+          <div className="pt-4 border-t border-gray-100">
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Earnings Snapshot
             </div>
@@ -230,24 +230,15 @@ export function CompanyDashboard({
               </p>
             )}
           </div>
+
+          {/* Bear Case — paired with Bull Case in left column */}
+          {editorial?.bearCase && editorial.bearCase.length > 0 && (
+            <div className="border-t border-gray-100 pt-4 mt-4">
+              <CaseColumn title="Bear Case" tone="rose" points={editorial.bearCase} max={3} />
+            </div>
+          )}
         </div>
       </div>
-
-      {/* ── ROW 2: BULL CASE · BEAR CASE ── */}
-      {editorial && (
-        <div id="bull-bear" className="border-t border-gray-300 pt-6 mb-6">
-          <Section eyebrow="The debate" title="Bull Case / Bear Case">
-            <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-300">
-              <div className="sm:pr-8 pb-6 sm:pb-0">
-                <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
-              </div>
-              <div className="sm:pl-8">
-                <CaseColumn title="Bear Case" tone="rose" points={editorial.bearCase} max={3} />
-              </div>
-            </div>
-          </Section>
-        </div>
-      )}
 
       {/* ── ROW 3: LATEST DEVELOPMENTS ── */}
       <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-300 pt-6 mb-6">

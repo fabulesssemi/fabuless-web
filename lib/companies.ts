@@ -58,6 +58,11 @@ export type CompanyEditorial = {
   // Each entry: q = "Q1 FY27" style label, gm = gross margin as % (e.g. 74.1).
   // Newest entry last. [] until the first cron run after this field was added.
   quarterlyGM?: { q: string; gm: number }[];
+  // Revenue by segment — extracted from latest earnings by the editorial refresh cron.
+  // Overrides the seed data in CompanyMeta.revenueSegments when present.
+  // null until the first cron run that finds segment data in earnings news.
+  revenueSegments?: RevenueSegment[];
+  fiscalLabel?: string; // e.g. "Q1 FY26" — the period the segment data covers
   related: { slug: string; reason: string }[];
   updated: string; // when the editorial layer was last refreshed
 };

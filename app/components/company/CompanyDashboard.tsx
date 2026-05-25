@@ -235,10 +235,14 @@ export function CompanyDashboard({
               </p>
             )}
 
-            {/* Revenue by segment */}
-            {meta.revenueSegments && meta.revenueSegments.length > 0 && (
-              <SegmentChart segments={meta.revenueSegments} fiscalLabel={meta.fiscalLabel} />
-            )}
+            {/* Revenue by segment — editorial (AI-refreshed after earnings) takes priority over seed data */}
+            {(() => {
+              const segments = editorial?.revenueSegments ?? meta.revenueSegments;
+              const label = editorial?.fiscalLabel ?? meta.fiscalLabel;
+              return segments && segments.length > 0
+                ? <SegmentChart segments={segments} fiscalLabel={label} />
+                : null;
+            })()}
           </div>
 
         </div>

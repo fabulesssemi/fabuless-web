@@ -61,8 +61,15 @@ const OUTPUT_SCHEMA = `{
   "guidanceCommentary": "1-2 sentences on what to watch and listen for on earnings calls.",
   "consensusBullThemes": ["short phrase"],
   "consensusBearThemes": ["short phrase"],
-  "quarterlyGM": [{"q": "Q1 FY25", "gm": 78.4}, {"q": "Q2 FY25", "gm": 75.1}]
+  "quarterlyGM": [{"q": "Q1 FY25", "gm": 78.4}, {"q": "Q2 FY25", "gm": 75.1}],
+  "revenueSegments": [{"name": "Data Center", "pct": 88}, {"name": "Gaming", "pct": 8}],
+  "fiscalLabel": "Q1 FY26"
 }`;
+// revenueSegments rules (for the prompt):
+// - Extract from the most recent earnings report visible in the news/podcast data.
+// - Use short names (≤14 chars). Percentages must be integers summing to 100.
+// - fiscalLabel: the quarter or fiscal year these numbers come from, e.g. "Q2 FY25" or "FY2024".
+// - Return null for BOTH fields if the news below does not contain enough segment data.
 
 export async function generateEditorial(
   meta: CompanyMeta,
@@ -90,6 +97,7 @@ RULES:
 - The keyThemes array should have 4–7 items. bullCase and bearCase should have 3–5 items each.
 - consensusBullThemes and consensusBearThemes should be 2–4 short phrases (not full sentences) suitable for analyst-consensus badges.
 - For quarterlyGM: extract the last 4–6 quarters of GAAP gross margin percentages from the earnings headlines and podcast notes below. Use format "Q1 FY26" (fiscal year label). gm is a number 0–100 (e.g. 74.1 not 0.741). Order oldest → newest. If you cannot find at least 2 confirmed quarters in the data below, return []. Never invent numbers.
+- For revenueSegments + fiscalLabel: extract the most recent revenue-by-segment breakdown from the earnings data below. Short names (≤14 chars). All pct values must be integers summing to exactly 100. fiscalLabel is the period covered (e.g. "Q1 FY26" or "FY2024"). If the news below does not contain enough segment data, return null for both revenueSegments and fiscalLabel.
 
 ## Prior editorial baseline (for context and structural continuity — update as needed):
 quickTake: ${baseline.quickTake}
@@ -151,6 +159,14 @@ ${OUTPUT_SCHEMA}`;
         Array.isArray(parsed.quarterlyGM) && parsed.quarterlyGM.length >= 2
           ? parsed.quarterlyGM
           : baseline.quarterlyGM,
+      // Use freshly extracted segments if Claude found them and they sum to 100, else keep existing
+      revenueSegments: (() => {
+        const segs = parsed.revenueSegments;
+        if (!Array.isArray(segs) || segs.length === 0) return baseline.revenueSegments;
+        const sum = segs.reduce((acc: number, s: { pct: number }) => acc + (s.pct ?? 0), 0);
+        return sum >= 98 && sum <= 102 ? segs : baseline.revenueSegments;
+      })(),
+      fiscalLabel: parsed.fiscalLabel ?? baseline.fiscalLabel,
       // Preserve structural fields from the curated static editorial
       supplyChain: baseline.supplyChain,
       related: baseline.related,

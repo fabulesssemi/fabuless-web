@@ -29,16 +29,16 @@ export default async function Earnings() {
                 {["Date", "Company", "EPS Est."].map((h) => (
                   <th
                     key={h}
-                    className="pb-3 align-bottom font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase pr-8"
+                    className="pb-6 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase pr-8"
                   >
                     {h}
                   </th>
                 ))}
-                <th className="pb-3 align-bottom pr-8 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
+                <th className="pb-3 pr-8 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
                   Avg 2-Day Move
                   <span className="block normal-case tracking-normal font-normal text-gray-400 text-[10px] mt-0.5">post-earnings</span>
                 </th>
-                <th className="pb-3 align-bottom font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
+                <th className="pb-6 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
                   Beat Rate
                 </th>
               </tr>

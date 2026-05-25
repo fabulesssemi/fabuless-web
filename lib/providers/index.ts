@@ -98,18 +98,26 @@ async function collectNews(
   const lists = await Promise.all(
     newsProviders.map((p) => safe(() => p.getNews(symbol, { limit: limit * 3 }))),
   );
+  // Deduplicate across providers
   const seen = new Set<string>();
-  const out: NewsItem[] = [];
+  const all: NewsItem[] = [];
   for (const list of lists) {
     for (const item of list ?? []) {
       if (!item.url || seen.has(item.url)) continue;
-      if (keywords?.length) {
-        const title = (item.title ?? "").toLowerCase();
-        if (!keywords.some((kw) => title.includes(kw.toLowerCase()))) continue;
-      }
       seen.add(item.url);
-      out.push(item);
+      all.push(item);
     }
+  }
+  // Apply keyword filter when it produces results. If filtering removes
+  // everything, fall back to all items — Yahoo already filtered by ticker
+  // so the results are relevant regardless of whether keywords appear in titles.
+  let out = all;
+  if (keywords?.length && all.length > 0) {
+    const filtered = all.filter((item) => {
+      const title = (item.title ?? "").toLowerCase();
+      return keywords.some((kw) => title.includes(kw.toLowerCase()));
+    });
+    if (filtered.length > 0) out = filtered;
   }
   out.sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
   return out.slice(0, limit);

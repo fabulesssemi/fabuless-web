@@ -151,14 +151,14 @@ export default function Home() {
         </div>
 
         {/* Card grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-200 border border-gray-200 overflow-hidden">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {featuredStories.map(({ story, category }) => (
             <a
               key={story.url}
               href={story.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-white block"
+              className="group bg-white block border border-gray-200"
             >
               {story.image ? (
                 <img

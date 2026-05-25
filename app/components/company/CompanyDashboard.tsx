@@ -39,12 +39,7 @@ export function CompanyDashboard({
   const { profile, quote, earnings, news } = data;
   const currency = quote?.currency ?? "USD";
 
-  const ratingColor =
-    analyst?.consensusRating?.toLowerCase().includes("buy")
-      ? "text-emerald-600"
-      : analyst?.consensusRating?.toLowerCase().includes("sell")
-      ? "text-rose-600"
-      : "text-gray-800";
+  const ratingColor = "text-gray-900";
 
   return (
     <div className="max-w-5xl mx-auto px-6 pt-5 pb-10">
@@ -349,8 +344,8 @@ function InlineCEO({ ceo }: { ceo: CEOProfile }) {
 
 function CaseColumn({ title, points, tone, max = 99 }: { title: string; points: string[]; tone: "emerald" | "rose"; max?: number }) {
   const accent    = tone === "emerald" ? "border-l-2 border-emerald-400" : "border-l-2 border-rose-400";
-  const titleColor = tone === "emerald" ? "text-emerald-700"              : "text-rose-600";
-  const countBg   = tone === "emerald" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-600";
+  const titleColor = "text-gray-700";
+  const countBg   = "bg-gray-100 text-gray-600";
   return (
     <div className={`pl-4 ${accent}`}>
       <div className="flex items-center gap-2 mb-3">

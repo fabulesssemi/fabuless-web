@@ -57,12 +57,12 @@ export default async function AnalystConsensusDashboard() {
         </p>
         <div className="mt-6 flex items-center gap-6">
           <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-2xl font-bold text-emerald-600 tabular-nums">{counts.improving}</span>
+            <span className="font-serif text-2xl font-bold text-gray-900 tabular-nums">{counts.improving}</span>
             <span className="text-[10px] uppercase tracking-widest text-gray-400">improving</span>
           </div>
           <span className="w-px h-4 bg-gray-200" />
           <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-2xl font-bold text-rose-500 tabular-nums">{counts.weakening}</span>
+            <span className="font-serif text-2xl font-bold text-gray-900 tabular-nums">{counts.weakening}</span>
             <span className="text-[10px] uppercase tracking-widest text-gray-400">weakening</span>
           </div>
           <span className="w-px h-4 bg-gray-200" />
@@ -96,14 +96,14 @@ export default async function AnalystConsensusDashboard() {
           title="Biggest Bullish Moves"
           eyebrow="Sentiment ▲"
           items={rankBullish(views)}
-          metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "text-emerald-600" })}
+          metric={(v) => ({ text: `+${v.sentimentScore}pp`, tone: "text-gray-700" })}
           emptyHint="No clear bullish shifts right now."
         />
         <RankCard
           title="Biggest Bearish Moves"
           eyebrow="Sentiment ▼"
           items={rankBearish(views)}
-          metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "text-rose-500" })}
+          metric={(v) => ({ text: `${v.sentimentScore}pp`, tone: "text-gray-700" })}
           emptyHint="No clear bearish shifts right now."
         />
         <RankCard
@@ -208,8 +208,8 @@ function NarrativeColumn({
   views: AnalystView[];
 }) {
   const isPositive = tone === "emerald";
-  const titleColor   = isPositive ? "text-emerald-600" : "text-rose-500";
-  const borderColor  = isPositive ? "border-emerald-300" : "border-rose-300";
+  const titleColor   = "text-gray-700";
+  const borderColor  = isPositive ? "border-gray-300" : "border-gray-200";
   const indicator    = isPositive ? "↑" : "↓";
 
   return (

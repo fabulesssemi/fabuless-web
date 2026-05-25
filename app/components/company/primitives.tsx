@@ -36,9 +36,9 @@ export function fmtPercent(pct?: number, withSign = true): string {
   return `${sign}${pct.toFixed(2)}%`;
 }
 
-export function changeTone(n?: number): string {
-  if (n == null) return "text-gray-400";
-  return n > 0 ? "text-emerald-600" : n < 0 ? "text-rose-600" : "text-gray-400";
+export function changeTone(_n?: number): string {
+  // Morningstar style — all financial values in neutral dark text, no green/red
+  return "text-gray-900";
 }
 
 export function displayTicker(ticker: string): string {
@@ -130,7 +130,7 @@ export function Stat({
 }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">
+      <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">
         {label}
       </div>
       <div className={`text-sm font-semibold tabular-nums ${tone ?? "text-gray-900"}`}>

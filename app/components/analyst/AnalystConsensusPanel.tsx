@@ -18,7 +18,7 @@ export function SentimentBadge({
 }) {
   const map = {
     improving: { tone: "amber" as const, arrow: "↑", label: "Improving" },
-    weakening: { tone: "rose" as const, arrow: "↓", label: "Weakening" },
+    weakening: { tone: "neutral" as const, arrow: "↓", label: "Weakening" },
     stable: { tone: "neutral" as const, arrow: "–", label: "Stable" },
   };
   const m = map[direction];
@@ -37,7 +37,7 @@ export function EstimateBadge({
 }) {
   const map = {
     rising:  { tone: "amber" as const, label: "Estimates Rising" },
-    falling: { tone: "rose" as const,  label: "Estimates Falling" },
+    falling: { tone: "neutral" as const,  label: "Estimates Falling" },
     stable:  { tone: "neutral" as const, label: "Estimates Stable" },
   };
   const m = map[direction];
@@ -62,10 +62,10 @@ export function DistributionBar({
           <div key={s.label} className={s.c} style={{ width: `${(s.v / total) * 100}%` }} />
         ))}
       </div>
-      <div className="mt-1.5 flex justify-between text-[11px] text-gray-400">
-        <span className="text-amber-700">{segs[0].v} Buy</span>
+      <div className="mt-1.5 flex justify-between text-[11px] text-gray-500">
+        <span>{segs[0].v} Buy</span>
         <span>{segs[1].v} Hold</span>
-        <span className="text-rose-600">{segs[2].v} Sell</span>
+        <span>{segs[2].v} Sell</span>
       </div>
     </div>
   );
@@ -73,8 +73,8 @@ export function DistributionBar({
 
 function actionVerb(action?: string): { label: string; tone: "emerald" | "rose" | "neutral" } {
   switch (action) {
-    case "up":   return { label: "Upgrade",    tone: "emerald" };
-    case "down": return { label: "Downgrade",  tone: "rose" };
+    case "up":   return { label: "Upgrade",    tone: "neutral" };
+    case "down": return { label: "Downgrade",  tone: "neutral" };
     case "init": return { label: "Initiated",  tone: "neutral" };
     case "reit": return { label: "Reiterated", tone: "neutral" };
     default:     return { label: "Maintained", tone: "neutral" };
@@ -200,9 +200,9 @@ export function AnalystConsensusPanel({ view }: { view: AnalystView }) {
                   Estimate Revisions (next quarter EPS)
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <RevStat label="Up (7d)"   value={view.revisions.epsUpLast7d}   tone="text-emerald-600" />
-                  <RevStat label="Up (30d)"  value={view.revisions.epsUpLast30d}  tone="text-emerald-600" />
-                  <RevStat label="Down (30d)" value={view.revisions.epsDownLast30d} tone="text-rose-600" />
+                  <RevStat label="Up (7d)"   value={view.revisions.epsUpLast7d}   tone="text-gray-700" />
+                  <RevStat label="Up (30d)"  value={view.revisions.epsUpLast30d}  tone="text-gray-700" />
+                  <RevStat label="Down (30d)" value={view.revisions.epsDownLast30d} tone="text-gray-700" />
                   <RevStat
                     label="vs 90d ago"
                     value={
@@ -295,11 +295,11 @@ function PTRangeBar({
         <div className="h-1 rounded-full bg-gray-100 relative">
           <div className="absolute inset-y-0 left-0 bg-gray-300 rounded-l-full" style={{ width: `${curPct}%` }} />
           {avgPct > curPct && (
-            <div className="absolute inset-y-0 bg-emerald-400" style={{ left: `${curPct}%`, width: `${avgPct - curPct}%` }} />
+            <div className="absolute inset-y-0 bg-gray-400" style={{ left: `${curPct}%`, width: `${avgPct - curPct}%` }} />
           )}
-          <div className="absolute inset-y-0 bg-emerald-100 rounded-r-full" style={{ left: `${Math.max(curPct, avgPct)}%`, width: `${100 - Math.max(curPct, avgPct)}%` }} />
+          <div className="absolute inset-y-0 bg-gray-100 rounded-r-full" style={{ left: `${Math.max(curPct, avgPct)}%`, width: `${100 - Math.max(curPct, avgPct)}%` }} />
           <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-gray-700 ring-2 ring-white z-10" style={{ left: `${curPct}%` }} />
-          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white z-10" style={{ left: `${avgPct}%` }} />
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-gray-600 ring-2 ring-white z-10" style={{ left: `${avgPct}%` }} />
         </div>
         <div className="flex justify-between mt-2 text-[10px] text-gray-400">
           <span>{fmtPrice(low, currency)} Low</span>
@@ -312,8 +312,8 @@ function PTRangeBar({
           <span className="text-gray-500">Current <span className="text-gray-900 tabular-nums">{fmtPrice(current, currency)}</span></span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block shrink-0" />
-          <span className="text-gray-500">Avg PT <span className="text-emerald-600 tabular-nums">{fmtPrice(avg, currency)}</span></span>
+          <span className="w-2 h-2 rounded-full bg-gray-400 inline-block shrink-0" />
+          <span className="text-gray-500">Avg PT <span className="text-gray-900 font-medium tabular-nums">{fmtPrice(avg, currency)}</span></span>
         </div>
       </div>
     </div>

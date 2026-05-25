@@ -4,6 +4,7 @@ export type Story = {
   source: string;
   image: string | null;
   oneliner: string;
+  topLabel?: string;
 };
 
 export type IssueSection = {
@@ -64,7 +65,7 @@ export const issues: Issue[] = [
             headline: "Analog Devices CEO Drops Bombshell Message on Exploding AI Infrastructure Demand",
             url: "https://www.thestreet.com/investing/stocks/analog-devices-ceo-drops-bombshell-message-on-exploding-ai-infrastructure-demand",
             source: "TheStreet",
-            image: null,
+            image: "https://www.eetimes.com/wp-content/uploads/Hero-image-Empower.png?fit=800%2C480",
             oneliner: "ADI's CEO backs AI demand with hard order data — not vague optionality.",
           },
           {
@@ -97,6 +98,7 @@ export const issues: Issue[] = [
             source: "SemiAnalysis",
             image: "https://substackcdn.com/image/fetch/$s_!X4k_!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F017877b6-b4be-4112-b1d9-a0dcbc5c5568_2400x1260.jpeg",
             oneliner: "Synopsys and Cadence have the deepest lock-in in semis — China's domestic vendors are the only credible threat.",
+            topLabel: "EDA",
           },
           {
             headline: "ASML High-NA EUV is Not Ready for High-Volume Production",
@@ -104,6 +106,7 @@ export const issues: Issue[] = [
             source: "SemiWiki",
             image: "https://semiwiki.com/wp-content/uploads/2026/05/ASML-Elephant-High-NA-EUV-1-1200x800.jpg",
             oneliner: "High-NA EUV is years behind schedule — 2nm fabs will lean on multi-patterning longer than expected.",
+            topLabel: "EUV",
           },
         ],
       },

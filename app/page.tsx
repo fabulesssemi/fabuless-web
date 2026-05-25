@@ -184,7 +184,7 @@ export default function Home() {
               )}
               <div className="p-4 pt-3">
                 <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
-                  {category}
+                  {story.topLabel ?? category}
                 </div>
                 <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
                   {story.headline}

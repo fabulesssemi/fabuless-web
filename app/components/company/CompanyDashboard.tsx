@@ -125,12 +125,11 @@ export function CompanyDashboard({
         </div>
       )}
 
-      {/* ── ROW 1: EDITORIAL + BULL CASE LEFT · ANALYST DATA + BEAR CASE RIGHT ── */}
-      {/* Mirrors Morningstar's Bulls Say / Bears Say inside the main card */}
-      <div className="grid sm:grid-cols-2 border border-gray-300 mb-6">
+      {/* ── ROW 1: EDITORIAL + BULL CASE LEFT · ANALYST DATA RIGHT ── */}
+      <div className="grid sm:grid-cols-2 items-start sm:divide-x divide-gray-200 border-t border-gray-200 mb-4">
 
-        {/* LEFT — editorial teaser + bull/bear side-by-side at bottom */}
-        <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-300 flex flex-col">
+        {/* LEFT — editorial teaser + bull/bear side-by-side */}
+        <div className="py-5 sm:pr-8 pb-5 sm:pb-0 flex flex-col border-b sm:border-b-0 border-gray-100">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-3">
             Fabuless Analysis{editorial ? ` · ${editorial.updated}` : ""}
           </div>
@@ -149,9 +148,9 @@ export function CompanyDashboard({
                   ))}
                 </div>
               )}
-              {/* Bull + Bear side-by-side, pushed to bottom to align with "What to watch" */}
+              {/* Bull + Bear side-by-side */}
               {(editorial.bullCase.length > 0 || editorial.bearCase.length > 0) && (
-                <div className="mt-auto border-t border-gray-100 pt-4">
+                <div className="border-t border-gray-100 pt-4 mt-4">
                   <div className="grid grid-cols-2 divide-x divide-gray-100">
                     <div className="pr-4">
                       <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
@@ -171,8 +170,8 @@ export function CompanyDashboard({
           )}
         </div>
 
-        {/* RIGHT — analyst consensus + key financials + bear case */}
-        <div className="p-6 flex flex-col">
+        {/* RIGHT — analyst consensus + key financials */}
+        <div className="py-5 sm:pl-8 flex flex-col">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
             Wall Street · Analyst View
           </div>
@@ -242,7 +241,7 @@ export function CompanyDashboard({
       </div>
 
       {/* ── ROW 3: LATEST DEVELOPMENTS ── */}
-      <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-300 pt-6 mb-6">
+      <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-100 pt-4 mb-4">
         {news.length > 0 ? (
           <ul className="divide-y divide-gray-100">
             {news.slice(0, 6).map((n) => (
@@ -267,7 +266,7 @@ export function CompanyDashboard({
 
       {/* ── ROW 4: KEY THEMES (left) · SUPPLY CHAIN (right) ── */}
       {editorial && (
-        <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-300 border-t border-gray-300 pt-6 mb-6">
+        <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-100 border-t border-gray-100 pt-4 mb-4">
           {editorial.keyThemes.length > 0 && (
             <div className="sm:pr-8 pb-6 sm:pb-0">
               <Section eyebrow="What the industry is watching" title="Key Themes">
@@ -298,7 +297,7 @@ export function CompanyDashboard({
       )}
 
       {/* Related companies */}
-      <div className="pt-6 border-t border-gray-300 mb-4">
+      <div className="pt-4 border-t border-gray-100 mb-4">
         <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-4">Related Companies</div>
         <div className="flex flex-wrap gap-x-8 gap-y-3">
           {relatedFor(meta, editorial).map((r) => (

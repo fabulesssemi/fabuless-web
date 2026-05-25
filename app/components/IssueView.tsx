@@ -2,99 +2,96 @@ import type { Issue } from "@/lib/issues";
 
 export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEarnings?: boolean }) {
   const hasSidebar = showEarnings && issue.earnings.length > 0;
-
-  // Flatten stories from all sections into a single ordered list
   const allStories = issue.sections.flatMap((s) => s.stories);
 
   return (
     <div className={hasSidebar ? "flex gap-10 items-start" : ""}>
       <div className={hasSidebar ? "flex-1 min-w-0" : ""}>
 
-        {/* 2-column story grid */}
-        <div className="grid grid-cols-2">
+        {/* 2-column story grid — FT card style */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 divide-x divide-gray-200">
           {allStories.map((story, i) => (
             <div
               key={story.url}
               className={[
-                "py-5",
-                i % 2 === 0 ? "pr-8 border-r border-gray-200" : "pl-8",
-                i >= 2 ? "border-t border-gray-100" : "",
+                "py-6 flex flex-col",
+                i % 2 === 0 ? "pr-8" : "pl-8",
+                i >= 2 ? "border-t border-gray-200" : "",
               ].filter(Boolean).join(" ")}
             >
-              <div className="flex gap-3 items-start">
-                <div className="flex-1 min-w-0">
-                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
-                    {story.source}
-                  </div>
-                  <a
-                    href={story.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-sans text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
-                  >
-                    {story.headline}
-                  </a>
-                  <p className="text-[13px] text-gray-500 italic leading-relaxed mt-1">
-                    {story.oneliner}
-                  </p>
-                </div>
-                {story.image && (
-                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="shrink-0">
-                    <img
-                      src={story.image}
-                      alt={story.headline}
-                      className="w-20 object-cover"
-                      style={{ height: "56px" }}
-                    />
-                  </a>
-                )}
+              {/* Source — amber, prominent */}
+              <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-2">
+                {story.source}
               </div>
+
+              {/* Headline */}
+              <a
+                href={story.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block font-sans text-[1.1rem] font-bold leading-snug text-[#111827] hover:text-[#B45309] transition-colors mb-2"
+              >
+                {story.headline}
+              </a>
+
+              {/* One-liner deck */}
+              <p className="text-[13px] text-gray-500 leading-relaxed flex-1">
+                {story.oneliner}
+              </p>
+
+              {/* Image — full width, below text */}
+              {story.image && (
+                <a href={story.url} target="_blank" rel="noopener noreferrer" className="block mt-4">
+                  <img
+                    src={story.image}
+                    alt={story.headline}
+                    className="w-full object-cover"
+                    style={{ height: "180px" }}
+                  />
+                </a>
+              )}
             </div>
           ))}
         </div>
 
         {/* Podcasts */}
         {issue.podcasts.length > 0 && (
-          <div className="mt-1 pt-5 border-t-2 border-[#B45309]">
+          <div className="mt-2 pt-5 border-t-2 border-[#B45309]">
             <div className="text-[10px] font-bold uppercase tracking-widest text-[#B45309] mb-3">
               Podcasts
             </div>
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 divide-x divide-gray-200">
               {issue.podcasts.map((p, i) => (
                 <div
                   key={p.url}
                   className={[
-                    "py-2",
-                    i % 2 === 0 && i < issue.podcasts.length - 1
-                      ? "pr-8 border-r border-gray-200"
-                      : i % 2 === 1 ? "pl-8" : "",
+                    "py-4 flex gap-3 items-start",
+                    i % 2 === 0 && i < issue.podcasts.length - 1 ? "pr-8" : i % 2 === 1 ? "pl-8" : "",
                   ].filter(Boolean).join(" ")}
                 >
-                  <div className="flex gap-3 items-start">
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
-                        {p.show}
-                      </div>
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-sans text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
-                      >
-                        {p.title}
-                      </a>
-                      {p.oneliner && (
-                        <p className="text-[13px] text-gray-500 leading-snug mt-1 italic">
-                          {p.oneliner}
-                        </p>
-                      )}
+                  {p.image && (
+                    <img
+                      src={p.image}
+                      alt=""
+                      className="w-14 h-14 object-cover shrink-0"
+                    />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      {p.show}
                     </div>
-                    {p.image && (
-                      <img
-                        src={p.image}
-                        alt=""
-                        className="w-[112px] h-[72px] object-cover shrink-0"
-                      />
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-[0.95rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
+                    >
+                      {p.title}
+                    </a>
+                    {p.oneliner && (
+                      <p className="text-[12px] text-gray-500 leading-snug mt-1">
+                        {p.oneliner}
+                      </p>
                     )}
                   </div>
                 </div>

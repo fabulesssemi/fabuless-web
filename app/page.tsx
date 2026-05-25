@@ -128,7 +128,7 @@ export default function Home() {
 
       {/* Latest issue */}
       <section className="pt-7 pb-8">
-        <div className="mb-5">
+        <div className="mb-5 border-t-2 border-[#111827] pt-4">
           <div className="text-[11px] text-gray-400 uppercase tracking-widest">Latest Issue · {latestIssue.date}</div>
           <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
             {latestIssue.title}

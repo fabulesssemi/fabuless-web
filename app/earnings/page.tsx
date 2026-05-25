@@ -26,22 +26,19 @@ export default async function Earnings() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
-                {["Date", "Company"].map((h) => (
+                {["Date", "Company", "EPS Est."].map((h) => (
                   <th
                     key={h}
-                    className="pb-3 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase pr-16"
+                    className="pb-3 align-bottom font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase pr-8"
                   >
                     {h}
                   </th>
                 ))}
-                <th className="pb-3 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase pr-16">
-                  EPS Est.
-                </th>
-                <th className="pb-3 pr-8 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase whitespace-nowrap">
+                <th className="pb-3 align-bottom pr-8 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
                   Avg 2-Day Move
-                  <span className="ml-1.5 normal-case tracking-normal font-normal text-gray-400 text-[10px]">(post-earnings)</span>
+                  <span className="block normal-case tracking-normal font-normal text-gray-400 text-[10px] mt-0.5">post-earnings</span>
                 </th>
-                <th className="pb-3 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
+                <th className="pb-3 align-bottom font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
                   Beat Rate
                 </th>
               </tr>

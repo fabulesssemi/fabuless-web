@@ -95,32 +95,54 @@ async function collectNews(
   limit: number,
   keywords?: string[],
 ): Promise<NewsItem[]> {
-  const lists = await Promise.all(
+  function applyKeywords(items: NewsItem[]): NewsItem[] {
+    if (!keywords?.length) return items;
+    return items.filter((item) =>
+      keywords.some((kw) => (item.title ?? "").toLowerCase().includes(kw.toLowerCase())),
+    );
+  }
+
+  function dedup(lists: (NewsItem[] | null)[], seen: Set<string>): NewsItem[] {
+    const out: NewsItem[] = [];
+    for (const list of lists) {
+      for (const item of list ?? []) {
+        if (!item.url || seen.has(item.url)) continue;
+        seen.add(item.url);
+        out.push(item);
+      }
+    }
+    return out;
+  }
+
+  const seen = new Set<string>();
+
+  // Primary search: by ticker symbol
+  const primaryLists = await Promise.all(
     newsProviders.map((p) => safe(() => p.getNews(symbol, { limit: limit * 3 }))),
   );
-  // Deduplicate across providers
-  const seen = new Set<string>();
-  const all: NewsItem[] = [];
-  for (const list of lists) {
-    for (const item of list ?? []) {
-      if (!item.url || seen.has(item.url)) continue;
-      seen.add(item.url);
-      all.push(item);
-    }
+  const primaryAll = dedup(primaryLists, seen);
+  const primaryFiltered = applyKeywords(primaryAll);
+
+  if (primaryFiltered.length > 0) {
+    primaryFiltered.sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
+    return primaryFiltered.slice(0, limit);
   }
-  // Apply keyword filter when it produces results. If filtering removes
-  // everything, fall back to all items — Yahoo already filtered by ticker
-  // so the results are relevant regardless of whether keywords appear in titles.
-  let out = all;
-  if (keywords?.length && all.length > 0) {
-    const filtered = all.filter((item) => {
-      const title = (item.title ?? "").toLowerCase();
-      return keywords.some((kw) => title.includes(kw.toLowerCase()));
-    });
-    if (filtered.length > 0) out = filtered;
+
+  // Secondary search: if the ticker search returned items but none matched
+  // keywords (e.g. Korean stocks, or tickers Yahoo maps to generic news),
+  // try searching by the primary keyword phrase instead.
+  // Never fall back to unfiltered results — that shows irrelevant articles.
+  if (keywords?.length && primaryAll.length > 0) {
+    const secondaryLists = await Promise.all(
+      newsProviders.map((p) => safe(() => p.getNews(keywords[0], { limit: limit * 2 }))),
+    );
+    const secondaryAll = dedup(secondaryLists, seen);
+    const secondaryFiltered = applyKeywords([...primaryAll, ...secondaryAll]);
+    secondaryFiltered.sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
+    return secondaryFiltered.slice(0, limit);
   }
-  out.sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
-  return out.slice(0, limit);
+
+  return [];
 }
 
 // Uncached aggregation. Runs every category in parallel and records which ones

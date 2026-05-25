@@ -14,7 +14,7 @@ export default function Issue2Page() {
           ← Archive
         </Link>
         <div className="mt-3 text-sm text-gray-400">Issue {issue.number} · {issue.date}</div>
-        <h1 className="font-serif text-3xl text-[#374151] tracking-tight leading-tight mt-1">
+        <h1 className="font-sans text-3xl text-[#374151] tracking-tight leading-tight mt-1">
           {issue.title}
         </h1>
       </div>

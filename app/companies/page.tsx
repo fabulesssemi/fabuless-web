@@ -35,7 +35,7 @@ export default async function CompaniesIndex() {
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309]">
             Company Intelligence
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl text-gray-900 tracking-tight mt-2">
+          <h1 className="font-sans text-4xl sm:text-5xl text-gray-900 tracking-tight mt-2">
             The AI Silicon Stack
           </h1>
           <p className="mt-3 max-w-2xl text-gray-500 leading-relaxed">
@@ -57,7 +57,7 @@ export default async function CompaniesIndex() {
                   <div className="font-mono text-xs text-[#B45309]">
                     {displayTicker(meta.ticker)}
                   </div>
-                  <div className="font-serif text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
+                  <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
                     {meta.name}
                   </div>
                 </div>

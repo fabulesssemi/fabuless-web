@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-
-const playfairDisplay = Playfair_Display({
-  weight: ["400", "600", "700"],
-  variable: "--font-display",
-  subsets: ["latin"],
-});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${inter.variable}`}
+      className={inter.variable}
     >
       <body className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#18181B] font-sans">
         <header>
@@ -51,7 +45,7 @@ export default function RootLayout({
             <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
               <Link
                 href="/"
-                className="font-serif text-xl font-bold text-white tracking-tight"
+                className="font-sans text-xl font-bold text-white tracking-tight"
               >
                 Fabuless
               </Link>

@@ -18,7 +18,7 @@ const issues = [
 export default function Archive() {
   return (
     <div className="max-w-4xl mx-auto px-6 pt-16 pb-8">
-      <h1 className="font-serif text-4xl text-[#0E7490] mb-2 tracking-tight">
+      <h1 className="font-sans text-4xl text-[#0E7490] mb-2 tracking-tight">
         Archive
       </h1>
       <p className="text-[#374151] mb-10 leading-relaxed">
@@ -36,7 +36,7 @@ export default function Archive() {
               <span className="text-xs font-medium text-[#0E7490] uppercase tracking-widest mr-3">
                 Issue {issue.number}
               </span>
-              <span className="font-serif text-lg text-[#374151] group-hover:text-[#0E7490] transition-colors">
+              <span className="font-sans text-lg text-[#374151] group-hover:text-[#0E7490] transition-colors">
                 {issue.title}
               </span>
             </div>

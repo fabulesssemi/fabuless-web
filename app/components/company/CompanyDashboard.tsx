@@ -65,7 +65,7 @@ export function CompanyDashboard({
               )}
               <Pill tone="cyan">{meta.sector}</Pill>
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl text-gray-900 tracking-tight leading-tight">
+            <h1 className="font-sans text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight leading-tight">
               {meta.name}
             </h1>
             {meta.ceo && <InlineCEO ceo={meta.ceo} />}
@@ -143,15 +143,18 @@ export function CompanyDashboard({
                   ))}
                 </div>
               )}
-              {/* Bull + Bear side-by-side */}
+              {/* Bull + Bear side-by-side — Morningstar style */}
               {(editorial.bullCase.length > 0 || editorial.bearCase.length > 0) && (
                 <div className="border-t border-gray-200 pt-4 mt-4">
+                  <div className="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-3">
+                    Bulls Say / Bears Say
+                  </div>
                   <div className="grid grid-cols-2 divide-x divide-gray-200">
                     <div className="pr-4">
-                      <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
+                      <CaseColumn title="Bulls" tone="emerald" points={editorial.bullCase} max={3} />
                     </div>
                     <div className="pl-4">
-                      <CaseColumn title="Bear Case" tone="rose" points={editorial.bearCase} max={3} />
+                      <CaseColumn title="Bears" tone="rose" points={editorial.bearCase} max={3} />
                     </div>
                   </div>
                 </div>
@@ -343,18 +346,18 @@ function InlineCEO({ ceo }: { ceo: CEOProfile }) {
 }
 
 function CaseColumn({ title, points, tone, max = 99 }: { title: string; points: string[]; tone: "emerald" | "rose"; max?: number }) {
-  const accent    = tone === "emerald" ? "border-l-2 border-emerald-400" : "border-l-2 border-rose-400";
-  const titleColor = "text-gray-700";
-  const countBg   = "bg-gray-100 text-gray-600";
   return (
-    <div className={`pl-4 ${accent}`}>
-      <div className="flex items-center gap-2 mb-3">
-        <div className={`text-[10px] font-bold uppercase tracking-wider ${titleColor}`}>{title}</div>
-        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${countBg}`}>{points.length}</span>
-      </div>
+    <div>
+      <div className="text-sm font-bold text-gray-900 mb-2">{title}</div>
       <ShowMore max={max}>
         {points.map((p, i) => (
-          <li key={i} className="text-[13px] text-gray-600 leading-relaxed list-none">{p}</li>
+          <li key={i} className="list-none py-2.5 border-t border-gray-200 first:border-t-0 first:pt-0">
+            <p className="text-[13px] text-gray-700 leading-relaxed">
+              <span className="text-gray-300 mr-0.5 select-none">&ldquo;&ldquo;</span>
+              {p}
+              <span className="text-gray-300 ml-0.5 select-none">&rdquo;&rdquo;</span>
+            </p>
+          </li>
         ))}
       </ShowMore>
     </div>

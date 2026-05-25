@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div className="max-w-4xl mx-auto px-6 pt-16 pb-8">
-      <h1 className="font-serif text-4xl text-[#0E7490] mb-8 tracking-tight">
+      <h1 className="font-sans text-4xl text-[#0E7490] mb-8 tracking-tight">
         About
       </h1>
 
@@ -20,7 +20,7 @@ export default function About() {
           <em>fabulous</em>. We thought that was clever.
         </p>
 
-        <h2 className="font-serif text-2xl text-[#374151] pt-4">
+        <h2 className="font-sans text-2xl text-[#374151] pt-4">
           The model
         </h2>
         <p>
@@ -31,7 +31,7 @@ export default function About() {
           lens.
         </p>
 
-        <h2 className="font-serif text-2xl text-[#374151] pt-4">
+        <h2 className="font-sans text-2xl text-[#374151] pt-4">
           Who it&apos;s for
         </h2>
         <p>
@@ -43,7 +43,7 @@ export default function About() {
           briefing that treats them like an intelligent adult.
         </p>
 
-        <h2 className="font-serif text-2xl text-[#374151] pt-4">
+        <h2 className="font-sans text-2xl text-[#374151] pt-4">
           Who writes it
         </h2>
         <p>

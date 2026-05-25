@@ -30,7 +30,7 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                     href={story.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-serif text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
+                    className="font-sans text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
                   >
                     {story.headline}
                   </a>
@@ -79,7 +79,7 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                         href={p.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-serif text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
+                        className="font-sans text-[1rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
                       >
                         {p.title}
                       </a>

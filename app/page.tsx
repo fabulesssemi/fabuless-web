@@ -49,7 +49,7 @@ export default function Home() {
           <p className="text-xs font-semibold uppercase tracking-widest text-[#B45309] mb-3">
             Every Friday
           </p>
-          <h1 className="font-serif text-4xl font-bold text-[#111827] leading-tight tracking-tight mb-4 max-w-xl">
+          <h1 className="font-sans text-4xl font-bold text-[#111827] leading-tight tracking-tight mb-4 max-w-xl">
             The semiconductor briefing for serious investors.
           </h1>
           <p className="text-[15px] text-gray-500 max-w-lg leading-relaxed mb-6">
@@ -130,7 +130,7 @@ export default function Home() {
       <section className="pt-7 pb-8">
         <div className="mb-5">
           <div className="text-[11px] text-gray-400 uppercase tracking-widest">Latest Issue · {latestIssue.date}</div>
-          <h2 className="font-serif text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
+          <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
             {latestIssue.title}
           </h2>
         </div>

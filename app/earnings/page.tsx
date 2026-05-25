@@ -8,7 +8,7 @@ export default async function Earnings() {
   return (
     <div className="max-w-4xl mx-auto px-6 pt-16 pb-8">
       <div className="flex items-baseline justify-between mb-2">
-        <h1 className="font-serif text-4xl text-[#0E7490] tracking-tight">
+        <h1 className="font-sans text-4xl text-[#0E7490] tracking-tight">
           Earnings Calendar
         </h1>
       </div>

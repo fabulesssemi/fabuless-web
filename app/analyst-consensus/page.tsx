@@ -48,7 +48,7 @@ export default async function AnalystConsensusDashboard() {
         <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-2">
           Wall Street Intelligence
         </div>
-        <h1 className="font-serif text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
+        <h1 className="font-sans text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
           Analyst Consensus
         </h1>
         <p className="mt-3 text-[14px] text-gray-500 leading-relaxed max-w-xl">
@@ -57,17 +57,17 @@ export default async function AnalystConsensusDashboard() {
         </p>
         <div className="mt-6 flex items-center gap-6">
           <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-2xl font-bold text-emerald-600 tabular-nums">{counts.improving}</span>
+            <span className="font-sans text-2xl font-bold text-emerald-600 tabular-nums">{counts.improving}</span>
             <span className="text-[10px] uppercase tracking-widest text-gray-400">improving</span>
           </div>
           <span className="w-px h-4 bg-gray-200" />
           <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-2xl font-bold text-rose-500 tabular-nums">{counts.weakening}</span>
+            <span className="font-sans text-2xl font-bold text-rose-500 tabular-nums">{counts.weakening}</span>
             <span className="text-[10px] uppercase tracking-widest text-gray-400">weakening</span>
           </div>
           <span className="w-px h-4 bg-gray-200" />
           <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-2xl font-bold text-gray-400 tabular-nums">{counts.stable}</span>
+            <span className="font-sans text-2xl font-bold text-gray-400 tabular-nums">{counts.stable}</span>
             <span className="text-[10px] uppercase tracking-widest text-gray-400">stable</span>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default async function AnalystConsensusDashboard() {
 
       {/* Master sortable table — primary view */}
       <div className="mb-2 flex items-baseline justify-between">
-        <h2 className="font-serif text-lg font-semibold text-gray-900">All Companies</h2>
+        <h2 className="font-sans text-lg font-semibold text-gray-900">All Companies</h2>
         <span className="text-[11px] text-gray-400">Click column to sort</span>
       </div>
       <ConsensusTable rows={rows} />
@@ -118,7 +118,7 @@ export default async function AnalystConsensusDashboard() {
       {/* Analyst Narrative Trends */}
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-6">
-          <h2 className="font-serif text-lg font-semibold text-gray-900">Narrative Trends</h2>
+          <h2 className="font-sans text-lg font-semibold text-gray-900">Narrative Trends</h2>
           <div className="flex-1 h-px bg-gray-100" />
         </div>
         <div className="grid lg:grid-cols-2 gap-8">
@@ -156,7 +156,7 @@ function RankCard({
         <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-0.5">
           {eyebrow}
         </div>
-        <h3 className="font-serif text-[1.05rem] font-semibold text-gray-900">{title}</h3>
+        <h3 className="font-sans text-[1.05rem] font-semibold text-gray-900">{title}</h3>
         <div className="mt-3 h-px bg-gray-100" />
       </div>
       {items.length === 0 ? (

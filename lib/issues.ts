@@ -113,7 +113,7 @@ export const issues: Issue[] = [
         show: "The Circuit",
         title: "Ep. 165: Cerebras IPO, Premium Tokens, Neo Clouds, and the Angstrom Era",
         url: "https://share.transistor.fm/s/8357dfce",
-        image: "https://img.transistorcdn.com/tnpq4jdvvzodQvQtsL8JLTOktDH9fudh6uGPZfCC-Hs/rs:fill:0:0:1/w:800/h:800/q:60/mb:500000/aHR0cHM6Ly9pbWctdXBsb2FkLXByb2R1Y3Rpb24udHJhbnNpc3Rvci5mbS9zaG93LzM3MjEyLzE2NzQzMTg3MzAtYXJ0d29yay5qcGc.webp",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/93/af/60/93af603b-e0ae-3c34-fce4-68ced89e4938/mza_989817321568677055.jpg/600x600bb.jpg",
         oneliner: "Ben Bajarin and Jay Goldberg discuss the Cerebras IPO, AI compute pricing, neo cloud providers, wafer fab equipment forecasts, and post-Moore's law manufacturing challenges.",
       },
       {
@@ -219,6 +219,7 @@ export const issues: Issue[] = [
         show: "The Circuit",
         title: "Ep. 165: Cerebras IPO, Premium Tokens, Neo Clouds, and the Angstrom Era",
         url: "https://share.transistor.fm/s/8357dfce",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/93/af/60/93af603b-e0ae-3c34-fce4-68ced89e4938/mza_989817321568677055.jpg/600x600bb.jpg",
         oneliner: "Ben Bajarin and Jay Goldberg break down the Cerebras IPO, the rise of neo cloud providers, and what the angstrom era means for foundry economics.",
       },
       {

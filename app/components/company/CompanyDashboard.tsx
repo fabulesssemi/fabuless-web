@@ -129,7 +129,7 @@ export function CompanyDashboard({
       <div className="grid sm:grid-cols-2 border border-gray-100 mb-8">
 
         {/* LEFT — editorial teaser */}
-        <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-100">
+        <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-100 flex flex-col">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-3">
             Fabuless Analysis{editorial ? ` · ${editorial.updated}` : ""}
           </div>
@@ -150,7 +150,7 @@ export function CompanyDashboard({
               )}
               <a
                 href="#bull-bear"
-                className="inline-flex items-center gap-1.5 bg-[#B45309] text-white text-[11px] font-semibold uppercase tracking-widest px-4 py-2 hover:bg-amber-800 transition-colors"
+                className="mt-auto inline-flex items-center gap-1.5 bg-[#B45309] text-white text-[11px] font-semibold uppercase tracking-widest px-4 py-2 hover:bg-amber-800 transition-colors self-start"
               >
                 Bull &amp; Bear Case ↓
               </a>

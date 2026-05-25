@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CEOProfile, CompanyEditorial, CompanyMeta } from "@/lib/companies";
+import type { CEOProfile, CompanyEditorial, CompanyMeta, ProductImage } from "@/lib/companies";
 import type { PricePoint } from "@/lib/providers/history";
 import { PriceChart } from "./PriceChart";
 import { GrossMarginChart } from "./GrossMarginChart";
@@ -8,6 +8,7 @@ import type { CompanyMarketData } from "@/lib/providers/types";
 import type { AnalystView } from "@/lib/analyst/types";
 import { DistributionBar } from "@/app/components/analyst/AnalystConsensusPanel";
 import { ShowMore } from "./ShowMore";
+import { HardwareSpotlight } from "./HardwareSpotlight";
 import {
   ChipGroup,
   Pill,
@@ -232,6 +233,11 @@ export function CompanyDashboard({
                 <span className="text-[#B45309] font-medium">What to watch: </span>
                 {editorial.guidanceCommentary}
               </p>
+            )}
+
+            {/* Hardware spotlight */}
+            {meta.productImage && (
+              <HardwareSpotlight image={meta.productImage} />
             )}
           </div>
 

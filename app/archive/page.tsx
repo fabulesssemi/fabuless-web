@@ -4,7 +4,7 @@ import { issues } from "@/lib/issues";
 export default function Archive() {
   return (
     <div className="max-w-4xl mx-auto px-6 pt-12 pb-16">
-      <div className="border-t-2 border-[#111827] pt-4 mb-10">
+      <div className="mb-10">
         <h1 className="font-sans text-3xl font-bold text-[#111827] tracking-tight">
           Archive
         </h1>

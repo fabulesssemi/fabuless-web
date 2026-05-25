@@ -129,7 +129,7 @@ export function CompanyDashboard({
       <div className="grid sm:grid-cols-2 items-start sm:divide-x divide-gray-200 border-t border-gray-200 mb-4">
 
         {/* LEFT — editorial teaser + bull/bear side-by-side */}
-        <div className="py-5 sm:pr-8 pb-5 sm:pb-0 flex flex-col border-b sm:border-b-0 border-gray-100">
+        <div className="py-5 sm:pr-8 pb-5 sm:pb-0 flex flex-col border-b sm:border-b-0 border-gray-200">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-3">
             Fabuless Analysis{editorial ? ` · ${editorial.updated}` : ""}
           </div>
@@ -150,8 +150,8 @@ export function CompanyDashboard({
               )}
               {/* Bull + Bear side-by-side */}
               {(editorial.bullCase.length > 0 || editorial.bearCase.length > 0) && (
-                <div className="border-t border-gray-100 pt-4 mt-4">
-                  <div className="grid grid-cols-2 divide-x divide-gray-100">
+                <div className="border-t border-gray-200 pt-4 mt-4">
+                  <div className="grid grid-cols-2 divide-x divide-gray-200">
                     <div className="pr-4">
                       <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
                     </div>
@@ -211,7 +211,7 @@ export function CompanyDashboard({
           ) : null}
 
           {/* Earnings chart + stats */}
-          <div className="pt-4 border-t border-gray-100">
+          <div className="pt-4 border-t border-gray-200">
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Earnings Snapshot
             </div>
@@ -230,7 +230,7 @@ export function CompanyDashboard({
               <p className="text-sm text-gray-400 italic mt-2">Earnings data unavailable.</p>
             )}
             {editorial?.guidanceCommentary && (
-              <p className="text-[12px] text-gray-500 leading-relaxed border-t border-gray-100 pt-3 mt-3">
+              <p className="text-[12px] text-gray-500 leading-relaxed border-t border-gray-200 pt-3 mt-3">
                 <span className="text-[#B45309] font-medium">What to watch: </span>
                 {editorial.guidanceCommentary}
               </p>
@@ -241,9 +241,9 @@ export function CompanyDashboard({
       </div>
 
       {/* ── ROW 3: LATEST DEVELOPMENTS ── */}
-      <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-100 pt-4 mb-4">
+      <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-200 pt-4 mb-4">
         {news.length > 0 ? (
-          <ul className="divide-y divide-gray-100">
+          <ul className="divide-y divide-gray-200">
             {news.slice(0, 6).map((n) => (
               <li key={n.url} className="py-3 first:pt-0 last:pb-0">
                 <a href={n.url} target="_blank" rel="noopener noreferrer" className="group">
@@ -266,7 +266,7 @@ export function CompanyDashboard({
 
       {/* ── ROW 4: KEY THEMES (left) · SUPPLY CHAIN (right) ── */}
       {editorial && (
-        <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-100 border-t border-gray-100 pt-4 mb-4">
+        <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4 mb-4">
           {editorial.keyThemes.length > 0 && (
             <div className="sm:pr-8 pb-6 sm:pb-0">
               <Section eyebrow="What the industry is watching" title="Key Themes">
@@ -297,7 +297,7 @@ export function CompanyDashboard({
       )}
 
       {/* Related companies */}
-      <div className="pt-4 border-t border-gray-100 mb-4">
+      <div className="pt-4 border-t border-gray-200 mb-4">
         <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-4">Related Companies</div>
         <div className="flex flex-wrap gap-x-8 gap-y-3">
           {relatedFor(meta, editorial).map((r) => (

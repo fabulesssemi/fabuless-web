@@ -135,23 +135,19 @@ export function CompanyDashboard({
           </div>
           {editorial ? (
             <>
-              <p className="text-[15px] leading-relaxed text-gray-800 italic mb-4">
+              <p className="text-[14px] leading-relaxed text-gray-700 italic mb-5 line-clamp-5">
                 {editorial.quickTake}
               </p>
-              <div className="space-y-2.5 mb-5">
-                <div>
-                  <div className="text-[10px] uppercase tracking-wider text-sky-700 mb-0.5">
-                    Role in the AI ecosystem
-                  </div>
-                  <p className="text-[13px] text-gray-600 leading-relaxed">{editorial.ecosystemRole}</p>
+              {/* Key themes as compact chips */}
+              {editorial.keyThemes.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {editorial.keyThemes.slice(0, 3).map((t) => (
+                    <span key={t.title} className="text-[11px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                      {t.title}
+                    </span>
+                  ))}
                 </div>
-                <div>
-                  <div className="text-[10px] uppercase tracking-wider text-[#B45309] mb-0.5">
-                    What investors care about
-                  </div>
-                  <p className="text-[13px] text-gray-600 leading-relaxed">{editorial.investorFocus}</p>
-                </div>
-              </div>
+              )}
               <a
                 href="#bull-bear"
                 className="inline-flex items-center gap-1.5 bg-[#B45309] text-white text-[11px] font-semibold uppercase tracking-widest px-4 py-2 hover:bg-amber-800 transition-colors"
@@ -160,9 +156,9 @@ export function CompanyDashboard({
               </a>
             </>
           ) : (
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed line-clamp-6">
               {profile?.description ??
-                `Our full editorial deep-dive for ${meta.name} is in progress. Live market data, earnings, analyst consensus, and news are fully active.`}
+                `Our full editorial deep-dive for ${meta.name} is in progress.`}
             </p>
           )}
         </div>

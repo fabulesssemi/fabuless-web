@@ -42,10 +42,10 @@ export default function RootLayout({
           {/* Amber accent line — publication masthead signature */}
           <div className="h-[3px] bg-[#B45309]" />
           <div className="bg-[#111827]">
-            <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
               <Link
                 href="/"
-                className="font-sans text-xl font-bold text-white tracking-tight"
+                className="font-sans text-[1.6rem] font-extrabold text-white tracking-tight"
               >
                 Fabuless
               </Link>

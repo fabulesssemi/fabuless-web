@@ -126,7 +126,7 @@ export function CompanyDashboard({
 
       {/* ── ROW 1: EDITORIAL LEFT · ANALYST DATA RIGHT ── */}
       {/* Mirrors the Morningstar "Company Report | Price vs Fair Value" split */}
-      <div className="grid sm:grid-cols-2 border border-gray-300 mb-6">
+      <div className="grid sm:grid-cols-2 items-start border border-gray-300 mb-6">
 
         {/* LEFT — editorial teaser */}
         <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-200 flex flex-col items-start">

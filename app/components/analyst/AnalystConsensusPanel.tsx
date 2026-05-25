@@ -51,7 +51,7 @@ export function DistributionBar({
 }) {
   const total = d.strongBuy + d.buy + d.hold + d.sell + d.strongSell || 1;
   const segs = [
-    { v: d.strongBuy + d.buy, c: "bg-amber-400", label: "Buy" },
+    { v: d.strongBuy + d.buy, c: "bg-emerald-500", label: "Buy" },
     { v: d.hold,              c: "bg-gray-200",  label: "Hold" },
     { v: d.sell + d.strongSell, c: "bg-rose-400", label: "Sell" },
   ];

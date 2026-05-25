@@ -46,7 +46,7 @@ export function CompanyDashboard({
       : "text-gray-800";
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
+    <div className="max-w-5xl mx-auto px-6 pt-5 pb-10">
 
       {/* Back link */}
       <Link
@@ -57,11 +57,11 @@ export function CompanyDashboard({
       </Link>
 
       {/* ── HERO HEADER ── */}
-      <header className="mt-5 mb-8 pb-8 border-b border-gray-200">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+      <header className="mt-3 mb-5 pb-5 border-b border-gray-200">
+        <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <div className="flex items-center gap-3 mb-1">
-              <span className="font-mono text-[#B45309] text-base font-semibold">
+            <div className="flex items-center gap-2.5 mb-0.5">
+              <span className="font-mono text-[#B45309] text-sm font-semibold">
                 {displayTicker(meta.ticker)}
               </span>
               {meta.exchangeLabel && (
@@ -69,7 +69,7 @@ export function CompanyDashboard({
               )}
               <Pill tone="cyan">{meta.sector}</Pill>
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl text-gray-900 tracking-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl text-gray-900 tracking-tight leading-tight">
               {meta.name}
             </h1>
             {meta.ceo && <InlineCEO ceo={meta.ceo} />}
@@ -86,7 +86,7 @@ export function CompanyDashboard({
                   {quote.change != null ? `${quote.change > 0 ? "+" : ""}${quote.change.toFixed(2)} ` : ""}
                   ({fmtPercent(quote.changePercent)})
                 </div>
-                <div className="mt-1 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-gray-400">
+                <div className="mt-0.5 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-gray-400">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Live · Yahoo Finance
                 </div>
@@ -98,7 +98,7 @@ export function CompanyDashboard({
         </div>
 
         {/* Key stats strip */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
           <Stat label="Market Cap"    value={fmtMarketCap(quote?.marketCap)} />
           <Stat label="P/E (TTM)"     value={quote?.peTrailing != null ? quote.peTrailing.toFixed(1) : "—"} />
           <Stat
@@ -115,7 +115,7 @@ export function CompanyDashboard({
 
       {/* Price chart */}
       {priceHistory.length >= 10 && (
-        <div className="mb-8">
+        <div className="mb-6">
           <PriceChart
             data={priceHistory}
             symbol={meta.yahooSymbol}
@@ -238,7 +238,7 @@ export function CompanyDashboard({
 
       {/* ── ROW 2: BULL CASE · BEAR CASE ── */}
       {editorial && (
-        <div id="bull-bear" className="mb-8">
+        <div id="bull-bear" className="mb-6">
           <Section eyebrow="The debate" title="Bull Case / Bear Case">
             <div className="grid sm:grid-cols-2 gap-8">
               <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} />
@@ -249,7 +249,7 @@ export function CompanyDashboard({
       )}
 
       {/* ── ROW 3: LATEST DEVELOPMENTS ── */}
-      <Section eyebrow="Live" title="Latest Developments" live className="mb-8">
+      <Section eyebrow="Live" title="Latest Developments" live className="mb-6">
         {news.length > 0 ? (
           <ul className="divide-y divide-gray-100">
             {news.slice(0, 6).map((n) => (

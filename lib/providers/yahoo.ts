@@ -246,20 +246,28 @@ export class YahooProvider
     opts?: { limit?: number },
   ): Promise<NewsItem[]> {
     try {
-      const res = await yf.search(ticker, {
-        newsCount: opts?.limit ?? 8,
-        quotesCount: 0,
-        enableNavLinks: false,
-      });
-      return (res.news ?? []).map((n) => ({
-        title: n.title,
-        url: n.link,
-        source: n.publisher ?? undefined,
-        publishedAt:
-          n.providerPublishTime instanceof Date
-            ? n.providerPublishTime.toISOString()
-            : undefined,
-      }));
+      // Pass MODULE_OPTS (validateResult: false) so Yahoo schema drift
+      // (new fields like screenerFieldResults, culturalAssets) doesn't throw.
+      const raw = await yf.search(
+        ticker,
+        { newsCount: opts?.limit ?? 8, quotesCount: 0, enableNavLinks: false },
+        MODULE_OPTS,
+      ) as { news?: Array<{ title?: string; link?: string; publisher?: string; providerPublishTime?: Date | number }> };
+      return (raw.news ?? [])
+        .filter((n): n is typeof n & { title: string; link: string } =>
+          typeof n.title === "string" && typeof n.link === "string",
+        )
+        .map((n) => ({
+          title: n.title,
+          url: n.link,
+          source: n.publisher ?? undefined,
+          publishedAt:
+            n.providerPublishTime instanceof Date
+              ? n.providerPublishTime.toISOString()
+              : typeof n.providerPublishTime === "number"
+              ? new Date(n.providerPublishTime * 1000).toISOString()
+              : undefined,
+        }));
     } catch {
       return [];
     }

@@ -199,52 +199,40 @@ export function CompanyDashboard({
                 </div>
               )}
 
-              <div className="pt-4 border-t border-gray-100 grid grid-cols-2 gap-x-6 gap-y-3">
-                {earnings?.revenueGrowthYoY != null && (
-                  <Stat
-                    label="Revenue Growth"
-                    value={fmtFraction(earnings.revenueGrowthYoY, true)}
-                    tone={changeTone(earnings.revenueGrowthYoY)}
-                  />
-                )}
-                {earnings?.grossMargin != null && (
-                  <Stat label="Gross Margin" value={fmtFraction(earnings.grossMargin)} />
-                )}
-                {earnings?.epsTrailing != null && (
-                  <Stat label="EPS (TTM)" value={`$${earnings.epsTrailing.toFixed(2)}`} />
-                )}
-                {analyst.lowPriceTarget != null && analyst.highPriceTarget != null && (
-                  <Stat
-                    label="PT Range"
-                    value={`${fmtPrice(analyst.lowPriceTarget, currency)} – ${fmtPrice(analyst.highPriceTarget, currency)}`}
-                  />
-                )}
-              </div>
+              {analyst.lowPriceTarget != null && analyst.highPriceTarget != null && (
+                <div className="mb-4 text-[11px] text-gray-400">
+                  PT range: {fmtPrice(analyst.lowPriceTarget, currency)} – {fmtPrice(analyst.highPriceTarget, currency)}
+                </div>
+              )}
             </>
-          ) : (
-            /* No analyst data — show key financials only */
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-              {earnings?.revenueGrowthYoY != null && (
-                <Stat
-                  label="Revenue Growth"
-                  value={fmtFraction(earnings.revenueGrowthYoY, true)}
-                  tone={changeTone(earnings.revenueGrowthYoY)}
-                />
-              )}
-              {earnings?.grossMargin != null && (
-                <Stat label="Gross Margin" value={fmtFraction(earnings.grossMargin)} />
-              )}
-              {earnings?.epsTrailing != null && (
-                <Stat label="EPS (TTM)" value={`$${earnings.epsTrailing.toFixed(2)}`} />
-              )}
-              {quote?.peTrailing != null && (
-                <Stat label="P/E (TTM)" value={quote.peTrailing.toFixed(1)} />
-              )}
-              {earnings?.nextEarningsDate && (
-                <Stat label="Next Earnings" value={earnings.nextEarningsDate} tone="text-amber-700" />
-              )}
+          ) : null}
+
+          {/* Earnings chart + stats — shared regardless of analyst data */}
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
+              Earnings Snapshot
             </div>
-          )}
+            <GrossMarginChart
+              quarters={editorial?.quarterlyGM}
+              currentGM={earnings?.grossMargin ?? undefined}
+            />
+            {earnings ? (
+              <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
+                <Stat label="Revenue Growth (YoY)" value={fmtFraction(earnings.revenueGrowthYoY, true)} tone={changeTone(earnings.revenueGrowthYoY)} />
+                <Stat label="Gross Margin"         value={fmtFraction(earnings.grossMargin)} />
+                <Stat label="EPS (TTM)"            value={earnings.epsTrailing != null ? `$${earnings.epsTrailing.toFixed(2)}` : "—"} />
+                <Stat label="Next-Q EPS Est."      value={earnings.nextQuarterEpsEstimate != null ? `$${earnings.nextQuarterEpsEstimate.toFixed(2)}` : "—"} />
+              </div>
+            ) : (
+              <p className="text-sm text-gray-400 italic mt-2">Earnings data unavailable.</p>
+            )}
+            {editorial?.guidanceCommentary && (
+              <p className="text-[12px] text-gray-500 leading-relaxed border-t border-gray-100 pt-3 mt-3">
+                <span className="text-[#B45309] font-medium">What to watch: </span>
+                {editorial.guidanceCommentary}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -311,32 +299,6 @@ export function CompanyDashboard({
           </Section>
         </div>
       )}
-
-      {/* ── ROW 5: EARNINGS SNAPSHOT ── */}
-      <Section eyebrow="Live + KPIs" title="Earnings Snapshot" className="mb-8">
-        <GrossMarginChart
-          quarters={editorial?.quarterlyGM}
-          currentGM={earnings?.grossMargin ?? undefined}
-        />
-        {earnings ? (
-          <div className="mt-5 space-y-4">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-              <Stat label="Revenue Growth (YoY)" value={fmtFraction(earnings.revenueGrowthYoY, true)} tone={changeTone(earnings.revenueGrowthYoY)} />
-              <Stat label="Gross Margin"         value={fmtFraction(earnings.grossMargin)} />
-              <Stat label="EPS (TTM)"            value={earnings.epsTrailing != null ? `$${earnings.epsTrailing.toFixed(2)}` : "—"} />
-              <Stat label="Next-Q EPS Est."      value={earnings.nextQuarterEpsEstimate != null ? `$${earnings.nextQuarterEpsEstimate.toFixed(2)}` : "—"} />
-            </div>
-            {editorial?.guidanceCommentary && (
-              <p className="text-[13px] text-gray-500 leading-relaxed border-t border-gray-100 pt-4 max-w-2xl">
-                <span className="text-[#B45309] font-medium">What to watch: </span>
-                {editorial.guidanceCommentary}
-              </p>
-            )}
-          </div>
-        ) : (
-          <Unavailable what="Earnings data" />
-        )}
-      </Section>
 
       {/* Related companies */}
       <div className="pt-6 border-t border-gray-100 mb-4">

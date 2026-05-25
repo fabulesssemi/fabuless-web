@@ -7,6 +7,7 @@ import { COMPANY_UNIVERSE, getCompanyMeta } from "@/lib/companies";
 import type { CompanyMarketData } from "@/lib/providers/types";
 import type { AnalystView } from "@/lib/analyst/types";
 import { DistributionBar } from "@/app/components/analyst/AnalystConsensusPanel";
+import { ShowMore } from "./ShowMore";
 import {
   ChipGroup,
   Pill,
@@ -236,9 +237,13 @@ export function CompanyDashboard({
       {editorial && (
         <div id="bull-bear" className="border-t border-gray-300 pt-6 mb-6">
           <Section eyebrow="The debate" title="Bull Case / Bear Case">
-            <div className="grid sm:grid-cols-2 gap-8">
-              <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} />
-              <CaseColumn title="Bear Case" tone="rose"    points={editorial.bearCase} />
+            <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-300">
+              <div className="sm:pr-8 pb-6 sm:pb-0">
+                <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
+              </div>
+              <div className="sm:pl-8">
+                <CaseColumn title="Bear Case" tone="rose" points={editorial.bearCase} max={3} />
+              </div>
             </div>
           </Section>
         </div>
@@ -270,29 +275,33 @@ export function CompanyDashboard({
 
       {/* ── ROW 4: KEY THEMES (left) · SUPPLY CHAIN (right) ── */}
       {editorial && (
-        <div className="grid sm:grid-cols-2 gap-8 border-t border-gray-300 pt-6 mb-6">
+        <div className="grid sm:grid-cols-2 sm:divide-x divide-gray-300 border-t border-gray-300 pt-6 mb-6">
           {editorial.keyThemes.length > 0 && (
-            <Section eyebrow="What the industry is watching" title="Key Themes">
+            <div className="sm:pr-8 pb-6 sm:pb-0">
+              <Section eyebrow="What the industry is watching" title="Key Themes">
+                <ShowMore max={3}>
+                  {editorial.keyThemes.map((t) => (
+                    <div key={t.title}>
+                      <div className="text-[13px] font-semibold text-gray-900 mb-0.5">{t.title}</div>
+                      <p className="text-[13px] text-gray-500 leading-relaxed">{t.detail}</p>
+                    </div>
+                  ))}
+                </ShowMore>
+              </Section>
+            </div>
+          )}
+          <div className="sm:pl-8">
+            <Section eyebrow="Who they depend on" title="Supply Chain">
               <div className="space-y-4">
-                {editorial.keyThemes.map((t) => (
-                  <div key={t.title}>
-                    <div className="text-[13px] font-semibold text-gray-900 mb-0.5">{t.title}</div>
-                    <p className="text-[13px] text-gray-500 leading-relaxed">{t.detail}</p>
-                  </div>
-                ))}
+                <ChipGroup label="Key suppliers"        items={editorial.supplyChain.suppliers} />
+                <ChipGroup label="Customers"            items={editorial.supplyChain.customers} />
+                <ChipGroup label="Hyperscaler exposure" items={editorial.supplyChain.hyperscalers} />
+                <ChipGroup label="Foundry"              items={editorial.supplyChain.foundry} />
+                <ChipGroup label="Packaging"            items={editorial.supplyChain.packaging} />
+                <ChipGroup label="Memory"               items={editorial.supplyChain.memory} />
               </div>
             </Section>
-          )}
-          <Section eyebrow="Who they depend on" title="Supply Chain">
-            <div className="space-y-4">
-              <ChipGroup label="Key suppliers"        items={editorial.supplyChain.suppliers} />
-              <ChipGroup label="Customers"            items={editorial.supplyChain.customers} />
-              <ChipGroup label="Hyperscaler exposure" items={editorial.supplyChain.hyperscalers} />
-              <ChipGroup label="Foundry"              items={editorial.supplyChain.foundry} />
-              <ChipGroup label="Packaging"            items={editorial.supplyChain.packaging} />
-              <ChipGroup label="Memory"               items={editorial.supplyChain.memory} />
-            </div>
-          </Section>
+          </div>
         </div>
       )}
 
@@ -347,7 +356,7 @@ function InlineCEO({ ceo }: { ceo: CEOProfile }) {
   );
 }
 
-function CaseColumn({ title, points, tone }: { title: string; points: string[]; tone: "emerald" | "rose" }) {
+function CaseColumn({ title, points, tone, max = 99 }: { title: string; points: string[]; tone: "emerald" | "rose"; max?: number }) {
   const accent    = tone === "emerald" ? "border-l-2 border-emerald-400" : "border-l-2 border-rose-400";
   const titleColor = tone === "emerald" ? "text-emerald-700"              : "text-rose-600";
   const countBg   = tone === "emerald" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-600";
@@ -357,11 +366,11 @@ function CaseColumn({ title, points, tone }: { title: string; points: string[]; 
         <div className={`text-[10px] font-bold uppercase tracking-wider ${titleColor}`}>{title}</div>
         <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${countBg}`}>{points.length}</span>
       </div>
-      <ul className="space-y-2.5">
+      <ShowMore max={max}>
         {points.map((p, i) => (
-          <li key={i} className="text-[13px] text-gray-600 leading-relaxed">{p}</li>
+          <li key={i} className="text-[13px] text-gray-600 leading-relaxed list-none">{p}</li>
         ))}
-      </ul>
+      </ShowMore>
     </div>
   );
 }

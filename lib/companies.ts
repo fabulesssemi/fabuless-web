@@ -12,9 +12,9 @@ export type CEOProfile = {
   photo?: string; // URL to headshot (Wikipedia/Wikimedia Commons)
 };
 
-export type ProductImage = {
-  url: string;
-  caption: string;
+export type RevenueSegment = {
+  name: string;   // short label, e.g. "Data Center"
+  pct: number;    // integer percentage, all segments must sum to 100
 };
 
 export type CompanyMeta = {
@@ -26,7 +26,8 @@ export type CompanyMeta = {
   exchangeLabel?: string; // optional, for foreign listings
   newsKeywords: string[]; // title must contain at least one (case-insensitive) for news to show
   ceo?: CEOProfile;
-  productImage?: ProductImage; // hardware spotlight shown on company page
+  revenueSegments?: RevenueSegment[]; // shown as a mini chart in the What to watch panel
+  fiscalLabel?: string; // e.g. "FY2025 (Jan)" — labels the segment data period
 };
 
 export type CompanyEditorial = {
@@ -70,76 +71,128 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
     sector: "AI GPUs / Accelerated Computing",
     newsKeywords: ["nvidia", "nvda"],
     ceo: { name: "Jensen Huang", since: "1993", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Jen-Hsun_Huang_2025.jpg/500px-Jen-Hsun_Huang_2025.jpg" },
-    productImage: {
-      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/NVIDIA_H100_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_001.png/960px-NVIDIA_H100_%28%E6%9E%81%E5%AE%A2%E6%B9%BEGeekerwan%29_001.png",
-      caption: "NVIDIA H100 SXM5 · Hopper architecture · 80GB HBM3 · 3,958 TFLOPS FP8 · the chip behind the AI buildout",
-    },
+    revenueSegments: [
+      { name: "Data Center", pct: 88 },
+      { name: "Gaming", pct: 8 },
+      { name: "Pro Viz", pct: 2 },
+      { name: "Automotive", pct: 2 },
+    ],
+    fiscalLabel: "FY2025 (Jan)",
   },
   {
     slug: "amd", ticker: "AMD", name: "AMD", yahooSymbol: "AMD",
     sector: "CPUs & AI GPUs (x86 + Instinct)",
     newsKeywords: ["amd", "advanced micro devices", "advanced micro"],
     ceo: { name: "Lisa Su", since: "2014", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/SXSW-2024-alih-OB7A0861-Lisa_Su_%28cropped_2%29.jpg/500px-SXSW-2024-alih-OB7A0861-Lisa_Su_%28cropped_2%29.jpg" },
-    // productImage: add when confirmed Wikimedia URL available for MI300X
+    revenueSegments: [
+      { name: "Data Center", pct: 56 },
+      { name: "Client / PC", pct: 26 },
+      { name: "Gaming", pct: 13 },
+      { name: "Embedded", pct: 5 },
+    ],
+    fiscalLabel: "FY2024",
   },
   {
     slug: "avgo", ticker: "AVGO", name: "Broadcom", yahooSymbol: "AVGO",
     sector: "Custom AI ASICs & Networking",
     newsKeywords: ["broadcom", "avgo"],
     ceo: { name: "Hock Tan", since: "2006", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hock_Tan_2022.png/500px-Hock_Tan_2022.png" },
-    // productImage: add Broadcom ASIC image URL when confirmed
+    revenueSegments: [
+      { name: "Semiconductor", pct: 60 },
+      { name: "Infra Software", pct: 40 },
+    ],
+    fiscalLabel: "FY2024 (Oct)",
   },
   {
     slug: "mrvl", ticker: "MRVL", name: "Marvell", yahooSymbol: "MRVL",
     sector: "Custom AI Silicon & Optical Interconnect",
     newsKeywords: ["marvell", "mrvl"],
     ceo: { name: "Matt Murphy", since: "2016" },
-    // productImage: add Marvell image URL when confirmed
+    revenueSegments: [
+      { name: "Data Center", pct: 74 },
+      { name: "Enterprise", pct: 11 },
+      { name: "Carrier", pct: 9 },
+      { name: "Consumer", pct: 6 },
+    ],
+    fiscalLabel: "FY2025 (Feb)",
   },
   {
     slug: "tsm", ticker: "TSM", name: "TSMC", yahooSymbol: "TSM",
     sector: "Leading-Edge Foundry",
     newsKeywords: ["tsmc", "taiwan semiconductor"],
     ceo: { name: "C.C. Wei", since: "2018" },
-    // productImage: add TSMC wafer image URL when confirmed
+    revenueSegments: [
+      { name: "HPC / AI", pct: 51 },
+      { name: "Smartphones", pct: 33 },
+      { name: "IoT", pct: 6 },
+      { name: "Automotive", pct: 5 },
+      { name: "Consumer", pct: 5 },
+    ],
+    fiscalLabel: "FY2024",
   },
   {
     slug: "asml", ticker: "ASML", name: "ASML", yahooSymbol: "ASML",
     sector: "EUV Lithography Equipment",
     newsKeywords: ["asml"],
     ceo: { name: "Christophe Fouquet", since: "2024" },
-    productImage: {
-      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Lens_from_ASML.jpg/960px-Lens_from_ASML.jpg",
-      caption: "ASML EUV optical lens assembly · 13.5nm wavelength · sole supplier of EUV tools to TSMC, Samsung, Intel Foundry",
-    },
+    revenueSegments: [
+      { name: "DUV Systems", pct: 46 },
+      { name: "EUV Systems", pct: 29 },
+      { name: "Services", pct: 19 },
+      { name: "Applications", pct: 6 },
+    ],
+    fiscalLabel: "FY2024",
   },
   {
     slug: "arm", ticker: "ARM", name: "Arm Holdings", yahooSymbol: "ARM",
     sector: "CPU IP & Instruction Set",
     newsKeywords: ["arm holdings", "arm chips", "arm-based", "arm's", "arm stock", "arm ipo"],
     ceo: { name: "Rene Haas", since: "2022", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Rene_Haas_at_SXSW_2025.jpg/500px-Rene_Haas_at_SXSW_2025.jpg" },
-    // productImage: add Arm chip image URL when confirmed
+    revenueSegments: [
+      { name: "Royalties", pct: 73 },
+      { name: "Licensing", pct: 27 },
+    ],
+    fiscalLabel: "FY2025 (Mar)",
   },
   {
     slug: "mu", ticker: "MU", name: "Micron", yahooSymbol: "MU",
     sector: "HBM & DRAM/NAND Memory",
     newsKeywords: ["micron", "micron technology"],
     ceo: { name: "Sanjay Mehrotra", since: "2017", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Sanjay_Mehrotra_2025_%28cropped%29.jpg/500px-Sanjay_Mehrotra_2025_%28cropped%29.jpg" },
-    // productImage: add Micron HBM3E image URL when confirmed
+    revenueSegments: [
+      { name: "DRAM", pct: 70 },
+      { name: "NAND Flash", pct: 28 },
+      { name: "Other", pct: 2 },
+    ],
+    fiscalLabel: "FY2024 (Aug)",
   },
   {
     slug: "intc", ticker: "INTC", name: "Intel", yahooSymbol: "INTC",
     sector: "x86 CPUs & Foundry (IDM)",
     newsKeywords: ["intel", "intc"],
     ceo: { name: "Lip-Bu Tan", since: "2025", photo: "https://upload.wikimedia.org/wikipedia/commons/1/10/Howard_Lutnick_with_Intel_CEO_Lip-Bu_Tan_%282025%29_%28cropped3%29.jpg" },
-    // productImage: add Intel Gaudi image URL when confirmed
+    revenueSegments: [
+      { name: "Client / PC", pct: 55 },
+      { name: "DC & AI", pct: 24 },
+      { name: "Network/Edge", pct: 11 },
+      { name: "Mobileye", pct: 3 },
+      { name: "Other", pct: 7 },
+    ],
+    fiscalLabel: "FY2024",
   },
   {
     slug: "qcom", ticker: "QCOM", name: "Qualcomm", yahooSymbol: "QCOM",
     sector: "Mobile SoCs & Edge AI",
     newsKeywords: ["qualcomm", "qcom"],
     ceo: { name: "Cristiano Amon", since: "2021", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Cristiano_Amon_%28President_%26_CEOQualcomm%29_%2854916855494%29_%28cropped%29.jpg/500px-Cristiano_Amon_%28President_%26_CEOQualcomm%29_%2854916855494%29_%28cropped%29.jpg" },
-    // productImage: add Snapdragon chip image URL when confirmed
+    revenueSegments: [
+      { name: "Handsets", pct: 54 },
+      { name: "IoT", pct: 14 },
+      { name: "Automotive", pct: 7 },
+      { name: "QTL License", pct: 13 },
+      { name: "Other", pct: 12 },
+    ],
+    fiscalLabel: "FY2024 (Sep)",
   },
   {
     slug: "skhynix", ticker: "000660.KS", name: "SK Hynix", yahooSymbol: "000660.KS",
@@ -147,7 +200,11 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
     exchangeLabel: "KRX: 000660",
     newsKeywords: ["sk hynix", "hynix"],
     ceo: { name: "Kwak Noh-jung", since: "2021" },
-    // productImage: add SK Hynix HBM3E image URL when confirmed
+    revenueSegments: [
+      { name: "DRAM", pct: 78 },
+      { name: "NAND / SSDs", pct: 22 },
+    ],
+    fiscalLabel: "FY2024",
   },
   {
     slug: "samsung", ticker: "005930.KS", name: "Samsung Electronics", yahooSymbol: "005930.KS",
@@ -155,7 +212,14 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
     exchangeLabel: "KRX: 005930",
     newsKeywords: ["samsung"],
     ceo: { name: "Jong-Hee Han", since: "2022" },
-    // productImage: add Samsung chip image URL when confirmed
+    revenueSegments: [
+      { name: "Mobile / MX", pct: 40 },
+      { name: "Semiconductor", pct: 28 },
+      { name: "Consumer Elec", pct: 12 },
+      { name: "Display", pct: 12 },
+      { name: "Harman", pct: 8 },
+    ],
+    fiscalLabel: "FY2024",
   },
 ];
 

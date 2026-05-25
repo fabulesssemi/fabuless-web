@@ -139,26 +139,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Latest issue header — above Top Stories */}
+      <section className="pt-7 pb-0">
+        <div className="mb-5 border-t-2 border-[#111827] pt-4">
+          <div className="text-[11px] text-gray-400 uppercase tracking-widest">Latest Issue · {latestIssue.date}</div>
+          <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
+            {latestIssue.title}
+          </h2>
+        </div>
+      </section>
+
       {/* Top Stories — FT style */}
-      <section className="pt-7 pb-8 border-b border-gray-200">
+      <section className="pt-4 pb-8 border-b border-gray-200">
         {/* Section header */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="h-px flex-1 bg-gray-300" />
-          <span className="text-[11px] font-bold uppercase tracking-widest text-gray-500 shrink-0">
-            Top Stories · {latestIssue.date}
+        <div className="flex items-center gap-4 mb-5">
+          <div className="h-px flex-1 bg-gray-200" />
+          <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 shrink-0">
+            Top Stories
           </span>
-          <div className="h-px flex-1 bg-gray-300" />
+          <div className="h-px flex-1 bg-gray-200" />
         </div>
 
         {/* Card grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {featuredStories.map(({ story, category }) => (
             <a
               key={story.url}
               href={story.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-white block border border-gray-200"
+              className="group bg-gray-50 block border border-gray-200"
             >
               {story.image ? (
                 <img
@@ -187,12 +197,6 @@ export default function Home() {
 
       {/* Rest of the issue */}
       <section className="pt-7 pb-8">
-        <div className="mb-5 border-t-2 border-[#111827] pt-4">
-          <div className="text-[11px] text-gray-400 uppercase tracking-widest">Latest Issue · {latestIssue.date}</div>
-          <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
-            {latestIssue.title}
-          </h2>
-        </div>
         <IssueView issue={restSections.length > 0 ? restIssue : latestIssue} showEarnings={false} />
       </section>
     </div>

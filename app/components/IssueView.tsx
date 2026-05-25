@@ -8,48 +8,52 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
     <div className={hasSidebar ? "flex gap-10 items-start" : ""}>
       <div className={hasSidebar ? "flex-1 min-w-0" : ""}>
 
-        {/* 2-column story grid — FT card style */}
+        {/* 2-column story grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 divide-x divide-gray-200">
           {allStories.map((story, i) => (
             <div
               key={story.url}
               className={[
-                "py-6 flex flex-col",
+                "py-5",
                 i % 2 === 0 ? "pr-8" : "pl-8",
                 i >= 2 ? "border-t border-gray-200" : "",
               ].filter(Boolean).join(" ")}
             >
-              {/* Source — amber, prominent */}
-              <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-2">
-                {story.source}
+              <div className="flex gap-4 items-start">
+                <div className="flex-1 min-w-0">
+                  {/* Source — amber, prominent */}
+                  <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
+                    {story.source}
+                  </div>
+
+                  {/* Headline */}
+                  <a
+                    href={story.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block font-sans text-[1.05rem] font-bold leading-snug text-[#111827] hover:text-[#B45309] transition-colors mb-2"
+                  >
+                    {story.headline}
+                  </a>
+
+                  {/* One-liner deck */}
+                  <p className="text-[13px] text-gray-500 leading-relaxed">
+                    {story.oneliner}
+                  </p>
+                </div>
+
+                {/* Image — right side, consistent size */}
+                {story.image && (
+                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="shrink-0">
+                    <img
+                      src={story.image}
+                      alt={story.headline}
+                      className="w-[130px] object-cover"
+                      style={{ height: "88px" }}
+                    />
+                  </a>
+                )}
               </div>
-
-              {/* Headline */}
-              <a
-                href={story.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block font-sans text-[1.1rem] font-bold leading-snug text-[#111827] hover:text-[#B45309] transition-colors mb-2"
-              >
-                {story.headline}
-              </a>
-
-              {/* One-liner deck */}
-              <p className="text-[13px] text-gray-500 leading-relaxed flex-1">
-                {story.oneliner}
-              </p>
-
-              {/* Image — full width, below text */}
-              {story.image && (
-                <a href={story.url} target="_blank" rel="noopener noreferrer" className="block mt-4">
-                  <img
-                    src={story.image}
-                    alt={story.headline}
-                    className="w-full object-cover"
-                    style={{ height: "180px" }}
-                  />
-                </a>
-              )}
             </div>
           ))}
         </div>

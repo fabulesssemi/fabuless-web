@@ -10,6 +10,36 @@ import { filterByKeywords, fetchAllNewsItems, fetchPodcastEpisodes, type RssItem
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+// ---------------------------------------------------------------------------
+// Helpers for news enrichment
+// ---------------------------------------------------------------------------
+
+function sourceFromUrl(url: string): string | undefined {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    const KNOWN: Record<string, string> = {
+      "reuters.com": "Reuters",
+      "cnbc.com": "CNBC",
+      "nextplatform.com": "NextPlatform",
+      "semiwiki.com": "SemiWiki",
+      "benzinga.com": "Benzinga",
+    };
+    return KNOWN[host] ?? host;
+  } catch {
+    return undefined;
+  }
+}
+
+function isoFromPubDate(s: string): string | undefined {
+  if (!s) return undefined;
+  try {
+    const d = new Date(s);
+    return isNaN(d.getTime()) ? undefined : d.toISOString();
+  } catch {
+    return undefined;
+  }
+}
+
 function fmtActions(view: AnalystView): string {
   const actions = view.recentActions?.slice(0, 8) ?? [];
   if (actions.length === 0) return "  None in the past 30 days.";
@@ -79,6 +109,25 @@ export async function generateEditorial(
   podcastEpisodes: RssItem[],
 ): Promise<CompanyEditorial> {
   const companyNews = filterByKeywords(allNewsItems, meta.newsKeywords);
+
+  // Build pinnedNews from the RSS items the pipeline already fetched and filtered.
+  // These are guaranteed relevant (passed the keyword filter), from curated sources,
+  // and will be stored in Supabase — auto-revalidating the company page each cron run.
+  const freshPinnedNews = companyNews
+    .filter((n) => n.link && n.title)
+    .sort((a, b) => {
+      // Prefer more recent items when pubDate is available
+      const ta = a.pubDate ? new Date(a.pubDate).getTime() : 0;
+      const tb = b.pubDate ? new Date(b.pubDate).getTime() : 0;
+      return tb - ta;
+    })
+    .slice(0, 12)
+    .map((n) => ({
+      title: n.title,
+      url: n.link,
+      source: sourceFromUrl(n.link),
+      publishedAt: isoFromPubDate(n.pubDate),
+    }));
   const bs = analystView.buyShare != null ? `${analystView.buyShare.toFixed(0)}%` : "N/A";
   const pt = analystView.avgPriceTarget != null ? `$${analystView.avgPriceTarget.toFixed(0)}` : "N/A";
   const upside = analystView.impliedUpsidePct != null
@@ -167,13 +216,20 @@ ${OUTPUT_SCHEMA}`;
         return sum >= 98 && sum <= 102 ? segs : baseline.revenueSegments;
       })(),
       fiscalLabel: parsed.fiscalLabel ?? baseline.fiscalLabel,
+      // Curated news — always use freshly fetched RSS items (never fall back to stale baseline).
+      // If the pipeline found 0 relevant articles for this company, preserve any prior pinned news.
+      pinnedNews: freshPinnedNews.length > 0 ? freshPinnedNews : baseline.pinnedNews,
       // Preserve structural fields from the curated static editorial
       supplyChain: baseline.supplyChain,
       related: baseline.related,
       updated: new Date().toISOString().slice(0, 10),
     };
   } catch {
-    // Any failure (API error, JSON parse error) returns the baseline unchanged
-    return { ...baseline, updated: new Date().toISOString().slice(0, 10) };
+    // Any failure (API error, JSON parse error) returns the baseline + fresh pinned news
+    return {
+      ...baseline,
+      pinnedNews: freshPinnedNews.length > 0 ? freshPinnedNews : baseline.pinnedNews,
+      updated: new Date().toISOString().slice(0, 10),
+    };
   }
 }

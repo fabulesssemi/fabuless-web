@@ -249,28 +249,43 @@ export function CompanyDashboard({
       </div>
 
       {/* ── ROW 3: LATEST DEVELOPMENTS ── */}
-      <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-200 pt-4 mb-4">
-        {news.length > 0 ? (
-          <ul className="divide-y divide-gray-200">
-            {news.slice(0, 6).map((n) => (
-              <li key={n.url} className="py-3 first:pt-0 last:pb-0">
-                <a href={n.url} target="_blank" rel="noopener noreferrer" className="group">
-                  <span className="text-[14px] text-gray-800 group-hover:text-[#B45309] group-hover:underline underline-offset-2 decoration-[#B45309]/50 transition-colors leading-snug block">
-                    {n.title}
-                  </span>
-                </a>
-                <div className="mt-0.5 flex items-center gap-2 text-[11px] text-gray-400">
-                  {n.source && <span>{n.source}</span>}
-                  {n.source && n.publishedAt && <span>·</span>}
-                  {n.publishedAt && <span>{timeAgo(n.publishedAt)}</span>}
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <Unavailable what="News" />
-        )}
-      </Section>
+      {(() => {
+        // Merge pipeline-curated RSS news (editorial.pinnedNews) with Yahoo Finance live news.
+        // Pinned items appear first — they're guaranteed relevant (keyword-filtered from Reuters,
+        // CNBC, SemiWiki, etc.) and updated every time the editorial pipeline runs.
+        // Yahoo Finance news fills any remaining slots, deduplicated by URL.
+        const pinned = editorial?.pinnedNews ?? [];
+        const pinnedUrls = new Set(pinned.map((n) => n.url));
+        const merged = [
+          ...pinned,
+          ...news.filter((n) => !pinnedUrls.has(n.url)),
+        ].slice(0, 8);
+
+        return (
+          <Section eyebrow="Live" title="Latest Developments" live className="border-t border-gray-200 pt-4 mb-4">
+            {merged.length > 0 ? (
+              <ul className="divide-y divide-gray-200">
+                {merged.map((n) => (
+                  <li key={n.url} className="py-3 first:pt-0 last:pb-0">
+                    <a href={n.url} target="_blank" rel="noopener noreferrer" className="group">
+                      <span className="text-[14px] text-gray-800 group-hover:text-[#B45309] group-hover:underline underline-offset-2 decoration-[#B45309]/50 transition-colors leading-snug block">
+                        {n.title}
+                      </span>
+                    </a>
+                    <div className="mt-0.5 flex items-center gap-2 text-[11px] text-gray-400">
+                      {n.source && <span>{n.source}</span>}
+                      {n.source && n.publishedAt && <span>·</span>}
+                      {n.publishedAt && <span>{timeAgo(n.publishedAt)}</span>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <Unavailable what="News" />
+            )}
+          </Section>
+        );
+      })()}
 
       {/* ── ROW 4: KEY THEMES (left) · SUPPLY CHAIN (right) ── */}
       {editorial && (

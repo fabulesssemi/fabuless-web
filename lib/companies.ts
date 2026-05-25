@@ -63,6 +63,10 @@ export type CompanyEditorial = {
   // null until the first cron run that finds segment data in earnings news.
   revenueSegments?: RevenueSegment[];
   fiscalLabel?: string; // e.g. "Q1 FY26" — the period the segment data covers
+  // Curated news — top relevant articles found by the editorial pipeline from RSS sources.
+  // Updated every time the editorial refresh cron runs; auto-revalidates the company page.
+  // Merged with live Yahoo Finance news on the page (pinned items appear first).
+  pinnedNews?: { title: string; url: string; source?: string; publishedAt?: string }[];
   related: { slug: string; reason: string }[];
   updated: string; // when the editorial layer was last refreshed
 };

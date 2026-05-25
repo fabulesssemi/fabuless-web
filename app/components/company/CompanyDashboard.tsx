@@ -4,9 +4,9 @@ import type { PricePoint } from "@/lib/providers/history";
 import { PriceChart } from "./PriceChart";
 import { GrossMarginChart } from "./GrossMarginChart";
 import { COMPANY_UNIVERSE, getCompanyMeta } from "@/lib/companies";
-import type { CompanyMarketData } from "@/lib/providers/types";
+import type { CompanyMarketData, EarningsSnapshot } from "@/lib/providers/types";
 import type { AnalystView } from "@/lib/analyst/types";
-import { AnalystConsensusPanel } from "@/app/components/analyst/AnalystConsensusPanel";
+import { AnalystConsensusPanel, DistributionBar } from "@/app/components/analyst/AnalystConsensusPanel";
 import {
   ChipGroup,
   Pill,
@@ -116,6 +116,12 @@ export function CompanyDashboard({
           />
         </div>
       )}
+
+      {/* ── SNAPSHOT PANEL ── */}
+      <CompanySnapshotPanel analyst={analyst} earnings={data.earnings} currency={currency} />
+
+      {/* ── FULL EDITORIAL ANALYSIS DIVIDER ── */}
+      {editorial && <FullAnalysisDivider />}
 
       {/* ── MAIN CONTENT ── */}
       <div className="space-y-10">
@@ -259,7 +265,11 @@ export function CompanyDashboard({
           </Section>
 
           {/* 8. ANALYST CONSENSUS */}
-          {analyst && <AnalystConsensusPanel view={analyst} />}
+          {analyst && (
+            <div id="analyst-consensus">
+              <AnalystConsensusPanel view={analyst} />
+            </div>
+          )}
 
           {/* Related companies — horizontal strip */}
           <div className="pt-6 border-t border-gray-100">
@@ -326,14 +336,160 @@ function WhyBlock({ label, text, tone }: { label: string; text: string; tone: st
 function CaseColumn({ title, points, tone }: { title: string; points: string[]; tone: "emerald" | "rose" }) {
   const accent = tone === "emerald" ? "border-l-2 border-emerald-400" : "border-l-2 border-rose-400";
   const titleColor = tone === "emerald" ? "text-emerald-700" : "text-rose-600";
+  const countBg = tone === "emerald" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-600";
   return (
     <div className={`pl-4 ${accent}`}>
-      <div className={`text-[10px] font-bold uppercase tracking-wider mb-3 ${titleColor}`}>{title}</div>
+      <div className="flex items-center gap-2 mb-3">
+        <div className={`text-[10px] font-bold uppercase tracking-wider ${titleColor}`}>{title}</div>
+        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${countBg}`}>{points.length}</span>
+      </div>
       <ul className="space-y-2.5">
         {points.map((p, i) => (
           <li key={i} className="text-[13px] text-gray-600 leading-relaxed">{p}</li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+// ── Company Snapshot Panel ────────────────────────────────────────────────────
+// Compact data-visual block shown right after the price chart — analyst
+// consensus + distribution bar + key financials in a 3-column card.
+
+function CompanySnapshotPanel({
+  analyst,
+  earnings,
+  currency,
+}: {
+  analyst?: AnalystView;
+  earnings: EarningsSnapshot | null;
+  currency: string;
+}) {
+  const hasAnalyst = analyst && (analyst.consensusRating || analyst.avgPriceTarget || analyst.distribution);
+  const hasEarnings = earnings && (earnings.revenueGrowthYoY != null || earnings.grossMargin != null);
+  if (!hasAnalyst && !hasEarnings) return null;
+
+  const ratingColor = analyst?.consensusRating?.toLowerCase().includes("buy")
+    ? "text-emerald-600"
+    : analyst?.consensusRating?.toLowerCase().includes("sell")
+    ? "text-rose-600"
+    : "text-gray-800";
+
+  return (
+    <div className="border border-gray-100 mb-10">
+      <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-between">
+        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400">Company Snapshot</span>
+        <span className="text-[10px] text-gray-300 uppercase tracking-widest">Live · Yahoo Finance</span>
+      </div>
+
+      <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+
+        {/* Col 1 — Analyst consensus */}
+        <div className="p-5">
+          <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-3">Analyst Consensus</div>
+          {hasAnalyst ? (
+            <>
+              <div className={`text-2xl font-semibold mb-0.5 ${ratingColor}`}>
+                {analyst!.consensusRating ?? "—"}
+              </div>
+              {analyst!.numberOfAnalysts != null && (
+                <div className="text-[11px] text-gray-400 mb-4">
+                  {analyst!.numberOfAnalysts} analysts covering
+                </div>
+              )}
+              {analyst!.distribution && <DistributionBar d={analyst!.distribution} />}
+              <a
+                href="#analyst-consensus"
+                className="mt-4 inline-block text-[10px] uppercase tracking-widest text-[#B45309] hover:underline"
+              >
+                Full breakdown ↓
+              </a>
+            </>
+          ) : (
+            <span className="text-sm text-gray-400">—</span>
+          )}
+        </div>
+
+        {/* Col 2 — Price target */}
+        <div className="p-5">
+          <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-3">Avg Price Target</div>
+          {hasAnalyst ? (
+            <>
+              <div className="text-2xl font-semibold text-gray-900 tabular-nums mb-0.5">
+                {analyst!.avgPriceTarget != null ? fmtPrice(analyst!.avgPriceTarget, currency) : "—"}
+              </div>
+              {analyst!.impliedUpsidePct != null && (
+                <div className={`text-[13px] font-medium tabular-nums mb-4 ${changeTone(analyst!.impliedUpsidePct)}`}>
+                  {fmtPercent(analyst!.impliedUpsidePct)} implied upside
+                </div>
+              )}
+              {analyst!.lowPriceTarget != null && analyst!.highPriceTarget != null && (
+                <div className="text-[11px] text-gray-400">
+                  Range: {fmtPrice(analyst!.lowPriceTarget, currency)} – {fmtPrice(analyst!.highPriceTarget, currency)}
+                </div>
+              )}
+            </>
+          ) : (
+            <span className="text-sm text-gray-400">—</span>
+          )}
+        </div>
+
+        {/* Col 3 — Key financials */}
+        <div className="p-5">
+          <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-3">Key Financials</div>
+          {hasEarnings ? (
+            <div className="space-y-3">
+              {earnings!.revenueGrowthYoY != null && (
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Revenue Growth (YoY)</div>
+                  <div className={`text-xl font-semibold tabular-nums ${changeTone(earnings!.revenueGrowthYoY)}`}>
+                    {fmtFraction(earnings!.revenueGrowthYoY, true)}
+                  </div>
+                </div>
+              )}
+              {earnings!.grossMargin != null && (
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Gross Margin</div>
+                  <div className="text-xl font-semibold tabular-nums text-gray-900">
+                    {fmtFraction(earnings!.grossMargin)}
+                  </div>
+                </div>
+              )}
+              {earnings!.nextEarningsDate && (
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Next Earnings</div>
+                  <div className="text-[13px] font-semibold text-amber-700">{earnings!.nextEarningsDate}</div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <span className="text-sm text-gray-400">—</span>
+          )}
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+// ── Full Editorial Analysis Divider ──────────────────────────────────────────
+// Amber-accented banner that separates the data snapshot from the editorial
+// deep-dive sections below — acts as a visual "Read Full Report" CTA.
+
+function FullAnalysisDivider() {
+  return (
+    <div className="border-t-2 border-[#B45309] pt-5 mb-10">
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-0.5">
+            Full Editorial Analysis
+          </div>
+          <p className="text-[12px] text-gray-400 leading-relaxed max-w-md">
+            In-depth research on business model, investment thesis, and market dynamics
+          </p>
+        </div>
+        <span className="text-gray-300 text-2xl select-none leading-none">↓</span>
+      </div>
     </div>
   );
 }

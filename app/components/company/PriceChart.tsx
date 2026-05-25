@@ -1,11 +1,11 @@
 import type { PricePoint } from "@/lib/providers/history";
 
 const W = 800;
-const H = 170;
+const H = 220;
 const PAD_L = 52;
-const PAD_R = 12;
-const PAD_T = 14;
-const PAD_B = 26;
+const PAD_R = 16;
+const PAD_T = 16;
+const PAD_B = 30;
 const PW = W - PAD_L - PAD_R;
 const PH = H - PAD_T - PAD_B;
 
@@ -96,8 +96,7 @@ export function PriceChart({
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full"
-          style={{ height: 150 }}
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid meet"
         >
           <defs>
             <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">

@@ -10,6 +10,19 @@ export default function Home() {
   const [earnings, setEarnings] = useState<EarningsRow[]>(latestIssue.earnings);
   const [earningsLive, setEarningsLive] = useState(false);
 
+  const allTagged = latestIssue.sections.flatMap((s) =>
+    s.stories.map((story) => ({ story, category: s.category }))
+  );
+  const featuredStories = [
+    ...allTagged.filter(({ story }) => story.image !== null),
+    ...allTagged.filter(({ story }) => story.image === null),
+  ].slice(0, 4);
+  const featuredUrls = new Set(featuredStories.map(({ story }) => story.url));
+  const restSections = latestIssue.sections
+    .map((s) => ({ ...s, stories: s.stories.filter((story) => !featuredUrls.has(story.url)) }))
+    .filter((s) => s.stories.length > 0);
+  const restIssue = { ...latestIssue, sections: restSections };
+
   useEffect(() => {
     fetch("/api/earnings")
       .then((r) => r.json())
@@ -126,7 +139,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest issue */}
+      {/* Top Stories — FT style */}
+      <section className="pt-7 pb-8 border-b border-gray-200">
+        {/* Section header */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-px flex-1 bg-gray-300" />
+          <span className="text-[11px] font-bold uppercase tracking-widest text-gray-500 shrink-0">
+            Top Stories · {latestIssue.date}
+          </span>
+          <div className="h-px flex-1 bg-gray-300" />
+        </div>
+
+        {/* Card grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-200 border border-gray-200 overflow-hidden">
+          {featuredStories.map(({ story, category }) => (
+            <a
+              key={story.url}
+              href={story.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white block"
+            >
+              {story.image ? (
+                <img
+                  src={story.image}
+                  alt={story.headline}
+                  className="w-full object-cover"
+                  style={{ height: "180px" }}
+                />
+              ) : (
+                <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height: "180px" }}>
+                  <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{story.source}</span>
+                </div>
+              )}
+              <div className="p-4 pt-3">
+                <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
+                  {category}
+                </div>
+                <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
+                  {story.headline}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Rest of the issue */}
       <section className="pt-7 pb-8">
         <div className="mb-5 border-t-2 border-[#111827] pt-4">
           <div className="text-[11px] text-gray-400 uppercase tracking-widest">Latest Issue · {latestIssue.date}</div>
@@ -134,8 +193,7 @@ export default function Home() {
             {latestIssue.title}
           </h2>
         </div>
-
-        <IssueView issue={latestIssue} showEarnings={false} />
+        <IssueView issue={restSections.length > 0 ? restIssue : latestIssue} showEarnings={false} />
       </section>
     </div>
   );

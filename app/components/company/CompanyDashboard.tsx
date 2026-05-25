@@ -129,7 +129,7 @@ export function CompanyDashboard({
       {/* Mirrors Morningstar's Bulls Say / Bears Say inside the main card */}
       <div className="grid sm:grid-cols-2 border border-gray-300 mb-6">
 
-        {/* LEFT — editorial teaser + bull case */}
+        {/* LEFT — editorial teaser + bull/bear side-by-side at bottom */}
         <div className="p-6 border-b sm:border-b-0 sm:border-r border-gray-300 flex flex-col">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-3">
             Fabuless Analysis{editorial ? ` · ${editorial.updated}` : ""}
@@ -141,7 +141,7 @@ export function CompanyDashboard({
               </p>
               {/* Key themes as compact chips */}
               {editorial.keyThemes.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-1.5 mb-4">
                   {editorial.keyThemes.slice(0, 3).map((t) => (
                     <span key={t.title} className="text-[11px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
                       {t.title}
@@ -149,10 +149,17 @@ export function CompanyDashboard({
                   ))}
                 </div>
               )}
-              {/* Bull Case — fills white space naturally */}
-              {editorial.bullCase.length > 0 && (
-                <div className="border-t border-gray-100 pt-4">
-                  <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
+              {/* Bull + Bear side-by-side, pushed to bottom to align with "What to watch" */}
+              {(editorial.bullCase.length > 0 || editorial.bearCase.length > 0) && (
+                <div className="mt-auto border-t border-gray-100 pt-4">
+                  <div className="grid grid-cols-2 divide-x divide-gray-100">
+                    <div className="pr-4">
+                      <CaseColumn title="Bull Case" tone="emerald" points={editorial.bullCase} max={3} />
+                    </div>
+                    <div className="pl-4">
+                      <CaseColumn title="Bear Case" tone="rose" points={editorial.bearCase} max={3} />
+                    </div>
+                  </div>
                 </div>
               )}
             </>
@@ -231,12 +238,6 @@ export function CompanyDashboard({
             )}
           </div>
 
-          {/* Bear Case — paired with Bull Case in left column */}
-          {editorial?.bearCase && editorial.bearCase.length > 0 && (
-            <div className="border-t border-gray-100 pt-4 mt-4">
-              <CaseColumn title="Bear Case" tone="rose" points={editorial.bearCase} max={3} />
-            </div>
-          )}
         </div>
       </div>
 

@@ -3,27 +3,37 @@
 import { useState, useEffect } from "react";
 import { latestIssue, type EarningsRow } from "@/lib/issues";
 import { IssueView } from "@/app/components/IssueView";
+import type { HomepageContent } from "@/lib/homepage";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
   const [earnings, setEarnings] = useState<EarningsRow[]>(latestIssue.earnings);
   const [earningsLive, setEarningsLive] = useState(false);
+  const [autoContent, setAutoContent] = useState<HomepageContent | null>(null);
 
+  // ── Static issue data (manual fallback) ──────────────────────────────────
   const allTagged = latestIssue.sections.flatMap((s) =>
     s.stories.map((story) => ({ story, category: s.category }))
   );
-  const featuredStories = [
+  const staticFeatured = [
     ...allTagged.filter(({ story }) => story.image !== null),
     ...allTagged.filter(({ story }) => story.image === null),
   ].slice(0, 4);
-  const featuredUrls = new Set(featuredStories.map(({ story }) => story.url));
+  const featuredUrls = new Set(staticFeatured.map(({ story }) => story.url));
   const restSections = latestIssue.sections
     .map((s) => ({ ...s, stories: s.stories.filter((story) => !featuredUrls.has(story.url)) }))
     .filter((s) => s.stories.length > 0);
   const restIssue = { ...latestIssue, sections: restSections };
 
+  // Auto-curated stories from the pipeline take priority over the static issue
+  // when available. Falls back to the hand-curated issue seamlessly.
+  const autoStories = autoContent?.topStories ?? null;
+  const issueLabel = autoContent?.issueTitle ?? `Issue #${latestIssue.number} · ${latestIssue.date}`;
+  const issueTitle = latestIssue.title; // always show the manual issue title
+
   useEffect(() => {
+    // Fetch live earnings
     fetch("/api/earnings")
       .then((r) => r.json())
       .then((data: EarningsRow[]) => {
@@ -31,6 +41,14 @@ export default function Home() {
           setEarnings(data);
           setEarningsLive(true);
         }
+      })
+      .catch(() => {/* keep static fallback */});
+
+    // Fetch auto-curated top stories from the pipeline
+    fetch("/api/stories")
+      .then((r) => r.json())
+      .then((data: HomepageContent | null) => {
+        if (data?.topStories?.length) setAutoContent(data);
       })
       .catch(() => {/* keep static fallback */});
   }, []);
@@ -142,9 +160,14 @@ export default function Home() {
       {/* Latest issue header — above Top Stories */}
       <section className="pt-7 pb-0">
         <div className="mb-5 border-t-2 border-[#111827] pt-4">
-          <div className="text-[11px] text-gray-400 uppercase tracking-widest">Latest Issue · {latestIssue.date}</div>
+          <div className="text-[11px] text-gray-400 uppercase tracking-widest">
+            {issueLabel}
+            {autoStories && (
+              <span className="ml-2 text-emerald-600 font-semibold">· Auto-updated</span>
+            )}
+          </div>
           <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
-            {latestIssue.title}
+            {issueTitle}
           </h2>
         </div>
       </section>
@@ -160,39 +183,90 @@ export default function Home() {
           <div className="h-px flex-1 bg-gray-200" />
         </div>
 
-        {/* Card grid */}
+        {/* Card grid — auto-curated stories if available, else static issue */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {featuredStories.map(({ story, category }) => (
-            <a
-              key={story.url}
-              href={story.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-gray-50 block border border-gray-200"
-            >
-              {story.image ? (
-                <img
-                  src={story.image}
-                  alt={story.headline}
-                  className="w-full object-cover"
-                  style={{ height: "180px" }}
-                />
-              ) : (
-                <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height: "180px" }}>
-                  <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{story.source}</span>
-                </div>
-              )}
-              <div className="p-4 pt-3">
-                <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
-                  {story.topLabel ?? category}
-                </div>
-                <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
-                  {story.headline}
-                </h3>
-              </div>
-            </a>
-          ))}
+          {autoStories
+            ? autoStories.slice(0, 4).map((story) => (
+                <a
+                  key={story.url}
+                  href={story.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-gray-50 block border border-gray-200"
+                >
+                  {story.image ? (
+                    <img
+                      src={story.image}
+                      alt={story.headline}
+                      className="w-full object-cover"
+                      style={{ height: "180px" }}
+                    />
+                  ) : (
+                    <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height: "180px" }}>
+                      <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{story.source}</span>
+                    </div>
+                  )}
+                  <div className="p-4 pt-3">
+                    <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
+                      {story.category}
+                    </div>
+                    <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
+                      {story.headline}
+                    </h3>
+                    <p className="text-[12px] text-gray-500 mt-1.5 leading-snug line-clamp-2">
+                      {story.oneliner}
+                    </p>
+                  </div>
+                </a>
+              ))
+            : staticFeatured.map(({ story, category }) => (
+                <a
+                  key={story.url}
+                  href={story.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-gray-50 block border border-gray-200"
+                >
+                  {story.image ? (
+                    <img
+                      src={story.image}
+                      alt={story.headline}
+                      className="w-full object-cover"
+                      style={{ height: "180px" }}
+                    />
+                  ) : (
+                    <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height: "180px" }}>
+                      <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{story.source}</span>
+                    </div>
+                  )}
+                  <div className="p-4 pt-3">
+                    <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
+                      {story.topLabel ?? category}
+                    </div>
+                    <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
+                      {story.headline}
+                    </h3>
+                  </div>
+                </a>
+              ))}
         </div>
+
+        {/* Show remaining auto stories below the grid if we have more than 4 */}
+        {autoStories && autoStories.length > 4 && (
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4">
+            {autoStories.slice(4).map((story) => (
+              <div key={story.url} className="py-4 first:pt-0 sm:first:pt-4 odd:sm:pr-8 even:sm:pl-8">
+                <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1">{story.category}</div>
+                <a href={story.url} target="_blank" rel="noopener noreferrer"
+                  className="block font-sans text-[0.95rem] font-bold text-[#111827] hover:text-[#B45309] transition-colors leading-snug mb-1">
+                  {story.headline}
+                </a>
+                <p className="text-[12px] text-gray-500 leading-snug">{story.oneliner}</p>
+                <div className="text-[10px] text-gray-400 mt-1">{story.source}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Rest of the issue */}

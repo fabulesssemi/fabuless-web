@@ -45,12 +45,13 @@ export function CompanyDashboard({
   return (
     <div className="max-w-5xl mx-auto px-6 pt-5 pb-10">
 
-      {/* Back link */}
+      {/* Back link — prominent, flush left */}
       <Link
         href="/companies"
-        className="text-[11px] uppercase tracking-widest text-gray-400 hover:text-[#B45309] transition-colors"
+        className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-gray-600 hover:text-[#B45309] transition-colors -ml-0.5 mb-1"
       >
-        ← All Companies
+        <span className="text-[#B45309] font-bold">←</span>
+        <span className="uppercase tracking-wide">All Companies</span>
       </Link>
 
       {/* ── HERO HEADER ── */}

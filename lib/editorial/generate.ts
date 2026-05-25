@@ -40,6 +40,24 @@ function isoFromPubDate(s: string): string | undefined {
   }
 }
 
+/** Merge Claude's supply chain updates onto the baseline. Claude can add/refine
+ *  individual sub-arrays; any key it omits or returns empty keeps the baseline value. */
+function mergeSupplyChain(
+  base: CompanyEditorial["supplyChain"],
+  fresh?: Partial<CompanyEditorial["supplyChain"]>,
+): CompanyEditorial["supplyChain"] {
+  if (!fresh || typeof fresh !== "object") return base;
+  const keys = ["suppliers", "customers", "hyperscalers", "foundry", "packaging", "memory"] as const;
+  const out: CompanyEditorial["supplyChain"] = { ...base };
+  for (const k of keys) {
+    const arr = (fresh as Record<string, unknown>)[k];
+    if (Array.isArray(arr) && arr.length > 0) {
+      (out as Record<string, unknown>)[k] = arr;
+    }
+  }
+  return out;
+}
+
 function fmtActions(view: AnalystView): string {
   const actions = view.recentActions?.slice(0, 8) ?? [];
   if (actions.length === 0) return "  None in the past 30 days.";
@@ -93,13 +111,24 @@ const OUTPUT_SCHEMA = `{
   "consensusBearThemes": ["short phrase"],
   "quarterlyGM": [{"q": "Q1 FY25", "gm": 78.4}, {"q": "Q2 FY25", "gm": 75.1}],
   "revenueSegments": [{"name": "Data Center", "pct": 88}, {"name": "Gaming", "pct": 8}],
-  "fiscalLabel": "Q1 FY26"
+  "fiscalLabel": "Q1 FY26",
+  "supplyChain": {
+    "suppliers": ["string — key component/service suppliers"],
+    "customers": ["string — major end customers or OEMs"],
+    "hyperscalers": ["string — cloud/AI hyperscaler exposure, or omit if none"],
+    "foundry": ["string — which fabs manufacture their chips, or omit if N/A"],
+    "packaging": ["string — advanced packaging partners, or omit if N/A"],
+    "memory": ["string — memory suppliers or competitors, or omit if N/A"]
+  }
 }`;
-// revenueSegments rules (for the prompt):
-// - Extract from the most recent earnings report visible in the news/podcast data.
-// - Use short names (≤14 chars). Percentages must be integers summing to 100.
-// - fiscalLabel: the quarter or fiscal year these numbers come from, e.g. "Q2 FY25" or "FY2024".
-// - Return null for BOTH fields if the news below does not contain enough segment data.
+// OUTPUT_SCHEMA field rules:
+// revenueSegments: Extract from the most recent earnings report in the news/podcast data.
+//   Short names (≤14 chars). Percentages must be integers summing to 100.
+//   fiscalLabel: the period covered (e.g. "Q1 FY26" or "FY2024").
+//   Return null for BOTH revenueSegments and fiscalLabel if data is insufficient.
+// supplyChain: Update from news context when there are confirmed changes (new customers,
+//   new foundry wins, supply chain shifts). Omit a subkey entirely if you have no
+//   relevant information — the baseline value will be preserved for that subkey.
 
 export async function generateEditorial(
   meta: CompanyMeta,
@@ -219,13 +248,14 @@ ${OUTPUT_SCHEMA}`;
       // Curated news — always use freshly fetched RSS items (never fall back to stale baseline).
       // If the pipeline found 0 relevant articles for this company, preserve any prior pinned news.
       pinnedNews: freshPinnedNews.length > 0 ? freshPinnedNews : baseline.pinnedNews,
-      // Preserve structural fields from the curated static editorial
-      supplyChain: baseline.supplyChain,
+      // Supply chain — merge Claude's updates with the baseline. Claude can add/update
+      // individual subkeys from news context; baseline values fill in anything omitted.
+      supplyChain: mergeSupplyChain(baseline.supplyChain, parsed.supplyChain),
       related: baseline.related,
       updated: new Date().toISOString().slice(0, 10),
     };
   } catch {
-    // Any failure (API error, JSON parse error) returns the baseline + fresh pinned news
+    // Any Claude/parse failure: still update pinnedNews (RSS fetch succeeded), keep everything else
     return {
       ...baseline,
       pinnedNews: freshPinnedNews.length > 0 ? freshPinnedNews : baseline.pinnedNews,

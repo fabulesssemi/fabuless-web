@@ -6,6 +6,7 @@ export type RssItem = {
   description: string;
   pubDate: string;
   link: string;
+  image: string | null; // extracted from enclosure / media:content / media:thumbnail
 };
 
 const RSS_FEEDS = [
@@ -41,6 +42,24 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+/** Extract an image URL from a feed item chunk (tries multiple RSS image conventions). */
+function extractItemImage(chunk: string): string | null {
+  // <enclosure url="..." type="image/..."/>
+  const enc = chunk.match(/<enclosure[^>]+url="([^"]+)"[^>]*type="image/i)?.[1];
+  if (enc) return enc;
+  // <media:content medium="image" url="..."> (attribute order varies)
+  const mc1 = chunk.match(/<media:content[^>]+medium="image"[^>]+url="([^"]+)"/i)?.[1]
+    ?? chunk.match(/<media:content[^>]+url="([^"]+)"[^>]*medium="image"/i)?.[1];
+  if (mc1) return mc1;
+  // <media:thumbnail url="..."/>
+  const thumb = chunk.match(/<media:thumbnail[^>]+url="([^"]+)"/i)?.[1];
+  if (thumb) return thumb;
+  // Fallback: any media:content url (may be video; callers can filter)
+  const mc2 = chunk.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
+  if (mc2) return mc2;
+  return null;
+}
+
 function parseRss(xml: string, limit = 60): RssItem[] {
   const items: RssItem[] = [];
   const itemRe = /<item>([\s\S]*?)<\/item>/g;
@@ -53,7 +72,8 @@ function parseRss(xml: string, limit = 60): RssItem[] {
     ).slice(0, 400);
     const link = cdataText(chunk.match(/<link>([\s\S]*?)<\/link>/)?.[1] ?? "");
     const pubDate = cdataText(chunk.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1] ?? "");
-    if (title) items.push({ title, description, link, pubDate });
+    const image = extractItemImage(chunk);
+    if (title) items.push({ title, description, link, pubDate, image });
   }
   return items;
 }

@@ -5,6 +5,8 @@ import { getAnalystView } from "@/lib/analyst";
 import { generateEditorial } from "@/lib/editorial/generate";
 import { saveEditorial } from "@/lib/editorial/supabase";
 import { fetchAllNewsItems, fetchPodcastEpisodes } from "@/lib/editorial/sources";
+import { generateTopStories } from "@/lib/editorial/curate-stories";
+import { saveHomepageContent } from "@/lib/homepage";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -43,6 +45,18 @@ export async function GET(request: Request) {
 
   revalidatePath("/analyst-consensus");
 
+  // Generate and save auto-curated top stories for the homepage.
+  // Runs after company editorials so it can use the same RSS batch.
+  let storiesOk = false;
+  try {
+    const homepage = await generateTopStories(allNewsItems);
+    if (homepage) {
+      const { ok } = await saveHomepageContent(homepage);
+      storiesOk = ok;
+      if (ok) revalidatePath("/");
+    }
+  } catch { /* non-fatal */ }
+
   const succeeded = results.flatMap((r) =>
     r.status === "fulfilled" && r.value.ok ? [r.value.ticker] : [],
   );
@@ -60,5 +74,6 @@ export async function GET(request: Request) {
     errors,
     newsItemsFetched: allNewsItems.length,
     podcastEpisodesFetched: podcastEpisodes.length,
+    topStoriesGenerated: storiesOk,
   });
 }

@@ -30,8 +30,9 @@ const COLS: { key: SortKey; label: string; numeric: boolean }[] = [
   { key: "estimateScore", label: "Est. Δ", numeric: true },
 ];
 
-function tone(_n: number | null | undefined): string {
-  return "text-gray-700";
+function tone(n: number | null | undefined): string {
+  if (n == null) return "text-gray-400";
+  return n > 0 ? "text-emerald-600" : n < 0 ? "text-rose-600" : "text-gray-400";
 }
 function pct(n: number | null, sign = true): string {
   if (n == null) return "—";
@@ -117,10 +118,10 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
                 {r.sentimentScore > 0 ? "+" : ""}
                 {r.sentimentScore}
               </td>
-              <td className="px-3 py-2.5 text-right tabular-nums text-gray-700">
+              <td className="px-3 py-2.5 text-right tabular-nums text-emerald-600">
                 {r.upgrades30d || "—"}
               </td>
-              <td className="px-3 py-2.5 text-right tabular-nums text-gray-700">
+              <td className="px-3 py-2.5 text-right tabular-nums text-rose-600">
                 {r.downgrades30d || "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.ptChangePct)}`}>

@@ -174,8 +174,9 @@ export const issues: Issue[] = [
         name: "dylan ツ",
         text: "The CPU was supposed to be the commodity layer of AI. As of this week, both chip CEOs say otherwise.",
         url: "https://x.com/demian_ai/status/2059269939987632363",
-      },        // ← and this closing brace + comma
-    ],        
+      },
+    ],
+  },
   {
     number: 1,
     date: "May 20, 2026",

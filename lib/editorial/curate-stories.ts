@@ -33,7 +33,8 @@ const KNOWN_SOURCES: Record<string, string> = {
   "benzinga.com": "Benzinga", "ft.com": "Financial Times",
   "bloomberg.com": "Bloomberg", "wsj.com": "WSJ",
   "marketwatch.com": "MarketWatch", "eetimes.com": "EE Times",
-  "theinformation.com": "The Information",
+  "theinformation.com": "The Information", "tomshardware.com": "Tom's Hardware",
+  "typepad.com": "Silicon Leverage", "feedburner.com": "Silicon Leverage",
 };
 
 function sourceNameFromUrl(url: string): string {
@@ -47,27 +48,22 @@ function sourceNameFromUrl(url: string): string {
 
 // ---------------------------------------------------------------------------
 // Hard-enforce source diversity after Claude responds.
-// Claude can mis-apply prompt rules when one source dominates the corpus;
-// this dedup is the guarantee. Logic: prefer the first (highest-ranked by
-// Claude) story per source. If we still need more after one-per-source, allow
-// a second pick per source to fill up to `max`.
+// STRICT: exactly one story per source, no second picks. If Claude returns
+// 10 stories from only 2 sources, we end up with 2 stories — that's correct.
+// More feeds in RSS_FEEDS = more unique sources = more stories shown.
 // ---------------------------------------------------------------------------
 function diversify(stories: AutoStory[], max = 6): AutoStory[] {
-  // Pass 1: one per source (in Claude's ranked order)
   const seenSources = new Set<string>();
-  const firstPicks: AutoStory[] = [];
-  const remainders: AutoStory[] = [];
+  const result: AutoStory[] = [];
   for (const s of stories) {
     const src = s.source.toLowerCase().trim();
     if (!seenSources.has(src)) {
       seenSources.add(src);
-      firstPicks.push(s);
-    } else {
-      remainders.push(s);
+      result.push(s);
     }
+    if (result.length >= max) break;
   }
-  // Pass 2: fill remaining slots (allows a second pick per source only if needed)
-  return [...firstPicks, ...remainders].slice(0, max);
+  return result;
 }
 
 /**

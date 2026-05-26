@@ -15,6 +15,11 @@ const RSS_FEEDS = [
   "https://www.nextplatform.com/feed/",
   "https://semiwiki.com/feed/",
   "https://www.benzinga.com/feeds/analyst-ratings/rss",
+  // Additional feeds for source diversity — without these, Claude defaulted to
+  // CNBC + NextPlatform since they had the most context-window representation.
+  "https://www.eetimes.com/feed/",                          // EE Times — deep semiconductor/IC industry coverage
+  "https://www.tomshardware.com/feeds/all",                 // Tom's Hardware — GPU/chip news with investment angle
+  "https://feeds.feedburner.com/typepad/siliconleverage",   // Silicon Leverage — semiconductor analyst blog
 ];
 
 const PODCAST_FEEDS: { show: string; url: string }[] = [

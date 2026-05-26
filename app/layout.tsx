@@ -56,6 +56,9 @@ export default function RootLayout({
                 <Link href="/analyst-consensus" className="hover:text-amber-400 transition-colors">
                   Analysts
                 </Link>
+                <Link href="/voices" className="hover:text-amber-400 transition-colors">
+                  Top Voices
+                </Link>
                 <Link href="/about" className="hover:text-amber-400 transition-colors">
                   About
                 </Link>

@@ -150,6 +150,26 @@ export const issues: Issue[] = [
       { date: "Mon Jun 01", company: "Credo", ticker: "CRDO", eps: "$1.03", beatRate: "67%", avgMove: "+5.9%" },
       { date: "Wed Jun 03", company: "Broadcom", ticker: "AVGO", eps: "$2.39", beatRate: "95%", avgMove: "+2.9%" },
     ],
+      quotes: [
+      {
+        handle: "@MilkRoadAI",
+        name: "MilkRoadAI",
+        text: "Micron just officially crossed $1 trillion in market cap for the first time in its history and is still extremely undervalued at these levels",
+        url:"https://x.com/MilkRoadAI/status/2059294657654456787",
+      },
+      {
+        handle: "@chr1sa",
+        name: "Chris Anderson",
+        text: "In all of human history, has there ever been a commodity with infinite demand, as there appears to be for intelligence? I can't think of one. Even compute, energy or just silicon/sand are just downstream of intelligence, which is the main demand driver.",
+        url: "https://x.com/chr1sa/status/2058600333493047379",
+      },
+      {
+        handle: "@PhotonCap",
+        name: "Photon Capital",
+        text: "More AI → more GPUs → more interconnects → CPO → silicon photonics",
+        url: "https://x.com/PhotonCap/status/2059114034931405264",
+      },
+    ],
   },
   {
     number: 1,

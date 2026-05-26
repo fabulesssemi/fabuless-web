@@ -37,9 +37,16 @@ export function XQuotesCard({ quotes }: { quotes: Quote[] }) {
           <QuoteCell key={i} q={q} />
         ))}
       </div>
-      {/* Bottom row: third quote full width */}
-      {quotes[2] && (
+      {/* Bottom row: remaining quotes (1 full-width or 2 side by side) */}
+      {quotes.length === 3 && (
         <QuoteCell q={quotes[2]} className="border-t border-gray-100" />
+      )}
+      {quotes.length >= 4 && (
+        <div className="grid grid-cols-2 divide-x divide-gray-100 border-t border-gray-100">
+          {quotes.slice(2, 4).map((q, i) => (
+            <QuoteCell key={i} q={q} />
+          ))}
+        </div>
       )}
     </div>
   );

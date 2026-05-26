@@ -6,8 +6,12 @@ import { IssueView } from "@/app/components/IssueView";
 import type { HomepageContent } from "@/lib/homepage";
 
 // ---------------------------------------------------------------------------
-// StoryImage: article image → source logo from Clearbit → gray text badge.
-// Clearbit returns clean 128×128 logos for every major news domain.
+// StoryImage: 3-step fallback chain when a story has no article image.
+//   1. Article image from RSS (ideal — real photo)
+//   2. Clearbit logo  (logo.clearbit.com/{domain}) — clean brand logo
+//   3. Google favicon (t2.gstatic.com favicons at sz=128) — always works,
+//      every site on the internet has a favicon in Google's index
+//   4. Gray text badge — absolute last resort, should never be reached
 // ---------------------------------------------------------------------------
 function StoryImage({ image, url, source, headline, height = 180 }: {
   image: string | null;
@@ -16,11 +20,17 @@ function StoryImage({ image, url, source, headline, height = 180 }: {
   headline: string;
   height?: number;
 }) {
-  const [logoFailed, setLogoFailed] = useState(false);
+  // 0 = try Clearbit, 1 = try Google favicon, 2 = show text badge
+  const [fallbackStep, setFallbackStep] = useState(0);
 
   const domain = (() => {
     try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return ""; }
   })();
+
+  const fallbackSrc = [
+    `https://logo.clearbit.com/${domain}`,
+    `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128`,
+  ];
 
   if (image) {
     return (
@@ -33,17 +43,17 @@ function StoryImage({ image, url, source, headline, height = 180 }: {
     );
   }
 
-  if (domain && !logoFailed) {
+  if (domain && fallbackStep < fallbackSrc.length) {
     return (
       <div
         className="w-full bg-gray-50 flex items-center justify-center border-b border-gray-100"
         style={{ height }}
       >
         <img
-          src={`https://logo.clearbit.com/${domain}`}
+          src={fallbackSrc[fallbackStep]}
           alt={source}
-          className="h-10 w-auto max-w-[60%] object-contain opacity-70"
-          onError={() => setLogoFailed(true)}
+          className="h-12 w-auto max-w-[55%] object-contain opacity-75"
+          onError={() => setFallbackStep((s) => s + 1)}
         />
       </div>
     );

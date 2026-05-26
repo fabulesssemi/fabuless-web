@@ -8,8 +8,6 @@ import Anthropic from "@anthropic-ai/sdk";
 import type { RssItem, PodcastFeed } from "./sources";
 import type { AutoStory, AutoPodcast, HomepageContent } from "@/lib/homepage";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
 const CATEGORIES = ["Compute", "Capital Flows", "Geopolitics & Policy", "Memory & Networking", "Other"] as const;
 
 const STORY_SCHEMA = `{
@@ -142,9 +140,12 @@ Return ONLY a valid JSON object matching this schema (no markdown, no explanatio
 ${STORY_SCHEMA}`;
 
   try {
+    // Instantiate inside the function so process.env is read at call time,
+    // not at module load time (avoids Turbopack/serverless env-var timing issues).
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const message = await client.messages.create({
       model: "claude-sonnet-4-6",
-      max_tokens: 2048,
+      max_tokens: 4096, // 10 stories × ~200 tokens each + issueTitle — 2048 was too tight
       messages: [{ role: "user", content: prompt }],
     });
 
@@ -185,7 +186,8 @@ ${STORY_SCHEMA}`;
       issueTitle: generatedTitle || `Week of ${weekOf}`,
       generatedAt: new Date().toISOString(),
     };
-  } catch {
+  } catch (err) {
+    console.error("[generateTopStories] failed:", err);
     return null;
   }
 }
@@ -245,6 +247,7 @@ Return ONLY a valid JSON array matching this schema (no markdown, no explanation
 ${PODCAST_SCHEMA}`;
 
   try {
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const message = await client.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1024,

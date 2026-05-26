@@ -86,6 +86,9 @@ function extractItemImage(chunk: string): string | null {
   // Fallback: any media:content url (may be video; callers can filter)
   const mc2 = chunk.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
   if (check(mc2)) return mc2!;
+  // <itunes:image href="..."/> — standard podcast episode artwork
+  const itunesImg = chunk.match(/<itunes:image[^>]+href="([^"]+)"/i)?.[1];
+  if (check(itunesImg)) return itunesImg!;
   // Last resort: first <img src="..."> inside content:encoded HTML
   const encoded = chunk.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/i)?.[1] ?? "";
   const imgSrc = encoded.match(/<img[^>]+src="(https?:[^"]+)"/i)?.[1];
@@ -143,10 +146,17 @@ export async function fetchAllPodcastFeeds(limit = 10): Promise<PodcastFeed[]> {
   const xmlList = await Promise.all(
     PODCAST_FEEDS.map(({ url }) => fetchText(url)),
   );
-  return PODCAST_FEEDS.map(({ show }, i) => ({
-    show,
-    episodes: xmlList[i] ? parseRss(xmlList[i]!, limit) : [],
-  }));
+  return PODCAST_FEEDS.map(({ show }, i) => {
+    const xml = xmlList[i];
+    if (!xml) return { show, episodes: [] };
+    // Channel-level show artwork — fallback for episodes without their own image
+    const channelArtwork = xml.match(/<itunes:image[^>]+href="([^"]+)"/i)?.[1] ?? null;
+    const episodes = parseRss(xml, limit).map((ep) => ({
+      ...ep,
+      image: ep.image ?? channelArtwork,
+    }));
+    return { show, episodes };
+  });
 }
 
 /**

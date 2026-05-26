@@ -5,8 +5,8 @@
 // ---------------------------------------------------------------------------
 
 import Anthropic from "@anthropic-ai/sdk";
-import type { RssItem } from "./sources";
-import type { AutoStory, HomepageContent } from "@/lib/homepage";
+import type { RssItem, PodcastFeed } from "./sources";
+import type { AutoStory, AutoPodcast, HomepageContent } from "@/lib/homepage";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -111,10 +111,84 @@ ${STORY_SCHEMA}`;
 
     return {
       topStories: valid.slice(0, 6),
+      podcasts: [], // filled in separately by generatePodcastPicks
       issueTitle: `Week of ${weekOf}`,
       generatedAt: new Date().toISOString(),
     };
   } catch {
     return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Podcast pick curation
+// ---------------------------------------------------------------------------
+
+const PODCAST_SCHEMA = `[
+  {
+    "show": "exact show name from the input",
+    "title": "exact episode title from the input",
+    "url": "exact episode url from the input — never invent",
+    "image": "image url from input or null",
+    "oneliner": "one sentence: WHY semiconductor equity investors specifically should listen — name the company, theme, or investment angle covered"
+  }
+]`;
+
+/**
+ * For each podcast show, pick the single episode most relevant to semiconductor
+ * investors — not necessarily the most recent. Returns one AutoPodcast per show.
+ * Never throws — returns [] on any failure.
+ */
+export async function generatePodcastPicks(
+  feeds: PodcastFeed[],
+): Promise<AutoPodcast[]> {
+  // Only process shows that have episodes
+  const activeFeeds = feeds.filter((f) => f.episodes.length > 0);
+  if (activeFeeds.length === 0) return [];
+
+  const episodeLines = activeFeeds.flatMap(({ show, episodes }) =>
+    episodes.slice(0, 10).map((ep, i) => {
+      const img = ep.image ? ` [image: ${ep.image}]` : " [image: null]";
+      return `[${show} — ep ${i + 1}] "${ep.title}" | ${ep.description.slice(0, 250)} | url: ${ep.link}${img}`;
+    }),
+  );
+
+  const showNames = activeFeeds.map((f) => f.show).join(", ");
+  const today = new Date().toISOString().slice(0, 10);
+
+  const prompt = `You are a senior semiconductor investment editor at Fabuless.
+
+Today is ${today}. Below are recent episodes from ${showNames}.
+
+Your task: For EACH show, pick the ONE episode most relevant to semiconductor equity investors — prioritising episodes that cover chip companies (NVIDIA, AMD, TSMC, Broadcom, Micron, SK Hynix, ARM, Intel, Qualcomm, Marvell, ASML), AI compute, memory cycles, data center capex, export controls, foundry strategy, or chip supply chain. Do NOT just pick the most recent episode — pick the most investment-relevant.
+
+RULES:
+- Return exactly one object per show, in an array of ${activeFeeds.length} items.
+- Use the exact show name, title, url, and image from the input. Never invent.
+- The "oneliner" must state the specific investment angle: which companies are discussed and what the key insight is. Example: "Gavin Baker connects AI compute demand to TSMC capacity and explains why energy is now the binding constraint on the chip buildout."
+- If a show has no semiconductor-relevant episode, pick the most broadly relevant one and note this in the oneliner.
+
+Episodes:
+${episodeLines.join("\n")}
+
+Return ONLY a valid JSON array matching this schema (no markdown, no explanation):
+${PODCAST_SCHEMA}`;
+
+  try {
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1024,
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    const raw = message.content.find((b) => b.type === "text")?.text ?? "";
+    const jsonStr = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim();
+    const parsed: AutoPodcast[] = JSON.parse(jsonStr);
+
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.filter((p) => p.show && p.title && p.url && p.oneliner);
+  } catch {
+    return [];
   }
 }

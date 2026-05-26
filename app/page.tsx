@@ -26,9 +26,9 @@ export default function Home() {
     .filter((s) => s.stories.length > 0);
   const restIssue = { ...latestIssue, sections: restSections };
 
-  // Auto-curated stories from the pipeline take priority over the static issue
-  // when available. Falls back to the hand-curated issue seamlessly.
+  // Auto-curated content takes priority when available; falls back to hand-curated issue.
   const autoStories = autoContent?.topStories ?? null;
+  const autoPodcasts = autoContent?.podcasts?.length ? autoContent.podcasts : null;
   const issueLabel = autoContent?.issueTitle ?? `Issue #${latestIssue.number} · ${latestIssue.date}`;
   const issueTitle = latestIssue.title; // always show the manual issue title
 
@@ -269,10 +269,55 @@ export default function Home() {
         )}
       </section>
 
-      {/* Rest of the issue */}
-      <section className="pt-7 pb-8">
+      {/* Rest of the issue — stories below the grid */}
+      <section className="pt-7 pb-0">
         <IssueView issue={restSections.length > 0 ? restIssue : latestIssue} showEarnings={false} />
       </section>
+
+      {/* Podcasts — auto-picked by pipeline when available, else hand-curated fallback */}
+      {(autoPodcasts ?? latestIssue.podcasts).length > 0 && (
+        <section className="pt-0 pb-8">
+          <div className="mt-2 pt-5 border-t-2 border-[#B45309]">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-[#B45309] mb-3">
+              Podcasts
+              {autoPodcasts && (
+                <span className="ml-2 text-emerald-600 normal-case font-semibold tracking-normal">· Auto-selected</span>
+              )}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+              {(autoPodcasts ?? latestIssue.podcasts).map((p, i) => (
+                <div
+                  key={p.url}
+                  className={[
+                    "py-4 flex gap-3 items-start",
+                    i === 0 ? "sm:pr-8" : i === 1 ? "sm:px-8" : "sm:pl-8",
+                  ].filter(Boolean).join(" ")}
+                >
+                  {p.image && (
+                    <img src={p.image} alt="" className="w-14 h-14 object-cover shrink-0" />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      {p.show}
+                    </div>
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-[0.95rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
+                    >
+                      {p.title}
+                    </a>
+                    {p.oneliner && (
+                      <p className="text-[12px] text-gray-500 leading-snug mt-1">{p.oneliner}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

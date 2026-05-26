@@ -15,8 +15,17 @@ export type AutoStory = {
   image: string | null;
 };
 
+export type AutoPodcast = {
+  show: string;        // "The Circuit" | "Chip Stock Investor" | "Invest Like the Best"
+  title: string;       // episode title (exact from RSS)
+  url: string;         // episode link
+  image: string | null; // show artwork or episode image from RSS
+  oneliner: string;    // why semiconductor investors should listen to this specific episode
+};
+
 export type HomepageContent = {
   topStories: AutoStory[];
+  podcasts: AutoPodcast[];  // one pick per show, most relevant to semi investors
   issueTitle: string; // e.g. "Week of May 26, 2026"
   generatedAt: string; // ISO timestamp
 };

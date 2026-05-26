@@ -4,8 +4,8 @@ import { COMPANY_UNIVERSE, getEditorial } from "@/lib/companies";
 import { getAnalystView } from "@/lib/analyst";
 import { generateEditorial } from "@/lib/editorial/generate";
 import { saveEditorial } from "@/lib/editorial/supabase";
-import { fetchAllNewsItems, fetchPodcastEpisodes } from "@/lib/editorial/sources";
-import { generateTopStories } from "@/lib/editorial/curate-stories";
+import { fetchAllNewsItems, fetchPodcastEpisodes, fetchAllPodcastFeeds } from "@/lib/editorial/sources";
+import { generateTopStories, generatePodcastPicks } from "@/lib/editorial/curate-stories";
 import { saveHomepageContent } from "@/lib/homepage";
 
 export const dynamic = "force-dynamic";
@@ -20,10 +20,11 @@ export async function GET(request: Request) {
     }
   }
 
-  // Fetch RSS data + all analyst views in parallel first.
-  const [allNewsItems, podcastEpisodes, ...analystViews] = await Promise.all([
+  // Fetch all RSS data + podcast feeds + analyst views in parallel.
+  const [allNewsItems, podcastEpisodes, podcastFeeds, ...analystViews] = await Promise.all([
     fetchAllNewsItems(),
-    fetchPodcastEpisodes(4),
+    fetchPodcastEpisodes(4),          // flat list for editorial prompt context
+    fetchAllPodcastFeeds(10),         // structured per-show data for podcast picking
     ...COMPANY_UNIVERSE.map((meta) => getAnalystView(meta)),
   ]);
 
@@ -45,12 +46,18 @@ export async function GET(request: Request) {
 
   revalidatePath("/analyst-consensus");
 
-  // Generate and save auto-curated top stories for the homepage.
-  // Runs after company editorials so it can use the same RSS batch.
+  // Generate top stories + podcast picks in parallel, then save combined homepage content.
   let storiesOk = false;
+  let podcastsGenerated = 0;
   try {
-    const homepage = await generateTopStories(allNewsItems);
+    const [homepage, podcastPicks] = await Promise.all([
+      generateTopStories(allNewsItems),
+      generatePodcastPicks(podcastFeeds),
+    ]);
     if (homepage) {
+      // Merge podcast picks into the homepage content
+      homepage.podcasts = podcastPicks;
+      podcastsGenerated = podcastPicks.length;
       const { ok } = await saveHomepageContent(homepage);
       storiesOk = ok;
       if (ok) revalidatePath("/");
@@ -75,5 +82,6 @@ export async function GET(request: Request) {
     newsItemsFetched: allNewsItems.length,
     podcastEpisodesFetched: podcastEpisodes.length,
     topStoriesGenerated: storiesOk,
+    podcastPicksGenerated: podcastsGenerated,
   });
 }

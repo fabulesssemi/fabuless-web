@@ -17,8 +17,12 @@ const RSS_FEEDS = [
   "https://www.benzinga.com/feeds/analyst-ratings/rss",
 ];
 
-const CIRCUIT_RSS = "https://feeds.transistor.fm/the-circuit";
-const CHIP_STOCK_RSS = "https://feeds.transistor.fm/chip-stock-investor";
+const PODCAST_FEEDS: { show: string; url: string }[] = [
+  { show: "The Circuit",           url: "https://feeds.transistor.fm/the-circuit" },
+  { show: "Chip Stock Investor",   url: "https://feeds.transistor.fm/chip-stock-investor" },
+  // Invest Like the Best — semiconductor episodes (power, wafers, AI capex) are highly relevant
+  { show: "Invest Like the Best",  url: "https://feeds.megaphone.fm/FS3946346007" },
+];
 
 async function fetchText(url: string, timeoutMs = 8000): Promise<string | null> {
   try {
@@ -98,14 +102,29 @@ export async function fetchAllNewsItems(): Promise<RssItem[]> {
   return results.flat();
 }
 
-/** Fetch The Circuit + Chip Stock Investor podcast episodes (last N). */
+export type PodcastFeed = { show: string; episodes: RssItem[] };
+
+/**
+ * Fetch all podcast feeds in parallel. Returns structured data per show,
+ * including episodes from all 3 shows (The Circuit, Chip Stock Investor,
+ * Invest Like the Best). Fetches up to `limit` episodes per show.
+ * Graceful — missing/failing feeds return an empty episodes array.
+ */
+export async function fetchAllPodcastFeeds(limit = 10): Promise<PodcastFeed[]> {
+  const xmlList = await Promise.all(
+    PODCAST_FEEDS.map(({ url }) => fetchText(url)),
+  );
+  return PODCAST_FEEDS.map(({ show }, i) => ({
+    show,
+    episodes: xmlList[i] ? parseRss(xmlList[i]!, limit) : [],
+  }));
+}
+
+/**
+ * Flat list of recent episodes from all shows — used as editorial prompt context.
+ * Kept for backward compatibility with generateEditorial().
+ */
 export async function fetchPodcastEpisodes(limit = 4): Promise<RssItem[]> {
-  const [circuitXml, chipStockXml] = await Promise.all([
-    fetchText(CIRCUIT_RSS),
-    fetchText(CHIP_STOCK_RSS),
-  ]);
-  const circuit = circuitXml ? parseRss(circuitXml, limit) : [];
-  const chipStock = chipStockXml ? parseRss(chipStockXml, limit) : [];
-  // Return the most recent N from each, show notes are in description
-  return [...circuit.slice(0, limit), ...chipStock.slice(0, limit)];
+  const feeds = await fetchAllPodcastFeeds(limit);
+  return feeds.flatMap(({ episodes }) => episodes.slice(0, limit));
 }

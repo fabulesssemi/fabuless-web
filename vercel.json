@@ -11,6 +11,10 @@
     {
       "path": "/api/analyst/weekly",
       "schedule": "0 7 * * 0"
+    },
+    {
+      "path": "/api/homepage/refresh",
+      "schedule": "0 8 * * 0"
     }
   ]
 }

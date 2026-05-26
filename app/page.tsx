@@ -29,8 +29,10 @@ export default function Home() {
   // Auto-curated content takes priority when available; falls back to hand-curated issue.
   const autoStories = autoContent?.topStories ?? null;
   const autoPodcasts = autoContent?.podcasts?.length ? autoContent.podcasts : null;
-  const issueLabel = autoContent?.issueTitle ?? `Issue #${latestIssue.number} · ${latestIssue.date}`;
-  const issueTitle = latestIssue.title; // always show the manual issue title
+  const issueLabel = autoContent
+    ? `Week of ${new Date(autoContent.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} · Auto-updated`
+    : `Issue #${latestIssue.number} · ${latestIssue.date}`;
+  const issueTitle = autoContent?.issueTitle ?? latestIssue.title;
 
   useEffect(() => {
     // Fetch live earnings

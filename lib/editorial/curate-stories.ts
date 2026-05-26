@@ -12,16 +12,19 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const CATEGORIES = ["Compute", "Capital Flows", "Geopolitics & Policy", "Memory & Networking", "Other"] as const;
 
-const STORY_SCHEMA = `[
-  {
-    "headline": "exact article headline from the input",
-    "url": "exact url from the input — never invent",
-    "source": "exact source name from the input",
-    "category": "one of: Compute | Capital Flows | Geopolitics & Policy | Memory & Networking | Other",
-    "oneliner": "one sharp analyst-style sentence — the investment implication, not a summary",
-    "image": "image url from the input if available, otherwise null"
-  }
-]`;
+const STORY_SCHEMA = `{
+  "issueTitle": "a punchy 8-14 word editorial headline covering the 2-3 biggest themes from your picks — written like a newspaper front page. Example: 'Nvidia's China Risk, TSMC's Arizona Push, and Samsung's Memory Pivot'",
+  "stories": [
+    {
+      "headline": "exact article headline from the input",
+      "url": "exact url from the input — never invent",
+      "source": "exact source name from the input",
+      "category": "one of: Compute | Capital Flows | Geopolitics & Policy | Memory & Networking | Other",
+      "oneliner": "one sharp analyst-style sentence — the investment implication, not a summary",
+      "image": "image url from the input if available, otherwise null"
+    }
+  ]
+}`;
 
 /**
  * Ask Claude to pick the 6 most investment-relevant semiconductor stories
@@ -32,15 +35,6 @@ export async function generateTopStories(
   allNewsItems: RssItem[],
 ): Promise<HomepageContent | null> {
   if (allNewsItems.length === 0) return null;
-
-  // Build a compact story list for Claude — one per line, include image if present
-  const storyLines = allNewsItems
-    .slice(0, 80) // cap context size
-    .map((item, i) => {
-      const img = item.image ? ` [image: ${item.image}]` : "";
-      return `${i + 1}. [${item.pubDate?.slice(0, 16) ?? ""}] "${item.title}" — ${item.description.slice(0, 180)} | URL: ${item.link} | Source: guessed from URL${img}`;
-    })
-    .join("\n");
 
   // Derive source names from URLs for Claude
   const storyLinesWithSource = allNewsItems
@@ -71,14 +65,16 @@ RULES:
 - Prefer stories with real investment implications: earnings, guidance, capex decisions, supply chain shifts, export controls, M&A, major technology milestones.
 - Avoid generic market summaries, broad macro commentary, or stories that don't specifically affect semiconductor stocks.
 - Return ONLY stories that appear in the input list — use the exact URL, headline, source, and image provided.
+- SOURCE DIVERSITY: Pick from at least 4 different sources. No more than 1 story from the same source. If you must pick 2 from one source, the remaining 4 must all be from different sources.
 - The "oneliner" must be one sharp sentence stating the investment implication (not a summary). Example: "A $10B TSMC commitment deepens AMD's single-supplier risk at peak cross-strait tension."
 - If a story has an image url, include it. Otherwise set image to null.
 - Assign the most accurate category from: ${CATEGORIES.join(" | ")}.
+- After selecting stories, craft the "issueTitle": 8-14 words covering the 2-3 biggest themes, written as a punchy newspaper front-page headline with specific names (companies, technologies, events — not generic phrases like "chip industry dynamics").
 
 Input articles (newest first):
 ${storyLinesWithSource}
 
-Return ONLY a valid JSON array matching this schema (no markdown, no explanation):
+Return ONLY a valid JSON object matching this schema (no markdown, no explanation):
 ${STORY_SCHEMA}`;
 
   try {
@@ -90,21 +86,26 @@ ${STORY_SCHEMA}`;
 
     const raw = message.content.find((b) => b.type === "text")?.text ?? "";
     const jsonStr = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim();
-    const parsed: AutoStory[] = JSON.parse(jsonStr);
+    const parsed: { issueTitle?: string; stories?: AutoStory[] } = JSON.parse(jsonStr);
 
-    if (!Array.isArray(parsed) || parsed.length === 0) return null;
+    // Support both new object format and legacy array format
+    const storiesArr: AutoStory[] = Array.isArray(parsed)
+      ? (parsed as AutoStory[])
+      : (parsed.stories ?? []);
+    const generatedTitle: string = Array.isArray(parsed)
+      ? ""
+      : (parsed.issueTitle ?? "");
 
-    // Validate each story has required fields and URL exists in input
-    const inputUrls = new Set(allNewsItems.map((n) => n.link));
-    const valid = parsed.filter(
-      (s) =>
-        s.headline && s.url && s.source && s.category && s.oneliner &&
-        (inputUrls.has(s.url) || true), // allow slight URL drift (Claude may normalize)
+    if (storiesArr.length === 0) return null;
+
+    // Validate each story has required fields
+    const valid = storiesArr.filter(
+      (s) => s.headline && s.url && s.source && s.category && s.oneliner,
     );
 
     if (valid.length === 0) return null;
 
-    // Issue title: week of today
+    // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {
       month: "long", day: "numeric", year: "numeric",
     });
@@ -112,7 +113,7 @@ ${STORY_SCHEMA}`;
     return {
       topStories: valid.slice(0, 6),
       podcasts: [], // filled in separately by generatePodcastPicks
-      issueTitle: `Week of ${weekOf}`,
+      issueTitle: generatedTitle || `Week of ${weekOf}`,
       generatedAt: new Date().toISOString(),
     };
   } catch {

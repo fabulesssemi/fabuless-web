@@ -57,9 +57,16 @@ function extractItemImage(chunk: string): string | null {
   // <media:thumbnail url="..."/>
   const thumb = chunk.match(/<media:thumbnail[^>]+url="([^"]+)"/i)?.[1];
   if (thumb) return thumb;
+  // <thumbnail url="..."/> (no namespace — used by CNBC and some others)
+  const thumb2 = chunk.match(/<thumbnail[^>]+url="([^"]+)"/i)?.[1];
+  if (thumb2) return thumb2;
   // Fallback: any media:content url (may be video; callers can filter)
   const mc2 = chunk.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
   if (mc2) return mc2;
+  // Last resort: first <img src="..."> inside content:encoded HTML
+  const encoded = chunk.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/i)?.[1] ?? "";
+  const imgSrc = encoded.match(/<img[^>]+src="(https?:[^"]+)"/i)?.[1];
+  if (imgSrc) return imgSrc;
   return null;
 }
 

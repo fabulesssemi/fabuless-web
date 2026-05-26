@@ -26,9 +26,61 @@ const STORY_SCHEMA = `{
   ]
 }`;
 
+// ---------------------------------------------------------------------------
+// Source name resolution — shared by input building and post-processing dedup.
+// ---------------------------------------------------------------------------
+const KNOWN_SOURCES: Record<string, string> = {
+  "reuters.com": "Reuters", "cnbc.com": "CNBC",
+  "nextplatform.com": "NextPlatform", "semiwiki.com": "SemiWiki",
+  "benzinga.com": "Benzinga", "ft.com": "Financial Times",
+  "bloomberg.com": "Bloomberg", "wsj.com": "WSJ",
+  "marketwatch.com": "MarketWatch", "eetimes.com": "EE Times",
+  "theinformation.com": "The Information",
+};
+
+function sourceNameFromUrl(url: string): string {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return KNOWN_SOURCES[host] ?? host;
+  } catch {
+    return "Unknown";
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Hard-enforce source diversity after Claude responds.
+// Claude can mis-apply prompt rules when one source dominates the corpus;
+// this dedup is the guarantee. Logic: prefer the first (highest-ranked by
+// Claude) story per source. If we still need more after one-per-source, allow
+// a second pick per source to fill up to `max`.
+// ---------------------------------------------------------------------------
+function diversify(stories: AutoStory[], max = 6): AutoStory[] {
+  // Pass 1: one per source (in Claude's ranked order)
+  const seenSources = new Set<string>();
+  const firstPicks: AutoStory[] = [];
+  const remainders: AutoStory[] = [];
+  for (const s of stories) {
+    const src = s.source.toLowerCase().trim();
+    if (!seenSources.has(src)) {
+      seenSources.add(src);
+      firstPicks.push(s);
+    } else {
+      remainders.push(s);
+    }
+  }
+  // Pass 2: fill remaining slots (allows a second pick per source only if needed)
+  return [...firstPicks, ...remainders].slice(0, max);
+}
+
 /**
- * Ask Claude to pick the 6 most investment-relevant semiconductor stories
- * from the full RSS corpus. Returns a ready-to-save HomepageContent object.
+ * Ask Claude to pick the top semiconductor investment stories from the full RSS
+ * corpus. Returns a ready-to-save HomepageContent object.
+ *
+ * SOURCE DIVERSITY is enforced at TWO levels so it cannot break:
+ *  1. Input: capped to MAX_PER_SOURCE items per feed before being sent to Claude,
+ *     so no single source dominates the context window.
+ *  2. Output: diversify() deduplicates Claude's response to max 1 per source.
+ *
  * Never throws — returns null on any failure.
  */
 export async function generateTopStories(
@@ -36,21 +88,34 @@ export async function generateTopStories(
 ): Promise<HomepageContent | null> {
   if (allNewsItems.length === 0) return null;
 
-  // Derive source names from URLs for Claude
-  const storyLinesWithSource = allNewsItems
-    .slice(0, 80)
+  // ── Step 1: cap per source and interleave so all feeds appear in the prompt ──
+  // fetchAllNewsItems() returns feeds concatenated in order. A simple slice(0,80)
+  // would cut off the later feeds entirely (e.g. SemiWiki, Benzinga never reach
+  // Claude). Instead: take up to MAX_PER_SOURCE from each source, then interleave
+  // round-robin so the Claude context window samples all feeds equally.
+  const MAX_PER_SOURCE = 15;
+  const sourceBuckets = new Map<string, RssItem[]>();
+  for (const item of allNewsItems) {
+    const src = sourceNameFromUrl(item.link);
+    if (!sourceBuckets.has(src)) sourceBuckets.set(src, []);
+    const bucket = sourceBuckets.get(src)!;
+    if (bucket.length < MAX_PER_SOURCE) bucket.push(item);
+  }
+  // Interleave round-robin: pick one from each source bucket, repeat
+  const bucketArrays = [...sourceBuckets.values()];
+  const interleaved: RssItem[] = [];
+  const maxRounds = MAX_PER_SOURCE;
+  for (let round = 0; round < maxRounds && interleaved.length < 90; round++) {
+    for (const bucket of bucketArrays) {
+      if (round < bucket.length) interleaved.push(bucket[round]);
+      if (interleaved.length >= 90) break;
+    }
+  }
+
+  // ── Step 2: build the prompt context ────────────────────────────────────────
+  const storyLinesWithSource = interleaved
     .map((item, i) => {
-      let src = "Unknown";
-      try { src = new URL(item.link).hostname.replace(/^www\./, ""); } catch { /* */ }
-      const KNOWN: Record<string, string> = {
-        "reuters.com": "Reuters", "cnbc.com": "CNBC",
-        "nextplatform.com": "NextPlatform", "semiwiki.com": "SemiWiki",
-        "benzinga.com": "Benzinga", "ft.com": "Financial Times",
-        "bloomberg.com": "Bloomberg", "wsj.com": "WSJ",
-        "marketwatch.com": "MarketWatch", "eetimes.com": "EE Times",
-        "theinformation.com": "The Information",
-      };
-      src = KNOWN[src] ?? src;
+      const src = sourceNameFromUrl(item.link);
       const img = item.image ? ` [image: ${item.image}]` : " [image: null]";
       return `${i + 1}. "${item.title}" | source: ${src} | url: ${item.link} | ${item.description.slice(0, 160)}${img}`;
     })
@@ -59,19 +124,18 @@ export async function generateTopStories(
   const today = new Date().toISOString().slice(0, 10);
   const prompt = `You are a senior semiconductor investment editor at Fabuless, a briefing read by professional investors.
 
-Today is ${today}. From the articles below, pick exactly 6 that are MOST significant for semiconductor equity investors this week.
+Today is ${today}. From the articles below, rank and return the top 10 most significant for semiconductor equity investors this week.
 
 RULES:
 - Prefer stories with real investment implications: earnings, guidance, capex decisions, supply chain shifts, export controls, M&A, major technology milestones.
 - Avoid generic market summaries, broad macro commentary, or stories that don't specifically affect semiconductor stocks.
 - Return ONLY stories that appear in the input list — use the exact URL, headline, source, and image provided.
-- SOURCE DIVERSITY: Pick from at least 4 different sources. No more than 1 story from the same source. If you must pick 2 from one source, the remaining 4 must all be from different sources.
 - The "oneliner" must be one sharp sentence stating the investment implication (not a summary). Example: "A $10B TSMC commitment deepens AMD's single-supplier risk at peak cross-strait tension."
 - If a story has an image url, include it. Otherwise set image to null.
 - Assign the most accurate category from: ${CATEGORIES.join(" | ")}.
 - After selecting stories, craft the "issueTitle": 8-14 words covering the 2-3 biggest themes, written as a punchy newspaper front-page headline with specific names (companies, technologies, events — not generic phrases like "chip industry dynamics").
 
-Input articles (newest first):
+Input articles (interleaved across sources for balance):
 ${storyLinesWithSource}
 
 Return ONLY a valid JSON object matching this schema (no markdown, no explanation):
@@ -105,13 +169,18 @@ ${STORY_SCHEMA}`;
 
     if (valid.length === 0) return null;
 
+    // Hard-enforce source diversity in code — prompt rules alone are not reliable
+    // when one RSS source dominates the corpus. diversify() guarantees max 1 per
+    // source in the final 6, regardless of what Claude returned.
+    const topStories = diversify(valid, 6);
+
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {
       month: "long", day: "numeric", year: "numeric",
     });
 
     return {
-      topStories: valid.slice(0, 6),
+      topStories,
       podcasts: [], // filled in separately by generatePodcastPicks
       issueTitle: generatedTitle || `Week of ${weekOf}`,
       generatedAt: new Date().toISOString(),

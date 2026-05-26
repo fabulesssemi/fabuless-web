@@ -82,14 +82,20 @@ export async function generateTopStories(
 ): Promise<HomepageContent | null> {
   if (allNewsItems.length === 0) return null;
 
-  // ── Step 1: cap per source and interleave so all feeds appear in the prompt ──
+  // ── Step 1: pre-filter to image-bearing articles only ───────────────────────
+  // Stories without images are excluded from Top Stories entirely — the grid
+  // requires a real photo. This also prevents recap/roundup pieces (which
+  // rarely have article images) from dominating the picks.
+  const withImages = allNewsItems.filter((item) => item.image !== null);
+
+  // ── Step 2: cap per source and interleave so all feeds appear in the prompt ──
   // fetchAllNewsItems() returns feeds concatenated in order. A simple slice(0,80)
   // would cut off the later feeds entirely (e.g. SemiWiki, Benzinga never reach
   // Claude). Instead: take up to MAX_PER_SOURCE from each source, then interleave
   // round-robin so the Claude context window samples all feeds equally.
   const MAX_PER_SOURCE = 15;
   const sourceBuckets = new Map<string, RssItem[]>();
-  for (const item of allNewsItems) {
+  for (const item of withImages) {
     const src = sourceNameFromUrl(item.link);
     if (!sourceBuckets.has(src)) sourceBuckets.set(src, []);
     const bucket = sourceBuckets.get(src)!;
@@ -106,12 +112,13 @@ export async function generateTopStories(
     }
   }
 
-  // ── Step 2: build the prompt context ────────────────────────────────────────
+  if (interleaved.length === 0) return null;
+
+  // ── Step 3: build the prompt context ────────────────────────────────────────
   const storyLinesWithSource = interleaved
     .map((item, i) => {
       const src = sourceNameFromUrl(item.link);
-      const img = item.image ? ` [image: ${item.image}]` : " [image: null]";
-      return `${i + 1}. "${item.title}" | source: ${src} | url: ${item.link} | ${item.description.slice(0, 160)}${img}`;
+      return `${i + 1}. "${item.title}" | source: ${src} | url: ${item.link} | ${item.description.slice(0, 160)} [image: ${item.image}]`;
     })
     .join("\n");
 
@@ -121,15 +128,15 @@ export async function generateTopStories(
 Today is ${today}. From the articles below, rank and return the top 10 most significant for semiconductor equity investors this week.
 
 RULES:
-- Prefer stories with real investment implications: earnings, guidance, capex decisions, supply chain shifts, export controls, M&A, major technology milestones.
-- Avoid generic market summaries, broad macro commentary, or stories that don't specifically affect semiconductor stocks.
+- Prefer stories about SPECIFIC EVENTS: earnings reports, guidance changes, capex announcements, supply chain decisions, export control actions, M&A, major technology milestones, regulatory decisions.
+- NEVER pick: weekly recaps ("what you missed"), opinion columns, newsletters, roundups, "top stories" digest pieces, or any article that summarizes other news rather than breaking its own story. These add no value to investors.
+- NEVER pick articles with vague or clickbait headlines like "what you might have missed", "here's everything you need to know", "5 things to watch". Real news events have specific factual headlines.
 - Return ONLY stories that appear in the input list — use the exact URL, headline, source, and image provided.
-- The "oneliner" must be one sharp sentence stating the investment implication (not a summary). Example: "A $10B TSMC commitment deepens AMD's single-supplier risk at peak cross-strait tension."
-- If a story has an image url, include it. Otherwise set image to null.
+- The "oneliner" must be one sharp sentence stating the specific investment implication. Example: "A $10B TSMC commitment deepens AMD's single-supplier risk at peak cross-strait tension."
 - Assign the most accurate category from: ${CATEGORIES.join(" | ")}.
-- After selecting stories, craft the "issueTitle": 8-14 words covering the 2-3 biggest themes, written as a punchy newspaper front-page headline with specific names (companies, technologies, events — not generic phrases like "chip industry dynamics").
+- After selecting stories, craft the "issueTitle": 8-14 words covering the 2-3 biggest themes, written as a punchy newspaper front-page headline with specific company names and events.
 
-Input articles (interleaved across sources for balance):
+Input articles (all have images, interleaved across sources for balance):
 ${storyLinesWithSource}
 
 Return ONLY a valid JSON object matching this schema (no markdown, no explanation):

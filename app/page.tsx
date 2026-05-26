@@ -36,7 +36,7 @@ export default async function Home() {
   const restSections = latestIssue.sections
     .map((s) => ({ ...s, stories: s.stories.filter((story) => !featuredUrls.has(story.url)) }))
     .filter((s) => s.stories.length > 0);
-  const restIssue = { ...latestIssue, sections: restSections };
+  const restIssue = { ...latestIssue, sections: restSections, podcasts: [] };
 
   return (
     <div className="max-w-6xl mx-auto px-6">

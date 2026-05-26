@@ -190,7 +190,7 @@ ${STORY_SCHEMA}`;
     // Hard-enforce source diversity in code — prompt rules alone are not reliable
     // when one RSS source dominates the corpus. diversify() guarantees max 1 per
     // source in the final 6, regardless of what Claude returned.
-    const topStories = diversify(valid, 6);
+    const topStories = diversify(valid); // target=4 (min stories), max=6
 
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {

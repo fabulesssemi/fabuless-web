@@ -6,7 +6,7 @@ import { latestIssue } from "@/lib/issues";
 import { IssueView } from "@/app/components/IssueView";
 import { getHomepageContent } from "@/lib/homepage";
 import { SubscribeForm } from "@/app/components/SubscribeForm";
-import { EarningsCard } from "@/app/components/EarningsCard";
+import { XQuotesCard } from "@/app/components/XQuotesCard";
 import { StoryImage } from "@/app/components/StoryImage";
 
 // Opt out of the Next.js fetch cache so revalidatePath("/") from the pipeline
@@ -57,8 +57,8 @@ export default async function Home() {
           <SubscribeForm />
         </div>
 
-        {/* Right: live earnings card */}
-        <EarningsCard />
+        {/* Right: chip Twitter quotes (when curated for this issue) */}
+        <XQuotesCard quotes={latestIssue.quotes ?? []} />
       </section>
 
       {/* Latest issue header — above Top Stories */}
@@ -87,45 +87,64 @@ export default async function Home() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {autoStories
             ? autoStories.slice(0, 4).map((story) => (
-                <a
-                  key={story.url}
-                  href={story.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-gray-50 block border border-gray-200"
-                >
-                  <StoryImage image={story.image} source={story.source} headline={story.headline} />
-                  <div className="p-4 pt-3">
+                <div key={story.url} className="bg-gray-50 border border-gray-200 flex flex-col">
+                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="block">
+                    <StoryImage image={story.image} source={story.source} headline={story.headline} />
+                  </a>
+                  <div className="p-4 pt-3 flex flex-col flex-1">
                     <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
                       {story.category}
                     </div>
-                    <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
+                    <a href={story.url} target="_blank" rel="noopener noreferrer"
+                      className="font-sans text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#B45309] transition-colors">
                       {story.headline}
-                    </h3>
+                    </a>
                     <p className="text-[12px] text-gray-500 mt-1.5 leading-snug line-clamp-2">
                       {story.oneliner}
                     </p>
+                    <div className="mt-auto pt-2.5 flex items-center justify-between">
+                      <span className="text-[10px] text-gray-400">{story.source}</span>
+                      <a
+                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(story.headline + " — via fabuless.ai")}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="text-[10px] text-gray-400 hover:text-[#111827] transition-colors flex items-center gap-1"
+                      >
+                        <span className="font-bold">𝕏</span>
+                        <span>Share</span>
+                      </a>
+                    </div>
                   </div>
-                </a>
+                </div>
               ))
             : staticFeatured.map(({ story, category }) => (
-                <a
-                  key={story.url}
-                  href={story.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-gray-50 block border border-gray-200"
-                >
-                  <StoryImage image={story.image} source={story.source} headline={story.headline} />
-                  <div className="p-4 pt-3">
+                <div key={story.url} className="bg-gray-50 border border-gray-200 flex flex-col">
+                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="block">
+                    <StoryImage image={story.image} source={story.source} headline={story.headline} />
+                  </a>
+                  <div className="p-4 pt-3 flex flex-col flex-1">
                     <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
                       {story.topLabel ?? category}
                     </div>
-                    <h3 className="font-sans text-[1rem] font-bold text-[#111827] leading-snug group-hover:text-[#B45309] transition-colors">
+                    <a href={story.url} target="_blank" rel="noopener noreferrer"
+                      className="font-sans text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#B45309] transition-colors">
                       {story.headline}
-                    </h3>
+                    </a>
+                    <p className="text-[12px] text-gray-500 mt-1.5 leading-snug line-clamp-2">
+                      {story.oneliner}
+                    </p>
+                    <div className="mt-auto pt-2.5 flex items-center justify-between">
+                      <span className="text-[10px] text-gray-400">{story.source}</span>
+                      <a
+                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(story.headline + " — via fabuless.ai")}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="text-[10px] text-gray-400 hover:text-[#111827] transition-colors flex items-center gap-1"
+                      >
+                        <span className="font-bold">𝕏</span>
+                        <span>Share</span>
+                      </a>
+                    </div>
                   </div>
-                </a>
+                </div>
               ))}
         </div>
 

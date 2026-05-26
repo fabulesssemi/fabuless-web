@@ -1,3 +1,10 @@
+export type Quote = {
+  handle: string;  // e.g. "@BenBajarin"
+  name: string;    // e.g. "Ben Bajarin"
+  text: string;    // tweet text
+  url?: string;    // link to the original tweet
+};
+
 export type Story = {
   headline: string;
   url: string;
@@ -37,6 +44,9 @@ export type Issue = {
   sections: IssueSection[];
   podcasts: Podcast[];
   earnings: EarningsRow[];
+  // Add 2-3 real tweets each week from chip Twitter (analysts, founders, journalists).
+  // Leave empty ([]) if you don't have good ones — the hero just goes full-width.
+  quotes?: Quote[];
 };
 
 export const issues: Issue[] = [

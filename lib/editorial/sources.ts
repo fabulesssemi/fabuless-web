@@ -15,11 +15,18 @@ const RSS_FEEDS = [
   "https://www.nextplatform.com/feed/",
   "https://semiwiki.com/feed/",
   "https://www.benzinga.com/feeds/analyst-ratings/rss",
-  // Additional feeds for source diversity — without these, Claude defaulted to
-  // CNBC + NextPlatform since they had the most context-window representation.
   "https://www.eetimes.com/feed/",                          // EE Times — deep semiconductor/IC industry coverage
-  "https://www.tomshardware.com/feeds/all",                 // Tom's Hardware — GPU/chip news with investment angle
+  "https://www.tomshardware.com/feeds/all",                 // Tom's Hardware — GPU/chip news (images hotlink-blocked, filtered below)
   "https://feeds.feedburner.com/typepad/siliconleverage",   // Silicon Leverage — semiconductor analyst blog
+  "https://feeds.arstechnica.com/arstechnica/technology",   // Ars Technica — reliable tech images, chip/AI coverage
+  "https://www.theregister.com/headlines.atom",             // The Register — chip industry, strong semiconductor beat
+];
+
+// CDN domains that hotlink-protect their images — browsers get 403 when the
+// Referer is an external site. Treat image URLs from these domains as null so
+// the pipeline filters those articles out of Top Stories automatically.
+const HOTLINK_BLOCKED_IMAGE_DOMAINS = [
+  "cdn.mos.cms.futurecdn.net", // Tom's Hardware, PC Gamer, etc. (Future Publishing CDN)
 ];
 
 const PODCAST_FEEDS: { show: string; url: string }[] = [
@@ -50,28 +57,39 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+/** Return null if this image URL is from a known hotlink-protected CDN. */
+function isHotlinkBlocked(url: string): boolean {
+  try {
+    const host = new URL(url).hostname;
+    return HOTLINK_BLOCKED_IMAGE_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`));
+  } catch { return false; }
+}
+
 /** Extract an image URL from a feed item chunk (tries multiple RSS image conventions). */
 function extractItemImage(chunk: string): string | null {
+  const check = (url: string | undefined): string | null =>
+    url && !isHotlinkBlocked(url) ? url : null;
+
   // <enclosure url="..." type="image/..."/>
   const enc = chunk.match(/<enclosure[^>]+url="([^"]+)"[^>]*type="image/i)?.[1];
-  if (enc) return enc;
+  if (check(enc)) return enc!;
   // <media:content medium="image" url="..."> (attribute order varies)
   const mc1 = chunk.match(/<media:content[^>]+medium="image"[^>]+url="([^"]+)"/i)?.[1]
     ?? chunk.match(/<media:content[^>]+url="([^"]+)"[^>]*medium="image"/i)?.[1];
-  if (mc1) return mc1;
+  if (check(mc1)) return mc1!;
   // <media:thumbnail url="..."/>
   const thumb = chunk.match(/<media:thumbnail[^>]+url="([^"]+)"/i)?.[1];
-  if (thumb) return thumb;
+  if (check(thumb)) return thumb!;
   // <thumbnail url="..."/> (no namespace — used by CNBC and some others)
   const thumb2 = chunk.match(/<thumbnail[^>]+url="([^"]+)"/i)?.[1];
-  if (thumb2) return thumb2;
+  if (check(thumb2)) return thumb2!;
   // Fallback: any media:content url (may be video; callers can filter)
   const mc2 = chunk.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
-  if (mc2) return mc2;
+  if (check(mc2)) return mc2!;
   // Last resort: first <img src="..."> inside content:encoded HTML
   const encoded = chunk.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/i)?.[1] ?? "";
   const imgSrc = encoded.match(/<img[^>]+src="(https?:[^"]+)"/i)?.[1];
-  if (imgSrc) return imgSrc;
+  if (check(imgSrc)) return imgSrc!;
   return null;
 }
 

@@ -35,6 +35,7 @@ const KNOWN_SOURCES: Record<string, string> = {
   "marketwatch.com": "MarketWatch", "eetimes.com": "EE Times",
   "theinformation.com": "The Information", "tomshardware.com": "Tom's Hardware",
   "typepad.com": "Silicon Leverage", "feedburner.com": "Silicon Leverage",
+  "arstechnica.com": "Ars Technica", "theregister.com": "The Register",
 };
 
 function sourceNameFromUrl(url: string): string {
@@ -48,22 +49,35 @@ function sourceNameFromUrl(url: string): string {
 
 // ---------------------------------------------------------------------------
 // Hard-enforce source diversity after Claude responds.
-// STRICT: exactly one story per source, no second picks. If Claude returns
-// 10 stories from only 2 sources, we end up with 2 stories — that's correct.
-// More feeds in RSS_FEEDS = more unique sources = more stories shown.
+// Pass 1: strictly one per source (best picks).
+// Pass 2: if still under `target`, allow second picks from already-seen
+//         sources to fill the grid — we always want at least `target` stories.
+// Never exceeds `max` total.
 // ---------------------------------------------------------------------------
-function diversify(stories: AutoStory[], max = 6): AutoStory[] {
+function diversify(stories: AutoStory[], target = 4, max = 6): AutoStory[] {
   const seenSources = new Set<string>();
-  const result: AutoStory[] = [];
+  const firstPicks: AutoStory[] = [];
+  const secondPicks: AutoStory[] = [];
+
   for (const s of stories) {
     const src = s.source.toLowerCase().trim();
     if (!seenSources.has(src)) {
       seenSources.add(src);
-      result.push(s);
+      firstPicks.push(s);
+    } else {
+      secondPicks.push(s);
     }
-    if (result.length >= max) break;
   }
-  return result;
+
+  const result = [...firstPicks];
+  // Only add second picks if we're still under the target — prefer diversity
+  // but never leave the grid with fewer than `target` cards.
+  for (const s of secondPicks) {
+    if (result.length >= target) break;
+    result.push(s);
+  }
+
+  return result.slice(0, max);
 }
 
 /**

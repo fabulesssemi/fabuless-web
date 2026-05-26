@@ -154,7 +154,7 @@ export const issues: Issue[] = [
       {
         handle: "@MilkRoadAI",
         name: "MilkRoadAI",
-        text: "Micron just officially crossed $1 trillion in market cap for the first time in its history and is still extremely undervalued at these levels",
+        text: "Micron just officially crossed $1 trillion in market cap for the first time in its history and is still extremely undervalued at these levels. Twelve months ago, this stock was worth $70 billion and that is a 14x move in a single year, one of the fastest wealth creation events in the history of American public markets.",
         url:"https://x.com/MilkRoadAI/status/2059294657654456787",
       },
       {

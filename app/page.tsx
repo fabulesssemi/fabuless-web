@@ -5,6 +5,57 @@ import { latestIssue, type EarningsRow } from "@/lib/issues";
 import { IssueView } from "@/app/components/IssueView";
 import type { HomepageContent } from "@/lib/homepage";
 
+// ---------------------------------------------------------------------------
+// StoryImage: article image → source logo from Clearbit → gray text badge.
+// Clearbit returns clean 128×128 logos for every major news domain.
+// ---------------------------------------------------------------------------
+function StoryImage({ image, url, source, headline, height = 180 }: {
+  image: string | null;
+  url: string;
+  source: string;
+  headline: string;
+  height?: number;
+}) {
+  const [logoFailed, setLogoFailed] = useState(false);
+
+  const domain = (() => {
+    try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return ""; }
+  })();
+
+  if (image) {
+    return (
+      <img
+        src={image}
+        alt={headline}
+        className="w-full object-cover"
+        style={{ height }}
+      />
+    );
+  }
+
+  if (domain && !logoFailed) {
+    return (
+      <div
+        className="w-full bg-gray-50 flex items-center justify-center border-b border-gray-100"
+        style={{ height }}
+      >
+        <img
+          src={`https://logo.clearbit.com/${domain}`}
+          alt={source}
+          className="h-10 w-auto max-w-[60%] object-contain opacity-70"
+          onError={() => setLogoFailed(true)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height }}>
+      <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{source}</span>
+    </div>
+  );
+}
+
 export default function Home() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
@@ -196,18 +247,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="group bg-gray-50 block border border-gray-200"
                 >
-                  {story.image ? (
-                    <img
-                      src={story.image}
-                      alt={story.headline}
-                      className="w-full object-cover"
-                      style={{ height: "180px" }}
-                    />
-                  ) : (
-                    <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height: "180px" }}>
-                      <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{story.source}</span>
-                    </div>
-                  )}
+                  <StoryImage image={story.image} url={story.url} source={story.source} headline={story.headline} />
                   <div className="p-4 pt-3">
                     <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
                       {story.category}
@@ -229,18 +269,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="group bg-gray-50 block border border-gray-200"
                 >
-                  {story.image ? (
-                    <img
-                      src={story.image}
-                      alt={story.headline}
-                      className="w-full object-cover"
-                      style={{ height: "180px" }}
-                    />
-                  ) : (
-                    <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height: "180px" }}>
-                      <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{story.source}</span>
-                    </div>
-                  )}
+                  <StoryImage image={story.image} url={story.url} source={story.source} headline={story.headline} />
                   <div className="p-4 pt-3">
                     <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
                       {story.topLabel ?? category}

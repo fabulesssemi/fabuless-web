@@ -169,8 +169,13 @@ export const issues: Issue[] = [
         text: "More AI → more GPUs → more interconnects → CPO → silicon photonics",
         url: "https://x.com/PhotonCap/status/2059114034931405264",
       },
-    ],
-  },
+ {         // ← you need this opening brace
+        handle: "@demian_ai",
+        name: "dylan ツ",
+        text: "The CPU was supposed to be the commodity layer of AI. As of this week, both chip CEOs say otherwise.",
+        url: "https://x.com/demian_ai/status/2059269939987632363",
+      },        // ← and this closing brace + comma
+    ],        
   {
     number: 1,
     date: "May 20, 2026",

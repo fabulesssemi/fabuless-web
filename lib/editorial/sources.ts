@@ -19,9 +19,8 @@ const RSS_FEEDS = [
 
 const PODCAST_FEEDS: { show: string; url: string }[] = [
   { show: "The Circuit",           url: "https://feeds.transistor.fm/the-circuit" },
-  { show: "Chip Stock Investor",   url: "https://feeds.transistor.fm/chip-stock-investor" },
-  // Invest Like the Best — semiconductor episodes (power, wafers, AI capex) are highly relevant
-  { show: "Invest Like the Best",  url: "https://feeds.megaphone.fm/FS3946346007" },
+  { show: "Chip Stock Investor",   url: "https://anchor.fm/s/e2cacf78/podcast/rss" },
+  { show: "Invest Like the Best",  url: "https://feeds.megaphone.fm/investlikethebest" },
 ];
 
 async function fetchText(url: string, timeoutMs = 8000): Promise<string | null> {

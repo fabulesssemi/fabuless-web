@@ -1,51 +1,30 @@
-"use client";
+// Server component — fetches auto-curated content directly from Supabase on the
+// server so there is zero flash of the old static issue on page load.
+// Interactive parts (subscribe form, live earnings) are client components.
 
-import { useState, useEffect } from "react";
-import { latestIssue, type EarningsRow } from "@/lib/issues";
+import { latestIssue } from "@/lib/issues";
 import { IssueView } from "@/app/components/IssueView";
-import type { HomepageContent } from "@/lib/homepage";
+import { getHomepageContent } from "@/lib/homepage";
+import { SubscribeForm } from "@/app/components/SubscribeForm";
+import { EarningsCard } from "@/app/components/EarningsCard";
+import { StoryImage } from "@/app/components/StoryImage";
 
-// ---------------------------------------------------------------------------
-// StoryImage: render article image, with a gray badge as last-resort fallback
-// for broken URLs. Pipeline now pre-filters to image-bearing articles only,
-// so the fallback should rarely fire in practice.
-// ---------------------------------------------------------------------------
-function StoryImage({ image, url, source, headline, height = 180 }: {
-  image: string | null;
-  url: string;
-  source: string;
-  headline: string;
-  height?: number;
-}) {
-  const [broken, setBroken] = useState(false);
+// Opt out of the Next.js fetch cache so revalidatePath("/") from the pipeline
+// always serves fresh Supabase data on the next request.
+export const dynamic = "force-dynamic";
 
-  if (image && !broken) {
-    return (
-      <img
-        src={image}
-        alt={headline}
-        className="w-full object-cover"
-        style={{ height }}
-        onError={() => setBroken(true)}
-      />
-    );
-  }
+export default async function Home() {
+  const autoContent = await getHomepageContent();
 
-  return (
-    <div className="w-full bg-gray-100 flex items-center justify-center" style={{ height }}>
-      <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">{source}</span>
-    </div>
-  );
-}
+  // ── Auto-curated content (from Sunday pipeline) or static fallback ──────────
+  const autoStories = autoContent?.topStories ?? null;
+  const autoPodcasts = autoContent?.podcasts?.length ? autoContent.podcasts : null;
+  const issueLabel = autoContent
+    ? `Week of ${new Date(autoContent.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} · Auto-updated`
+    : `Issue #${latestIssue.number} · ${latestIssue.date}`;
+  const issueTitle = autoContent?.issueTitle ?? latestIssue.title;
 
-export default function Home() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
-  const [earnings, setEarnings] = useState<EarningsRow[]>(latestIssue.earnings);
-  const [earningsLive, setEarningsLive] = useState(false);
-  const [autoContent, setAutoContent] = useState<HomepageContent | null>(null);
-
-  // ── Static issue data (manual fallback) ──────────────────────────────────
+  // ── Static issue data (manual fallback when pipeline hasn't run yet) ────────
   const allTagged = latestIssue.sections.flatMap((s) =>
     s.stories.map((story) => ({ story, category: s.category }))
   );
@@ -58,53 +37,6 @@ export default function Home() {
     .map((s) => ({ ...s, stories: s.stories.filter((story) => !featuredUrls.has(story.url)) }))
     .filter((s) => s.stories.length > 0);
   const restIssue = { ...latestIssue, sections: restSections };
-
-  // Auto-curated content takes priority when available; falls back to hand-curated issue.
-  const autoStories = autoContent?.topStories ?? null;
-  const autoPodcasts = autoContent?.podcasts?.length ? autoContent.podcasts : null;
-  const issueLabel = autoContent
-    ? `Week of ${new Date(autoContent.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} · Auto-updated`
-    : `Issue #${latestIssue.number} · ${latestIssue.date}`;
-  const issueTitle = autoContent?.issueTitle ?? latestIssue.title;
-
-  useEffect(() => {
-    // Fetch live earnings
-    fetch("/api/earnings")
-      .then((r) => r.json())
-      .then((data: EarningsRow[]) => {
-        if (data.length > 0) {
-          setEarnings(data);
-          setEarningsLive(true);
-        }
-      })
-      .catch(() => {/* keep static fallback */});
-
-    // Fetch auto-curated top stories from the pipeline
-    fetch("/api/stories")
-      .then((r) => r.json())
-      .then((data: HomepageContent | null) => {
-        if (data?.topStories?.length) setAutoContent(data);
-      })
-      .catch(() => {/* keep static fallback */});
-  }, []);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("loading");
-    const res = await fetch("/api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    if (res.ok) {
-      setStatus("success");
-      setEmail("");
-    } else if (res.status === 409) {
-      setStatus("duplicate");
-    } else {
-      setStatus("error");
-    }
-  }
 
   return (
     <div className="max-w-6xl mx-auto px-6">
@@ -122,74 +54,11 @@ export default function Home() {
             Chips power every AI model, every smartphone, every data
             center. We track the stories that move markets.
           </p>
-
-          {status === "success" ? (
-            <p className="text-sm text-emerald-700 font-medium">You&apos;re in. See you Friday.</p>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 px-3 py-2 border border-gray-300 bg-white text-sm focus:outline-none focus:border-[#B45309] transition-colors"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="px-4 py-2 bg-[#111827] text-white text-sm hover:bg-[#1f2937] transition-colors whitespace-nowrap disabled:opacity-60"
-              >
-                {status === "loading" ? "..." : "Subscribe"}
-              </button>
-            </form>
-          )}
-          {status === "duplicate" && (
-            <p className="mt-2 text-sm text-gray-400">That email is already subscribed.</p>
-          )}
-          {status === "error" && (
-            <p className="mt-2 text-sm text-red-600">Something went wrong — try again.</p>
-          )}
+          <SubscribeForm />
         </div>
 
-        {/* Right: compact earnings card */}
-        <div className="w-fit shrink-0 hidden lg:block border border-gray-200 bg-white">
-          <div className="border-b border-gray-200 px-4 py-1.5 flex items-start justify-between gap-2">
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[#111827]">
-                Upcoming Earnings
-              </div>
-              <div className="text-[10px] text-gray-400 mt-0.5 leading-snug">
-                Avg stock move in the 2 trading days after the report · last 20 quarters
-              </div>
-            </div>
-            {earningsLive && (
-              <div className="text-[9px] text-emerald-600 font-semibold uppercase tracking-wide shrink-0 mt-0.5">Live</div>
-            )}
-          </div>
-          {/* Column headers */}
-          <div className="flex items-center px-4 py-1 border-b border-gray-100 text-[9px] font-bold uppercase tracking-wider text-gray-400">
-            <div className="w-36">Company</div>
-            <div className="w-14 text-right">EPS Est</div>
-            <div className="w-[4.5rem] text-right">2-Day Move</div>
-            <div className="w-12 text-right">Beat</div>
-          </div>
-          <div className="divide-y divide-gray-100">
-            {earnings.slice(0, 6).map((e) => (
-              <div key={e.ticker} className="flex items-center px-4 py-1">
-                <div className="w-36 min-w-0">
-                  <div className="text-[12px] font-semibold text-[#111827] leading-tight truncate">{e.company}</div>
-                  <div className="text-[10px] text-gray-400">{e.date} · {e.ticker}</div>
-                </div>
-                <div className="w-14 text-right text-[11px] text-gray-600 font-mono">{e.eps}</div>
-                <div className={`w-[4.5rem] text-right text-[11px] font-mono font-medium ${e.avgMove.startsWith("-") ? "text-red-600" : "text-emerald-700"}`}>
-                  {e.avgMove}
-                </div>
-                <div className="w-12 text-right text-[11px] text-gray-600 font-mono">{e.beatRate}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Right: live earnings card */}
+        <EarningsCard />
       </section>
 
       {/* Latest issue header — above Top Stories */}
@@ -197,9 +66,6 @@ export default function Home() {
         <div className="mb-5 border-t-2 border-[#111827] pt-4">
           <div className="text-[11px] text-gray-400 uppercase tracking-widest">
             {issueLabel}
-            {autoStories && (
-              <span className="ml-2 text-emerald-600 font-semibold">· Auto-updated</span>
-            )}
           </div>
           <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
             {issueTitle}
@@ -209,7 +75,6 @@ export default function Home() {
 
       {/* Top Stories — FT style */}
       <section className="pt-4 pb-8 border-b border-gray-200">
-        {/* Section header */}
         <div className="flex items-center gap-4 mb-5">
           <div className="h-px flex-1 bg-gray-200" />
           <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 shrink-0">
@@ -218,7 +83,7 @@ export default function Home() {
           <div className="h-px flex-1 bg-gray-200" />
         </div>
 
-        {/* Card grid — auto-curated stories if available, else static issue */}
+        {/* Card grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {autoStories
             ? autoStories.slice(0, 4).map((story) => (
@@ -229,7 +94,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="group bg-gray-50 block border border-gray-200"
                 >
-                  <StoryImage image={story.image} url={story.url} source={story.source} headline={story.headline} />
+                  <StoryImage image={story.image} source={story.source} headline={story.headline} />
                   <div className="p-4 pt-3">
                     <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
                       {story.category}
@@ -251,7 +116,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="group bg-gray-50 block border border-gray-200"
                 >
-                  <StoryImage image={story.image} url={story.url} source={story.source} headline={story.headline} />
+                  <StoryImage image={story.image} source={story.source} headline={story.headline} />
                   <div className="p-4 pt-3">
                     <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
                       {story.topLabel ?? category}
@@ -264,7 +129,7 @@ export default function Home() {
               ))}
         </div>
 
-        {/* Show remaining auto stories below the grid if we have more than 4 */}
+        {/* Remaining auto stories (beyond top 4) in 2-col list */}
         {autoStories && autoStories.length > 4 && (
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4">
             {autoStories.slice(4).map((story) => (
@@ -282,12 +147,12 @@ export default function Home() {
         )}
       </section>
 
-      {/* Rest of the issue — stories below the grid */}
+      {/* Rest of the manual issue */}
       <section className="pt-7 pb-0">
         <IssueView issue={restSections.length > 0 ? restIssue : latestIssue} showEarnings={false} />
       </section>
 
-      {/* Podcasts — auto-picked by pipeline when available, else hand-curated fallback */}
+      {/* Podcasts */}
       {(autoPodcasts ?? latestIssue.podcasts).length > 0 && (
         <section className="pt-0 pb-8">
           <div className="mt-2 pt-5 border-t-2 border-[#B45309]">

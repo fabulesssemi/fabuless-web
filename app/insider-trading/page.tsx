@@ -72,7 +72,7 @@ export default async function InsiderTrading() {
   const livePrices = await fetchLivePrices(tickers);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-14 pb-16">
+    <div className="max-w-5xl mx-auto px-6 pt-14 pb-16">
 
       {/* Header */}
       <div className="flex items-baseline justify-between mb-1">

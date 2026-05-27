@@ -2,9 +2,7 @@ import { insiderTradingData } from "@/lib/insider-trading";
 import type { ConvictionLevel } from "@/lib/insider-trading";
 import { getQuoteCached } from "@/lib/providers";
 
-export const revalidate = 1800; // refresh every 30 min
-
-// ── Live price fetcher ────────────────────────────────────────────────────────
+export const revalidate = 1800;
 
 async function fetchLivePrices(tickers: string[]): Promise<Record<string, number | null>> {
   const results = await Promise.all(
@@ -23,8 +21,6 @@ function formatPrice(price: number | null | undefined): string {
     : `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-// ── UI components ─────────────────────────────────────────────────────────────
-
 function Stars({ count }: { count: number }) {
   return (
     <span className="text-amber-400 tracking-tight text-xs">
@@ -36,14 +32,14 @@ function Stars({ count }: { count: number }) {
 function ConvictionBadge({ level }: { level: ConvictionLevel }) {
   const styles: Record<ConvictionLevel, string> = {
     "VERY HIGH": "bg-emerald-100 text-emerald-800 border border-emerald-200",
-    HIGH: "bg-emerald-50 text-emerald-700 border border-emerald-200",
-    "MOD-HIGH": "bg-teal-50 text-teal-700 border border-teal-200",
-    MODERATE: "bg-gray-100 text-gray-500 border border-gray-200",
-    AVOID: "bg-red-100 text-red-700 border border-red-200",
-    CAUTIOUS: "bg-amber-50 text-amber-700 border border-amber-200",
+    HIGH:        "bg-emerald-50 text-emerald-700 border border-emerald-200",
+    "MOD-HIGH":  "bg-teal-50 text-teal-700 border border-teal-200",
+    MODERATE:    "bg-gray-100 text-gray-500 border border-gray-200",
+    AVOID:       "bg-red-100 text-red-700 border border-red-200",
+    CAUTIOUS:    "bg-amber-50 text-amber-700 border border-amber-200",
   };
   return (
-    <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase ${styles[level]}`}>
+    <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase whitespace-nowrap ${styles[level]}`}>
       {level}
     </span>
   );
@@ -51,13 +47,11 @@ function ConvictionBadge({ level }: { level: ConvictionLevel }) {
 
 function SeverityBadge({ severity }: { severity: string }) {
   if (severity === "STRONG AVOID")
-    return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-red-100 text-red-800 border border-red-300">🚨 STRONG AVOID</span>;
+    return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-red-100 text-red-800 border border-red-300 whitespace-nowrap">🚨 STRONG AVOID</span>;
   if (severity === "AVOID")
-    return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-red-50 text-red-700 border border-red-200">🚨 AVOID</span>;
-  return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200">⚠️ CAUTIOUS</span>;
+    return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-red-50 text-red-700 border border-red-200 whitespace-nowrap">🚨 AVOID</span>;
+  return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200 whitespace-nowrap">⚠️ CAUTIOUS</span>;
 }
-
-// ── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function InsiderTrading() {
   const data = insiderTradingData;
@@ -81,46 +75,48 @@ export default async function InsiderTrading() {
         Open-market insider purchases and cluster-sell signals across the semi &amp; semi-cap universe. Prices live · Thesis as of {analysisDate}.
       </p>
 
-      {/* Top 10 Watchlist */}
+      {/* Top 10 Watchlist — 2-column grid */}
       <h2 className="font-sans text-sm font-semibold text-[#0E7490] mb-3 tracking-widest uppercase">
         Top 10 Watchlist
       </h2>
 
-      <div className="divide-y divide-gray-100 border border-gray-200 rounded-lg mb-10 bg-white">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
         {data.watchlist.map((item) => {
           const livePrice = livePrices[item.ticker];
           return (
-            <div key={item.ticker} className="px-4 py-3 hover:bg-gray-50/60 transition-colors">
-
-              {/* Row 1: rank · ticker · company · price · stars · conviction */}
-              <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                <span className="text-[10px] text-gray-400 font-sans w-3 flex-shrink-0">{item.rank}.</span>
+            <div
+              key={item.ticker}
+              className="border border-gray-200 rounded-lg p-3.5 hover:border-[#0E7490]/40 transition-colors bg-white flex flex-col gap-2"
+            >
+              {/* Ticker row */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] text-gray-400 w-3 flex-shrink-0">{item.rank}.</span>
                 <span className="font-sans font-bold text-sm text-[#18181B] tracking-tight">{item.ticker}</span>
-                <span className="text-xs text-gray-400">{item.company}</span>
-                <span className="ml-auto flex items-center gap-2 flex-shrink-0">
-                  {livePrice ? (
-                    <span className="font-sans font-semibold text-xs text-[#18181B]">
-                      {formatPrice(livePrice)} <span className="text-[9px] font-normal text-gray-400">live</span>
-                    </span>
-                  ) : (
-                    <span className="text-xs text-gray-400">{item.price}</span>
-                  )}
-                  <Stars count={item.stars} />
-                  <ConvictionBadge level={item.conviction} />
-                </span>
+                <span className="text-xs text-gray-400 truncate">{item.company}</span>
               </div>
 
-              {/* Row 2: signal */}
-              <p className="text-xs text-gray-600 leading-relaxed mb-1">{item.signal}</p>
+              {/* Price + stars + conviction */}
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-sans font-semibold text-xs text-[#18181B]">
+                  {livePrice ? (
+                    <>{formatPrice(livePrice)} <span className="text-[9px] font-normal text-gray-400">live</span></>
+                  ) : (
+                    <span className="text-gray-400">{item.price}</span>
+                  )}
+                </span>
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <Stars count={item.stars} />
+                  <ConvictionBadge level={item.conviction} />
+                </div>
+              </div>
 
-              {/* Row 3: thesis + last buy inline */}
-              <p className="text-[11px] text-gray-400 leading-relaxed">{item.thesis}</p>
+              {/* Signal — clamped to 2 lines */}
+              <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">{item.signal}</p>
 
-              <div className="mt-1.5 flex items-center gap-3 text-[10px] text-gray-400">
+              {/* Footer */}
+              <div className="flex items-center gap-3 text-[10px] text-gray-400 mt-auto pt-0.5 border-t border-gray-100">
                 <span>Last buy: <span className="text-gray-500">{item.lastInsiderBuy}</span></span>
-                {item.stillOpen && (
-                  <span className="text-emerald-600 font-medium">✓ Open</span>
-                )}
+                {item.stillOpen && <span className="text-emerald-600 font-medium ml-auto">✓ Open</span>}
               </div>
             </div>
           );
@@ -133,17 +129,17 @@ export default async function InsiderTrading() {
           <h2 className="font-sans text-sm font-semibold text-red-700 mb-3 tracking-widest uppercase">
             Red Flags
           </h2>
-          <div className="divide-y divide-red-50 border border-red-100 rounded-lg mb-10 bg-red-50/30">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
             {data.redFlags.map((flag) => (
-              <div key={flag.ticker} className="px-4 py-3">
-                <div className="flex items-center gap-2 flex-wrap mb-1.5">
+              <div key={flag.ticker} className="border border-red-100 rounded-lg p-3.5 bg-red-50/30 flex flex-col gap-2">
+                <div className="flex items-center gap-2">
                   <span className="font-sans font-bold text-sm text-[#18181B] tracking-tight">{flag.ticker}</span>
-                  <span className="text-xs text-gray-400">{flag.company}</span>
-                  <span className="ml-auto flex-shrink-0">
+                  <span className="text-xs text-gray-400 truncate">{flag.company}</span>
+                  <div className="ml-auto flex-shrink-0">
                     <SeverityBadge severity={flag.severity} />
-                  </span>
+                  </div>
                 </div>
-                <p className="text-xs text-gray-600 leading-relaxed">{flag.signal}</p>
+                <p className="text-xs text-gray-600 leading-relaxed line-clamp-3">{flag.signal}</p>
               </div>
             ))}
           </div>
@@ -153,7 +149,7 @@ export default async function InsiderTrading() {
       {/* Methodology */}
       <div className="border-t border-gray-100 pt-5">
         <p className="text-[10px] text-gray-400 leading-relaxed">
-          <span className="font-semibold text-gray-500">Methodology:</span> Data pulled from Finviz insider trading tables and SEC EDGAR Form 4 filings. Coverage universe: NVDA, AMD, INTC, QCOM, AVGO, MRVL, MU, AMAT, LRCX, KLAC, ASML, ARM, ONTO, ENTG, SNPS, CDNS, LSCC, ACLS, MKSI. Open-market purchases weighted higher than option exercises. 10b5-1 sales treated as less directional. Prices live via Yahoo Finance. Not investment advice.
+          <span className="font-semibold text-gray-500">Methodology:</span> Data pulled from Finviz insider trading tables and SEC EDGAR Form 4 filings. Coverage: NVDA, AMD, INTC, QCOM, AVGO, MRVL, MU, AMAT, LRCX, KLAC, ASML, ARM, ONTO, ENTG, SNPS, CDNS, LSCC, ACLS, MKSI. Open-market purchases weighted higher than option exercises. 10b5-1 sales less directional. Prices live via Yahoo Finance. Not investment advice.
         </p>
       </div>
     </div>

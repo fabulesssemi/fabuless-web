@@ -1,0 +1,38 @@
+name: Weekly Insider Trading Update
+
+on:
+  schedule:
+    - cron: '0 13 * * 1'   # Every Monday at 9am ET (13:00 UTC)
+  workflow_dispatch:         # Manual trigger from GitHub Actions tab
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests
+
+      - name: Run insider trading updater
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+        run: python scripts/update_insider_trading.py
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "Fabuless Bot"
+          git config user.email "bot@fabuless.ai"
+          git add lib/insider-trading.ts
+          git diff --cached --quiet || git commit -m "chore: weekly insider trading update $(date +%Y-%m-%d)"
+          git push

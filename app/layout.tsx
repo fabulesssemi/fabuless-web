@@ -68,6 +68,9 @@ export default function RootLayout({
                 <Link href="/earnings" className="hover:text-amber-400 transition-colors">
                   Earnings
                 </Link>
+                <Link href="/insider-trading" className="hover:text-amber-400 transition-colors">
+                  Insider Trades
+                </Link>
               </div>
             </nav>
           </div>

@@ -1,4 +1,5 @@
 import { voices, type VoiceQuote } from "@/lib/voices";
+import { latestIssue } from "@/lib/issues";
 
 const SOURCE_STYLES: Record<VoiceQuote["source"], { label: string; className: string }> = {
   "X":             { label: "X",             className: "bg-gray-900 text-white" },
@@ -67,6 +68,29 @@ function QuoteCard({ q }: { q: VoiceQuote }) {
 }
 
 export default function VoicesPage() {
+  // Pull the homepage hero quotes from the latest issue and convert them to
+  // VoiceQuote shape so they can be rendered with the same card component.
+  // Filter out any that are already in voices[] (matched by URL or text) so
+  // there are no duplicates — as the voices[] list grows, fewer hero quotes
+  // will appear at the bottom.
+  const voiceUrls = new Set(voices.map((v) => v.url).filter(Boolean));
+  const voiceTexts = new Set(voices.map((v) => v.text.trim().toLowerCase()));
+
+  const heroQuotes: VoiceQuote[] = (latestIssue.quotes ?? [])
+    .filter((q) => {
+      if (q.url && voiceUrls.has(q.url)) return false;
+      if (voiceTexts.has(q.text.trim().toLowerCase())) return false;
+      return true;
+    })
+    .map((q) => ({
+      text: q.text,
+      name: q.name,
+      handle: q.handle,
+      source: "X" as const,
+      url: q.url,
+      date: latestIssue.date,
+    }));
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       {/* Header */}
@@ -83,15 +107,31 @@ export default function VoicesPage() {
         </p>
       </div>
 
-      {/* Masonry grid */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
-        {voices.map((q, i) => (
-          <QuoteCard key={i} q={q} />
-        ))}
-      </div>
+      {/* Main curated quotes */}
+      {voices.length > 0 && (
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
+          {voices.map((q, i) => (
+            <QuoteCard key={i} q={q} />
+          ))}
+        </div>
+      )}
 
-      {voices.length === 0 && (
+      {voices.length === 0 && heroQuotes.length === 0 && (
         <p className="text-gray-400 text-sm">No quotes yet — check back soon.</p>
+      )}
+
+      {/* Homepage hero quotes — shown at bottom, only those not already above */}
+      {heroQuotes.length > 0 && (
+        <div className="mt-10 pt-8 border-t border-gray-200">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-6">
+            Featured This Issue · {latestIssue.date}
+          </p>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
+            {heroQuotes.map((q, i) => (
+              <QuoteCard key={i} q={q} />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

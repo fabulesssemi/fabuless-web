@@ -80,43 +80,43 @@ export default async function InsiderTrading() {
         Top 10 Watchlist
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-10">
         {data.watchlist.map((item) => {
           const livePrice = livePrices[item.ticker];
           return (
             <div
               key={item.ticker}
-              className="border border-gray-200 rounded-lg p-3.5 hover:border-[#0E7490]/40 transition-colors bg-white flex flex-col gap-2"
+              className="border border-gray-200 rounded-lg p-3 hover:border-[#0E7490]/40 transition-colors bg-white flex flex-col gap-1.5"
             >
               {/* Ticker row */}
-              <div className="flex items-center gap-1.5">
-                <span className="text-[10px] text-gray-400 w-3 flex-shrink-0">{item.rank}.</span>
+              <div className="flex items-center gap-1">
+                <span className="text-[9px] text-gray-400 w-3 flex-shrink-0">{item.rank}.</span>
                 <span className="font-sans font-bold text-sm text-[#18181B] tracking-tight">{item.ticker}</span>
-                <span className="text-xs text-gray-400 truncate">{item.company}</span>
+                <span className="text-[10px] text-gray-400 truncate">{item.company}</span>
               </div>
 
-              {/* Price + stars + conviction */}
-              <div className="flex items-center justify-between gap-2">
-                <span className="font-sans font-semibold text-xs text-[#18181B]">
-                  {livePrice ? (
-                    <>{formatPrice(livePrice)} <span className="text-[9px] font-normal text-gray-400">live</span></>
-                  ) : (
-                    <span className="text-gray-400">{item.price}</span>
-                  )}
-                </span>
-                <div className="flex items-center gap-1.5 flex-shrink-0">
-                  <Stars count={item.stars} />
-                  <ConvictionBadge level={item.conviction} />
-                </div>
+              {/* Price */}
+              <span className="font-sans font-semibold text-xs text-[#18181B]">
+                {livePrice ? (
+                  <>{formatPrice(livePrice)} <span className="text-[9px] font-normal text-gray-400">live</span></>
+                ) : (
+                  <span className="text-gray-400">{item.price}</span>
+                )}
+              </span>
+
+              {/* Stars + conviction */}
+              <div className="flex items-center gap-1.5">
+                <Stars count={item.stars} />
+                <ConvictionBadge level={item.conviction} />
               </div>
 
               {/* Signal — clamped to 2 lines */}
-              <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">{item.signal}</p>
+              <p className="text-[11px] text-gray-600 leading-relaxed line-clamp-2">{item.signal}</p>
 
               {/* Footer */}
-              <div className="flex items-center gap-3 text-[10px] text-gray-400 mt-auto pt-0.5 border-t border-gray-100">
-                <span>Last buy: <span className="text-gray-500">{item.lastInsiderBuy}</span></span>
-                {item.stillOpen && <span className="text-emerald-600 font-medium ml-auto">✓ Open</span>}
+              <div className="flex items-center gap-2 text-[9px] text-gray-400 mt-auto pt-1 border-t border-gray-100">
+                <span className="truncate">Last buy: <span className="text-gray-500">{item.lastInsiderBuy}</span></span>
+                {item.stillOpen && <span className="text-emerald-600 font-medium ml-auto flex-shrink-0">✓ Open</span>}
               </div>
             </div>
           );
@@ -129,7 +129,7 @@ export default async function InsiderTrading() {
           <h2 className="font-sans text-sm font-semibold text-red-700 mb-3 tracking-widest uppercase">
             Red Flags
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-10">
             {data.redFlags.map((flag) => (
               <div key={flag.ticker} className="border border-red-100 rounded-lg p-3.5 bg-red-50/30 flex flex-col gap-2">
                 <div className="flex items-center gap-2">

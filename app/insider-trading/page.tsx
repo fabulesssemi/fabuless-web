@@ -72,11 +72,11 @@ export default async function InsiderTrading() {
   const livePrices = await fetchLivePrices(tickers);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 pt-14 pb-16">
+    <div className="max-w-6xl mx-auto px-6 pt-14 pb-16">
 
       {/* Header */}
       <div className="flex items-baseline justify-between mb-1">
-        <h1 className="font-sans text-3xl text-[#0E7490] tracking-tight">Insider Trading</h1>
+        <h1 className="font-sans text-3xl text-[#18181B] tracking-tight">Insider Trading</h1>
         <span className="text-xs text-gray-400 font-sans">Updated {analysisDate} · {data.lookbackWindow}</span>
       </div>
       <p className="text-xs text-gray-400 mb-8">

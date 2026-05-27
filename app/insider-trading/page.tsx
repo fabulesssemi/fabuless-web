@@ -83,12 +83,12 @@ export default async function InsiderTrading() {
       {/* Conviction key */}
       <div className="flex flex-wrap gap-x-4 gap-y-1 mb-4">
         {([
-          ["VERY HIGH", "bg-emerald-100 text-emerald-800 border-emerald-200", "CEO/CFO buy $500k+"],
-          ["HIGH",      "bg-emerald-50 text-emerald-700 border-emerald-200",  "Large buy $250k+"],
-          ["MOD-HIGH",  "bg-teal-50 text-teal-700 border-teal-200",           "Buy $100k–250k"],
-          ["MODERATE",  "bg-gray-100 text-gray-500 border-gray-200",          "No clear signal"],
-          ["CAUTIOUS",  "bg-amber-50 text-amber-700 border-amber-200",        "Execs selling (likely planned)"],
-          ["AVOID",     "bg-red-100 text-red-700 border-red-200",             "Cluster selling — exit signal"],
+          ["VERY HIGH", "bg-emerald-100 text-emerald-800 border-emerald-200", "CEO/CFO bought $500k+ of their own stock"],
+          ["HIGH",      "bg-emerald-50 text-emerald-700 border-emerald-200",  "Insider bought $250k+ of their own stock"],
+          ["MOD-HIGH",  "bg-teal-50 text-teal-700 border-teal-200",           "Insider bought $100k–$250k of their own stock"],
+          ["MODERATE",  "bg-gray-100 text-gray-500 border-gray-200",          "No notable buying or selling"],
+          ["CAUTIOUS",  "bg-amber-50 text-amber-700 border-amber-200",        "Executives selling shares (likely pre-planned)"],
+          ["AVOID",     "bg-red-100 text-red-700 border-red-200",             "Multiple insiders selling — exit signal"],
         ] as const).map(([label, style, desc]) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className={`text-[8px] font-semibold px-1.5 py-0.5 rounded border tracking-wider uppercase ${style}`}>{label}</span>

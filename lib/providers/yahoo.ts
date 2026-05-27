@@ -35,6 +35,17 @@ type QS = {
     longName?: string;
     shortName?: string;
     exchangeName?: string;
+    regularMarketPrice?: number;
+    regularMarketChange?: number;
+    regularMarketChangePercent?: number;
+    marketCap?: number;
+    currency?: string;
+  };
+  summaryDetail?: {
+    trailingPE?: number;
+    forwardPE?: number;
+    fiftyTwoWeekHigh?: number;
+    fiftyTwoWeekLow?: number;
   };
   financialData?: {
     revenueGrowth?: number;
@@ -125,17 +136,25 @@ export class YahooProvider
 
   async getQuote(ticker: string): Promise<Partial<Quote> | null> {
     try {
-      const q = await yf.quote(ticker);
+      // Use quoteSummary with validateResult:false — more resilient than yf.quote()
+      // in server/serverless environments where Yahoo may return schema drift.
+      const r = (await yf.quoteSummary(
+        ticker,
+        { modules: ["price", "summaryDetail"] },
+        MODULE_OPTS,
+      )) as QS;
+      const px = r.price;
+      const sd = r.summaryDetail;
       return {
-        price: q.regularMarketPrice ?? undefined,
-        change: q.regularMarketChange ?? undefined,
-        changePercent: q.regularMarketChangePercent ?? undefined,
-        currency: q.currency ?? undefined,
-        marketCap: q.marketCap ?? undefined,
-        peTrailing: q.trailingPE ?? undefined,
-        peForward: q.forwardPE ?? undefined,
-        fiftyTwoWeekHigh: q.fiftyTwoWeekHigh ?? undefined,
-        fiftyTwoWeekLow: q.fiftyTwoWeekLow ?? undefined,
+        price:          px?.regularMarketPrice ?? undefined,
+        change:         px?.regularMarketChange ?? undefined,
+        changePercent:  px?.regularMarketChangePercent ?? undefined,
+        currency:       px?.currency ?? undefined,
+        marketCap:      px?.marketCap ?? undefined,
+        peTrailing:     sd?.trailingPE ?? undefined,
+        peForward:      sd?.forwardPE ?? undefined,
+        fiftyTwoWeekHigh: sd?.fiftyTwoWeekHigh ?? undefined,
+        fiftyTwoWeekLow:  sd?.fiftyTwoWeekLow ?? undefined,
         asOf: new Date().toISOString(),
       };
     } catch {

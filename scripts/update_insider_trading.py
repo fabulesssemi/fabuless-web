@@ -40,8 +40,8 @@ BROADER_UNIVERSE = ["LRCX", "KLAC", "AMAT", "ONTO", "ENTG", "SNPS", "CDNS", "LSC
 
 TODAY = datetime.date.today()
 TODAY_ISO = TODAY.isoformat()
-TWO_WEEKS_AGO = TODAY - datetime.timedelta(days=14)
-WINDOW_LABEL = f"{TWO_WEEKS_AGO.strftime('%b %d')} – {TODAY.strftime('%b %d, %Y')}"
+SIX_MONTHS_AGO = TODAY - datetime.timedelta(days=180)
+WINDOW_LABEL = f"{SIX_MONTHS_AGO.strftime('%b %d')} – {TODAY.strftime('%b %d, %Y')}"
 
 # ── Firecrawl helpers ─────────────────────────────────────────────────────────
 
@@ -68,23 +68,23 @@ def collect_insider_data() -> str:
     print("📡 Scraping Finviz insider trading data...")
 
     # Main insider trading feed (all companies, last 100 transactions)
-    main = firecrawl_scrape("https://finviz.com/insidertrading.ashx?tc=1", max_chars=10000)
+    main = firecrawl_scrape("https://finviz.com/insidertrading.ashx?tc=1", max_chars=12000)
 
-    # Per-ticker pages for Fabuless 12 — richer individual signal
+    # Per-ticker quote pages — each quote page includes an insider trading table
     ticker_snippets = {}
     all_tickers = FABULESS_12 + BROADER_UNIVERSE
     for ticker in all_tickers:
         print(f"  → {ticker}")
         page = firecrawl_scrape(
             f"https://finviz.com/quote.ashx?t={ticker}",
-            max_chars=2500,
+            max_chars=3000,
         )
         if page:
             ticker_snippets[ticker] = page
 
     # Assemble the context block
-    lines = [f"# Finviz Insider Trading Data — {WINDOW_LABEL}\n"]
-    lines.append(f"## Main Feed\n{main}\n")
+    lines = [f"# Finviz Insider Trading Data — {WINDOW_LABEL} (6-month window)\n"]
+    lines.append(f"## Main Feed (recent across all names)\n{main}\n")
     for ticker, snippet in ticker_snippets.items():
         lines.append(f"## {ticker}\n{snippet}\n")
 
@@ -128,19 +128,23 @@ def analyze_with_claude(raw_data: str) -> dict:
 
     prompt = f"""You are a buy-side equity research analyst covering large-cap semiconductors.
 
-Today is {TODAY.strftime("%B %d, %Y")}. Analyze the insider trading data below for the window {WINDOW_LABEL}.
+Today is {TODAY.strftime("%B %d, %Y")}. Analyze the insider trading data below covering the 6-month window {WINDOW_LABEL}.
+
+CRITICAL RANKING RULE: A signal is ACTIONABLE as long as the insider has NOT subsequently sold, regardless of when they bought.
+A CFO who bought $500k in January and still holds is MORE interesting than no recent activity.
+Rank by signal quality × conviction, NOT by recency. An open 6-month-old buy outranks no signal.
 
 ## Fabuless 12 — ALWAYS include all of these in the watchlist first:
 NVDA (NVIDIA), AMD, AVGO (Broadcom), MRVL (Marvell), TSM (TSMC), ASML, ARM (Arm Holdings),
 MU (Micron), INTC (Intel), QCOM (Qualcomm), SK Hynix (000660.KS), Samsung (005930.KS)
 
-Even if there is no actionable signal for a Fabuless 12 name, include it in the watchlist with
+Even if there is no actionable signal for a Fabuless 12 name, include it with
 conviction = "MODERATE" and an honest explanation of the insider posture.
 
 ## Conviction levels:
-- VERY HIGH → CFO/CEO open-market buy $500k+
-- HIGH → multiple insiders buying, or single large buy $250k+
-- MOD-HIGH → single significant buy $100k–$250k
+- VERY HIGH → CFO/CEO open-market buy $500k+ (position still held)
+- HIGH → multiple insiders buying, or single large buy $250k+ (position still held)
+- MOD-HIGH → single significant buy $100k–$250k (position still held)
 - MODERATE → no buys but also no alarming sells; or routine option exercises held
 - AVOID → cluster selling (3+ insiders), large directional exits
 - CAUTIOUS → CEO/CFO selling heavily but likely 10b5-1
@@ -149,8 +153,8 @@ conviction = "MODERATE" and an honest explanation of the insider posture.
 
 ## Rules:
 - Watchlist: exactly 10 items. First 10 from the Fabuless 12, ranked by signal strength.
-- RedFlags: only names with genuinely alarming patterns (cluster sells, full liquidations).
-- "stillOpen" = true if the insider who bought has NOT subsequently sold.
+- RedFlags: only names with genuinely alarming patterns (cluster sells, full liquidations) within 6 months.
+- "stillOpen" = true if the insider who bought in the 6-month window has NOT subsequently sold.
 - All prices approximate based on data available.
 
 ## Raw data:

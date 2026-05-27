@@ -56,6 +56,12 @@ export default function RootLayout({
                 <Link href="/analyst-consensus" className="hover:text-amber-400 transition-colors">
                   Analysts
                 </Link>
+                <Link href="/insider-trading" className="hover:text-amber-400 transition-colors">
+                  Insider Trades
+                </Link>
+                <Link href="/earnings" className="hover:text-amber-400 transition-colors">
+                  Earnings
+                </Link>
                 <Link href="/voices" className="hover:text-amber-400 transition-colors">
                   Top Voices
                 </Link>
@@ -64,12 +70,6 @@ export default function RootLayout({
                 </Link>
                 <Link href="/archive" className="hover:text-amber-400 transition-colors">
                   Archive
-                </Link>
-                <Link href="/earnings" className="hover:text-amber-400 transition-colors">
-                  Earnings
-                </Link>
-                <Link href="/insider-trading" className="hover:text-amber-400 transition-colors">
-                  Insider Trades
                 </Link>
               </div>
             </nav>

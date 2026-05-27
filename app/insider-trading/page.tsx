@@ -75,10 +75,27 @@ export default async function InsiderTrading() {
         Open-market insider purchases and cluster-sell signals across the semi &amp; semi-cap universe. Prices live · Thesis as of {analysisDate}.
       </p>
 
-      {/* Top 10 Watchlist — 2-column grid */}
-      <h2 className="font-sans text-sm font-semibold text-[#0E7490] mb-3 tracking-widest uppercase">
+      {/* Top 10 Watchlist */}
+      <h2 className="font-sans text-sm font-semibold text-[#0E7490] mb-2 tracking-widest uppercase">
         Top 10 Watchlist
       </h2>
+
+      {/* Conviction key */}
+      <div className="flex flex-wrap gap-x-4 gap-y-1 mb-4">
+        {([
+          ["VERY HIGH", "bg-emerald-100 text-emerald-800 border-emerald-200", "CEO/CFO buy $500k+"],
+          ["HIGH",      "bg-emerald-50 text-emerald-700 border-emerald-200",  "Large buy $250k+"],
+          ["MOD-HIGH",  "bg-teal-50 text-teal-700 border-teal-200",           "Buy $100k–250k"],
+          ["MODERATE",  "bg-gray-100 text-gray-500 border-gray-200",          "No clear signal"],
+          ["CAUTIOUS",  "bg-amber-50 text-amber-700 border-amber-200",        "Execs selling (likely planned)"],
+          ["AVOID",     "bg-red-100 text-red-700 border-red-200",             "Cluster selling — exit signal"],
+        ] as const).map(([label, style, desc]) => (
+          <div key={label} className="flex items-center gap-1.5">
+            <span className={`text-[8px] font-semibold px-1.5 py-0.5 rounded border tracking-wider uppercase ${style}`}>{label}</span>
+            <span className="text-[10px] text-gray-400">{desc}</span>
+          </div>
+        ))}
+      </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-10">
         {data.watchlist.map((item) => {
@@ -110,8 +127,8 @@ export default async function InsiderTrading() {
                 <ConvictionBadge level={item.conviction} />
               </div>
 
-              {/* Signal — clamped to 2 lines */}
-              <p className="text-[11px] text-gray-600 leading-relaxed line-clamp-2">{item.signal}</p>
+              {/* Signal */}
+              <p className="text-[11px] text-gray-600 leading-relaxed">{item.signal}</p>
 
               {/* Footer */}
               <div className="flex items-center gap-2 text-[9px] text-gray-400 mt-auto pt-1 border-t border-gray-100">
@@ -139,7 +156,7 @@ export default async function InsiderTrading() {
                     <SeverityBadge severity={flag.severity} />
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 leading-relaxed line-clamp-3">{flag.signal}</p>
+                <p className="text-xs text-gray-600 leading-relaxed">{flag.signal}</p>
               </div>
             ))}
           </div>

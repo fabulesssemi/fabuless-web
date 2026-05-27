@@ -1,7 +1,36 @@
 import { insiderTradingData } from "@/lib/insider-trading";
 import type { ConvictionLevel } from "@/lib/insider-trading";
+import YahooFinance from "yahoo-finance2";
 
-export const revalidate = 3600;
+export const revalidate = 1800; // refresh every 30 min
+
+// ── Live price fetcher ────────────────────────────────────────────────────────
+
+const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
+
+async function fetchLivePrices(tickers: string[]): Promise<Record<string, number | null>> {
+  const results: Record<string, number | null> = {};
+  await Promise.all(
+    tickers.map(async (ticker) => {
+      try {
+        const q = await (yf.quote as (t: string) => Promise<{ regularMarketPrice?: number }>)(ticker);
+        results[ticker] = q.regularMarketPrice ?? null;
+      } catch {
+        results[ticker] = null;
+      }
+    })
+  );
+  return results;
+}
+
+function formatPrice(price: number | null | undefined): string {
+  if (!price) return "—";
+  return price >= 1000
+    ? `$${price.toLocaleString("en-US", { maximumFractionDigits: 0 })}`
+    : `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+// ── UI components ─────────────────────────────────────────────────────────────
 
 function Stars({ count }: { count: number }) {
   return (
@@ -35,78 +64,102 @@ function SeverityBadge({ severity }: { severity: string }) {
   return <span className="text-[10px] font-semibold px-2 py-0.5 rounded font-sans tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200">⚠️ CAUTIOUS</span>;
 }
 
-export default function InsiderTrading() {
+// ── Page ──────────────────────────────────────────────────────────────────────
+
+export default async function InsiderTrading() {
   const data = insiderTradingData;
-  const updated = new Date(data.generatedDate).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
+
+  const analysisDate = new Date(data.generatedDate).toLocaleDateString("en-US", {
+    month: "long", day: "numeric", year: "numeric",
   });
+
+  // Fetch live prices for all watchlist tickers
+  const tickers = data.watchlist.map((item) => item.ticker);
+  const livePrices = await fetchLivePrices(tickers);
 
   return (
     <div className="max-w-4xl mx-auto px-6 pt-16 pb-16">
+
       {/* Header */}
       <div className="flex items-baseline justify-between mb-2">
         <h1 className="font-sans text-4xl text-[#0E7490] tracking-tight">
           Insider Trading
         </h1>
-        <span className="text-xs text-gray-400 font-sans">Updated {updated}</span>
+        <span className="text-xs text-gray-400 font-sans">Analysis: {analysisDate}</span>
       </div>
       <p className="text-sm text-gray-400 mb-2">
         Open-market insider purchases and cluster-sell signals across the semi &amp; semi-cap equipment universe.
         Generated weekly by the Fabuless Equity Research Agent.
       </p>
-      <p className="text-xs text-gray-400 mb-10">
+      <p className="text-xs text-gray-400 mb-2">
         Lookback window: <span className="text-gray-500">{data.lookbackWindow}</span>
+      </p>
+      <p className="text-xs text-amber-600 mb-10">
+        ⚡ Prices shown are live. Thesis text reflects conditions on {analysisDate} — specific price targets may be stale.
       </p>
 
       {/* Executive Summary */}
       <div className="bg-[#111827] rounded-lg p-5 mb-12 border-l-4 border-amber-500">
         <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-2 font-sans">Executive Summary</p>
         <p className="text-sm text-gray-300 leading-relaxed">{data.executiveSummary}</p>
+        <p className="text-[10px] text-gray-500 mt-3">Written {analysisDate}</p>
       </div>
 
       {/* Top 10 Watchlist */}
       <h2 className="font-sans text-xl font-semibold text-[#0E7490] mb-1 tracking-tight">
         Top 10 Watchlist
       </h2>
-      <p className="text-xs text-gray-400 mb-6">Ranked by insider conviction signal strength</p>
+      <p className="text-xs text-gray-400 mb-6">Ranked by insider conviction signal strength · Prices live</p>
 
       <div className="space-y-5 mb-14">
-        {data.watchlist.map((item) => (
-          <div
-            key={item.ticker}
-            className="border border-gray-200 rounded-lg p-5 hover:border-[#0E7490]/40 transition-colors bg-white"
-          >
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-400 font-sans w-4">{item.rank}.</span>
-                <span className="font-sans font-bold text-lg text-[#18181B] tracking-tight">
-                  {item.ticker}
-                </span>
-                <span className="text-sm text-gray-500">{item.company}</span>
-                <span className="text-sm font-medium text-gray-700">{item.price}</span>
+        {data.watchlist.map((item) => {
+          const livePrice = livePrices[item.ticker];
+          return (
+            <div
+              key={item.ticker}
+              className="border border-gray-200 rounded-lg p-5 hover:border-[#0E7490]/40 transition-colors bg-white"
+            >
+              <div className="flex items-start justify-between gap-4 mb-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="text-xs text-gray-400 font-sans w-4">{item.rank}.</span>
+                  <span className="font-sans font-bold text-lg text-[#18181B] tracking-tight">
+                    {item.ticker}
+                  </span>
+                  <span className="text-sm text-gray-500">{item.company}</span>
+
+                  {/* Live price — prominent */}
+                  {livePrice ? (
+                    <span className="font-sans font-semibold text-sm text-[#18181B] bg-gray-100 px-2 py-0.5 rounded">
+                      {formatPrice(livePrice)} <span className="text-[10px] font-normal text-gray-400">live</span>
+                    </span>
+                  ) : (
+                    <span className="text-sm text-gray-400">{item.price}</span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <Stars count={item.stars} />
+                  <ConvictionBadge level={item.conviction} />
+                </div>
               </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <Stars count={item.stars} />
-                <ConvictionBadge level={item.conviction} />
+
+              <p className="text-xs text-[#0E7490] font-semibold mb-1 font-sans uppercase tracking-wider">Insider Signal</p>
+              <p className="text-sm text-gray-700 mb-3 leading-relaxed">{item.signal}</p>
+
+              {/* Thesis with staleness disclaimer */}
+              <p className="text-xs text-gray-500 font-semibold mb-1 font-sans uppercase tracking-wider">
+                Thesis <span className="normal-case tracking-normal font-normal text-gray-400">· as of {analysisDate}</span>
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed">{item.thesis}</p>
+
+              <div className="mt-3 flex items-center gap-4 text-xs text-gray-400">
+                <span>Last buy: <span className="text-gray-600">{item.lastInsiderBuy}</span></span>
+                {item.stillOpen && (
+                  <span className="text-emerald-600 font-medium">✓ Signal still open</span>
+                )}
               </div>
             </div>
-
-            <p className="text-xs text-[#0E7490] font-semibold mb-1 font-sans uppercase tracking-wider">Insider Signal</p>
-            <p className="text-sm text-gray-700 mb-3 leading-relaxed">{item.signal}</p>
-
-            <p className="text-xs text-gray-500 font-semibold mb-1 font-sans uppercase tracking-wider">Thesis</p>
-            <p className="text-sm text-gray-600 leading-relaxed">{item.thesis}</p>
-
-            <div className="mt-3 flex items-center gap-4 text-xs text-gray-400">
-              <span>Last buy: <span className="text-gray-600">{item.lastInsiderBuy}</span></span>
-              {item.stillOpen && (
-                <span className="text-emerald-600 font-medium">✓ Signal still open</span>
-              )}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Red Flags */}
@@ -133,14 +186,15 @@ export default function InsiderTrading() {
         ))}
       </div>
 
-      {/* Methodology note */}
+      {/* Methodology */}
       <div className="border-t border-gray-200 pt-6">
         <p className="text-xs text-gray-400 leading-relaxed">
           <span className="font-semibold text-gray-500">Methodology:</span> Data pulled from Finviz insider trading tables,
           SEC EDGAR Form 4 filings, and StockTitan/Benzinga for individual tickers. Coverage universe: NVDA, AMD, INTC,
           QCOM, AVGO, TXN, MRVL, MU, AMAT, LRCX, KLAC, ONTO, ENTG, MKSI, ACLS, ASML, SNPS, CDNS, ARM, LSCC, ON.
           Open-market purchases weighted higher than option exercises. 10b5-1 sales treated as less directional than
-          discretionary sales. Not investment advice.
+          discretionary sales. Prices shown are live via Yahoo Finance. Thesis text is generated weekly and reflects
+          market conditions at the time of analysis — specific price levels may be stale between updates. Not investment advice.
         </p>
       </div>
     </div>

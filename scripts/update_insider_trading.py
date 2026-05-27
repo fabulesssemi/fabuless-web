@@ -217,6 +217,10 @@ def write_typescript(data: dict, output_path: str):
     }}"""
         )
 
+    # Pre-join outside f-string (backslashes not allowed in f-string expressions in Python <3.12)
+    watchlist_block = ",\n".join(watchlist_items)
+    red_flags_block = ",\n".join(red_flag_items)
+
     ts = f'''export type ConvictionLevel = "VERY HIGH" | "HIGH" | "MOD-HIGH" | "MODERATE" | "AVOID" | "CAUTIOUS";
 
 export interface WatchlistItem {{
@@ -255,10 +259,10 @@ export const insiderTradingData: InsiderTradingData = {{
   lookbackWindow: {ts_str(data["lookbackWindow"])},
   executiveSummary: {ts_str(data["executiveSummary"])},
   watchlist: [
-{",\n".join(watchlist_items)},
+{watchlist_block},
   ],
   redFlags: [
-{",\n".join(red_flag_items)},
+{red_flags_block},
   ],
 }};
 '''

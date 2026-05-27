@@ -158,6 +158,5 @@ export const insiderTradingData: InsiderTradingData = {
     },
   ],
   redFlags: [
-,
   ],
 };

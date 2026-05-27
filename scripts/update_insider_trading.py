@@ -221,6 +221,10 @@ def write_typescript(data: dict, output_path: str):
     watchlist_block = ",\n".join(watchlist_items)
     red_flags_block = ",\n".join(red_flag_items)
 
+    # Trailing commas — only when the block is non-empty (empty block + trailing comma = invalid TS)
+    watchlist_trailing = "," if watchlist_items else ""
+    red_flags_trailing = "," if red_flag_items else ""
+
     ts = f'''export type ConvictionLevel = "VERY HIGH" | "HIGH" | "MOD-HIGH" | "MODERATE" | "AVOID" | "CAUTIOUS";
 
 export interface WatchlistItem {{
@@ -259,10 +263,10 @@ export const insiderTradingData: InsiderTradingData = {{
   lookbackWindow: {ts_str(data["lookbackWindow"])},
   executiveSummary: {ts_str(data["executiveSummary"])},
   watchlist: [
-{watchlist_block},
+{watchlist_block}{watchlist_trailing}
   ],
   redFlags: [
-{red_flags_block},
+{red_flags_block}{red_flags_trailing}
   ],
 }};
 '''

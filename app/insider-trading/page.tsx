@@ -1,26 +1,19 @@
 import { insiderTradingData } from "@/lib/insider-trading";
 import type { ConvictionLevel } from "@/lib/insider-trading";
-import YahooFinance from "yahoo-finance2";
+import { getQuoteCached } from "@/lib/providers";
 
 export const revalidate = 1800; // refresh every 30 min
 
 // ── Live price fetcher ────────────────────────────────────────────────────────
 
-const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
-
 async function fetchLivePrices(tickers: string[]): Promise<Record<string, number | null>> {
-  const results: Record<string, number | null> = {};
-  await Promise.all(
+  const results = await Promise.all(
     tickers.map(async (ticker) => {
-      try {
-        const q = await (yf.quote as (t: string) => Promise<{ regularMarketPrice?: number }>)(ticker);
-        results[ticker] = q.regularMarketPrice ?? null;
-      } catch {
-        results[ticker] = null;
-      }
+      const quote = await getQuoteCached(ticker).catch(() => null);
+      return [ticker, quote?.price ?? null] as [string, number | null];
     })
   );
-  return results;
+  return Object.fromEntries(results);
 }
 
 function formatPrice(price: number | null | undefined): string {

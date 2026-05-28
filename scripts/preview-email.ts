@@ -35,6 +35,12 @@ function esc(s: string) {
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
+function truncate(str: string, limit: number): string {
+  if (str.length <= limit) return str;
+  const cut = str.slice(0, limit).replace(/\s+\S*$/, "");
+  return cut + "…";
+}
+
 function sectionHeader(label: string, color: string) {
   return `
   <tr><td style="padding:20px 32px 4px;">
@@ -53,7 +59,7 @@ function storyRow(s: AutoStory) {
       <td style="vertical-align:top;">
         <p style="font-family:system-ui,sans-serif;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 5px 0;">${esc(s.source)}</p>
         <a href="${esc(s.url)}" style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:#B45309;text-decoration:none;line-height:1.4;display:block;margin-bottom:7px;">${esc(s.headline)}</a>
-        <p style="font-family:system-ui,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(s.oneliner)}</p>
+        <p style="font-family:system-ui,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(truncate(s.oneliner, 100))}</p>
       </td>${img}
     </tr></table>
   </td></tr>
@@ -65,7 +71,7 @@ function podcastRow(p: AutoPodcast) {
   <tr><td style="padding:12px 32px 14px;">
     <p style="font-family:system-ui,sans-serif;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 4px 0;">${esc(p.show)}</p>
     <a href="${esc(p.url)}" style="font-family:system-ui,sans-serif;font-size:14px;font-weight:500;color:#0E7490;text-decoration:none;display:block;margin-bottom:5px;">${esc(p.title)}</a>
-    <p style="font-family:system-ui,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(p.oneliner)}</p>
+    <p style="font-family:system-ui,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(truncate(p.oneliner, 150))}</p>
   </td></tr>
   <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f3f4f6;margin:0;"></td></tr>`;
 }

@@ -148,7 +148,7 @@ export class YahooProvider
       return {
         price:          px?.regularMarketPrice ?? undefined,
         change:         px?.regularMarketChange ?? undefined,
-        changePercent:  px?.regularMarketChangePercent ?? undefined,
+        changePercent:  px?.regularMarketChangePercent != null ? px.regularMarketChangePercent * 100 : undefined,
         currency:       px?.currency ?? undefined,
         marketCap:      px?.marketCap ?? undefined,
         peTrailing:     sd?.trailingPE ?? undefined,

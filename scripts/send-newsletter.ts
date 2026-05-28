@@ -87,6 +87,13 @@ async function getSubscribers(): Promise<string[]> {
 
 // ── HTML builder ─────────────────────────────────────────────────────────────
 
+// Trim to nearest word boundary so email one-liners stay punchy
+function truncate(str: string, limit: number): string {
+  if (str.length <= limit) return str;
+  const cut = str.slice(0, limit).replace(/\s+\S*$/, "");
+  return cut + "…";
+}
+
 function esc(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -120,7 +127,7 @@ function storyRow(story: AutoStory): string {
             <td style="vertical-align:top;">
               <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 5px 0;">${esc(story.source)}</p>
               <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:#B45309;text-decoration:none;line-height:1.4;display:block;margin-bottom:7px;">${esc(story.headline)}</a>
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(story.oneliner)}</p>
+              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(truncate(story.oneliner, 100))}</p>
             </td>
             ${imgCell}
           </tr>
@@ -138,7 +145,7 @@ function podcastRow(pod: AutoPodcast): string {
       <td style="padding:12px 32px 14px;">
         <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 4px 0;">${esc(pod.show)}</p>
         <a href="${esc(pod.url)}" style="font-family:system-ui,-apple-system,sans-serif;font-size:14px;font-weight:500;color:#0E7490;text-decoration:none;display:block;margin-bottom:5px;">${esc(pod.title)}</a>
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(pod.oneliner)}</p>
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(truncate(pod.oneliner, 150))}</p>
       </td>
     </tr>
     <tr>

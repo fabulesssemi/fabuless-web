@@ -175,22 +175,18 @@ export function getCompanyData(symbol: string, newsKeywords?: string[]): Promise
   const cached = unstable_cache(
     () => fetchCompanyData(symbol, newsKeywords),
     ["company-data", symbol],
-    { tags: [`company:${symbol}`], revalidate: 3600 },
+    { tags: [`company:${symbol}`], revalidate: 300 },
   );
   return cached();
 }
 
 /**
- * Lightweight quote-only fetch for list/index views. Cached 1 hour per symbol.
- * Never throws.
+ * Lightweight quote-only fetch for list/index views.
+ * No inner cache — relies on page-level ISR (revalidate: 300) so prices
+ * stay fresh. Never throws.
  */
 export function getQuoteCached(symbol: string): Promise<Quote | null> {
-  const cached = unstable_cache(
-    () => collectQuote(symbol),
-    ["company-quote", symbol],
-    { tags: [`company:${symbol}`], revalidate: 3600 },
-  );
-  return cached();
+  return collectQuote(symbol);
 }
 
 export type { CompanyMarketData } from "./types";

@@ -11,7 +11,7 @@ import {
   fmtPrice,
 } from "@/app/components/company/primitives";
 
-export const revalidate = 3600;
+export const revalidate = 300; // 5 min — keeps prices fresh
 
 export const metadata: Metadata = {
   title: "Companies — Fabuless",

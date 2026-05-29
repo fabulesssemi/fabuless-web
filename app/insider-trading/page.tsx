@@ -2,7 +2,7 @@ import { insiderTradingData } from "@/lib/insider-trading";
 import type { ConvictionLevel } from "@/lib/insider-trading";
 import { getQuoteCached } from "@/lib/providers";
 
-export const revalidate = 1800;
+export const revalidate = 300; // 5 min — keeps prices fresh
 
 async function fetchLivePrices(tickers: string[]): Promise<Record<string, number | null>> {
   const results = await Promise.all(

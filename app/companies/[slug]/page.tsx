@@ -7,8 +7,8 @@ import { getEditorialForSlug } from "@/lib/editorial";
 import { CompanyDashboard } from "@/app/components/company/CompanyDashboard";
 import { getPriceHistory } from "@/lib/providers/history";
 
-// Pre-render all known companies at build; refresh data hourly (ISR).
-export const revalidate = 3600;
+// Pre-render all known companies at build; refresh price + analyst data every 5 min (ISR).
+export const revalidate = 300;
 export const dynamicParams = true;
 
 export function generateStaticParams() {

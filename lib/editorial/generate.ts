@@ -142,10 +142,18 @@ export async function generateEditorial(
   // Build pinnedNews from the RSS items the pipeline already fetched and filtered.
   // These are guaranteed relevant (passed the keyword filter), from curated sources,
   // and will be stored in Supabase — auto-revalidating the company page each cron run.
+  const cutoff = Date.now() - 14 * 24 * 60 * 60 * 1000; // 14 days
   const freshPinnedNews = companyNews
-    .filter((n) => n.link && n.title)
+    .filter((n) => {
+      if (!n.link || !n.title) return false;
+      // Drop articles older than 14 days (no pubDate = include, better than hiding)
+      if (n.pubDate) {
+        const t = new Date(n.pubDate).getTime();
+        if (!isNaN(t) && t < cutoff) return false;
+      }
+      return true;
+    })
     .sort((a, b) => {
-      // Prefer more recent items when pubDate is available
       const ta = a.pubDate ? new Date(a.pubDate).getTime() : 0;
       const tb = b.pubDate ? new Date(b.pubDate).getTime() : 0;
       return tb - ta;

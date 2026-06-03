@@ -51,6 +51,122 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 3,
+    date: "June 3, 2026",
+    slug: "issue-3",
+    title: "TSMC-Nvidia AI Alliance, Memory's Trillion-Dollar Surge, and Electrician Bottlenecks",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "TSMC Expands Use of NVIDIA AI Technologies Across Chip Production Operations",
+            url: "https://semiwiki.com/semiconductor-manufacturers/tsmc/369873-tsmc-expands-use-of-nvidia-ai-technologies-across-chip-production-operations/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/06/TSMC-Expands-Use-of-NVIDIA-AI-Technologies-Across-Chip-Production-Operations-1200x600.jpg",
+            oneliner: "TSMC is embedding NVIDIA's AI and accelerated computing stack deeper into its chip design and fab operations.",
+          },
+          {
+            headline: "TSMC Defends Transistor Scaling Amid Huawei’s ‘Her’s Law’ Proposal",
+            url: "https://www.eetimes.com/tsmc-defends-transistor-scaling-amid-huaweis-hers-law-proposal/",
+            source: "EE Times",
+            image: "https://www.eetimes.com/wp-content/uploads/Kevin-Zhang-sq.jpg?fit=887%2C887",
+            oneliner: "TSMC defends node scaling as the core roadmap, rejecting Huawei's framing that 3D packaging should supplant Moore's Law.",
+          },
+          {
+            headline: "Nvidia Extends Its Grip On The AI Datacenter Outwards",
+            url: "https://www.nextplatform.com/ai/2026/06/02/nvidia-extends-its-grip-on-the-ai-datacenter-outwards/5250344",
+            source: "The Next Platform",
+            image: "https://image.nextplatform.com/5250346.jpg?imageId=5250346&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Nvidia is pushing further into networking and systems-level infrastructure, expanding its AI datacenter share beyond GPUs.",
+          },
+          {
+            headline: "GPUs And RAM Are In Short Supply, But The Real Bottleneck For AI Is Electricians",
+            url: "https://www.nextplatform.com/compute/2026/05/28/gpus-and-ram-are-in-short-supply-but-the-real-bottleneck-for-ai-is-electricians/5247566",
+            source: "The Next Platform",
+            image: "https://image.nextplatform.com/5247569.jpg?imageId=5247569&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Electrician shortages are emerging as a key bottleneck for AI data center buildouts, alongside GPU and memory supply constraints.",
+          },
+          {
+            headline: "What Can Nvidia Do to Get Investors Excited Again?",
+            url: "https://www.bloomberg.com/news/articles/2026-06-03/nvidia-share-price-what-can-chipmaker-do-to-get-investors-excited-again",
+            source: "Bloomberg Technology",
+            image: null,
+            oneliner: "Nvidia faces investor questions on what catalysts can sustain momentum as AI trade enthusiasm cools.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "HPE shares soar 37% on booming demand for AI infrastructure",
+            url: "https://www.ft.com/content/3ddf001d-d7f6-40f1-8fe4-1cc577868da0",
+            source: "Financial Times Tech",
+            image: "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F26a52004-19e2-4863-b519-6f80e9496c51.jpg?source=next-barrier-page",
+            oneliner: "HPE stock surged 37% on accelerating AI server and networking demand, signaling broad-based data center capex strength.",
+          },
+          {
+            headline: "HSBC massively revamps Broadcom's stock price target",
+            url: "https://www.thestreet.com/investing/stocks/hsbc-massively-revamps-broadcoms-stock-price-target-ahead-of-earnings",
+            source: "TheStreet Tech",
+            image: null,
+            oneliner: "HSBC sharply lifts Broadcom price target on Buy rating, pointing to stronger-than-expected AI ASIC and networking demand.",
+          },
+          {
+            headline: "Memory chips are all the rage in markets, with Micron and SK Hynix becoming trillion-dollar companies",
+            url: "https://finance.yahoo.com/markets/stocks/articles/memory-chips-rage-markets-micron-160000501.html",
+            source: "Yahoo Finance Tech",
+            image: "https://s.yimg.com/ny/api/res/1.2/4Dscf9X7EdysP1aOpoOcKQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/moneywise_327/04cd2ec715a9a5c4ffea766203a03809",
+            oneliner: "AI-driven HBM and DRAM demand has pushed Micron and SK Hynix into trillion-dollar territory, signaling a memory supercycle repricing.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Marvell’s stock is on a run not seen in a quarter-century as the tech company grows in stature",
+            url: "https://www.marketwatch.com/story/marvells-stock-is-on-a-run-not-seen-in-a-quarter-century-as-the-tech-company-grows-in-stature-7884b9c3?mod=mw_rss_topstories",
+            source: "MarketWatch Tech",
+            image: null,
+            oneliner: "Marvell's market cap hit $269B, surpassing PepsiCo and T-Mobile, as AI-driven gains fuel its biggest stock run in 25 years.",
+          },
+          {
+            headline: "Susquehanna resets Broadcom stock target ahead of earnings",
+            url: "https://www.thestreet.com/investing/stocks/susquehanna-raises-broadcom-stock-target-ahead-of-earnings",
+            source: "TheStreet Tech",
+            image: null,
+            oneliner: "Susquehanna lifts Broadcom price target but trims 2025 AI revenue estimate heading into June 3 earnings.",
+          },
+          {
+            headline: "Broadcom stock hovers at all-time highs ahead of earnings",
+            url: "https://finance.yahoo.com/markets/article/broadcom-stock-hovers-at-all-time-highs-ahead-of-earnings-165602217.html",
+            source: "Yahoo Finance Tech",
+            image: "https://s.yimg.com/ny/api/res/1.2/m3Tq2R0N4Kcj1ezXmkiqqA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03NzI-/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/gettyimages-1980670067_3607.jpg",
+            oneliner: "Broadcom enters earnings at all-time highs, with AI ASIC and networking momentum setting a high bar for results.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Dell Makes The Profits Up In Volume For Booming AI Servers",
+            url: "https://www.nextplatform.com/compute/2026/06/01/dell-makes-the-profits-up-in-volume-for-booming-ai-servers/5249707",
+            source: "The Next Platform",
+            image: "https://image.nextplatform.com/5249710.jpg?imageId=5249710&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Dell is riding AI server volume to grow profits despite tight per-unit margins on hyperscaler deals.",
+          },
+        ],
+      },
+    ],
+    podcasts: [
+    ],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 2,
     date: "May 22, 2026",
     slug: "issue-2",

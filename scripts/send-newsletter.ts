@@ -26,7 +26,7 @@ try {
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import * as readline from "readline";
-import { issues, type Issue, type Story, type Podcast, type Quote } from "../lib/issues";
+import { issues, type Issue, type Story, type Podcast, type Quote, type StoryQuote } from "../lib/issues";
 
 // ── Supabase ─────────────────────────────────────────────────────────────────
 
@@ -64,42 +64,57 @@ function categoryHeader(label: string): string {
   const color = CAT_COLORS[label] ?? "#6B7280";
   return `
     <tr>
-      <td style="padding:22px 32px 6px;">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr>
-            <td style="border-left:3px solid ${color};padding-left:10px;">
-              <span style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:${color};letter-spacing:0.12em;text-transform:uppercase;">${esc(label)}</span>
-            </td>
-          </tr>
-        </table>
-        <hr style="border:none;border-top:1px solid #e5e7eb;margin:6px 0 0 0;">
+      <td style="padding:26px 32px 0px;">
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:${color};letter-spacing:0.18em;text-transform:uppercase;margin:0 0 8px 0;">${esc(label)}</p>
+        <hr style="border:none;border-top:2px solid ${color};margin:0;">
       </td>
     </tr>`;
 }
 
-function storyRow(story: Story): string {
-  const imgCell = story.image
-    ? `<td width="90" style="vertical-align:top;padding-left:14px;min-width:90px;">
-         <img src="${esc(story.image)}" width="90" height="60" style="display:block;border-radius:3px;border:1px solid #f3f4f6;object-fit:cover;" alt="">
+function storyXQuotes(quotes: StoryQuote[]): string {
+  if (!quotes.length) return "";
+  return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">` +
+    quotes.map((q) => `
+    <tr><td style="padding:6px 0 0 0;border-top:1px solid #f3f4f6;">
+      <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;color:#18181B;margin:0;line-height:1.55;">
+        <span style="font-weight:900;color:#000;margin-right:4px;">𝕏</span><a href="${q.url ? esc(q.url) : "#"}" style="color:#B45309;text-decoration:none;font-weight:700;">${esc(q.handle)}</a><span style="color:#9ca3af;font-size:11px;"> ${esc(q.name)}</span><br>
+        <span style="color:#374151;font-style:italic;">"${esc(q.text)}"</span>
+      </p>
+    </td></tr>`).join("") +
+    `</table>`;
+}
+
+function storyRow(story: Story, showImage: boolean, featured: boolean = false): string {
+  const headlineSize = featured ? "19px" : "15px";
+  const headlineWeight = featured ? "800" : "700";
+  const padding = featured ? "18px 32px 18px" : "12px 32px 13px";
+  const imgSize = featured ? 120 : 90;
+  const imgHeight = featured ? 80 : 60;
+
+  const imgCell = showImage && story.image
+    ? `<td width="${imgSize}" style="vertical-align:top;padding-left:14px;min-width:${imgSize}px;">
+         <img src="${esc(story.image)}" width="${imgSize}" height="${imgHeight}" style="display:block;border-radius:4px;border:1px solid #e5e7eb;object-fit:cover;" alt="">
        </td>`
     : "";
+  const xQuotesHtml = story.xQuotes?.length ? storyXQuotes(story.xQuotes) : "";
 
   return `
     <tr>
-      <td style="padding:12px 32px 14px;">
+      <td style="padding:${padding};">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td style="vertical-align:top;">
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 4px 0;">${esc(story.source)}</p>
-              <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:#B45309;text-decoration:none;line-height:1.4;display:block;margin-bottom:6px;">${esc(story.headline)}</a>
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;font-style:italic;margin:0;line-height:1.55;">${esc(story.oneliner)}</p>
+              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 5px 0;">${esc(story.source)}</p>
+              <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:#111827;text-decoration:none;line-height:1.35;display:block;margin-bottom:7px;">${esc(story.headline)}</a>
+              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12.5px;color:#B45309;font-weight:600;margin:0;line-height:1.5;">${esc(story.oneliner)}</p>
+              ${xQuotesHtml}
             </td>
             ${imgCell}
           </tr>
         </table>
       </td>
     </tr>
-    <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f3f4f6;margin:0;"></td></tr>`;
+    <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f0f0f0;margin:0;"></td></tr>`;
 }
 
 function podcastRow(pod: Podcast): string {
@@ -162,11 +177,15 @@ function buildEmailHtml(issue: Issue): string {
 
   // Build stories HTML grouped by category
   let storiesHtml = "";
+  let storyIndex = 0;
   for (const cat of CAT_ORDER) {
     const section = issue.sections.find((s) => s.category === cat);
     if (!section || !section.stories.length) continue;
     storiesHtml += categoryHeader(cat);
-    storiesHtml += section.stories.map(storyRow).join("");
+    storiesHtml += section.stories.map((s) => {
+      const i = storyIndex++;
+      return storyRow(s, i === 0 || i === 6, i === 0);
+    }).join("");
   }
 
   const podcastsHtml = issue.podcasts.map(podcastRow).join("");

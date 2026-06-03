@@ -5,6 +5,13 @@ export type Quote = {
   url?: string;    // link to the original tweet
 };
 
+export type StoryQuote = {
+  handle: string; // e.g. "@BenBajarin"
+  name: string;   // e.g. "Ben Bajarin"
+  text: string;
+  url?: string;
+};
+
 export type Story = {
   headline: string;
   url: string;
@@ -12,6 +19,8 @@ export type Story = {
   image: string | null;
   oneliner: string;
   topLabel?: string;
+  // Email-only: X quotes that react to this specific story (Techmeme style)
+  xQuotes?: StoryQuote[];
 };
 
 export type IssueSection = {
@@ -50,6 +59,150 @@ export type Issue = {
 };
 
 export const issues: Issue[] = [
+  {
+    number: 4,
+    date: "June 3, 2026",
+    slug: "issue-4",
+    title: "Nvidia's AI Stack Expansion, TSMC's Scaling Defense, and Photonics' Rise",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "TSMC Expands Use of NVIDIA AI Technologies Across Chip Production Operations",
+            url: "https://semiwiki.com/semiconductor-manufacturers/tsmc/369873-tsmc-expands-use-of-nvidia-ai-technologies-across-chip-production-operations/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/06/TSMC-Expands-Use-of-NVIDIA-AI-Technologies-Across-Chip-Production-Operations-1200x600.jpg",
+            oneliner: "TSMC is embedding NVIDIA's AI and accelerated computing stack deeper into its chip design and fab operations.",
+          },
+          {
+            headline: "Physical AI Pushes Chipmakers Up the Value Chain",
+            url: "https://www.eetimes.com/physical-ai-pushes-chipmakers-up-the-value-chain/",
+            source: "EE Times",
+            image: "https://www.eetimes.com/wp-content/uploads/Robot_a5661d.jpg?fit=925%2C925",
+            oneliner: "European chipmakers are repositioning around physical AI in robotics and autos, aiming to move up the stack from components to systems.",
+          },
+          {
+            headline: "TSMC Defends Transistor Scaling Amid Huawei’s ‘Her’s Law’ Proposal",
+            url: "https://www.eetimes.com/tsmc-defends-transistor-scaling-amid-huaweis-hers-law-proposal/",
+            source: "EE Times",
+            image: "https://www.eetimes.com/wp-content/uploads/Kevin-Zhang-sq.jpg?fit=887%2C887",
+            oneliner: "TSMC defends node scaling as the core roadmap, rejecting Huawei's framing that 3D packaging should supplant Moore's Law.",
+          },
+          {
+            headline: "Nvidia Extends Its Grip On The AI Datacenter Outwards",
+            url: "https://www.nextplatform.com/ai/2026/06/02/nvidia-extends-its-grip-on-the-ai-datacenter-outwards/5250344",
+            source: "The Next Platform",
+            image: "https://image.nextplatform.com/5250346.jpg?imageId=5250346&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Nvidia is pushing further into networking and systems-level infrastructure, expanding its AI datacenter share beyond GPUs.",
+          },
+          {
+            headline: "GPUs And RAM Are In Short Supply, But The Real Bottleneck For AI Is Electricians",
+            url: "https://www.nextplatform.com/compute/2026/05/28/gpus-and-ram-are-in-short-supply-but-the-real-bottleneck-for-ai-is-electricians/5247566",
+            source: "The Next Platform",
+            image: "https://image.nextplatform.com/5247569.jpg?imageId=5247569&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Electrician shortages are emerging as a key bottleneck for AI data center buildouts, alongside GPU and memory supply constraints.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Taiwan Minister Emphasizes Collaboration and Future Focus on Photonics, WBG, and Quantum",
+            url: "https://www.eetimes.com/taiwan-minister-emphasizes-collaboration-and-future-focus-on-photonics-wbg-and-quantum/",
+            source: "EE Times",
+            image: "https://www.eetimes.com/wp-content/uploads/Minister-Wu-NSTC-Taiwan_sq.jpg?fit=1920%2C1920",
+            oneliner: "Taiwan is steering national R&D priorities toward photonics, wide-bandgap, and quantum to extend its chip dominance into AI infrastructure.",
+          },
+          {
+            headline: "Photonics: A Foundational Scaling Layer for AI-Era Computing",
+            url: "https://www.eetimes.com/photonics-a-foundational-scaling-layer-for-ai-era-computing/",
+            source: "EE Times",
+            image: "https://www.eetimes.com/wp-content/uploads/AdobeStock_1971136027.jpeg?fit=2688%2C1536",
+            oneliner: "Photonics is being positioned as a core enabler for AI scaling, benefiting silicon photonics players as electrical interconnects hit limits.",
+          },
+          {
+            headline: "HPE shares soar 37% on booming demand for AI infrastructure",
+            url: "https://www.ft.com/content/3ddf001d-d7f6-40f1-8fe4-1cc577868da0",
+            source: "Financial Times Tech",
+            image: "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F26a52004-19e2-4863-b519-6f80e9496c51.jpg?source=next-barrier-page",
+            oneliner: "HPE stock surged 37% on accelerating AI server and networking demand, signaling broad-based data center capex strength.",
+          },
+          {
+            headline: "HSBC massively revamps Broadcom's stock price target",
+            url: "https://www.thestreet.com/investing/stocks/hsbc-massively-revamps-broadcoms-stock-price-target-ahead-of-earnings",
+            source: "TheStreet Tech",
+            image: null,
+            oneliner: "HSBC sharply lifts Broadcom price target on Buy rating, pointing to stronger-than-expected AI ASIC and networking demand.",
+          },
+          {
+            headline: "Memory chips are all the rage in markets, with Micron and SK Hynix becoming trillion-dollar companies",
+            url: "https://finance.yahoo.com/markets/stocks/articles/memory-chips-rage-markets-micron-160000501.html",
+            source: "Yahoo Finance Tech",
+            image: "https://s.yimg.com/ny/api/res/1.2/4Dscf9X7EdysP1aOpoOcKQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/moneywise_327/04cd2ec715a9a5c4ffea766203a03809",
+            oneliner: "AI-driven HBM and DRAM demand has pushed Micron and SK Hynix into trillion-dollar territory, signaling a memory supercycle repricing.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Marvell’s stock is on a run not seen in a quarter-century as the tech company grows in stature",
+            url: "https://www.marketwatch.com/story/marvells-stock-is-on-a-run-not-seen-in-a-quarter-century-as-the-tech-company-grows-in-stature-7884b9c3?mod=mw_rss_topstories",
+            source: "MarketWatch Tech",
+            image: null,
+            oneliner: "Marvell's market cap hit $269B, surpassing PepsiCo and T-Mobile, as AI-driven gains fuel its biggest stock run in 25 years.",
+          },
+          {
+            headline: "Susquehanna resets Broadcom stock target ahead of earnings",
+            url: "https://www.thestreet.com/investing/stocks/susquehanna-raises-broadcom-stock-target-ahead-of-earnings",
+            source: "TheStreet Tech",
+            image: null,
+            oneliner: "Susquehanna lifts Broadcom price target but trims 2025 AI revenue estimate heading into June 3 earnings.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Dell Makes The Profits Up In Volume For Booming AI Servers",
+            url: "https://www.nextplatform.com/compute/2026/06/01/dell-makes-the-profits-up-in-volume-for-booming-ai-servers/5249707",
+            source: "The Next Platform",
+            image: "https://image.nextplatform.com/5249710.jpg?imageId=5249710&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Dell is riding AI server volume to grow profits despite tight per-unit margins on hyperscaler deals.",
+          },
+          {
+            headline: "Hyperscalers and the equity tap: more to come",
+            url: "https://www.ft.com/content/c9d562d6-1448-4a40-8198-0cb1f0dc2032",
+            source: "Financial Times Tech",
+            image: null,
+            oneliner: "FT signals more hyperscaler equity raises ahead as AI capex outpaces cash flow, a potential supply overhang for investors.",
+          },
+        ],
+      },
+    ],
+    podcasts: [
+    {
+      show: "Chip Stock Investor",
+      title: "Wafer Fab Equipment, M&A Moves & The Lab 7 You've Never Heard Of",
+      url: "https://podcasters.spotify.com/pod/show/chipstockinvestor/episodes/Wafer-Fab-Equipment--MA-Moves--The-Lab-7-Youve-Never-Heard-Of-e3k23qo",
+      image: "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/37949422/37949422-1745251328337-b57bc485b0f23.jpg",
+      oneliner: "Chip Stock Investor reviews valuations and 2026-2028 revenue outlooks for the Fab 5 (ASML, Applied Materials, Lam, Tokyo Electron, KLA), recent M&A including Axcelis-Veeco, Onto-Rigaku, and Applied-ASMPT, plus a \"Lab 7\" life-science equip",
+    },
+    {
+      show: "Invest Like The Best",
+      title: "Gavin Baker - Watts and Wafers - [Invest Like the Best, EP.473]",
+      url: "https://colossus.com/episode/watts-and-wafers/",
+      image: "https://megaphone.imgix.net/podcasts/3bc7d580-53ec-11f1-99c0-3bd245449e4f/image/31563a7dd10ea92493c934f0c1e723fe.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress",
+      oneliner: "Gavin Baker of Atreides Management discusses AI's power and wafer constraints, TSMC capacity, Elon's Terrafab, GPU disaggregation, and frontier model economics.",
+    },
+    ],
+    earnings: [],
+    quotes: [],
+  },
   {
     number: 3,
     date: "June 3, 2026",

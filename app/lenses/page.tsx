@@ -26,8 +26,8 @@ const lenses = [
     subtitle: "Supply Chain & Infrastructure",
     description:
       "Explore semiconductor supply chains, fab economics, AI infrastructure, and compute tokenomics — grounded in publicly available SemiAnalysis articles and podcast appearances.",
-    accent: "#D97706",
-    accentLight: "#FEF3C7",
+    accent: "#9A3412",
+    accentLight: "#FEE2E2",
     sources: "22 sources",
     dateRange: "2023–2026",
     sampleQuestion: "What are the key bottlenecks in CoWoS advanced packaging?",

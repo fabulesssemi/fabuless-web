@@ -20,8 +20,8 @@ interface Message {
   suggestedFollowUps?: string[];
 }
 
-const ACCENT = "#D97706";
-const ACCENT_LIGHT = "#FEF3C7";
+const ACCENT = "#9A3412";
+const ACCENT_LIGHT = "#FEE2E2";
 
 const STARTER_QUESTIONS = [
   "CoWoS bottlenecks",
@@ -304,7 +304,7 @@ export default function DylanLensPage() {
           <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Active</p>
           <div className="rounded-md px-3 py-2.5 border" style={{ backgroundColor: ACCENT_LIGHT, borderColor: "#BFDBFE" }}>
             <span className="text-[13px] font-semibold" style={{ color: ACCENT }}>The Patel Lens</span>
-            <p className="text-[11px] mt-0.5" style={{ color: "#92400E" }}>Supply Chain & Infrastructure</p>
+            <p className="text-[11px] mt-0.5" style={{ color: "#7F1D1D" }}>Supply Chain & Infrastructure</p>
           </div>
         </div>
 

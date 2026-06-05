@@ -37,7 +37,7 @@ const OTHER_LENSES = [
     href: "/lenses/dylan",
     name: "The Patel Lens",
     subtitle: "Supply Chain & Infrastructure",
-    color: "#D97706",
+    color: "#9A3412",
     initials: "DP",
   },
   {

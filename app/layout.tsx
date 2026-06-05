@@ -62,6 +62,9 @@ export default function RootLayout({
                 <Link href="/earnings" className="hover:text-amber-400 transition-colors">
                   Earnings
                 </Link>
+                <Link href="/lenses" className="hover:text-amber-400 transition-colors">
+                  Lenses
+                </Link>
                 <Link href="/voices" className="hover:text-amber-400 transition-colors">
                   Top Voices
                 </Link>

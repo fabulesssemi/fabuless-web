@@ -21,19 +21,6 @@ const lenses = [
     badge: "Investing",
   },
   {
-    slug: "dylan",
-    name: "The Patel Lens",
-    subtitle: "Supply Chain & Infrastructure",
-    description:
-      "Explore semiconductor supply chains, fab economics, AI infrastructure, and compute tokenomics — grounded in publicly available SemiAnalysis articles and podcast appearances.",
-    accent: "#9A3412",
-    accentLight: "#FEE2E2",
-    sources: "22 sources",
-    dateRange: "2023–2026",
-    sampleQuestion: "What are the key bottlenecks in CoWoS advanced packaging?",
-    badge: "Supply Chain",
-  },
-  {
     slug: "circuit",
     name: "The Circuit Lens",
     subtitle: "Earnings & Industry Dynamics",
@@ -45,6 +32,19 @@ const lenses = [
     dateRange: "Aug 2025–Jun 2026",
     sampleQuestion: "How are hyperscalers thinking about custom silicon vs. Nvidia GPUs?",
     badge: "Earnings",
+  },
+  {
+    slug: "dylan",
+    name: "The Patel Lens",
+    subtitle: "Supply Chain & Infrastructure",
+    description:
+      "Explore semiconductor supply chains, fab economics, AI infrastructure, and compute tokenomics — grounded in publicly available SemiAnalysis articles and podcast appearances.",
+    accent: "#9A3412",
+    accentLight: "#FEE2E2",
+    sources: "22 sources",
+    dateRange: "2023–2026",
+    sampleQuestion: "What are the key bottlenecks in CoWoS advanced packaging?",
+    badge: "Supply Chain",
   },
 ];
 

@@ -37,14 +37,14 @@ const OTHER_LENSES = [
     href: "/lenses/dylan",
     name: "The Patel Lens",
     subtitle: "Supply Chain & Infrastructure",
-    color: "#1D4ED8",
+    color: "#D97706",
     initials: "DP",
   },
   {
     href: "/lenses/circuit",
     name: "The Circuit Lens",
     subtitle: "Earnings & Industry Dynamics",
-    color: "#065F46",
+    color: "#1C1917",
     initials: "BJ",
   },
 ];

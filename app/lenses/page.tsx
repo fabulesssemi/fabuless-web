@@ -26,8 +26,8 @@ const lenses = [
     subtitle: "Supply Chain & Infrastructure",
     description:
       "Explore semiconductor supply chains, fab economics, AI infrastructure, and compute tokenomics — grounded in publicly available SemiAnalysis articles and podcast appearances.",
-    accent: "#1D4ED8",
-    accentLight: "#DBEAFE",
+    accent: "#D97706",
+    accentLight: "#FEF3C7",
     sources: "22 sources",
     dateRange: "2023–2026",
     sampleQuestion: "What are the key bottlenecks in CoWoS advanced packaging?",
@@ -39,8 +39,8 @@ const lenses = [
     subtitle: "Earnings & Industry Dynamics",
     description:
       "Dig into semiconductor earnings, chip industry cycles, and AI hardware demand — grounded in 38 episodes of The Circuit podcast with Ben Bajarin and Jay Goldberg.",
-    accent: "#065F46",
-    accentLight: "#D1FAE5",
+    accent: "#1C1917",
+    accentLight: "#F5F5F4",
     sources: "38 episodes",
     dateRange: "Aug 2025–Jun 2026",
     sampleQuestion: "How are hyperscalers thinking about custom silicon vs. Nvidia GPUs?",

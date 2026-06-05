@@ -20,8 +20,8 @@ interface Message {
   suggestedFollowUps?: string[];
 }
 
-const ACCENT = "#065F46";
-const ACCENT_LIGHT = "#D1FAE5";
+const ACCENT = "#1C1917";
+const ACCENT_LIGHT = "#F5F5F4";
 
 const STARTER_QUESTIONS = [
   "Custom silicon vs. Nvidia",
@@ -44,7 +44,7 @@ const OTHER_LENSES = [
     href: "/lenses/dylan",
     name: "The Patel Lens",
     subtitle: "Supply Chain & Infrastructure",
-    color: "#1D4ED8",
+    color: "#D97706",
     initials: "DP",
   },
 ];
@@ -148,7 +148,7 @@ export default function CircuitLensPage() {
               <div className="flex flex-wrap gap-2 mb-8">
                 {STARTER_QUESTIONS.map((q) => (
                   <button key={q} onClick={() => sendMessage(q)}
-                    className="text-[12px] text-gray-600 border border-gray-300 bg-white rounded-full px-3 py-1.5 hover:border-emerald-500 hover:text-emerald-700 hover:bg-emerald-50 transition-all whitespace-nowrap">
+                    className="text-[12px] text-gray-600 border border-gray-300 bg-white rounded-full px-3 py-1.5 hover:border-gray-800 hover:text-gray-900 hover:bg-gray-100 transition-all whitespace-nowrap">
                     {q}
                   </button>
                 ))}
@@ -183,9 +183,9 @@ export default function CircuitLensPage() {
                       <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content}</div>
 
                       {msg.isInference && (
-                        <div className="flex items-start gap-2 border border-emerald-200 bg-emerald-50 rounded-md px-3 py-2 mb-4">
-                          <span className="text-emerald-600 text-[11px] mt-0.5">⚠</span>
-                          <p className="text-[12px] text-emerald-700">Includes reasoning beyond direct source quotes.</p>
+                        <div className="flex items-start gap-2 border border-gray-200 bg-gray-50 rounded-md px-3 py-2 mb-4">
+                          <span className="text-gray-500 text-[11px] mt-0.5">⚠</span>
+                          <p className="text-[12px] text-gray-700">Includes reasoning beyond direct source quotes.</p>
                         </div>
                       )}
 
@@ -231,7 +231,7 @@ export default function CircuitLensPage() {
                           <div className="flex flex-wrap gap-1.5">
                             {msg.suggestedFollowUps.map((q) => (
                               <button key={q} onClick={() => sendMessage(q)}
-                                className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-emerald-400 hover:text-emerald-700 transition-colors">
+                                className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-gray-800 hover:text-gray-900 transition-colors">
                                 {q}
                               </button>
                             ))}
@@ -304,7 +304,7 @@ export default function CircuitLensPage() {
           <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Active</p>
           <div className="rounded-md px-3 py-2.5 border" style={{ backgroundColor: ACCENT_LIGHT, borderColor: "#A7F3D0" }}>
             <span className="text-[13px] font-semibold" style={{ color: ACCENT }}>The Circuit Lens</span>
-            <p className="text-[11px] mt-0.5" style={{ color: "#065F46" }}>Earnings & Industry Dynamics</p>
+            <p className="text-[11px] mt-0.5 text-gray-600">Earnings & Industry Dynamics</p>
           </div>
         </div>
 

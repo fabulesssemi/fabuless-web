@@ -20,8 +20,8 @@ interface Message {
   suggestedFollowUps?: string[];
 }
 
-const ACCENT = "#1D4ED8";
-const ACCENT_LIGHT = "#DBEAFE";
+const ACCENT = "#D97706";
+const ACCENT_LIGHT = "#FEF3C7";
 
 const STARTER_QUESTIONS = [
   "CoWoS bottlenecks",
@@ -44,7 +44,7 @@ const OTHER_LENSES = [
     href: "/lenses/circuit",
     name: "The Circuit Lens",
     subtitle: "Earnings & Industry Dynamics",
-    color: "#065F46",
+    color: "#1C1917",
     initials: "BJ",
   },
 ];
@@ -148,7 +148,7 @@ export default function DylanLensPage() {
               <div className="flex flex-wrap gap-2 mb-8">
                 {STARTER_QUESTIONS.map((q) => (
                   <button key={q} onClick={() => sendMessage(q)}
-                    className="text-[12px] text-gray-600 border border-gray-300 bg-white rounded-full px-3 py-1.5 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all whitespace-nowrap">
+                    className="text-[12px] text-gray-600 border border-gray-300 bg-white rounded-full px-3 py-1.5 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50 transition-all whitespace-nowrap">
                     {q}
                   </button>
                 ))}
@@ -183,9 +183,9 @@ export default function DylanLensPage() {
                       <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content}</div>
 
                       {msg.isInference && (
-                        <div className="flex items-start gap-2 border border-blue-200 bg-blue-50 rounded-md px-3 py-2 mb-4">
-                          <span className="text-blue-500 text-[11px] mt-0.5">⚠</span>
-                          <p className="text-[12px] text-blue-700">Includes reasoning beyond direct source quotes.</p>
+                        <div className="flex items-start gap-2 border border-amber-200 bg-amber-50 rounded-md px-3 py-2 mb-4">
+                          <span className="text-amber-500 text-[11px] mt-0.5">⚠</span>
+                          <p className="text-[12px] text-amber-700">Includes reasoning beyond direct source quotes.</p>
                         </div>
                       )}
 
@@ -231,7 +231,7 @@ export default function DylanLensPage() {
                           <div className="flex flex-wrap gap-1.5">
                             {msg.suggestedFollowUps.map((q) => (
                               <button key={q} onClick={() => sendMessage(q)}
-                                className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-blue-400 hover:text-blue-700 transition-colors">
+                                className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-amber-400 hover:text-amber-700 transition-colors">
                                 {q}
                               </button>
                             ))}
@@ -304,7 +304,7 @@ export default function DylanLensPage() {
           <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Active</p>
           <div className="rounded-md px-3 py-2.5 border" style={{ backgroundColor: ACCENT_LIGHT, borderColor: "#BFDBFE" }}>
             <span className="text-[13px] font-semibold" style={{ color: ACCENT }}>The Patel Lens</span>
-            <p className="text-[11px] mt-0.5" style={{ color: "#1E40AF" }}>Supply Chain & Infrastructure</p>
+            <p className="text-[11px] mt-0.5" style={{ color: "#92400E" }}>Supply Chain & Infrastructure</p>
           </div>
         </div>
 

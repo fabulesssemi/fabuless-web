@@ -73,24 +73,24 @@ Example: ["Marvell earnings beat data center revenue", "custom silicon hyperscal
 }
 
 async function embedQuery(text: string): Promise<number[]> {
-  let response: Response;
-  try {
-    response = await fetch("http://localhost:11434/api/embeddings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "nomic-embed-text", prompt: text }),
-    });
-  } catch (err) {
-    throw new Error(`Ollama is not running. Start it with: ollama serve\n(Original error: ${err})`);
-  }
+  const apiKey = process.env.COHERE_API_KEY;
+  if (!apiKey) throw new Error("COHERE_API_KEY is not set");
+  const response = await fetch("https://api.cohere.com/v2/embed", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: "embed-english-v3.0",
+      texts: [text],
+      input_type: "search_query",
+      embedding_types: ["float"],
+    }),
+  });
   if (!response.ok) {
-    throw new Error(`Ollama embedding failed: ${response.status} ${response.statusText}`);
+    const err = await response.text();
+    throw new Error(`Cohere embed failed: ${response.status} ${err}`);
   }
   const json = await response.json();
-  if (!json.embedding) {
-    throw new Error(`Ollama returned no embedding. Run: ollama pull nomic-embed-text`);
-  }
-  return json.embedding;
+  return json.embeddings.float[0];
 }
 
 async function vectorSearch(queryEmbedding: number[], opts: RetrievalOptions): Promise<any[]> {

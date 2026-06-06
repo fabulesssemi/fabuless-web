@@ -84,10 +84,12 @@ export default function CircuitLensPage() {
 
   async function sendMessage(question: string) {
     if (!question.trim() || loading) return;
-    setMessages((prev) => [...prev, { id: Date.now().toString(), role: "user", content: question }]);
+    const userId = `u-${Date.now()}-${Math.random()}`;
+    const assistantId = `a-${Date.now()}-${Math.random()}`;
+    setMessages((prev) => [...prev, { id: userId, role: "user", content: question }]);
     setInput("");
     setLoading(true);
-    const assistantId = (Date.now() + 1).toString();
+    let assistantAdded = false;
     try {
       const res = await fetch("/api/circuit-lens", {
         method: "POST",
@@ -95,8 +97,6 @@ export default function CircuitLensPage() {
         body: JSON.stringify({ question, conversationHistory, previousChunks }),
       });
       if (!res.body) throw new Error("No response body");
-      setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "" }]);
-      setLoading(false);
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
@@ -110,20 +110,24 @@ export default function CircuitLensPage() {
           if (!line.startsWith("data: ")) continue;
           const data = JSON.parse(line.slice(6));
           if (data.type === "text") {
-            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: m.content + data.text } : m));
+            if (!assistantAdded) {
+              assistantAdded = true;
+              setLoading(false);
+              setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: data.text }]);
+            } else {
+              setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: m.content + data.text } : m));
+            }
           } else if (data.type === "done") {
             setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, citations: data.citations, isInference: data.isInference, suggestedFollowUps: data.suggestedFollowUps, usedChunks: data.usedChunks } as any : m));
           } else if (data.type === "error") {
-            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m));
+            if (!assistantAdded) { assistantAdded = true; setLoading(false); setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "Something went wrong. Please try again." }]); }
+            else { setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m)); }
           }
         }
       }
     } catch {
-      setMessages((prev) => {
-        const exists = prev.find((m) => m.id === assistantId);
-        if (exists) return prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m);
-        return [...prev, { id: assistantId, role: "assistant", content: "Something went wrong. Please try again." }];
-      });
+      if (!assistantAdded) { setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "Something went wrong. Please try again." }]); }
+      else { setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m)); }
     } finally {
       setLoading(false);
     }

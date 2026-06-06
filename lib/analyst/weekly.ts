@@ -47,7 +47,7 @@ Output only the paragraph — no headers, no bullets, no intro phrase like "This
   try {
     const message = await client.messages.create({
       model: "claude-sonnet-4-6",
-      max_tokens: 150,
+      max_tokens: 80,
       messages: [{ role: "user", content: prompt }],
     });
     const summary = message.content.find((b) => b.type === "text")?.text?.trim() ?? "";

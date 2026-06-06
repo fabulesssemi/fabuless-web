@@ -138,13 +138,6 @@ export default function DylanLensPage() {
     }
   }
 
-  function toggleCitation(id: string) {
-    setExpandedCitations((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  }
 
   async function submitFeedback(_id: string, thumbsUp: boolean, question: string, answer: string) {
     await fetch("/api/lens-feedback", {
@@ -237,9 +230,6 @@ export default function DylanLensPage() {
                           <div className="inline-flex items-center gap-1.5 border border-green-200 bg-green-50 rounded-full px-3 py-1 mb-4">
                             <span className="text-green-500 text-[10px]">●</span>
                             <span className="text-[11px] font-semibold text-green-700 uppercase tracking-widest">Direct View</span>
-                          </div>
-                        )}
-
                           </div>
                         )}
 

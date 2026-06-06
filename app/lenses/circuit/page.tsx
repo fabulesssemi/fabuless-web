@@ -138,13 +138,6 @@ export default function CircuitLensPage() {
     }
   }
 
-  function toggleCitation(id: string) {
-    setExpandedCitations((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  }
 
   async function submitFeedback(_id: string, thumbsUp: boolean, question: string, answer: string) {
     await fetch("/api/lens-feedback", {

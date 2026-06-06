@@ -65,10 +65,7 @@ export default function BakerLensPage() {
   useEffect(() => {
     const el = bottomRef.current;
     if (!el) return;
-    const parent = el.parentElement;
-    if (!parent) return;
-    // Only auto-scroll if user is within 200px of the bottom
-    const distanceFromBottom = parent.scrollHeight - parent.scrollTop - parent.clientHeight;
+    const distanceFromBottom = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
     if (distanceFromBottom < 200) {
       el.scrollIntoView({ behavior: "smooth" });
     }
@@ -222,37 +219,33 @@ export default function BakerLensPage() {
 
                       {msg.citations && msg.citations.length > 0 && (
                         <div className="mb-4">
-                          <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2">Sources</p>
-                          <div className="space-y-1">
-                            {msg.citations.map((c, ci) => {
-                              const citId = `${msg.id}-${ci}`;
-                              const expanded = expandedCitations.has(citId);
-                              return (
-                                <div key={ci} className="border border-gray-100 rounded-md bg-gray-50 overflow-hidden">
-                                  <button onClick={() => toggleCitation(citId)}
-                                    className="w-full flex items-center justify-between px-3 py-2 text-left hover:bg-gray-100 transition-colors">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-[10px] font-bold" style={{ color: ACCENT }}>[{ci + 1}]</span>
-                                      <span className="text-[12px] font-medium text-gray-700">{c.source}</span>
-                                      <span className="text-[10px] text-gray-400">{c.date}</span>
-                                    </div>
-                                    <span className="text-[10px] text-gray-400">{expanded ? "▲" : "▼"}</span>
-                                  </button>
-                                  {expanded && (
-                                    <div className="px-3 pb-3 border-t border-gray-100">
-                                      <p className="text-[13px] text-gray-600 italic leading-relaxed mt-2">"{c.quote}"</p>
-                                      {c.url && (
-                                        <a href={c.url} target="_blank" rel="noopener noreferrer"
-                                          className="text-[11px] hover:underline mt-2 inline-block" style={{ color: ACCENT }}>
-                                          View source →
-                                        </a>
-                                      )}
-                                    </div>
+                          <button
+                            onClick={() => toggleCitation(msg.id)}
+                            className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-gray-600 transition-colors mb-2"
+                          >
+                            <span className="font-bold uppercase tracking-widest">Sources ({msg.citations.length})</span>
+                            <span>{expandedCitations.has(msg.id) ? "▲" : "▼"}</span>
+                          </button>
+                          {expandedCitations.has(msg.id) && (
+                            <div className="space-y-1">
+                              {msg.citations.map((c, ci) => (
+                                <div key={ci} className="border border-gray-100 rounded-md bg-gray-50 px-3 py-2">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <span className="text-[10px] font-bold" style={{ color: ACCENT }}>[{ci + 1}]</span>
+                                    <span className="text-[12px] font-medium text-gray-700">{c.source}</span>
+                                    <span className="text-[10px] text-gray-400">{c.date}</span>
+                                  </div>
+                                  <p className="text-[12px] text-gray-500 italic leading-relaxed">"{c.quote}"</p>
+                                  {c.url && (
+                                    <a href={c.url} target="_blank" rel="noopener noreferrer"
+                                      className="text-[11px] hover:underline mt-1 inline-block" style={{ color: ACCENT }}>
+                                      View source →
+                                    </a>
                                   )}
                                 </div>
-                              );
-                            })}
-                          </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       )}
 

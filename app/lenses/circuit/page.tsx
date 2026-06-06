@@ -17,6 +17,7 @@ interface Message {
   content: string;
   citations?: Citation[];
   isInference?: boolean;
+  answerTier?: "direct" | "inference" | "outside";
   suggestedFollowUps?: string[];
 }
 
@@ -57,6 +58,7 @@ export default function CircuitLensPage() {
   const [sourceList, setSourceList] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const userScrolledUp = useRef(false);
 
   const sidebarStories = latestIssue.sections
     .flatMap((s) => s.stories)
@@ -71,7 +73,7 @@ export default function CircuitLensPage() {
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el || userScrolledUp.current) return;
     el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
@@ -87,6 +89,7 @@ export default function CircuitLensPage() {
 
   async function sendMessage(question: string) {
     if (!question.trim() || loading) return;
+    userScrolledUp.current = false;
     const userId = `u-${Date.now()}-${Math.random()}`;
     const assistantId = `a-${Date.now()}-${Math.random()}`;
     setMessages((prev) => [...prev, { id: userId, role: "user", content: question }]);
@@ -121,7 +124,7 @@ export default function CircuitLensPage() {
               setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: m.content + data.text } : m));
             }
           } else if (data.type === "done") {
-            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, citations: data.citations, isInference: data.isInference, suggestedFollowUps: data.suggestedFollowUps, usedChunks: data.usedChunks } as any : m));
+            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, citations: data.citations, isInference: data.isInference, answerTier: data.answerTier, suggestedFollowUps: data.suggestedFollowUps, usedChunks: data.usedChunks } as any : m));
           } else if (data.type === "error") {
             if (!assistantAdded) { assistantAdded = true; setLoading(false); setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "Something went wrong. Please try again." }]); }
             else { setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m)); }
@@ -162,7 +165,13 @@ export default function CircuitLensPage() {
         <div className="flex-1 w-full mx-auto flex flex-col overflow-hidden" style={{ maxWidth: "860px" }}>
 
           {/* scrollable area */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-8 pt-6 pb-4">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-8 pt-6 pb-4"
+            onScroll={() => {
+              const el = scrollRef.current;
+              if (!el) return;
+              const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+              userScrolledUp.current = !atBottom;
+            }}>
 
             {messages.length === 0 && (
               <div className="flex flex-col pt-8 pb-4">
@@ -232,10 +241,16 @@ export default function CircuitLensPage() {
                       <div className="p-5">
                         <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content}</div>
 
-                        {msg.isInference && (
-                          <div className="flex items-start gap-2 border border-gray-200 bg-gray-50 rounded-md px-3 py-2 mb-4">
-                            <span className="text-gray-500 text-[11px] mt-0.5">⚠</span>
-                            <p className="text-[12px] text-gray-700">Includes reasoning beyond direct source quotes.</p>
+                        {msg.answerTier === "inference" && (
+                          <div className="inline-flex items-center gap-1.5 border border-amber-200 bg-amber-50 rounded-full px-3 py-1 mb-4">
+                            <span className="text-amber-500 text-[10px]">◈</span>
+                            <span className="text-[11px] font-semibold text-amber-700 uppercase tracking-widest">Circuit Lens Inference</span>
+                          </div>
+                        )}
+                        {msg.answerTier === "direct" && (
+                          <div className="inline-flex items-center gap-1.5 border border-green-200 bg-green-50 rounded-full px-3 py-1 mb-4">
+                            <span className="text-green-500 text-[10px]">●</span>
+                            <span className="text-[11px] font-semibold text-green-700 uppercase tracking-widest">Direct View</span>
                           </div>
                         )}
 

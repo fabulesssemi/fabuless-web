@@ -17,8 +17,11 @@ export interface ConversationTurn {
   answer: string;
 }
 
+export type AnswerTier = "direct" | "inference" | "outside";
+
 export interface CircuitLensResponse {
   answer: string;
+  answerTier: AnswerTier;
   citations: {
     quote: string;
     source: string;
@@ -34,6 +37,13 @@ export interface CircuitLensResponse {
 }
 
 const SUMMARY_THRESHOLD = 5;
+
+function parseAnswerTier(answer: string): AnswerTier {
+  const upper = answer.trimStart().toUpperCase();
+  if (upper.startsWith("**CIRCUIT LENS INFERENCE**") || upper.startsWith("CIRCUIT LENS INFERENCE")) return "inference";
+  if (upper.startsWith("**OUTSIDE COVERAGE**") || upper.startsWith("OUTSIDE COVERAGE")) return "outside";
+  return "direct";
+}
 
 export async function queryCircuitLens(
   userQuestion: string,
@@ -57,17 +67,9 @@ export async function queryCircuitLens(
     chunksToUse = relevantChunks;
   }
 
-  if (chunksToUse.length === 0 || (belowThreshold && intent === "new_topic")) {
-    return {
-      answer: "The available source material doesn't cover this with enough depth to give a confident answer.",
-      citations: [],
-      isInference: false,
-      guardrailPassed: true,
-      unsupportedClaims: [],
-      suggestedFollowUps: [],
-      usedChunks: [],
-      intent,
-    };
+  if (chunksToUse.length === 0) {
+    const msg = "**OUTSIDE COVERAGE**\n\nThis question is outside the available source material. There isn't enough related content to form a useful inference.";
+    return { answer: msg, answerTier: "outside", citations: [], isInference: false, guardrailPassed: true, unsupportedClaims: [], suggestedFollowUps: [], usedChunks: [], intent };
   }
 
   let historyMessages: Anthropic.MessageParam[] = [];
@@ -85,11 +87,7 @@ export async function queryCircuitLens(
   }
 
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-  const sortedChunks = [...chunksToUse].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
+  const sortedChunks = [...chunksToUse].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const documentBlocks = sortedChunks.map((chunk) => ({
     type: "document" as const,
     source: { type: "text" as const, media_type: "text/plain" as const, data: chunk.text },
@@ -99,25 +97,13 @@ export async function queryCircuitLens(
 
   const messages: Anthropic.MessageParam[] = [
     ...historyMessages,
-    {
-      role: "user",
-      content: [
-        ...documentBlocks,
-        { type: "text" as const, text: userQuestion },
-      ],
-    },
+    { role: "user", content: [...documentBlocks, { type: "text" as const, text: userQuestion }] },
   ];
 
   const response = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 2048,
-    system: [
-      {
-        type: "text",
-        text: CIRCUIT_LENS_SYSTEM_PROMPT,
-        cache_control: { type: "ephemeral" },
-      },
-    ],
+    system: [{ type: "text", text: CIRCUIT_LENS_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
     messages,
   } as any);
 
@@ -128,55 +114,28 @@ export async function queryCircuitLens(
   for (const block of response.content) {
     if (block.type !== "text") continue;
     answer += block.text;
-
     const blockCitations = (block as any).citations;
     if (!Array.isArray(blockCitations)) continue;
-
     for (const citation of blockCitations) {
-      const chunkIndex: number =
-        citation.document_index ??
-        citation.document_indices?.[0] ??
-        -1;
+      const chunkIndex: number = citation.document_index ?? citation.document_indices?.[0] ?? -1;
       const chunk = sortedChunks[chunkIndex];
       const quote: string = citation.cited_text ?? citation.quote ?? "";
-
       if (chunk && quote && !seenQuotes.has(quote)) {
         seenQuotes.add(quote);
-        citations.push({
-          quote,
-          source: formatSourceName(chunk.source),
-          date: chunk.date,
-          url: chunk.url,
-        });
+        citations.push({ quote, source: formatSourceName(chunk.source), date: chunk.date, url: chunk.url });
       }
     }
   }
 
-  const isInference =
-    answer.includes("doesn't address this directly") ||
-    answer.includes("would likely") ||
-    answer.includes("doesn't cover this");
+  const answerTier = parseAnswerTier(answer);
+  const isInference = answerTier === "inference";
 
-  // Run guardrail and follow-up generation truly in parallel — guardrail is
-  // expensive (Haiku call), follow-ups are also a Haiku call. Running both
-  // concurrently saves ~300-500ms on inference answers.
   const [guardrailResult, suggestedFollowUps] = await Promise.all([
-    isInference
-      ? runGuardrail(answer, sortedChunks.map((c) => c.text))
-      : Promise.resolve({ passed: true, unsupportedClaims: [] }),
+    isInference ? runGuardrail(answer, sortedChunks.map((c) => c.text)) : Promise.resolve({ passed: true, unsupportedClaims: [] }),
     generateFollowUps(userQuestion, answer, "semiconductor earnings analysis and chip industry dynamics"),
   ]);
 
-  return {
-    answer,
-    citations,
-    isInference,
-    guardrailPassed: guardrailResult.passed,
-    unsupportedClaims: guardrailResult.unsupportedClaims,
-    suggestedFollowUps,
-    usedChunks: sortedChunks,
-    intent,
-  };
+  return { answer, answerTier, citations, isInference, guardrailPassed: guardrailResult.passed, unsupportedClaims: guardrailResult.unsupportedClaims, suggestedFollowUps, usedChunks: sortedChunks, intent };
 }
 
 export async function streamCircuitLens(
@@ -199,10 +158,10 @@ export async function streamCircuitLens(
     chunksToUse = relevantChunks;
   }
 
-  if (chunksToUse.length === 0 || (belowThreshold && intent === "new_topic")) {
-    const msg = "The available source material doesn't cover this with enough depth to give a confident answer.";
+  if (chunksToUse.length === 0) {
+    const msg = "**OUTSIDE COVERAGE**\n\nThis question is outside the available source material. There isn't enough related content to form a useful inference.";
     onText(msg);
-    return { answer: msg, citations: [], isInference: false, guardrailPassed: true, unsupportedClaims: [], suggestedFollowUps: [], usedChunks: [], intent };
+    return { answer: msg, answerTier: "outside", citations: [], isInference: false, guardrailPassed: true, unsupportedClaims: [], suggestedFollowUps: [], usedChunks: [], intent };
   }
 
   let historyMessages: Anthropic.MessageParam[] = [];
@@ -242,11 +201,12 @@ export async function streamCircuitLens(
     }
   }
 
-  const isInference = answer.includes("doesn't address this directly") || answer.includes("would likely") || answer.includes("doesn't cover this");
+  const answerTier = parseAnswerTier(answer);
+  const isInference = answerTier === "inference";
   const [guardrailResult, suggestedFollowUps] = await Promise.all([
     isInference ? runGuardrail(answer, sortedChunks.map((c) => c.text)) : Promise.resolve({ passed: true, unsupportedClaims: [] }),
     generateFollowUps(userQuestion, answer, "semiconductor earnings analysis and chip industry dynamics"),
   ]);
 
-  return { answer, citations, isInference, guardrailPassed: guardrailResult.passed, unsupportedClaims: guardrailResult.unsupportedClaims, suggestedFollowUps, usedChunks: sortedChunks, intent };
+  return { answer, answerTier, citations, isInference, guardrailPassed: guardrailResult.passed, unsupportedClaims: guardrailResult.unsupportedClaims, suggestedFollowUps, usedChunks: sortedChunks, intent };
 }

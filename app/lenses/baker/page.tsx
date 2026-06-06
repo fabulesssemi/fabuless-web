@@ -60,6 +60,7 @@ export default function BakerLensPage() {
   const [sourceList, setSourceList] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const userScrolledUp = useRef(false);
 
   const sidebarStories = latestIssue.sections
     .flatMap((s) => s.stories)
@@ -74,7 +75,7 @@ export default function BakerLensPage() {
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el || userScrolledUp.current) return;
     el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
@@ -90,6 +91,7 @@ export default function BakerLensPage() {
 
   async function sendMessage(question: string) {
     if (!question.trim() || loading) return;
+    userScrolledUp.current = false; // re-enable auto-scroll on new message
     const userId = `u-${Date.now()}-${Math.random()}`;
     const assistantId = `a-${Date.now()}-${Math.random()}`;
     setMessages((prev) => [...prev, { id: userId, role: "user", content: question }]);
@@ -169,7 +171,13 @@ export default function BakerLensPage() {
         <div className="flex-1 w-full mx-auto flex flex-col overflow-hidden" style={{ maxWidth: "860px" }}>
 
           {/* scrollable area */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-8 pt-6 pb-4">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-8 pt-6 pb-4"
+            onScroll={() => {
+              const el = scrollRef.current;
+              if (!el) return;
+              const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+              userScrolledUp.current = !atBottom;
+            }}>
 
             {/* ── EMPTY STATE ── */}
             {messages.length === 0 && (

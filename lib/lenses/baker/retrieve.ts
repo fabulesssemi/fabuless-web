@@ -21,7 +21,7 @@ function getSupabase() {
 }
 const VECTOR_CANDIDATES = 20;  // retrieve this many per query before reranking
 const KEYWORD_CANDIDATES = 20;
-const FINAL_TOP_K = 8;         // chunks passed to Claude after reranking
+const FINAL_TOP_K = 5;         // chunks passed to Claude after reranking
 
 // Minimum similarity score to consider a chunk relevant.
 // Below this threshold, the corpus doesn't cover the topic well enough to answer.

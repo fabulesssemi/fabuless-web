@@ -73,8 +73,6 @@ export default function BakerLensPage() {
       .catch(() => {});
   }, []);
 
-  // Auto-focus input on load
-  useEffect(() => { inputRef.current?.focus(); }, []);
 
   // Auto-resize textarea
   useEffect(() => {

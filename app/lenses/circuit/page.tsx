@@ -71,7 +71,6 @@ export default function CircuitLensPage() {
       .catch(() => {});
   }, []);
 
-  useEffect(() => { inputRef.current?.focus(); }, []);
 
   useEffect(() => {
     const el = inputRef.current;

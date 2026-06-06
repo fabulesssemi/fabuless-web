@@ -9,6 +9,7 @@ type SortKey =
   | "ticker"
   | "rating"
   | "avgPT"
+  | "numberOfAnalysts"
   | "upside"
   | "buyShare"
   | "sentimentScore"
@@ -21,6 +22,7 @@ const COLS: { key: SortKey; label: string; numeric: boolean }[] = [
   { key: "ticker", label: "Company", numeric: false },
   { key: "rating", label: "Rating", numeric: false },
   { key: "avgPT", label: "Avg PT", numeric: true },
+  { key: "numberOfAnalysts", label: "# Analysts", numeric: true },
   { key: "upside", label: "Upside", numeric: true },
   { key: "buyShare", label: "Buy %", numeric: true },
   { key: "sentimentScore", label: "Sentiment", numeric: true },
@@ -104,14 +106,17 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
                   </span>
                 </Link>
               </td>
-              <td className="px-3 py-2.5text-gray-700">{r.rating}</td>
-              <td className="px-3 py-2.5text-right tabular-nums text-gray-800">
+              <td className="px-3 py-2.5 text-gray-700">{r.rating}</td>
+              <td className="px-3 py-2.5 text-right tabular-nums text-gray-800">
                 {money(r.avgPT, r.ticker)}
+              </td>
+              <td className="px-3 py-2.5 text-right tabular-nums text-gray-400 text-[12px]">
+                {r.numberOfAnalysts != null ? r.numberOfAnalysts : "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.upside)}`}>
                 {pct(r.upside)}
               </td>
-              <td className="px-3 py-2.5text-right tabular-nums text-gray-800">
+              <td className="px-3 py-2.5 text-right tabular-nums text-gray-800">
                 {r.buyShare != null ? `${r.buyShare.toFixed(0)}%` : "—"}
               </td>
               <td className={`px-3 py-3 text-right tabular-nums ${tone(r.sentimentScore)}`}>

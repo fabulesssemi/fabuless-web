@@ -86,6 +86,7 @@ export type ConsensusRow = {
   name: string;
   rating: string;
   avgPT: number | null;
+  numberOfAnalysts: number | null;
   upside: number | null;
   buyShare: number | null;
   sentimentScore: number;
@@ -103,6 +104,7 @@ export function toRows(views: AnalystView[]): ConsensusRow[] {
     name: v.name,
     rating: v.consensusRating ?? "—",
     avgPT: v.avgPriceTarget ?? null,
+    numberOfAnalysts: v.numberOfAnalysts ?? null,
     upside: v.impliedUpsidePct ?? null,
     buyShare: v.buyShare ?? null,
     sentimentScore: v.sentimentScore,

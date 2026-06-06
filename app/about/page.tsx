@@ -2,7 +2,7 @@ import { SubscribeForm } from "@/app/components/SubscribeForm";
 
 export default function About() {
   return (
-    <div className="max-w-2xl mx-auto px-6 pt-16 pb-16">
+    <div className="max-w-4xl mx-auto px-6 pt-16 pb-16">
 
       <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-4">
         About Fabuless

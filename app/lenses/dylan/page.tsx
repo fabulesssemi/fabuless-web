@@ -80,29 +80,43 @@ export default function DylanLensPage() {
     setMessages((prev) => [...prev, { id: Date.now().toString(), role: "user", content: question }]);
     setInput("");
     setLoading(true);
+    const assistantId = (Date.now() + 1).toString();
     try {
       const res = await fetch("/api/dylan-patel-lens", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question, conversationHistory, previousChunks }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Error");
-      setMessages((prev) => [...prev, {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: data.answer,
-        citations: data.citations,
-        isInference: data.isInference,
-        suggestedFollowUps: data.suggestedFollowUps,
-        ...(data.usedChunks && { usedChunks: data.usedChunks }),
-      } as any]);
+      if (!res.body) throw new Error("No response body");
+      setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "" }]);
+      setLoading(false);
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const data = JSON.parse(line.slice(6));
+          if (data.type === "text") {
+            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: m.content + data.text } : m));
+          } else if (data.type === "done") {
+            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, citations: data.citations, isInference: data.isInference, suggestedFollowUps: data.suggestedFollowUps, usedChunks: data.usedChunks } as any : m));
+          } else if (data.type === "error") {
+            setMessages((prev) => prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m));
+          }
+        }
+      }
     } catch {
-      setMessages((prev) => [...prev, {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: "Something went wrong. Please try again.",
-      }]);
+      setMessages((prev) => {
+        const exists = prev.find((m) => m.id === assistantId);
+        if (exists) return prev.map((m) => m.id === assistantId ? { ...m, content: "Something went wrong. Please try again." } : m);
+        return [...prev, { id: assistantId, role: "assistant", content: "Something went wrong. Please try again." }];
+      });
     } finally {
       setLoading(false);
     }

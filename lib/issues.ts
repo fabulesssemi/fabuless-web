@@ -121,6 +121,63 @@ export const issues: Issue[] = [
             source: "EE Times",
             image: "https://www.eetimes.com/wp-content/uploads/AdobeStock_1971136027.jpeg?fit=2688%2C1536",
             oneliner: "Photonics is being positioned as a core enabler for AI scaling, benefiting silicon photonics players as electrical interconnects hit limits.",
+            xQuotes: [
+              {
+                handle: "@MoMoMacro",
+                name: "MoMoMacro",
+                text: "CPO (co-packaged optics, where the laser moves inside the chip housing instead of sitting at the rack edge) is still in early hyperscaler qualification. This run is pluggable transceivers. The CPO volume cycle is still ahead.",
+                url: "https://x.com/MoMoMacro/status/2062194824535556205",
+              },
+            ],
+          },
+          {
+            headline: "HPE shares soar 37% on booming demand for AI infrastructure",
+            url: "https://www.ft.com/content/3ddf001d-d7f6-40f1-8fe4-1cc577868da0",
+            source: "Financial Times Tech",
+            image: "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F26a52004-19e2-4863-b519-6f80e9496c51.jpg?source=next-barrier-page",
+            oneliner: "HPE stock surged 37% on accelerating AI server and networking demand, signaling broad-based data center capex strength.",
+          },
+          {
+            headline: "HSBC massively revamps Broadcom's stock price target",
+            url: "https://www.thestreet.com/investing/stocks/hsbc-massively-revamps-broadcoms-stock-price-target-ahead-of-earnings",
+            source: "TheStreet Tech",
+            image: null,
+            oneliner: "HSBC sharply lifts Broadcom price target on Buy rating, pointing to stronger-than-expected AI ASIC and networking demand.",
+            xQuotes: [
+              {
+                handle: "@schaeffers",
+                name: "Schaeffer's Investment Research",
+                text: "The reaction in $AVGO is a reminder of how HIGHHHH the bar has become for AI winners. Broadcom beat earnings, beat revenue, and guided Q3 revenue nearly $1B above consensus. Yet shares are sharply lower after hours.",
+                url: "https://x.com/schaeffers/status/2062272358849876344",
+              },
+            ],
+          },
+          {
+            headline: "Memory chips are all the rage in markets, with Micron and SK Hynix becoming trillion-dollar companies",
+            url: "https://finance.yahoo.com/markets/stocks/articles/memory-chips-rage-markets-micron-160000501.html",
+            source: "Yahoo Finance Tech",
+            image: "https://s.yimg.com/ny/api/res/1.2/4Dscf9X7EdysP1aOpoOcKQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/moneywise_327/04cd2ec715a9a5c4ffea766203a03809",
+            oneliner: "AI-driven HBM and DRAM demand has pushed Micron and SK Hynix into trillion-dollar territory, signaling a memory supercycle repricing.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Marvell's stock is on a run not seen in a quarter-century as the tech company grows in stature",
+            url: "https://www.eetimes.com/photonics-a-foundational-scaling-layer-for-ai-era-computing/",
+            source: "EE Times",
+            image: "https://www.eetimes.com/wp-content/uploads/AdobeStock_1971136027.jpeg?fit=2688%2C1536",
+            oneliner: "Photonics is being positioned as a core enabler for AI scaling, benefiting silicon photonics players as electrical interconnects hit limits.",
+            xQuotes: [
+              {
+                handle: "@MoMoMacro",
+                name: "MoMoMacro",
+                text: "CPO (co-packaged optics, where the laser moves inside the chip housing instead of sitting at the rack edge) is still in early hyperscaler qualification. This run is pluggable transceivers. The CPO volume cycle is still ahead.",
+                url: "https://x.com/MoMoMacro/status/2062194824535556205",
+              },
+            ],
           },
           {
             headline: "HPE shares soar 37% on booming demand for AI infrastructure",
@@ -153,7 +210,15 @@ export const issues: Issue[] = [
             url: "https://www.marketwatch.com/story/marvells-stock-is-on-a-run-not-seen-in-a-quarter-century-as-the-tech-company-grows-in-stature-7884b9c3?mod=mw_rss_topstories",
             source: "MarketWatch Tech",
             image: null,
-            oneliner: "Marvell's market cap hit $269B, surpassing PepsiCo and T-Mobile, as AI-driven gains fuel its biggest stock run in 25 years.",
+            oneliner: "Marvell’s market cap hit $269B, surpassing PepsiCo and T-Mobile, as AI-driven gains fuel its biggest stock run in 25 years.",
+            xQuotes: [
+              {
+                handle: "@jukan05",
+                name: "Jukan @COMPUTEX",
+                text: "Marvell CEO says copper wall is moving inside the rack, and copackaged optics is the only way through. He emphasized at Computex 2026 that the next bottleneck in AI infrastructure is not compute or memory but connectivity.",
+                url: "https://x.com/jukan05/status/2061728423656210652",
+              },
+            ],
           },
           {
             headline: "Susquehanna resets Broadcom stock target ahead of earnings",
@@ -180,6 +245,14 @@ export const issues: Issue[] = [
             source: "Financial Times Tech",
             image: null,
             oneliner: "FT signals more hyperscaler equity raises ahead as AI capex outpaces cash flow, a potential supply overhang for investors.",
+            xQuotes: [
+              {
+                handle: "@ScroogeCap",
+                name: "Scrooge McDuck",
+                text: "Oppenheimer brings out an interesting point here. If $GOOGL that prints massive FCF is tapping equity markets for $80B it's because credit is drying up.",
+                url: "https://x.com/search?q=google%20equity%20raise%20private%20credit&src=typed_query&f=top",
+              },
+            ],
           },
         ],
       },
@@ -201,7 +274,14 @@ export const issues: Issue[] = [
     },
     ],
     earnings: [],
-    quotes: [],
+    quotes: [
+      {
+        handle: "@jukan05",
+        name: "Jukan @COMPUTEX",
+        text: "Marvell will design a networking chip for Google. This chip will be manufactured on Intel's 18A (or 18AP), with mass production scheduled to begin by the end of 2027, and it will be paired with the MediaTek-designed Humufish for Google.",
+        url: "https://x.com/jukan05/status/2062123266668679514",
+      },
+    ],
   },
   {
     number: 3,

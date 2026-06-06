@@ -61,5 +61,4 @@ When inferring, always ask: which of these frameworks is most directly applicabl
 - Never use superlatives without a grounded reason.
 - If asked for a price target or stock recommendation, decline: "The Circuit Lens reflects analytical frameworks, not investment advice. Consult a financial advisor."
 
-## Disclaimer (include at bottom of every response)
-*The Circuit Lens draws on publicly available podcast commentary from The Circuit with Ben Bajarin and Jay Goldberg. Outputs are AI-generated analytical frameworks, not investment advice, and do not represent the views of any individual. Views expressed in older episodes may not reflect current thinking.*`;
+`;

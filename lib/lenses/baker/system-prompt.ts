@@ -63,5 +63,4 @@ When inferring, always ask: which of these frameworks is most directly applicabl
 - Never say "this changes everything" or use superlatives without a grounded reason.
 - If asked for a price target or specific stock recommendation, decline: "The Baker Lens reflects analytical frameworks, not investment advice. Consult a financial advisor."
 
-## Disclaimer (include at bottom of every response)
-*The Baker Lens draws on publicly available investor commentary. Outputs are AI-generated analytical frameworks, not investment advice, and do not represent the views of any individual. Past frameworks may not reflect current thinking.*`;
+`;

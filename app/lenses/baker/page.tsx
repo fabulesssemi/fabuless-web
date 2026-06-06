@@ -73,6 +73,17 @@ export default function BakerLensPage() {
       .catch(() => {});
   }, []);
 
+  // Auto-focus input on load
+  useEffect(() => { inputRef.current?.focus(); }, []);
+
+  // Auto-resize textarea
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [input]);
+
   useEffect(() => {
     const el = scrollRef.current;
     if (!el || userScrolledUp.current) return;
@@ -229,7 +240,13 @@ export default function BakerLensPage() {
                 <div className="flex items-center gap-2 pb-3 border-b border-gray-200 mb-4">
                   <span className="text-[13px] font-semibold text-[#111827]">The Baker Lens</span>
                   <span className="text-[11px] text-gray-400">· Growth & AI Investing</span>
-                  <Link href="/lenses" className="ml-auto text-[11px] text-gray-400 hover:text-gray-600">← Lenses</Link>
+                  <div className="ml-auto flex items-center gap-3">
+                    <button onClick={() => { setMessages([]); setInput(""); setTimeout(() => inputRef.current?.focus(), 50); }}
+                      className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
+                      New conversation
+                    </button>
+                    <Link href="/lenses" className="text-[11px] text-gray-400 hover:text-gray-600">← Lenses</Link>
+                  </div>
                 </div>
 
                 {messages.map((msg, i) => {
@@ -346,8 +363,9 @@ export default function BakerLensPage() {
                 onBlur={() => setFocused(false)}
                 onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(input); } }}
                 placeholder="Ask about AI investing, semiconductors, platform shifts..."
-                className="w-full px-5 pt-4 pb-2 text-[14px] text-gray-800 placeholder-gray-400 resize-none focus:outline-none bg-transparent rounded-2xl"
-                rows={2}
+                className="w-full px-5 pt-4 pb-2 text-[14px] text-gray-800 placeholder-gray-400 resize-none focus:outline-none bg-transparent rounded-2xl overflow-hidden"
+                rows={1}
+                style={{ minHeight: "52px", maxHeight: "200px" }}
               />
               <div className="flex items-center justify-between px-5 pb-3">
                 <span className="text-[10px] text-gray-400">Enter to send · Shift+Enter for new line</span>

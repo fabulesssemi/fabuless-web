@@ -17,8 +17,11 @@ export interface ConversationTurn {
   answer: string;
 }
 
+export type AnswerTier = "direct" | "inference" | "outside";
+
 export interface BakerLensResponse {
   answer: string;
+  answerTier: AnswerTier;
   citations: {
     quote: string;
     source: string;
@@ -31,6 +34,13 @@ export interface BakerLensResponse {
   suggestedFollowUps: string[];
   usedChunks: TranscriptChunk[];
   intent: string;
+}
+
+function parseAnswerTier(answer: string): AnswerTier {
+  const upper = answer.trimStart().toUpperCase();
+  if (upper.startsWith("**BAKER LENS INFERENCE**") || upper.startsWith("BAKER LENS INFERENCE")) return "inference";
+  if (upper.startsWith("**OUTSIDE COVERAGE**") || upper.startsWith("OUTSIDE COVERAGE")) return "outside";
+  return "direct";
 }
 
 const SUMMARY_THRESHOLD = 5;
@@ -57,9 +67,12 @@ export async function queryBakerLens(
     chunksToUse = relevantChunks;
   }
 
-  if (chunksToUse.length === 0 || (belowThreshold && intent === "new_topic")) {
+  // Only hard-exit if there is truly zero source material
+  if (chunksToUse.length === 0) {
+    const msg = "**OUTSIDE COVERAGE**\n\nThis question is outside the available source material. There isn't enough related content to form a useful inference.";
     return {
-      answer: "The available source material doesn't cover this with enough depth to give a confident answer.",
+      answer: msg,
+      answerTier: "outside",
       citations: [],
       isInference: false,
       guardrailPassed: true,
@@ -152,14 +165,9 @@ export async function queryBakerLens(
     }
   }
 
-  const isInference =
-    answer.includes("doesn't address this directly") ||
-    answer.includes("would likely") ||
-    answer.includes("doesn't cover this");
+  const answerTier = parseAnswerTier(answer);
+  const isInference = answerTier === "inference";
 
-  // Run guardrail and follow-up generation truly in parallel — guardrail is
-  // expensive (Haiku call), follow-ups are also a Haiku call. Running both
-  // concurrently saves ~300-500ms on inference answers.
   const [guardrailResult, suggestedFollowUps] = await Promise.all([
     isInference
       ? runGuardrail(answer, sortedChunks.map((c) => c.text))
@@ -169,6 +177,7 @@ export async function queryBakerLens(
 
   return {
     answer,
+    answerTier,
     citations,
     isInference,
     guardrailPassed: guardrailResult.passed,
@@ -201,10 +210,10 @@ export async function streamBakerLens(
     chunksToUse = relevantChunks;
   }
 
-  if (chunksToUse.length === 0 || (belowThreshold && intent === "new_topic")) {
-    const msg = "The available source material doesn't cover this with enough depth to give a confident answer.";
+  if (chunksToUse.length === 0) {
+    const msg = "**OUTSIDE COVERAGE**\n\nThis question is outside the available source material. There isn't enough related content to form a useful inference.";
     onText(msg);
-    return { answer: msg, citations: [], isInference: false, guardrailPassed: true, unsupportedClaims: [], suggestedFollowUps: [], usedChunks: [], intent };
+    return { answer: msg, answerTier: "outside", citations: [], isInference: false, guardrailPassed: true, unsupportedClaims: [], suggestedFollowUps: [], usedChunks: [], intent };
   }
 
   let historyMessages: Anthropic.MessageParam[] = [];
@@ -271,12 +280,13 @@ export async function streamBakerLens(
     }
   }
 
-  const isInference = answer.includes("doesn't address this directly") || answer.includes("would likely") || answer.includes("doesn't cover this");
+  const answerTier = parseAnswerTier(answer);
+  const isInference = answerTier === "inference";
 
   const [guardrailResult, suggestedFollowUps] = await Promise.all([
     isInference ? runGuardrail(answer, sortedChunks.map((c) => c.text)) : Promise.resolve({ passed: true, unsupportedClaims: [] }),
     generateFollowUps(userQuestion, answer, "growth investing and semiconductor markets"),
   ]);
 
-  return { answer, citations, isInference, guardrailPassed: guardrailResult.passed, unsupportedClaims: guardrailResult.unsupportedClaims, suggestedFollowUps, usedChunks: sortedChunks, intent };
+  return { answer, answerTier, citations, isInference, guardrailPassed: guardrailResult.passed, unsupportedClaims: guardrailResult.unsupportedClaims, suggestedFollowUps, usedChunks: sortedChunks, intent };
 }

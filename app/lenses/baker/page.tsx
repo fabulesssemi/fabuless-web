@@ -11,12 +11,15 @@ interface Citation {
   url?: string;
 }
 
+type AnswerTier = "direct" | "inference" | "outside";
+
 interface Message {
   id: string;
   role: "user" | "assistant";
   content: string;
   citations?: Citation[];
   isInference?: boolean;
+  answerTier?: AnswerTier;
   suggestedFollowUps?: string[];
 }
 
@@ -123,7 +126,8 @@ export default function BakerLensPage() {
           } else if (data.type === "done") {
             setMessages((prev) => prev.map((m) => m.id === assistantId ? {
               ...m, citations: data.citations, isInference: data.isInference,
-              suggestedFollowUps: data.suggestedFollowUps, usedChunks: data.usedChunks,
+              answerTier: data.answerTier, suggestedFollowUps: data.suggestedFollowUps,
+              usedChunks: data.usedChunks,
             } as any : m));
           } else if (data.type === "error") {
             if (!assistantAdded) { assistantAdded = true; setLoading(false); setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "Something went wrong. Please try again." }]); }
@@ -237,10 +241,16 @@ export default function BakerLensPage() {
                       <div className="p-5">
                         <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content}</div>
 
-                        {msg.isInference && (
-                          <div className="flex items-start gap-2 border border-amber-200 bg-amber-50 rounded-md px-3 py-2 mb-4">
-                            <span className="text-amber-500 text-[11px] mt-0.5">⚠</span>
-                            <p className="text-[12px] text-amber-700">Includes reasoning beyond direct source quotes.</p>
+                        {msg.answerTier === "inference" && (
+                          <div className="inline-flex items-center gap-1.5 border border-amber-200 bg-amber-50 rounded-full px-3 py-1 mb-4">
+                            <span className="text-amber-500 text-[10px]">◈</span>
+                            <span className="text-[11px] font-semibold text-amber-700 uppercase tracking-widest">Baker Lens Inference</span>
+                          </div>
+                        )}
+                        {msg.answerTier === "direct" && (
+                          <div className="inline-flex items-center gap-1.5 border border-green-200 bg-green-50 rounded-full px-3 py-1 mb-4">
+                            <span className="text-green-500 text-[10px]">●</span>
+                            <span className="text-[11px] font-semibold text-green-700 uppercase tracking-widest">Direct View</span>
                           </div>
                         )}
 

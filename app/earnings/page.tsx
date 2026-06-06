@@ -13,13 +13,13 @@ export default async function Earnings() {
         </h1>
       </div>
       <p className="text-sm text-gray-400 mb-10">
-        Upcoming semiconductor &amp; hyperscaler earnings — next 2 weeks.
+        Upcoming semiconductor &amp; hyperscaler earnings — next 6 weeks.
         Auto-updated daily; past reports drop off automatically.
       </p>
 
       {earnings.length === 0 ? (
         <p className="text-sm text-gray-400 italic">
-          No earnings reports in the next two weeks.
+          No earnings reports in the next 6 weeks.
         </p>
       ) : (
         <div className="overflow-x-auto">

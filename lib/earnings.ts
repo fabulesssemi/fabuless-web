@@ -37,7 +37,7 @@ export type LiveEarningsRow = {
 
 async function _fetchUpcomingEarnings(): Promise<LiveEarningsRow[]> {
   const now = new Date();
-  const twoWeeksOut = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+  const twoWeeksOut = new Date(now.getTime() + 42 * 24 * 60 * 60 * 1000); // 6 weeks
   const tickers = Object.keys(COMPANIES);
 
   const settled = await Promise.allSettled(

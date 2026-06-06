@@ -70,7 +70,7 @@ export function ConsensusTable({ rows }: { rows: ConsensusRow[] }) {
   }
 
   return (
-    <div className="overflow-x-auto border border-gray-100">
+    <div className="overflow-x-auto border border-gray-100 -mx-4 sm:mx-0">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-gray-200 text-[11px] uppercase tracking-wider text-gray-400 bg-gray-50">

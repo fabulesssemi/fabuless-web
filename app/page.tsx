@@ -41,7 +41,7 @@ export default async function Home() {
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-8 pb-8 border-b border-gray-200 flex gap-8 items-start justify-between">
+      <section className="pt-8 pb-8 border-b border-gray-200 flex flex-col md:flex-row gap-8 items-start justify-between">
         {/* Left: pitch + subscribe */}
         <div className="flex-1 min-w-0">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#B45309] mb-3">

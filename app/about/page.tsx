@@ -12,7 +12,7 @@ export default function About() {
         Semiconductor intelligence,<br />without the complexity.
       </h1>
 
-      <div className="space-y-5 text-[15px] text-[#374151] leading-relaxed mb-12">
+      <div className="space-y-4 text-[15px] text-[#374151] leading-relaxed mb-10">
         <p>
           Fabuless is a semiconductor intelligence platform. We track the stories, data, and companies that drive the chip industry and make it accessible to people who don't want to spend hours scouring the internet or decoding technical research just to stay up to speed.
         </p>
@@ -24,10 +24,10 @@ export default function About() {
         </p>
       </div>
 
-      <div className="h-px bg-gray-100 mb-12" />
+      <div className="h-px bg-gray-100 mb-8" />
 
-      <div className="mb-12">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-5">
+      <div className="mb-8">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#111827] mb-5">
           Who it's for
         </h2>
         <div className="space-y-4 text-[15px] text-[#374151] leading-relaxed">
@@ -43,10 +43,10 @@ export default function About() {
         </div>
       </div>
 
-      <div className="h-px bg-gray-100 mb-12" />
+      <div className="h-px bg-gray-100 mb-8" />
 
-      <div className="mb-12">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-5">
+      <div className="mb-8">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#111827] mb-5">
           What's on the platform
         </h2>
         <div className="space-y-0">
@@ -68,10 +68,10 @@ export default function About() {
         </div>
       </div>
 
-      <div className="h-px bg-gray-100 mb-12" />
+      <div className="h-px bg-gray-100 mb-8" />
 
-      <div className="mb-12">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-5">
+      <div className="mb-8">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#111827] mb-5">
           Who built it
         </h2>
         <p className="text-[15px] text-[#374151] leading-relaxed">
@@ -79,10 +79,10 @@ export default function About() {
         </p>
       </div>
 
-      <div className="h-px bg-gray-100 mb-12" />
+      <div className="h-px bg-gray-100 mb-8" />
 
       <div>
-        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#111827] mb-3">
           Get the newsletter
         </h2>
         <p className="text-[14px] text-gray-500 mb-5">

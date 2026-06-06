@@ -53,9 +53,6 @@ export default function CircuitLensPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [expandedCitations, setExpandedCitations] = useState<Set<string>>(new Set());
-  const [sourcesOpen, setSourcesOpen] = useState(false);
-  const [sourceList, setSourceList] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const userScrolledUp = useRef(false);
@@ -64,12 +61,6 @@ export default function CircuitLensPage() {
     .flatMap((s) => s.stories)
     .slice(0, 5);
 
-  useEffect(() => {
-    fetch("/api/lens-sources?lens=circuit")
-      .then((r) => r.json())
-      .then((d) => setSourceList(d.sources ?? []))
-      .catch(() => {});
-  }, []);
 
 
   useEffect(() => {
@@ -202,25 +193,6 @@ export default function CircuitLensPage() {
                   ))}
                 </div>
 
-                {/* ── SOURCES DROPDOWN ── */}
-                <div className="max-w-xl">
-                  <button
-                    onClick={() => setSourcesOpen((o) => !o)}
-                    className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    <span>Sources ({sourceList.length || 38})</span>
-                    <span>{sourcesOpen ? "▲" : "▼"}</span>
-                  </button>
-                  {sourcesOpen && (
-                    <div className="mt-2 border border-gray-200 rounded-lg bg-white divide-y divide-gray-100 shadow-sm">
-                      {sourceList.length > 0 ? sourceList.map((s, i) => (
-                        <div key={i} className="px-3 py-2 text-[12px] text-gray-600">{s}</div>
-                      )) : (
-                        <div className="px-3 py-2 text-[12px] text-gray-400">Loading sources...</div>
-                      )}
-                    </div>
-                  )}
-                </div>
               </div>
             )}
 
@@ -268,37 +240,6 @@ export default function CircuitLensPage() {
                           </div>
                         )}
 
-                        {msg.citations && msg.citations.length > 0 && (
-                          <div className="mb-4">
-                            <button
-                              onClick={() => toggleCitation(msg.id)}
-                              className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-gray-600 transition-colors mb-2"
-                            >
-                              <span className="font-bold uppercase tracking-widest">Sources ({msg.citations.length})</span>
-                              <span>{expandedCitations.has(msg.id) ? "▲" : "▼"}</span>
-                            </button>
-                            {expandedCitations.has(msg.id) && (
-                              <div className="space-y-1">
-                                {msg.citations.map((c, ci) => (
-                                  <div key={ci} className="border border-gray-100 rounded-md bg-gray-50 px-3 py-2">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      <span className="text-[10px] font-bold" style={{ color: ACCENT }}>[{ci + 1}]</span>
-                                      <span className="text-[12px] font-medium text-gray-700">{c.source}</span>
-                                      <span className="text-[10px] text-gray-400">{c.date}</span>
-                                    </div>
-                                    <p className="text-[12px] text-gray-500 italic leading-relaxed">"{c.quote}"</p>
-                                    {c.url && (
-                                      <a href={c.url} target="_blank" rel="noopener noreferrer"
-                                        className="text-[11px] hover:underline mt-1 inline-block" style={{ color: ACCENT }}>
-                                        View source →
-                                      </a>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        )}
 
                         {msg.suggestedFollowUps && msg.suggestedFollowUps.length > 0 && (
                           <div className="mb-4">

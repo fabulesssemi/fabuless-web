@@ -6,11 +6,12 @@ import { rateLimit } from "@/lib/lenses/shared/rate-limit";
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for") ?? "unknown";
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
   const encoder = new TextEncoder();
-
-  if (!rateLimit(ip)) {
-    const stream = new ReadableStream({ start(c) { c.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Too many requests." })}\n\n`)); c.close(); } });
+  const rl = await rateLimit(ip);
+  if (!rl.allowed) {
+    const hoursLeft = Math.ceil((rl.resetAt - Date.now()) / (1000 * 60 * 60));
+    const stream = new ReadableStream({ start(c) { c.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: `You've used all 10 questions for today. Resets in ~${hoursLeft}h.` })}\n\n`)); c.close(); } });
     return new Response(stream, { status: 429, headers: { "Content-Type": "text/event-stream" } });
   }
 

@@ -63,7 +63,14 @@ export default function DylanLensPage() {
     .slice(0, 5);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = bottomRef.current;
+    if (!el) return;
+    const parent = el.parentElement;
+    if (!parent) return;
+    const distanceFromBottom = parent.scrollHeight - parent.scrollTop - parent.clientHeight;
+    if (distanceFromBottom < 200) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages, loading]);
 
   const conversationHistory = messages.map((m) => ({

@@ -238,9 +238,9 @@ export default function DylanLensPage() {
                                     </a>
                                   )}
                                 </div>
-                              );
-                            })}
-                          </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       )}
 

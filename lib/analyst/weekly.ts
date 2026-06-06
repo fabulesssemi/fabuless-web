@@ -33,21 +33,21 @@ export async function generateWeeklySummary(): Promise<{ summary: string; highli
   }
 
   const top = deltas.slice(0, 8);
-  const prompt = `You are a senior equity research analyst writing the "What Changed This Week" section for Fabuless, a semiconductor investment intelligence service read by professional investors.
+  const prompt = `You are a senior equity research analyst writing the "What Changed This Week" blurb for Fabuless, a semiconductor investment intelligence service read by professional investors.
 
-Based on the analyst data below, write a 2–3 paragraph summary of the most notable analyst sentiment shifts across AI semiconductor companies this week. Be specific — reference actual figures and company names. Write with an analyst's directness, not marketing language. Focus on the 3–4 most notable movers; don't try to cover every company.
+Based on the analyst data below, write a single tight paragraph — 2 to 3 sentences maximum. Lead with the biggest mover. Name companies, cite actual figures. Under 60 words total.
 
 ## This Week's Analyst Moves (biggest movers first):
 ${top.map(fmtDelta).join("\n")}
 
 ## Date context: Week ending ${new Date().toISOString().slice(0, 10)}
 
-Write only the summary paragraphs — no headers, no bullet points, no intro sentence like "This week...". Start directly with the most notable development.`;
+Output only the paragraph — no headers, no bullets, no intro phrase like "This week...".`;
 
   try {
     const message = await client.messages.create({
       model: "claude-sonnet-4-6",
-      max_tokens: 600,
+      max_tokens: 150,
       messages: [{ role: "user", content: prompt }],
     });
     const summary = message.content.find((b) => b.type === "text")?.text?.trim() ?? "";

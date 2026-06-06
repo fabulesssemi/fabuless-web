@@ -37,7 +37,7 @@ export default function RootLayout({
       lang="en"
       className={inter.variable}
     >
-      <body className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#18181B] font-sans">
+      <body className="h-screen flex flex-col bg-[#FAFAF8] text-[#18181B] font-sans overflow-hidden">
         <header>
           {/* Amber accent line — publication masthead signature */}
           <div className="h-[3px] bg-[#B45309]" />
@@ -79,7 +79,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 overflow-y-auto min-h-0">{children}</main>
 
         <footer className="border-t border-gray-200 py-6 mt-12">
           <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-sm text-gray-400">

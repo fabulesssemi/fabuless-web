@@ -38,14 +38,12 @@ const OTHER_LENSES = [
     name: "The Baker Lens",
     subtitle: "Growth & AI Investing",
     color: "#B45309",
-    initials: "GB",
   },
   {
     href: "/lenses/dylan",
     name: "The Patel Lens",
     subtitle: "Supply Chain & Infrastructure",
     color: "#9A3412",
-    initials: "DP",
   },
 ];
 
@@ -55,7 +53,9 @@ export default function CircuitLensPage() {
   const [loading, setLoading] = useState(false);
   const [focused, setFocused] = useState(false);
   const [expandedCitations, setExpandedCitations] = useState<Set<string>>(new Set());
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [sourceList, setSourceList] = useState<string[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const sidebarStories = latestIssue.sections
@@ -63,18 +63,23 @@ export default function CircuitLensPage() {
     .slice(0, 5);
 
   useEffect(() => {
-    const el = bottomRef.current;
+    fetch("/api/lens-sources?lens=circuit")
+      .then((r) => r.json())
+      .then((d) => setSourceList(d.sources ?? []))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
     if (!el) return;
-    const distanceFromBottom = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
-    if (distanceFromBottom < 200) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
-  const conversationHistory = messages.map((m) => ({
-    question: m.role === "user" ? m.content : "",
-    answer: m.role === "assistant" ? m.content : "",
-  })).filter((t) => t.question || t.answer);
+  const conversationHistory = messages.reduce<{ question: string; answer: string }[]>((acc, m) => {
+    if (m.role === "user") acc.push({ question: m.content, answer: "" });
+    else if (m.role === "assistant" && acc.length > 0) acc[acc.length - 1].answer = m.content;
+    return acc;
+  }, []).filter((t) => t.question && t.answer);
 
   const previousChunks = messages.length > 0
     ? (messages[messages.length - 1] as any).usedChunks ?? []
@@ -148,145 +153,168 @@ export default function CircuitLensPage() {
   }
 
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: "#F4F3EF" }}>
+    <div className="flex h-full overflow-hidden" style={{ backgroundColor: "#F4F3EF" }}>
 
       {/* ── MAIN ── */}
-      <main className="flex-1 flex flex-col min-h-screen">
+      <main className="flex-1 flex flex-col overflow-hidden">
         <div className="h-[2px] shrink-0" style={{ backgroundColor: ACCENT }} />
 
-        <div className="flex-1 max-w-4xl w-full mx-auto px-8 pt-6 pb-4 flex flex-col">
+        <div className="flex-1 w-full mx-auto flex flex-col overflow-hidden" style={{ maxWidth: "860px" }}>
 
-          {messages.length === 0 && (
-            <div className="flex flex-col pt-8 pb-4">
-              <div className="mb-5">
-                <p className="text-[11px] font-bold uppercase tracking-widest mb-1" style={{ color: ACCENT }}>Earnings & Industry Dynamics</p>
-                <h1 className="text-[22px] font-bold text-[#111827] leading-tight">The Circuit Lens</h1>
-                <p className="text-[11px] text-gray-400 mt-0.5">38 episodes · Aug 2025–Jun 2026</p>
-              </div>
+          {/* scrollable area */}
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-8 pt-6 pb-4">
 
-              <p className="text-[13px] text-gray-500 leading-relaxed mb-6 max-w-xl">
-                Ask anything about semiconductor earnings, chip industry cycles, and AI hardware demand — grounded in 38 episodes of The Circuit with Ben Bajarin and Jay Goldberg, with citations to the exact source.
-              </p>
+            {messages.length === 0 && (
+              <div className="flex flex-col pt-8 pb-4">
+                <div className="mb-5">
+                  <p className="text-[11px] font-bold uppercase tracking-widest mb-1" style={{ color: ACCENT }}>Earnings & Industry Dynamics</p>
+                  <h1 className="text-[22px] font-bold text-[#111827] leading-tight">The Circuit Lens</h1>
+                  <p className="text-[11px] text-gray-400 mt-0.5">38 episodes · Aug 2025–Jun 2026</p>
+                </div>
 
-              <div className="flex flex-wrap gap-2 mb-8">
-                {STARTER_QUESTIONS.map((q) => (
-                  <button key={q} onClick={() => sendMessage(q)}
-                    className="text-[12px] text-gray-600 border border-gray-300 bg-white rounded-full px-3 py-1.5 hover:border-gray-800 hover:text-gray-900 hover:bg-gray-100 transition-all whitespace-nowrap">
-                    {q}
+                <p className="text-[13px] text-gray-500 leading-relaxed mb-5 max-w-xl">
+                  Ask anything about semiconductor earnings, chip industry cycles, and AI hardware demand — grounded in 38 episodes of The Circuit with Ben Bajarin and Jay Goldberg, with citations to the exact source.
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {STARTER_QUESTIONS.map((q) => (
+                    <button key={q} onClick={() => sendMessage(q)}
+                      className="text-[12px] text-gray-600 border border-gray-300 bg-white rounded-full px-3 py-1.5 hover:border-gray-800 hover:text-gray-900 hover:bg-gray-100 transition-all whitespace-nowrap">
+                      {q}
+                    </button>
+                  ))}
+                </div>
+
+                {/* ── SOURCES DROPDOWN ── */}
+                <div className="max-w-xl">
+                  <button
+                    onClick={() => setSourcesOpen((o) => !o)}
+                    className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <span>Sources ({sourceList.length || 38})</span>
+                    <span>{sourcesOpen ? "▲" : "▼"}</span>
                   </button>
-                ))}
+                  {sourcesOpen && (
+                    <div className="mt-2 border border-gray-200 rounded-lg bg-white divide-y divide-gray-100 shadow-sm">
+                      {sourceList.length > 0 ? sourceList.map((s, i) => (
+                        <div key={i} className="px-3 py-2 text-[12px] text-gray-600">{s}</div>
+                      )) : (
+                        <div className="px-3 py-2 text-[12px] text-gray-400">Loading sources...</div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
+            )}
 
-            </div>
-          )}
+            {messages.length > 0 && (
+              <div className="space-y-4 mb-4">
+                <div className="flex items-center gap-2 pb-3 border-b border-gray-200 mb-4">
+                  <span className="text-[13px] font-semibold text-[#111827]">The Circuit Lens</span>
+                  <span className="text-[11px] text-gray-400">· Earnings & Industry Dynamics</span>
+                  <Link href="/lenses" className="ml-auto text-[11px] text-gray-400 hover:text-gray-600">← Lenses</Link>
+                </div>
 
-          {messages.length > 0 && (
-            <div className="space-y-4 mb-6 flex-1">
-              <div className="flex items-center gap-2 pb-3 border-b border-gray-200 mb-4">
-                <span className="text-[13px] font-semibold text-[#111827]">The Circuit Lens</span>
-                <span className="text-[11px] text-gray-400">· Earnings & Industry Dynamics</span>
-                <Link href="/lenses" className="ml-auto text-[11px] text-gray-400 hover:text-gray-600">← Lenses</Link>
-              </div>
-
-              {messages.map((msg, i) => {
-                if (msg.role === "user") {
+                {messages.map((msg, i) => {
+                  if (msg.role === "user") {
+                    return (
+                      <div key={msg.id} className="flex justify-end">
+                        <div className="max-w-lg bg-[#111827] text-white px-4 py-2.5 text-[13px] leading-relaxed rounded-2xl rounded-br-sm">
+                          {msg.content}
+                        </div>
+                      </div>
+                    );
+                  }
+                  const prevUser = messages[i - 1];
                   return (
-                    <div key={msg.id} className="flex justify-end">
-                      <div className="max-w-lg bg-[#111827] text-white px-4 py-2.5 text-[13px] leading-relaxed rounded-2xl rounded-br-sm">
-                        {msg.content}
+                    <div key={msg.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                      <div className="h-[2px]" style={{ backgroundColor: ACCENT }} />
+                      <div className="p-5">
+                        <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content}</div>
+
+                        {msg.isInference && (
+                          <div className="flex items-start gap-2 border border-gray-200 bg-gray-50 rounded-md px-3 py-2 mb-4">
+                            <span className="text-gray-500 text-[11px] mt-0.5">⚠</span>
+                            <p className="text-[12px] text-gray-700">Includes reasoning beyond direct source quotes.</p>
+                          </div>
+                        )}
+
+                        {msg.citations && msg.citations.length > 0 && (
+                          <div className="mb-4">
+                            <button
+                              onClick={() => toggleCitation(msg.id)}
+                              className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-gray-600 transition-colors mb-2"
+                            >
+                              <span className="font-bold uppercase tracking-widest">Sources ({msg.citations.length})</span>
+                              <span>{expandedCitations.has(msg.id) ? "▲" : "▼"}</span>
+                            </button>
+                            {expandedCitations.has(msg.id) && (
+                              <div className="space-y-1">
+                                {msg.citations.map((c, ci) => (
+                                  <div key={ci} className="border border-gray-100 rounded-md bg-gray-50 px-3 py-2">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <span className="text-[10px] font-bold" style={{ color: ACCENT }}>[{ci + 1}]</span>
+                                      <span className="text-[12px] font-medium text-gray-700">{c.source}</span>
+                                      <span className="text-[10px] text-gray-400">{c.date}</span>
+                                    </div>
+                                    <p className="text-[12px] text-gray-500 italic leading-relaxed">"{c.quote}"</p>
+                                    {c.url && (
+                                      <a href={c.url} target="_blank" rel="noopener noreferrer"
+                                        className="text-[11px] hover:underline mt-1 inline-block" style={{ color: ACCENT }}>
+                                        View source →
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {msg.suggestedFollowUps && msg.suggestedFollowUps.length > 0 && (
+                          <div className="mb-4">
+                            <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2">Follow up</p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {msg.suggestedFollowUps.map((q) => (
+                                <button key={q} onClick={() => sendMessage(q)}
+                                  className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-gray-800 hover:text-gray-900 transition-colors">
+                                  {q}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {prevUser && (
+                          <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                            <span className="text-[10px] text-gray-400">Helpful?</span>
+                            <button onClick={() => submitFeedback(msg.id, true, prevUser.content, msg.content)} className="text-[12px] hover:scale-110 transition-transform">👍</button>
+                            <button onClick={() => submitFeedback(msg.id, false, prevUser.content, msg.content)} className="text-[12px] hover:scale-110 transition-transform">👎</button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   );
-                }
-                const prevUser = messages[i - 1];
-                return (
-                  <div key={msg.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                })}
+
+                {loading && (
+                  <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                     <div className="h-[2px]" style={{ backgroundColor: ACCENT }} />
-                    <div className="p-5">
-                      <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content}</div>
-
-                      {msg.isInference && (
-                        <div className="flex items-start gap-2 border border-gray-200 bg-gray-50 rounded-md px-3 py-2 mb-4">
-                          <span className="text-gray-500 text-[11px] mt-0.5">⚠</span>
-                          <p className="text-[12px] text-gray-700">Includes reasoning beyond direct source quotes.</p>
-                        </div>
-                      )}
-
-                      {msg.citations && msg.citations.length > 0 && (
-                        <div className="mb-4">
-                          <button
-                            onClick={() => toggleCitation(msg.id)}
-                            className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-gray-600 transition-colors mb-2"
-                          >
-                            <span className="font-bold uppercase tracking-widest">Sources ({msg.citations.length})</span>
-                            <span>{expandedCitations.has(msg.id) ? "▲" : "▼"}</span>
-                          </button>
-                          {expandedCitations.has(msg.id) && (
-                            <div className="space-y-1">
-                              {msg.citations.map((c, ci) => (
-                                <div key={ci} className="border border-gray-100 rounded-md bg-gray-50 px-3 py-2">
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-[10px] font-bold" style={{ color: ACCENT }}>[{ci + 1}]</span>
-                                    <span className="text-[12px] font-medium text-gray-700">{c.source}</span>
-                                    <span className="text-[10px] text-gray-400">{c.date}</span>
-                                  </div>
-                                  <p className="text-[12px] text-gray-500 italic leading-relaxed">"{c.quote}"</p>
-                                  {c.url && (
-                                    <a href={c.url} target="_blank" rel="noopener noreferrer"
-                                      className="text-[11px] hover:underline mt-1 inline-block" style={{ color: ACCENT }}>
-                                      View source →
-                                    </a>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {msg.suggestedFollowUps && msg.suggestedFollowUps.length > 0 && (
-                        <div className="mb-4">
-                          <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2">Follow up</p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {msg.suggestedFollowUps.map((q) => (
-                              <button key={q} onClick={() => sendMessage(q)}
-                                className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-gray-800 hover:text-gray-900 transition-colors">
-                                {q}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {prevUser && (
-                        <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                          <span className="text-[10px] text-gray-400">Helpful?</span>
-                          <button onClick={() => submitFeedback(msg.id, true, prevUser.content, msg.content)} className="text-[12px] hover:scale-110 transition-transform">👍</button>
-                          <button onClick={() => submitFeedback(msg.id, false, prevUser.content, msg.content)} className="text-[12px] hover:scale-110 transition-transform">👎</button>
-                        </div>
-                      )}
+                    <div className="p-4 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: ACCENT }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: ACCENT, animationDelay: "0.15s" }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: ACCENT, animationDelay: "0.3s" }} />
+                      <span className="ml-2 text-[13px] text-gray-400">Searching sources...</span>
                     </div>
                   </div>
-                );
-              })}
+                )}
+              </div>
+            )}
 
-              {loading && (
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                  <div className="h-[2px]" style={{ backgroundColor: ACCENT }} />
-                  <div className="p-4 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: ACCENT }} />
-                    <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: ACCENT, animationDelay: "0.15s" }} />
-                    <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: ACCENT, animationDelay: "0.3s" }} />
-                    <span className="ml-2 text-[13px] text-gray-400">Searching sources...</span>
-                  </div>
-                </div>
-              )}
-              <div ref={bottomRef} />
-            </div>
-          )}
+          </div>
 
-          {/* ── INPUT ── */}
-          <div className={messages.length === 0 ? "mt-8" : "sticky bottom-4 mt-auto"}>
+          {/* ── INPUT (pinned bottom) ── */}
+          <div className="px-8 py-4 shrink-0">
             <div className="bg-white rounded-2xl shadow-md border transition-all duration-150"
               style={{ borderColor: focused ? ACCENT : "#E5E7EB", boxShadow: focused ? `0 0 0 3px ${ACCENT}22, 0 4px 16px rgba(0,0,0,0.08)` : "0 2px 12px rgba(0,0,0,0.06)" }}>
               <textarea ref={inputRef} value={input}
@@ -313,7 +341,7 @@ export default function CircuitLensPage() {
       </main>
 
       {/* ── RIGHT SIDEBAR ── */}
-      <aside className="hidden lg:flex flex-col w-72 shrink-0 border-l border-gray-200 bg-white px-4 py-6 gap-6">
+      <aside className="hidden lg:flex flex-col w-60 shrink-0 border-l border-gray-200 bg-white px-4 py-6 gap-5 overflow-y-auto">
 
         <Link href="/lenses" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1 pl-1">
           ← Lenses

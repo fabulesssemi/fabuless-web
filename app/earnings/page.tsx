@@ -13,7 +13,7 @@ export default async function Earnings() {
         </h1>
       </div>
       <p className="text-sm text-gray-400 mb-10">
-        Upcoming semiconductor &amp; hyperscaler earnings — next 6 weeks.
+        Semiconductor companies with $10B+ market cap — next 6 weeks.
         Auto-updated daily; past reports drop off automatically.
       </p>
 

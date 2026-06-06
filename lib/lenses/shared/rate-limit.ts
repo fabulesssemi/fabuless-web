@@ -30,7 +30,15 @@ export interface RateLimitResult {
   resetAt: number;   // unix ms when the window resets
 }
 
+const BYPASS_IPS = new Set(
+  (process.env.BYPASS_RATE_LIMIT_IPS ?? "").split(",").map((s) => s.trim()).filter(Boolean)
+);
+
 export async function rateLimit(ip: string): Promise<RateLimitResult> {
+  if (BYPASS_IPS.has(ip)) {
+    return { allowed: true, remaining: 9999, resetAt: Date.now() + WINDOW_MS };
+  }
+
   const supabase = getSupabase();
   const now = Date.now();
 

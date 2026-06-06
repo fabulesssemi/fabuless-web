@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { SiteFooter } from "@/app/components/SiteFooter";
 import "./globals.css";
 
 const inter = Inter({
@@ -82,7 +81,6 @@ export default function RootLayout({
 
         <main className="flex-1 overflow-y-auto min-h-0">
           {children}
-          <SiteFooter />
         </main>
       </body>
     </html>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { SiteFooter } from "@/app/components/SiteFooter";
 import "./globals.css";
 
 const inter = Inter({
@@ -81,12 +82,7 @@ export default function RootLayout({
 
         <main className="flex-1 overflow-y-auto min-h-0">
           {children}
-          <footer className="border-t border-gray-200 py-6 mt-12">
-            <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-sm text-gray-400">
-              <span>© 2026 Fabuless Information Services</span>
-              <span>fabuless.ai</span>
-            </div>
-          </footer>
+          <SiteFooter />
         </main>
       </body>
     </html>

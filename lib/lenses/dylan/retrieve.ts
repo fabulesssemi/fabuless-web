@@ -23,7 +23,7 @@ function getSupabase() {
 
 const VECTOR_CANDIDATES = 20;
 const KEYWORD_CANDIDATES = 20;
-const FINAL_TOP_K = 5;
+const FINAL_TOP_K = 3;
 const MIN_SIMILARITY_THRESHOLD = 0.45;
 
 export interface RetrievalOptions {

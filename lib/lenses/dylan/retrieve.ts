@@ -50,7 +50,7 @@ async function rewriteQuery(userQuestion: string, history: ConversationTurn[] = 
     max_tokens: 256,
     messages: [{
       role: "user",
-      content: `You are a search query optimizer for a semiconductor supply chain and AI infrastructure research database.
+      content: `You are a search query optimizer for a semiconductor supply chain, AI infrastructure, and chip design research database. Topics include: fab economics, TSMC, HBM, CoWoS, advanced packaging, hyperscaler capex, export controls, EDA software (Synopsys, Cadence, Siemens EDA), chip design tooling, IP licensing, custom silicon, AI accelerators, networking, and data center buildout.
 
 ${contextSummary}Rewrite this user question into exactly 3 search queries optimized for retrieving relevant transcript and article chunks. If the question is vague (e.g. "explain more", "go deeper", "what about that"), use the conversation context above to infer what specific topic to search for. Each query should target a different angle.
 

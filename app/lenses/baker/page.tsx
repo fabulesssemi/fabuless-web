@@ -227,7 +227,7 @@ export default function BakerLensPage() {
                     <div key={msg.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
                       <div className="h-[2px]" style={{ backgroundColor: ACCENT }} />
                       <div className="p-5">
-                        <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/^(DIRECT VIEW|BAKER LENS INFERENCE|OUTSIDE COVERAGE)\s*\n+/i, "").trimStart()}</div>
+                        <div className="text-[14px] text-gray-800 leading-relaxed mb-4 whitespace-pre-wrap">{msg.content.replace(/<cite[^>]*>|<\/cite>/g, "").replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/^(DIRECT VIEW|BAKER LENS INFERENCE|OUTSIDE COVERAGE)\s*\n+/i, "").trimStart()}</div>
 
                         {msg.answerTier === "inference" && (
                           <div className="inline-flex items-center gap-1.5 border border-amber-200 bg-amber-50 rounded-full px-3 py-1 mb-4">

@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { retrieveChunks } from "@/lib/lenses/baker/retrieve";
 import { streamBakerLens, ConversationTurn, TranscriptChunk } from "@/lib/lenses/baker/query";
 import { rateLimit } from "@/lib/lenses/shared/rate-limit";
+import { fetchRecentNewsForQuery } from "@/lib/lenses/shared/recent-news";
 
 export const maxDuration = 60;
 
@@ -46,7 +47,10 @@ export async function POST(req: NextRequest) {
       };
 
       try {
-        const { chunks, belowThreshold } = await retrieveChunks(question, { conversationHistory });
+        const [{ chunks, belowThreshold }, recentNews] = await Promise.all([
+          retrieveChunks(question, { conversationHistory }),
+          fetchRecentNewsForQuery(question),
+        ]);
 
         await streamBakerLens(
           question,
@@ -54,7 +58,8 @@ export async function POST(req: NextRequest) {
           belowThreshold,
           conversationHistory,
           previousChunks,
-          (text) => send({ type: "text", text })
+          (text) => send({ type: "text", text }),
+          recentNews
         ).then((result) => {
           send({ type: "done", ...result });
         });

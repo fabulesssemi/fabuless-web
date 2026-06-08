@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { retrieveChunks } from "@/lib/lenses/circuit/retrieve";
 import { streamCircuitLens, ConversationTurn, TranscriptChunk } from "@/lib/lenses/circuit/query";
 import { rateLimit } from "@/lib/lenses/shared/rate-limit";
+import { fetchRecentNewsForQuery } from "@/lib/lenses/shared/recent-news";
 
 export const maxDuration = 60;
 
@@ -31,8 +32,11 @@ export async function POST(req: NextRequest) {
     async start(controller) {
       const send = (data: object) => controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
       try {
-        const { chunks, belowThreshold } = await retrieveChunks(question, { conversationHistory });
-        await streamCircuitLens(question, chunks, belowThreshold, conversationHistory, previousChunks, (text) => send({ type: "text", text }))
+        const [{ chunks, belowThreshold }, recentNews] = await Promise.all([
+          retrieveChunks(question, { conversationHistory }),
+          fetchRecentNewsForQuery(question),
+        ]);
+        await streamCircuitLens(question, chunks, belowThreshold, conversationHistory, previousChunks, (text) => send({ type: "text", text }), recentNews)
           .then((result) => send({ type: "done", ...result }));
       } catch (err) {
         send({ type: "error", error: String(err) });

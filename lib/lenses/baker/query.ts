@@ -3,6 +3,7 @@ import { BAKER_LENS_SYSTEM_PROMPT } from "./system-prompt";
 import { runGuardrail } from "../shared/guardrail";
 import { formatSourceName } from "../shared/format-source";
 import { summarizeHistory, detectIntent, generateFollowUps } from "../shared/conversation";
+import { RecentNewsItem, buildNewsDocumentBlocks } from "../shared/recent-news";
 
 export interface TranscriptChunk {
   id: string;
@@ -194,7 +195,8 @@ export async function streamBakerLens(
   belowThreshold: boolean = false,
   conversationHistory: ConversationTurn[] = [],
   previousChunks: TranscriptChunk[] = [],
-  onText: (text: string) => void
+  onText: (text: string) => void,
+  recentNews: RecentNewsItem[] = []
 ): Promise<BakerLensResponse> {
   const intent = await detectIntent(userQuestion, conversationHistory);
 
@@ -232,7 +234,7 @@ export async function streamBakerLens(
 
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const sortedChunks = [...chunksToUse].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
+  const newsBlocks = buildNewsDocumentBlocks(recentNews);
   const documentBlocks = sortedChunks.map((chunk) => ({
     type: "document" as const,
     source: { type: "text" as const, media_type: "text/plain" as const, data: chunk.text },
@@ -242,7 +244,7 @@ export async function streamBakerLens(
 
   const messages: Anthropic.MessageParam[] = [
     ...historyMessages,
-    { role: "user", content: [...documentBlocks, { type: "text" as const, text: userQuestion }] },
+    { role: "user", content: [...newsBlocks, ...documentBlocks, { type: "text" as const, text: userQuestion }] },
   ];
 
   const stream = anthropic.messages.stream({

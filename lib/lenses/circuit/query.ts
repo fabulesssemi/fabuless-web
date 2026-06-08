@@ -3,6 +3,7 @@ import { CIRCUIT_LENS_SYSTEM_PROMPT } from "./system-prompt";
 import { runGuardrail } from "../shared/guardrail";
 import { formatSourceName } from "../shared/format-source";
 import { summarizeHistory, detectIntent, generateFollowUps } from "../shared/conversation";
+import { RecentNewsItem, buildNewsDocumentBlocks } from "../shared/recent-news";
 
 export interface TranscriptChunk {
   id: string;
@@ -144,7 +145,8 @@ export async function streamCircuitLens(
   belowThreshold: boolean = false,
   conversationHistory: ConversationTurn[] = [],
   previousChunks: TranscriptChunk[] = [],
-  onText: (text: string) => void
+  onText: (text: string) => void,
+  recentNews: RecentNewsItem[] = []
 ): Promise<CircuitLensResponse> {
   const intent = await detectIntent(userQuestion, conversationHistory);
 
@@ -174,8 +176,9 @@ export async function streamCircuitLens(
 
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const sortedChunks = [...chunksToUse].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const newsBlocks = buildNewsDocumentBlocks(recentNews);
   const documentBlocks = sortedChunks.map((chunk) => ({ type: "document" as const, source: { type: "text" as const, media_type: "text/plain" as const, data: chunk.text }, title: `${formatSourceName(chunk.source)} (${chunk.date})`, citations: { enabled: true } }));
-  const messages: Anthropic.MessageParam[] = [...historyMessages, { role: "user", content: [...documentBlocks, { type: "text" as const, text: userQuestion }] }];
+  const messages: Anthropic.MessageParam[] = [...historyMessages, { role: "user", content: [...newsBlocks, ...documentBlocks, { type: "text" as const, text: userQuestion }] }];
 
   const stream = anthropic.messages.stream({ model: "claude-sonnet-4-6", max_tokens: 2048, system: [{ type: "text", text: CIRCUIT_LENS_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }], messages } as any);
 

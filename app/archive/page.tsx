@@ -3,9 +3,9 @@ import { issues } from "@/lib/issues";
 
 export default function Archive() {
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-12 pb-16">
+    <div className="max-w-4xl mx-auto px-6 py-10">
       <div className="mb-10">
-        <h1 className="font-sans text-3xl font-bold text-[#111827] tracking-tight">
+        <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
           Archive
         </h1>
         <p className="font-serif text-[15px] text-[#4a4a4a] mt-1">

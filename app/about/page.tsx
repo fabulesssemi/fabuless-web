@@ -2,13 +2,13 @@ import { SubscribeForm } from "@/app/components/SubscribeForm";
 
 export default function About() {
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-16 pb-16">
+    <div className="max-w-4xl mx-auto px-6 py-10">
 
       <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#B45309] mb-4">
         About Fabuless
       </p>
 
-      <h1 className="font-sans text-4xl font-bold text-[#111827] tracking-tight leading-tight mb-8">
+      <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mb-6">
         Semiconductor intelligence,<br />without the complexity.
       </h1>
 

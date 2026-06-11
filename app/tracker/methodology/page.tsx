@@ -65,10 +65,10 @@ export default function MethodologyPage() {
         <p className="text-[11px] font-bold uppercase tracking-widest text-[#B45309] mb-2">
           Prediction Tracker
         </p>
-        <h1 className="font-sans text-4xl font-bold text-[#111827] tracking-tight mb-3">
+        <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
           Methodology
         </h1>
-        <p className="text-gray-500 leading-relaxed">
+        <p className="font-serif text-[15px] text-[#4a4a4a] mt-1 leading-relaxed">
           A scoreboard is only as good as its rules. These are ours — applied identically to
           every expert, every prediction, every verdict.
         </p>

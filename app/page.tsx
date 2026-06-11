@@ -25,9 +25,10 @@ export default async function Home() {
   const issueTitle = autoContent?.issueTitle ?? latestIssue.title;
 
   // ── Static issue data (manual fallback when pipeline hasn't run yet) ────────
-  const allTagged = latestIssue.sections.flatMap((s) =>
-    s.stories.map((story) => ({ story, category: s.category }))
-  );
+  const seenStaticUrls = new Set<string>();
+  const allTagged = latestIssue.sections
+    .flatMap((s) => s.stories.map((story) => ({ story, category: s.category })))
+    .filter(({ story }) => !seenStaticUrls.has(story.url) && seenStaticUrls.add(story.url));
   const staticFeatured = [
     ...allTagged.filter(({ story }) => story.image !== null),
     ...allTagged.filter(({ story }) => story.image === null),

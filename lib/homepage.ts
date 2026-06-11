@@ -33,6 +33,13 @@ export type HomepageContent = {
 const TABLE = "homepage_content";
 const KEY = "top_stories";
 
+// The pipeline can emit the same article twice (e.g. picked under two
+// categories). The homepage keys stories by URL, so drop repeats here.
+function dedupeByUrl<T extends { url: string }>(items: T[]): T[] {
+  const seen = new Set<string>();
+  return items.filter((item) => !seen.has(item.url) && seen.add(item.url));
+}
+
 export async function getHomepageContent(): Promise<HomepageContent | null> {
   try {
     const { data, error } = await supabase
@@ -41,7 +48,12 @@ export async function getHomepageContent(): Promise<HomepageContent | null> {
       .eq("key", KEY)
       .single();
     if (error || !data) return null;
-    return data.data as HomepageContent;
+    const content = data.data as HomepageContent;
+    return {
+      ...content,
+      topStories: dedupeByUrl(content.topStories ?? []),
+      podcasts: dedupeByUrl(content.podcasts ?? []),
+    };
   } catch {
     return null;
   }

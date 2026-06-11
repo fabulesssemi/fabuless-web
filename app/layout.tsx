@@ -51,6 +51,7 @@ export default function RootLayout({
               <div className="hidden md:flex gap-8 text-sm text-gray-400">
                 <Link href="/companies" className="hover:text-amber-400 transition-colors">Companies</Link>
                 <Link href="/lenses" className="hover:text-amber-400 transition-colors font-semibold">Lenses</Link>
+                <Link href="/tracker" className="hover:text-amber-400 transition-colors">Tracker</Link>
                 <Link href="/analyst-consensus" className="hover:text-amber-400 transition-colors">Analysts</Link>
                 <Link href="/insider-trading" className="hover:text-amber-400 transition-colors">Insider Trades</Link>
                 <Link href="/earnings" className="hover:text-amber-400 transition-colors">Earnings</Link>

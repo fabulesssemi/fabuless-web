@@ -1,0 +1,156 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import { predictions, type ExpertId } from "@/lib/tracker/predictions";
+import { statsFor } from "@/lib/tracker/stats";
+import { PredictionTable } from "@/app/components/tracker/PredictionTable";
+
+export const metadata: Metadata = {
+  title: "Prediction Tracker — Fabuless",
+  description:
+    "Who actually called it? Every falsifiable semiconductor prediction from leading analysts — verbatim quote, source, and verdict. The scoreboard nobody else keeps.",
+};
+
+const EXPERTS: {
+  id: ExpertId;
+  name: string;
+  subtitle: string;
+  accent: string;
+}[] = [
+  { id: "dylan",   name: "Dylan Patel",      subtitle: "SemiAnalysis",         accent: "#9A3412" },
+  { id: "circuit", name: "The Circuit",       subtitle: "Bajarin & Goldberg",   accent: "#1C1917" },
+  { id: "baker",   name: "Gavin Baker",       subtitle: "Atreides Management",  accent: "#1D4ED8" },
+  { id: "doug",    name: "Doug O'Laughlin",   subtitle: "Fabricated Knowledge", accent: "#065F46" },
+  { id: "stacy",   name: "Stacy Rasgon",      subtitle: "Bernstein Research",   accent: "#0F4C81" },
+];
+
+const DOMAIN_COLS = [
+  { key: "supply_chain", label: "Supply" },
+  { key: "demand",       label: "Demand" },
+  { key: "pricing",      label: "Pricing" },
+  { key: "geopolitics",  label: "Geo" },
+  { key: "technology",   label: "Tech" },
+  { key: "financials",   label: "Fin" },
+] as const;
+
+function pctColor(pct: number | null): string {
+  if (pct === null) return "text-gray-300";
+  if (pct >= 75)    return "text-emerald-600";
+  if (pct >= 50)    return "text-amber-600";
+  return "text-rose-600";
+}
+
+export default function TrackerPage() {
+  const rows = EXPERTS.map((e) => ({ expert: e, stats: statsFor(e.id) }));
+
+  return (
+    <div className="max-w-6xl mx-auto px-6 py-10">
+      {/* Header */}
+      <div className="border-b border-gray-200 pb-4 mb-6 flex items-baseline justify-between gap-4">
+        <div className="flex items-baseline gap-3">
+          <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
+            Prediction Tracker
+          </h1>
+          <span className="text-[13px] text-gray-400">
+            Every falsifiable semiconductor prediction — verbatim quote, source, verdict.
+          </span>
+        </div>
+        <Link href="/tracker/methodology" className="text-[12px] text-[#B45309] font-semibold hover:underline shrink-0">
+          Methodology →
+        </Link>
+      </div>
+
+      {/* Leaderboard */}
+      <div className="border border-gray-200 bg-white mb-8 overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-gray-100">
+              <th className="text-left px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 w-6">#</th>
+              <th className="text-left px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Expert</th>
+              <th className="text-center px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Overall</th>
+              <th className="hidden sm:table-cell text-center px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-300">Resolved</th>
+              <th className="hidden sm:table-cell text-center px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-300">Open</th>
+              {DOMAIN_COLS.map((d) => (
+                <th key={d.key} className="hidden md:table-cell text-center px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-300">
+                  {d.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ expert, stats }, i) => {
+              const domainMap = Object.fromEntries(stats.domains.map((d) => [d.domain, d.accuracyPct]));
+              return (
+                <tr key={expert.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                  {/* Rank */}
+                  <td className="px-4 py-3 text-[12px] text-gray-300 font-semibold">{i + 1}</td>
+
+                  {/* Expert name */}
+                  <td className="px-3 py-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-0.5 h-8 shrink-0 rounded-full" style={{ backgroundColor: expert.accent }} />
+                      <div>
+                        <div className="text-[13px] font-bold text-[#111827] leading-tight">{expert.name}</div>
+                        <div className="text-[11px] text-gray-400">{expert.subtitle}</div>
+                      </div>
+                    </div>
+                  </td>
+
+                  {/* Overall % — hero stat */}
+                  <td className="px-4 py-3 text-center">
+                    {stats.accuracyPct !== null ? (
+                      <span className={`text-[18px] font-bold ${pctColor(stats.accuracyPct)}`}>
+                        {stats.accuracyPct}%
+                      </span>
+                    ) : (
+                      <span className="text-gray-300 text-[13px]">—</span>
+                    )}
+                  </td>
+
+                  {/* Resolved */}
+                  <td className="hidden sm:table-cell px-3 py-3 text-center text-[12px] text-gray-500">
+                    {stats.correct}/{stats.resolved}
+                  </td>
+
+                  {/* Open */}
+                  <td className="hidden sm:table-cell px-3 py-3 text-center text-[12px] text-gray-400">
+                    {stats.tooEarly}
+                  </td>
+
+                  {/* Domain columns */}
+                  {DOMAIN_COLS.map((d) => {
+                    const pct = domainMap[d.key] ?? null;
+                    return (
+                      <td key={d.key} className="hidden md:table-cell px-3 py-3 text-center">
+                        {pct !== null ? (
+                          <span className={`text-[12px] font-semibold ${pctColor(pct)}`}>{pct}%</span>
+                        ) : (
+                          <span className="text-gray-200 text-[12px]">—</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Prediction table */}
+      <PredictionTable rows={predictions} />
+
+      {/* Bottom note */}
+      <div className="mt-12 pt-8 border-t border-gray-200">
+        <p className="text-[12px] text-gray-400 leading-relaxed max-w-2xl">
+          All predictions are drawn from publicly available articles, podcasts, and interviews.
+          Verdicts are editorial judgments based on verifiable outcomes, graded per the{" "}
+          <Link href="/tracker/methodology" className="underline hover:text-gray-600">
+            methodology
+          </Link>
+          . This is independent analysis — Fabuless is not affiliated with any tracked expert.
+          Nothing here is investment advice.
+        </p>
+      </div>
+    </div>
+  );
+}

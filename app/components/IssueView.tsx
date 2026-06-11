@@ -2,7 +2,12 @@ import type { Issue } from "@/lib/issues";
 
 export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEarnings?: boolean }) {
   const hasSidebar = showEarnings && issue.earnings.length > 0;
-  const allStories = issue.sections.flatMap((s) => s.stories);
+  // A story can appear in more than one section; stories are keyed by URL,
+  // so keep only the first occurrence.
+  const seenUrls = new Set<string>();
+  const allStories = issue.sections
+    .flatMap((s) => s.stories)
+    .filter((story) => !seenUrls.has(story.url) && seenUrls.add(story.url));
 
   return (
     <div className={hasSidebar ? "flex gap-10 items-start" : ""}>

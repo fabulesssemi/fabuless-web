@@ -57,6 +57,7 @@ export default function RootLayout({
                   <span className="cursor-default hover:text-amber-400 transition-colors py-4">More ▾</span>
                   <div className="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
                     <div className="bg-[#111827] border border-gray-700 py-1.5 w-44 shadow-lg">
+                      <Link href="/supply-chain" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Supply Chain</Link>
                       <Link href="/insider-trading" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Insider Trades</Link>
                       <Link href="/earnings" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Earnings</Link>
                       <Link href="/voices" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Top Voices</Link>

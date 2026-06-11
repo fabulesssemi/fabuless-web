@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/lenses",           label: "Lenses" },
   { href: "/tracker",          label: "Tracker" },
   { href: "/analyst-consensus",label: "Analysts" },
+  { href: "/supply-chain",     label: "Supply Chain" },
   { href: "/insider-trading",  label: "Insider Trades" },
   { href: "/earnings",         label: "Earnings" },
   { href: "/voices",           label: "Top Voices" },

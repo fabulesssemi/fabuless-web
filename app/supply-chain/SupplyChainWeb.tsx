@@ -477,7 +477,7 @@ export function SupplyChainWeb() {
           {(active || scenario || ckOnly) && (
             <button
               onClick={reset}
-              className="text-[11px] text-gray-400 hover:text-gray-600"
+              className="border border-gray-300 bg-white px-2.5 py-1 text-xs font-semibold text-gray-700 hover:border-gray-400 hover:text-gray-900"
               title="Reset view"
             >
               Reset ↺

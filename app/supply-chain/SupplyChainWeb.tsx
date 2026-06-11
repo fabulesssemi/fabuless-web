@@ -670,16 +670,24 @@ export function SupplyChainWeb() {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 top-full z-50 mt-1 w-80 border border-gray-200 bg-white shadow-lg">
-                <div className="border-b border-gray-100 px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-                  20 investor scenarios
+              <div className="fixed right-0 top-[55px] bottom-0 z-50 w-72 border-l border-gray-200 bg-white shadow-2xl flex flex-col">
+                <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                    20 investor scenarios
+                  </span>
+                  <button
+                    onClick={() => setDropdownOpen(false)}
+                    className="text-gray-400 hover:text-gray-600 text-sm leading-none"
+                  >
+                    ✕
+                  </button>
                 </div>
-                <div className="max-h-[420px] overflow-y-auto">
+                <div className="flex-1 overflow-y-auto">
                   {SCENARIOS.map((s) => (
                     <button
                       key={s.id}
                       onClick={() => selectScenario(s.id)}
-                      className={`block w-full border-b border-gray-50 px-3 py-2.5 text-left last:border-b-0 hover:bg-gray-50 ${
+                      className={`block w-full border-b border-gray-50 px-4 py-3 text-left last:border-b-0 hover:bg-gray-50 transition-colors ${
                         scenario === s.id ? "bg-[#FFF7ED]" : ""
                       }`}
                     >
@@ -688,7 +696,7 @@ export function SupplyChainWeb() {
                           className="mt-0.5 h-2 w-2 shrink-0 rounded-full"
                           style={{ backgroundColor: s.color }}
                         />
-                        <span className="text-[12px] font-semibold text-gray-800">{s.label}</span>
+                        <span className="text-[12px] font-semibold text-gray-800 leading-snug">{s.label}</span>
                         {scenario === s.id && (
                           <span className="ml-auto shrink-0 text-[10px] text-[#B45309]">active</span>
                         )}
@@ -703,7 +711,7 @@ export function SupplyChainWeb() {
                   ))}
                 </div>
                 {scenario && (
-                  <div className="border-t border-gray-100 px-3 py-2">
+                  <div className="border-t border-gray-100 px-4 py-3">
                     <button
                       onClick={() => { setScenario(null); setDropdownOpen(false); }}
                       className="text-[11px] text-gray-500 hover:text-gray-700"

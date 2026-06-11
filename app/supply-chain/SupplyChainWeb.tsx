@@ -198,9 +198,12 @@ const SCENARIOS: Omit<Scenario, "count">[] = [
     id: "optical-transition",
     label: "Optical interconnects go mainstream",
     subtitle: "Copper hits bandwidth limits — photonics winners emerge at rack and switch scale",
-    nodes: ["nvidia","broadcom","marvell","astera","arista","tsmc","microsoft","google","amazon","meta"],
+    nodes: ["coherent","lumentum","fabrinet","nvidia","broadcom","marvell","astera","arista","tsmc","microsoft","google","amazon","meta"],
     color: "#0E7490",
     why: {
+      coherent: "The 800G/1.6T transceiver market doubles — sole supplier of high-bandwidth modules at scale",
+      lumentum: "Laser chips inside every transceiver — demand scales with port count across hyperscaler DCs",
+      fabrinet: "Contract optical manufacturing capacity becomes the supply constraint — backlog grows",
       nvidia: "NVLink and rack-scale interconnects must go optical at 800G+ — Nvidia invests $6B+ in photonics",
       broadcom: "Tomahawk switch silicon ships with co-packaged optics — major design win at stake",
       marvell: "Optical DSPs and PAM4 silicon — positioned as the key enabler of CPO transition",
@@ -348,7 +351,7 @@ const SCENARIOS: Omit<Scenario, "count">[] = [
     label: "AI capex supercycle accelerates",
     subtitle: "Hyperscalers collectively double 2027 capex — every link in the chain reprices",
     nodes: ["nvidia","skhynix","micron","tsmc","broadcom","marvell","astera",
-            "supermicro","dell","foxconn","arista",
+            "supermicro","dell","foxconn","arista","coherent","lumentum","fabrinet",
             "microsoft","google","amazon","meta","oracle","coreweave"],
     color: "#B45309",
     why: {
@@ -363,6 +366,9 @@ const SCENARIOS: Omit<Scenario, "count">[] = [
       dell: "Enterprise AI server demand inflects — GPU server mix reaches 40%+ of revenue",
       foxconn: "GB200 rack manufacturing for Nvidia — volume order locks in capacity",
       arista: "AI network switch refresh cycle accelerates — 800G ports go mainstream",
+      coherent: "800G/1.6T transceiver demand scales with every new DC build — multi-year supercycle",
+      lumentum: "Laser chip demand doubles with port count — Lumentum is the laser supplier behind it all",
+      fabrinet: "Contract optical manufacturing backlog extends to 18 months — pricing power expands",
       microsoft: "Azure AI becomes largest cloud AI revenue generator — capex justified",
       google: "TPU and GPU deployments both scale — GCP AI revenue inflects",
       amazon: "AWS AI chip mix shifts — $20B+ annualized AI infrastructure",
@@ -567,6 +573,9 @@ const STOCK_EFFECTS: Record<string, Record<string, StockEffect>> = {
     xai:              { dir: "down",  note: "Baker: xAI built Colossus 'in a superhuman way' but used external generators — liability exposed" },
   },
   "optical-transition": {
+    coherent:         { dir: "up",    note: "Circuit: 800G datacenter interconnect is a multi-year refresh wave — Coherent ships the transceivers" },
+    lumentum:         { dir: "up",    note: "Every 800G/1.6T transceiver needs Lumentum laser chips — demand compounds with port count" },
+    fabrinet:         { dir: "up",    note: "Contract optical manufacturing is the supply constraint — Fabrinet backlog extends, pricing power rises" },
     nvidia:           { dir: "mixed", note: "Circuit: Nvidia already largest networking vendor — must invest in photonics; near-term cost, long-term moat" },
     broadcom:         { dir: "up",    note: "Circuit: Broadcom guided $100B AI revenue 2027 — co-packaged optics is central to that thesis" },
     marvell:          { dir: "up",    note: "Optical DSP silicon is Marvell's biggest near-term catalyst; Circuit: Trainium/Maia customer" },
@@ -670,6 +679,9 @@ const STOCK_EFFECTS: Record<string, Record<string, StockEffect>> = {
     dell:             { dir: "up",    note: "GPU server mix reaches 40%+ of revenue; Circuit: OEM commitment to AI hardware is locked" },
     foxconn:          { dir: "up",    note: "GB200 rack manufacturing; Baker: Terafab-level hardware engineering is the next wave" },
     arista:           { dir: "up",    note: "Circuit: Nvidia is already the largest networking vendor — 800G refresh accelerates" },
+    coherent:         { dir: "up",    note: "Every new AI DC needs 800G/1.6T optics — Coherent transceiver demand scales with every rack" },
+    lumentum:         { dir: "up",    note: "Laser chip content grows with port count — supercycle means Lumentum demand grows linearly" },
+    fabrinet:         { dir: "up",    note: "Contract optical manufacturing backlog extends; supercycle tightens capacity across the board" },
     microsoft:        { dir: "up",    note: "Patel: Azure dwarfs rivals in capex — supercycle justifies every dollar of Stargate" },
     google:           { dir: "up",    note: "Patel: TPUv7 Ironwood deal worth ~$52B — GCP AI revenue inflects on supercycle" },
     amazon:           { dir: "up",    note: "Patel: AWS will build more capacity than anyone in 2025-2027 — supercycle vindicates" },
@@ -930,7 +942,7 @@ export function SupplyChainWeb() {
           ))}
         </div>
         <div className="flex shrink-0 items-center gap-3">
-          {/* Scenarios dropdown */}
+          {/* Scenarios button */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen((o) => !o)}
@@ -947,60 +959,6 @@ export function SupplyChainWeb() {
               )}
               <span className="ml-0.5 text-[10px]">{dropdownOpen ? "▲" : "▾"}</span>
             </button>
-
-            {dropdownOpen && (
-              <div className="fixed right-0 top-[55px] bottom-0 z-50 w-72 border-l border-gray-200 bg-white shadow-2xl flex flex-col">
-                <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-                    20 investor scenarios
-                  </span>
-                  <button
-                    onClick={() => setDropdownOpen(false)}
-                    className="text-gray-400 hover:text-gray-600 text-sm leading-none"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div className="flex-1 overflow-y-auto">
-                  {SCENARIOS.map((s) => (
-                    <button
-                      key={s.id}
-                      onClick={() => selectScenario(s.id)}
-                      className={`block w-full border-b border-gray-50 px-4 py-3 text-left last:border-b-0 hover:bg-gray-50 transition-colors ${
-                        scenario === s.id ? "bg-[#FFF7ED]" : ""
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="mt-0.5 h-2 w-2 shrink-0 rounded-full"
-                          style={{ backgroundColor: s.color }}
-                        />
-                        <span className="text-[12px] font-semibold text-gray-800 leading-snug">{s.label}</span>
-                        {scenario === s.id && (
-                          <span className="ml-auto shrink-0 text-[10px] text-[#B45309]">active</span>
-                        )}
-                      </div>
-                      <p className="ml-4 mt-0.5 text-[11px] leading-snug text-gray-500">
-                        {s.subtitle}
-                      </p>
-                      <p className="ml-4 mt-0.5 text-[10px] text-gray-400">
-                        {s.nodes.length} companies affected
-                      </p>
-                    </button>
-                  ))}
-                </div>
-                {scenario && (
-                  <div className="border-t border-gray-100 px-4 py-3">
-                    <button
-                      onClick={() => { setScenario(null); setDropdownOpen(false); }}
-                      className="text-[11px] text-gray-500 hover:text-gray-700"
-                    >
-                      ✕ Clear scenario
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
           {/* Chokepoints toggle */}
@@ -1030,74 +988,174 @@ export function SupplyChainWeb() {
         </div>
       </div>
 
-      {/* Active scenario panel */}
-      {activeScenario && (
-        <div
-          className="border-b"
-          style={{ borderColor: activeScenario.color + "30", backgroundColor: activeScenario.color + "08" }}
-        >
-          {/* Panel header */}
-          <div className="flex items-start gap-3 px-4 pt-3 pb-2">
-            <span
-              className="mt-0.5 h-2.5 w-2.5 shrink-0 rounded-full"
-              style={{ backgroundColor: activeScenario.color }}
-            />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-baseline gap-2 flex-wrap">
-                <span className="text-sm font-bold" style={{ color: activeScenario.color }}>
-                  {activeScenario.label}
+      {/* Right sidebar: scenario list (dropdown open) OR scenario detail (scenario active) */}
+      {(dropdownOpen || activeScenario) && (
+        <div className="fixed right-0 top-[70px] bottom-0 z-50 w-80 border-l border-gray-200 bg-white shadow-2xl flex flex-col">
+          {dropdownOpen ? (
+            /* ── Scenario list ── */
+            <>
+              <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3 shrink-0">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                  {SCENARIOS.length} investor scenarios
                 </span>
-                <span className="text-xs text-gray-500">{activeScenario.subtitle}</span>
-              </div>
-              <div className="mt-0.5 text-[11px] text-gray-400">
-                {activeScenario.nodes.length} companies affected — highlighted on the map
-              </div>
-            </div>
-            <button
-              onClick={() => setScenario(null)}
-              className="shrink-0 text-gray-400 hover:text-gray-600 text-sm leading-none mt-0.5"
-            >
-              ✕
-            </button>
-          </div>
-          {/* Affected companies grid */}
-          <div className="px-4 pb-3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
-            {activeScenario.nodes.map((nid) => {
-              const node = NODES.find((n) => n.id === nid);
-              const reason = activeScenario.why[nid];
-              const effect = STOCK_EFFECTS[activeScenario.id]?.[nid];
-              if (!node) return null;
-              const effectColor = effect?.dir === "up" ? "#16a34a" : effect?.dir === "down" ? "#dc2626" : "#6b7280";
-              const effectArrow = effect?.dir === "up" ? "▲" : effect?.dir === "down" ? "▼" : "↔";
-              return (
-                <div
-                  key={nid}
-                  className="flex items-start gap-2 py-2 border-b border-gray-100 last:border-0"
+                <button
+                  onClick={() => setDropdownOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 text-sm leading-none"
                 >
-                  <span
-                    className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full"
-                    style={{ backgroundColor: TIER_COLORS[node.tier as Tier] }}
-                  />
-                  <div className="min-w-0">
-                    <div>
-                      <span className="text-[11px] font-semibold text-gray-800">{node.ticker ?? node.name}</span>
-                      {reason && (
-                        <span className="text-[11px] text-gray-500"> — {reason}</span>
-                      )}
-                    </div>
-                    {effect && (
-                      <div className="mt-0.5 flex items-start gap-1">
-                        <span className="text-[10px] font-bold leading-tight shrink-0" style={{ color: effectColor }}>
-                          {effectArrow}
+                  ✕
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                {SCENARIOS.map((s) => {
+                  const effects = STOCK_EFFECTS[s.id] ?? {};
+                  const ups = s.nodes.filter((n) => effects[n]?.dir === "up").length;
+                  const downs = s.nodes.filter((n) => effects[n]?.dir === "down").length;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => selectScenario(s.id)}
+                      className={`block w-full border-b border-gray-50 px-4 py-3 text-left last:border-b-0 hover:bg-gray-50 transition-colors ${
+                        scenario === s.id ? "bg-[#FFF7ED]" : ""
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="mt-0.5 h-2 w-2 shrink-0 rounded-full"
+                          style={{ backgroundColor: s.color }}
+                        />
+                        <span className="text-[12px] font-semibold text-gray-800 leading-snug flex-1">{s.label}</span>
+                        <span className="flex items-center gap-1.5 shrink-0">
+                          {ups > 0 && (
+                            <span className="text-[11px] font-bold text-green-600">▲{ups}</span>
+                          )}
+                          {downs > 0 && (
+                            <span className="text-[11px] font-bold text-red-600">▼{downs}</span>
+                          )}
                         </span>
-                        <span className="text-[10px] leading-tight text-gray-500">{effect.note}</span>
                       </div>
-                    )}
+                      <p className="ml-4 mt-0.5 text-[11px] leading-snug text-gray-500">
+                        {s.subtitle}
+                      </p>
+                    </button>
+                  );
+                })}
+              </div>
+              {scenario && (
+                <div className="border-t border-gray-100 px-4 py-3 shrink-0">
+                  <button
+                    onClick={() => { setScenario(null); setDropdownOpen(false); }}
+                    className="text-[11px] text-gray-500 hover:text-gray-700"
+                  >
+                    ✕ Clear scenario
+                  </button>
+                </div>
+              )}
+            </>
+          ) : activeScenario ? (
+            /* ── Scenario detail ── */
+            <>
+              <div
+                className="shrink-0 border-b px-4 pt-3 pb-2"
+                style={{ borderColor: activeScenario.color + "40", backgroundColor: activeScenario.color + "08" }}
+              >
+                <div className="flex items-start gap-2">
+                  <span
+                    className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+                    style={{ backgroundColor: activeScenario.color }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[13px] font-bold leading-snug" style={{ color: activeScenario.color }}>
+                      {activeScenario.label}
+                    </div>
+                    <div className="mt-0.5 text-[11px] text-gray-500 leading-snug">{activeScenario.subtitle}</div>
+                    {/* ▲/▼ summary */}
+                    {(() => {
+                      const effects = STOCK_EFFECTS[activeScenario.id] ?? {};
+                      const ups = activeScenario.nodes.filter((n) => effects[n]?.dir === "up").length;
+                      const downs = activeScenario.nodes.filter((n) => effects[n]?.dir === "down").length;
+                      const mixed = activeScenario.nodes.filter((n) => effects[n]?.dir === "mixed").length;
+                      return (
+                        <div className="mt-1.5 flex items-center gap-3">
+                          {ups > 0 && <span className="text-[12px] font-bold text-green-600">▲ {ups} bullish</span>}
+                          {downs > 0 && <span className="text-[12px] font-bold text-red-600">▼ {downs} bearish</span>}
+                          {mixed > 0 && <span className="text-[12px] font-semibold text-gray-400">↔ {mixed} mixed</span>}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={() => setDropdownOpen(true)}
+                      className="text-[10px] text-gray-400 hover:text-gray-600 border border-gray-200 px-1.5 py-0.5 leading-tight"
+                    >
+                      ≡
+                    </button>
+                    <button
+                      onClick={() => setScenario(null)}
+                      className="text-gray-400 hover:text-gray-600 text-sm leading-none"
+                    >
+                      ✕
+                    </button>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+              {/* Company rows */}
+              <div className="flex-1 overflow-y-auto">
+                {activeScenario.nodes.map((nid) => {
+                  const node = NODES.find((n) => n.id === nid);
+                  const reason = activeScenario.why[nid];
+                  const effect = STOCK_EFFECTS[activeScenario.id]?.[nid];
+                  if (!node) return null;
+                  const effectColor = effect?.dir === "up" ? "#16a34a" : effect?.dir === "down" ? "#dc2626" : "#6b7280";
+                  const effectArrow = effect?.dir === "up" ? "▲" : effect?.dir === "down" ? "▼" : "↔";
+                  return (
+                    <div
+                      key={nid}
+                      className="flex items-start gap-2.5 px-4 py-2.5 border-b border-gray-50 last:border-0"
+                    >
+                      {/* Colored direction badge */}
+                      {effect ? (
+                        <span
+                          className="mt-0.5 shrink-0 text-[13px] font-black leading-none w-4 text-center"
+                          style={{ color: effectColor }}
+                        >
+                          {effectArrow}
+                        </span>
+                      ) : (
+                        <span
+                          className="mt-1 h-1.5 w-4 shrink-0 flex items-center justify-center"
+                        >
+                          <span
+                            className="h-1.5 w-1.5 rounded-full"
+                            style={{ backgroundColor: TIER_COLORS[node.tier as Tier] }}
+                          />
+                        </span>
+                      )}
+                      <div className="min-w-0">
+                        <div className="flex items-baseline gap-1.5 flex-wrap">
+                          <span className="text-[12px] font-bold text-gray-900">{node.ticker ?? node.name}</span>
+                          {effect && (
+                            <span
+                              className="text-[10px] font-semibold px-1 py-0 rounded"
+                              style={{ color: effectColor, backgroundColor: effectColor + "14" }}
+                            >
+                              {effect.dir === "up" ? "bullish" : effect.dir === "down" ? "bearish" : "mixed"}
+                            </span>
+                          )}
+                        </div>
+                        {reason && (
+                          <p className="mt-0.5 text-[10px] leading-snug text-gray-500">{reason}</p>
+                        )}
+                        {effect && (
+                          <p className="mt-0.5 text-[10px] leading-snug text-gray-400 italic">{effect.note}</p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          ) : null}
         </div>
       )}
 

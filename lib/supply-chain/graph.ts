@@ -123,6 +123,12 @@ export const NODES: SupplyNode[] = [
     blurb: "World's largest electronics assembler — GB200 rack manufacturing." },
   { id: "arista", name: "Arista", ticker: "ANET", tier: "integrator", covered: false,
     blurb: "AI datacenter networking — the switch layer between GPUs." },
+  { id: "coherent", name: "Coherent", ticker: "COHR", tier: "integrator", covered: false,
+    blurb: "800G/1.6T optical transceivers — the physical layer of AI networking." },
+  { id: "lumentum", name: "Lumentum", ticker: "LITE", tier: "integrator", covered: false,
+    blurb: "Laser chips and optical components inside every transceiver." },
+  { id: "fabrinet", name: "Fabrinet", ticker: "FN", tier: "integrator", covered: false,
+    blurb: "Contract optical manufacturer — builds Coherent/Lumentum modules at scale." },
 
   // Tier: customers
   { id: "apple", name: "Apple", ticker: "AAPL", tier: "customer", covered: false,
@@ -237,6 +243,13 @@ export const EDGES: SupplyEdge[] = [
   { from: "broadcom", to: "arista", relation: "supplies_chips", label: "Tomahawk switch silicon", critical: true },
   { from: "astera", to: "supermicro", relation: "supplies_chips", label: "PCIe retimers" },
   { from: "astera", to: "dell", relation: "supplies_chips", label: "PCIe retimers" },
+
+  // Optical components
+  { from: "lumentum", to: "coherent", relation: "supplies_materials", label: "Laser chips / EMLs", critical: true },
+  { from: "coherent", to: "arista", relation: "supplies_chips", label: "800G/1.6T transceivers", critical: true },
+  { from: "fabrinet", to: "arista", relation: "supplies_chips", label: "Optical module mfg" },
+  { from: "coherent", to: "nvidia", relation: "supplies_chips", label: "Optical transceivers" },
+  { from: "fabrinet", to: "coherent", relation: "supplies_materials", label: "Contract optical mfg" },
 
   // Integrators
   { from: "nvidia", to: "supermicro", relation: "supplies_chips", label: "GPUs for servers" },

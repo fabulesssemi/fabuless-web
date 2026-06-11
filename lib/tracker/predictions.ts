@@ -5009,4 +5009,17 @@ export const predictions: Prediction[] = [
     source: `a16z Podcast — GPT-5, NVIDIA, Intel, Meta, Apple (Aug 18 2025)`,
     domain: "geopolitics",
   },
+  {
+    id: `circuit-52`,
+    expert: "circuit",
+    date: `2026-04-21`,
+    speaker: `Ben Bajarin`,
+    claim: `All iPhone modems will be made by Apple by the end of next year.`,
+    horizon: `end of 2027`,
+    status: "TOO_EARLY",
+    notes: `Predicts full Qualcomm modem displacement across the iPhone line by end of 2027. Apple's C-series modem rollout ongoing as of mid-2026.`,
+    source: `CNBC — Apple promotes silicon head Johny Srouji (Apr 21 2026)`,
+    domain: "supply_chain",
+    companies: ["AAPL", "QCOM"],
+  },
 ];

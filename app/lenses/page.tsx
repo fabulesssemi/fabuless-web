@@ -60,7 +60,7 @@ export default function LensesPage() {
           Lenses
         </h1>
         <p className="font-serif text-[15px] text-[#4a4a4a] mt-1 max-w-2xl">
-          Ask questions. Get answers grounded in the documented thinking of the sharpest minds in semiconductors and tech investing — with citations back to the exact source.
+          AI frameworks built on the public work of specific analysts and investors. Ask a question, get an answer tied to a source.
         </p>
       </div>
 

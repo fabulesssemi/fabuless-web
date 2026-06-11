@@ -102,8 +102,7 @@ export default function VoicesPage() {
           Top Voices
         </h1>
         <p className="font-serif text-[15px] text-[#4a4a4a] mt-1 max-w-xl">
-          The sharpest takes on semiconductors, AI infrastructure, and chip markets —
-          from analysts, founders, investors, and executives worth listening to.
+          Notable quotes on semiconductors and AI infrastructure, sourced from earnings calls, podcasts, and interviews.
         </p>
       </div>
 

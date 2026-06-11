@@ -39,9 +39,7 @@ export default async function CompaniesIndex() {
             The AI Silicon Stack
           </h1>
           <p className="mt-1 max-w-2xl font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
-            The easiest way to understand the semiconductor and AI infrastructure
-            companies we cover — what changed, why it matters, and where each one
-            sits in the chip ecosystem. Live market data, refreshed hourly.
+            Coverage of the semiconductor and AI infrastructure companies that move markets. Prices and ratings refreshed hourly.
           </p>
         </header>
 

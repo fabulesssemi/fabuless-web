@@ -10,7 +10,7 @@
     },
     {
       "path": "/api/analyst/weekly",
-      "schedule": "0 7 * * 0"
+      "schedule": "30 9 * * 1-5"
     },
     {
       "path": "/api/homepage/refresh",

@@ -60,12 +60,9 @@ Output only the paragraph — no headers, no bullets, no intro phrase like "This
   }
 }
 
-function mondayOfCurrentWeek(): string {
-  const d = new Date();
-  const day = d.getUTCDay();
-  const diff = (day === 0 ? -6 : 1 - day);
-  d.setUTCDate(d.getUTCDate() + diff);
-  return d.toISOString().slice(0, 10);
+function weekKey(): string {
+  // Use today's date as the key — cron runs daily, latest row wins.
+  return new Date().toISOString().slice(0, 10);
 }
 
 export async function saveWeeklySummary(
@@ -75,7 +72,7 @@ export async function saveWeeklySummary(
   try {
     const { error } = await supabase.from("analyst_weekly_summary").upsert(
       {
-        week_of: mondayOfCurrentWeek(),
+        week_of: weekKey(),
         summary,
         highlights,
         generated_at: new Date().toISOString(),

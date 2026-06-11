@@ -23,7 +23,8 @@ export type RelationType =
   | "eda_tools"
   | "designs_asic_for"
   | "supplies_chips"
-  | "builds_systems_for";
+  | "builds_systems_for"
+  | "provides_compute";
 
 export type SupplyNode = {
   id: string;            // slug, matches /companies/[slug] where covered
@@ -52,6 +53,8 @@ export const NODES: SupplyNode[] = [
     blurb: "Second-largest silicon wafer supplier." },
   { id: "jsr", name: "JSR", tier: "materials", covered: false,
     blurb: "Photoresist leader, critical for EUV lithography." },
+  { id: "zeiss", name: "Zeiss SMT", tier: "materials", covered: false,
+    blurb: "Sole supplier of EUV optics — ASML's machines don't exist without it." },
 
   // Tier: equipment
   { id: "asml", name: "ASML", ticker: "ASML", tier: "equipment", covered: true,
@@ -80,6 +83,8 @@ export const NODES: SupplyNode[] = [
     blurb: "Second-source leading-edge foundry; Exynos + external customers." },
   { id: "intel", name: "Intel", ticker: "INTC", tier: "foundry", covered: true,
     blurb: "x86 designer turned foundry challenger — 18A is the bet." },
+  { id: "globalfoundries", name: "GlobalFoundries", ticker: "GFS", tier: "foundry", covered: false,
+    blurb: "Trailing-edge foundry — RF, auto, and legacy nodes." },
 
   // Tier: memory
   { id: "micron", name: "Micron", ticker: "MU", tier: "memory", covered: true,
@@ -106,12 +111,18 @@ export const NODES: SupplyNode[] = [
     blurb: "Custom ASICs (Amazon Trainium) + optical/interconnect." },
   { id: "qualcomm", name: "Qualcomm", ticker: "QCOM", tier: "designer", covered: true,
     blurb: "Mobile SoCs and modems; pushing into PC and auto." },
+  { id: "astera", name: "Astera Labs", ticker: "ALAB", tier: "designer", covered: false,
+    blurb: "PCIe/CXL connectivity silicon inside every AI server rack." },
 
   // Tier: integrators
   { id: "supermicro", name: "Supermicro", ticker: "SMCI", tier: "integrator", covered: false,
     blurb: "AI server assembly — GPUs into racks." },
   { id: "dell", name: "Dell", ticker: "DELL", tier: "integrator", covered: false,
     blurb: "AI server volume leader for enterprise." },
+  { id: "foxconn", name: "Foxconn", ticker: "2317.TW", tier: "integrator", covered: false,
+    blurb: "World's largest electronics assembler — GB200 rack manufacturing." },
+  { id: "arista", name: "Arista", ticker: "ANET", tier: "integrator", covered: false,
+    blurb: "AI datacenter networking — the switch layer between GPUs." },
 
   // Tier: customers
   { id: "apple", name: "Apple", ticker: "AAPL", tier: "customer", covered: false,
@@ -126,6 +137,14 @@ export const NODES: SupplyNode[] = [
     blurb: "MTIA ASIC + among the largest GPU buyers." },
   { id: "openai", name: "OpenAI", tier: "customer", covered: false,
     blurb: "The demand engine — multi-gigawatt buildouts across partners." },
+  { id: "oracle", name: "Oracle", ticker: "ORCL", tier: "customer", covered: false,
+    blurb: "OCI GPU cloud + Stargate — OpenAI's biggest compute landlord." },
+  { id: "coreweave", name: "CoreWeave", ticker: "CRWV", tier: "customer", covered: false,
+    blurb: "The pure-play GPU cloud — Nvidia-backed, AI-lab demand." },
+  { id: "xai", name: "xAI", tier: "customer", covered: false,
+    blurb: "Colossus — first confirmed gigawatt-scale training cluster." },
+  { id: "anthropic", name: "Anthropic", tier: "customer", covered: false,
+    blurb: "Frontier lab training across AWS Trainium and Google TPUs." },
 ];
 
 // ── Edges ────────────────────────────────────────────────────────────────────
@@ -136,6 +155,9 @@ export const EDGES: SupplyEdge[] = [
   { from: "sumco", to: "tsmc", relation: "supplies_materials", label: "Silicon wafers" },
   { from: "shin-etsu", to: "samsung-foundry", relation: "supplies_materials", label: "Silicon wafers" },
   { from: "jsr", to: "tsmc", relation: "supplies_materials", label: "EUV photoresist", critical: true },
+  { from: "zeiss", to: "asml", relation: "supplies_materials", label: "EUV optics — sole source", critical: true },
+  { from: "shin-etsu", to: "intel", relation: "supplies_materials", label: "Silicon wafers" },
+  { from: "sumco", to: "samsung-foundry", relation: "supplies_materials", label: "Silicon wafers" },
 
   // Equipment → foundries/memory
   { from: "asml", to: "tsmc", relation: "supplies_equipment", label: "EUV lithography", critical: true },
@@ -151,6 +173,10 @@ export const EDGES: SupplyEdge[] = [
   { from: "klac", to: "tsmc", relation: "supplies_equipment", label: "Process control" },
   { from: "klac", to: "intel", relation: "supplies_equipment", label: "Process control" },
   { from: "tel", to: "tsmc", relation: "supplies_equipment", label: "Coat/develop" },
+  { from: "tel", to: "samsung-foundry", relation: "supplies_equipment", label: "Coat/develop" },
+  { from: "klac", to: "samsung-foundry", relation: "supplies_equipment", label: "Process control" },
+  { from: "asml", to: "samsung-memory", relation: "supplies_equipment", label: "EUV for DRAM" },
+  { from: "amat", to: "globalfoundries", relation: "supplies_equipment", label: "Deposition/etch" },
 
   // EDA/IP → designers
   { from: "arm", to: "nvidia", relation: "licenses_ip", label: "Grace CPU (Arm ISA)" },
@@ -160,6 +186,8 @@ export const EDGES: SupplyEdge[] = [
   { from: "snps", to: "nvidia", relation: "eda_tools", label: "EDA" },
   { from: "snps", to: "amd", relation: "eda_tools", label: "EDA" },
   { from: "cdns", to: "broadcom", relation: "eda_tools", label: "EDA" },
+  { from: "cdns", to: "marvell", relation: "eda_tools", label: "EDA" },
+  { from: "snps", to: "qualcomm", relation: "eda_tools", label: "EDA" },
 
   // Foundry → designers
   { from: "tsmc", to: "nvidia", relation: "fabricates_for", label: "Blackwell/Rubin (N4/N3)", critical: true },
@@ -171,6 +199,8 @@ export const EDGES: SupplyEdge[] = [
   { from: "samsung-foundry", to: "qualcomm", relation: "fabricates_for", label: "Second source" },
   { from: "intel", to: "apple", relation: "fabricates_for", label: "18A (announced 2026)" },
   { from: "intel", to: "microsoft", relation: "fabricates_for", label: "18A custom silicon" },
+  { from: "tsmc", to: "astera", relation: "fabricates_for", label: "Connectivity silicon" },
+  { from: "globalfoundries", to: "qualcomm", relation: "fabricates_for", label: "RF front-end" },
 
   // Memory → designers
   { from: "skhynix", to: "nvidia", relation: "supplies_memory", label: "HBM3E/HBM4", critical: true },
@@ -178,6 +208,7 @@ export const EDGES: SupplyEdge[] = [
   { from: "samsung-memory", to: "nvidia", relation: "supplies_memory", label: "HBM (qualifying)" },
   { from: "skhynix", to: "amd", relation: "supplies_memory", label: "HBM for MI-series" },
   { from: "micron", to: "amd", relation: "supplies_memory", label: "HBM" },
+  { from: "samsung-memory", to: "amd", relation: "supplies_memory", label: "HBM" },
 
   // Packaging
   { from: "tsmc", to: "nvidia", relation: "packages_for", label: "CoWoS advanced packaging", critical: true },
@@ -188,6 +219,8 @@ export const EDGES: SupplyEdge[] = [
   { from: "broadcom", to: "google", relation: "designs_asic_for", label: "TPU co-design", critical: true },
   { from: "marvell", to: "amazon", relation: "designs_asic_for", label: "Trainium co-design" },
   { from: "marvell", to: "microsoft", relation: "designs_asic_for", label: "Maia interconnect" },
+  { from: "broadcom", to: "openai", relation: "designs_asic_for", label: "Custom XPU — 10GW deal", critical: true },
+  { from: "broadcom", to: "meta", relation: "designs_asic_for", label: "MTIA co-design" },
 
   // Designers → customers (chips)
   { from: "nvidia", to: "microsoft", relation: "supplies_chips", label: "GPUs (for OpenAI)" },
@@ -198,12 +231,32 @@ export const EDGES: SupplyEdge[] = [
   { from: "amd", to: "openai", relation: "supplies_chips", label: "MI450 — 6GW deal" },
   { from: "amd", to: "meta", relation: "supplies_chips", label: "MI-series" },
   { from: "qualcomm", to: "apple", relation: "supplies_chips", label: "Modems (being displaced)" },
+  { from: "nvidia", to: "oracle", relation: "supplies_chips", label: "GPUs (OCI / Stargate)" },
+  { from: "nvidia", to: "coreweave", relation: "supplies_chips", label: "GPUs — equity backer", critical: true },
+  { from: "nvidia", to: "xai", relation: "supplies_chips", label: "Colossus GPUs", critical: true },
+  { from: "broadcom", to: "arista", relation: "supplies_chips", label: "Tomahawk switch silicon", critical: true },
+  { from: "astera", to: "supermicro", relation: "supplies_chips", label: "PCIe retimers" },
+  { from: "astera", to: "dell", relation: "supplies_chips", label: "PCIe retimers" },
 
   // Integrators
   { from: "nvidia", to: "supermicro", relation: "supplies_chips", label: "GPUs for servers" },
   { from: "nvidia", to: "dell", relation: "supplies_chips", label: "GPUs for servers" },
+  { from: "nvidia", to: "foxconn", relation: "supplies_chips", label: "GB200 components" },
   { from: "supermicro", to: "openai", relation: "builds_systems_for", label: "AI racks" },
+  { from: "supermicro", to: "coreweave", relation: "builds_systems_for", label: "AI racks" },
   { from: "dell", to: "microsoft", relation: "builds_systems_for", label: "AI servers" },
+  { from: "dell", to: "coreweave", relation: "builds_systems_for", label: "AI servers" },
+  { from: "foxconn", to: "microsoft", relation: "builds_systems_for", label: "Rack assembly" },
+  { from: "foxconn", to: "amazon", relation: "builds_systems_for", label: "Rack assembly" },
+  { from: "arista", to: "microsoft", relation: "builds_systems_for", label: "AI network switches" },
+  { from: "arista", to: "meta", relation: "builds_systems_for", label: "AI network switches" },
+
+  // Compute provision (cloud → AI labs)
+  { from: "microsoft", to: "openai", relation: "provides_compute", label: "Azure — primary host", critical: true },
+  { from: "oracle", to: "openai", relation: "provides_compute", label: "Stargate capacity", critical: true },
+  { from: "coreweave", to: "openai", relation: "provides_compute", label: "GPU capacity" },
+  { from: "amazon", to: "anthropic", relation: "provides_compute", label: "Trainium clusters", critical: true },
+  { from: "google", to: "anthropic", relation: "provides_compute", label: "TPU capacity" },
 ];
 
 export const TIER_ORDER: Tier[] = [

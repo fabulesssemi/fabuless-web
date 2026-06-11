@@ -5,6 +5,7 @@
 import { latestIssue } from "@/lib/issues";
 import { IssueView } from "@/app/components/IssueView";
 import { getHomepageContent } from "@/lib/homepage";
+import { fetchLatestEpisodePerShow } from "@/lib/editorial/sources";
 import { SubscribeForm } from "@/app/components/SubscribeForm";
 import { XQuotesCard } from "@/app/components/XQuotesCard";
 import { StoryImage } from "@/app/components/StoryImage";
@@ -14,11 +15,17 @@ import { StoryImage } from "@/app/components/StoryImage";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const autoContent = await getHomepageContent();
+  const [autoContent, livePodcasts] = await Promise.all([
+    getHomepageContent(),
+    fetchLatestEpisodePerShow(),
+  ]);
 
   // ── Auto-curated content (from Sunday pipeline) or static fallback ──────────
   const autoStories = autoContent?.topStories ?? null;
-  const autoPodcasts = autoContent?.podcasts?.length ? autoContent.podcasts : null;
+  // Always use live RSS data for podcasts — revalidates every 4h, never stale
+  const autoPodcasts = livePodcasts.length > 0
+    ? livePodcasts.map((ep) => ({ ...ep, oneliner: undefined }))
+    : (autoContent?.podcasts?.length ? autoContent.podcasts : null);
   const issueLabel = autoContent
     ? `Week of ${new Date(autoContent.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} · Auto-updated`
     : `Issue #${latestIssue.number} · ${latestIssue.date}`;

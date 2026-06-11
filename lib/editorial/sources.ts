@@ -167,3 +167,37 @@ export async function fetchPodcastEpisodes(limit = 4): Promise<RssItem[]> {
   const feeds = await fetchAllPodcastFeeds(limit);
   return feeds.flatMap(({ episodes }) => episodes.slice(0, limit));
 }
+
+/**
+ * Fetch the latest episode from each podcast show — used directly on the
+ * homepage so the podcast section always reflects the most recent episode
+ * without waiting for the weekly cron. Revalidates every 4 hours.
+ */
+export async function fetchLatestEpisodePerShow(): Promise<
+  { show: string; title: string; url: string; image: string | null; description: string }[]
+> {
+  const xmlList = await Promise.all(
+    PODCAST_FEEDS.map(({ url }) =>
+      fetch(url, {
+        signal: AbortSignal.timeout(8000),
+        headers: { "User-Agent": "Fabuless/1.0 (+https://fabuless.ai)" },
+        next: { revalidate: 14400 }, // 4 hours
+      })
+        .then((r) => (r.ok ? r.text() : null))
+        .catch(() => null),
+    ),
+  );
+
+  return PODCAST_FEEDS.map(({ show }, i) => {
+    const xml = xmlList[i];
+    if (!xml) return null;
+    const channelArtwork = xml.match(/<itunes:image[^>]+href="([^"]+)"/i)?.[1] ?? null;
+    const episodes = parseRss(xml, 1).map((ep) => ({
+      ...ep,
+      image: ep.image ?? channelArtwork,
+    }));
+    if (!episodes.length) return null;
+    const ep = episodes[0];
+    return { show, title: ep.title, url: ep.link, image: ep.image ?? null, description: ep.description };
+  }).filter((x): x is NonNullable<typeof x> => x !== null);
+}

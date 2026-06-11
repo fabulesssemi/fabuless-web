@@ -447,6 +447,283 @@ const SCENARIOS: Omit<Scenario, "count">[] = [
   },
 ];
 
+type StockEffect = { dir: "up" | "down" | "mixed"; note: string };
+
+const STOCK_EFFECTS: Record<string, Record<string, StockEffect>> = {
+  "taiwan-conflict": {
+    tsmc:             { dir: "down",  note: "Physical assets at risk; fabrication ceases entirely" },
+    nvidia:           { dir: "down",  note: "All GPU revenue halts; stock could fall 50%+" },
+    amd:              { dir: "down",  note: "Entire product line stops shipping" },
+    broadcom:         { dir: "down",  note: "TPU and networking revenue disappears overnight" },
+    marvell:          { dir: "down",  note: "Custom ASIC business goes to zero" },
+    qualcomm:         { dir: "down",  note: "Mobile chip revenue collapses globally" },
+    apple:            { dir: "down",  note: "iPhone/Mac production stops; $300B+ revenue at risk" },
+    astera:           { dir: "down",  note: "No chips to ship; revenue zeroed" },
+    asml:             { dir: "mixed", note: "Short-term crash; long-term fab rebuild demand bullish" },
+    amat:             { dir: "down",  note: "Largest customer gone; Taiwan tool revenue disappears" },
+    lrcx:             { dir: "down",  note: "Taiwan etch tool revenue gone; market disrupted" },
+    klac:             { dir: "down",  note: "Metrology orders collapse with fab shutdowns" },
+    tel:              { dir: "down",  note: "TSMC exposure = direct and immediate revenue loss" },
+    arm:              { dir: "down",  note: "Royalties fall to zero without chip production" },
+    snps:             { dir: "down",  note: "Tape-outs halt; EDA demand craters" },
+    cdns:             { dir: "down",  note: "Same; subscription base erodes fast" },
+    microsoft:        { dir: "down",  note: "Azure AI frozen; OpenAI partnership in jeopardy" },
+    google:           { dir: "down",  note: "TPU fleet can't grow; GCP AI revenue stalls" },
+    amazon:           { dir: "down",  note: "AWS AI capacity frozen; Trainium investment stranded" },
+    meta:             { dir: "down",  note: "GPU buildout stops; Llama timeline indefinite" },
+    openai:           { dir: "down",  note: "Compute costs spike to unaffordable levels" },
+    oracle:           { dir: "down",  note: "Stargate becomes a stranded $100B investment" },
+    coreweave:        { dir: "down",  note: "No new GPUs = business model collapse" },
+    xai:              { dir: "down",  note: "Colossus expansion halts indefinitely" },
+    anthropic:        { dir: "down",  note: "Training compute inaccessible; roadmap freezes" },
+  },
+  "china-export-controls": {
+    asml:             { dir: "down",  note: "~30% China DUV revenue at risk from expanded ban" },
+    amat:             { dir: "down",  note: "Largest single market lost; ~15-20% revenue at risk" },
+    lrcx:             { dir: "down",  note: "Significant China etch tool revenue disappears" },
+    klac:             { dir: "down",  note: "China process control revenue cut" },
+    tel:              { dir: "down",  note: "China equipment sales restricted further" },
+    snps:             { dir: "down",  note: "Huawei and SMIC EDA revenue gone" },
+    cdns:             { dir: "down",  note: "Same; China advanced chip design revenue lost" },
+    nvidia:           { dir: "up",    note: "H20 already banned; controls hobble Chinese GPU competition" },
+    broadcom:         { dir: "down",  note: "China hyperscaler networking revenue under scrutiny" },
+    qualcomm:         { dir: "down",  note: "60%+ of revenue from Chinese OEMs — largest single risk" },
+    "samsung-foundry":{ dir: "up",    note: "Chinese fabs hobbled; Samsung gains fab market share" },
+    "samsung-memory": { dir: "down",  note: "HBM export to China AI customers restricted" },
+    jsr:              { dir: "down",  note: "EUV photoresist export ban expands; China revenue lost" },
+    "shin-etsu":      { dir: "down",  note: "Wafer exports to Chinese fabs restricted" },
+    sumco:            { dir: "down",  note: "Same; China wafer export revenue at risk" },
+  },
+  "hbm-shortage": {
+    skhynix:          { dir: "up",    note: "Sole qualified supplier; ASP and margin surge dramatically" },
+    micron:           { dir: "up",    note: "Second-source scarcity premium; ASP improves" },
+    "samsung-memory": { dir: "down",  note: "HBM3E qualification lag exposed publicly; share loss" },
+    nvidia:           { dir: "down",  note: "GPU shipments slip; revenue miss vs estimates" },
+    amd:              { dir: "down",  note: "MI-series constrained alongside Nvidia" },
+    lrcx:             { dir: "up",    note: "HBM capacity investment accelerates; etch orders rise" },
+    asml:             { dir: "up",    note: "Advanced DRAM EUV demand rises with HBM investment" },
+    openai:           { dir: "down",  note: "Compute expansion delayed; training timelines slip" },
+    xai:              { dir: "down",  note: "Colossus expansion gated by GPU delivery" },
+    coreweave:        { dir: "down",  note: "Can't add GPU capacity; customer commitments at risk" },
+    microsoft:        { dir: "down",  note: "Azure GPU expansion slows; OpenAI build delayed" },
+    amazon:           { dir: "down",  note: "AWS AI capacity additions constrained" },
+  },
+  "cowos-bottleneck": {
+    tsmc:             { dir: "up",    note: "CoWoS scarcity = pricing power and margin expansion" },
+    nvidia:           { dir: "down",  note: "GPU shipments directly constrained; revenue miss likely" },
+    amd:              { dir: "down",  note: "MI-series in same TSMC packaging queue as Nvidia" },
+    broadcom:         { dir: "down",  note: "TPU production constrained; Google build delayed" },
+    ase:              { dir: "up",    note: "Overflow CoWoS demand; significant AI packaging share gain" },
+    amkor:            { dir: "up",    note: "Arizona OSAT gains real share as TSMC alternative" },
+    microsoft:        { dir: "down",  note: "Azure GPU fleet expansion delayed" },
+    google:           { dir: "down",  note: "TPU and GPU capacity equally constrained" },
+    amazon:           { dir: "down",  note: "Trainium ramp limited by packaging availability" },
+    meta:             { dir: "down",  note: "GPU orders slip; Llama training schedules extend" },
+    openai:           { dir: "down",  note: "Compute expansion delayed; inference capacity capped" },
+    oracle:           { dir: "down",  note: "Stargate build timeline at direct risk" },
+    coreweave:        { dir: "down",  note: "Can't add GPU capacity; revenue growth stalls" },
+  },
+  "n3-crunch": {
+    tsmc:             { dir: "up",    note: "Kingmaker on N3; can raise wafer prices significantly" },
+    nvidia:           { dir: "down",  note: "Rubin potentially delayed if Apple wins allocation" },
+    amd:              { dir: "down",  note: "EPYC and MI-series volume at risk; timeline extends" },
+    broadcom:         { dir: "down",  note: "TPU v6/v7 delayed if TSMC prioritizes Apple wafers" },
+    marvell:          { dir: "down",  note: "Custom ASIC ramps gated by node availability" },
+    apple:            { dir: "mixed", note: "May win allocation but share fight adds cost pressure" },
+    qualcomm:         { dir: "down",  note: "Snapdragon N3 wafers compete directly with AI chips" },
+    asml:             { dir: "up",    note: "N3/N2 EUV demand validates the next tool order cycle" },
+    amat:             { dir: "up",    note: "N3 process tools in high demand; orders grow" },
+    klac:             { dir: "up",    note: "More metrology steps at smaller nodes = more revenue" },
+    tel:              { dir: "up",    note: "Coat/develop tools in every N3 layer" },
+  },
+  "euv-ban": {
+    asml:             { dir: "down",  note: "New EUV machine sales blocked; High-NA ramp delayed" },
+    zeiss:            { dir: "down",  note: "Sole optics supplier — ban effectively hits Zeiss too" },
+    tsmc:             { dir: "down",  note: "N2/A16 expansion frozen without new EUV tools" },
+    "samsung-foundry":{ dir: "down",  note: "2nm node timeline slips 18+ months" },
+    intel:            { dir: "down",  note: "18A foundry comeback timeline directly blocked" },
+    skhynix:          { dir: "down",  note: "HBM4 capacity growth frozen without EUV tools" },
+    micron:           { dir: "down",  note: "1-gamma DRAM advancement stalls" },
+    "samsung-memory": { dir: "down",  note: "Advanced DRAM scaling halts at current node" },
+    nvidia:           { dir: "down",  note: "Rubin GPU on N2 delayed; roadmap slips" },
+    amd:              { dir: "down",  note: "Next-gen MI-series timeline pushed out" },
+    broadcom:         { dir: "down",  note: "TPU v7+ depends on N2 capacity availability" },
+    apple:            { dir: "down",  note: "A19/M5 on N2 — iPhone launch timing at risk" },
+  },
+  "power-constraint": {
+    nvidia:           { dir: "mixed", note: "Demand unaffected; deployment delays = revenue timing risk" },
+    supermicro:       { dir: "down",  note: "Rack backlog grows but deployments stall — revenue delayed" },
+    dell:             { dir: "down",  note: "AI server delivery outpaces customer power readiness" },
+    foxconn:          { dir: "down",  note: "GB200 rack manufacturing demand drops if builds stall" },
+    arista:           { dir: "down",  note: "Switch deployments tied to rack build timelines" },
+    microsoft:        { dir: "down",  note: "Azure expansion constrained; capex plans slip 18-24 months" },
+    google:           { dir: "down",  note: "Datacenter build timelines extend significantly" },
+    amazon:           { dir: "down",  note: "AWS expansion gated by grid permitting and interconnection" },
+    meta:             { dir: "down",  note: "Louisiana and Texas builds face multi-year power delays" },
+    openai:           { dir: "down",  note: "Stargate power connection timelines add 18+ months" },
+    oracle:           { dir: "down",  note: "OCI expansion explicitly power-constrained" },
+    coreweave:        { dir: "down",  note: "GPU capacity additions need 18-month power contracts" },
+    xai:              { dir: "down",  note: "Colossus external generator dependency is a liability" },
+  },
+  "optical-transition": {
+    nvidia:           { dir: "mixed", note: "Must invest in photonics; near-term cost, long-term moat" },
+    broadcom:         { dir: "up",    note: "Co-packaged optics is their core thesis; massive design wins" },
+    marvell:          { dir: "up",    note: "Optical DSP silicon is their biggest near-term catalyst" },
+    astera:           { dir: "up",    note: "CXL and optical connectivity expand in tandem" },
+    arista:           { dir: "up",    note: "800G optical switch refresh = multi-year revenue wave" },
+    tsmc:             { dir: "up",    note: "Silicon photonics chips fabbed at TSMC" },
+    microsoft:        { dir: "up",    note: "GB300 optical racks lower total compute cost" },
+    google:           { dir: "up",    note: "Already using in-package optical; cost advantage widens" },
+    amazon:           { dir: "up",    note: "Trainium 3 optical design gives cost edge vs GPU racks" },
+    meta:             { dir: "up",    note: "Optical scale-out reduces MTIA cluster cost" },
+  },
+  "custom-asic-inflection": {
+    broadcom:         { dir: "up",    note: "Direct ASIC revenue from 5 hyperscalers; best positioned" },
+    marvell:          { dir: "up",    note: "Trainium and Maia ramps hit estimates; stock re-rates" },
+    tsmc:             { dir: "up",    note: "More diverse chip customers; same leading-edge fab demand" },
+    arm:              { dir: "up",    note: "All custom ASICs use Arm ISA; royalties scale with volume" },
+    google:           { dir: "up",    note: "TPU economics vs GPU improve; GCP margins widen" },
+    amazon:           { dir: "up",    note: "Trainium TCO advantage grows; AWS margin expands" },
+    microsoft:        { dir: "up",    note: "Maia reduces Nvidia dependency; Azure margin improves" },
+    meta:             { dir: "up",    note: "MTIA cuts Nvidia spend; margin story strengthens" },
+    openai:           { dir: "mixed", note: "XPU deal lowers long-term cost; near-term execution risk" },
+    anthropic:        { dir: "up",    note: "TPU commitment lowers training cost vs GPU clusters" },
+    nvidia:           { dir: "down",  note: "Inference market share erodes; GPU ASP under pressure" },
+  },
+  "token-commoditization": {
+    openai:           { dir: "down",  note: "Token revenue margin collapses; IPO story weakens" },
+    anthropic:        { dir: "down",  note: "Claude pricing pressure; fundraising multiple at risk" },
+    xai:              { dir: "down",  note: "Grok inference ROI on Colossus deteriorates" },
+    nvidia:           { dir: "down",  note: "Training capex pauses; GPU demand growth thesis weakens" },
+    amd:              { dir: "down",  note: "MI-series inference chips reprice as market commoditizes" },
+    broadcom:         { dir: "up",    note: "ASIC economics improve as GPU TCO looks expensive" },
+    marvell:          { dir: "up",    note: "Custom silicon thesis strengthens on GPU margin pressure" },
+    microsoft:        { dir: "down",  note: "Azure AI revenue margin at risk from cheap competition" },
+    google:           { dir: "mixed", note: "TPU costs drop; Gemini revenue margin also under pressure" },
+    amazon:           { dir: "mixed", note: "Trainium looks prescient; AWS AI pricing must fall too" },
+    oracle:           { dir: "down",  note: "OCI GPU cloud revenue under severe margin pressure" },
+    coreweave:        { dir: "down",  note: "Inference pricing collapse = direct margin compression" },
+  },
+  "chips-act": {
+    intel:            { dir: "up",    note: "$8.5B grant + $11B loans de-risk the foundry bet entirely" },
+    micron:           { dir: "up",    note: "$6B grant enables US HBM production — stock re-rates" },
+    tsmc:             { dir: "up",    note: "Arizona fab de-risked; $6.6B grant validates US strategy" },
+    globalfoundries:  { dir: "up",    note: "$1.5B Malta expansion; trailing-edge strategic moat grows" },
+    "samsung-foundry":{ dir: "up",    note: "$6B Taylor TX grant; US fab presence established" },
+    ase:              { dir: "up",    note: "Packaging grant de-risks Arizona OSAT build" },
+    amkor:            { dir: "up",    note: "Co-investment with TSMC; packaging onshoring funded" },
+    amat:             { dir: "up",    note: "Domestic fab builds generate a fresh equipment order wave" },
+    lrcx:             { dir: "up",    note: "New US fabs need full etch tool refresh" },
+    klac:             { dir: "up",    note: "Every new domestic fab line requires KLA process control" },
+  },
+  "arm-disruption": {
+    arm:              { dir: "mixed", note: "Higher royalties short-term; customer RISC-V migration risk" },
+    nvidia:           { dir: "down",  note: "Grace CPU roadmap threatened; datacenter plans at risk" },
+    qualcomm:         { dir: "down",  note: "Entire portfolio at risk; most exposed company in the chain" },
+    apple:            { dir: "down",  note: "A/M-series uses Arm ISA; no viable alternative short-term" },
+    amazon:           { dir: "down",  note: "Graviton cost advantage erodes if royalties spike" },
+    tsmc:             { dir: "down",  note: "Arm-based chip tape-outs slow if designers pause" },
+    "samsung-foundry":{ dir: "down",  note: "Exynos and Arm customer designs affected" },
+  },
+  "intel-foundry-comeback": {
+    intel:            { dir: "up",    note: "18A success = major stock re-rating; foundry thesis proven" },
+    microsoft:        { dir: "up",    note: "First 18A customer; chip costs fall, margins improve" },
+    apple:            { dir: "up",    note: "Second-source optionality reduces TSMC pricing leverage" },
+    asml:             { dir: "up",    note: "High-NA commercial validation drives next order cycle" },
+    amat:             { dir: "up",    note: "18A uses AMAT backside power delivery — key process win" },
+    klac:             { dir: "up",    note: "Intel 18A requires full KLA metrology refresh" },
+    arm:              { dir: "up",    note: "18A customer chips use Arm ISA; royalty volume grows" },
+    snps:             { dir: "up",    note: "18A PDK in Synopsys drives tape-out revenue" },
+    cdns:             { dir: "up",    note: "Cadence 18A design tools validated; customer wins" },
+  },
+  "memory-oversupply": {
+    skhynix:          { dir: "down",  note: "ASP and gross margin fall sharply on spot price collapse" },
+    micron:           { dir: "down",  note: "Commodity DRAM crush; memory revenue down 30-40%" },
+    "samsung-memory": { dir: "mixed", note: "Strategic pricing weapon — but own margins also crushed" },
+    "samsung-foundry":{ dir: "down",  note: "Memory losses drag overall Samsung financials" },
+    lrcx:             { dir: "down",  note: "Memory capex cuts directly reduce etch tool orders" },
+    amat:             { dir: "down",  note: "DRAM capex is a major spending driver — falls with prices" },
+    nvidia:           { dir: "up",    note: "Cheaper HBM improves GPU margins if savings are captured" },
+  },
+  "asml-shock": {
+    asml:             { dir: "down",  note: "Revenue misses as High-NA tool deliveries slip significantly" },
+    zeiss:            { dir: "down",  note: "Root cause of delay; optics bottleneck exposed publicly" },
+    tsmc:             { dir: "down",  note: "N2 and A16 capacity expansion frozen" },
+    "samsung-foundry":{ dir: "down",  note: "2nm node schedule slips 18+ months" },
+    intel:            { dir: "down",  note: "18A foundry comeback timeline directly tied to ASML delivery" },
+    skhynix:          { dir: "down",  note: "HBM4 capacity growth stalls without EUV tools" },
+    micron:           { dir: "down",  note: "1-gamma DRAM node advancement stalls" },
+    nvidia:           { dir: "down",  note: "Rubin GPU on N2 delayed; chip roadmap slips" },
+    amd:              { dir: "down",  note: "EPYC and MI next-gen both N2-targeted; collateral delay" },
+    apple:            { dir: "down",  note: "A19/M5 on N2 — iPhone launch timeline at risk" },
+  },
+  "ai-capex-supercycle": {
+    nvidia:           { dir: "up",    note: "GPU demand doubles; H100→Blackwell→Rubin cycle compresses" },
+    skhynix:          { dir: "up",    note: "HBM demand doubles; pricing power and margin expand" },
+    micron:           { dir: "up",    note: "$15B+ revenue opportunity if US HBM supply keeps pace" },
+    tsmc:             { dir: "up",    note: "Leading-edge wafer demand doubles; pricing power rises" },
+    broadcom:         { dir: "up",    note: "Custom ASIC demand from all 5 hyperscalers accelerates" },
+    marvell:          { dir: "up",    note: "Trainium and Maia ramps beat estimates; stock re-rates" },
+    astera:           { dir: "up",    note: "Every AI rack needs connectivity silicon; scales linearly" },
+    supermicro:       { dir: "up",    note: "AI server assembly demand doubles; backlog grows 18 months" },
+    dell:             { dir: "up",    note: "GPU server mix reaches 40%+ of revenue; margin expands" },
+    foxconn:          { dir: "up",    note: "GB200 rack manufacturing volume locks in long-term capacity" },
+    arista:           { dir: "up",    note: "800G port refresh cycle accelerates; multi-year wave" },
+    microsoft:        { dir: "up",    note: "Azure AI becomes the largest cloud AI revenue generator" },
+    google:           { dir: "up",    note: "GCP AI inflects; TPU and GPU deployments both scale" },
+    amazon:           { dir: "up",    note: "AWS AI infrastructure investment pays off at scale" },
+    meta:             { dir: "up",    note: "Llama training at scale justifies massive capex" },
+    oracle:           { dir: "up",    note: "Stargate and OCI GPU cloud re-rate the stock meaningfully" },
+    coreweave:        { dir: "up",    note: "Pure-play GPU cloud revenue doubles; IPO timing ideal" },
+  },
+  "openai-demand-shock": {
+    openai:           { dir: "up",    note: "Revenue and valuation surge; IPO window opens" },
+    microsoft:        { dir: "up",    note: "Azure AI revenue surge; $500B Stargate commitment justified" },
+    oracle:           { dir: "up",    note: "OCI becomes primary non-Azure OpenAI host; stock re-rates" },
+    coreweave:        { dir: "up",    note: "OpenAI anchor customer validates GPU cloud at scale" },
+    nvidia:           { dir: "up",    note: "$100B+ direct order; largest single customer in history" },
+    tsmc:             { dir: "up",    note: "GPU wafer orders are a meaningful allocation event" },
+    skhynix:          { dir: "up",    note: "HBM demand from Nvidia GPU surge = multi-billion contract" },
+    broadcom:         { dir: "up",    note: "XPU ASIC deal could be Broadcom's largest customer ever" },
+    supermicro:       { dir: "up",    note: "AI rack assembly for Stargate; $1B+ revenue concentration" },
+    foxconn:          { dir: "up",    note: "GB200 rack manufacturing for Stargate DCs" },
+    arista:           { dir: "up",    note: "Hundreds of thousands of switch ports across Stargate DCs" },
+  },
+  "hbm4-transition": {
+    skhynix:          { dir: "up",    note: "Sole HBM4 supplier = maximum pricing power; stock re-rates" },
+    micron:           { dir: "down",  note: "Risks missing Blackwell Ultra generation; stock de-rates" },
+    "samsung-memory": { dir: "down",  note: "HBM3E issues persist; HBM4 timeline even further behind" },
+    lrcx:             { dir: "up",    note: "HBM4 stacking requires advanced etch; orders accelerate" },
+    nvidia:           { dir: "mixed", note: "Chips ship but sole-sourced from Hynix = supply risk premium" },
+    amd:              { dir: "down",  note: "MI400 delayed if HBM4 supply concentrated at Hynix only" },
+    openai:           { dir: "down",  note: "GPU delivery timing risk delays cluster expansion" },
+    xai:              { dir: "down",  note: "Colossus 3 expansion requires next-gen GPUs" },
+    coreweave:        { dir: "down",  note: "Next-gen GPU capacity additions delayed" },
+  },
+  "geopolitical-japan-korea": {
+    "shin-etsu":      { dir: "down",  note: "Japan allied control alignment restricts China sales" },
+    sumco:            { dir: "down",  note: "Same; China wafer export revenue at risk" },
+    jsr:              { dir: "down",  note: "Prior METI restrictions expand; China photoresist revenue lost" },
+    zeiss:            { dir: "down",  note: "EU aligned on EUV-adjacent component exports" },
+    tel:              { dir: "down",  note: "Already restricted; further US-Japan alignment cuts more" },
+    skhynix:          { dir: "down",  note: "HBM to China AI customers under export scrutiny" },
+    "samsung-foundry":{ dir: "mixed", note: "Export review adds uncertainty; rival hobbling is a benefit" },
+    "samsung-memory": { dir: "down",  note: "HBM export to China increasingly restricted" },
+    tsmc:             { dir: "up",    note: "Allied coordination benefits Taiwan; competitor access cut" },
+    asml:             { dir: "down",  note: "DUV restrictions expand further; China sales window closes" },
+  },
+  "packaging-unbundled": {
+    tsmc:             { dir: "down",  note: "CoWoS pricing power erodes; margin compression likely" },
+    ase:              { dir: "up",    note: "Gains AI chip packaging share; world's largest OSAT wins" },
+    amkor:            { dir: "up",    note: "Arizona OSAT for AI chips gains Nvidia and Apple orders" },
+    nvidia:           { dir: "up",    note: "Packaging competition lowers CoWoS cost; GPU margins improve" },
+    amd:              { dir: "up",    note: "Multiple packaging sources reduce supply risk and cost" },
+    broadcom:         { dir: "up",    note: "TPU packaging options expand; TSMC leverage reduced" },
+    "samsung-foundry":{ dir: "up",    note: "Fab+package bundle competes directly with TSMC offering" },
+    intel:            { dir: "up",    note: "EMIB and Foveros gain credibility vs CoWoS" },
+  },
+};
+
 const W = 960;
 const H = 740;
 const TOP = 60;
@@ -786,20 +1063,33 @@ export function SupplyChainWeb() {
             {activeScenario.nodes.map((nid) => {
               const node = NODES.find((n) => n.id === nid);
               const reason = activeScenario.why[nid];
+              const effect = STOCK_EFFECTS[activeScenario.id]?.[nid];
               if (!node) return null;
+              const effectColor = effect?.dir === "up" ? "#16a34a" : effect?.dir === "down" ? "#dc2626" : "#6b7280";
+              const effectArrow = effect?.dir === "up" ? "▲" : effect?.dir === "down" ? "▼" : "↔";
               return (
                 <div
                   key={nid}
-                  className="flex items-start gap-2 py-1.5 border-b border-gray-100 last:border-0"
+                  className="flex items-start gap-2 py-2 border-b border-gray-100 last:border-0"
                 >
                   <span
                     className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full"
                     style={{ backgroundColor: TIER_COLORS[node.tier as Tier] }}
                   />
                   <div className="min-w-0">
-                    <span className="text-[11px] font-semibold text-gray-800">{node.ticker ?? node.name}</span>
-                    {reason && (
-                      <span className="text-[11px] text-gray-500"> — {reason}</span>
+                    <div>
+                      <span className="text-[11px] font-semibold text-gray-800">{node.ticker ?? node.name}</span>
+                      {reason && (
+                        <span className="text-[11px] text-gray-500"> — {reason}</span>
+                      )}
+                    </div>
+                    {effect && (
+                      <div className="mt-0.5 flex items-start gap-1">
+                        <span className="text-[10px] font-bold leading-tight shrink-0" style={{ color: effectColor }}>
+                          {effectArrow}
+                        </span>
+                        <span className="text-[10px] leading-tight text-gray-500">{effect.note}</span>
+                      </div>
                     )}
                   </div>
                 </div>

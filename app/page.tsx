@@ -42,24 +42,17 @@ export default async function Home() {
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-8 pb-8 border-b border-gray-200 flex flex-col md:flex-row gap-8 items-start justify-between">
-        {/* Left: pitch + subscribe */}
-        <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#B45309] mb-3">
-            Every Friday
-          </p>
-          <h1 className="font-sans text-4xl font-bold text-[#111827] leading-tight tracking-tight mb-4 max-w-xl">
-            Your weekly edge on the semiconductor market.
-          </h1>
-          <p className="text-[15px] text-gray-700 max-w-lg leading-relaxed mb-6">
-            Chips power every AI model, every smartphone, every data
-            center. We track the stories that move markets.
-          </p>
-          <SubscribeForm />
-        </div>
-
-        {/* Right: chip Twitter quotes (when curated for this issue) */}
-        <XQuotesCard quotes={latestIssue.quotes ?? []} />
+      <section className="pt-6 pb-6 border-b border-gray-200">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#B45309] mb-2">
+          Every Friday
+        </p>
+        <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-2 max-w-xl">
+          Your weekly edge on the semiconductor market.
+        </h1>
+        <p className="font-serif text-[15px] text-[#4a4a4a] max-w-lg leading-relaxed mb-4">
+          Chips power every AI model, every smartphone, every data center. We track the stories that move markets.
+        </p>
+        <SubscribeForm />
       </section>
 
       {/* Latest issue header — above Top Stories */}

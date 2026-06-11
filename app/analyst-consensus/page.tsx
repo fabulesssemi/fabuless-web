@@ -41,34 +41,35 @@ export default async function AnalystConsensusDashboard() {
     .sort((a, b) => a.sentimentScore - b.sentimentScore);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-6 py-10">
 
       {/* Header */}
-      <header className="mb-10 pb-8 border-b border-gray-200">
-        <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-2">
-          Wall Street Intelligence
-        </div>
-        <h1 className="font-sans text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
-          Analyst Consensus
-        </h1>
-        <p className="mt-3 text-[14px] text-gray-500 leading-relaxed max-w-xl">
-          What Wall Street is getting more bullish or bearish on across AI semiconductors.
-          Sentiment, price targets, upgrades, and estimate revisions — refreshed hourly.
-        </p>
-        <div className="mt-6 flex items-center gap-6">
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-sans text-2xl font-bold text-emerald-600 tabular-nums">{counts.improving}</span>
-            <span className="text-[10px] uppercase tracking-widest text-gray-400">improving</span>
+      <header className="mb-6 pb-4 border-b border-gray-200">
+        <div className="flex items-baseline justify-between gap-4">
+          <div>
+            <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
+              Analyst Consensus
+            </h1>
+            <p className="mt-1 text-[13px] text-gray-400 leading-relaxed">
+              What Wall Street is getting more bullish or bearish on across AI semiconductors.
+              Sentiment, price targets, upgrades — refreshed hourly.
+            </p>
           </div>
-          <span className="w-px h-4 bg-gray-200" />
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-sans text-2xl font-bold text-rose-500 tabular-nums">{counts.weakening}</span>
-            <span className="text-[10px] uppercase tracking-widest text-gray-400">weakening</span>
-          </div>
-          <span className="w-px h-4 bg-gray-200" />
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-sans text-2xl font-bold text-gray-400 tabular-nums">{counts.stable}</span>
-            <span className="text-[10px] uppercase tracking-widest text-gray-400">stable</span>
+          <div className="flex items-center gap-4 shrink-0">
+            <div className="flex items-baseline gap-1">
+              <span className="font-sans text-base font-bold text-emerald-600 tabular-nums">{counts.improving}</span>
+              <span className="text-[10px] uppercase tracking-wider text-gray-400">up</span>
+            </div>
+            <span className="w-px h-3 bg-gray-200" />
+            <div className="flex items-baseline gap-1">
+              <span className="font-sans text-base font-bold text-rose-500 tabular-nums">{counts.weakening}</span>
+              <span className="text-[10px] uppercase tracking-wider text-gray-400">down</span>
+            </div>
+            <span className="w-px h-3 bg-gray-200" />
+            <div className="flex items-baseline gap-1">
+              <span className="font-sans text-base font-bold text-gray-400 tabular-nums">{counts.stable}</span>
+              <span className="text-[10px] uppercase tracking-wider text-gray-400">stable</span>
+            </div>
           </div>
         </div>
       </header>

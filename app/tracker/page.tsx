@@ -32,11 +32,8 @@ const DOMAIN_COLS = [
   { key: "financials",   label: "Fin" },
 ] as const;
 
-function pctColor(pct: number | null): string {
-  if (pct === null) return "text-gray-300";
-  if (pct >= 75)    return "text-emerald-600";
-  if (pct >= 50)    return "text-amber-600";
-  return "text-rose-600";
+function pctColor(_pct: number | null): string {
+  return "text-gray-700";
 }
 
 export default function TrackerPage() {

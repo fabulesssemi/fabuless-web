@@ -47,7 +47,7 @@ function ConvictionBadge({ level }: { level: ConvictionLevel }) {
     CAUTIOUS:    "Cautious",
   };
   return (
-    <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase whitespace-nowrap ${styles[level]}`}>
+    <span className={`text-[9px] font-semibold px-1.5 py-0.5 font-sans tracking-wider uppercase whitespace-nowrap ${styles[level]}`}>
       {labels[level]}
     </span>
   );
@@ -55,10 +55,10 @@ function ConvictionBadge({ level }: { level: ConvictionLevel }) {
 
 function SeverityBadge({ severity }: { severity: string }) {
   if (severity === "STRONG AVOID")
-    return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-red-100 text-red-800 border border-red-300 whitespace-nowrap">🚨 STRONG AVOID</span>;
+    return <span className="text-[9px] font-semibold px-1.5 py-0.5 font-sans tracking-wider uppercase bg-red-100 text-red-800 border border-red-300 whitespace-nowrap">STRONG AVOID</span>;
   if (severity === "AVOID")
-    return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-red-50 text-red-700 border border-red-200 whitespace-nowrap">🚨 AVOID</span>;
-  return <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded font-sans tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200 whitespace-nowrap">⚠️ CAUTIOUS</span>;
+    return <span className="text-[9px] font-semibold px-1.5 py-0.5 font-sans tracking-wider uppercase bg-red-50 text-red-700 border border-red-200 whitespace-nowrap">AVOID</span>;
+  return <span className="text-[9px] font-semibold px-1.5 py-0.5 font-sans tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200 whitespace-nowrap">CAUTIOUS</span>;
 }
 
 export default async function InsiderTrading() {
@@ -72,19 +72,21 @@ export default async function InsiderTrading() {
   const livePrices = await fetchLivePrices(tickers);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 pt-14 pb-16">
+    <div className="max-w-6xl mx-auto px-6 py-10">
 
       {/* Header */}
-      <div className="flex items-baseline justify-between mb-1">
-        <h1 className="font-sans text-3xl text-[#18181B] tracking-tight">Insider Trading</h1>
-        <span className="text-xs text-gray-400 font-sans">Updated {analysisDate} · {data.lookbackWindow}</span>
+      <div className="border-b border-gray-200 pb-4 mb-6 flex items-baseline justify-between gap-4">
+        <div>
+          <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">Insider Trading</h1>
+          <p className="text-[13px] text-gray-400 mt-1">
+            Open-market insider purchases and cluster-sell signals across the semi universe. Prices live · {data.lookbackWindow}.
+          </p>
+        </div>
+        <span className="text-[11px] text-gray-400 shrink-0">Updated {analysisDate}</span>
       </div>
-      <p className="text-xs text-gray-400 mb-8">
-        Open-market insider purchases and cluster-sell signals across the semi &amp; semi-cap universe. Prices live · Thesis as of {analysisDate}.
-      </p>
 
       {/* Top 10 Watchlist */}
-      <h2 className="font-sans text-sm font-semibold text-[#0E7490] mb-2 tracking-widest uppercase">
+      <h2 className="font-sans text-[10px] font-bold text-gray-500 mb-2 tracking-widest uppercase">
         Top 10 Watchlist
       </h2>
 
@@ -111,7 +113,7 @@ export default async function InsiderTrading() {
           return (
             <div
               key={item.ticker}
-              className="border border-gray-200 rounded-lg p-3 hover:border-[#0E7490]/40 transition-colors bg-white flex flex-col gap-1.5"
+              className="border border-gray-200 p-3 hover:bg-gray-50 transition-colors bg-white flex flex-col gap-1.5"
             >
               {/* Ticker row */}
               <div className="flex items-center gap-1">
@@ -151,12 +153,12 @@ export default async function InsiderTrading() {
       {/* Red Flags */}
       {data.redFlags.length > 0 && (
         <>
-          <h2 className="font-sans text-sm font-semibold text-red-700 mb-3 tracking-widest uppercase">
+          <h2 className="font-sans text-[10px] font-bold text-gray-500 mb-3 tracking-widest uppercase">
             Red Flags
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-10">
             {data.redFlags.map((flag) => (
-              <div key={flag.ticker} className="border border-red-100 rounded-lg p-3.5 bg-red-50/30 flex flex-col gap-2">
+              <div key={flag.ticker} className="border border-gray-200 p-3.5 bg-white flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   <span className="font-sans font-bold text-sm text-[#18181B] tracking-tight">{flag.ticker}</span>
                   <span className="text-xs text-gray-400 truncate">{flag.company}</span>

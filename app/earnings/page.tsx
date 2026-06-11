@@ -6,65 +6,59 @@ export default async function Earnings() {
   const earnings = await getUpcomingEarnings();
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-16 pb-8">
-      <div className="flex items-baseline justify-between mb-2">
-        <h1 className="font-sans text-4xl text-[#0E7490] tracking-tight">
-          Earnings Calendar
-        </h1>
+    <div className="max-w-6xl mx-auto px-6 py-10">
+      {/* Header */}
+      <div className="border-b border-gray-200 pb-4 mb-6 flex items-baseline justify-between gap-4">
+        <div>
+          <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
+            Earnings Calendar
+          </h1>
+          <p className="text-[13px] text-gray-400 mt-1">
+            Semiconductor companies with $10B+ market cap — next 6 weeks. Updates daily.
+          </p>
+        </div>
       </div>
-      <p className="text-sm text-gray-400 mb-10">
-        Semiconductor companies with $10B+ market cap — next 6 weeks.
-        Auto-updated daily; past reports drop off automatically.
-      </p>
 
       {earnings.length === 0 ? (
-        <p className="text-sm text-gray-400 italic">
-          No earnings reports in the next 6 weeks.
-        </p>
+        <p className="text-[13px] text-gray-400 italic">No earnings reports in the next 6 weeks.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="border border-gray-200 bg-white overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 text-left">
-                {["Date", "Company", "EPS Est."].map((h) => (
+              <tr className="border-b border-gray-100 bg-gray-50">
+                {[
+                  { label: "Date" },
+                  { label: "Company" },
+                  { label: "EPS Est." },
+                  { label: "Avg 2-Day Move", sub: "post-earnings" },
+                  { label: "Beat Rate" },
+                ].map((h) => (
                   <th
-                    key={h}
-                    className="pb-6 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase pr-8"
+                    key={h.label}
+                    className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-wider text-gray-400"
                   >
-                    {h}
+                    {h.label}
+                    {h.sub && <span className="block font-normal normal-case tracking-normal text-gray-300">{h.sub}</span>}
                   </th>
                 ))}
-                <th className="pb-3 pr-8 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
-                  Avg 2-Day Move
-                  <span className="block normal-case tracking-normal font-normal text-gray-400 text-[10px] mt-0.5">post-earnings</span>
-                </th>
-                <th className="pb-6 font-sans font-semibold text-xs tracking-widest text-[#0E7490] uppercase">
-                  Beat Rate
-                </th>
               </tr>
             </thead>
             <tbody>
               {earnings.map((row) => (
                 <tr
                   key={`${row.ticker}-${row.date}`}
-                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors"
                 >
-                  <td className="py-4 pr-8 text-gray-500 whitespace-nowrap">
-                    {row.date}
+                  <td className="px-4 py-3 text-[13px] text-gray-400 whitespace-nowrap">{row.date}</td>
+                  <td className="px-4 py-3">
+                    <span className="text-[13px] font-semibold text-[#111827]">{row.company}</span>
+                    <span className="ml-2 text-[11px] text-gray-400">{row.ticker}</span>
                   </td>
-                  <td className="py-4 pr-8">
-                    <span className="font-medium text-gray-900">{row.company}</span>
-                    <span className="ml-2 text-xs text-gray-400">{row.ticker}</span>
-                  </td>
-                  <td className="py-4 pr-8 text-gray-900">{row.eps}</td>
-                  <td
-                    className={`py-4 pr-8 font-medium ${
-                      row.avgMove.startsWith("+") ? "text-emerald-600" : "text-rose-500"
-                    }`}
-                  >
+                  <td className="px-4 py-3 text-[13px] text-gray-700">{row.eps}</td>
+                  <td className={`px-4 py-3 text-[13px] font-semibold ${row.avgMove.startsWith("+") ? "text-emerald-600" : "text-rose-500"}`}>
                     {row.avgMove}
                   </td>
-                  <td className="py-4 text-gray-900">{row.beatRate}</td>
+                  <td className="px-4 py-3 text-[13px] text-gray-700">{row.beatRate}</td>
                 </tr>
               ))}
             </tbody>
@@ -72,9 +66,8 @@ export default async function Earnings() {
         </div>
       )}
 
-      <p className="mt-6 text-xs text-gray-400">
-        Avg 2-day move and beat rate based on last 20 quarters. Live earnings
-        dates via Yahoo Finance. Updates hourly.
+      <p className="mt-4 text-[11px] text-gray-400">
+        Avg 2-day move and beat rate based on last 20 quarters. Dates via Yahoo Finance.
       </p>
     </div>
   );

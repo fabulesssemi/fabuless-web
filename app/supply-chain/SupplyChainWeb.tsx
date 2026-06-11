@@ -827,6 +827,7 @@ function edgePath(a: Pos, b: Pos): string {
 
 export function SupplyChainWeb() {
   const [active, setActive] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
   const [ckOnly, setCkOnly] = useState(false);
   const [scenario, setScenario] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -1139,23 +1140,22 @@ export function SupplyChainWeb() {
             const a = pos[e.from];
             const b = pos[e.to];
             if (!a || !b) return null;
-            const hit = active !== null && (e.from === active || e.to === active);
-            // scenario: highlight edges where both endpoints are in the scenario
-            const scHit = scenarioSet !== null && scenarioSet.has(e.from) && scenarioSet.has(e.to);
-            const dim = active !== null ? !hit
-                      : scenarioSet !== null ? !scHit
-                      : false;
+            const hit    = active  !== null && (e.from === active  || e.to === active);
+            const hovHit = hovered !== null && (e.from === hovered || e.to === hovered);
+            const scHit  = scenarioSet !== null && scenarioSet.has(e.from) && scenarioSet.has(e.to);
+            const ckHit  = ckOnly && e.critical;
+            // hide edge entirely when nothing requests it to be shown
+            const visible = hit || hovHit || scHit || ckHit;
+            if (!visible) return null;
             const d = edgePath(a, b);
             const scColor = activeScenario?.color ?? "#B45309";
+            const stroke = hit ? "#B45309" : scHit ? scColor : hovHit ? "#9CA3AF" : "#DC2626";
+            const sw     = hit ? 2 : scHit ? 1.4 : hovHit ? 0.8 : 1.3;
+            const op     = hit ? 1 : scHit ? 0.7 : hovHit ? 0.45 : 0.55;
             return (
               <g key={i} fill="none">
-                <path
-                  d={d}
-                  stroke={hit ? "#B45309" : scHit ? scColor : e.critical ? "#DC2626" : "#9CA3AF"}
-                  strokeWidth={hit ? 2 : scHit ? 1.4 : e.critical ? 1.3 : 0.8}
-                  opacity={dim ? 0.06 : hit ? 1 : scHit ? 0.7 : e.critical ? 0.55 : 0.3}
-                />
-                {(hit || scHit || (!active && !scenarioSet && e.critical)) && (
+                <path d={d} stroke={stroke} strokeWidth={sw} opacity={op} />
+                {(hit || scHit || ckHit) && (
                   <path
                     d={d}
                     stroke={hit ? "#D97706" : scHit ? scColor : "#EF4444"}
@@ -1183,19 +1183,26 @@ export function SupplyChainWeb() {
             const isActive = n.id === active;
             const inScenario = scenarioSet !== null && scenarioSet.has(n.id);
             const scColor = activeScenario?.color ?? "#B45309";
+            const isHovered = n.id === hovered;
+            const hovConnected = hovered !== null && edges.some(
+              (e) => (e.from === hovered || e.to === hovered) && (e.from === n.id || e.to === n.id)
+            );
             const dim = connected !== null ? !connected.has(n.id)
                       : scenarioSet !== null ? !inScenario
+                      : hovered !== null ? !(isHovered || hovConnected)
                       : false;
             const isCk = CHOKEPOINTS.has(n.id);
             const markSize = Math.max(7.5, p.r * 0.42);
             return (
               <g
                 key={n.id}
-                opacity={dim ? 0.15 : 1}
+                opacity={dim ? 0.2 : 1}
                 className="cursor-pointer"
                 onClick={() => toggle(n.id)}
+                onMouseEnter={() => setHovered(n.id)}
+                onMouseLeave={() => setHovered(null)}
               >
-                {(isActive || inScenario || (!active && !scenarioSet && isCk)) && (
+                {(isActive || inScenario || isHovered || (!active && !scenarioSet && !hovered && isCk && ckOnly)) && (
                   <circle
                     cx={p.x} cy={p.y} r={p.r + 7}
                     fill="none"

@@ -78,7 +78,7 @@ export default async function InsiderTrading() {
       <div className="border-b border-gray-200 pb-4 mb-6 flex items-baseline justify-between gap-4">
         <div>
           <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">Insider Trading</h1>
-          <p className="text-[13px] text-gray-500 mt-1">
+          <p className="text-[13px] text-gray-700 mt-1">
             Open-market insider purchases and cluster-sell signals across the semi universe. Prices live · {data.lookbackWindow}.
           </p>
         </div>

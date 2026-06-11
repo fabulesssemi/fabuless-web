@@ -35,10 +35,10 @@ export default async function CompaniesIndex() {
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309]">
             Company Intelligence
           </div>
-          <h1 className="font-sans text-4xl sm:text-5xl text-gray-900 tracking-tight mt-2">
+          <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight mt-1">
             The AI Silicon Stack
           </h1>
-          <p className="mt-3 max-w-2xl text-gray-500 leading-relaxed">
+          <p className="mt-1 max-w-2xl text-[13px] text-gray-700 leading-relaxed">
             The easiest way to understand the semiconductor and AI infrastructure
             companies we cover — what changed, why it matters, and where each one
             sits in the chip ecosystem. Live market data, refreshed hourly.

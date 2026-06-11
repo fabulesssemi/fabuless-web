@@ -8,7 +8,7 @@ export default function Archive() {
         <h1 className="font-sans text-3xl font-bold text-[#111827] tracking-tight">
           Archive
         </h1>
-        <p className="text-[14px] text-gray-500 mt-1">
+        <p className="text-[14px] text-gray-700 mt-1">
           Every issue, in order. Shipped Fridays.
         </p>
       </div>

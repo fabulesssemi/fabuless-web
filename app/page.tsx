@@ -51,7 +51,7 @@ export default async function Home() {
           <h1 className="font-sans text-4xl font-bold text-[#111827] leading-tight tracking-tight mb-4 max-w-xl">
             Your weekly edge on the semiconductor market.
           </h1>
-          <p className="text-[15px] text-gray-500 max-w-lg leading-relaxed mb-6">
+          <p className="text-[15px] text-gray-700 max-w-lg leading-relaxed mb-6">
             Chips power every AI model, every smartphone, every data
             center. We track the stories that move markets.
           </p>

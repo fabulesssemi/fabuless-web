@@ -59,7 +59,7 @@ export default function LensesPage() {
         <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
           Lenses
         </h1>
-        <p className="text-[13px] text-gray-500 mt-1 max-w-2xl">
+        <p className="text-[13px] text-gray-700 mt-1 max-w-2xl">
           Ask questions. Get answers grounded in the documented thinking of the sharpest minds in semiconductors and tech investing — with citations back to the exact source.
         </p>
       </div>

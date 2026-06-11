@@ -77,7 +77,7 @@ export default async function AnalystConsensusDashboard() {
       {weeklySummary && (
         <div className="mb-8 pl-4 border-l-2 border-gray-200">
           <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-1">
-            What Changed This Week · {weeklySummary.week_of}
+            What Changed This Week · {new Date(weeklySummary.week_of + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric" })}
           </div>
           <p className="text-[13px] text-gray-600 leading-relaxed">{weeklySummary.summary}</p>
         </div>

@@ -13,7 +13,7 @@ export default async function Earnings() {
           <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
             Earnings Calendar
           </h1>
-          <p className="text-[13px] text-gray-700 mt-1">
+          <p className="font-serif text-[15px] text-[#4a4a4a] mt-1">
             Semiconductor companies with $10B+ market cap — next 6 weeks. Updates daily.
           </p>
         </div>

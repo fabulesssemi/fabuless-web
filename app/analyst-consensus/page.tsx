@@ -50,7 +50,7 @@ export default async function AnalystConsensusDashboard() {
             <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
               Analyst Consensus
             </h1>
-            <p className="mt-1 text-[13px] text-gray-600 leading-relaxed">
+            <p className="mt-1 font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
               What Wall Street is getting more bullish or bearish on across AI semiconductors.
               Sentiment, price targets, upgrades — refreshed hourly.
             </p>

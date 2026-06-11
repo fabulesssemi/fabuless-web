@@ -47,7 +47,7 @@ export default function TrackerPage() {
           <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
             Prediction Tracker
           </h1>
-          <span className="text-[13px] text-gray-600">
+          <span className="font-serif text-[15px] text-[#4a4a4a]">
             Every falsifiable semiconductor prediction — verbatim quote, source, verdict.
           </span>
         </div>

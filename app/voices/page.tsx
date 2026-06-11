@@ -98,10 +98,10 @@ export default function VoicesPage() {
         <p className="text-[11px] font-bold uppercase tracking-widest text-[#B45309] mb-2">
           Curated
         </p>
-        <h1 className="font-sans text-4xl font-bold text-[#111827] tracking-tight mb-3">
+        <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
           Top Voices
         </h1>
-        <p className="text-gray-500 max-w-xl leading-relaxed">
+        <p className="text-[13px] text-gray-500 mt-1 max-w-xl">
           The sharpest takes on semiconductors, AI infrastructure, and chip markets —
           from analysts, founders, investors, and executives worth listening to.
         </p>

@@ -50,24 +50,34 @@ export default async function AnalystsIndex() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {analysts.map((analyst) => {
           const { bull, bear, neutral } = bullBearSummary(analyst.coverage);
+          const firmShort = analyst.firmDisplay.split(" ")[0].toUpperCase();
           return (
-            <Link key={analyst.id} href={`/analysts/${analyst.id}`}>
-              <div className="border border-gray-200 hover:border-gray-400 hover:shadow-md transition-all h-full flex flex-col overflow-hidden">
-                <div className="p-5 flex flex-col gap-3 flex-1">
-                  <div>
-                    <div className="text-[15px] font-bold text-gray-900 leading-tight">{analyst.name}</div>
-                    <div className="text-[11px] text-gray-400 mt-0.5">{analyst.firmDisplay}</div>
+            <Link
+              key={analyst.id}
+              href={`/analysts/${analyst.id}`}
+              className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 flex flex-col"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
+                    {firmShort}
                   </div>
-
-                  <p className="text-[12px] text-gray-500 leading-relaxed flex-1">{analyst.knownFor}</p>
-
-                  <div className="flex items-center gap-4 pt-3 border-t border-gray-100">
-                    <span className="text-[11px] font-semibold text-emerald-600">▲ {bull} buy</span>
-                    <span className="text-[11px] font-semibold text-rose-500">▼ {bear} sell</span>
-                    <span className="text-[11px] text-gray-300">— {neutral}</span>
-                    <span className="ml-auto text-[11px] font-semibold" style={{ color: analyst.accent }}>View →</span>
+                  <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
+                    {analyst.name}
                   </div>
                 </div>
+                <div className="text-right shrink-0 pt-0.5">
+                  <span className="text-[11px] font-semibold text-emerald-600">{bull} buy</span>
+                </div>
+              </div>
+
+              <p className="mt-3 text-[13px] text-gray-500 leading-snug flex-1">
+                {analyst.knownFor}
+              </p>
+
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-[11px] text-gray-400">{analyst.coverage.length} stocks covered</span>
+                <span className="text-[11px] font-semibold" style={{ color: analyst.accent }}>View →</span>
               </div>
             </Link>
           );

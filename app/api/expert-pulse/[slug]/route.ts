@@ -22,6 +22,8 @@ async function embedQuery(text: string): Promise<number[]> {
 
 interface ChunkRow { id: string; text: string; source?: string; date?: string; url?: string; similarity?: number; }
 
+const MIN_SIMILARITY = 0.5; // below this the corpus doesn't meaningfully cover the company
+
 async function getTopChunks(
   corpus: "baker" | "dylan" | "circuit",
   embedding: number[],
@@ -32,9 +34,14 @@ async function getTopChunks(
     supabase.rpc(`match_${corpus}_chunks`, { query_embedding: embedding, match_count: 10, date_from: null, date_to: null }),
     supabase.rpc(`keyword_search_${corpus}_chunks`, { query_text: keyword, match_count: 10, date_from: null, date_to: null }),
   ]);
+
+  // Only include vector results that clear the similarity threshold
+  const goodVec = (vec.data ?? []).filter((r: ChunkRow) => (r.similarity ?? 0) >= MIN_SIMILARITY);
+
   const seen = new Set<string>();
   const rows: ChunkRow[] = [];
-  for (const row of [...(vec.data ?? []), ...(kw.data ?? [])]) {
+  // Prioritise high-similarity vector results; fill from keyword only if we have good vector hits
+  for (const row of [...goodVec, ...(goodVec.length > 0 ? (kw.data ?? []) : [])]) {
     if (!seen.has(row.id) && row.text?.trim().length > 60) {
       seen.add(row.id);
       rows.push(row);

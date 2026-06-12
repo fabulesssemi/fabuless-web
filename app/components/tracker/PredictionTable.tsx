@@ -37,7 +37,7 @@ function prettySource(source: string): string {
   return source;
 }
 
-export function PredictionTable({ rows }: { rows: Prediction[] }) {
+export function PredictionTable({ rows, hideExpertFilter = false }: { rows: Prediction[]; hideExpertFilter?: boolean }) {
   const [expert, setExpert]   = useState<ExpertFilter>("all");
   const [status, setStatus]   = useState<StatusFilter>("all");
   const [company, setCompany] = useState<string>("all");
@@ -89,14 +89,18 @@ export function PredictionTable({ rows }: { rows: Prediction[] }) {
     <div>
       {/* Expert filter */}
       <div className="flex flex-wrap items-center gap-2 mb-3">
-        <div className="flex flex-wrap gap-1.5">
-          {(["all", "dylan", "circuit", "baker", "doug", "stacy"] as const).map((e) => (
-            <button key={e} onClick={() => setExpert(e)} className={filterBtn(expert === e)}>
-              {e === "all" ? "All experts" : EXPERT_LABELS[e]}
-            </button>
-          ))}
-        </div>
-        <span className="hidden sm:block text-gray-200">|</span>
+        {!hideExpertFilter && (
+          <>
+            <div className="flex flex-wrap gap-1.5">
+              {(["all", "dylan", "circuit", "baker", "doug", "stacy"] as const).map((e) => (
+                <button key={e} onClick={() => setExpert(e)} className={filterBtn(expert === e)}>
+                  {e === "all" ? "All experts" : EXPERT_LABELS[e]}
+                </button>
+              ))}
+            </div>
+            <span className="hidden sm:block text-gray-200">|</span>
+          </>
+        )}
         <div className="flex gap-1.5">
           {(
             [["all", "All"], ["resolved", "Resolved"], ["open", "Open"]] as const

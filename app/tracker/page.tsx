@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { predictions, type ExpertId } from "@/lib/tracker/predictions";
+import { predictions } from "@/lib/tracker/predictions";
 import { statsFor } from "@/lib/tracker/stats";
+import { EXPERTS } from "@/lib/tracker/experts";
 import { PredictionTable } from "@/app/components/tracker/PredictionTable";
 
 export const metadata: Metadata = {
@@ -9,19 +10,6 @@ export const metadata: Metadata = {
   description:
     "Who actually called it? Every falsifiable semiconductor prediction from leading analysts — verbatim quote, source, and verdict. The scoreboard nobody else keeps.",
 };
-
-const EXPERTS: {
-  id: ExpertId;
-  name: string;
-  subtitle: string;
-  accent: string;
-}[] = [
-  { id: "dylan",   name: "Dylan Patel",      subtitle: "SemiAnalysis",         accent: "#9A3412" },
-  { id: "circuit", name: "The Circuit",       subtitle: "Bajarin & Goldberg",   accent: "#1C1917" },
-  { id: "baker",   name: "Gavin Baker",       subtitle: "Atreides Management",  accent: "#1D4ED8" },
-  { id: "doug",    name: "Doug O'Laughlin",   subtitle: "Fabricated Knowledge", accent: "#065F46" },
-  { id: "stacy",   name: "Stacy Rasgon",      subtitle: "Bernstein Research",   accent: "#0F4C81" },
-];
 
 const DOMAIN_COLS = [
   { key: "supply_chain", label: "Supply" },
@@ -83,13 +71,14 @@ export default function TrackerPage() {
 
                   {/* Expert name */}
                   <td className="px-3 py-3">
-                    <div className="flex items-center gap-2.5">
+                    <Link href={`/tracker/${expert.id}`} className="group flex items-center gap-2.5">
                       <div className="w-0.5 h-8 shrink-0 rounded-full" style={{ backgroundColor: expert.accent }} />
                       <div>
-                        <div className="text-[13px] font-bold text-[#111827] leading-tight">{expert.name}</div>
+                        <div className="text-[13px] font-bold text-[#111827] leading-tight group-hover:text-[#B45309] transition-colors">{expert.name}</div>
                         <div className="text-[11px] text-gray-400">{expert.subtitle}</div>
                       </div>
-                    </div>
+                      <span className="ml-1 text-[11px] font-semibold text-[#B45309] opacity-0 group-hover:opacity-100 transition-opacity">Scorecard →</span>
+                    </Link>
                   </td>
 
                   {/* Overall % — hero stat */}

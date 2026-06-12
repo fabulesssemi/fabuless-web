@@ -75,7 +75,7 @@ export default async function EarningsDeepDive({ params }: { params: Promise<{ t
       <div className="max-w-5xl mx-auto px-6 pt-6 pb-4 border-b border-gray-200">
         <Link
           href="/earnings"
-          className="inline-flex items-center gap-1.5 text-[12px] font-medium text-gray-400 hover:text-[#B45309] transition-colors"
+          className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#B45309] border border-amber-200 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded transition-colors"
         >
           ← All upcoming earnings
         </Link>

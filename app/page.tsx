@@ -49,20 +49,45 @@ export default async function Home() {
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-6 pb-4 flex items-start justify-between gap-8">
-        <div className="max-w-xl">
-          <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-2">
-            Semiconductor intelligence for the curious investor.
-          </h1>
-          <p className="font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
-            Supply chain dynamics, expert track records, analyst consensus, and the companies that matter — all in one place.
-          </p>
+      <section className="pt-7 pb-6 border-b border-gray-200">
+        <div className="flex items-start justify-between gap-8 mb-6">
+          <div>
+            <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-1">
+              Semiconductor intelligence for the curious investor.
+            </h1>
+            <p className="font-serif text-[15px] text-[#4a4a4a]">
+              Expert track records, earnings deep-dives, supply chain maps, and analyst consensus — all in one place.
+            </p>
+          </div>
+          <div className="shrink-0 text-right hidden sm:block">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">Every Friday</p>
+            <SubscribeForm compact />
+          </div>
         </div>
-        <div className="shrink-0 text-right hidden sm:block">
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">
-            Every Friday
-          </p>
-          <SubscribeForm compact />
+
+        {/* Platform tiles */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {[
+            { href: "/tracker",      label: "Prediction Tracker",   desc: "Who called it. Who missed. Every verdict public.",         accent: "#B45309" },
+            { href: "/earnings",     label: "Earnings Calendar",     desc: "Deep-dives on upcoming semi earnings reports.",            accent: "#059669" },
+            { href: "/companies",    label: "Companies",             desc: "Coverage universe — prices, ratings, analyst targets.",    accent: "#1D4ED8" },
+            { href: "/lenses",       label: "Expert Lenses",         desc: "Ask Dylan, Baker, or The Circuit anything.",               accent: "#9A3412" },
+            { href: "/analysts",     label: "Analysts",              desc: "TipRanks-style scorecards for top semi analysts.",         accent: "#065F46" },
+            { href: "/supply-chain", label: "Supply Chain Web",      desc: "Interactive map of every critical chokepoint.",            accent: "#0F4C81" },
+          ].map((tile) => (
+            <a
+              key={tile.href}
+              href={tile.href}
+              className="group block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all"
+            >
+              <div className="text-[11px] font-bold uppercase tracking-wider mb-1" style={{ color: tile.accent }}>
+                {tile.label}
+              </div>
+              <div className="text-[12px] text-gray-500 leading-snug group-hover:text-gray-700 transition-colors">
+                {tile.desc}
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 

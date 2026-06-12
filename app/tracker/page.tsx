@@ -36,7 +36,7 @@ export default function TrackerPage() {
             Prediction Tracker
           </h1>
           <span className="font-serif text-[15px] text-[#4a4a4a]">
-            Every prediction on record. Every verdict public. See who called it and who missed.
+            Every prediction on record. Every verdict public. Click any expert for their full scorecard.
           </span>
         </div>
         <Link href="/tracker/methodology" className="text-[12px] text-[#B45309] font-semibold hover:underline shrink-0">

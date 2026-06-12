@@ -79,7 +79,7 @@ export default function MethodologyPage() {
         <h2 className="text-xl font-bold text-[#111827] tracking-tight mb-5">The rules</h2>
         <div className="space-y-5">
           {RULES.map((rule, i) => (
-            <div key={rule.title} className="border border-gray-200 bg-white p-5">
+            <div key={rule.title} className="border border-[#DDDBD2] bg-white p-5">
               <h3 className="text-[15px] font-bold text-[#111827] mb-1.5">
                 {i + 1}. {rule.title}
               </h3>
@@ -94,7 +94,7 @@ export default function MethodologyPage() {
         <h2 className="text-xl font-bold text-[#111827] tracking-tight mb-5">The four verdicts</h2>
         <div className="space-y-4">
           {STATUSES.map((s) => (
-            <div key={s.label} className="border border-gray-200 bg-white p-5">
+            <div key={s.label} className="border border-[#DDDBD2] bg-white p-5">
               <span
                 className={`inline-block border px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider mb-2 ${s.badge}`}
               >
@@ -117,7 +117,7 @@ export default function MethodologyPage() {
         <h2 className="text-xl font-bold text-[#111827] tracking-tight mb-5">
           Known limitations
         </h2>
-        <div className="border border-gray-200 bg-white p-5 space-y-4">
+        <div className="border border-[#DDDBD2] bg-white p-5 space-y-4">
           <div>
             <h3 className="text-[15px] font-bold text-[#111827] mb-1.5">
               The initial dataset was compiled retrospectively
@@ -157,7 +157,7 @@ export default function MethodologyPage() {
         <h2 className="text-xl font-bold text-[#111827] tracking-tight mb-5">
           Disputes & corrections
         </h2>
-        <p className="text-[14px] text-gray-600 leading-relaxed border border-gray-200 bg-white p-5">
+        <p className="text-[14px] text-gray-600 leading-relaxed border border-[#DDDBD2] bg-white p-5">
           If you believe a quote is inaccurate, a verdict is wrong, or a prediction is missing
           context — including if you're the person being tracked — email{" "}
           <a href="mailto:newsletter@fabuless.ai" className="text-[#B45309] font-semibold hover:underline">

@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FFFFFF;
+  --background: #F4F3EC;
   --foreground: #111111;
   --accent: #B45309;
+  --grid-line: #E8E6DC;
+  --panel-border: #DDDBD2;
 }
 
 @theme inline {
@@ -15,6 +17,10 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--foreground);
 }

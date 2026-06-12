@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="h-screen flex flex-col bg-[#FAFAF8] text-[#18181B] font-sans overflow-hidden">
+      <body className="h-screen flex flex-col text-[#18181B] font-sans overflow-hidden">
         <header className="relative z-40">
           <div className="h-[3px] bg-[#B45309]" />
           <div className="bg-[#111827]">

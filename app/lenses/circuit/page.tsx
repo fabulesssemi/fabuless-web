@@ -148,7 +148,7 @@ export default function CircuitLensPage() {
   }
 
   return (
-    <div className="flex h-full overflow-hidden" style={{ backgroundColor: "#F4F3EF" }}>
+    <div className="flex h-full overflow-hidden">
 
       {/* ── MAIN ── */}
       <main className="flex-1 flex flex-col overflow-hidden">
@@ -240,7 +240,7 @@ export default function CircuitLensPage() {
                             <div className="flex flex-wrap gap-1.5">
                               {msg.suggestedFollowUps.map((q) => (
                                 <button key={q} onClick={() => sendMessage(q)}
-                                  className="text-[12px] border border-gray-200 bg-white rounded-full px-3 py-1 text-gray-600 hover:border-gray-800 hover:text-gray-900 transition-colors">
+                                  className="text-[12px] border border-[#DDDBD2] bg-white rounded-full px-3 py-1 text-gray-600 hover:border-gray-800 hover:text-gray-900 transition-colors">
                                   {q}
                                 </button>
                               ))}
@@ -305,7 +305,7 @@ export default function CircuitLensPage() {
       </main>
 
       {/* ── RIGHT SIDEBAR ── */}
-      <aside className="hidden lg:flex flex-col w-60 shrink-0 border-l border-gray-200 bg-white px-4 py-6 gap-5 overflow-y-auto">
+      <aside className="hidden lg:flex flex-col w-60 shrink-0 border-l border-[#DDDBD2] bg-white px-4 py-6 gap-5 overflow-y-auto">
 
         <Link href="/lenses" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1 pl-1">
           ← Lenses

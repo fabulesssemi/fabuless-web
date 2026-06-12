@@ -57,7 +57,7 @@ export default function TrackerPage() {
       </div>
 
       {/* Leaderboard */}
-      <div className="border border-gray-200 bg-white mb-8 overflow-x-auto">
+      <div className="border border-[#DDDBD2] bg-white mb-8 overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-100">

@@ -70,7 +70,7 @@ export default function LensesPage() {
           <Link
             key={lens.slug}
             href={`/lenses/${lens.slug}`}
-            className="group border border-gray-200 bg-white hover:border-gray-300 hover:shadow-md transition-all duration-150 flex flex-col"
+            className="group border border-[#DDDBD2] bg-white hover:border-gray-300 hover:shadow-md transition-all duration-150 flex flex-col"
           >
             {/* Accent top bar */}
             <div className="h-[3px]" style={{ backgroundColor: lens.accent }} />

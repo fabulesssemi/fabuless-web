@@ -88,7 +88,7 @@ export default async function Home() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {autoStories
             ? autoStories.slice(0, 4).map((story) => (
-                <div key={story.url} className="bg-gray-50 border border-gray-200 flex flex-col">
+                <div key={story.url} className="bg-white border border-[#DDDBD2] flex flex-col">
                   <a href={story.url} target="_blank" rel="noopener noreferrer" className="block">
                     <StoryImage image={story.image} source={story.source} headline={story.headline} />
                   </a>
@@ -118,7 +118,7 @@ export default async function Home() {
                 </div>
               ))
             : staticFeatured.map(({ story, category }) => (
-                <div key={story.url} className="bg-gray-50 border border-gray-200 flex flex-col">
+                <div key={story.url} className="bg-white border border-[#DDDBD2] flex flex-col">
                   <a href={story.url} target="_blank" rel="noopener noreferrer" className="block">
                     <StoryImage image={story.image} source={story.source} headline={story.headline} />
                   </a>

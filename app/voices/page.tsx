@@ -21,7 +21,7 @@ function QuoteCard({ q }: { q: VoiceQuote }) {
   const style = SOURCE_STYLES[q.source];
 
   return (
-    <div className="border border-gray-200 bg-white flex flex-col p-5 break-inside-avoid mb-4">
+    <div className="border border-[#DDDBD2] bg-white flex flex-col p-5 break-inside-avoid mb-4">
       {/* Source badge */}
       <div className="flex items-center gap-2 mb-3">
         <span className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 ${style.className}`}>

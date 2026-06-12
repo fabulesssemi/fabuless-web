@@ -22,7 +22,7 @@ export default async function Earnings() {
       {earnings.length === 0 ? (
         <p className="text-[13px] text-gray-400 italic">No earnings reports in the next 6 weeks.</p>
       ) : (
-        <div className="border border-gray-200 bg-white overflow-x-auto">
+        <div className="border border-[#DDDBD2] bg-white overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">

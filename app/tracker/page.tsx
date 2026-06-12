@@ -77,7 +77,7 @@ export default function TrackerPage() {
                         <div className="text-[13px] font-bold text-[#111827] leading-tight group-hover:text-[#B45309] transition-colors">{expert.name}</div>
                         <div className="flex items-center gap-2 mt-0.5">
                           <span className="text-[11px] text-gray-400">{expert.subtitle}</span>
-                          <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded leading-none">Scorecard →</span>
+                          <span className="text-[10px] font-bold text-white bg-[#B45309] px-2 py-0.5 rounded leading-none tracking-wide">Scorecard →</span>
                         </div>
                       </div>
                     </Link>

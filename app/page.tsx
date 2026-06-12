@@ -65,26 +65,6 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Compact platform pills */}
-        <div className="flex flex-wrap gap-2">
-          {[
-            { href: "/tracker",      label: "Prediction Tracker", accent: "#B45309" },
-            { href: "/earnings",     label: "Earnings Calendar",  accent: "#059669" },
-            { href: "/companies",    label: "Companies",          accent: "#1D4ED8" },
-            { href: "/lenses",       label: "Expert Lenses",      accent: "#9A3412" },
-            { href: "/analysts",     label: "Analysts",           accent: "#065F46" },
-            { href: "/supply-chain", label: "Supply Chain Web",   accent: "#0F4C81" },
-          ].map((tile) => (
-            <a
-              key={tile.href}
-              href={tile.href}
-              className="inline-flex items-center gap-1.5 border border-gray-200 bg-white hover:border-amber-300 rounded-full px-3 py-1 transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: tile.accent }} />
-              <span className="text-[11px] font-semibold text-gray-600 hover:text-gray-900 whitespace-nowrap">{tile.label}</span>
-            </a>
-          ))}
-        </div>
       </section>
 
       {/* Latest issue header — above Top Stories */}

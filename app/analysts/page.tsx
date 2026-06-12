@@ -60,7 +60,7 @@ export default async function AnalystsIndex() {
                 <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
                   {analyst.firmDisplay.toUpperCase()}
                 </div>
-                <div className="font-sans text-[17px] text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
+                <div className="font-sans text-[17px] text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight mt-2">
                   {analyst.name}
                 </div>
               </div>

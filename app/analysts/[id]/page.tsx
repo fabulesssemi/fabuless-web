@@ -78,7 +78,7 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
   return (
     <div className="max-w-6xl mx-auto px-6 pt-5 pb-10">
       <div className="mb-3">
-        <Link href="/analysts" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
+        <Link href="/analysts" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-900 transition-colors">
           ← All Analysts
         </Link>
       </div>

@@ -84,7 +84,7 @@ If no excerpt contains a genuinely useful, specific quote about ${companyName}, 
 }
 
 const EXPERT_LABELS: Record<string, { name: string; description: string; accent: string }> = {
-  baker:   { name: "Gary Black",   description: "Growth & AI Investing",         accent: "#B45309" },
+  baker:   { name: "Gavin Baker",  description: "Growth & AI Investing",         accent: "#B45309" },
   dylan:   { name: "Dylan Patel",  description: "Supply Chain & Infrastructure", accent: "#9A3412" },
   circuit: { name: "The Circuit",  description: "Earnings & Industry Dynamics",  accent: "#1C1917" },
 };

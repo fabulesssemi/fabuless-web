@@ -24,6 +24,18 @@ interface ChunkRow { id: string; text: string; source?: string; date?: string; u
 
 const MIN_SIMILARITY = 0.5; // below this the corpus doesn't meaningfully cover the company
 
+// Safety net: only accept chunks whose source belongs to the right corpus
+const SOURCE_PREFIXES: Record<string, string[]> = {
+  baker:   ["gavin baker", "invest like the best gavin", "all in podcast gavin", "baker", "capital allocators", "limitless", "antonio gracias gavin", "invested gavin", "rise of the gigafirm"],
+  dylan:   ["semianalysis", "dylan patel", "dwarkesh", "lex fridman", "mad podcast dylan", "a16z dylan", "invest like the best dylan"],
+  circuit: ["circuit ep"],
+};
+
+function sourceMatchesCorpus(source: string, corpus: string): boolean {
+  const s = (source ?? "").toLowerCase();
+  return (SOURCE_PREFIXES[corpus] ?? []).some((p) => s.includes(p));
+}
+
 async function getTopChunks(
   corpus: "baker" | "dylan" | "circuit",
   embedding: number[],
@@ -40,9 +52,8 @@ async function getTopChunks(
 
   const seen = new Set<string>();
   const rows: ChunkRow[] = [];
-  // Prioritise high-similarity vector results; fill from keyword only if we have good vector hits
   for (const row of [...goodVec, ...(goodVec.length > 0 ? (kw.data ?? []) : [])]) {
-    if (!seen.has(row.id) && row.text?.trim().length > 60) {
+    if (!seen.has(row.id) && row.text?.trim().length > 60 && sourceMatchesCorpus(row.source, corpus)) {
       seen.add(row.id);
       rows.push(row);
       if (rows.length >= 8) break;

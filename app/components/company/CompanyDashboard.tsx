@@ -133,7 +133,7 @@ export function CompanyDashboard({
           </div>
           {editorial ? (
             <>
-              <p className="text-[14px] leading-relaxed text-gray-700 italic mb-4 line-clamp-4">
+              <p className="text-[14px] leading-relaxed text-gray-700 italic mb-4">
                 {editorial.quickTake}
               </p>
               {/* Key themes as compact chips */}
@@ -164,7 +164,7 @@ export function CompanyDashboard({
               )}
             </>
           ) : (
-            <p className="text-sm text-gray-500 leading-relaxed line-clamp-6">
+            <p className="text-sm text-gray-500 leading-relaxed">
               {profile?.description ??
                 `Our full editorial deep-dive for ${meta.name} is in progress.`}
             </p>

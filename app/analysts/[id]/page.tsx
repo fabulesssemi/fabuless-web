@@ -8,10 +8,6 @@ export const revalidate = 3600;
 
 const slugByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.slug]));
 
-export async function generateStaticParams() {
-  return WALL_STREET_ANALYSTS.map((a) => ({ id: a.id }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const analyst = WALL_STREET_ANALYSTS.find((a) => a.id === id);

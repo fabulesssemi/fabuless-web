@@ -177,7 +177,7 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
                     const slug = slugByTicker.get(c.ticker);
                     const pos  = positionStyle(c.rating);
                     return (
-                      <tr key={c.ticker} className="border-b border-gray-100 last:border-0 hover:bg-[#FAFAF8] transition-colors">
+                      <tr key={c.ticker} className="border-b border-gray-200 last:border-0 hover:bg-[#FAFAF8] transition-colors">
 
                         {/* Company */}
                         <td className="px-5 py-3.5">

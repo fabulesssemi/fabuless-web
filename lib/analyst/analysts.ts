@@ -55,8 +55,25 @@ export function actionLabel(action: string): string {
   return ACTION_LABEL[action] ?? "Assigned";
 }
 
+// Broad semiconductor + adjacent universe for analyst coverage lookup
+const COVERAGE_UNIVERSE = [
+  // Core semi
+  "NVDA","AMD","AVGO","MRVL","TSM","ASML","ARM","MU","INTC","QCOM",
+  // Equipment
+  "AMAT","LRCX","KLAC","ENTG","MKSI","ACLS","ICHR","ONTO","FORM","COHU",
+  // Analog / mixed-signal
+  "TXN","ADI","MCHP","ON","MPWR","SLAB","SWKS","QRVO","CRUS","MTSI",
+  // EDA / IP
+  "SNPS","CDNS",
+  // Test & measurement
+  "TER","KEYS",
+  // Memory adjacents
+  "WOLF","AMKR","ASX",
+];
+
 async function fetchAnalystCoverageRaw(): Promise<AnalystWithCoverage[]> {
-  const tickers = COMPANY_UNIVERSE.map((c) => c.ticker);
+  const tickers = COVERAGE_UNIVERSE;
+  // Name map: prefer COMPANY_UNIVERSE names, fall back to ticker
   const nameByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.name]));
   const STALE_CUTOFF = new Date(Date.now() - 18 * 30 * 24 * 60 * 60 * 1000);
 

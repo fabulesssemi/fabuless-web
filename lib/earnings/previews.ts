@@ -42,6 +42,13 @@ export interface EarningsExpectations {
   barToMove: string;
 }
 
+export interface SignalCheck {
+  /** The source / lens, e.g. "Options-implied move" or "Line-item consensus". */
+  source: string;
+  /** What that source is telling us going into the print. */
+  read: string;
+}
+
 export interface EarningsVerdict {
   /** ISO date the verdict was written. */
   date: string;
@@ -65,6 +72,8 @@ export interface EarningsPreview {
   /** 2-3 sentences: where the story and the stock are right now. */
   setup: string;
   expectations: EarningsExpectations;
+  /** Cross-source reads (consensus, options, end-market data, Circuit) — the rigor layer. */
+  signalChecks?: SignalCheck[];
   /** Ranked — most stock-relevant first. */
   watchPoints: WatchPoint[];
   /** Product / roadmap items management may lay out that the market cares about. */
@@ -85,62 +94,84 @@ export const EARNINGS_PREVIEWS: Record<string, EarningsPreview> = {
     reportDate: "2026-06-24",
     reportTime: "After market close",
     centralQuestion:
-      "With revenue expected to roughly quadruple year-over-year and margins near record highs, is there any beat large enough to move a stock that has already priced in the memory super-cycle?",
+      "With the stock up ~70% on the year, Street estimates already sitting above the company's own guide, and options pricing a ~9.5% move, is there a print big enough to satisfy a market that has fully embraced the memory super-cycle?",
     setup:
-      "Micron has been the cleanest large-cap way to own the AI memory shortage, and the stock has run accordingly into the print. The debate has shifted from 'is the cycle real' to 'how long can pricing and HBM economics stay this good' — which means the risk has quietly flipped from upside surprise to disappointment if the forward guide cools. This is the quarter where expectations are highest and the margin of safety is thinnest.",
+      "Micron is the cleanest US-listed way to own the AI memory shortage, and the stock has run ~70% in 2026 ahead of the print. The debate has moved past 'is the cycle real' to 'how durable is it' — which flips the risk from upside surprise toward disappointment if the forward guide or HBM share narrative wobbles. Crucially, Micron is still the #3 HBM player (~5-10% share) behind SK Hynix and Samsung, so its bull case rests on closing the gap from a low base, not on dominance. This is the quarter with the highest expectations and the thinnest margin of safety.",
     expectations: {
-      revenue: "~$33.5B (guide ±$750M) — confirm vs. latest Street",
-      eps: "~$19 non-GAAP vs. $1.73 a year ago — confirm vs. latest Street",
-      whisper: "Buy-side is positioned for a beat-and-raise; an in-line print is effectively a miss.",
+      revenue: "Guide ~$33.5B (±$750M); Street ~$33.7B-$40.9B — the Street already sits above guidance",
+      eps: "~$19 non-GAAP vs. $1.73 a year ago; gross margin guided ~81%",
+      whisper: "Buy-side is positioned for a beat-and-raise; with the Street above the guide, merely beating guidance is not the bar.",
       stockSetup:
-        "Stock has rallied hard into the quarter on HBM and DRAM pricing optimism. A lot of the up-cycle is already in the multiple, so positioning is crowded and expectations are extended.",
+        "Up ~70% YTD on HBM and DRAM-pricing optimism. The up-cycle is largely in the multiple, positioning is crowded, and options imply a ~9.5% move — nearly double the ~5.7% historical average, i.e. the market is braced for one of the bigger reactions of the year.",
       barToMove:
-        "An in-line $33.5B and a reiterated guide likely sells off — the cycle is already in the price. To move the stock up, Micron needs (1) revenue and margins above the high end, (2) a raised forward guide, and (3) a strengthened HBM narrative (more capacity sold out, share gains, HBM4 progress). Two of three may not be enough.",
+        "An in-line $33.5B with a reiterated guide likely sells off — the cycle is priced and a ~9.5% implied move means a quiet quarter isn't an option. Because Street revenue already runs above the company's own guide, 'beating guidance' isn't enough; Micron has to beat the Street's above-guide number, hold gross margin near or above ~81%, raise the forward guide, AND show HBM4 share progress at NVIDIA. Two of four after a 70% run is the textbook 'sell the news' setup.",
     },
+    signalChecks: [
+      {
+        source: "Options-implied move",
+        read: "~9.5% expected move vs. a ~5.7% 12-quarter average — among the largest setups of the year. A top-tier move is already priced, so an in-line quarter is effectively a disappointment.",
+      },
+      {
+        source: "Line-item consensus",
+        read: "Street revenue ~$33.7B-$40.9B sits above the company's own ~$33.5B guide. The bar is the Street's above-guide number and the gross-margin slope, not the printed guidance.",
+      },
+      {
+        source: "Memory pricing (TrendForce / BofA)",
+        read: "Conventional DRAM contract prices up ~55-60% and server DRAM hiked 60-70%; HBM now eats ~23% of DRAM wafers, cannibalizing conventional supply and driving the pricing spike. BofA frames 2026 as a '1990s-style' super-cycle.",
+      },
+      {
+        source: "HBM share (Counterpoint)",
+        read: "Micron is ~5-10% of HBM vs. SK Hynix ~50-55% and Samsung ~35-40%; UBS sees Hynix at ~70% of HBM4 for NVIDIA's Rubin. Micron's upside is share capture from a low base — and its bear risk is being designed out of HBM4.",
+      },
+      {
+        source: "The Circuit (qualitative)",
+        read: "Recent memory-focused episodes frame the structural 'memory wall' demand and the supply-discipline dynamic among the three makers — the qualitative backdrop, used to shape the questions, not quoted.",
+      },
+    ],
     watchPoints: [
       {
-        title: "HBM revenue run-rate & sold-out status",
-        why: "HBM is the single largest swing factor for both revenue and gross margin, and it's the reason the multiple re-rated. The market wants confirmation that HBM is sold out further into the future and that Micron is taking share, not just riding the tide.",
-        metric: "HBM revenue run-rate, % of capacity sold out for the next 12+ months, stated share trajectory vs. SK Hynix",
+        title: "HBM4 share & NVIDIA Rubin qualification",
+        why: "Micron is the #3 HBM player from a low base, so the entire bull thesis is share capture. The single biggest swing is whether Micron secures meaningful HBM4 allocation at NVIDIA's Rubin — where UBS expects SK Hynix to take ~70%. Evidence of real HBM4 share gains is the upside catalyst; being designed out is the bear case made real.",
+        metric: "HBM4 qualification status at NVIDIA, stated HBM share-target trajectory, HBM revenue run-rate and sold-out status",
         importance: "critical",
       },
       {
         title: "Gross margin trajectory",
-        why: "Margin is the cleanest read on where Micron sits in the cycle and on mix shift toward high-value HBM/DDR5. With margins already near records, the question is whether the slope is still up — flattening margin is the first sign the cycle is maturing.",
+        why: "Margin is the cleanest read on cycle position and on mix shift toward high-value HBM/DDR5, and it compresses before revenue when supply loosens. With margin guided ~81% — far above the historical norm — the question is whether the slope is still up.",
         metric: "Reported gross margin vs. ~81% guide, and the direction of next-quarter margin guidance",
         importance: "critical",
       },
       {
-        title: "Forward guidance vs. the run-up",
-        why: "Memory stocks trade on the next-quarter guide far more than the printed quarter. Given how far the stock has run, the guide is the whole game — a strong print with a merely in-line guide is the classic up-cycle sell-off setup.",
-        metric: "Next-quarter revenue / EPS / gross-margin guidance vs. Street",
+        title: "Forward guide vs. an above-guide Street",
+        why: "Memory stocks trade on the next-quarter guide more than the printed quarter, and here the Street already sits above the company's guide. The forward number is the whole game — an in-line guide after a 70% run is the classic up-cycle sell-off.",
+        metric: "Next-quarter revenue / EPS / gross-margin guidance vs. the (above-guide) Street",
         importance: "critical",
       },
       {
-        title: "DRAM pricing & bit demand mix",
-        why: "DRAM is the majority of profit. The split between data-center DRAM (strong, AI-driven) and consumer DRAM (PC/mobile, more cyclical) tells you how durable the strength is versus how much is a pricing spike that can reverse.",
-        metric: "DRAM bit shipment growth, ASP direction, data-center vs. consumer mix commentary",
+        title: "DRAM pricing & the wafer-cannibalization engine",
+        why: "DRAM is the majority of profit, and the pricing spike is being driven by HBM consuming ~23% of wafer supply, starving conventional DRAM. Watch whether ASPs are still climbing and how durable management frames it — that mechanism is the core of the super-cycle, and any sign it's cresting matters more than the headline.",
+        metric: "DRAM bit shipment growth, ASP direction, server vs. consumer DRAM mix, management's pricing-durability commentary",
         importance: "high",
       },
       {
         title: "Capex & supply discipline",
-        why: "The memory market punishes supply gluts. The market wants to see disciplined wafer additions; aggressive bit-supply growth or greenfield acceleration would raise fears of seeding the next downturn.",
+        why: "The super-cycle thesis — and talk of the rally running past 2028 — rests on all three makers staying disciplined on supply. Aggressive bit-supply growth or greenfield acceleration from Micron would raise fears of seeding the next glut and could break the narrative.",
         metric: "FY capex guidance, wafer-fab equipment spend, bit-supply growth commentary",
         importance: "high",
       },
       {
         title: "NAND pricing & posture",
-        why: "NAND is secondary and more commoditized, but it can swing the blended margin. Watch whether Micron is curtailing supply to protect pricing or seeing demand recovery in enterprise SSD.",
+        why: "NAND is secondary and more commoditized but swings the blended margin. With NAND contract pricing up ~33-38%, watch whether Micron is curtailing supply to protect pricing or seeing enterprise-SSD demand recovery.",
         metric: "NAND pricing trend, enterprise SSD demand, any supply curtailment",
         importance: "medium",
       },
     ],
     roadmapWatch: [
-      "HBM4 timeline and whether Micron is sampling / qualifying ahead of or on pace with SK Hynix and Samsung.",
-      "HBM3E 12-high qualification status at the major GPU/accelerator customers.",
-      "Custom HBM (logic base die) positioning — the next axis of differentiation and pricing power.",
-      "Stated HBM market-share target trajectory exiting calendar 2026.",
-      "Leading-edge DRAM node progress (1-gamma / EUV adoption) as a cost-and-capacity lever.",
+      "HBM4 timeline and whether Micron is sampling / qualifying on pace with SK Hynix and Samsung for NVIDIA's Rubin generation.",
+      "HBM3E 12-high qualification and ramp status at the major GPU/accelerator customers.",
+      "Custom HBM (logic base die) positioning — the next axis of differentiation and pricing power into HBM4E.",
+      "A concrete HBM market-share target exiting calendar 2026 (the gap-closing milestone the bulls need).",
+      "Leading-edge DRAM node progress (1-gamma / EUV) as the cost-and-capacity lever behind both HBM and conventional DRAM.",
     ],
     partnershipWatch: [
       "New or expanded long-term supply agreements (LTAs) with hyperscalers or GPU vendors that lock in HBM pricing/volume.",
@@ -149,9 +180,9 @@ export const EARNINGS_PREVIEWS: Record<string, EarningsPreview> = {
       "Custom HBM design wins with a major accelerator customer.",
     ],
     bullCase:
-      "HBM stays sold out further than the market models, Micron confirms share gains and HBM4 progress, and the forward guide steps up again — proving the memory cycle has a longer, more structural runway than a typical boom-bust. In that world, the stock's multiple is still too low for the earnings power.",
+      "Micron confirms real HBM4 share gains at NVIDIA from its low base, margins hold or climb past ~81%, and the forward guide steps up again — validating that the memory cycle is a longer, more structural franchise (the '1990s-style' super-cycle) rather than another boom-bust. In that world the stock's multiple still under-prices the earnings power.",
     bearCase:
-      "Revenue and margins are great but merely meet a very high bar, the forward guide is only in-line, and management strikes any cautious note on consumer DRAM or 2027 supply. With positioning crowded and the cycle already priced, that's enough to trigger a sharp 'sell the news' move even on a strong quarter.",
+      "Revenue and margins are great but merely clear a very high, above-guide bar; the forward guide is only in-line; HBM4 share commentary disappoints versus SK Hynix; or management flags any 2027 supply addition. With a ~9.5% move priced and positioning crowded after a 70% run, any of those triggers a sharp 'sell the news' drop even on a strong quarter.",
     verdict: null,
   },
 };

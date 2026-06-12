@@ -156,6 +156,25 @@ export default async function EarningsDeepDive({ params }: { params: Promise<{ t
           </div>
         </section>
 
+        {/* Signal check — cross-source reads */}
+        {preview.signalChecks && preview.signalChecks.length > 0 && (
+          <section className="mb-10">
+            <div className="flex items-center gap-3 mb-1">
+              <h2 className="text-[12px] font-bold uppercase tracking-widest text-gray-400">Signal check</h2>
+              <div className="h-px flex-1 bg-gray-200" />
+            </div>
+            <p className="text-[11px] text-gray-400 mb-4">What the consensus, options, and end-market data say going in.</p>
+            <div className="border border-gray-200 bg-white divide-y divide-gray-100">
+              {preview.signalChecks.map((s) => (
+                <div key={s.source} className="flex flex-col sm:flex-row gap-1 sm:gap-5 px-5 py-3.5">
+                  <div className="sm:w-44 shrink-0 text-[12px] font-bold text-[#111827]">{s.source}</div>
+                  <p className="text-[13px] text-gray-600 leading-relaxed flex-1">{s.read}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Watch points */}
         <section className="mb-10">
           <div className="flex items-center gap-3 mb-4">
@@ -241,6 +260,13 @@ export default async function EarningsDeepDive({ params }: { params: Promise<{ t
             See the full {preview.company} deep-dive →
           </Link>
         )}
+
+        <p className="mt-8 pt-4 border-t border-gray-100 text-[11px] text-gray-400 leading-relaxed max-w-3xl">
+          Built from line-item consensus and analyst preview notes, the options-implied move, the prior quarter&apos;s
+          guidance, end-market memory-pricing data, and industry discussion (incl. The Circuit) — synthesized into what
+          the sell-side is actually watching. Editorial analysis, not investment advice; figures are approximate and
+          confirmed against filings where possible.
+        </p>
       </div>
     </div>
   );

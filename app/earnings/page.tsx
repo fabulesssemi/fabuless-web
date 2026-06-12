@@ -31,7 +31,7 @@ export default async function Earnings() {
       {featured && featuredRow && (
         <Link
           href={`/earnings/${featured.ticker.toLowerCase()}`}
-          className="group block mb-8 rounded-2xl bg-[#F3F4F6] border border-gray-200 overflow-hidden hover:border-amber-300 transition-all"
+          className="group block mb-8 rounded-2xl bg-[#F3F4F6] border-2 border-amber-400 overflow-hidden hover:border-amber-500 transition-all"
         >
           <div className="p-5 sm:p-6">
             <div className="flex items-center gap-2.5 mb-2">

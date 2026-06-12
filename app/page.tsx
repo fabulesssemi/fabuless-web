@@ -49,17 +49,21 @@ export default async function Home() {
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-6 pb-4">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#B45309] mb-2">
-          Every Friday
-        </p>
-        <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-2 max-w-xl">
-          Your weekly edge on the semiconductor market.
-        </h1>
-        <p className="font-serif text-[15px] text-[#4a4a4a] max-w-lg leading-relaxed mb-4">
-          Chips power every AI model, every smartphone, every data center. We track the stories that move markets.
-        </p>
-        <SubscribeForm />
+      <section className="pt-6 pb-4 flex items-start justify-between gap-8">
+        <div className="max-w-xl">
+          <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-2">
+            Semiconductor intelligence for serious investors.
+          </h1>
+          <p className="font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
+            Supply chain dynamics, expert track records, analyst consensus, and the companies that matter — all in one place.
+          </p>
+        </div>
+        <div className="shrink-0 text-right hidden sm:block">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">
+            Every Friday
+          </p>
+          <SubscribeForm compact />
+        </div>
       </section>
 
       {/* Latest issue header — above Top Stories */}

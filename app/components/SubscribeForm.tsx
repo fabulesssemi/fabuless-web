@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export function SubscribeForm() {
+export function SubscribeForm({ compact }: { compact?: boolean }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
 
@@ -30,7 +30,7 @@ export function SubscribeForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm">
+      <form onSubmit={handleSubmit} className={`flex gap-2 ${compact ? "" : "max-w-sm"}`}>
         <input
           type="email"
           placeholder="your@email.com"

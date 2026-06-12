@@ -52,7 +52,7 @@ export default function RootLayout({
                 <Link href="/companies" className="hover:text-amber-400 transition-colors">Companies</Link>
                 <Link href="/lenses" className="hover:text-amber-400 transition-colors">Lenses</Link>
                 <Link href="/tracker" className="hover:text-amber-400 transition-colors">Tracker</Link>
-                <Link href="/analyst-consensus" className="hover:text-amber-400 transition-colors">Analysts</Link>
+                <Link href="/analysts" className="hover:text-amber-400 transition-colors">Analysts</Link>
                 <Link href="/supply-chain" className="hover:text-amber-400 transition-colors">Supply Chain</Link>
                 <div className="relative group">
                   <span className="cursor-default hover:text-amber-400 transition-colors py-4">More ▾</span>

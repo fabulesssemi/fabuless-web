@@ -48,7 +48,7 @@ async function fetchAnalystCoverageRaw(): Promise<AnalystWithCoverage[]> {
   // Fetch upgrade/downgrade history for every ticker in parallel
   const results = await Promise.allSettled(
     tickers.map((t) =>
-      yf.quoteSummary(t, { modules: ["upgradeDowngradeHistory"], moduleOptions: { validateResult: false } } as any).then((r: any) => ({
+      yf.quoteSummary(t, { modules: ["upgradeDowngradeHistory"] }).then((r: any) => ({
         ticker: t,
         history: (r.upgradeDowngradeHistory?.history ?? []) as Array<{
           epochGradeDate: Date;

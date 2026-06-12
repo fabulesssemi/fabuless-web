@@ -31,7 +31,7 @@ export function Countdown({ iso }: { iso: string }) {
 
   const cell = (val: number, label: string) => (
     <div className="flex flex-col items-center">
-      <span className="font-mono text-2xl font-bold text-white tabular-nums leading-none">
+      <span className="font-mono text-2xl font-bold text-[#111827] tabular-nums leading-none">
         {String(val).padStart(2, "0")}
       </span>
       <span className="text-[9px] uppercase tracking-widest text-gray-500 mt-1">{label}</span>

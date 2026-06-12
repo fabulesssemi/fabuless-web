@@ -71,49 +71,45 @@ export default async function EarningsDeepDive({ params }: { params: Promise<{ t
 
   return (
     <div>
-      {/* ── IMMERSIVE DARK HERO — "another dimension" ── */}
-      <div className="bg-[#0B0E14] text-white">
-        <div className="max-w-5xl mx-auto px-6 pt-5 pb-10">
-          <Link
-            href="/earnings"
-            className="inline-flex items-center gap-1.5 text-[12px] font-medium text-gray-400 hover:text-white transition-colors"
-          >
-            ← All upcoming earnings
-          </Link>
+      {/* ── HEADER ── */}
+      <div className="max-w-5xl mx-auto px-6 pt-6 pb-4 border-b border-gray-200">
+        <Link
+          href="/earnings"
+          className="inline-flex items-center gap-1.5 text-[12px] font-medium text-gray-400 hover:text-[#B45309] transition-colors"
+        >
+          ← All upcoming earnings
+        </Link>
 
-          <div className="mt-7 flex items-start justify-between gap-8 flex-wrap">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-bold text-amber-400">{preview.ticker}</span>
-                <span className="text-[11px] uppercase tracking-widest text-gray-500">{preview.fiscalQuarter}</span>
-              </div>
-              <h1 className="font-sans text-[34px] font-bold tracking-tight leading-none mt-1.5">
-                {preview.company}
-              </h1>
-              <div className="text-[13px] text-gray-400 mt-2">
-                {fmtDate(preview.reportDate)} · {preview.reportTime}
-              </div>
+        <div className="mt-4 flex items-start justify-between gap-8 flex-wrap">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2.5">
+              <span className="font-mono text-[12px] font-bold text-amber-700">{preview.ticker}</span>
+              <span className="text-[11px] uppercase tracking-widest text-gray-400">{preview.fiscalQuarter}</span>
             </div>
-
-            {!hasVerdict && (
-              <div className="shrink-0">
-                <div className="text-[9px] uppercase tracking-widest text-gray-500 mb-2">Reports in</div>
-                <Countdown iso={preview.reportDate} />
-              </div>
-            )}
+            <h1 className="font-sans text-[26px] font-bold tracking-tight leading-none mt-1 text-[#111827]">
+              {preview.company}
+            </h1>
+            <div className="text-[12px] text-gray-400 mt-1">
+              {fmtDate(preview.reportDate)} · {preview.reportTime}
+            </div>
           </div>
 
-          {/* Central question — the frame */}
-          <div className="mt-8 border-l-2 border-amber-400 pl-5">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-1.5">The question</div>
-            <p className="font-serif text-[19px] text-gray-100 leading-relaxed">
-              {preview.centralQuestion}
-            </p>
-          </div>
+          {!hasVerdict && (
+            <div className="shrink-0">
+              <div className="text-[9px] uppercase tracking-widest text-gray-400 mb-1.5">Reports in</div>
+              <Countdown iso={preview.reportDate} />
+            </div>
+          )}
+        </div>
+
+        <div className="mt-4 border-l-2 border-amber-400 pl-4">
+          <p className="font-serif text-[15px] text-gray-600 leading-relaxed">
+            {preview.centralQuestion}
+          </p>
         </div>
       </div>
 
-      {/* ── BODY (light) ── */}
+      {/* ── BODY ── */}
       <div className="max-w-5xl mx-auto px-6 py-10">
 
         {/* Setup */}

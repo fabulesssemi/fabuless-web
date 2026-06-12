@@ -76,8 +76,8 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
   const gaugeColor = bullPct >= 60 ? "#059669" : bullPct >= 40 ? "#D97706" : "#E11D48";
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
-      <div className="mb-6">
+    <div className="max-w-6xl mx-auto px-6 pt-5 pb-10">
+      <div className="mb-3">
         <Link href="/analysts" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
           ← All Analysts
         </Link>

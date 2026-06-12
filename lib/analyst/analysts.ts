@@ -1,6 +1,7 @@
 import { unstable_cache } from "next/cache";
 import YahooFinance from "yahoo-finance2";
 import { COMPANY_UNIVERSE } from "@/lib/companies";
+import priceTargets from "./price-targets.json";
 
 const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
 
@@ -22,9 +23,8 @@ export const WALL_STREET_ANALYSTS: WallStreetAnalyst[] = [
   { id: "lu",      name: "C.J. Muse",       firm: "Cantor Fitzgerald",   firmDisplay: "Cantor Fitzgerald",    title: "Senior Analyst",    knownFor: "ASML, litho equipment — EUV cycle and wafer starts",            accent: "#1F618D" },
   { id: "lurie",   name: "Chris Caso",      firm: "Wolfe Research",      firmDisplay: "Wolfe Research",       title: "Managing Director", knownFor: "QCOM, INTC — mobile/PC cycle and foundry strategy",             accent: "#784212" },
   { id: "mcneill", name: "Harlan Sur",      firm: "JP Morgan",           firmDisplay: "JP Morgan",            title: "Managing Director", knownFor: "Broad semi coverage — MRVL, AVGO, NVDA",                       accent: "#17202A" },
-  { id: "pitzer",  name: "Matt Ramsay",     firm: "TD Cowen",            firmDisplay: "TD Cowen",             title: "Managing Director", knownFor: "AMD deep-dive — Instinct MI series vs NVDA competitive calls",  accent: "#0E6655" },
-  { id: "egan",    name: "Timothy Arcuri",  firm: "UBS",                 firmDisplay: "UBS",                  title: "Managing Director", knownFor: "TSM, ASML — leading-edge fab economics and capex cycles",       accent: "#1A5276" },
-  { id: "mehdi",   name: "Toshiya Hari",    firm: "Goldman Sachs",       firmDisplay: "Goldman Sachs",        title: "Managing Director", knownFor: "NVDA, ARM — data center and edge AI silicon",                   accent: "#2874A6" },
+  { id: "egan",      name: "Timothy Arcuri",   firm: "UBS",      firmDisplay: "UBS",      title: "Managing Director", knownFor: "TSM, ASML — leading-edge fab economics and capex cycles",    accent: "#1A5276" },
+  { id: "omalley",  name: "Thomas O'Malley", firm: "Barclays", firmDisplay: "Barclays", title: "Managing Director", knownFor: "Semiconductor coverage — Barclays equity research",           accent: "#00AEEF" },
 ];
 
 export interface AnalystCoverage {
@@ -55,90 +55,83 @@ export function actionLabel(action: string): string {
   return ACTION_LABEL[action] ?? "Assigned";
 }
 
-// Broad semiconductor + adjacent universe for analyst coverage lookup
-const COVERAGE_UNIVERSE = [
-  // Core semi
-  "NVDA","AMD","AVGO","MRVL","TSM","ASML","ARM","MU","INTC","QCOM",
-  // Equipment
-  "AMAT","LRCX","KLAC","ENTG","MKSI","ACLS","ICHR","ONTO","FORM","COHU",
-  // Analog / mixed-signal
-  "TXN","ADI","MCHP","ON","MPWR","SLAB","SWKS","QRVO","CRUS","MTSI",
-  // EDA / IP
-  "SNPS","CDNS",
-  // Test & measurement
-  "TER","KEYS",
-  // Memory adjacents
-  "WOLF","AMKR","ASX",
-];
+// Build a merged name map: start from COMPANY_UNIVERSE then overlay curated names.
+// Curated names win so we always display the correct full company name.
+const _universeNames = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.name]));
+const _CURATED: Record<string, string> = {
+  NVDA: "NVIDIA", MU:   "Micron", ARM:  "Arm Holdings", QCOM: "Qualcomm",
+  INTC: "Intel",  AVGO: "Broadcom", MRVL: "Marvell",
+  AMD:  "Advanced Micro Devices", ADI:  "Analog Devices", AMBA: "Ambarella",
+  SNPS: "Synopsys", CDNS: "Cadence Design", TXN:  "Texas Instruments",
+  ON:   "ON Semiconductor", AMAT: "Applied Materials", MCHP: "Microchip Technology",
+  GFS:  "GlobalFoundries", KLAC: "KLA Corporation", TER:  "Teradyne",
+  NXPI: "NXP Semiconductors", LRCX: "Lam Research", SWKS: "Skyworks Solutions",
+  CRDO: "Credo Technology", ALAB: "Astera Labs", LITE: "Lumentum",
+  MTSI: "MACOM Technology", COHR: "Coherent Corp", NVMI: "Nova",
+  MKSI: "MKS Instruments", CAMT: "Camtek", CBRS: "Cerebras Systems",
+  SNDK: "SanDisk", SMTC: "Semtech", IONQ: "IonQ",
+  NVTS: "Navitas Semiconductor", AMKR: "Amkor Technology", QRVO: "Qorvo",
+  ALGM: "Allegro MicroSystems", AEVA: "Aeva Technologies",
+  ASML: "ASML", TSM: "TSMC",
+  WDC:  "Western Digital", STX:  "Seagate Technology",
+  ENTG: "Entegris", SITM: "SiTime", UCTT: "Ultra Clean Holdings",
+  PI:   "Impinj", AMBQ: "Ambiq Micro",
+};
+
+function companyName(ticker: string): string {
+  return _CURATED[ticker] ?? _universeNames.get(ticker) ?? ticker;
+}
 
 async function fetchAnalystCoverageRaw(): Promise<AnalystWithCoverage[]> {
-  const tickers = COVERAGE_UNIVERSE;
-  // Name map: prefer COMPANY_UNIVERSE names, fall back to ticker
-  const nameByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.name]));
-  const STALE_CUTOFF = new Date(Date.now() - 18 * 30 * 24 * 60 * 60 * 1000);
+  // Collect unique tickers across all manual entries
+  const uniqueTickers = [...new Set(priceTargets.targets.map((t) => t.ticker))];
 
-  // Fetch history + current price for every ticker in parallel
-  const results = await Promise.allSettled(
-    tickers.map((t) =>
-      yf.quoteSummary(t, { modules: ["upgradeDowngradeHistory", "financialData"] }).then((r: any) => ({
-        ticker: t,
+  // Fetch only current price — no upgradeDowngradeHistory needed
+  const priceResults = await Promise.allSettled(
+    uniqueTickers.map((ticker) =>
+      yf.quoteSummary(ticker, { modules: ["financialData"] }).then((r: any) => ({
+        ticker,
         currentPrice: (r.financialData?.currentPrice ?? null) as number | null,
-        history: (r.upgradeDowngradeHistory?.history ?? []) as Array<{
-          epochGradeDate: Date;
-          firm: string;
-          toGrade: string;
-          currentPriceTarget?: number;
-          action: string;
-        }>,
       }))
     )
   );
 
-  const byFirm = new Map<string, Map<string, AnalystCoverage>>();
   const currentPrices = new Map<string, number | null>();
-
-  for (const result of results) {
-    if (result.status !== "fulfilled") continue;
-    const { ticker, currentPrice, history } = result.value;
-    currentPrices.set(ticker, currentPrice);
-    const companyName = nameByTicker.get(ticker) ?? ticker;
-
-    for (const entry of history) {
-      if (!entry.firm || !entry.toGrade) continue;
-      if (entry.epochGradeDate && new Date(entry.epochGradeDate) < STALE_CUTOFF) continue;
-      if (!byFirm.has(entry.firm)) byFirm.set(entry.firm, new Map());
-      const firmMap = byFirm.get(entry.firm)!;
-      if (!firmMap.has(ticker)) {
-        const pt = entry.currentPriceTarget ?? null;
-        const cp = currentPrice;
-        const upside = pt && cp ? Math.round(((pt - cp) / cp) * 1000) / 10 : null;
-        firmMap.set(ticker, {
-          ticker,
-          name: companyName,
-          rating: entry.toGrade,
-          priceTarget: pt,
-          currentPrice: cp,
-          upsidePct: upside,
-          priceTargetDate: entry.epochGradeDate
-            ? new Date(entry.epochGradeDate).toISOString().slice(0, 10)
-            : null,
-          action: entry.action,
-        });
-      }
+  for (const result of priceResults) {
+    if (result.status === "fulfilled") {
+      currentPrices.set(result.value.ticker, result.value.currentPrice);
     }
   }
 
-  return WALL_STREET_ANALYSTS.map((analyst) => ({
-    ...analyst,
-    coverage: Array.from(byFirm.get(analyst.firm)?.values() ?? []).sort((a, b) => {
-      // Sort by date descending
+  return WALL_STREET_ANALYSTS.map((analyst) => {
+    const entries = priceTargets.targets.filter((t) => t.analyst === analyst.id);
+    const coverage: AnalystCoverage[] = entries.map((entry) => {
+      const pt = entry.priceTarget;
+      const cp = currentPrices.get(entry.ticker) ?? null;
+      const upsidePct = pt && cp ? Math.round(((pt - cp) / cp) * 1000) / 10 : null;
+      return {
+        ticker: entry.ticker,
+        name: companyName(entry.ticker),
+        rating: entry.rating,
+        priceTarget: pt,
+        currentPrice: cp,
+        upsidePct,
+        priceTargetDate: entry.date,
+        action: entry.action,
+      };
+    });
+
+    // Sort by date descending
+    coverage.sort((a, b) => {
       if (!a.priceTargetDate) return 1;
       if (!b.priceTargetDate) return -1;
       return b.priceTargetDate.localeCompare(a.priceTargetDate);
-    }),
-  }));
+    });
+
+    return { ...analyst, coverage };
+  });
 }
 
-export const fetchAnalystCoverage = unstable_cache(fetchAnalystCoverageRaw, ["analyst-coverage"], {
+export const fetchAnalystCoverage = unstable_cache(fetchAnalystCoverageRaw, ["analyst-coverage-v4"], {
   revalidate: 3600,
 });

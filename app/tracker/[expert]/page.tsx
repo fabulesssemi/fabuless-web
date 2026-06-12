@@ -158,39 +158,39 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
 
   return (
     <div>
-      {/* ── Hero ── */}
-      <div className="bg-[#0B0E14] text-white">
-        <div className="max-w-5xl mx-auto px-6 pt-5 pb-9">
-          <Link href="/tracker" className="inline-flex items-center gap-1.5 text-[12px] font-medium text-gray-400 hover:text-white transition-colors">
+      {/* ── Header ── */}
+      <div className="border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-6 pt-6 pb-5">
+          <Link href="/tracker" className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#B45309] border border-amber-200 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded transition-colors">
             ← Prediction Tracker
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-end justify-between gap-8">
+          <div className="mt-5 flex flex-wrap items-end justify-between gap-8">
             <div>
               <div className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: meta.accent }} />
                 <span className="text-[11px] uppercase tracking-widest text-gray-400">{meta.subtitle}</span>
               </div>
-              <h1 className="font-sans text-[34px] font-bold tracking-tight leading-none mt-2">{meta.name}</h1>
-              <div className="text-[13px] text-gray-400 mt-2.5">
+              <h1 className="font-sans text-[28px] font-bold tracking-tight leading-none mt-1.5 text-[#111827]">{meta.name}</h1>
+              <div className="text-[12px] text-gray-400 mt-1.5">
                 {stats.total} predictions tracked · {stats.dateRange} · {stats.sourceCount} sources
               </div>
             </div>
 
             <div className="flex items-center gap-8">
               <div className="text-right">
-                <div className="font-mono text-[44px] font-bold leading-none text-white tabular-nums">
+                <div className="font-mono text-[40px] font-bold leading-none text-[#111827] tabular-nums">
                   {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
                 </div>
-                <div className="text-[10px] uppercase tracking-widest text-gray-500 mt-1.5">
+                <div className="text-[10px] uppercase tracking-widest text-gray-400 mt-1.5">
                   accurate · {stats.resolved} resolved
                 </div>
               </div>
               <div className="flex flex-col gap-1.5 text-[12px] tabular-nums">
-                <span className="text-emerald-400 font-semibold">{stats.correct} correct</span>
-                <span className="text-amber-400 font-semibold">{stats.partial} partial</span>
-                <span className="text-rose-400 font-semibold">{stats.wrong} wrong</span>
-                <span className="text-gray-500 font-semibold">{stats.tooEarly} open</span>
+                <span className="text-emerald-600 font-semibold">{stats.correct} correct</span>
+                <span className="text-amber-600 font-semibold">{stats.partial} partial</span>
+                <span className="text-rose-600 font-semibold">{stats.wrong} wrong</span>
+                <span className="text-gray-400 font-semibold">{stats.tooEarly} open</span>
               </div>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
             href={tweetHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 border border-gray-700 hover:border-gray-500 text-[12px] font-semibold text-gray-300 hover:text-white px-3.5 py-2 rounded transition-colors"
+            className="mt-4 inline-flex items-center gap-2 border border-gray-200 hover:border-gray-400 text-[12px] font-semibold text-gray-500 hover:text-gray-700 px-3.5 py-2 rounded transition-colors"
           >
             <span className="font-bold">𝕏</span> Share this scorecard
           </a>

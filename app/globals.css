@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F4F3EC;
+  --background: #FFFFFF;
   --foreground: #111111;
   --accent: #B45309;
-  --grid-line: #E8E6DC;
+  --grid-line: rgba(0,0,0,0.018);
   --panel-border: #DDDBD2;
 }
 
@@ -21,6 +21,7 @@ body {
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-attachment: local;
   background-size: 24px 24px;
   color: var(--foreground);
 }

@@ -50,7 +50,7 @@ function Gauge({ pct, color }: { pct: number; color: string }) {
         transform="rotate(-90 48 48)"
       />
       <text x="48" y="44" textAnchor="middle" fontSize="15" fontWeight="700" fill="#111827">{pct}%</text>
-      <text x="48" y="58" textAnchor="middle" fontSize="9" fill="#9CA3AF" fontWeight="600" letterSpacing="0.5">BULL RATE</text>
+      <text x="48" y="58" textAnchor="middle" fontSize="9" fill="#9CA3AF" fontWeight="600" letterSpacing="0.5">% BUY RATED</text>
     </svg>
   );
 }

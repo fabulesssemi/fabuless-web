@@ -31,27 +31,27 @@ export default async function Earnings() {
       {featured && featuredRow && (
         <Link
           href={`/earnings/${featured.ticker.toLowerCase()}`}
-          className="group block mb-8 rounded-2xl bg-[#111827] text-white overflow-hidden hover:ring-2 hover:ring-amber-400/50 transition-all"
+          className="group block mb-8 rounded-2xl bg-[#F3F4F6] border border-gray-200 overflow-hidden hover:border-amber-300 transition-all"
         >
           <div className="p-5 sm:p-6">
             <div className="flex items-center gap-2.5 mb-2">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">Next up</span>
-              <span className="text-[10px] uppercase tracking-widest text-gray-500">· {featuredRow.date}</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-amber-700">Next up</span>
+              <span className="text-[10px] uppercase tracking-widest text-gray-400">· {featuredRow.date}</span>
             </div>
             <div className="flex items-center justify-between gap-6 flex-wrap">
               <div className="min-w-0">
                 <div className="flex items-center gap-2.5">
-                  <span className="font-mono text-[12px] font-bold text-amber-400">{featured.ticker}</span>
-                  <span className="text-[11px] uppercase tracking-widest text-gray-500">{featured.fiscalQuarter}</span>
-                  <h2 className="font-sans text-[20px] font-bold tracking-tight leading-none">
+                  <span className="font-mono text-[12px] font-bold text-amber-700">{featured.ticker}</span>
+                  <span className="text-[11px] uppercase tracking-widest text-gray-400">{featured.fiscalQuarter}</span>
+                  <h2 className="font-sans text-[20px] font-bold tracking-tight leading-none text-[#111827]">
                     {featured.company}
                   </h2>
                 </div>
-                <p className="font-serif text-[13px] text-gray-400 leading-snug mt-2 max-w-2xl">
+                <p className="font-serif text-[13px] text-gray-500 leading-snug mt-2 max-w-2xl">
                   {featured.centralQuestion}
                 </p>
               </div>
-              <span className="shrink-0 inline-flex items-center gap-2 text-[13px] font-semibold text-amber-400 group-hover:gap-3 transition-all">
+              <span className="shrink-0 inline-flex items-center gap-2 text-[13px] font-semibold text-amber-700 group-hover:gap-3 transition-all">
                 Enter the deep dive →
               </span>
             </div>

@@ -1,9 +1,17 @@
+import Link from "next/link";
 import { getUpcomingEarnings } from "@/lib/earnings";
+import { getPreview, tickersWithPreview } from "@/lib/earnings/previews";
 
 export const revalidate = 3600; // ISR — refreshes hourly
 
+const PREVIEW_TICKERS = new Set(tickersWithPreview());
+
 export default async function Earnings() {
   const earnings = await getUpcomingEarnings();
+
+  // The "portal": the soonest upcoming earner that has a published deep-dive.
+  const featuredRow = earnings.find((r) => PREVIEW_TICKERS.has(r.ticker));
+  const featured = featuredRow ? getPreview(featuredRow.ticker) : null;
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
@@ -18,6 +26,38 @@ export default async function Earnings() {
           </p>
         </div>
       </div>
+
+      {/* ── NEXT-UP PORTAL — pulls you into the deep dive ── */}
+      {featured && featuredRow && (
+        <Link
+          href={`/earnings/${featured.ticker.toLowerCase()}`}
+          className="group block mb-8 rounded-2xl bg-[#0B0E14] text-white overflow-hidden hover:ring-2 hover:ring-amber-400/50 transition-all"
+        >
+          <div className="p-7 sm:p-8">
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">Next up</span>
+              <span className="text-[10px] uppercase tracking-widest text-gray-500">· {featuredRow.date}</span>
+            </div>
+            <div className="flex items-end justify-between gap-6 flex-wrap">
+              <div className="min-w-0">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[13px] font-bold text-amber-400">{featured.ticker}</span>
+                  <span className="text-[11px] uppercase tracking-widest text-gray-500">{featured.fiscalQuarter}</span>
+                </div>
+                <h2 className="font-sans text-[30px] font-bold tracking-tight leading-none mt-1.5">
+                  {featured.company}
+                </h2>
+                <p className="font-serif text-[15px] text-gray-300 leading-relaxed mt-3 max-w-2xl">
+                  {featured.centralQuestion}
+                </p>
+              </div>
+              <span className="shrink-0 inline-flex items-center gap-2 text-[13px] font-semibold text-amber-400 group-hover:gap-3 transition-all">
+                Enter the deep dive →
+              </span>
+            </div>
+          </div>
+        </Link>
+      )}
 
       {earnings.length === 0 ? (
         <p className="text-[13px] text-gray-400 italic">No earnings reports in the next 6 weeks.</p>
@@ -51,8 +91,18 @@ export default async function Earnings() {
                 >
                   <td className="px-4 py-3 text-[13px] text-gray-400 whitespace-nowrap">{row.date}</td>
                   <td className="px-4 py-3">
-                    <span className="text-[13px] font-semibold text-[#111827]">{row.company}</span>
-                    <span className="ml-2 text-[11px] text-gray-400">{row.ticker}</span>
+                    {PREVIEW_TICKERS.has(row.ticker) ? (
+                      <Link href={`/earnings/${row.ticker.toLowerCase()}`} className="group inline-flex items-center gap-2">
+                        <span className="text-[13px] font-semibold text-[#B45309] group-hover:underline">{row.company}</span>
+                        <span className="text-[11px] text-gray-400">{row.ticker}</span>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5">Deep dive</span>
+                      </Link>
+                    ) : (
+                      <>
+                        <span className="text-[13px] font-semibold text-[#111827]">{row.company}</span>
+                        <span className="ml-2 text-[11px] text-gray-400">{row.ticker}</span>
+                      </>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-[13px] text-gray-700">{row.eps}</td>
                   <td className={`px-4 py-3 text-[13px] font-semibold ${row.avgMove.startsWith("+") ? "text-emerald-600" : "text-rose-500"}`}>

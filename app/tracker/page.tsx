@@ -48,7 +48,7 @@ export default function TrackerPage() {
             Prediction Tracker
           </h1>
           <span className="font-serif text-[15px] text-[#4a4a4a]">
-            Tracking who gets it right — verbatim predictions, sources, and verdicts across the semiconductor industry's most followed voices.
+            Every prediction on record. Every verdict public. See who called it and who missed.
           </span>
         </div>
         <Link href="/tracker/methodology" className="text-[12px] text-[#B45309] font-semibold hover:underline shrink-0">

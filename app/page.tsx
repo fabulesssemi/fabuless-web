@@ -52,7 +52,7 @@ export default async function Home() {
       <section className="pt-6 pb-4 flex items-start justify-between gap-8">
         <div className="max-w-xl">
           <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-2">
-            Semiconductor intelligence for serious investors.
+            Semiconductor intelligence for the curious investor.
           </h1>
           <p className="font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
             Supply chain dynamics, expert track records, analyst consensus, and the companies that matter — all in one place.

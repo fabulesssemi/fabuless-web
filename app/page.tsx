@@ -46,11 +46,20 @@ export default async function Home() {
     .filter((s) => s.stories.length > 0);
   const restIssue = { ...latestIssue, sections: restSections, podcasts: [] };
 
+  const TILES = [
+    { href: "/tracker",      label: "Prediction Tracker", desc: "Who called it. Who missed. Every verdict public.",      accent: "#B45309" },
+    { href: "/earnings",     label: "Earnings Calendar",  desc: "Deep-dives on upcoming semi earnings reports.",         accent: "#059669" },
+    { href: "/companies",    label: "Companies",          desc: "Coverage universe — prices, ratings, analyst targets.", accent: "#1D4ED8" },
+    { href: "/lenses",       label: "Expert Lenses",      desc: "Ask Dylan, Baker, or The Circuit anything.",            accent: "#9A3412" },
+    { href: "/analysts",     label: "Analysts",           desc: "TipRanks-style scorecards for top semi analysts.",      accent: "#065F46" },
+    { href: "/supply-chain", label: "Supply Chain Web",   desc: "Interactive map of every critical chokepoint.",         accent: "#0F4C81" },
+  ];
+
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-7 pb-6 border-b border-gray-200">
-        <div className="flex items-start justify-between gap-8 mb-6">
+      <section className="pt-7 pb-5 border-b border-gray-200">
+        <div className="flex items-start justify-between gap-8">
           <div>
             <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-1">
               Semiconductor intelligence for the curious investor.
@@ -64,32 +73,52 @@ export default async function Home() {
             <SubscribeForm compact />
           </div>
         </div>
+      </section>
 
-        {/* Platform tiles */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {[
-            { href: "/tracker",      label: "Prediction Tracker",   desc: "Who called it. Who missed. Every verdict public.",         accent: "#B45309" },
-            { href: "/earnings",     label: "Earnings Calendar",     desc: "Deep-dives on upcoming semi earnings reports.",            accent: "#059669" },
-            { href: "/companies",    label: "Companies",             desc: "Coverage universe — prices, ratings, analyst targets.",    accent: "#1D4ED8" },
-            { href: "/lenses",       label: "Expert Lenses",         desc: "Ask Dylan, Baker, or The Circuit anything.",               accent: "#9A3412" },
-            { href: "/analysts",     label: "Analysts",              desc: "TipRanks-style scorecards for top semi analysts.",         accent: "#065F46" },
-            { href: "/supply-chain", label: "Supply Chain Web",      desc: "Interactive map of every critical chokepoint.",            accent: "#0F4C81" },
-          ].map((tile) => (
+      {/* Two-column: explore rail left, content right */}
+      <div className="lg:flex lg:gap-10">
+        {/* Explore rail — sticky vertical stack */}
+        <aside className="hidden lg:block w-56 shrink-0 pt-7">
+          <div className="sticky top-6">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Explore</div>
+            <div className="flex flex-col gap-2.5">
+              {TILES.map((tile) => (
+                <a
+                  key={tile.href}
+                  href={tile.href}
+                  className="group block rounded-lg border border-gray-100 bg-white py-3 pr-3 pl-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all relative overflow-hidden"
+                >
+                  <span className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ backgroundColor: tile.accent }} />
+                  <div className="text-[11px] font-bold uppercase tracking-wider mb-0.5" style={{ color: tile.accent }}>
+                    {tile.label}
+                  </div>
+                  <div className="text-[11px] text-gray-500 leading-snug group-hover:text-gray-700 transition-colors">
+                    {tile.desc}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        {/* Mobile: compact tile grid */}
+        <div className="lg:hidden grid grid-cols-2 gap-2.5 pt-6">
+          {TILES.map((tile) => (
             <a
               key={tile.href}
               href={tile.href}
-              className="group block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all"
+              className="block rounded-lg border border-gray-100 bg-white p-3 shadow-sm relative overflow-hidden"
             >
-              <div className="text-[11px] font-bold uppercase tracking-wider mb-1" style={{ color: tile.accent }}>
+              <span className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ backgroundColor: tile.accent }} />
+              <div className="text-[11px] font-bold uppercase tracking-wider pl-1" style={{ color: tile.accent }}>
                 {tile.label}
-              </div>
-              <div className="text-[12px] text-gray-500 leading-snug group-hover:text-gray-700 transition-colors">
-                {tile.desc}
               </div>
             </a>
           ))}
         </div>
-      </section>
+
+        {/* Main content column */}
+        <div className="flex-1 min-w-0">
 
       {/* Latest issue header — above Top Stories */}
       <section className="pt-7 pb-0">
@@ -245,6 +274,9 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+        </div>
+      </div>
     </div>
   );
 }

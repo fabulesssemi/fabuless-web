@@ -93,14 +93,6 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
           <div className="h-1 w-full" style={{ backgroundColor: analyst.accent }} />
 
           <div className="p-7 flex flex-col items-center text-center">
-            {/* Avatar */}
-            <div
-              className="w-20 h-20 rounded-full flex items-center justify-center text-white text-[22px] font-bold mb-4"
-              style={{ backgroundColor: analyst.accent }}
-            >
-              {analyst.name.split(" ").map((n) => n[0]).join("")}
-            </div>
-
             {/* Name + firm */}
             <h1 className="text-[18px] font-bold text-[#111827] tracking-tight leading-tight">
               {analyst.name}

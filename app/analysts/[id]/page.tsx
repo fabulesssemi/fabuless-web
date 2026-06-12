@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchAnalystCoverage, WALL_STREET_ANALYSTS } from "@/lib/analyst/analysts";
+import { fetchAnalystCoverage, WALL_STREET_ANALYSTS, actionLabel } from "@/lib/analyst/analysts";
 import { COMPANY_UNIVERSE } from "@/lib/companies";
 
 export const revalidate = 3600;
@@ -18,29 +18,23 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-const RATING_COLOR: Record<string, string> = {
-  "Buy": "text-emerald-600",
-  "Strong Buy": "text-emerald-700",
-  "Outperform": "text-emerald-600",
-  "Overweight": "text-emerald-600",
-  "Hold": "text-gray-500",
-  "Neutral": "text-gray-500",
-  "Equal-Weight": "text-gray-500",
-  "Market Perform": "text-gray-500",
-  "Underperform": "text-rose-500",
-  "Underweight": "text-rose-500",
-  "Sell": "text-rose-500",
-};
+const BULL_RATINGS = new Set(["Buy", "Strong Buy", "Outperform", "Overweight", "Positive"]);
+const BEAR_RATINGS = new Set(["Sell", "Underperform", "Underweight", "Negative"]);
 
-function ratingColor(r: string): string {
-  return RATING_COLOR[r] ?? "text-gray-600";
+function ratingStyle(r: string) {
+  if (BULL_RATINGS.has(r)) return { text: "text-emerald-700", bg: "bg-emerald-50", border: "border-emerald-200" };
+  if (BEAR_RATINGS.has(r)) return { text: "text-rose-600",   bg: "bg-rose-50",    border: "border-rose-200"   };
+  return                          { text: "text-gray-500",    bg: "bg-gray-50",    border: "border-gray-200"   };
 }
 
-function actionLabel(action: string): { text: string; color: string } | null {
-  if (action === "up")   return { text: "Upgraded",   color: "text-emerald-600 bg-emerald-50" };
-  if (action === "down") return { text: "Downgraded", color: "text-rose-500 bg-rose-50" };
-  if (action === "init") return { text: "Initiated",  color: "text-blue-600 bg-blue-50" };
-  return null;
+function upsideColor(pct: number | null) {
+  if (pct === null) return "text-gray-300";
+  return pct > 0 ? "text-emerald-600" : "text-rose-500";
+}
+
+function fmtDate(iso: string | null) {
+  if (!iso) return "—";
+  return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
 export default async function AnalystPage({ params }: { params: Promise<{ id: string }> }) {
@@ -49,105 +43,144 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
   const analyst = all.find((a) => a.id === id);
   if (!analyst) notFound();
 
-  const bullCount = analyst.coverage.filter((c) =>
-    ["Buy", "Strong Buy", "Outperform", "Overweight"].includes(c.rating)
-  ).length;
-  const bearCount = analyst.coverage.filter((c) =>
-    ["Sell", "Underperform", "Underweight"].includes(c.rating)
-  ).length;
+  const bull    = analyst.coverage.filter((c) => BULL_RATINGS.has(c.rating)).length;
+  const bear    = analyst.coverage.filter((c) => BEAR_RATINGS.has(c.rating)).length;
+  const neutral = analyst.coverage.length - bull - bear;
+  const upsideVals = analyst.coverage.map((c) => c.upsidePct).filter((v): v is number => v !== null);
+  const avgUpside  = upsideVals.length ? Math.round((upsideVals.reduce((a, b) => a + b, 0) / upsideVals.length) * 10) / 10 : null;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10">
-      <div className="mb-2">
-        <Link href="/analyst-consensus" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
-          ← Analyst Consensus
+    <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="mb-4">
+        <Link href="/analysts" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
+          ← All Analysts
         </Link>
       </div>
 
-      {/* Header */}
-      <div className="border-b border-gray-200 pb-5 mb-8">
-        <div className="flex items-start gap-4">
+      {/* Header card */}
+      <div className="border border-gray-200 p-6 mb-8">
+        <div className="flex items-start gap-5 flex-wrap">
           <div
-            className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[13px] font-bold shrink-0 mt-0.5"
+            className="w-12 h-12 rounded-full flex items-center justify-center text-white text-[14px] font-bold shrink-0"
             style={{ backgroundColor: analyst.accent }}
           >
             {analyst.name.split(" ").map((n) => n[0]).join("")}
           </div>
           <div className="flex-1 min-w-0">
-            <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">{analyst.name}</h1>
-            <div className="text-[13px] text-gray-500 mt-0.5">{analyst.title} · {analyst.firmDisplay}</div>
-            <p className="text-[13px] text-[#4a4a4a] font-serif leading-relaxed mt-2 max-w-2xl">{analyst.knownFor}</p>
+            <div className="flex items-baseline gap-3 flex-wrap">
+              <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">{analyst.name}</h1>
+              <span className="text-[12px] text-gray-400">{analyst.title} · {analyst.firmDisplay}</span>
+            </div>
+            <p className="font-serif text-[14px] text-[#4a4a4a] leading-relaxed mt-1 max-w-2xl">{analyst.knownFor}</p>
           </div>
-          <div className="shrink-0 text-right hidden sm:flex flex-col gap-1">
-            <div className="flex items-baseline gap-1.5 justify-end">
-              <span className="text-lg font-bold text-emerald-600 tabular-nums">{bullCount}</span>
-              <span className="text-[10px] uppercase tracking-wider text-gray-400">bullish</span>
-            </div>
-            <div className="flex items-baseline gap-1.5 justify-end">
-              <span className="text-lg font-bold text-rose-500 tabular-nums">{bearCount}</span>
-              <span className="text-[10px] uppercase tracking-wider text-gray-400">bearish</span>
-            </div>
-            <div className="flex items-baseline gap-1.5 justify-end">
-              <span className="text-lg font-bold text-gray-400 tabular-nums">{analyst.coverage.length - bullCount - bearCount}</span>
-              <span className="text-[10px] uppercase tracking-wider text-gray-400">neutral</span>
-            </div>
+
+          {/* Stats strip */}
+          <div className="flex items-stretch border border-gray-200 divide-x divide-gray-200 shrink-0">
+            {[
+              { label: "Buys",       value: String(bull),    color: "text-emerald-600" },
+              { label: "Holds",      value: String(neutral), color: "text-gray-400"    },
+              { label: "Sells",      value: String(bear),    color: "text-rose-500"    },
+              { label: "Avg Upside", value: avgUpside !== null ? `${avgUpside > 0 ? "+" : ""}${avgUpside}%` : "—",
+                color: avgUpside !== null ? (avgUpside > 0 ? "text-emerald-600" : "text-rose-500") : "text-gray-400" },
+            ].map((s) => (
+              <div key={s.label} className="flex flex-col items-center justify-center px-5 py-3">
+                <span className={`text-[20px] font-bold tabular-nums leading-none ${s.color}`}>{s.value}</span>
+                <span className="text-[9px] uppercase tracking-wider text-gray-400 mt-1 whitespace-nowrap">{s.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Coverage grid */}
+      {/* Coverage table */}
       {analyst.coverage.length === 0 ? (
-        <p className="text-[13px] text-gray-400 italic">No recent coverage data available.</p>
+        <div className="border border-gray-100 p-10 text-center">
+          <p className="text-[13px] text-gray-400 italic">No recent coverage data available.</p>
+        </div>
       ) : (
-        <div className="grid sm:grid-cols-2 gap-3">
-          {analyst.coverage.map((c) => {
-            const slug = slugByTicker.get(c.ticker);
-            const action = actionLabel(c.action);
-            const card = (
-              <div
-                key={c.ticker}
-                className="border border-gray-100 p-4 hover:border-gray-300 hover:shadow-sm transition-all"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <div className="font-mono text-[10px] text-gray-400 leading-none">{c.ticker}</div>
-                    <div className="text-[14px] font-semibold text-gray-900 mt-0.5 leading-snug">{c.name}</div>
-                  </div>
-                  {action && (
-                    <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${action.color}`}>
-                      {action.text}
-                    </span>
-                  )}
-                </div>
-                <div className="mt-3 flex items-baseline justify-between">
-                  <span className={`text-[15px] font-bold ${ratingColor(c.rating)}`}>
-                    {c.rating}
-                  </span>
-                  {c.priceTarget && (
-                    <div className="text-right">
-                      <span className="text-[18px] font-bold text-gray-900 tabular-nums">
-                        ${c.priceTarget.toFixed(0)}
-                      </span>
-                      {c.priceTargetDate && (
-                        <div className="text-[10px] text-gray-400">
-                          {new Date(c.priceTargetDate + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+        <div className="border border-gray-200 overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-200 bg-[#FAFAF8]">
+                {["Company", "Date", "Rating", "Action", "Price Target", "Upside"].map((h, i) => (
+                  <th
+                    key={h}
+                    className={`px-5 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 ${i >= 5 ? "text-right hidden sm:table-cell" : i >= 4 ? "text-right" : "text-left"}`}
+                  >
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {analyst.coverage.map((c) => {
+                const slug = slugByTicker.get(c.ticker);
+                const rs   = ratingStyle(c.rating);
+                return (
+                  <tr key={c.ticker} className="border-b border-gray-50 last:border-0 hover:bg-[#FAFAF8] transition-colors">
+
+                    {/* Company */}
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-3">
+                        <span className="w-0.5 h-7 rounded-full shrink-0" style={{ backgroundColor: analyst.accent + "70" }} />
+                        <div>
+                          <div className="font-mono text-[10px] text-gray-400 leading-none">{c.ticker}</div>
+                          {slug ? (
+                            <Link href={`/companies/${slug}`} className="text-[13px] font-semibold text-[#111827] hover:text-[#B45309] transition-colors leading-snug mt-0.5 block">
+                              {c.name}
+                            </Link>
+                          ) : (
+                            <div className="text-[13px] font-semibold text-[#111827] leading-snug mt-0.5">{c.name}</div>
+                          )}
                         </div>
+                      </div>
+                    </td>
+
+                    {/* Date */}
+                    <td className="px-5 py-3.5 text-[12px] text-gray-500 whitespace-nowrap">
+                      {fmtDate(c.priceTargetDate)}
+                    </td>
+
+                    {/* Rating */}
+                    <td className="px-5 py-3.5">
+                      <span className={`text-[11px] font-bold px-2 py-0.5 border ${rs.text} ${rs.bg} ${rs.border}`}>
+                        {c.rating.toUpperCase()}
+                      </span>
+                    </td>
+
+                    {/* Action */}
+                    <td className="px-5 py-3.5 text-[12px] text-gray-500">
+                      {actionLabel(c.action)}
+                    </td>
+
+                    {/* Price Target */}
+                    <td className="px-5 py-3.5 text-right">
+                      {c.priceTarget ? (
+                        <span className="text-[15px] font-bold text-[#111827] tabular-nums">
+                          ${c.priceTarget.toLocaleString()}
+                        </span>
+                      ) : (
+                        <span className="text-gray-300">—</span>
                       )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-            return slug ? (
-              <Link key={c.ticker} href={`/companies/${slug}`}>{card}</Link>
-            ) : card;
-          })}
+                    </td>
+
+                    {/* Upside */}
+                    <td className="px-5 py-3.5 text-right hidden sm:table-cell">
+                      <span className={`text-[13px] font-semibold tabular-nums ${upsideColor(c.upsidePct)}`}>
+                        {c.upsidePct !== null ? `${c.upsidePct > 0 ? "+" : ""}${c.upsidePct}%` : "—"}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       )}
 
-      <p className="mt-10 text-[11px] text-gray-400 border-t border-gray-100 pt-4">
-        Data sourced from Yahoo Finance, refreshed hourly. Most recent rating and price target per company shown.
-        Individual analyst names are matched to their firm&apos;s published ratings.
+      <p className="mt-8 text-[11px] text-gray-400 border-t border-gray-100 pt-4 leading-relaxed">
+        Data via Yahoo Finance, refreshed hourly. Most recent rating and price target per company shown.
+        Upside calculated vs. current market price. Analyst names matched to firm&apos;s published ratings.
       </p>
     </div>
   );

@@ -38,7 +38,7 @@ export default async function AnalystsIndex() {
               Wall Street Analysts
             </h1>
             <p className="mt-1 font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
-              Top semiconductor coverage desks — click any analyst to see their current ratings and price targets across the universe.
+              The analysts who move semi stocks. Current ratings and price targets across the coverage universe.
             </p>
           </div>
           <Link href="/analyst-consensus" className="text-[11px] text-[#B45309] font-semibold hover:underline shrink-0">

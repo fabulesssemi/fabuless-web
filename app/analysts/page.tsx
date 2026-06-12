@@ -61,7 +61,7 @@ export default async function AnalystsIndex() {
                 <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
                   {firmShort}
                 </div>
-                <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
+                <div className="font-sans text-[17px] text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
                   {analyst.name}
                 </div>
               </div>

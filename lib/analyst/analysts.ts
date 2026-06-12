@@ -16,15 +16,15 @@ export interface WallStreetAnalyst {
 }
 
 export const WALL_STREET_ANALYSTS: WallStreetAnalyst[] = [
-  { id: "arya",    name: "Vivek Arya",      firm: "B of A Securities",   firmDisplay: "BofA Securities",      title: "Managing Director", knownFor: "NVDA, AMD, AVGO bull — AI infrastructure supply chain",       accent: "#C0392B" },
-  { id: "moore",   name: "Joseph Moore",    firm: "Morgan Stanley",      firmDisplay: "Morgan Stanley",       title: "Managing Director", knownFor: "Memory cycle specialist — MU, SKHYNIX, HBM dynamics",          accent: "#1A5276" },
-  { id: "rasgon",  name: "Stacy Rasgon",    firm: "Bernstein",           firmDisplay: "Bernstein",            title: "Senior Analyst",    knownFor: "Bearish contrarian — known for early cycle calls on INTC/QCOM", accent: "#145A32" },
-  { id: "rolland", name: "Pierre Ferragu",  firm: "New Street Research", firmDisplay: "New Street Research",  title: "Partner",           knownFor: "NVDA mega-bull — GPU compute buildout thesis",                  accent: "#6C3483" },
-  { id: "lu",      name: "C.J. Muse",       firm: "Cantor Fitzgerald",   firmDisplay: "Cantor Fitzgerald",    title: "Senior Analyst",    knownFor: "ASML, litho equipment — EUV cycle and wafer starts",            accent: "#1F618D" },
-  { id: "lurie",   name: "Chris Caso",      firm: "Wolfe Research",      firmDisplay: "Wolfe Research",       title: "Managing Director", knownFor: "QCOM, INTC — mobile/PC cycle and foundry strategy",             accent: "#784212" },
-  { id: "mcneill", name: "Harlan Sur",      firm: "JP Morgan",           firmDisplay: "JP Morgan",            title: "Managing Director", knownFor: "Broad semi coverage — MRVL, AVGO, NVDA",                       accent: "#17202A" },
-  { id: "egan",      name: "Timothy Arcuri",   firm: "UBS",      firmDisplay: "UBS",      title: "Managing Director", knownFor: "TSM, ASML — leading-edge fab economics and capex cycles",    accent: "#1A5276" },
-  { id: "omalley",  name: "Thomas O'Malley", firm: "Barclays", firmDisplay: "Barclays", title: "Managing Director", knownFor: "Semiconductor coverage — Barclays equity research",           accent: "#00AEEF" },
+  { id: "arya",    name: "Vivek Arya",      firm: "B of A Securities",   firmDisplay: "BofA Securities",      title: "Managing Director", knownFor: "AI infrastructure bull covering NVDA, AMD, and AVGO",              accent: "#C0392B" },
+  { id: "moore",   name: "Joseph Moore",    firm: "Morgan Stanley",      firmDisplay: "Morgan Stanley",       title: "Managing Director", knownFor: "Memory cycle specialist focused on MU, SK Hynix, and HBM",         accent: "#1A5276" },
+  { id: "rasgon",  name: "Stacy Rasgon",    firm: "Bernstein",           firmDisplay: "Bernstein",            title: "Senior Analyst",    knownFor: "Bearish contrarian known for early cycle calls on INTC and QCOM",  accent: "#145A32" },
+  { id: "rolland", name: "Pierre Ferragu",  firm: "New Street Research", firmDisplay: "New Street Research",  title: "Partner",           knownFor: "NVDA mega-bull behind the GPU compute buildout thesis",            accent: "#6C3483" },
+  { id: "lu",      name: "C.J. Muse",       firm: "Cantor Fitzgerald",   firmDisplay: "Cantor Fitzgerald",    title: "Senior Analyst",    knownFor: "Equipment specialist covering ASML, litho, and EUV cycle dynamics", accent: "#1F618D" },
+  { id: "lurie",   name: "Chris Caso",      firm: "Wolfe Research",      firmDisplay: "Wolfe Research",       title: "Managing Director", knownFor: "Mobile and PC cycle analyst covering QCOM, INTC, and foundry",     accent: "#784212" },
+  { id: "mcneill", name: "Harlan Sur",      firm: "JP Morgan",           firmDisplay: "JP Morgan",            title: "Managing Director", knownFor: "Broad semi coverage with focus on MRVL, AVGO, and NVDA",           accent: "#17202A" },
+  { id: "egan",    name: "Timothy Arcuri",  firm: "UBS",                 firmDisplay: "UBS",                  title: "Managing Director", knownFor: "Leading-edge fab economist covering TSM, ASML, and capex cycles",  accent: "#1A5276" },
+  { id: "omalley", name: "Thomas O'Malley", firm: "Barclays",            firmDisplay: "Barclays",             title: "Managing Director", knownFor: "Barclays semiconductor equity research",                           accent: "#00AEEF" },
 ];
 
 export interface AnalystCoverage {

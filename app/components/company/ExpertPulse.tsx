@@ -7,7 +7,10 @@ interface ExpertTake {
   name: string;
   description: string;
   accent: string;
-  take: string;
+  quote: string;
+  source?: string;
+  date?: string;
+  url?: string;
 }
 
 interface ExpertPulseData {
@@ -49,16 +52,26 @@ export function ExpertPulse({ slug }: { slug: string }) {
       <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-3">What the experts are saying</div>
       <div className="grid sm:grid-cols-3 gap-3">
         {data.experts.map((e) => (
-          <div key={e.corpus} className="rounded border border-gray-100 p-3">
-            <div className="flex items-center gap-1.5 mb-1.5">
-              <span
-                className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
-                style={{ backgroundColor: e.accent }}
-              />
+          <div key={e.corpus} className="rounded border border-gray-100 p-3 flex flex-col gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: e.accent }} />
               <span className="text-[11px] font-semibold text-gray-800">{e.name}</span>
               <span className="text-[10px] text-gray-400">· {e.description}</span>
             </div>
-            <p className="text-[12px] text-gray-600 leading-relaxed">{e.take}</p>
+            <blockquote className="text-[12px] text-gray-600 leading-relaxed border-l-2 pl-2.5" style={{ borderColor: e.accent + "40" }}>
+              "{e.quote}"
+            </blockquote>
+            {(e.source || e.date) && (
+              <div className="text-[10px] text-gray-400 mt-auto">
+                {e.url ? (
+                  <a href={e.url} target="_blank" rel="noopener noreferrer" className="hover:text-[#B45309] transition-colors">
+                    {e.source ?? "Source"}{e.date ? ` · ${e.date}` : ""}
+                  </a>
+                ) : (
+                  <span>{e.source ?? ""}{e.date ? ` · ${e.date}` : ""}</span>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>

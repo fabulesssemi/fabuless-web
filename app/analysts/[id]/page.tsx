@@ -144,8 +144,8 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
 
         {/* ── RIGHT: Coverage table ── */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-baseline justify-between mb-4">
-            <h2 className="text-[14px] font-semibold text-[#111827]">
+          <div className="flex items-baseline justify-between mb-3">
+            <h2 className="text-[18px] font-bold text-[#111827]">
               {analyst.name.split(" ")[0]}&apos;s Semiconductor Coverage
             </h2>
           </div>

@@ -60,7 +60,6 @@ export default function RootLayout({
                     <div className="bg-[#111827] border border-gray-700 py-1.5 w-44 shadow-lg">
                       <Link href="/insider-trading" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Insider Trades</Link>
                       <Link href="/earnings" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Earnings</Link>
-                      <Link href="/voices" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Top Voices</Link>
                       <Link href="/archive" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Archive</Link>
                       <Link href="/about" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">About</Link>
                     </div>

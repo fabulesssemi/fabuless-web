@@ -12,7 +12,6 @@ const LINKS = [
   { href: "/supply-chain",     label: "Supply Chain" },
   { href: "/insider-trading",  label: "Insider Trades" },
   { href: "/earnings",         label: "Earnings" },
-  { href: "/voices",           label: "Top Voices" },
   { href: "/about",            label: "About" },
   { href: "/archive",          label: "Archive" },
 ];

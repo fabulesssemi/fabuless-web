@@ -100,23 +100,23 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
             <div className="text-[13px] font-semibold text-gray-600 mt-1">{analyst.firmDisplay}</div>
             <div className="text-[11px] text-gray-400 mt-0.5 uppercase tracking-wider">Wall Street Analyst</div>
 
-            <div className="w-full h-px bg-gray-100 my-5" />
+            <div className="w-full h-px bg-gray-200 my-5" />
 
             {/* Bull rate gauge */}
             <Gauge pct={bullPct} color={gaugeColor} />
 
             {/* Avg upside */}
-            <div className="mt-5 w-full border border-gray-100 px-4 py-3 text-center">
+            <div className="mt-5 w-full border border-gray-200 px-4 py-3 text-center">
               <div className={`text-[26px] font-bold tabular-nums leading-none ${avgUpside !== null && avgUpside > 0 ? "text-emerald-600" : avgUpside !== null ? "text-rose-500" : "text-gray-400"}`}>
                 {avgUpside !== null ? `${avgUpside > 0 ? "+" : ""}${avgUpside}%` : "—"}
               </div>
               <div className="text-[9px] uppercase tracking-wider text-gray-400 mt-1.5 font-semibold">Avg Implied Upside</div>
             </div>
 
-            <div className="w-full h-px bg-gray-100 my-5" />
+            <div className="w-full h-px bg-gray-200 my-5" />
 
             {/* Coverage breakdown */}
-            <div className="w-full grid grid-cols-3 divide-x divide-gray-100">
+            <div className="w-full grid grid-cols-3 divide-x divide-gray-200">
               {[
                 { val: bull,    label: "Buys",   color: "text-emerald-600" },
                 { val: neutral, label: "Holds",  color: "text-gray-400"    },
@@ -129,7 +129,7 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
               ))}
             </div>
 
-            <div className="w-full h-px bg-gray-100 my-5" />
+            <div className="w-full h-px bg-gray-200 my-5" />
 
             {/* Known for */}
             <p className="text-[11px] text-gray-500 leading-relaxed text-left w-full">

@@ -14,6 +14,7 @@ const RSS_FEEDS = [
   "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",
   "https://www.nextplatform.com/feed/",
   "https://semiwiki.com/feed/",
+  "https://www.chipstrat.com/feed",                           // Chipstrat (Austin Lyons) — semi strategy, sits between SemiAnalysis and Stratechery
   "https://www.benzinga.com/feeds/analyst-ratings/rss",
   "https://www.eetimes.com/feed/",                          // EE Times — deep semiconductor/IC industry coverage
   "https://www.tomshardware.com/feeds/all",                 // Tom's Hardware — GPU/chip news (images hotlink-blocked, filtered below)

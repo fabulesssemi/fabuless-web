@@ -53,9 +53,6 @@ export default async function AnalystsIndex() {
           return (
             <Link key={analyst.id} href={`/analysts/${analyst.id}`}>
               <div className="border border-gray-200 hover:border-gray-400 hover:shadow-md transition-all h-full flex flex-col overflow-hidden">
-                {/* Accent bar */}
-                <div className="h-1 w-full shrink-0" style={{ backgroundColor: analyst.accent }} />
-
                 <div className="p-5 flex flex-col gap-3 flex-1">
                   <div>
                     <div className="text-[15px] font-bold text-gray-900 leading-tight">{analyst.name}</div>

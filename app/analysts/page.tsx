@@ -52,27 +52,24 @@ export default async function AnalystsIndex() {
           const { bull, bear, neutral } = bullBearSummary(analyst.coverage);
           return (
             <Link key={analyst.id} href={`/analysts/${analyst.id}`}>
-              <div className="border border-gray-100 p-4 hover:border-gray-300 hover:shadow-sm transition-all h-full flex flex-col gap-3">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[12px] font-bold shrink-0"
-                    style={{ backgroundColor: analyst.accent }}
-                  >
-                    {analyst.name.split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-[14px] font-bold text-gray-900 leading-tight">{analyst.name}</div>
-                    <div className="text-[11px] text-gray-400">{analyst.firmDisplay}</div>
-                  </div>
-                </div>
+              <div className="border border-gray-200 hover:border-gray-400 hover:shadow-md transition-all h-full flex flex-col overflow-hidden">
+                {/* Accent bar */}
+                <div className="h-1 w-full shrink-0" style={{ backgroundColor: analyst.accent }} />
 
-                <p className="text-[12px] text-gray-500 leading-snug flex-1">{analyst.knownFor}</p>
+                <div className="p-5 flex flex-col gap-3 flex-1">
+                  <div>
+                    <div className="text-[15px] font-bold text-gray-900 leading-tight">{analyst.name}</div>
+                    <div className="text-[11px] text-gray-400 mt-0.5">{analyst.firmDisplay}</div>
+                  </div>
 
-                <div className="flex items-center gap-4 pt-1 border-t border-gray-50">
-                  <span className="text-[11px] font-semibold text-emerald-600">▲ {bull} bull</span>
-                  <span className="text-[11px] font-semibold text-rose-500">▼ {bear} bear</span>
-                  <span className="text-[11px] text-gray-300">— {neutral}</span>
-                  <span className="ml-auto text-[10px] text-[#B45309] font-semibold">View →</span>
+                  <p className="text-[12px] text-gray-500 leading-relaxed flex-1">{analyst.knownFor}</p>
+
+                  <div className="flex items-center gap-4 pt-3 border-t border-gray-100">
+                    <span className="text-[11px] font-semibold text-emerald-600">▲ {bull} buy</span>
+                    <span className="text-[11px] font-semibold text-rose-500">▼ {bear} sell</span>
+                    <span className="text-[11px] text-gray-300">— {neutral}</span>
+                    <span className="ml-auto text-[11px] font-semibold" style={{ color: analyst.accent }}>View →</span>
+                  </div>
                 </div>
               </div>
             </Link>

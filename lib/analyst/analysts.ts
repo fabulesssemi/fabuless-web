@@ -63,6 +63,7 @@ async function fetchAnalystCoverageRaw(): Promise<AnalystWithCoverage[]> {
 
   // Build a map: firm → ticker → most recent entry
   const byFirm = new Map<string, Map<string, AnalystCoverage>>();
+  const STALE_CUTOFF = new Date(Date.now() - 18 * 30 * 24 * 60 * 60 * 1000); // 18 months
 
   for (const result of results) {
     if (result.status !== "fulfilled") continue;
@@ -70,6 +71,8 @@ async function fetchAnalystCoverageRaw(): Promise<AnalystWithCoverage[]> {
     const companyName = nameByTicker.get(ticker) ?? ticker;
     for (const entry of history) {
       if (!entry.firm || !entry.toGrade) continue;
+      // Skip stale ratings — firm likely doesn't cover this ADR
+      if (entry.epochGradeDate && new Date(entry.epochGradeDate) < STALE_CUTOFF) continue;
       if (!byFirm.has(entry.firm)) byFirm.set(entry.firm, new Map());
       const firmMap = byFirm.get(entry.firm)!;
       // Keep only the most recent entry per ticker (history is newest-first)

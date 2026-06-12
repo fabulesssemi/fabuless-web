@@ -50,7 +50,6 @@ export default async function AnalystsIndex() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {analysts.map((analyst) => {
           const { bull, bear, neutral } = bullBearSummary(analyst.coverage);
-          const firmShort = analyst.firmDisplay.split(" ")[0].toUpperCase();
           return (
             <Link
               key={analyst.id}
@@ -59,7 +58,7 @@ export default async function AnalystsIndex() {
             >
               <div className="min-w-0">
                 <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
-                  {firmShort}
+                  {analyst.firmDisplay.toUpperCase()}
                 </div>
                 <div className="font-sans text-[17px] text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
                   {analyst.name}

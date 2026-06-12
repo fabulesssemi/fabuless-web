@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import {
   NODES,
@@ -877,6 +877,28 @@ export function SupplyChainWeb() {
   const [ckOnly, setCkOnly] = useState(false);
   const [scenario, setScenario] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [panelPos, setPanelPos] = useState<{ x: number; y: number } | null>(null);
+  const dragState = useRef<{ startX: number; startY: number; origX: number; origY: number } | null>(null);
+
+  const onDragStart = useCallback((e: React.MouseEvent) => {
+    const panel = (e.currentTarget as HTMLElement).closest("[data-panel]") as HTMLElement;
+    const rect = panel.getBoundingClientRect();
+    dragState.current = { startX: e.clientX, startY: e.clientY, origX: rect.left, origY: rect.top };
+    e.preventDefault();
+  }, []);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!dragState.current) return;
+      const dx = e.clientX - dragState.current.startX;
+      const dy = e.clientY - dragState.current.startY;
+      setPanelPos({ x: dragState.current.origX + dx, y: dragState.current.origY + dy });
+    };
+    const onUp = () => { dragState.current = null; };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+  }, []);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const activeScenario = scenario ? SCENARIOS.find((s) => s.id === scenario) ?? null : null;
@@ -892,6 +914,7 @@ export function SupplyChainWeb() {
     setActive(null);
     setScenario(null);
     setCkOnly(false);
+    setPanelPos(null);
   }
 
   const pos = useMemo(computeLayout, []);
@@ -1023,20 +1046,35 @@ export function SupplyChainWeb() {
 
       {/* Right sidebar: scenario list (dropdown open) OR scenario detail (scenario active) */}
       {(dropdownOpen || activeScenario) && (
-        <div className="fixed right-0 top-[70px] bottom-0 z-50 w-80 border-l border-gray-200 bg-white shadow-2xl flex flex-col">
+        <div
+          data-panel
+          className="fixed z-50 w-80 border border-gray-200 bg-white shadow-2xl flex flex-col"
+          style={panelPos
+            ? { left: panelPos.x, top: panelPos.y, bottom: "auto", right: "auto", maxHeight: "calc(100vh - 80px)" }
+            : { right: 0, top: "70px", bottom: 0 }
+          }
+        >
           {dropdownOpen ? (
             /* ── Scenario list ── */
             <>
-              <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3 shrink-0">
+              <div
+                className="flex items-center justify-between border-b border-gray-100 px-4 py-3 shrink-0 cursor-grab active:cursor-grabbing select-none"
+                onMouseDown={onDragStart}
+                title="Drag to move"
+              >
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
                   {SCENARIOS.length} investor scenarios
                 </span>
-                <button
-                  onClick={() => setDropdownOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 text-sm leading-none"
-                >
-                  ✕
-                </button>
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-300 text-[14px] leading-none">⠿</span>
+                  <button
+                    onClick={() => setDropdownOpen(false)}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    className="text-gray-400 hover:text-gray-600 text-sm leading-none"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
               <div className="flex-1 overflow-y-auto">
                 {SCENARIOS.map((s) => {
@@ -1088,8 +1126,10 @@ export function SupplyChainWeb() {
             /* ── Scenario detail ── */
             <>
               <div
-                className="shrink-0 border-b px-4 pt-3 pb-2"
+                className="shrink-0 border-b px-4 pt-3 pb-2 cursor-grab active:cursor-grabbing select-none"
                 style={{ borderColor: activeScenario.color + "40", backgroundColor: activeScenario.color + "08" }}
+                onMouseDown={onDragStart}
+                title="Drag to move"
               >
                 <div className="flex items-start gap-2">
                   <span
@@ -1118,7 +1158,7 @@ export function SupplyChainWeb() {
                       );
                     })()}
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-2 shrink-0" onMouseDown={(e) => e.stopPropagation()}>
                     <button
                       onClick={() => setDropdownOpen(true)}
                       className="text-[10px] text-gray-400 hover:text-gray-600 border border-gray-200 px-1.5 py-0.5 leading-tight"

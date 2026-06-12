@@ -1,0 +1,40 @@
+TITLE: OpenAI Is Doomed? - Et tu, Microsoft? Meta, Google, Anthropic, DeepSeek, Distribution vs Capital
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-05-07
+URL: https://www.semianalysis.com/p/openai-doomed-microsoft
+
+H100 rental pricing is falling every month and availability is growing for medium-sized clusters. Despite this, demand dynamics remain strong. The clear target for most players is matching or surpassing OpenAI. Today, many firms are within spitting distance of OpenAI's GPT-4 in Chatbot ELO. Only a quarter of Americans have ever tried ChatGPT, and most don't continue using it.
+
+DeepSeek: China Is Competitive
+
+China's DeepSeek open-sourced a model that is both cheaper to run than Meta's Llama 3 70B and better on key benchmarks including code (HumanEval) and math (GSM 8k). DeepSeek V2 was able to achieve incredible training efficiency — 1/5th the compute of Meta's Llama 3 70B for better open-model performance, or 1/20th the flops of GPT-4 while not far off in performance.
+
+Novel architecture innovations: more than 160 experts with 6 routed per forward pass, 236B total parameters with 21B active per forward pass. Novel Multi-Head Latent Attention mechanism with better scaling than other attention forms.
+
+At API pricing of output tokens alone, DeepSeek can achieve $50.4 revenue per node per hour with 50,000 decode tokens per second peak throughput on 8xH800 GPUs. Node cost in China is ~$15/hour. At perfect utilization, DeepSeek can operate at 70%+ gross margins while crushing everyone else's inference economics.
+
+Microsoft's Dependency Problem on OpenAI
+
+OpenAI is a non-profit whose primary goal is creating AGI that is safe and benefits all of humanity. The board determines when AGI has been attained. AGI is explicitly carved out of all commercial and IP licensing agreements with Microsoft. The board can decide at any moment — with no voting input from Microsoft — that they have achieved AGI, and Microsoft is not entitled to the IP created with their investment dollars.
+
+Combined with OpenAI's major governance issues, Microsoft must put a contingency plan in place. Microsoft is attempting to move the majority of inference volumes to their own models for Copilot and Bing. They will use OpenAI only when OpenAI has the only capable model.
+
+Microsoft's Internal AI Effort
+
+The pseudo-acquisition of Inflection gives Microsoft a decent model plus a solid pre-training and infrastructure team. Microsoft Phi model team uses synthetic data from larger models to train small models; Phi-3 results have been impressive. WizardLM team created "Evol-Instruct" — an AI-based method for generating diverse instruction sets for LLMs using recursive AI-judged data curation.
+
+MAI-1: Microsoft's ~500B parameter MoE model, utilizing the Inflection pretraining team and dataset combined with Microsoft's own synthetic data. Goal: have an in-house GPT-4 class model. Microsoft has plans for a 100k GPU cluster for their internal team — 5x larger than the GPT-4 training cluster.
+
+More than 65% of the Fortune 500 use Azure OpenAI service — notably this is not directly through OpenAI, meaning OpenAI can lose significant business without Google or Amazon/Anthropic gaining share, simply by Microsoft pushing their own models instead.
+
+Distribution vs Capital: Who Wins?
+
+Distribution argument: Most future consumer LLM usage will go through existing platforms — Google, Instagram, WhatsApp, Facebook, iPhone/Android. Meta AI (powered by Llama 3 70B) is available across Facebook, Instagram, WhatsApp — across 1.1B people in 14 countries. Meta's 3.24B daily active user base makes this the largest LLM distribution play in history. This hurts Google Search more than Bing or Perplexity ever will.
+
+If Google strikes a deal with Apple to serve Gemini on iPhone exclusively, the same strategy Google used to entrench search dominance would be applied to AI.
+
+Capital argument: Google is king in compute given their hyper-aggressive TPU buildout pace. Ironically, Google now has combined focus via Google Deepmind while Microsoft is losing focus by building internal models that compete with OpenAI.
+
+Custom silicon is a major point — it dramatically reduces compute cost versus buying Nvidia chips. Microsoft has the least custom AI silicon deployed in the cloud, and that will remain true until at least 2026. Google, Meta, and Amazon are all ramping internal silicon, giving them a cost of compute advantage over Microsoft.
+
+The open-source threat from Meta (Llama 3 405B will match GPT-4 while being open source) means GPT-4 class intelligence will be available to anyone who can rent an H100 server. Fine tuning is no longer a monumental task; Databricks can train better than GPT-3.5 models from scratch.

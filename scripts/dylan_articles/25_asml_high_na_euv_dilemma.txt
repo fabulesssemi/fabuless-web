@@ -1,0 +1,42 @@
+TITLE: ASML Dilemma: High-NA EUV is Worse vs Low-NA EUV Multi-Patterning
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-12-11
+URL: https://www.semianalysis.com/p/asml-high-na-euv-dilemma
+
+High-NA EUV single patterning costs significantly more than low-NA EUV double patterning for all upcoming process nodes including 1.4nm/14A. Furthermore, low-NA multi-patterning achieves finer feature pitch than high-NA single exposure. ASML's goal of 20 High-NA tools per year by 2028 is unrealistic.
+
+High-NA Architecture Tradeoffs
+
+To increase lens size (numerical aperture from 0.33 to 0.55 NA), ASML faced two choices: increase mask size (impractical — entire mask infrastructure uses 6" standard) or reduce exposure field size by half. They chose the smaller field. Result: die layouts must accommodate both half-field high-NA and full-field low-NA layers on the same wafer — complex mask planning, potential die size cost penalties.
+
+Dose vs. Throughput — The Core Problem
+
+Dose requirements increase exponentially as critical dimensions (CD) shrink. High-NA achieves smaller features by using a larger lens aperture, but still must print sub-3nm features — requiring extremely high dose that even 1kW source power cannot compensate.
+
+Low-NA double patterning: prints features at 2x the final CD per exposure. Much lower dose required per pass. Despite requiring 2 scanner passes per layer, the lower dose enables each pass to run at full stage-speed-limited throughput (~200+ wafers per hour), not dose-limited (~80 wafers per hour for high-NA). Total cost: lower despite 2x passes.
+
+Cost Model Results
+
+Costs normalized to low-NA 3nm: Low-NA double patterning is cheaper at every node from 3nm through 1nm. High-NA becomes cost-competitive only at ~7A-10A nodes (2030+) when horizontal scaling gives way to 3D stacking — at which point CD shrink slows, dose requirements plateau, and high-NA throughput improves.
+
+If source power cannot reach 1kW (due to optics degradation), lithography costs increase ~20% at future nodes vs. today — high-NA economics worsen further. Even with 1kW, high-NA is dose-limited at all nodes through the end of the decade.
+
+ASML public materials shifted in 2021 from claiming "high-NA is lower cost" to claiming only "high-NA reduces process complexity." This is a tell — complexity reduction does not drive fab capex decisions; cost per wafer does.
+
+Faster stages developed for high-NA will be backported to future low-NA tools — further improving low-NA economics.
+
+Additional High-NA Challenges
+
+Half-field stitching: chips must be designed around a half-reticle field for critical layers, creating mask layout complexity. Die size penalties possible for chips near the reticle limit.
+
+Depth of focus: High-NA lenses have shallower depth of focus — tighter wafer flatness and topography control required.
+
+Photoresist sensitivity: Higher dose still needed relative to low-NA for equivalent CD — resist chemistry at the edge of performance. Stochastic defects increase with smaller features and higher NA.
+
+Samsung's Cautionary Tale
+
+Samsung adopted EUV for DRAM at D1Z generation ahead of Micron and SK Hynix — suffered yield problems that reversed Samsung's DRAM density leadership. Micron, using DUV multi-patterning, now has the world's densest DRAM. The parallel for high-NA is direct: adopting it before economics justify it can destroy yield and cost position.
+
+Investment Implication
+
+ASML's high-NA ramp will be slower and less economically compelling than marketed. 20 tools per year by 2028 is extremely unlikely. Intel (Intel 14A) and TSMC will use high-NA for specific critical layers while continuing heavy low-NA multi-patterning — limiting incremental high-NA tool demand. Low-NA ArFi tools remain the workhorse of leading-edge fabs through the late 2020s. Directed self-assembly (DSA) at Intel 14A may provide a path to reduce dose requirements by 50%+ — most important enabler for making high-NA economically viable.

@@ -1,0 +1,44 @@
+TITLE: Astera Labs Is First To CXL Memory Pooling Silicon – Beating Marvell, Rambus, Microchip, and Montage Technologies
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2022-08-30
+URL: https://www.semianalysis.com/p/astera-labs-leo-cxl-memory-pooling
+
+CXL will revolutionize the datacenter by bringing composable server architecture and heterogenous compute. The most important category of CXL products will be those related to memory because 50% of server costs are from DRAM alone.
+
+Microsoft estimates first-generation memory disaggregation can achieve a 9–10% reduction in overall DRAM, representing hundreds of millions of dollars in cost savings for a large cloud provider.
+
+SemiAnalysis believes the CXL-based memory expansion and memory pooling hardware market will exceed 1 billion dollars in 2025. Samsung, Micron, and SK Hynix are all developing memory expansion hardware. Furthermore, Rambus, Microchip, Montage Technologies, Marvell, and Astera Labs are all developing memory expansion and pooling ASICs.
+
+Astera Labs Leo: First To Market
+
+Astera Labs is coming to market sooner with CXL-based memory pooling. Their success so far has been as the only high-volume smart retimer for PCIe 5.0/CXL. They have taped out their CXL memory accelerator, codenamed Leo. Astera Labs should be able to ship it early next year (2023) and will have the highest volume CXL memory accelerator for 2023.
+
+Astera Labs has sampled Leo expansion and pooling chips to various customers — compare this to other firms just beginning to bring up their memory pooling devices or still working on FPGA-based implementations. Astera Labs says they are on their 3rd generation of their CXL controller while others are still working on the 1st.
+
+Astera Labs had a test CXL chip in 2019. They shipped smart retimers in volume in 2021. Leo is the 3rd generation. Astera Labs generated ~$35M in revenue in 2021 and is expected to have over $100M in 2022.
+
+Key Technical Differentiator: Dynamic Memory Pooling on CXL 1.1
+
+The most crucial feature of Leo is that it can do memory pooling on CXL 1.1 platforms. Marvell's Tanzanite Silicon solution also supports memory pooling on CXL 1.1, but with a critical drawback: the host would need to restart every time the memory pool size was changed. This is untenable in a cloud VM setting.
+
+Astera Labs Leo can dynamically resize the pools without restarting the host CPU. This makes memory pooling possible in the most important market — multi-tenant clouds — where VMs cannot afford downtime for memory reconfiguration.
+
+Leo supports 2TB of memory. It can utilize DDR4 or up to DDR5 5600MT/s per memory channel, which is required to max out the bandwidth of CXL 1.1 and CXL 2.0. Leo also supports "other memory vendor-specific interfaces," suggesting a new form factor for DRAM packages may be in development.
+
+Product SKUs
+
+Leo comes in two product lines: E (expansion only) and P (pooling and sharing). The 16-lane CM5162P platform is more attractive because multiple CPUs can be connected to enable memory pooling. It is also advantageous for Intel's Sapphire Rapids, which has a CXL lane bifurcation issue meaning an 8-lane CXL device would still consume the entire 16-lane CXL port. This issue will be solved with Emerald Rapids.
+
+AMD's Genoa and Bergamo will be the systems of choice for memory pooling. They support CXL bifurcation and have memory pooling features from CXL 2.0 despite the official support level being CXL 1.1.
+
+Competitive Positioning
+
+Astera Labs Leo has a feature and time-to-market advantage over competing memory expander and pooling ASICs from Rambus, Microchip, Montage Technologies, and Marvell. Astera Labs is also well positioned against SK Hynix, Micron, and Samsung in the memory expander market due to the business model of selling merchant silicon. Large hyperscalers prefer to purchase merchant ASICs and integrate them with commodity DRAM rather than the higher-cost expanders that come directly from the memory firms.
+
+SemiAnalysis estimates the DRAM expander and pooling market at larger than $1 billion in 2025, and Astera Labs is well positioned to be the leader in the merchant ASIC sub-segment.
+
+AMD has explicitly called out Leo interoperability with AMD processors and accelerators — the inclusion of the word "accelerator" suggests FPGAs or MI300 could also support Leo's memory pooling.
+
+Software and Telemetry
+
+Astera Labs is focusing heavily on software. They have developed extensive telemetry features and software APIs for fleet management to make it easy to manage, debug, and deploy at scale on cloud-based platforms using stock Linux drivers. This enterprise-grade software stack is a key differentiator versus competitors with hardware-only offerings.

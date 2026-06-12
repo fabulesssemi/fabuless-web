@@ -1,0 +1,64 @@
+TITLE: Intel GenAI For Yield, TSMC CFET & 3D Stacking, AMD 3D Device Modeling, SK Hynix HBM4, Micron 3D DRAM & FeRAM - IEDM 2023
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-01-03
+URL: https://www.semianalysis.com/p/iedm-2023-tsmc-cfet-hbm4-dram
+
+IEDM 2023 covered Intel GenAI for yield, TSMC/Intel/Samsung CFET and 2D materials, SK Hynix HBM4 roadmap, Micron FeRAM, Samsung >1,000 layer NAND, CXMT sanctions violation, and AMD thermal analysis of advanced packaging.
+
+Intel GenAI for Process Yield
+
+Intel presented a deep generative model (GAN and diffusion) for predicting device ETEST electrical characteristics from SPICE simulation inputs. GANs failed due to mode collapse — missing long tails of the distribution, which define yield. Diffusion models successfully replicated the full distribution including long tails, enabling yield prediction from design-stage simulation. This allows optimization before tape-out — reducing mask respins, shortening development cycles, increasing yield. Intel as an IDM has access to process data most startups cannot access. SemiAnalysis views this as an excellent angel/seed investment opportunity for founders who can access comparable datasets.
+
+Logic Scaling — 2D Materials
+
+Both TSMC and Intel presented TMD (Transition Metal Dichalcogenide) channel devices targeting the 10A (~1nm) node circa 2030. MoS2 for NMOS and WSe2 for PMOS have emerged as the consensus choice over carbon nanotubes.
+
+TSMC: Demonstrated working NSFETs (nanosheet FETs) with single TMD channel via CVD growth (no transfer step). Also showed "c-shaped" contacts to reduce contact resistance.
+
+Intel: Demonstrated working PMOS and NMOS TMD devices on 300mm wafer pilot line — ahead of TSMC in terms of scale. Used planar transistors, not GAA. Not yet at production pitch.
+
+Samsung: Made almost no mention of 2D materials at IEDM — appears to be letting others do the pathfinding.
+
+Logic Scaling — CFET (Complementary FET)
+
+All major logic players (TSMC, Intel, Samsung, IMEC) showed CFET results in 2023 vs. only university demos in 2022 — clear commercialization progression. CFET stacks one NMOS + one PMOS transistor vertically to form a full inverter within one device footprint. Target node: ~10A (2030+).
+
+Architectures are converging: Intel's integration is notable for combining CFET with backside power delivery and backside contacts simultaneously. Samsung has not announced a clear backside power delivery scheme unlike Intel (PowerVia) and TSMC (backside PDN on N2).
+
+AMD Thermal Analysis
+
+AMD simulations show up to 5% performance decrease from backside power delivery and 3D packaging due to wafer thinning reducing thermal conductivity near active devices. Silicon thinned to enable backside contacts cannot dissipate heat as effectively — forces throttling at hotspots. Conclusion: EDA tools (Cadence, Synopsys) currently lack first-class thermal analysis support, which is a gap that needs closing.
+
+TSMC presented AlN and diamond interlayer bonding materials with high thermal conductivity to mitigate this — still in lab stage, not industrialized.
+
+Applied Materials — All-Tungsten Interconnects
+
+Applied Materials presented an all-tungsten interconnect scheme for 2nm+ BEOL scaling. Processes entirely in-situ within AMAT's Endura platform (wafer never exposed to atmosphere). >20% lower resistance vs ex-situ process due to eliminated oxidation. This enables Applied Materials to bundle multiple process steps (etch, clean, deposition) in a single tool cluster — driving share gains from other etch/clean/deposition vendors on early BEOL layers.
+
+CXMT Sanctions Violation
+
+CXMT openly presented Gate-All-Around Vertical Channel Transistors (VCTs) at 18nm half-pitch at IEDM in San Francisco. This simultaneously violates two US export control rules: (1) 18nm half-pitch DRAM below export limit; (2) GAA transistor fabrication. US equipment firms (Applied Materials, Lam, KLA, Onto) are now technically prohibited from shipping tools to CXMT's facility. SemiAnalysis supply chain model shows CXMT plans $7B in equipment spending for DRAM next year — $3.8B to US tool firms, with Applied Materials as the largest contributor at $1.8B.
+
+SK Hynix HBM4 Roadmap
+
+SK Hynix presented HBM packaging technology including comprehensive overview of MR-MUF (Mass Reflow - Molded Underfill) advantages over TC-NCF. MR-MUF: batch reflow process (higher throughput vs. individual TCB), epoxy molding compound provides higher thermal conductivity vs. NCF film, better junction temperatures for high-power AI chips. SK Hynix has exclusivity on co-engineered EMC materials enabling MR-MUF.
+
+Key challenges solved: die warpage control via pre-stressed backside film; void-free EMC dispense using face-down mold tool with serpentine dispense pattern.
+
+HBM4 decision: hybrid bonding vs flipchip MR-MUF vs TCB — details on SK Hynix's selection criteria presented. Base die will move to TSMC leading-edge logic for HBM4 to enable tighter pitch hybrid bonding.
+
+Micron FeRAM
+
+Micron presented a non-volatile FeRAM that achieves higher density than the world's densest DRAM and performance within an order of magnitude of DRAM. First time a non-volatile memory has achieved competitive density AND near-DRAM performance — potentially a path to eliminating DRAM refresh power and enabling persistent memory without latency penalties.
+
+Samsung >1,000 Layer NAND
+
+Samsung presented their path to >1,000 layer NAND using multiple wafer bonding schemes, building stacked arrays that are singulated and rebonded. Kioxia presented the world's densest high-volume production NAND using their CBA (CMOS Bonded to Array) approach — separates CMOS logic from array for independent scaling.
+
+IBM Future of EUV
+
+IBM's paper confirms key elements of SemiAnalysis's prior report that High-NA EUV has dose issues that prevent it from being competitive on a cost-per-wafer basis vs Low-NA multi-patterning in the near-to-medium term.
+
+Investment Implication
+
+3D DRAM is the key memory inflection of the 2030s — will require 50% less litho and more etch/deposition equipment. CXMT's sanctions violations are being ignored by BIS — risk of forced equipment cutoff remains. AMAT's all-tungsten interconnect could drive incremental share gains on leading-edge BEOL layers. SK Hynix HBM4 MR-MUF exclusivity on advanced materials is a durable competitive moat.

@@ -1,0 +1,43 @@
+TITLE: Arm and a Leg: Arm's Quest To Extract Their True Value
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-09-13
+URL: https://www.semianalysis.com/p/arm-royalties-qualcomm-datacenter
+
+Arm IPO valuation rationale: $54.5B makes sense only if Arm dramatically increases royalty rates. Arm currently earns ~$0.50 per application processor in smartphones — for a foundational part with no viable alternative. Path to $13 per smartphone is the bull case.
+
+Arm Licensing Models
+
+ALA (Architectural License Agreement): licenses only the ISA instruction set. Customer designs own custom cores. Apple, HiSilicon/Huawei, Nuvia/Qualcomm use ALAs. Lower royalty rates.
+
+TLA (Technology License Agreement): licenses off-the-shelf CPU designs (Cortex cores). Customers like MediaTek and base Qualcomm Snapdragon use standard Cortex cores. Higher royalties. CSS (Compute Subsystem): fully validated block including CPU, interconnect, memory IP — even faster development. Used by Microsoft Cobalt 100 and Alibaba Yitian 710. Highest royalty potential.
+
+Qualcomm Dispute
+
+Arm's "nuclear option": Qualcomm acquired Nuvia (custom Arm core designers). Arm claims Nuvia's architecture license cannot transfer to Qualcomm without a new agreement. If Arm succeeds, Qualcomm must cancel next-gen Snapdragon mobile chips using Phoenix/Oryon cores. Qualcomm holds ~30% smartphone baseband market (60%+ in 5G). Qualcomm also pays $13/device to Apple equivalent for wireless IP (CDMA/OFDMA royalties). Arm envisions charging analogous amounts.
+
+Royalty Upside Model
+
+Conservative non-Apple smartphone royalty model:
+- High-end phones: $12/unit
+- Mid-range: $6/unit
+- Low-end: $3/unit
+- Incremental operating profit at zero incremental cost: ~$5.4B/year
+- ~10x Arm's FY2023 operating income
+
+This sounds aggressive but Apple pays Qualcomm $13/device for wireless IP — Arm's ISA is equally foundational. The moat difference: Qualcomm's wireless IP is essential but alternatives exist (licensing disputes ongoing). Arm's ISA has no alternative for smartphones — RISC-V ecosystem cannot support the software base in the near term.
+
+Softbank Context
+
+Softbank Vision Fund 1 acquired 25% of Arm in 2016 for $32B total. Vision Fund 1 recognized most of its gains from Softbank Group buying back that 25% at $64.4B valuation before IPO — booking gains at Softbank Group's expense. IPO at $50B+ valuation validates the internal transfer price. Arm's historical 12% revenue CAGR is unimpressive — the IPO valuation requires believing in transformational monetization improvement.
+
+Datacenter Opportunity
+
+Arm's Neoverse line: AWS Graviton 3, Google Axion, Microsoft Cobalt 100, Alibaba Yitian, Nvidia Grace. Total Arm datacenter TAM is growing but royalty rates on datacenter CPUs are higher in absolute terms — ~$5-15 per chip vs $0.50 for smartphone. This is a real growth vector. RISC-V in datacenter: minimal near-term risk. SiFive and Ventana Micro target HPC but have no production wins vs Neoverse.
+
+Chiplet / Contract Chip Business
+
+Arm entering contract chip design business for Xiaomi, Vivo — designing complete chips rather than just licensing IP. Higher revenue per chip, expands TAM into OEM-direct channel. Competes with Broadcom/Marvell custom silicon businesses. If successful, creates a recurring chiplet IP revenue stream separate from royalties.
+
+Investment Implication
+
+Arm's value proposition is straightforward: it's the only feasible ISA for smartphones, and they're only charging $0.50/device. The bull case is $5-13/device — 10-26x price increase. Key risk: Qualcomm lawsuit. If Arm loses, royalty rate increases are limited by the threat of chip makers investing in custom core design to avoid higher rates. Near-term revenue is stable; the long-term re-rating depends entirely on winning pricing power in court and negotiations.

@@ -17,7 +17,7 @@ export function EarningsCard() {
   }, []);
 
   return (
-    <div className="w-fit shrink-0 hidden lg:block border border-gray-200 bg-white">
+    <div className="w-fit shrink-0 hidden lg:block border border-[#DDDBD2] bg-white">
       <div className="border-b border-gray-200 px-4 py-1.5 flex items-start justify-between gap-2">
         <div>
           <div className="text-[10px] font-bold uppercase tracking-widest text-[#111827]">

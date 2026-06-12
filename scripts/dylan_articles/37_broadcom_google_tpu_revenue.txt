@@ -1,0 +1,37 @@
+TITLE: Broadcom's Google TPU Revenue Explosion, Networking Boom, VMWare Integration
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-08-30
+URL: https://www.semianalysis.com/p/broadcom-google-tpu-revenue
+
+Broadcom is the second largest AI chip company in revenue behind Nvidia — driven by Google TPU production. In 2023, Broadcom generates multiple billions of dollars from AI accelerator sales. No other company besides Nvidia will generate even $1B from AI chips in 2023.
+
+Broadcom's Business Model
+
+Strategy: acquire market-leading products with sticky customers, high margins, but excessive operating expenses. Cut middle management, eliminate science projects, retain product engineering teams. Result: lean organizations, 65%+ gross margins, high FCF conversion. Track record across 16 semiconductor and 2 major software acquisitions over 17 years.
+
+Key Segments:
+- Wireless (Apple): FBAR RF filters, Wi-Fi/BT/GPS SoCs. $8-10B revenue annually. 10-12% CAGR driven by content growth and spec upgrades (Wi-Fi 6E, 5G band expansion). Hock Tan personally negotiates Apple contracts.
+- Networking & Custom Silicon: Ethernet switching (Tomahawk family), Jericho router silicon, custom ASICs (Google TPU, Meta MTIA, YouTube video encoding). Revenue ~$7-9B annually, accelerating rapidly.
+- Broadband: DSL, PON, DOCSIS, set-top box SoCs. Accelerating from DOCSIS 4.0 capex cycle.
+- Storage: SAN controllers, PCIe switches, Fibre Channel (Brocade). Slower growth.
+- Infrastructure Software: CA Technologies + Symantec Enterprise = 92% gross margin, 72% operating margin. VMWare integration in progress.
+
+Google TPU Revenue
+
+Google is in full "Code Red" AI buildout in response to OpenAI/Microsoft. Google's TPU ramp (v4 Pufferfish, v5 Viperfish, v5e) is Broadcom's largest and fastest-growing revenue stream. SemiAnalysis estimates $3-4B+ in TPU-related custom silicon revenue flowing from Google to Broadcom in 2023, growing to $5-6B+ in 2024. This is a winner-take-all custom silicon relationship — Broadcom designed and manufacturers all Google TPUs.
+
+Meta MTIA: Broadcom is also the custom silicon partner for Meta's MTIA (Meta Training and Inference Accelerator). Early volumes, growing as Meta scales custom inference silicon beyond recommendation engine use cases toward LLM inference.
+
+Networking Business
+
+Broadcom's Tomahawk 5 (12.8 Tbps Ethernet switch ASIC) and Jericho3-AI are the backbone of hyperscale AI cluster Ethernet switches. Google, Microsoft, and Amazon all use Broadcom switching silicon in their Ethernet-based AI cluster scale-out networks. InfiniBand vs Ethernet: Nvidia dominates InfiniBand but Ethernet is growing share for scale-out as Ultra Ethernet Consortium (UEC) matures. Broadcom is the primary beneficiary of Ethernet switch spending in AI clusters.
+
+800G optical transceiver DSPs: Marvell had near-100% share on H100 generation. Broadcom is gaining share on Blackwell through Innolight and Eoptolink partnerships. Revenue growing rapidly.
+
+VMWare Integration
+
+VMWare acquisition closed late 2023. Broadcom plans to convert VMWare from perpetual licensing to subscription — revenue recognition shift creates ~12-18 month revenue headwind. Long-term: VMWare recurring subscription revenue should be higher quality and higher margin. Cost cuts will be aggressive — Broadcom's M&A playbook applied. Pro forma combined operating margin expected to exceed 55% by 2025.
+
+Investment Implication
+
+Broadcom is structurally advantaged from the AI buildout via two vectors: Google TPU custom silicon and hyperscale Ethernet switching. These are large, sticky, growing businesses. The Google TPU relationship is essentially a forever contract — switching costs for Google to move TPU production to another ASIC vendor are enormous. VMWare integration creates near-term earnings headwind but long-term FCF uplift. Broadcom is the best positioned large-cap semiconductor company outside Nvidia for AI infrastructure exposure.

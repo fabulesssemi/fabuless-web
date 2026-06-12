@@ -1,0 +1,47 @@
+TITLE: Wafer Wars: Deciphering Latest Restrictions On AI And Semiconductor Manufacturing
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-10-24
+URL: https://www.semianalysis.com/p/wafer-wars-ai-chip-restrictions-china
+
+October 2023 US export control update: closes AI chip loopholes, tightens wafer fabrication equipment restrictions, and harmonizes with Dutch and Japanese controls.
+
+AI Semiconductor Controls
+
+Prior test: aggregate bidirectional transfer rate AND TOPS×bit-length. Nvidia exploited this with H800/A800 — identical compute to H100/A100, just reduced NVLink bandwidth to 400GB/s.
+
+New rule: BANDWIDTH THRESHOLD REMOVED entirely. Compute threshold unchanged (~4800 TOPS×bit-length, now called "Total Processing Performance" or TPP). Performance density threshold added: TPP/die area — 5.92 for absolute ban, 3.2 for license requirement. Prevents designing around with many small chips.
+
+Newly blocked chips: H800, A800, L40S, L4. L40S was being sold to China by telling buyers it had competitive FLOPS vs A100 — technically true but wrong for LLMs (less than half A100 memory bandwidth, no NVLink).
+
+4090 consumer GPU: likely granted license (not datacenter-designed). RTX 4080: borderline, likely gets license.
+
+Can Nvidia design around it? No. The density rule requires going back to V100 (2017, 12nm) architecture to get below the density threshold. Cannot insert blank silicon (rules account for this). All high-performance ASICs are blocked.
+
+China's path forward: Huawei 7nm ASIC on SMIC N+2 using domestic HBM stockpile (millions of SK Hynix/Samsung HBM units imported in 2023). SMIC N+2 is approaching 20,000 WPM. Yields are better than Western media claims (~0.14 D0, vs TSMC N5 at ~0.07 D0 — SMIC is rougher but functional).
+
+Wafer Fabrication Equipment Controls
+
+Much less impactful than AI chip controls. Most equipment tools for deposition, etch, metrology, clean can still be shipped to China for "mature node" use — even though SMIC uses them for 7nm.
+
+Key additions:
+- Wet etch for SiGe with 100:1 SiGe:Si selectivity (targets GAA nanosheet formation)
+- New DUV restriction: overlay ≤2.4nm (expands from Dutch 1.5nm to cover ASML 1980i series)
+- Applied only to "advanced node" fabs — major loophole. Most China fabs are classified as "mature."
+
+The "advanced fab" loophole: ASML says only "a handful of fabs" affected. 100+ fabs are being built in China — virtually all classified as mature. CXMT (DRAM) and SMIC non-advanced fabs can still receive the 1980i series.
+
+Equipment Company Reactions
+
+ASML: Estimated new controls affect only 10-15% of China revenue (~5-7% of total revenue in the rush-order quarter). China revenue was 46% of total revenue in Q3 2023 due to pre-ban rush orders. ASML management says no peak in 2023 or 2024 for China DUV demand.
+
+Lam Research: China revenue surged 102% QoQ to $1,671M. Management says China will remain strong. CXMT specifically called out as driver of DRAM spending growth — directly offsetting non-China DRAM weakness.
+
+Applied Materials: Similar dynamic — China sales near all-time highs from rush orders and domestic semiconductor buildout spending for mature nodes.
+
+China Retaliation
+
+China announced export controls on gallium and germanium — two critical materials for compound semiconductors, high-speed transistors, and photovoltaics. China controls ~80% of global gallium supply and ~60% of germanium. This directly targets US/European semiconductor equipment firms that use these materials in compound semiconductor and photomask manufacturing. Additional retaliatory measures targeting rare earth elements possible.
+
+Investment Implication
+
+US equipment companies' China exposure is temporarily elevated from rush orders but will decline over 2024. The "advanced node" loophole in equipment controls means CXMT and SMIC can continue importing tools for years. Huawei's domestic AI chip (SMIC 7nm) combined with Chinese HBM stockpile enables China to build meaningful AI training clusters independent of Nvidia — the October 2023 AI chip rules are more effective at limiting AI compute access than the equipment rules are at limiting manufacturing capability.

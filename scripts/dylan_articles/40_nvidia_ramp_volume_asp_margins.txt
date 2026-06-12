@@ -1,0 +1,53 @@
+TITLE: Nvidia's Ramp – Volume, ASP, Cloud Pricing, Margins, EPS, Cashflow, China, Competition
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-08-20
+URL: https://www.semianalysis.com/p/nvidia-ramp-volume-asp-margins
+
+Nvidia's supply chain lag creates revenue recognition delays of 4-5 months from wafer start to final server delivery. This explains why AI head-fake supply chain companies (SuperMicro, etc.) are not yet showing AI revenue despite Nvidia's massive GPU ramp.
+
+Revenue Recognition Chain
+
+1. TSMC starts 4N wafer production (month 0)
+2. CoWoS packaging at TSMC (months 1-2)
+3. H100 SXM module assembly at Foxconn (month 2-3)
+4. 8-GPU baseboard assembly at Wistron (month 3-4)
+5. Nvidia recognizes revenue when baseboard ships to OEM (month 4-5)
+6. OEM builds server, installs in datacenter (month 5-6)
+7. Cloud provider rents out servers, recognizes revenue (months 6-7+)
+
+SuperMicro revenue recognition may lag Nvidia by 4-5 months additional. A March Nvidia order won't appear in SuperMicro results until their January quarterly report.
+
+Key Nvidia Estimates (FY2024-2025)
+
+Nvidia data center revenue FY2024: ~$40-50B (prior SemiAnalysis estimates preceded massive beats)
+Gross margins: ~65-70% for datacenter GPU segment
+H100 ASP: ~$30,000-35,000 per chip blended (NVL configurations higher)
+HGX H100 server (8-GPU) ASP to OEM: ~$200,000-350,000 depending on configuration
+
+Cash Position
+
+Nvidia's profit margins and cash flow conversion are so high that by end of FY2025, cash on balance sheet will equal roughly half of Intel's market cap at the time of this writing. Strategic use of cash: SemiAnalysis expected acquisitions targeting AI software, networking, or EDA assets.
+
+Cloud Pricing for 2024
+
+H100 on-demand cloud: $2.00-3.00/GPU/hour (retail). 1-year reserved pricing: $1.50-2.00/GPU/hour. Total number of GPUs available for cloud rental is capacity-constrained — even at $3/hour, CoreWeave and Lambda maintain waitlists.
+
+2024 pricing expectation: pricing will remain elevated as demand exceeds supply through H1 2024. Meaningful price compression begins when B100 ships (H2 2024) and CoWoS capacity expands.
+
+China Impact
+
+H800/A800 ban implemented in October 2023. SemiAnalysis supply chain model always assumed Q4 2023 ban — estimates were calibrated for this. Chinese firms placed massive advance orders for H800/A800 in Q2-Q3 2023 — pull-forward demand. China revenue decline in Q4 2023 partially offset by rest-of-world acceleration. Long-term: China likely develops Huawei/SMIC alternatives but loses ~18 months of training data and model iteration time vs Western peers.
+
+Competition Assessment
+
+AMD MI300X: first credible challenge to Nvidia in 3+ years. H200 directly responds to MI300X's memory capacity advantage. B100 maintains Nvidia's multi-year performance roadmap advantage. AMD MI400/Broadcom UEC alliance is the strategic wildcard for 2025-2026.
+
+Google TPUv5: existential threat to Nvidia's enterprise cloud revenue? No — Google doesn't sell TPUs externally at scale. TPUv5e on Google Cloud competes with H100 rentals only for customers willing to rewrite workloads for JAX.
+
+Intel Gaudi 3: price-competitive but software ecosystem too immature for large deployments.
+
+"X100" (Post-Blackwell): 2025 on TSMC 3nm variant. Annual cadence forcing competitors into perpetual catch-up.
+
+Investment Implication
+
+Nvidia is entering a structural oligopoly position in AI compute. Annual GPU cadence, supply chain control, software moat (CUDA), and networking bundling create self-reinforcing advantages. The primary risk: hyperscaler custom silicon (Google TPU, Amazon Trainium, Microsoft Maia, Meta MTIA) collectively reduces TAM growth — but only within hyperscaler walls. The $100B+ annual semiconductor TAM for external AI compute remains entirely Nvidia's to lose.

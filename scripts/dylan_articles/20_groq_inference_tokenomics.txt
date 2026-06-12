@@ -1,0 +1,28 @@
+TITLE: Groq Inference Tokenomics: Speed, But At What Cost?
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-02-21
+URL: https://www.semianalysis.com/p/groq-inference-tokenomics
+
+Groq has demonstrated up to 4x the throughput of other inference services while charging less than 1/3 of Mistral's own pricing for Mixtral 8x7b inference. This speed advantage enables chain-of-thought reasoning, agentic AI systems, and real-time codegen — use cases that are infeasible with high-latency GPU inference.
+
+Groq's Architecture
+
+Groq's chip uses a fully deterministic VLIW (Very Long Instruction Word) architecture with no buffers. The chip reaches ~725mm2 die size on GlobalFoundries 14nm. It has no external memory — weights, KVCache, and activations are all kept on-chip during processing. Each chip has only 230MB of SRAM, meaning no useful models fit on a single chip. Serving Mixtral requires 576 chips: 8 racks of 9 servers × 8 chips per server.
+
+Wafer cost: likely below $6,000 per wafer at GF 14nm. Compare to Nvidia H100 at 814mm2 on TSMC 4N (~$16,000/wafer). Nvidia also buys 80GB of HBM from SK Hynix for ~$1,150 per H100 chip. Groq's raw bill of materials is significantly lower, but startup volumes mean higher relative fixed costs, plus a margin paid to Marvell for custom ASIC services.
+
+Performance vs. Nvidia
+
+At batch size 1 (latency-optimized): Groq achieves ~500+ tokens/second per user for Mixtral, well ahead of 8xH100 (~280 tps) even with speculative decoding (~420 tps). Groq is clearly superior for latency-sensitive workloads.
+
+At high batch size (throughput-optimized): Nvidia wins by an order of magnitude on performance per dollar. Groq is not competitive architecturally for throughput-optimized scenarios because each chip's 230MB SRAM becomes a severe constraint when serving many users simultaneously.
+
+Total Cost of Ownership (TCO)
+
+The simplified BOM analysis favors Groq for latency-optimized single-user throughput. However, when system costs are fully accounted for — including the 576-chip system with 144 CPUs and 144TB of RAM — the economics look very different. Groq's system has far more CPU and memory overhead per useful token than an 8xH100 system.
+
+At $0.27 per million tokens, Groq's pricing matches the race-to-the-bottom GPU inference providers. Whether this is cost-justified or subsidized to generate hype (Groq raised a $50M SAFE in 2023 and was actively fundraising) is unclear. The answer depends heavily on utilization rates and whether their next-gen 4nm chip (targeting H2 2025) improves economics substantially.
+
+Key Investment Implication
+
+Groq is a real architectural innovation for latency-optimized inference but is fundamentally uncompetitive for throughput-optimized high-batch inference. The total cost of ownership, once system-level costs are included, is not favorable vs. GPUs at scale. A next-generation chip on 4nm could change this substantially. Supply chain diversification (entirely US-fabricated and packaged) is a genuine differentiator for government and defense customers.

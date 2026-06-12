@@ -1,0 +1,34 @@
+TITLE: AMD MI300 Performance - Faster Than H100, But How Much?
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-12-06
+URL: https://www.semianalysis.com/p/amd-mi300-performance
+
+MI300X specs vs H100: 30% more FP8 FLOPS, 60% more memory bandwidth, 2x+ memory capacity. Sells primarily against H200 which narrows memory bandwidth gap to single digits and capacity gap to under 40%. MI300X achieved only 5.3 TB/s vs the targeted 5.6 TB/s.
+
+Benchmark Results
+
+FlashAttention2 (inference/forward pass only): 10-20% MI300X advantage — far less than raw spec advantage.
+
+LLAMA2-70B forward pass: 10-20% advantage on compute-bound kernels. Not representative of full model inference.
+
+Bloom inference (large batch, throughput): Most impressive benchmark but uses a known trick — Bloom barely fits in H100 HGX 640GB so H100 must run smaller batch sizes due to KVCache memory pressure. MI300X's larger memory enables larger batches and better throughput utilization. Real advantage but edge case.
+
+LLAMA2-70B inference (realistic): 40% latency advantage — reasonable given 60% bandwidth advantage vs H100. H200 likely closes this gap significantly.
+
+LLAMA2-13B: 20% MI300X advantage.
+
+Training Performance
+
+MI300X achieves less than 30% of theoretical FLOPS in training vs Nvidia's 40%+ utilization. Reasons: AMD's GEMM kernels only achieve ~50% of theoretical peak; FlashAttention2 backward pass not fully optimized for AMD's architecture (larger L1 cache but same LDS size as previous gen — harder to tile FA2); ROCm software stack still catching up. Improvement velocity is high — AMD is closing the gap rapidly.
+
+Software Ecosystem Progress
+
+OpenAI committed to support AMD MI300 in standard Triton 3.0 distribution. This is significant — OpenAI and Microsoft use MI300 for inference, and Triton support enables optimization without needing ROCm-specific tuning. Torch.compile works out of the box for training and inference for most models. Performance optimization (TensorRT-LLM equivalent for AMD) is the remaining gap.
+
+AMD MI400 and Broadcom Anti-Nvidia Alliance
+
+AMD completely cancelled MI350X (which would have had TSMC 3nm XCDs) due to Nvidia accelerating B100 timeline — MI350X would have been uncompetitive on paper specs vs B100. AMD MI400 is the next major step. AMD is developing Open xGMI / Open Infinity Fabric / Accelerated Fabric Link — moving away from PCIe-constrained interconnect toward Ethernet-style high-bandwidth SerDes. Broadcom is partnering with AMD on MI400's scale-out interconnect solution — forming an anti-Nvidia alliance using Ultra Ethernet Consortium (UEC) standards.
+
+Investment Implication
+
+MI300X is a real H100 competitor for inference workloads, particularly latency-sensitive and memory-capacity-limited deployments. Training performance gap is real but narrowing. H200 resets the comparison — MI300X advantage over H200 is much more modest. The AMD/Broadcom alliance on MI400 targeting Ethernet-based scale-out is the most credible long-term threat to Nvidia's NVLink/InfiniBand ecosystem lock-in.

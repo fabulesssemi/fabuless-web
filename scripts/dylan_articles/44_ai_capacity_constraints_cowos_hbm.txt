@@ -1,0 +1,48 @@
+TITLE: AI Capacity Constraints - CoWoS and HBM Supply Chain
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-07-05
+URL: https://www.semianalysis.com/p/ai-capacity-constraints-cowos-hbm
+
+H100 will remain sold out until Q1 2024 despite Nvidia ramping to 400,000 H100 GPUs per quarter. The binding constraints are CoWoS packaging and HBM supply — not GPU wafer production.
+
+Why Wafer Supply Is Not the Constraint
+
+TSMC N5 utilization fell below 70% due to weakness in PC, smartphone, and non-AI datacenter chips. Nvidia has no problem securing N4 wafer supply. Nvidia is running wafer bank strategy — ordering wafers ahead of downstream CoWoS capacity, holding at TSMC as die bank WIP. GPU dice are already fabbed; they wait in queue for CoWoS packaging.
+
+HBM: SK Hynix Dominance
+
+SK Hynix: sole volume supplier of HBM3 in 2023, >95% market share. HBM3 started production June 2022. Current max configuration: 8-layer 16GB modules (5 active stacks on H100). SK Hynix ramping 12-layer 24GB HBM3 at 5.6 GT/s for AMD MI300X and Nvidia H100 refresh.
+
+Samsung: shipping HBM3 from H2 2023. Cutting favorable pricing deals to capture market share. Showing roadmap for 12-layer HBM and future hybrid-bonded HBM4 (base die on in-house FinFET node).
+
+Micron: stuck on HBM2E, cannot manufacture top-bin at high volume. Bold claims of HBM3E leadership in CQ1 2024 — SemiAnalysis skeptical given current execution gap. Micron historically invested in Hybrid Memory Cube (HMC, failed) rather than HBM until 2018 pivot.
+
+AMD invented HBM (partnership with SK Hynix in 2008, first shipped with Fiji GPU in 2015) but Nvidia and Google are now the highest volume HBM users.
+
+CoWoS: The Real Bottleneck
+
+TSMC's CoWoS capacity: only advanced packaging technology in high volume for AI accelerators. CoWoS-S is the workhorse — logic die + HBM on silicon interposer. TSMC's Advanced Backend Fab 6 in Zhunan: 14.3 hectares cleanroom space (larger than all other TSMC packaging fabs combined). Rush tooling orders to equipment makers. Still cannot keep up with demand through Q1 2024.
+
+Alternatives being explored:
+- Amkor: Nvidia secured Amkor capacity for H100 production — first diversification beyond TSMC for advanced AI packaging
+- JCET: working on CoWoS-equivalent technology
+- ASE: FOEB (Fan-Out Embedded Bridge) competing technology, sourcing silicon interposer from UMC
+
+HBM and CoWoS Together
+
+HBM2E: 307 GB/s bandwidth per stack, 8-Hi or 4-Hi configuration. Used in A100.
+HBM3: 819 GB/s per stack (2x HBM2E). Used in H100.
+HBM3E: ~1,200 GB/s per stack. Used in H200, MI300X, H100 refresh.
+HBM4: target >2,000 GB/s per stack. Base die on TSMC leading node. Hybrid bonded stacking. Roadmap 2025-2026.
+
+Each H100 uses 5 active HBM3 stacks (1 dummy die for mechanical balance). Total HBM content per H100: ~80GB at 3.35 TB/s. Nvidia has pre-purchased majority of SK Hynix HBM allocation, crowding out AMD, Google/Broadcom (except for contracted shares).
+
+Customer Volume Estimates (by accelerator)
+
+SemiAnalysis proprietary database covers quarterly volumes for: Nvidia H100/H800/A100, Broadcom/Google TPU, AMD MI300/MI250, Amazon Trainium2/Inferentia, Marvell/Microsoft Athena, Alchip/META MTIA, Alibaba T-Head, ZTE Sanechips, Samsung Mach-1. Available to clients.
+
+Key finding: total CoWoS wafer capacity through H1 2024 is fully allocated. TSMC has no unallocated slots. Any new customer wanting CoWoS capacity is on a waitlist for H2 2024+.
+
+Investment Implication
+
+CoWoS is the most important supply chain chokepoint in AI infrastructure. TSMC's backend capacity expansion capex is the most directly traceable AI-driven investment in the equipment supply chain. Equipment vendors enabling CoWoS and HBM production (DISCO, AMAT, Lam, KLA, TEL) are structural beneficiaries through 2025. SK Hynix has a 12-18 month lead on HBM quality — Samsung is second but cutting deals to close the volume gap. Micron is a distant third with upside if HBM3E execution delivers.

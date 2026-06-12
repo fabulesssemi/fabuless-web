@@ -1,0 +1,40 @@
+TITLE: China AI & Semiconductors Rise: US Sanctions Have Failed
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-09-12
+URL: https://www.semianalysis.com/p/china-ai-semiconductors-rise-sanctions-failed
+
+One year after October 7, 2022 export controls, it is clear they are failing. Huawei's Kirin 9000S on SMIC N+2 (7nm) proves Chinese manufacturing capability. Billions of dollars of US equipment continue to flow to SMIC and CXMT.
+
+Huawei Kirin 9000S
+
+SMIC N+2 is a true 7nm in terms of transistor density — comparable to TSMC's 2018 7nm (different engineering choices on specific pitches, but equivalent density class). Performance and power of the Arm A510 cores are on par with Qualcomm S8G1 on Samsung 4LPX — indicating SMIC N+2 process quality is better than the West realized. Part of the parity: Samsung 4LPX has poor yield and execution issues. SMIC N+2 has good yield (~D0 of 0.14 estimated — rougher than TSMC N5 at ~0.07 D0 but functional).
+
+Key evidence for good yield: uniform FinFETs visible in TechInsights teardown; low device-to-device performance variation across units tested; chip is not more aggressively binned (tight parameter spread visible in chip tests).
+
+Market Impact
+
+Apple: 35-45M iPhone units gained from Huawei ban in 2019. At risk if Huawei regains form — $20B+ annual revenue exposure. Tablets, watches, laptops add more. MediaTek and Qualcomm: ~$7.6B combined revenue at risk if Huawei recovers 190M annual SoC unit capacity. RF front-end (Skyworks, Qorvo, Murata): additional exposure as Huawei integrated its own RF chips.
+
+SMIC Lithography Situation
+
+SMIC's 7nm uses ASML 1980Di ArFi tools — the same tool series TSMC used to ramp 7nm to 100,000+ WPM. SMIC reportedly has 30+ advanced ArFi tools for the 7nm fab. First 7nm fab targeting 30,000-50,000 WPM by end of 2024. At 50% yield, 30,000 WPM supports over 10 million AI chip dies per year.
+
+SMIC 5nm ("N+3") is achievable with existing allowed tools: high-yield DUV SAQP (self-aligned quad patterning) can reach 130M transistors/mm². Lithography cost increase ~55-60% vs EUV-enabled 5nm, but lithography is only ~30% of total process cost → total cost only ~20% higher. Achievable for SMIC in 2025-2026. Export controls are not preventing this.
+
+US Equipment Companies' Complicity
+
+US equipment firms (Applied Materials, Lam, KLA, Tokyo Electron) sell deposition, etch, metrology, clean tools to SMIC for "28nm" applications. SMIC redirects tools to 7nm. Equipment firms almost certainly know but are turning blind eyes. SMIC 14nm already violated sanctions; US continued granting licenses afterward.
+
+China AI Compute
+
+By end of 2024: China will have over 1M A100-class or better Nvidia chips (H800/A800) — more than OpenAI will have. GPT-4 was trained on ~24,000 A100s. H800/A800 NVLink reduction (400GB/s) is not restrictive for standard parallelism strategies (8-way TP, FSDP, PP). Restrictions can potentially be reversed in software if hardware not fused off.
+
+Domestic AI chip ecosystem: Huawei Ascend 910B, Biren, Tencent, Alibaba, Baidu all developing A100-class chips on SMIC 7nm for 2024-2025. China has more software developers than US + Canada + Europe combined — software gap is solvable. Multiple firms (MetaX) are building CUDA-compatible chips. Biren architecture is "reminiscent of Nvidia's if you squint your eyes."
+
+Proposed Effective Controls
+
+To actually limit China: restrict ArFi immersion tools and their servicing; restrict ArFi photoresist; restrict masks and mask blanks; restrict metrology, CMP, epitaxy, dry etch, CVD/ALD equipment; restrict advanced packaging tools (hybrid bonding, TSV, CoWoS-equivalent); restrict chips with >25.6 Tbps IO even if no compute; restrict EDA tools; restrict 200G SerDes licensing; limit JVs and IP transfers. Half-measures will not work.
+
+Investment Implication
+
+China is 2-3 years from self-sufficiency in leading-edge AI chip production at meaningful volume. The timeline: Huawei SMIC 7nm AI chips in 2024, SMIC 5nm in 2026, HBM from CXMT in 2025-2026. US equipment companies' China revenue is temporarily elevated but faces structural risk if stricter controls are imposed. The Kirin 9000S is the canary in the coal mine — it demonstrated what is coming.

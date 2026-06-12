@@ -1,0 +1,39 @@
+TITLE: AMD MI300 Ramp, GPT-4 Performance, ASP & Volumes
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-11-01
+URL: https://www.semianalysis.com/p/amd-mi300-ramp-gpt4-performance-volumes
+
+AMD's MI300 is the only legitimate competitor to Nvidia and Google in LLM inference in 2023. Customers confirmed: Microsoft, Meta, Oracle, Google, Supermicro/Quanta direct, Amazon. Lisa Su guided "$2B+ in MI300 datacenter GPU revenue in 2024" — SemiAnalysis believes this is conservative.
+
+Supply Chain Dynamics
+
+MI300 supply chain has ~7 months lead time from TSMC wafer start to completed 8-GPU baseboard: N5/N6 wafer production → SoIC reconstituted wafer → CoWoS packaging → GPU package test → 8-GPU baseboard assembly. Orders placed well ahead — supply is the constraint through Q3 2024, then AMD likely oversupplied in Q4 2024 (demand-side model accounts for B100 accelerated timeline pulling demand forward).
+
+Volume Model
+
+SemiAnalysis tracks MI300 supply via: SK Hynix/Samsung/Micron HBM volumes by customer, TSMC CoWoS capacity by customer (database covers ~15 chip vendors), GPU package test capacity, and 8-GPU baseboard assembly. Demand model covers hyperscaler capex plans by customer. Result: AMD is supply-constrained through Q3 2024, then potentially oversupplied.
+
+MI300X and GPT-4
+
+MI300X has enough memory (192GB) to serve GPT-4-class inference at meaningful batch sizes — H100 with 80GB is severely constrained for GPT-4 inference. This is MI300X's primary selling point vs H100. GPT-4 inference performance on MI300X is available to subscribers.
+
+ASP and Gross Margin
+
+MI300X server ASP: $150,000-$200,000 per 8-GPU system. Gross margins: AMD MI300X carries higher margins than typical AMD datacenter CPU products due to HBM content and CoWoS packaging complexity. AMD GPU gross margins expected to be 50%+ as volumes ramp, below Nvidia's ~70% GPU gross margins.
+
+MI350X Cancellation and MI400
+
+AMD cancelled MI350X (which would have used TSMC 3nm XCDs with same AIDs) due to Nvidia accelerating B100. MI350X would be uncompetitive on paper specs vs B100. AMD MI400 is the next major product. Open xGMI / Accelerated Fabric Link is AMD's escape from PCIe-based interconnect toward higher-bandwidth Ethernet-style SerDes for the AI scale-up network.
+
+OEM/Cloud Support
+
+Microsoft: using MI300X for OpenAI inference workloads and Azure AI services.
+Oracle: supporting MI300X in cloud and bare metal offerings.
+Meta: evaluating for inference after using H100 for training.
+Google: small order for testing/evaluation.
+Supermicro/Quanta: direct channel sales to enterprises and startups.
+Amazon: small order for evaluation, primarily still Trainium/Inferentia focused.
+
+Investment Implication
+
+AMD's $2B 2024 guidance is sandbagging — SemiAnalysis estimates $3B-$4B+ is achievable with supply. MI300X is a genuine H100 competitor for LLM inference and memory-bound workloads. Training performance gap remains real but is closing. The MI300X ramp is the first time Nvidia has faced a credible hardware competitor for AI revenue since the AI boom began. AMD stock re-rating is justified but priced in — key question is whether MI300X sustains competitiveness vs B100/B200 in 2025.

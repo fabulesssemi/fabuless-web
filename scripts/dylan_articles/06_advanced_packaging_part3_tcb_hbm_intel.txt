@@ -1,0 +1,36 @@
+TITLE: Advanced Packaging Part 3 – Intel's Curious Bet on Thermocompression Bonding, TCB Tool Landscape
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2022-01-18
+URL: https://www.semianalysis.com/p/advanced-packaging-part-3
+
+Thermocompression bonding (TCB) is used in all current forms of HBM memory. Most of Intel's packaging technologies also use TCB. Intel has made a very curious bet on this technology as the driver of their packaging needs — one that TSMC has not followed.
+
+What Is Thermocompression Bonding?
+
+Standard flip chip has major drawbacks from thermal expansion mismatches. When an entire assembly of multiple materials is heated in a reflow oven, different materials expand at different rates, causing warpage, chip gap variation, and tilt. These issues led to early failures in AMD's Fiji GPU era — the original CoWoS interposer packaging had high failure rates from thermal cycling.
+
+TCB solves this by processing one die at a time. A singular tool places an individual die, applies pressure, and heats it up to reflow solder balls. Heat is applied only from the top of the chip, minimizing substrate warpage. The applied force ensures even bonds with no gap variation or tilt. Rapid vibration breaks up metal oxidation on bonding pads. The resulting bond has virtually no voids and no contamination.
+
+Benefits: Better electrical properties at the same IO pitch. Allows IO pitches to scale smaller. Enables packaging of thinner dies.
+
+The Cost Problem
+
+An advanced TCB tool places 500 to 1,000 dies per hour and costs ~$1.25M. A standard flip chip die placement tool places 3,000 to 10,000 dies per hour and costs ~$450K. Standard flip chip is clearly much higher throughput. This is why TCB has historically been niche.
+
+Intel's Curious 300+ TCB Tool Bet
+
+Intel owns nearly 300 TCB tools — far exceeding their advanced packaging needs. Their Malaysia packaging facility will double this count to ~600 tools. Intel uses TCB even in non-advanced packaging applications where standard flip chip would be fine. The rationale from Intel's packaging engineers: given Intel's heavy share in high-power, high-margin applications, the yield loss and reliability concerns from standard flip chip far outweigh the per-unit cost of TCB.
+
+These tools give Intel flexibility across package types: standard packages, 2.5D packages, and advanced 3D packaging all on the same tools. This is critical for Foveros Omni, which uses copper pillars at multiple pitch sizes (130-micron, 100-micron, and 36-micron) on the same package — essentially impossible with standard flip chip.
+
+Intel has been co-developing TCB tools with ASM Pacific, Kulicke and Soffa, and Besi for over a decade. TSMC, Samsung, and others would have difficulty instantly matching Intel's packaging capabilities because of this long co-development history. This is an underrated Intel moat — their packaging technology leadership in 3D stacking is directly enabled by their decade-long TCB investment.
+
+HBM Requires TCB
+
+HBM dies must be extremely thin. At 8 stacks, TCB became mandatory for Samsung, SK Hynix, and Micron. In SK Hynix's 12-stack HBM3, each die is thinned to only 30 microns. The bump pitch is incredibly dense. TCB is the only current way to enable HBM stacking at this scale.
+
+The TCB Tool Market (ASM Pacific, Kulicke and Soffa, Besi)
+
+Each player excels in different niches. Order books are going up significantly but not consistently across the three firms. The largest orders remain from Intel with their custom co-developed TCB platforms. OSATs are beginning to order more TCB tools for HBM and advanced packaging, but Intel's scale dominates.
+
+Investment implication: Intel's heavy investment in TCB and advanced packaging infrastructure is a genuine moat that is often overlooked by investors focused only on process nodes. Foveros Omni's ability to integrate many different IP blocks at many different nodes into a single package is directly enabled by TCB — and this gives Intel a path to foundry customers who need heterogeneous integration that neither TSMC's InFO nor Samsung's approaches can easily replicate.

@@ -34,7 +34,7 @@ export function GrossMarginChart({
     const pct = (currentGM * 100).toFixed(1);
     const color = barColor(currentGM * 100);
     return (
-      <div className="mb-6 rounded-xl border border-gray-200 bg-white px-4 py-3 flex items-center gap-4">
+      <div className="mb-6 rounded-xl border border-[#DDDBD2] bg-white px-4 py-3 flex items-center gap-4">
         <div>
           <div className="text-[10px] uppercase tracking-widest text-gray-400">Gross Margin (TTM)</div>
           <div className="text-2xl font-semibold tabular-nums mt-0.5" style={{ color }}>
@@ -81,7 +81,7 @@ export function GrossMarginChart({
           <span className="text-gray-400 font-normal text-[11px] ml-1">vs {quarters[0].q}</span>
         </span>
       </div>
-      <div className="rounded-xl border border-gray-200 bg-white p-3">
+      <div className="rounded-xl border border-[#DDDBD2] bg-white p-3">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full"

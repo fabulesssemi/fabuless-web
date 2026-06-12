@@ -125,7 +125,7 @@ export function PredictionTable({ rows }: { rows: Prediction[] }) {
       </div>
 
       {/* Table */}
-      <div className="border border-gray-200 bg-white overflow-x-auto -mx-4 sm:mx-0">
+      <div className="border border-[#DDDBD2] bg-white overflow-x-auto -mx-4 sm:mx-0">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-200 text-[11px] uppercase tracking-wider text-gray-400 bg-gray-50">

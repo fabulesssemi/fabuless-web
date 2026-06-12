@@ -1,0 +1,40 @@
+TITLE: Nvidia In The Hot Seat? Intel Habana, Graphcore, Google TPU, and Nvidia A100 Compared In AI Training
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2022-06-29
+URL: https://www.semianalysis.com/p/nvidia-in-the-hot-seat
+
+Nvidia has been king of AI training workloads due to their flexible, easy to program, powerful hardware. This may be changing as AI is very dynamic and various different AI workloads are bifurcating. Training isn't a monolithic entity, and therefore the hardware and software solution best suited for your workload may not be the same as that of another workload.
+
+The most important factor in AI performance over time is software. There has been as high as an 8x performance increase in 3.5 years across AI benchmarks depending on the model. Companies like Nvidia, Graphcore, Google, and Habana have only gone through 1 hardware iteration during this time period. Most of the gains can be attributed to software, not hardware.
+
+Intel Habana Gaudi2
+
+Habana's first-generation chip had an immature software stack when it became available via AWS. Their 2nd generation Gaudi2 chip brings performance much more inline with the industry. Gaudi2 is 600W vs Nvidia's 400W A100, but it doesn't require extra Infiniband NICs and NVSwitch to connect GPUs in 1 server or between multiple servers. This saves significant power and silicon cost. Both Nvidia's A100 and Intel's Habana Gaudi2 have reticle limit TSMC 7nm dies with 6 stacks of HBM, making the comparison fairly apples-to-apples on silicon cost.
+
+Habana submitted results for only 2 of 8 MLPerf model types, which is a limitation. They make a conscious effort to use out-of-the-box software with minimal optimization for submissions, which is interesting — they claim this is a more honest comparison versus Nvidia's hyper-optimized MLPerf submissions.
+
+Google TPU
+
+Google is on their 4th iteration of AI hardware architecture. Their chips are mostly only available internally and have always been designed with that in mind. Google being one of the foremost AI companies must deal with scaling to huge model sizes. Google generally uses a 2:1 ratio of TPUs to CPUs in their submitted systems, while Nvidia generally uses a 4:1 or 8:1 ratio.
+
+TPU so far has had very little success in the cloud service provider realm, but Google uses tens of thousands of them in their own datacenters for internal inference and training workloads. It will be interesting to see if Google can get the broader market to pick up TPU usage through Google Cloud.
+
+Graphcore Bow
+
+Graphcore's Bow IPU is the industry's first wafer-on-wafer hybrid bonded processor. The Bow chip is identical in architecture to the previous generation save for the use of wafer-on-wafer bonding to increase clocks by ~40% without increasing power consumption. Software improvements have carried Graphcore a long way since they were initially a complete failure in MLPerf benchmarks. Graphcore believes new model architecture approaches are necessary and that these would run better on their novel IPU architecture.
+
+Nvidia A100 — Still Dominant
+
+Nvidia was the only vendor to submit to all 8 benchmarks for MLPerf. The 2-year-old A100 GPU is fastest in 6/8 tests on a per-chip basis. The competitors simply didn't show up to compete in most tests, which likely means they tested internally but decided not to submit the final score.
+
+The important metric for training is TCO, not just peak FLOPS. Nvidia dominates here for multiple reasons:
+
+First, their GPUs are more flexible. Even if they are not the best in small image recognition networks, they have the most flexible hardware which can adapt to a wide range of workloads. The machine learning space is evolving rapidly and flexible hardware is needed for large training clusters. AI in the real world is rarely just one model — it is multiple models feeding into each other.
+
+Second, having multiple different model types from speech recognition to vision to recommendation models all working in tandem means having an accelerator best suited for just one model type leads to poor TCO. In a datacenter, utilization rates are paramount. Nvidia is the only company whose hardware can be used for data preparation, training, and inference.
+
+Third, software. The majority of cost is developing models and software, not running them. Nvidia's software stack is incredibly important as it represents the majority of a company's costs for all but the largest operators. Having developers easily tweak models, deploy, test, and iterate is critical to reducing development costs.
+
+The combo of software flexibility, development cost, and higher utilization rates leads to Nvidia still holding the TCO crown.
+
+There are increasingly becoming players who have such scale that utilization rates will be high and flexibility is not as important — these players are developing their own silicon (hyperscalers like Google, Amazon, Microsoft, Facebook, Alibaba). Established companies like Intel and AMD may have a shot, but it will take multiple generations to break Nvidia's monopoly. The inference side is where many different architectures and startups will succeed. Graphcore has potential to succeed, but their next hardware generation has to be great in addition to software continuing to improve.

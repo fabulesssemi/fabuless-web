@@ -1,0 +1,45 @@
+TITLE: Nvidia's Optical Boogeyman – NVL72, Infiniband Scale Out, 800G & 1.6T Ramp
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-03-25
+URL: https://www.semianalysis.com/p/nvidia-optical-boogeyman-nvl72
+
+At GTC, Nvidia announced the GB200 NVL72 — a single integrated rack with 72 GPUs connected at 900 GB/s per GPU via NVLink 5 over 5,184 direct-drive copper cables. Jensen said: "If we had to use optics, those transceivers and retimers alone would have cost 20,000 watts, 20 kilowatts… we did it completely for free over NVLink switch and saved the 20 kilowatts for computation."
+
+Panic set in across optical markets. Investors feared the NVLink scale-up over copper would dramatically reduce the number of optical transceivers per Nvidia GPU cluster. This fear is wrong.
+
+Why NVL72 Does NOT Reduce Optical Content
+
+The DGX H100 and DGX GB200 NVL both utilize three distinct networks:
+1. Frontend Ethernet (2-4 GPUs per NIC)
+2. Backend scale-out InfiniBand or Ethernet (1 NIC per GPU, 400G or 800G)
+3. Backend scale-up NVLink (connecting all GPUs in the rack)
+
+The NVLink scale-up network (network 3) uses 5,184 copper cables — this is what Jensen was referring to. This is NOT the backend scale-out network (network 2).
+
+The NVL72 rack still has 72 OSFP ports at 400G/800G — one for each GPU — which is exactly the same ratio as H100. As GPU network sizes scale, the number of optical transceivers required for the backend scale-out network also scales proportionally. No customer buys just 1 NVL72 rack in isolation; every deployment requires scale-out connectivity across racks, and that network uses optics.
+
+The real optical content per NVL72 rack for the backend scale-out network:
+- 72 OSFP ports on the rack compute side
+- Corresponding switch ports for leaf switches
+- Higher-radix switches for spine
+- Growing absolute transceiver counts as deployments scale from hundreds to tens of thousands of racks
+
+The Real Optical Boogeyman
+
+The real optical boogeyman that dramatically reduces transceiver counts is a technology shipping in high volume in 2025. It reduces the number of transceivers significantly — but it's not NVLink copper.
+
+The answer: co-packaged optics (CPO) or some form of linear drive optics that eliminates individual pluggable transceivers. At scale, the shift from pluggable 400G transceivers to 800G or 1.6T twin-port transceivers (Cedar modules) already reduces transceiver count by half. Cedar-7 (used by Microsoft/OpenAI on H100) uses twin-port 2x400G transceivers per GPU rather than two single-port, cutting compute-node transceiver counts in half.
+
+800G and 1.6T Transceiver Ramp
+
+The transition from ConnectX-7 (400G per port) to ConnectX-8 (800G per port, shipping Q2 2025) is the primary driver of transceiver upgrade cycle. This forces shift from 400G SR4 multimode to 800G DR4 single-mode optical transceivers, and on switch side from 800G twin-port SR8/DR8 to 1.6T DR8.
+
+200G per lane (4x200G = 800G) requires 200G EML (Electro-absorption Modulated Laser) on single-mode transceivers, since 200G multimode VCSELs won't be ready for 9-18 months. EML-based transceivers are more expensive than VCSEL-based, providing margin benefit to transceiver suppliers.
+
+Supplier Landscape
+
+Nvidia expanding transceiver supply chain from primarily Fabrinet + Innolight to include Eoptolink. Eoptolink focused on 800G LPO and 1.6T with DSP.
+
+DSP competition: Marvell had near-100% share on Nvidia H100 generation. Broadcom enters in large way for Blackwell via Innolight and Eoptolink. Nvidia has taped out their own 1.6T DSP but power challenges prevent near-term ramp — their DSP uses same high-power SerDes on both sides rather than optimizing separately for optics-facing vs NIC-facing.
+
+Investment implication: NVL72 copper is not a threat to optical content per GPU cluster. The growth in AI cluster sizes drives more transceiver demand in absolute terms. The upgrade cycle to 800G/1.6T and transition to single-mode optics for ConnectX-8 is the real near-term driver. Companies positioned in 1.6T DSP and single-mode transceivers are the key beneficiaries.

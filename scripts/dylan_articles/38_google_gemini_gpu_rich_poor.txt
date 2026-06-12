@@ -1,0 +1,46 @@
+TITLE: Google Gemini Eats The World – Gemini Smashes GPT-4 By 5X, The GPU-Poors
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-08-27
+URL: https://www.semianalysis.com/p/google-gemini-eats-the-world
+
+Google is iterating at a pace that will smash GPT-4 total pre-training FLOPS by 5x before end of 2023, with a clear path to 20x by end of 2024. Gemini training began on TPUv5 (Viperfish) clusters.
+
+Google's Compute Advantage
+
+Excluding entire existing TPUv4 fleet and TPUv5e (inference workhorse), Google's TPUv5 (Viperfish) ramp alone represents more quarterly chip additions than OpenAI's entire projected GPU fleet growth over 2 years. TPUv5 pod: 8,960 chips connected via 800G optical circuit switches in multi-pod configurations. Google has 100k+ TPUv5 chips in production by end of 2023 just for Gemini training — conservatively.
+
+Google AI Infrastructure Supremacy (detailed in prior report): Google achieves better performance/TCO by using 3-5x more chips at lower Capex per chip (no Nvidia margin). Gemini infrastructure uses multi-pod TPUv5 connected via OCS for reconfigurable training topology. OCS enables any-to-any GPU connectivity within 4ms — critical for pipeline parallelism across pods.
+
+GPU-Rich vs GPU-Poor
+
+GPU-Rich firms: OpenAI, Google, Anthropic, Inflection, xAI, Meta. Each researcher at these firms has access to thousands of GPUs for experiments. Meta is using "we have the 2nd most H100s in the world" as a recruiting tactic.
+
+GPU-Poor firms: HuggingFace, Databricks/MosaicML, Together.ai. World-class researchers, but orders of magnitude fewer GPUs than needed to train competitive frontier models. Fundamental problem: must build before customers come, but cannot fundraise enough to match Nvidia DGX Cloud service or hyperscaler infrastructure.
+
+GPU-Poor problems:
+- Fine-tuning small models on broken leaderboards (style over substance evaluations)
+- Ignoring MoE architectures and speculative decoding used by all frontier labs
+- Training on too-small datasets with inadequate quality
+- Obsessing over quantization/memory constraints instead of efficiency at scale
+
+HuggingFace: too-high valuation (~$4.5B) prevents raising the capital needed to compete. Leaderboards are "hurting the open source movement" by creating useless benchmark-optimized models.
+
+Databricks/MosaicML: $1.3B acquisition was a big bet. Need to raise 4x more capital for infrastructure. Could capture enterprise fine-tuning market but needs to outspend Nvidia's DGX Cloud service.
+
+Together.ai: best inference engine of the "race to bottom" group but fundamentally GPU-poor.
+
+Nvidia DGX Cloud
+
+Nvidia is building their own cloud service with enterprise AI customers: Amgen, Adobe, CCC, ServiceNow, Accenture, AstraZeneca, Getty Images, Shutterstock, Morningstar, plus undisclosed partnerships. Offers pre-trained models, fine-tuning frameworks, vector databases, inference APIs, and Nvidia expert support. "Everyone from Meta to Microsoft to startups is a pipeline of capital to Nvidia's bank account."
+
+Open Source Landscape
+
+GPU-poors are using dense LLAMA models (Meta's gift) despite MoE being more efficient. Without the incentive to be efficient on 10k+ GPU systems, open source researchers are solving the wrong problems. European startups and government supercomputers are "completely uncompetitive" — Jules Verne cluster is GPU-poor relative to US and China private investment. Saudi Arabia and UAE investing more in AI infrastructure than European governments.
+
+Can Google Save Us from Nvidia?
+
+Google is the only viable Nvidia alternative at scale. TPUv5 brings Gemini to competitive parity or ahead of GPT-4. Google AI Infrastructure Supremacy (systems over microarchitecture) enables 2x better performance/TCO than Nvidia. The question is whether Google has product and distribution execution to capitalize — Gemini launch will answer this.
+
+Investment Implication
+
+The GPU-rich/GPU-poor divide is widening and will not close. Frontier model training is a compute race, and the winners are locked in. For investors, the GPU-poor "picks and shovels" plays (HuggingFace, Together, Cohere) are structurally disadvantaged. The real picks-and-shovels are Nvidia (obvious), Broadcom (Google TPU), and TSMC/SK Hynix (manufacturing). Google's Gemini marks the end of OpenAI's unopposed frontier model leadership.

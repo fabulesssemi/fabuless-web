@@ -92,7 +92,7 @@ export function PriceChart({
           {changePct.toFixed(1)}%
         </span>
       </div>
-      <div className="rounded-xl border border-gray-200 bg-white p-3">
+      <div className="rounded-xl border border-[#DDDBD2] bg-white p-3">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full"

@@ -1,0 +1,34 @@
+TITLE: Amazon Anthropic: Poison Pill or Empire Strikes Back
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-10-01
+URL: https://www.semianalysis.com/p/amazon-anthropic-poison-pill
+
+Amazon invested $1.25B in Anthropic (convertible note converting at next funding round), with option for up to $4B more. Investment is likely in cloud credits, not cash — actual dollars out the door is much lower. Amazon does not get a board seat on Anthropic's 5-person Long-Term Benefit Trust.
+
+Amazon's AI Infrastructure Problem
+
+Amazon lagged all major hyperscalers in AI infrastructure buildout. Internal Titan model performing poorly. CodeWhisperer dominated by startups less than 1 year old. Poor Nvidia GPU allocations relative to cloud market share. Trainium/Inferentia poorly adapted for LLM workloads. Losing cloud market share to Azure and GCP in AI workloads. SemiAnalysis had detailed this in "Amazon's Cloud Crisis" report from March 2023.
+
+Deal Terms and IP
+
+Anthropic gives Amazon meaningful access to Claude models — current and future. Alleged meaty IP transfers: Amazon can build products leveraging Anthropic's technology. Alleged clawback provisions: Anthropic must make Amazon whole on investment within a few years via revenue sharing on AWS deployments. Structure similar to Microsoft/OpenAI (Microsoft gets 75% of profits until paid back, then 49% equity) but with more opaque terms and less direct customer control for Anthropic vs OpenAI's direct API/app distribution.
+
+Comparison to Microsoft/OpenAI
+
+OpenAI advantage: direct B2C and developer API distribution with high retention. ChatGPT.com and API have massive direct customer base independent of Azure. Anthropic disadvantage: lacks comparable direct distribution. Amazon will deploy Claude models on Bedrock at same time as Anthropic's own API — Amazon effectively front-runs Anthropic's customer relationships. Anthropic could end up ceding more economics than appears on surface.
+
+Trainium2 and Custom Silicon
+
+The deal includes a commitment for Anthropic to train on Trainium2 (Amazon's next-gen AI training chip, targeting H100-competitive performance). This gives Amazon a real large-scale customer to validate Trainium2 — critical for proving the chip before broader deployment. Inferentia3 roadmap also benefits.
+
+Google's Separate Investment
+
+Google invested $300M in Anthropic separately (at ~$29.5B valuation) — Google gets preferred status as Anthropic's cloud provider and Anthropic commits to use Google TPUs for training. Google is the only frontier AI lab that fully owns and controls its research org + custom silicon. Neither Microsoft nor Amazon have that level of integration.
+
+Claude 3 and Claude 4 Infrastructure
+
+Bounding box on model size: Claude 3 likely in GPT-4 parameter range or larger. Claude 4 will require substantially more training compute. Anthropic's compute dependency on Amazon and Google infrastructure — whoever provides the most compute gains the most leverage over Anthropic's roadmap.
+
+Investment Implication
+
+The deal is strategically essential for Amazon — without it, Amazon had no path to competitive foundation model access. The "poison pill" framing (Anthropic giving up control for compute survival) is partially true: Anthropic is betting its trajectory on Amazon's infrastructure. The deal accelerates Anthropic's ability to keep up with OpenAI and Google on training scale — the critical variable in the frontier model race. For Amazon, the return depends entirely on how widely Anthropic's models are adopted via Bedrock vs direct channels.

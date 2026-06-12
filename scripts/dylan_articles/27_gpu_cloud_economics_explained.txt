@@ -1,0 +1,44 @@
+TITLE: GPU Cloud Economics Explained – The Hidden Truth
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-12-04
+URL: https://www.semianalysis.com/p/gpu-cloud-economics-explained
+
+GPU clouds are significantly easier to operate than general-purpose clouds — no advanced database services, block storage, security guarantees for multi-tenancy, or complex virtualization. This low barrier to entry explains the explosion of 12+ new pureplay GPU clouds whose equity/debt proposals crossed SemiAnalysis desks in 2023.
+
+CPU vs GPU TCO — Why GPU Clouds Work
+
+CPU servers: Hosting costs (~$220/month) are roughly equal in magnitude to capital costs (~$301/month). Hyperscalers' lower PUE and datacenter efficiency advantages meaningfully impact CPU cloud economics.
+
+GPU servers (H100 HGX): Hosting costs (~$1,871/month) are dwarfed by capital costs (~$7,025/month). Nvidia's massive margins mean GPU servers are 20x+ more expensive than CPU servers per unit. The capital cost dominates so completely that a "relatively poor datacenter operator" can still build a competitive GPU cloud.
+
+PUE Impact: Hyperscale facilities approach PUE of 1.1. Colocation facilities average 1.4+. Newest GPU-purpose-built facilities target ~1.25. This difference is critical for CPU economics (hosting cost = large % of TCO) but nearly irrelevant for GPU economics (hosting cost = small % of TCO). A 15% hosting cost advantage for hyperscalers is worth ~$280/month on GPU vs $33/month on CPU.
+
+H100 Cloud Pricing
+
+All-in cost for a colocation GPU cloud provider with 13% cost of capital: ~$1.525/GPU/hour. Market pricing: $2-3/GPU/hour for H100. This implies ~30-100% gross margins for cloud providers at today's pricing. CoreWeave reportedly pitched customers on 8-year depreciation periods — "utter nonsense" per SemiAnalysis.
+
+Key Cost Variables
+
+Cost of capital (hurdle rate): Most important variable. 5% vs. 13% debt cost changes all-in GPU cost by ~15%.
+
+Depreciation period: 3 years is standard. Extending to 4-5 years reduces monthly capital cost but increases residual value risk as Nvidia releases new generations annually.
+
+Utilization rate: At 85% utilization, H100 costs ~$1.90/GPU/hour all-in. At 60%, cost rises to ~$2.70/GPU/hour. High utilization is critical — idle GPUs are pure cash burn.
+
+Networking: InfiniBand switches for large-scale training clusters add $200-400/GPU/month. For inference-only deployments, networking costs are minimal.
+
+Power density and cooling: GB200 NVL72 at 120kW/rack requires DLC (direct liquid cooling). Air-cooled alternatives (GB200A NVL36 at 40kW/rack) fit existing infrastructure at lower capex. DLC adds ~$50-100/GPU/month in infrastructure cost but enables higher rack density.
+
+Hyperscaler Disadvantages
+
+Hyperscalers (AWS, Azure, GCP) are actually disadvantaged for GPU cloud economics because:
+1. Their massive general cloud infrastructure runs at lower utilization than purpose-built GPU clouds
+2. They pay full retail for Nvidia GPUs unlike preferred customers like CoreWeave who get allocation priority
+3. GPU cloud software is simpler to operate, negating hyperscale software moats
+4. GPU workloads need fewer value-add services (storage, databases, networking)
+
+Third-party GPU clouds with cozy Nvidia relationships (CoreWeave, Lambda, Crusoe) receive better GPU allocations and can undercut hyperscale pricing.
+
+Investment Implication
+
+H100 cloud economics are attractive at today's pricing ($2/hour vs $1.52/hour all-in cost). The moat is not technology or infrastructure — it is GPU allocation relationships with Nvidia. Providers that Nvidia favors (by buying NVLink switches, optics, and committing to multi-year orders) get supply. Those that multi-source or build custom silicon face allocation penalties. The GPU cloud boom will end when Nvidia supply normalizes and GPU pricing drops — likely 2025-2026 as CoWoS capacity expands.

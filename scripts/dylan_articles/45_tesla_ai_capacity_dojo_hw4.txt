@@ -1,0 +1,42 @@
+TITLE: Tesla AI Capacity Expansion – H100, Dojo D1, D2, HW 4.0, X.AI, Cloud Service Provider
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-06-27
+URL: https://www.semianalysis.com/p/tesla-ai-capacity-dojo-hw4
+
+Tesla is increasing AI infrastructure capacity by 10x+ in 1.5 years — for both internal FSD/robotics and X.AI (Elon Musk's competitor to OpenAI).
+
+Tesla's AI Infrastructure Starting Point
+
+As of mid-2023: ~4,000 V100 GPUs + ~16,000 A100 GPUs — tiny vs Microsoft/Meta at 100,000+ GPUs. Weakness due to multiple D1 training chip delays. Now massively expanding: targeting top 5 AI compute capacity globally.
+
+Dojo D1 Chip
+
+Custom AI training ASIC fabbed by TSMC on InFO-SoW (Info on Wafer). 25 D1 chips are co-packaged on a single large fan-out wafer-scale package — enables known-good-die testing unlike Cerebras wafer-scale. D1 has no external memory (similar philosophy to Groq) — weights stored in on-chip SRAM supplemented by a separate memory extension card on PCIe.
+
+D1 architecture strength: optimized for convolutional neural networks (image/video) used for autonomous driving. Not well-suited for LLMs which are memory-bandwidth-bound. Tesla's use case (video segmentation, depth estimation, object detection) achieves better FLOPS utilization on D1 than on Nvidia GPUs. Nvidia's roadmap increasingly targets transformer/MoE architectures — D1's differentiation grows over time for Tesla's specific use case.
+
+D1 history: supposed to ramp in 2022, delayed multiple times due to silicon and system-level power delivery issues. Finally in volume production mid-2023.
+
+Dojo D2
+
+Next-generation Dojo chip: expected to improve significantly on D1 economics and performance. Will use a more advanced TSMC process node. Timing: 2024+.
+
+HW 4.0 (FSD Chip 2nd Generation)
+
+20-core Arm Cortex-A72 CPU (5 clusters × 4 cores) vs 12-core HW3. Three NPU cores: each 96×96 MAC grid = 9,216 MACs; total 27,648 MACs at 2.2 GHz = 121.65 TOPS. Memory: 16GB Micron GDDR6 at 14 Gbps on 128-bit bus = 224 GB/s bandwidth (3.3x bandwidth increase vs HW3). Two FSD chips per HW4 board. 256GB NVMe storage. AMD GPU/APU on same board as FSD (vs separate daughterboard in HW3). 12 cameras supported (11 active + 1 redundant) with two 5MP front cameras replacing three 1.2MP.
+
+Phoenix radar: in-house designed 76-77GHz radar using Xilinx Zynq FPGA for sensor fusion. Tesla paused radar on HW3 models to reduce cost; HW4 brings back radar as Phoenix combining camera+radar fusion for improved safety.
+
+Tesla believes pure camera sensing is sufficient for FSD — unlike Waymo/Cruise using LIDAR. HW4 represents a step toward camera+radar (without LIDAR) with stronger compute for larger models.
+
+X.AI Partnership
+
+X.AI is using Tesla's AI infrastructure for initial training runs. Elon Musk co-founded X.AI to compete with OpenAI. X.AI's first model (Grok) trained on Nvidia H100s inside Tesla's Memphis facility. Tesla's H100 ramp is partially serving X.AI training needs — the two organizations are intertwined under Musk's control.
+
+Tesla's Cloud Ambitions
+
+Tesla is considering offering excess AI compute as a cloud service — positioning as a GPU cloud provider in addition to AI end-user. Would compete with CoreWeave, Lambda, and potentially AWS/Azure for AI workloads. This depends on whether Tesla builds more infrastructure than needed for internal use.
+
+Investment Implication
+
+Tesla's Dojo investment ($2B+ planned through 2024) is primarily defensive — avoiding reliance on Nvidia GPU supply chain and building cost-efficient custom training infrastructure for proprietary FSD architecture. The cloud service provider aspiration is early-stage and speculative. HW4.0 is meaningful: 3.3x bandwidth improvement enables larger models for autonomous driving inference within the same car power budget. Tesla's AI competitive moat is data quantity (millions of vehicles collecting edge cases continuously) + custom silicon optimized for its specific model architecture — not general AI capability.

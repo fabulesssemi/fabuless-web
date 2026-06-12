@@ -1,0 +1,50 @@
+TITLE: Is Intel Back? Foundry & Product Resurgence Measured – Foundry Cost Wall, Whale Customers, Datacenter Share
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-04-02
+URL: https://www.semianalysis.com/p/intel-back-foundry-product-resurgence
+
+Intel's financial situation is dire — negative free cashflow, large net losses in 2022 and 2023, and continued market share losses in most major product segments. In the Datacenter segment, the former cash printing machine, share losses will continue until next year at minimum. If nothing changes, it's game over.
+
+The Decline: A Decade of Complacency
+
+Paul Otellini turned down the iPhone contract in 2007 due to apprehension over margins and underestimated volume projections. This led to Intel missing out on mobile — the last decade's largest growth area. Loss of mobile fed leading-edge volume growth to competitors, accelerating their R&D and high-volume manufacturing (HVM) learnings.
+
+By 2020, Intel's "state-of-the-art" 10nm was entering market at low volume, years behind TSMC's 7nm. TSMC was already shipping tens of thousands of 5nm wafers per month to Apple and Huawei. Intel's 3-year process lead had become a 2-year lag.
+
+The Systems Foundry Strategy
+
+Pat Gelsinger's Intel wants to be a systems foundry — not just a wafer foundry. Intel wants to provide everything: leading edge process nodes, hybrid bonding, EMIB, large format packages, advanced cooling, HBM base dies, connectivity IP (die-to-die adapters, SerDes, PCIe), and even NICs as chiplets for third-party vendors.
+
+Intel's restructuring creates a firewall between Intel Foundry (manufacturing) and Intel Product (design teams), each reporting its own P&L. Intel's goal is to be the 2nd largest foundry by 2030 — realistic given Samsung has been floundering after racing to 3nm gate-all-around at the expense of yield.
+
+Process Node Roadmap
+
+Intel 4/3: Intel claims Intel 4 has been "manufacturing ready" since December 2022, but the only released product is Meteor Lake's compute tile at ~70mm2 — smaller than most smartphone chips. Meteor Lake COGS estimated at 2x+ Raptor Lake. Total wafers run for Meteor Lake products: less than 20,000 wafers for a full year. Apple ships 45,000+ wafers per month on 5nm/3nm.
+
+Intel 18A: Includes PowerVia (backside power delivery), RibbonFET (gate-all-around transistors), new semi-damascene metallization. Intel claims performance-per-watt parity with TSMC N2, with process density advantage. Clearwater Forest test chip taped out using 18A logic chiplets on Intel 3 base die with EMIB and Foveros Direct (Cu-Cu hybrid bonding).
+
+Intel 14A (~2027): Uses High-NA EUV + directed self-assembly (DSA). Intel claims density advantage and wafer cost parity vs TSMC at this node. Designed to win mobile designs in addition to HPC. Intel will be first by years in High-NA EUV high-volume manufacturing.
+
+The Foundry Cost Wall
+
+Intel says they need $25B to $30B of capex per 10,000 wafers per week for new fabs. TSMC states $42B of capex per 10,000 wafers for 3nm Arizona. Building 150,000+ wafers per month of leading-edge capacity requires massive investment — all happening when Intel's core business profitability is at its weakest.
+
+Intel pulled accounting tricks: extended equipment depreciation periods from 5 to 8 years. Despite this, free cashflow has been negative for two consecutive years. Financing sources: traditional debt, government subsidies (CHIPS Act), the Brookfield Arizona co-investment deal, and potential future asset sale-leaseback arrangements.
+
+Pat Gelsinger: bad foundries should be valued at 2x net book value, best foundries at 5x+. Intel Foundry's net book value will reach ~$100B within a couple years. Intel may tap capital markets to plug the capital gap.
+
+TSMC's Self-Funding Flywheel (What Intel Lacks)
+
+TSMC's mature nodes — nodes where equipment is depreciated (>5 years old) — are enormously profitable because depreciation cost nearly disappears while revenue continues. These mature nodes fund leading-edge capacity expansions. Intel, as an IDM, deprecated nodes quickly (only internal customer) and never built this "forever node" cash engine. Now as a foundry, Intel can sustain demand for older nodes with external customers as internal demand declines, beginning to replicate TSMC's model.
+
+IP and EDA Ecosystem: Critical for Winning Customers
+
+Every leading-edge fab needs a #1 customer that fills the fab and proves out IP. For Intel 18A, the IP ecosystem is building: Arm, Synopsys, Cadence, Siemens, and Ansys are all investing in IP. Available IP includes Arm CPU cores, high-speed 112G and 224G SerDes, PCIe 6 and 7, and memory IP.
+
+Intel 18A has 1 known 224G SerDes tape-out (from Synopsys/Cadence). TSMC 3nm had 7 from major companies (Broadcom, Marvell, Nvidia, MediaTek, Alphawave, Synopsys, Cadence). The IP gap is real and takes years to close.
+
+The "whale customer" for Intel Foundry has been disclosed — believed to be a hyperscaler AI chip. Getting the right anchor customers who prove out the process and validate the IP ecosystem is the critical path to making Intel Foundry viable long-term.
+
+Datacenter CPU: Still Losing Share
+
+AMD Turin vs Intel Sierra Forest/Granite Rapids: AMD continues to hold performance-per-watt and core density advantages. Intel's goal is to leapfrog with 18A in high-volume products by end of 2025. Sierra Forest and Granite Rapids samples look decent to major customers but are not competitive enough to reverse share loss yet.

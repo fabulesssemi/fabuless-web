@@ -1,0 +1,54 @@
+TITLE: The Memory Wall: Past, Present, and Future of DRAM – Winners & Losers in the 3D DRAM Revolution
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-09-02
+URL: https://www.semianalysis.com/p/memory-wall-dram-future
+
+Moore's Law died over a decade ago with 0 fanfare — and it died first in DRAM. In the glory days, memory bit density doubled every 18 months, outpacing even logic. That translates to just over 100x density increase every decade. But in the last decade, DRAM scaling has slowed so much that density has increased just 2x.
+
+With the explosion in AI, the balance has been upset further. While logic chips have improved significantly in density and cost per transistor, improvements in DRAM speeds have been slow. High bandwidth memory (HBM), the backbone of accelerator memory, costs 3x or more per GB than standard DDR5. For the H100, ~50%+ of manufacturing cost is attributed to HBM, and with Blackwell this grows to ~60%+. The DRAM industry has hit a wall.
+
+DRAM Basics: 1T1C Architecture
+
+DRAM is built on the 1T1C memory cell — 1 transistor, 1 capacitor. The transistor controls access, the capacitor stores charge. A wordline energizes a row; a bitline connects to the column. Only the intersection of active wordline and bitline is read or written. Capacitors leak charge, requiring refreshes every ~32 milliseconds. At 8 stacks of HBM, each die must be thinned to 30 microns, requiring thermocompression bonding.
+
+Sense amplifiers at the end of each bitline detect the extremely small charges read from cells and amplify the signal to binary 1 or 0. The sense amp compares the active bitline to an inactive neighbor — reading and refreshing the cell simultaneously.
+
+DRAM scaling slowed by the end of the 20th century. Recent logic scaling delivers 30-40% density improvements every 2 years; DRAM now needs 10 years for a 2x density increase. More than 20 manufacturers produced DRAM in the mid-1990s; now the top 3 suppliers (Samsung, SK Hynix, Micron) own more than 95% of the market.
+
+HBM Roadmap
+
+HBM3E is the most valuable, highest-margin product the memory industry has ever produced — primarily because for large-model AI accelerators, no other DRAM is a viable alternative. SK Hynix can successfully produce HBM3E with their MR-MUF packaging while Samsung struggles with yield. Micron has a viable solution but needs to scale production.
+
+HBM4 is a few years away. Samsung and Micron claim up to 16-Hi stacks with 1.5 TB/s per stack — more than twice today's bandwidth at only 1.3-1.5x the power. HBM4 will change to 2048-bit width per stack. The base die will be fabricated on FinFET processes; SK Hynix has announced TSMC as their base die manufacturing partner.
+
+Custom HBM base dies for HBM4 will allow the memory interface to be optimized per customer. All initial HBM4 will not use hybrid bonding — yielding a bonded stack of 16+ die is not close to high-volume manufacturing-ready.
+
+Short-Term Scaling: 4F2 and Vertical Channel Transistors
+
+4F2 describes the memory cell area in terms of minimum feature size F. A 4F2 cell is only 2/3 the size of a 6F2 cell, offering a theoretical 30% density increase without scaling the minimum feature size. 4F2 is the theoretical limit for a single-bit cell. DRAM has used 6F2 layout since 2007.
+
+The key enabler for 4F2 is the vertical channel transistor (VCT). The transistor must be constructed vertically to fit in the cell footprint, stacking source (connected to BL below), channel (surrounded by gate and wordline), and drain (connected to capacitor above).
+
+CXMT, a Chinese vendor subject to US export sanctions, adopted VCTs and a 4F2 layout in their 18nm DRAM, demonstrated in late 2023. Their early adoption likely indicates difficulty scaling minimum feature size F — a sign they were pushed to more drastic architectural changes.
+
+Samsung's 4F2/VCT process uses wafer bonding similar to backside power delivery in logic: cell access transistors and bitlines are fabricated, the wafer is flipped and bonded to a support wafer, then thinned to expose the other ends of transistors for capacitor fabrication.
+
+Compute in Memory
+
+DRAM banks have incredible untapped performance potential. Each bank has 8 sub-banks of 64Mb. While supported by 8k sense amplifiers, only 1 in 32 sense amplifiers (256) are connected externally. Peak read/write capacity of a bank is ~256 Gb/s, with 32 banks per 16Gb chip giving full potential of 4 TB/s per chip. But the HBM interface bottlenecks this to 256 GB/s per die — only 1/16th of the underlying potential.
+
+DDR5 DIMMs expend more than 99% of read/write energy in the host controller and interface. HBM is roughly 95% interface, 5% memory cell read/write — still far from the full potential of DRAM.
+
+UCIe standard would allow 11 Tbps throughput per mm of edge — nearly 12x better than HBM3E — with energy per bit down from 2pJ to 0.25pJ.
+
+HBM4 with 3rd party base chips will unleash experiments: offloaded channel control, fabric extension on the interconnect, reduced energy per bit, daisy chaining to other rows of HBM, or to 2nd tier memory like LPDDR banks. Eliyan, funded by Micron and Intel, is spearheading their UMI interface for this purpose — attaching a custom ASIC base die to HBM stacks that handles memory controller and PHY functions.
+
+3D DRAM
+
+The DRAM industry has hit a wall with traditional horizontal scaling. 3D DRAM — stacking DRAM cells vertically in a manner fundamentally different from HBM — is the next major revolution. Samsung's roadmap shows VCT under the "3D" banner. Winners and losers in the 3D DRAM revolution will be determined by which memory firms and equipment suppliers can make this transition.
+
+Key equipment beneficiaries: EVG and TEL for wafer bonding tools. Key materials: the single-source DSA materials supplier. Key architecture shift: CMOS logic bonded to DRAM stacks enables compute-in-memory approaches that could unlock orders-of-magnitude more effective bandwidth.
+
+Investment Implications
+
+Samsung's HBM yield problems are the critical near-term investor risk — their use of trailing 1α node and design issues are contributing to shockingly poor HBM3E yields. SK Hynix is the clear winner in current-generation HBM. Micron is the challenger to watch as they scale production. The memory appetite of AI accelerators will continue to grow — even as margins erode from new supply, demand growth offsets this. HBM4 custom base dies represent a new monetization opportunity for TSMC.

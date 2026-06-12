@@ -25,7 +25,7 @@ export function XQuotesCard({ quotes }: { quotes: Quote[] }) {
   if (!quotes.length) return null;
 
   return (
-    <div className="w-[34rem] shrink-0 hidden lg:flex flex-col border border-gray-200 bg-white">
+    <div className="w-[34rem] shrink-0 hidden lg:flex flex-col border border-[#DDDBD2] bg-white">
       <div className="border-b border-gray-200 px-3 py-1.5">
         <div className="text-[10px] font-bold uppercase tracking-widest text-[#111827]">
           Chip Twitter

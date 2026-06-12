@@ -1,0 +1,61 @@
+TITLE: Nvidia's Blackwell Reworked - Shipment Delays & GB200A Reworked Platforms
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-08-04
+URL: https://www.semianalysis.com/p/nvidia-blackwell-reworked-gb200a
+
+Nvidia's Blackwell family is encountering major issues in reaching high volume production, impacting production targets for Q3/Q4 2024 and first half of 2025. Nvidia's Hopper is extended in lifespan to make up for a chunk of the delays. Product timelines for Blackwell are pushed out, but volumes are affected more than first shipment timelines.
+
+The core issue impacting shipments is directly related to Nvidia's design of the Blackwell architecture. The Blackwell package is the first high-volume design packaged with TSMC's CoWoS-L technology.
+
+CoWoS-L vs CoWoS-S
+
+CoWoS-S uses a passive silicon interposer — a massive slab of silicon. TSMC has scaled CoWoS-S to ~3.5x reticle-sized interposers with AMD's MI300, but this is the practical limit. Silicon is brittle, and handling very thin large silicon interposers gets harder as they grow. More reticle stitching adds cost.
+
+CoWoS-L uses an RDL interposer with local silicon interconnects (LSIs) and bridge dies embedded in the organic interposer to handle die-to-die communication. Organic interposers are not brittle, but lack the electrical performance of silicon alone. Silicon bridge dies supplement signal density. CoWoS-L is a much more complex technology but is the future for next-generation AI accelerators.
+
+Why Blackwell Is Delayed
+
+Two critical issues:
+
+1. Bridge die placement: embedding multiple fine bump pitch bridge dies in an organic interposer causes coefficient of thermal expansion (CTE) mismatch between silicon dies, bridges, organic interposer, and substrate — causing warpage. The bridge dies between the two main compute dies are critical for supporting the 10 TB/s chip-to-chip interconnect. These bridges need to be redesigned. The top few global routing metal layers and bump configuration of the Blackwell die itself are also rumored to require redesign.
+
+2. CoWoS-L capacity shortage: TSMC built up large CoWoS-S capacity over recent years with Nvidia taking the lion's share. Now with Nvidia rapidly moving demand to CoWoS-L, TSMC is simultaneously building a new fab (AP6) for CoWoS-L and converting existing CoWoS-S capacity at AP3. This conversion makes the ramp very lumpy.
+
+The B200A and B102 Die
+
+To satisfy demand, Nvidia is introducing the B200A based on the B102 die — a single monolithic compute die with 4 stacks of HBM. The B102 can be packaged on CoWoS-S instead of CoWoS-L, or even Nvidia's other 2.5D packaging suppliers (Amkor, ASE SPIL, Samsung). This immediately unlocks more supply. The B102 is also the China version of Blackwell, called B20.
+
+The B200A replaces B100 and B200 for HGX 8-GPU form factors. It comes in 700W and 1000W configurations with up to 144GB of HBM3E and up to 4 TB/s of memory bandwidth (notably less memory bandwidth than H200).
+
+The MGX GB200A Ultra NVL36
+
+Nvidia's new flagship air-cooled system: 36 GPUs, 40kW per rack, fully air cooled. Nine compute trays (2U each, one Grace CPU, four 700W B200A GPUs each) and nine NVSwitch trays (1 NVSwitch ASIC per tray at 28.8 Tbit/s).
+
+Unlike GB200 NVL72/NVL36x2, there is no C2C interconnect between Grace CPU and Blackwell GPUs — GPUs and CPU are on separate PCBs, connected via ConnectX-8 PCIe switch. NVLink bandwidth per GPU is 900 GB/s per direction — same as GB200 NVL72.
+
+The 40kW air-cooling target requires specially designed heatsinks. The H100 at 700W uses a 4U heatsink, and H200 at 1000W uses 6U. The B200A NVL36 at 700W in a 2U chassis is extremely constrained — a balcony-style heatsink that expands horizontally is required.
+
+Fan power will consume 15-17% of total system power, versus 6-8% for HGX H100. This dramatically worse energy efficiency is the tradeoff for eliminating liquid cooling dependencies.
+
+Why NVL64 Was Cancelled
+
+Nvidia also designed a proposed NVL64 (64 GPUs, 4 NVSwitch ASICs per tray), but it is infeasible:
+- Power density ~70kW per rack — impossible to air cool without rear door heat exchangers
+- Four NVSwitch ASICs in a single 1U chassis would generate ~1,500W blocked by Ultrapass flyover cables
+- Port mismatch: 64 GPUs vs 72-port switches leaves 16 ports empty per switch
+- 64 GPUs is a bad hot-spare topology: reserving 1 tray as spare leaves 60 GPUs — not a power-of-2 factoring
+
+NVL36 was chosen: reserving 1 spare tray leaves 32 contributing GPUs with clean 2/4/8/16 parallelism factors.
+
+Supply Chain Impact
+
+Major component changes vs GB200 NVL72/NVL36x2:
+- No liquid cooling supply chain requirement (CDUs, quick disconnects, manifolds, sidecars)
+- 3D vapor chamber heatsinks required instead — specialized balcony-style design
+- Fans running at extremely high speeds — 15-17% of power
+- ConnectX-8 mezzanine approach: GPUs talk to CPU via PCIe switch rather than C2C
+- Essentially impossible to use custom backend NICs on NVL36 due to thermal constraints
+
+Hyperscaler buying: GB200 NVL72/NVL36x2 remains most attractive for models >2 trillion parameters. MGX NVL36 is the sweet spot for datacenters lacking liquid cooling infrastructure or permits. HGX Blackwell volumes dramatically reduced outside of hyperscaler rental use cases.
+
+Blackwell Ultra (B210/B200 Ultra) follows: memory upgrade to 288GB of 12-Hi HBM3E plus up to 50% more FLOPS. B200A also gets an Ultra version without a memory upgrade but potential die FLOPS increase.

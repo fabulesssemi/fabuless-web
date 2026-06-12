@@ -1,0 +1,40 @@
+TITLE: TPUv5e: The New Benchmark in Cost-Efficient Inference and Training for <200B Parameter Models
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-09-01
+URL: https://www.semianalysis.com/p/tpuv5e-google-inference-training
+
+TPUv5e is generally available from Google Cloud. It is a game changer for cost-efficient inference and training for sub-200B parameter models. It enables Google to inference larger models than OpenAI at the same cost as OpenAI's smaller models.
+
+TPUv5e Architecture
+
+Single Tensor Core (vs TPUv5 full which has 2). Half the HBM stacks of TPUv5, lower HBM speeds. Neutered networking vs TPUv5. Die area: ~325mm². 197 BF16 TFLOPS, 393 INT8 TOPS. 16GB HBM2E at 3200MT/s = 819.2 GB/s memory bandwidth. Pod: up to 256 TPUv5e chips in 4 dual-sided racks (8 sleds per side). Each sled: 4 TPUs + CPU + 100G NIC.
+
+Networking
+
+Each TPU connects to 4 neighbors (N/S/E/W) at 400Gbps ICI (Inter-Chip Interconnect) = 1.6T aggregate bandwidth per chip. No OCS inside a pod (unlike TPUv4/v5 full) — flat topology, lower system cost. Multi-pod connectivity via datacenter spine Ethernet through OCS. Google confirmed 128+ pods (32,768+ TPUv5e chips) in a single datacenter. 6.4T pod-to-pod Ethernet per sled.
+
+Cost Advantage
+
+Training GPT-3 cost: TPUv5e pod significantly cheaper than A100 or H100 equivalent for equivalent throughput. At Google's internal cost (no margin paid to Nvidia), TPUv5e delivers ~2x better performance per dollar vs H100 for sub-200B dense models. For inference of LLAMA-65B: TPUv5e achieves lower cost per token than A100 at all batch sizes above break-even. Latency performance shared with subscribers.
+
+Google's TCO Model
+
+Google designs TPUs to optimize total cost of ownership rather than peak FLOPS. Lower power per chip means lower cooling and electricity costs over 4+ year chip lifetime. Capex for TPUs is low (no Nvidia margin paid — Google buys from Broadcom at cost + margin). Nvidia's model: maximize performance, charge massive margins, let customers accept high Capex. Google's model: moderate FLOPS, low Capex, low Opex.
+
+This means Google can afford to use 3-5x more chips than OpenAI for the same model inference cost — which translates to serving larger models at equivalent cost. Gemini models are larger than GPT-4 equivalents at the same inference cost for Google.
+
+Software Ecosystem
+
+JAX + XLA: optimal performance path. PyTorch + XLA backend: nearly equivalent performance — minimal code changes needed for most LLMs. Inference of standard LLM architectures (LLAMA, Mistral, GPT variants) is as easy or easier than Nvidia GPU due to TSMC mature compiler stack vs TensorRT-LLM complexity. Google recently made TPUv5e available for external customers via Cloud TPU — standard per-chip pricing with linear scaling from 1 to 256 chips.
+
+Hilariously, it makes economic sense for OpenAI to use Google Cloud TPUv5e for some inference rather than A100/H100 on Azure, despite their Microsoft deal — the economics are that compelling. Political/business reasons prevent this from happening.
+
+Comparison to Custom Silicon Landscape
+
+Amazon Trainium/Inferentia2: not competitive for LLM inference. Microsoft Athena (Maia 100): still unannounced at time of publication (Nov 2023). Meta MTIA: inference-focused, not competitive with TPUv5e at scale. Intel Gaudi2/3: behind on software stack.
+
+Google lead: 2+ year head start on systems-level optimization. TPUv5e pod as a unit of inference deployment enables economies of scale unavailable to single-GPU providers.
+
+Investment Implication
+
+TPUv5e is the clearest evidence of Google's infrastructure superiority for AI workloads. The cost advantage is structural — not just product-cycle timing. Google can price Gemini inference cheaper than OpenAI while serving a larger model. The question is whether Google has the distribution and product execution to capitalize on its infrastructure lead — the Gemini launch demonstrated they do.

@@ -1,0 +1,52 @@
+TITLE: Energizing AI: Power Delivery Competition - Vicor, MPS, Delta, ADI, Renesas, Infineon
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-07-31
+URL: https://www.semianalysis.com/p/energizing-ai-power-delivery
+
+AI accelerators are reaching 700W+ TDP (H100) vs 200W for typical datacenter CPUs. Next-generation chips target >200kW at rack level vs 15-20kW for CPU racks. Power delivery architecture is being redesigned from rack to chip level to maintain efficiency.
+
+Power Delivery Fundamentals
+
+Ohm's Law key relations: P = I×V (power = current × voltage); P = R×I² (loss = resistance × current squared). Silicon runs at ~0.8-1.0V DC. Delivering power at lower voltages requires dramatically higher currents. At 0.8V/700W GPU: 875A of current (15x the 60A at 12V input). Loss scales as I² — 15x current increase means 225x higher resistive losses for same trace length. Solution: step down voltage as close as possible to the silicon.
+
+48V Architecture
+
+Google pioneered datacenter 48V in 2016 and pushed for OpenCompute standardization. At 48V vs 12V: 4x less current needed → 16x (4²) lower I²R losses. Step down from 48V to 0.8V as close to the chip as possible, minimizing high-current trace length. Vicor was the primary beneficiary of 48V adoption — first to market with 48V VRM products for compute applications.
+
+Vicor Rise and Fall
+
+Vicor's first mainstream design win: Nvidia V100 SXM3 (2018). Also designed into A100 entire lineup and Google TPU. Appeared to be the structural winner of 48V power delivery. Disruption: SemiAnalysis first reported Monolithic Power Systems (MPS) designed Vicor out of H100 GPU. This caused Vicor stock to fall 20%+ immediately and 30% more over the following year. H100 is ramping massively — Vicor has no H100 revenue.
+
+Key Technical Battle
+
+Vicor's Factorized Power Architecture (FPA): separates voltage transformation (PRM) from regulation (VTM), enabling highly efficient 48V→chip voltage conversion. Vicor's Vertical Power Delivery (VPD): places power conversion directly underneath the chip die — dramatically reduces trace length and I²R losses.
+
+MPS advantage: successfully qualified into H100, lower price, competitive efficiency. Vicor CEO made public statements about a new design win in customer's "base platform" — stock short-squeezed. SemiAnalysis assessment: claims are premature, no confirmed orders at time of report.
+
+Competing Vendors
+
+Monolithic Power Systems (MPS): Won H100. Strong in isolated power stages and integrated VRM solutions. Fastest-growing threat to Vicor.
+
+Delta Electronics: Rack-level power solutions (48V HVDC to rack-level conversion). Strong hyperscaler relationships for power shelf products. Not a direct chip-level VRM competitor.
+
+Renesas: Multi-phase PWM controllers and power stages. Competing for CPU and GPU VRM sockets. Investing in 48V to point-of-load products.
+
+Infineon: Power stages for GPU and CPU VRMs. Strong presence on AMD CPU platforms. Competing for Nvidia AI accelerator sockets.
+
+Analog Devices (ADI): PMBus controllers and telemetry — power management software layer rather than primary conversion. Sticky position in fleet-level power monitoring.
+
+Google TPUv5 Power Delivery
+
+TPUv5 reportedly uses a different power delivery architecture vs TPUv4. Details of whether Vicor is in TPUv5 are in the full report. Key insight: Google's low-power-per-chip philosophy (vs Nvidia's high-power approach) changes VRM requirements — lower current at chip level means less stringent requirement for Vicor's VPD approach.
+
+Legal Battles
+
+Vicor filed lawsuits against competitors for alleged patent infringement on FPA and VPD technologies. Outcome uncertain but signals Vicor is fighting to protect its technical lead via IP rather than just product execution.
+
+Automotive Opportunity
+
+Vicor targeting automotive 48V architecture as next large market — electric vehicles increasingly using 48V subsystems. This is a potential growth vector independent of AI exposure. Competition in automotive from established players (Infineon, ON Semi, STMicro).
+
+Investment Implication
+
+Vicor lost the most important design win of the AI era (H100). MPS is the primary beneficiary. Vicor's 48V VPD technology is genuinely superior for high-power chips but power delivery is increasingly commoditizing. B100/B200 at >1kW per chip creates an opportunity for VPD to regain relevance — the case for Vicor is that extreme power density makes their vertical delivery architecture non-optional. MPS remains the execution leader for current generation.

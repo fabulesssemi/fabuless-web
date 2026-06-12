@@ -1,0 +1,50 @@
+TITLE: Hybrid Bonding Process Flow - Advanced Packaging Part 5
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-02-08
+URL: https://www.semianalysis.com/p/hybrid-bonding-process-flow-advanced-packaging-part5
+
+Hybrid bonding is the most transformative innovation in semiconductor manufacturing since EUV — it will have an even larger impact on design flows, branching from package architecture down to cell design and layouts. It enables a new era of 3D chip design where designers think vertically.
+
+What Is Hybrid Bonding?
+
+Hybrid bonding is a bumpless die-stacking technology that uses direct copper-to-copper connections instead of solder bumps. Both dies have copper pads that are directly bonded together with no intermediate material. The bond is "hybrid" because it combines a dielectric-dielectric bond and a direct copper-to-copper bond simultaneously. Interconnect pitch can scale below 10 microns, with roadmaps to the sub-micron regime. This delivers dramatically lower resistance and lower power versus solder bump interconnects, and enables orders of magnitude more die-to-die connections.
+
+AMD's 3D V-Cache uses TSMC's SoIC-X die-to-wafer hybrid bonding. The hybrid bond layer sits on top of the metal layers. The dielectric (SiO or SiCN) is patterned with copper pads at sub-10 micron pitch. Through Silicon Vias (TSVs) connect metal layers through the transistor layer to the adjacent die.
+
+Key Process Conditions
+
+Particles: A 1-micron particle causes a bond void of 10mm diameter. Hybrid bonding requires Class 1/ISO 3 cleanrooms or better — TSMC and Intel target ISO 1-2. OSATs lack this infrastructure, making hybrid bonding a front-end process dominated by leading-edge foundries.
+
+Surface smoothness: Dielectric roughness must be ≤0.5nm; copper pads ≤1nm. CMP (chemical-mechanical planarization) is the critical step. Copper pads are intentionally recessed ~5nm below the dielectric surface before bonding.
+
+Wafer-to-Wafer (W2W) vs Die-to-Wafer (D2W)
+
+W2W bonds entire wafers together with separate alignment and bonding chambers. Achieves sub-50nm alignment accuracy. High throughput, clean process. Currently used for image sensors (Sony, Omnivision, Samsung), 3D NAND (YMTC, Western Digital, Kioxia), and Graphcore Bow IPU. Limitation: cannot perform known-good-die (KGD) selection — high die yields required.
+
+D2W singulates KGD from the top wafer and places them individually onto the base wafer. More complex — die singulation generates particles. Requires plasma or laser dicing (not blade). AMD's 3D V-Cache is the primary D2W logic application. Process involves 5 bond steps per AMD V-Cache chip. D2W is more expensive at small die sizes but economical for large, lower-yield dies where W2W waste is prohibitive.
+
+Process Flow
+
+TSV Formation: Via-middle TSVs are etched via DRIE, insulated with CVD SiOx/SiNx, barrier deposited (Ti/Ta), copper seed via PVD, filled via ECD. TSV formation is a bottleneck limiting HBM and CoWoS production.
+
+Hybrid Bond Layer: SiCN deposited via PECVD. Holes patterned via lithography and etched. Copper damascene process fills pads. Multiple CMP steps achieve correct copper dishing profile (initially recessed ~5nm).
+
+Activation and Cleaning: N2 plasma activates surface to increase hydrophilicity and enable hydrogen bonding for the initial dielectric pre-bond at room temperature. Final DI water megasonic clean removes particles.
+
+Bonding (W2W): EVG SmartView alignment technology uses two calibrated cameras above and below the wafer pair to achieve sub-50nm registration. Wafers are pressed in bonding chamber for ~20 minutes for initial pre-bond. Post-bond acoustic inspection; bond can be reworked if misaligned.
+
+Annealing: High-temperature anneal (typically 200-400°C) drives copper out of recess to form the Cu-Cu bond while the initial dielectric bond strengthens. This is where the true hybrid bond is completed.
+
+Equipment Landscape
+
+Key equipment vendors: BESI (D2W pick-and-place, SemiAnalysis has a non-consensus view on BESI), EV Group (W2W bonders, SmartView alignment), ASMPT, SET, Shibaura, SUSS Microtec (D2W bonders), Tokyo Electron (CVD/etch/clean), Applied Materials (PVD/CVD/CMP/etch), AMAT Endura (in-situ TSV metal deposition), DISCO (laser/plasma dicing — stock tripled after SemiAnalysis recommendation).
+
+Current Applications and Adoption
+
+W2W: Mass-market for CMOS image sensors and 3D NAND. Logic use is limited to Graphcore Bow IPU (passive capacitor top die).
+
+D2W: AMD 3D V-Cache (2022) remains the primary commercial logic adopter. Future applications include AI accelerator HBM replacement with face-to-face logic stacking, compute-in-memory, and sub-1-micron pitch chip-to-chip connections. TSMC N2 process has custom D2W hybrid bonding integration options for customers including Apple and Nvidia for next-generation products.
+
+Investment Implication
+
+Hybrid bonding will reshape IP ecosystems, EDA tooling, and the packaging equipment supply chain. OSATs face structural disadvantages due to cleanroom requirements. TSMC and Intel have dominant positions. The transition from D2W collective reconstitution to direct D2W will accelerate as alignment tools improve. HBM4 will shift from TCB/MR-MUF to hybrid bonding for the base die stack — a major process flow change affecting equipment vendors.

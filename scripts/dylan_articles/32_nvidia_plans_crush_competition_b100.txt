@@ -1,0 +1,42 @@
+TITLE: Nvidia's Plans To Crush Competition – B100, H200, 224G SerDes, Co-Packaged Optics, PCIe 7.0
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-10-09
+URL: https://www.semianalysis.com/p/nvidia-plans-crush-competition-b100
+
+Nvidia is moving to annual AI GPU cadence — B100 accelerated timeline forces AMD to cancel MI350X. Strategy: transcend GPU comparisons to become peer of Google, Microsoft, Amazon, Meta, Apple.
+
+Supply Chain Mastery
+
+Nvidia holds $11.15B in purchase commitments and $3.81B in prepaid supply agreements — no competitor comes close. This secures HBM (SK Hynix, Samsung, Micron — Nvidia crowds out everyone except Broadcom/Google), CoWoS capacity at TSMC and Amkor, and downstream components (retimers, DSPs, optics). Nvidia uses allocation leverage: preferential H100 supply to customers who buy NVLink switches, InfiniBand, DGX systems, and Nvidia optics. OEMs must buy L40S to get better H100 allocation (same game Nvidia played with gaming GPU tiers historically).
+
+Anti-competitive Practices
+
+Nvidia's InfiniBand NICs (ConnectX-7) have deliberately shorter lead times than equivalent Ethernet NICs (same silicon, different SKU). Forces customers toward more expensive InfiniBand switches. Exception if buying Spectrum-X Ethernet with Bluefield-3 DPUs. L40S being pushed to OEMs with misleading framing (higher FLOPS than A100, but 1/2 the memory bandwidth and no NVLink — unusable for LLM inference). MGX modular server platform commoditizes OEM server design, compresses OEM margins while expanding Nvidia's ecosystem control.
+
+H200 Roadmap
+
+H200 SXM: same H100 GPU die, upgraded to 141GB HBM3E at 4.8 TB/s (vs H100's 80GB HBM3 at 3.35 TB/s). ~1.75x memory bandwidth improvement vs H100. Ships Q4 2023. Directly targets MI300X's memory bandwidth advantage.
+
+B100 Roadmap
+
+B100: TSMC 4NP process (N4 variant). Blackwell architecture. ~2x H100 compute. New NVLink 5 at 1.8 TB/s per GPU (2x NVLink 4). CoWoS-L packaging for larger die. GB200 = B100 GPU + Grace CPU + NVLink 5 scale-up fabric. Annual cadence forced by competitive pressure from AMD MI300 and Google TPUv5.
+
+"X100" (Post-Blackwell)
+
+Next generation after B100 on TSMC 3nm/N3 variant. Annual cadence continues. Codename not publicly confirmed but roadmap shows 2025 timeframe.
+
+224G SerDes and Networking
+
+Nvidia developing 224G SerDes for NVLink 5 and future scale-out. 1.6T per port (8×200G) becomes the next-generation standard. Co-packaged optics (CPO) development for next-gen NVSwitch — Nvidia developing CPO to eliminate pluggable transceivers from scale-up fabric entirely, reducing power and latency. Optical circuit switches (OCS) for scale-out: Nvidia investing in OCS technology to enable reconfigurable all-to-all network topologies for large-scale training clusters.
+
+PCIe 7.0 Planning
+
+PCIe 7.0 (128 GT/s) development beginning. Relevant for CPU-GPU connectivity in non-NVLink architectures. Nvidia supporting PCIe 6.0 on B100 for enterprise servers while prioritizing NVLink for AI clusters.
+
+AMD Response
+
+MI350X cancelled. MI400 development accelerated with new interconnect strategy (Open xGMI / Accelerated Fabric Link) to address Nvidia's bandwidth advantage. AMD/Broadcom UEC partnership for scale-out. Timeline: MI400 targeting 2025.
+
+Investment Implication
+
+Nvidia's annual cadence is its most powerful competitive weapon — compresses competitor product cycles and makes long-term capex commitments riskier for customers who might otherwise diversify. H200 directly addresses MI300X's key advantage (memory capacity). B100's NVLink 5 upgrade further widens the scale-up interconnect gap. Supply chain lock-in through allocation leverage is effectively anti-competitive but extremely difficult to challenge given Nvidia's product performance leadership.

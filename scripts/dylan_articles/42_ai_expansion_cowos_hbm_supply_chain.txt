@@ -1,0 +1,58 @@
+TITLE: AI Expansion - Supply Chain Analysis For CoWoS And HBM
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-07-25
+URL: https://www.semianalysis.com/p/ai-expansion-cowos-hbm-supply-chain
+
+CoWoS and HBM supply is the binding constraint on AI accelerator production — not wafer supply. TSMC's Advanced Backend Fab 6 in Zhunan (14.3 hectares — larger than all other TSMC packaging fabs combined) is ramping. This report covers 28 upstream suppliers required for CoWoS and HBM production.
+
+CoWoS Process Flow
+
+Silicon interposer fabrication: blank silicon wafer → TSV etch via DRIE → CVD insulation/barrier (SiOx, SiNx, Ti/Ta) → PVD copper seed → ECD copper fill → RDL deposition (SiO2 or low-k dielectric via PECVD) → litho patterning → RIE etch → Cu/Ti sputter + ECD plating → CMP → repeat for additional RDL layers → UBM pad formation → copper pillar + solder cap.
+
+Chip on Wafer: flux application → flip-chip bonder places logic + HBM dies → mass reflow oven → underfill dispense + cure → molding compound (encapsulation) → CMP to smooth → flip + grind/polish interposer backside to 100μm to reveal TSVs.
+
+Wafer on Substrate: C4 solder bump formation on interposer backside → dice → flip-chip attach to organic package substrate.
+
+TSV Formation Bottleneck
+
+TSV formation is bottlenecking HBM and CoWoS production. High-aspect-ratio DRIE is slow. TSV formation for silicon interposers and HBM base dies is a key capacity constraint as volumes ramp. One reason customers are switching to CoWoS-R (organic RDL interposer) is to avoid expensive silicon interposer TSV processes.
+
+CoWoS Variants
+
+CoWoS-S: Silicon interposer with TSVs. Current production workhorse. Reticle stitching enables interposers up to 4× reticle size for Nvidia H100 and AMD MI300.
+
+CoWoS-R: Organic substrate with RDL instead of silicon interposer. Lower cost, lower I/O density. AMD MI300 originally designed for CoWoS-R but switched to CoWoS-S due to warpage and thermal concerns with larger package size.
+
+CoWoS-L: Organic interposer with embedded silicon bridge for high-density die-to-die interconnect (TSMC equivalent of Intel EMIB). Enables packages beyond silicon interposer size limits. Ramping for Nvidia Blackwell (B100/B200). CoWoS-L super carrier at 6× reticle size in development vs 4× maximum for CoWoS-S.
+
+Equipment Suppliers by Process Step (28 vendors analyzed)
+
+Key winners from CoWoS ramp:
+- DISCO: laser/plasma dicing tools (stock tripled after SemiAnalysis recommendation)
+- Applied Materials: CVD, PVD, CMP, etch tools for interposer fabrication
+- Lam Research: DRIE for TSV, etch tools
+- Tokyo Electron: coaters/developers for litho, cleaning
+- KLA: metrology and inspection for CoWoS interposer
+- ASMPT: die bonding and flip-chip tools
+- Kulicke & Soffa: wire bonding (legacy) and advanced packaging tools
+- Entegris: advanced packaging chemicals and materials
+- Shin-Etsu / Sumitomo Bakelite: molding compounds (critical for MR-MUF yield in HBM)
+- Ibiden / Samsung Electro-Mechanics / TTM: ABF substrates
+
+Notably NOT benefiting as much as believed: some metrology companies whose tools are less critical for CoWoS vs front-end logic; wire bonding companies (CoWoS is flip-chip); some companies claiming AI exposure with limited direct CoWoS tooling.
+
+HBM Process Innovation
+
+HBM3/HBM3E bonding flow change: SK Hynix's MR-MUF (Mass Reflow Molded Underfill) is displacing TCB (Thermocompression Bonding) for HBM stacking. Key impact: one equipment vendor losing significant market share in HBM production. This information was proprietary at time of report.
+
+Samsung MR-MUF catching up to SK Hynix — Samsung has been shipping HBM3 starting H2 2023. Both use mass reflow + epoxy molding compound. SK Hynix maintains lead through co-engineered proprietary EMC materials.
+
+Nvidia CoWoS Capacity
+
+Nvidia has placed large wafer orders at TSMC die bank (partially processed wafers held at TSMC as WIP). Strategy: soak up TSMC's excess N4 utilization at discount, hold as die bank, pull forward when CoWoS capacity becomes available. This allows Nvidia to ramp shipments faster than CoWoS capacity additions alone would enable — the H100 GPU dice are already processed, only packaging is the bottleneck.
+
+Nvidia also secured Amkor CoWoS-equivalent capacity (InFO alternative packaging) for additional H100 supply — first major customer to leverage non-TSMC advanced packaging for AI GPUs.
+
+Investment Implication
+
+CoWoS capacity is the single most important supply chain constraint for AI accelerator production through Q1 2024. TSMC Advanced Backend Fab 6 ramp in Zhunan will add substantial capacity by H2 2024. Samsung, Intel, ASE/Amkor competing technologies gaining some volume from customers seeking supply diversification. Equipment vendors with CoWoS-specific process tools (DISCO, AMAT, Lam, KLA) are direct beneficiaries of the capacity expansion capex cycle.

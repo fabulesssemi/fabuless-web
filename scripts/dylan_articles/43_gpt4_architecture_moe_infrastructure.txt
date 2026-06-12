@@ -1,0 +1,43 @@
+TITLE: GPT-4 Architecture, Infrastructure, Training Dataset, Costs, Vision, MoE
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-07-10
+URL: https://www.semianalysis.com/p/gpt4-architecture-infrastructure
+
+GPT-4 is a closed architecture not because it is magic but because it is replicable. OpenAI's durable moat is real-world usage scale, leading engineering talent, and first-mover compounding on future models.
+
+Why MoE and Why It Matters
+
+Dense transformers cannot scale further on training cost — a 1T parameter dense model costs too much to train and cannot achieve acceptable inference throughput. GPT-4 uses a Mixture of Experts (MoE) architecture.
+
+MoE key property: at inference, only a small fraction of parameters activate per forward pass (2 of 8 experts, for example). This decouples training compute (full parameter count) from inference compute (active expert count). A 1.8T parameter MoE model with 8 experts activates ~220B parameters per token. Inference throughput: 8xH100 cannot serve a 1T dense model at human reading speed (33 tokens/sec) due to memory bandwidth requirements. An equivalent-quality MoE model achieves human-speed output.
+
+GPT-4 Architecture Details
+
+Parameter count: ~1.8T total parameters. Architecture: 8-expert MoE, 2 experts active per forward pass. Training token count and layer count: details from multiple sources, shared with subscribers. Training dataset: web crawl (similar to Common Crawl) filtered and cleaned, code data (GitHub), book data, scientific papers, and extensive RLHF post-training. Multi-modal vision encoder: separate vision transformer that encodes images into token-equivalent embeddings — fine-tuned separately then merged into language model training.
+
+Training Infrastructure
+
+Training runs: multiple A100 80GB GPU runs. Primary training cluster: ~25,000 A100s. Parallelism strategy: Tensor Parallelism (TP) × Pipeline Parallelism (PP) × Expert Parallelism (EP) × Data Parallelism (DP). TP splits attention heads across GPUs within a node. PP splits model layers across nodes via NVLink scale-up. EP distributes different experts to different GPUs — unique to MoE. DP replicates entire configuration across clusters for data throughput.
+
+Speculative Decoding Implementation
+
+Noam Shazeer (original Transformer paper, Switch Transformer/MoE, LaMDA, PaLM) proposed speculative decoding in 2018 — OpenAI implemented it for GPT-4 inference. Draft model (small, fast) generates look-ahead token predictions; reviewer model (GPT-4) validates/accepts in parallel. Enables multiple tokens per step at low batch size — critical for human-speed output from a 1.8T parameter model.
+
+Inference Infrastructure
+
+GPT-4 inference: TP8 within each node (NVLink), PP2 across nodes (IB), expert routing via EP across a pod. At batch size 1: ~2 active experts × activation parameter reads per token = ~220B parameters worth of memory bandwidth per token. 8xH100 (6.4 TB/s aggregate) achieves ~50-60 tokens/sec at batch 1 — human readable speed with speculative decoding boosting to effective 100+ tokens/sec output for many queries.
+
+Inference cost: ~$0.06/1,000 tokens at GPT-3.5 pricing was heavily subsidized. True cost of GPT-4 inference at launch was $0.30-0.60/1,000 tokens. Cost reductions from H100 deployment (higher bandwidth vs A100), speculative decoding, and software optimization reduced this to $0.06-0.10/1,000 output tokens by end of 2023.
+
+Why Training Cost Is Now Irrelevant
+
+GPT-4 training cost: ~$60-100M in compute. For Microsoft, Google, Meta at $10-50B AI capex commitments, training a frontier model is ~0.1% of annual compute spend. The bottleneck is NOT training cost — it's:
+1. Iteration speed (faster feedback loops from smaller intermediary models)
+2. Inference cost at scale (the real limiting factor for deployment)
+3. Data quality and diversity
+
+Every major lab will have GPT-4 class models in 12-18 months — pre-training is commoditized. The race is now at post-training (RLHF, RLAIF, Constitutional AI) and multi-modal capability.
+
+Investment Implication
+
+MoE is the dominant frontier model architecture going forward — enables scaling model capacity without proportional inference cost increase. H100's increased memory bandwidth vs A100 is most critical for MoE inference (expert activation patterns require fast parameter reads from many locations). AMD MI300X's large memory (192GB) is well-suited for GPT-4-class MoE inference because full expert parameter set must be in HBM. The inference infrastructure arms race (VLLM, TensorRT-LLM, custom kernels) is where competitive differentiation now lives.

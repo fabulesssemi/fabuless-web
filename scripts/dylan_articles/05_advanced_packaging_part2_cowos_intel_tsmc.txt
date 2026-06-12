@@ -1,0 +1,46 @@
+TITLE: Advanced Packaging Part 2 - CoWoS, InFO, EMIB, Foveros, HBM — Intel, TSMC, Samsung, AMD, ASE, Nvidia
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2022-01-06
+URL: https://www.semianalysis.com/p/advanced-packaging-part-2
+
+Advanced packaging exists on a continuum of cost and throughput versus performance and density. This deep dive covers every major advanced packaging type in production: TSMC InFO, CoWoS, Intel EMIB and Foveros, Samsung X-Cube, ASE FOEB, and hybrid bonding.
+
+TSMC InFO (Integrated Fan Out)
+
+Rather than using standard organic substrates with ABF films, TSMC uses silicon manufacturing techniques for redistribution layers (RDL). The layers are lithographically defined using Tokyo Electron, Veeco, and Applied Materials tools. This makes them smaller and denser than what most OSATs can produce. TSMC's highest volume InFO products are Apple iPhone and Mac chips.
+
+InFO-SoIS offers up to 14 redistribution layers enabling very complex routing between dies. InFO-SOW (system on wafer) allows fanout the size of an entire wafer packing dozens of chips — Tesla's Dojo compute tiles use this approach.
+
+CoWoS (Chip on Wafer on Substrate)
+
+CoWoS-S uses a passive silicon interposer. Known good dies are flip-chip packaged onto this wafer which has dense wires patterned in it. This is by far the highest volume 2.5D packaging platform. Nvidia's datacenter GPUs — P100, V100, A100, and H100 — all use CoWoS-S. Other major users include Broadcom, Google TPU, Amazon Trainium, AMD AI GPUs, and Habana Labs Gaudi.
+
+CoWoS supply has been severely constrained. Alchip (which assists firms using TSMC CoWoS) cannot even give financial guidance because TSMC told them not to, as "all the capacity is booked by tier 1 customers." Nvidia alone made $1.64B of prepayments to TSMC for CoWoS capacity in a single quarter, with another $1.79B coming. Nvidia gobbled up CoWoS supply — this packaging bottleneck is as important as chip supply.
+
+The silicon interposer in CoWoS must be lithographically defined, meaning it's subject to the reticle size limit. TSMC achieves larger interposers through "reticle stitching" — they can ship interposers 3x the reticle size. This is how they connect large GPU dies plus multiple HBM stacks that together exceed the 858mm2 reticle limit.
+
+Intel EMIB (Embedded Multi-Die Interconnect Bridge)
+
+Intel embeds a silicon bridge die within a cavity in an organic substrate. Unlike TSMC CoWoS which requires a full silicon interposer, EMIB uses existing organic laminate supply chains making it cheaper for designs that don't need full silicon substrate routing density. EMIB yields are near 100% (contrary to ASE's marketing claiming 80-90%). Intel's current EMIB is at 55-micron pitch, with 2nd gen at 45-micron and 3rd gen at 40-micron.
+
+EMIB has been shipping since 2018 in products including Kaby Lake G, FPGAs, Xe HP GPUs, and Sapphire Rapids server CPUs. Intel has the flexibility to design packages to function without EMIB and certain chiplets if SKU requirements don't demand them — saving bill of materials costs.
+
+Foveros (3D Stacking)
+
+Foveros involves both a base die and a top die containing active elements — not just wires. Intel's first Foveros product was Lakefield (June 2020) at 50-micron bump pitch. Ponte Vecchio GPU uses Foveros with 47 different active chiplets. Foveros Direct uses hybrid bonding (copper-to-copper) instead of bumps.
+
+Foveros Omni bridges EMIB and Foveros — it can function as an active bridge die, a die fully underneath another die, or overhanging. It uses copper pillar techniques enabling signal and power transport to different heights through dies. First Foveros Omni product is Meteor Lake client CPU.
+
+HBM and Hybrid Bonding
+
+All HBM uses thermocompression bonding (TCB). HBM dies must be extremely thin. SK Hynix's HBM3 stacks 12 DRAM dies with each die thinned to 30 microns. The only way to enable HBM stacking at this scale is TCB.
+
+Hybrid bonding (copper-to-copper direct bonding, no bumps) enables the densest die-to-die integration. The highest volume hybrid bonded chips are Sony CMOS image sensors — your high-end smartphone likely contains one. Sony ships 2-stack and 3-stack versions with pixel pitch down to 0.7 microns. AMD's 3D V-Cache (TSMC SoIC) uses hybrid bonding at 17-micron pitch.
+
+YMTC uses their Xtacking technology (wafer-to-wafer hybrid bonding) to stack CMOS periphery underneath NAND gates — allowing more NAND cells per given number of layers than Samsung, SK Hynix, Micron, Kioxia, or Western Digital.
+
+ASE FOEB
+
+AMD's MI200 GPU uses ASE's FOEB (Fan Out Embedded Bridge) packaging — different from both TSMC CoWoS and Intel EMIB. ASE uses a glass carrier panel rather than silicon, which is cheaper but carries some tradeoffs. FOEB does have advantages in routing density and die-to-package bump size through its fan-out approach, but is more costly than EMIB.
+
+Investment implications: CoWoS capacity is the binding constraint for AI GPU production, not wafer capacity. Companies that control CoWoS allocation — TSMC with Nvidia having priority — determine AI GPU supply. This is why Nvidia makes such large prepayments. The advanced packaging bottleneck is different from the fab bottleneck and often overlooked in semiconductor supply analysis.

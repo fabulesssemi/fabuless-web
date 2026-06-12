@@ -1,0 +1,54 @@
+TITLE: 100,000 H100 Clusters: Power, Network Topology, Ethernet vs InfiniBand, Reliability, Failures, Checkpointing
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-06-17
+URL: https://www.semianalysis.com/p/100000-h100-clusters-power-network-topology
+
+Multiple large AI labs — OpenAI/Microsoft, xAI, and Meta — are racing to build GPU clusters with over 100,000 GPUs. These clusters cost in excess of $4 billion in server capex alone. A 100,000 GPU cluster requires >150MW in datacenter capacity and consumes 1.59 terawatt-hours per year.
+
+On a 100k H100 cluster, peak theoretical AI training FLOPs would be 198/99 FP8/FP16 ExaFLOP/second — a 31.5x increase over the 20k A100 cluster that trained GPT-4. At 35% MFU on FP8, a 100k H100 cluster would take only four days to replicate GPT-4 training. A 100-day run achieves ~6e26 effective FP8 FLOP.
+
+Power Challenges
+
+Critical IT power for a 100k H100 cluster: ~150MW. Each H100 is 700W, but within each server CPUs, NICs, PSUs account for ~575W per GPU. Networking switches, storage, and other infrastructure add another ~10% in IT power.
+
+No single datacenter building currently has capacity for a new 150MW deployment — when people refer to 100k GPU clusters, they mean on a single campus, not building. xAI converted an old factory in Memphis Tennessee into a datacenter due to lack of other options.
+
+Parallelism and Network Design
+
+Tensor Parallelism (TP): every layer's work and weights distributed across GPUs across the hidden dimension. Multiple all-reduce operations per layer. Requires high bandwidth and extremely low latency. NVLink is the only network fast enough for efficient TP inside a server. Extending TP beyond 8 GPUs onto InfiniBand dramatically kills throughput — this is the "H200 bad hair day" that Nvidia exploited in the Blackwell keynote benchmark.
+
+Pipeline Parallelism (PP): each GPU holds a subset of layers. Heavy communication volume but less than TP. Used between nodes within the same island.
+
+Data Parallelism (DP): each GPU holds the full model copy, processes different data. No overhead between parallel instances — used between islands where bandwidth is lower.
+
+Expert Parallelism (EP): experts split among GPUs, attention replicated. All-to-All communication required. Less total communication overhead than pure TP.
+
+Network Topology Options
+
+Full fat tree is cost-prohibitive at 100k GPUs — requires 4 tiers of switching with exponential transceiver costs. Instead firms use "islands" of compute with full bandwidth within the island and oversubscribed inter-island connections.
+
+Hybrid InfiniBand + Frontend Ethernet: one major firm trains across multiple InfiniBand islands using frontend Ethernet for inter-island communication. Frontend Ethernet is cheaper but the bandwidth must be sized carefully — as MoE models grow, inter-island traffic explodes. This design requires careful topology-aware all-reduce: local reduce-scatter within each island, cross-pod all-reduce over frontend, then pod-level all-gather.
+
+Rail-Optimized Design: each H100 server connects to 8 different leaf switches so each GPU can reach distant GPUs with only 1 hop. Enables better all-to-all collective performance critical for MoE expert parallelism. Downside: requires optics between servers and leaf switches (not in same rack), single-mode transceivers if distance >50m.
+
+Middle-of-Rack (non-rail-optimized): leaf switch in same rack as GPUs, allowing DAC/AEC copper instead of optics for GPU-to-leaf connections. Replacing 98,304 optical transceivers with copper DAC cables saves 25-33% of GPU fabric optics cost. Copper runs cooler, uses less power, more reliable (less link flapping). A QM9700 switch uses 747W with copper vs 1,500W with multimode optics.
+
+Spectrum-X vs InfiniBand vs Tomahawk 5
+
+InfiniBand NDR (Quantum-2): 64 ports at 400G. Radix disadvantage vs Spectrum-X — at 100k GPUs requires 4 tiers vs 3 tiers with Spectrum-X, adding 33% more transceivers. Maximum fully interconnected GPUs with Quantum-2 is 65,536. Supports SHARP in-network reductions (2x theoretical bandwidth improvement). ConnectX-7 vs Bluefield-3 at $300 ASP delta, 50W more per card for Spectrum-X first gen.
+
+Spectrum-X Ethernet (SN5600): 128 ports at 400G — same as Tomahawk 5. Enables 3-tier topology at 100k GPUs. Requires Bluefield-3 for first gen (bandage solution). Adds 5MW power to a 100k cluster vs Tomahawk 5 due to Bluefield-3. Future Spectrum-X800 Ultra works with ConnectX-8.
+
+Broadcom Tomahawk 5: 128 ports at 400G. Same topology efficiency as Spectrum-X. Generic transceivers from any vendor — no Nvidia tax. Cheaper switches via ODMs like Celestica. Downside: requires significant in-house engineering to patch NCCL for optimal performance. Hyperscalers with $4B clusters have the engineering capacity for this.
+
+Reliability and Checkpointing
+
+Most common failure modes: GPU HBM ECC errors, GPU driver hangs, optical transceiver failures, NICs overheating. If each NIC-to-leaf-switch link had a mean time to failure of 5 years, the estimated time to first job failure on a 100k GPU cluster is only 26.28 minutes — without fault recovery the cluster would spend more time restarting than training.
+
+Traditional checkpoint recovery: pause training every ~100 iterations, save weights to CPU memory or SSD. When failure occurs, reload weights, lose up to 99 steps. On 100k cluster at 2 seconds/iteration, this loses up to 229 GPU-days of work per failure event.
+
+Fault recovery through memory reconstruction (RDMA copy): spare nodes RDMA copy from other GPUs' HBM memory over the backend fabric. At 400 Gbps with 80GB per GPU, copying weights takes ~1.6 seconds. Loss limited to 1 step (2.3 GPU-days) plus 1.85 GPU-days to RDMA copy. Implementing this adds multiple percentage points to MFU for large training runs.
+
+With GB200 NVL72, a single GPU failure or single optical failure takes the entire 72-GPU rack offline — a multi-million-dollar rack down from one component. Nvidia's RAS engine analyzes temperature, ECC retry counts, clocks, and voltages to predict upcoming failures and alert for proactive maintenance.
+
+Cedar-7 (Microsoft/OpenAI): single ConnectX-7 networking module per server serving all 8 GPUs via 4 OSFP cages with twin-port 2x400G transceivers instead of 8 single-port transceivers. Reduces transceiver count by half, raising estimated time to first job failure from 26.28 to 42.05 minutes.

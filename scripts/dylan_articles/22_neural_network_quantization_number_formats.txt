@@ -1,0 +1,76 @@
+TITLE: Neural Network Quantization & Number Formats From First Principles
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-01-11
+URL: https://www.semianalysis.com/p/neural-network-quantization-number-formats
+
+Quantization is responsible for a massive chunk of AI hardware efficiency improvements over the past decade. Nvidia claims it is the single largest component of the 1000x improvement in single-chip TOPS over 10 years — adding up to 16x improvement. By comparison, process node improvement from 28nm to 5nm contributed only 2.5x. Google is currently being sued for $1.6B-$5.2B for allegedly infringing on BF16.
+
+Number Format Fundamentals
+
+Unsigned integers (UINT): Base-2 representation from 0 to 2^n-1. UINT8 covers 0-255.
+Signed integers (INT): Two's complement allows same carry-adder circuitry for positive and negative numbers. INT8 covers -128 to 127.
+Fixed point: Integers with an implicit scale factor — no hardware changes needed.
+Floating point: Scientific notation in binary. IEEE 754 FP32 = (1,8,23): 1 sign bit, 8 exponent bits, 23 mantissa bits. BF16 = (1,8,7): same exponent range as FP32, less mantissa precision. FP16 = (1,5,10). FP8 variants: (1,5,2) for training, (1,4,3) for inference.
+
+Silicon Efficiency of Number Formats
+
+Integer multipliers: Area scales as n^2 (number of bits). Adders scale as n. Integer is always cheaper than floating point for area and power.
+
+Floating point multipliers: Cheaper for mantissa multiplication but the adder (alignment, shift, normalize) is extremely expensive. FP8 FMA requires 40-50% more silicon area than INT8 FMA.
+
+Result: Most dedicated ML inference chips use INT8 for the best area/power efficiency. Training requires FP8 or higher to maintain gradient accuracy.
+
+Representational Accuracy
+
+Neural network weight distributions are approximately normal/Laplace — concentrated near zero. Floating point is better than integer because it provides more representational density near zero. INT8 is a poor match for the actual distribution. FP8 (1,4,3) is better.
+
+Large language model activations exhibit extreme outliers that are rare but critical. These outliers break naive quantization schemes.
+
+Quantization Techniques
+
+Post-training quantization (PTQ):
+- Simple rounding: fastest but highest accuracy loss
+- LLM.int8(): transforms outlier weights to FP16, rest to INT8
+- GPTQ: uses second-order weight information
+- SmoothQuant: mathematically equivalent transformation to reduce outliers
+- AWQ: uses activation statistics to protect salient weights
+- QuIP: preprocesses weights to reduce quantization sensitivity
+
+Quantization-aware training (QAT): continues training with quantized precision, generally most effective but most compute-expensive.
+
+Block/Microscaling Number Formats
+
+Key insight: elements in adjacent tensor positions are often similar in magnitude. Sharing a single exponent across multiple values saves bits. Examples:
+- Nervana Flexpoint (early attempt)
+- Microsoft MSFP12
+- Nvidia VSQ (Vector Scaling Quantization)
+- OCP Microscaling Formats (MX4, MX6, MX9) — 2023 standard
+
+Log Number Systems: Nvidia proposed at HotChips as path to sub-8-bit. Better distribution match but extremely expensive adders.
+
+NF4/AF4: 4-bit lookup table optimized for normal distribution. Very expensive in area — each operation requires a large table lookup.
+
+Training in FP8
+
+Nvidia's FP8 training recipe:
+- All matmuls are FP8 × FP8, accumulated into FP32
+- Per-tensor scale factors required for each layer
+- Weight update must remain in FP32 (gradient update is tiny relative to weight value — needs precision to avoid rounding to zero)
+- Activation gradients can be INT8 in some formulations; weight gradients must be FP8(1,5,2) or higher
+- FP8 gradient has more extreme outliers than weights — harder to quantize
+
+Hardware Vendor Approaches
+
+Nvidia: FP8 on H100 with per-tensor scaling. Moving toward Microscaling/block formats for post-Blackwell generation. FP4 on Blackwell (B200) for inference — 2x throughput vs FP8.
+AMD: FP8 on MI300X. Block scaling with smaller tile sizes to reduce per-element overhead.
+Intel: FP8 and INT4 on Gaudi 3, BF16 on Ponte Vecchio.
+Google: BF16 on TPUv4/v5 — Google's bet on the wide exponent format. TPUv5 adds INT8 and possibly FP8.
+Microsoft: MAI-1 training uses BF16 on custom Maia silicon.
+Meta: MTIA uses INT8 and FP8 for inference.
+Qualcomm/Arm: INT8 edge inference in Hexagon DSPs.
+MatX: Custom training chip targeting improved FP8 efficiency with hardware co-design.
+Lemurian Labs: PAL (Posit-Arithmetic-Like) format claims better accuracy than FP16/BF16 at 16 bits and better distribution match than log formats at 4 bits — no hardware shipping yet.
+
+Investment Implication
+
+The race below 8 bits is accelerating. FP4 on Blackwell represents Nvidia's 2x FLOPS density boost for inference vs FP8. Block floating point / microscaling will dominate next-generation training chips. EDA tools and compiler support (MLIR, XLA, TensorRT) are critical bottlenecks as novel number formats multiply. Companies owning foundational number format IP (Qualcomm for INT8 training, potentially BF16 IP holders) may seek licensing revenues.

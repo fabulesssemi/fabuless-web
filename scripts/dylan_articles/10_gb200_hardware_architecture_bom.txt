@@ -1,0 +1,60 @@
+TITLE: GB200 Hardware Architecture - Component Supply Chain & BOM
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-07-16
+URL: https://www.semianalysis.com/p/gb200-hardware-architecture-component-supply-chain
+
+Nvidia's GB200 brings significant advances in performance via superior hardware architecture, but deployment complexities rise dramatically. There are dozens of different deployment variants with tradeoffs and significant complexity increases generation-on-generation. The supply chain gets reworked for end datacenter deployers, clouds, server OEMs/ODMs, and downstream component supply chains.
+
+The Four GB200 Rack Scale Form Factors
+
+GB200 NVL72: ~120kW per rack. 18 1U compute trays and 9 NVSwitch trays. Each compute tray has 2 Bianca boards (1 Grace CPU + 2 Blackwell GPUs each = 4 GPUs, 2 CPUs per tray). NVSwitch trays have 2 NVSwitch5 ASICs at 28.8 Tbit/s each. Requires liquid cooling.
+
+GB200 NVL36x2: Two racks side by side, ~66kW per rack (~132kW total). Still non-blocking all-to-all across 72 GPUs. Each compute tray is 2U with 2 Bianca boards. This is the primary time-to-market solution as most datacenters cannot support 120kW/rack even with direct-to-chip liquid cooling.
+
+GB200 NVL36x2 Ariel (Meta variant): Bianca board replaced with Ariel board — 1 Grace CPU per 1 Blackwell GPU (doubled CPU-to-GPU ratio). Designed for Meta's recommendation system workloads requiring more CPU and memory for embedding tables.
+
+x86 B200 NVL72/NVL36x2 (Miranda, Q2 2025): x86 CPUs replace Grace. Lower upfront cost but substantially lower CPU-to-GPU bandwidth (no C2C link at 450 GB/s). Total peak power higher as CPU and GPU cannot share power budget.
+
+The Bianca Board
+
+The heart of GB200 NVL72/NVL36x2. Contains 2 Blackwell B200 GPUs and 1 Grace CPU on the same PCB. The 1:2 CPU-to-GPU ratio vs GH200's 1:1 is deliberate — GH200 was too expensive; major customers said the CPU ratio was too high for their workloads.
+
+No PCIe switches or retimers between CPU and GPU in the reference design because they're on the same PCB — direct connection with low enough insertion loss. The ConnectX-7/8 NIC ICs sit directly on the Bianca board via Mirror Mezz connectors — same cold plate cools CPUs, GPUs, and NICs. DensiLink connectors route electrical lanes to OSFP cages at the chassis front.
+
+Coherent NVLink C2C between the two Bianca boards in the same compute tray operates at up to 600 GB/s bidirectional (300 GB/s unidirectional), enabling shared memory, storage, and NIC resources between the two CPUs per tray.
+
+NVLink Scale-Up Interconnect
+
+NVL72: flat 1-tier NVLink topology. Any GPU can reach any other GPU in the rack with 1 hop through NVSwitch. 5,184 direct-drive copper cables (Amphenol Ultrapass Paladin HD). Each GPU has 72 differential pairs at 200 Gb/s each = 900 GB/s unidirectional bandwidth.
+
+If optics were used instead: 648 1.6T twin-port transceivers at ~30W each = 19.4kW of just transceiver power per rack, plus ~$550,800 per rack in transceiver cost before Nvidia margin. This is why copper was chosen.
+
+NVL36x2 adds 162 1.6T twin-port horizontal ACC cables to connect NVSwitch trays between Rack A and Rack B, plus 324 DensiLink flyover cables. Total NVLink copper cabling costs more than double vs NVL72, but most customers choose NVL36x2 due to power and cooling constraints.
+
+GB200 NVL576: Connects 576 GPUs in a 2-tier fat tree with 18 planes. Uses copper backplane for L1 switching but optical connections between L1 and L2 NVSwitches. BOM cost for NVL576 NVLink interconnect alone exceeds $5.6M ($9,700/GPU), plus Nvidia margin making it untenable — the same reason DGX H100 NVL256 never shipped.
+
+Backend Networking (InfiniBand / Ethernet)
+
+Initial GB200 shipments use same ConnectX-7 as H100. ConnectX-8 (224G SerDes, 800G per port) ships Q2 2025 with Quantum-X800 QM3400 (144 800G ports). Enables shift from 400G SR4 multimode to 800G DR4 single-mode optical transceivers.
+
+Cedar-8 option: both ConnectX-8 NIC ICs from each Bianca board go into a single OSFP224 cage — reduces from four 800G single-port transceivers to two 1.6T twin-port transceivers, ~30% cost savings on optics, but cooling challenges likely limit adoption.
+
+Amazon exception: Using custom 400G backend NIC, requiring a dedicated PCIe switch (Broadcom or Astera Labs) and an adapter mezzanine board. Forces 2U NVL36 form factor, delays time to market.
+
+Key Optics Supplier Changes
+
+Nvidia expanding optical supply chain from primarily Fabrinet + Innolight to include Eoptolink. Eoptolink is focused on 800G LPO and 1.6T with DSP. DSP market: Marvell had ~100% Nvidia share in H100 generation; Broadcom enters in large way for Blackwell via Innolight and Eoptolink. Nvidia has taped out their own 1.6T DSP but power consumption challenges prevent near-term ramp.
+
+Frontend Networking
+
+Reference design: two 400G Bluefield-3 per compute tray (800G total per tray). Most customers won't pay for this. Oracle is likely the only major customer using Bluefield-3 as frontend NIC. Amazon, Google, Microsoft all use internal custom frontend NICs already. xAI uses Bluefield-3 in NIC mode (not DPU mode) as a bandage for first-gen Spectrum-X which requires Bluefield-3 for backend NICs.
+
+Liquid Cooling
+
+GB200 NVL72 at 120kW/rack requires direct-to-chip liquid cooling (DLC). This is the key adoption barrier — most existing datacenters max out at 20kW/rack. NVL36x2 at 66kW/rack still requires DLC but is more manageable.
+
+Cooling supply chain: Cooling Distribution Units (CDUs), quick disconnects (QDs), manifolds, cold plates, vapor chambers, sidecars. Key vendors impacted by GB200 ramp include liquid cooling CDU manufacturers and custom manifold suppliers. Meta halted datacenter projects to rescope them as AI-optimized facilities specifically to accommodate DLC requirements.
+
+Power Delivery
+
+48V DC from rack-level busbar steps down to 12V for Bianca boards via power distribution boards (PDB). 4 RapidLock 12V DC and 4 GND connectors per Bianca board supply 2,700W. VRM (voltage regulator modules) positioned near CPU and GPU on the Bianca board.

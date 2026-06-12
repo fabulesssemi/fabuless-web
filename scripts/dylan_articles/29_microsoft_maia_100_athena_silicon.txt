@@ -1,0 +1,40 @@
+TITLE: Microsoft Infrastructure - AI & CPU Custom Silicon Maia 100, Athena, Cobalt 100
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-11-15
+URL: https://www.semianalysis.com/p/microsoft-infrastructure-maia-100-athena
+
+Microsoft is conducting the largest infrastructure buildout in human history — >$50B annual datacenter spend planned for 2024 and beyond, targeting both AGI development and Copilot/Azure deployment. Two silicon announcements: Azure Cobalt 100 CPU and Maia 100 AI accelerator (also called Athena or M100).
+
+Azure Cobalt 100 CPU
+
+128-core Arm Neoverse N2 (Armv9) CPU with 12-channel DDR5. Based on two Arm Genesis CSS (Compute Subsystem) platforms bonded together — same approach as Alibaba's Yitan 710 (also Neoverse N2). Arm's Genesis CSS is a fully validated, pre-laid-out CPU subsystem that allows hyperscalers to build competitive Arm CPUs faster and cheaper than traditional custom design. Arm reported 13 months from project kick-off to working silicon for a hyperscaler customer (likely Microsoft). Neoverse N2 delivers 40% higher performance vs Neoverse N1.
+
+Current use: Azure SQL, Microsoft Teams internal workloads. Microsoft's prior Arm CPU was a licensed Neoverse N1 chip from Ampere. Cobalt 100 represents the first fully custom Microsoft CPU design.
+
+Azure Maia 100 (Athena)
+
+Microsoft is the last of the big 4 US hyperscalers to unveil an AI accelerator. Key specifications and comparison vs AMD MI300X, Nvidia H100/H200/B100, Google TPUv5, Amazon Trainium/Inferentia2 are proprietary in this report.
+
+Notable technical aspects:
+- Unique rack-level design: Maia 100 uses a novel thermal and power delivery architecture vs standard OCP server designs
+- Network topology: Azure Boost network adapter (200G DPU combining external FPGA + internally designed ASIC) handles host networking and storage offload
+- Unlike Amazon Nitro, Azure Boost still requires host CPU cores for infrastructure tasks — not a full offload architecture
+- Volume ramp: targeting internal OpenAI inference and Microsoft Copilot serving in 2024
+- Performance vs GPT-3.5: specific benchmarks available to subscribers
+
+Design partner: GUC (Global Unichip Corporation, TSMC subsidiary) confirmed as backend design partner for Maia 100. Fabricated on TSMC leading-edge node.
+
+Microsoft Silicon History
+
+Microsoft has a longer silicon history than commonly known:
+- Custom Arm CPU (E2) with custom EDGE ISA — even ported Windows to it
+- Semi-custom AMD chips for Xbox gaming consoles (continued partnership)
+- Project Catapult: multiple generations of FPGA infrastructure for Bing search and Azure networking — initially standard FPGAs, evolved to Intel custom FPGAs (scrapped due to Intel execution issues)
+- Azure Boost NIC DPU: current generation combines FPGA + ASIC
+- Root-of-trust silicon on every Microsoft server
+
+Next Generation: Microsoft MAI-1 (~500B parameter MoE model) reportedly in development, targeting performance competitive with GPT-4. Requires next-gen Maia silicon for training — timeline approximately 2025.
+
+Investment Implication
+
+Microsoft's custom silicon is defensive — primarily for inference cost reduction on Copilot products (OpenAI API integration). Maia cannot replace Nvidia for training at Microsoft's scale in the near term. The Azure Cobalt CPU is more immediately impactful — Arm CPU economics are proven (AWS Graviton delivers 40% better price/performance vs x86 for cloud workloads). Custom silicon moat is weaker for Microsoft vs Google (TPU) because Microsoft's moat is in models, data, and distribution — not infrastructure efficiency.

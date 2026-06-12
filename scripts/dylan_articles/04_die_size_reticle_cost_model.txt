@@ -1,0 +1,26 @@
+TITLE: Die Size And Reticle Conundrum – Cost Model With Lithography Scanner Throughput
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2022-06-18
+URL: https://www.semianalysis.com/p/die-size-and-reticle-conundrum
+
+The conventional wisdom is that bigger dies cost exponentially more due to defects. Larger die sizes increase costs because defects are more likely to affect the larger die. This is one of the major driving forces behind the chiplet revolution. But this conventional thought process can be completely wrong — a smaller die could be more costly to manufacture. Here's how.
+
+The biggest cost center in leading-edge semiconductor manufacturing is lithography. It makes nearly 1/3 of the cost of a processed wafer. That lithography cost differs widely based on what die size you choose.
+
+The standard photomask is 104mm by 132mm. A lithography tool exposes through the photomask to print features on the wafer at 4x reduction. That field is 26mm by 33mm. The key concept is reticle utilization rate — how much of that 26mm by 33mm field is actually being used by your chip design.
+
+If a die is 25mm by 32mm (800mm2), reticle utilization is very high — only 1mm wasted in each direction. If you instead go to a chiplet design with dies of 13.5mm by 32mm (432mm2), you can only fit 1 die per reticle (they're too wide to fit 2 side by side), leaving nearly half the reticle unused.
+
+A wafer placed in a lithography tool gets exposed one reticle field at a time. If the full 26mm by 33mm reticle is utilized, the tool steps over the 300mm wafer in the minimum number of steps — 12 fields wide and 10 fields tall. With the 13.5mm chiplet design, the tool must step over the wafer 1.875x as many times.
+
+Modern DUV and EUV tools have a slit (26mm) that is exposed while scanning across the reticle area. When comparing the monolithic design versus the chiplet MCM design, lithography tool time is up significantly because the wafer must be scanned 1.875x as much.
+
+In a hypothetical 5nm class node scenario: a foundry selling wafers for $17,000 (at ~50% gross margin) would need to charge $21,364 per wafer for the chiplet design to maintain margins, due to the $2,174 extra lithography cost per wafer from the underutilized reticle.
+
+Result: The defect-free silicon cost per die for the chiplet is $270 instead of $215, making the 2-chiplet product cost $541 vs the $567 monolithic. The decision between chiplet and monolithic becomes much closer once packaging costs and power overhead are added — it's not automatically better to go chiplet.
+
+Key insight for semiconductor investors: chiplet architectures don't always win on cost. The reticle utilization rate is a hidden cost driver that most analysis ignores. AMD's chiplet architecture for server CPUs works because their chiplet dimensions happen to have good reticle utilization. Designers who choose chiplet dimensions poorly can end up paying more per wafer than a monolithic approach.
+
+This matters most at 5nm and below where lithography is the dominant cost. At older nodes (28nm and below) with lower lithography intensity, the effect is smaller. But as the industry moves toward N2 and below, reticle utilization becomes even more critical because EUV costs per exposure continue rising.
+
+The conventional wisdom around "chiplets are always cheaper" is incomplete. Chiplets win when: (1) die sizes naturally have good reticle utilization, (2) yield improvement from smaller dies overwhelms the lithography overhead, and (3) packaging costs don't wipe out the savings. The reticle conundrum is why foundries like TSMC charge different prices for different die sizes even on the same process node.

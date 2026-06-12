@@ -1,0 +1,36 @@
+TITLE: Inference Race To The Bottom - Make It Up On Volume?
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-12-18
+URL: https://www.semianalysis.com/p/inference-race-to-the-bottom
+
+Five firms besides OpenAI now have models beating GPT-3.5: Mistral Mixtral, Inflection-2, Anthropic Claude 2, Google Gemini Pro, and xAI Grok — achieved by teams of fewer than 20 people. GPT-3.5-caliber pre-training is now completely commoditized. Almost everyone serving Mixtral inference is losing money.
+
+Market Structure
+
+Firms with sustainable inference advantages: those with unique distribution (Microsoft, Google, Meta via WhatsApp/Instagram), full-stack fine-tuning services, data protection guarantees. Pure inference API providers for open models have no competitive advantage.
+
+OpenAI charges $1.00/$2.00 per million input/output tokens. Mistral charges $0.65/$1.96 — effectively a price-taker due to market competition. Race to bottom: Fireworks ($1.60 output), Together ($0.60 output), Perplexity ($0.14/$0.56), Anyscale ($0.50), Deepinfra ($0.27), OpenRouter (free but impossible rate limits).
+
+Economics of Mixtral Inference
+
+At BF16 (unquantized), 2xH100 can serve Mixtral but requires batch size 64+ to turn a profit at $1.95/GPU/hour cloud costs. 2xA100 80GB is actually more cost-effective than 2xH100 for Mixtral due to ~32% greater bandwidth per dollar — compute FLOPS matter less than memory bandwidth for inference.
+
+Throughput: 8xA100 achieves ~220 tokens/second/user; 8xH100 achieves ~280 tokens/second/user; 8xH100 with speculative decoding achieves ~420 tokens/second/user.
+
+Mixtral as MoE Changes Inference Economics
+
+Mixtral is a Mixture of Experts model — only a fraction of parameters activate per forward pass at batch size 1. As batch size increases, more experts activate, forcing all parameters into memory bandwidth. MoE models have worse throughput scaling with batch size vs. dense models — MoE inference costs don't decrease as fast with higher batch sizes as dense models do.
+
+Speculative Decoding
+
+Draft model generates multiple look-ahead tokens; large reviewer model accepts or rejects in parallel — generating multiple tokens per step. Improves effective throughput by reducing memory bandwidth per generated token. Works less well for MoE because different draft tokens route to different experts — eliminating batch-level efficiencies. Temperature testing reveals use of speculative decoding: low temperature → high acceptance rate → high tokens/second; high temperature → low acceptance → slower output.
+
+H200 and MI300X Impact
+
+H200: 141GB HBM3E memory, significantly higher bandwidth than H100 — dramatically improves Mixtral economics by fitting model in fewer GPUs with less tensor parallelism overhead. NCCL all-reduce overhead is a major bottleneck in current multi-GPU inference.
+
+MI300X: 196GB memory, high bandwidth, cost-competitive pricing — strong for inference of large models that previously required 4-8 GPUs. AMD's ROCm/vLLM stack is improving rapidly. Cost per token significantly better than H100 for large-batch Mixtral inference.
+
+Investment Implication
+
+Inference providers serving unmodified open models are structurally loss-making. H200 and MI300X change the unit economics materially by enabling single-chip or 2-chip inference for models that previously required 4-8 chips. Firms that can achieve very high batch utilization (OpenAI, Microsoft Azure, Google) have structural cost advantages. The gap between GPU-rich hyperscalers and GPU-poor inference startups will widen as batch sizes scale.

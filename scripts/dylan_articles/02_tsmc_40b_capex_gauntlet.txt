@@ -1,0 +1,30 @@
+TITLE: TSMC Throws Down a $40B-$44B Gauntlet, Far Surpassing Intel And Samsung
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2022-01-13
+URL: https://www.semianalysis.com/p/tsmc-throws-down-a-40b-44b-gauntlet
+
+TSMC is the world's leading foundry, and they are making sure it stays that way. Intel and Samsung initiated quite ambitious plans last year that would take their spending on logic semiconductor fabs to $25B+ a year. TSMC puts a ceiling on their ambitious plans.
+
+TSMC believes the semiconductor industry will grow at 9%. Their forecast foundry growth at 20%, but they project TSMC's growth to be at 25%-29%. Intel's own projections have them basically flat on revenue, and Samsung isn't growing too fast due to DRAM pricing dynamics.
+
+TSMC's plans for 2021 were $25B to $28B, but total spend ended up coming in at $30B. With 2022, this number was expected to be in the $30B to $35B range, but instead TSMC stated they would spend $40B to $44B on expanding capacity. Intel and Samsung are going to have a hard time keeping up with the sheer scale that TSMC is planning for.
+
+The large increase over the consensus Wall Street estimate doesn't come as a surprise to SemiAnalysis. TSMC started accepting prepayments for capacity since Q3 of 2021. These prepayments are for increases in capacity that customers want beyond TSMC's plan. In total, TSMC has collected $6.7B of prepayments over the last 6 months and they will continue to collect more.
+
+Nvidia alone contributed to more than $3B of these prepayments to TSMC, with some of their prepayments also going to packaging and test firms. Nvidia's CFO Colette Kress confirmed: "We entered into several long-term supply agreements, under which we made advance payments of $1.64 billion this quarter and will make future payments of $1.79 billion. Outstanding inventory purchase and long-term supply obligations were $6.90 billion, up from $2.57 billion a year earlier."
+
+With this huge capacity expansion also comes some margin expansion. TSMC projects over 53% long term gross margins. This is a material increase over the prior guidance of over 50%. TSMC also stated N5 continues to be below the current corporate average, but as the technology matures it will reach the higher margins of their older technologies.
+
+TSMC derives more than half their revenue from 7nm and 5nm technologies, areas that only 2 other players can even dream of ever competing in. In addition, both Intel and Samsung have had major stumbling blocks and worse node performance, power, and density in comparison. Of the gargantuan $40B to $44B capital expenditures planned for 2022, 70% to 80% will be allocated for 7nm, 5nm, 3nm, or 2nm. 10% will be spent for masks and advanced packaging such as CoWoS, SoIC, and InFO. The last 10% to 20% will be spent for specialty and legacy technologies.
+
+TSMC's total wafer shipments skyrocketed from less than 10.5 million 12" equivalent wafers shipped in 2016 to more than 14.1 million 12" equivalent wafers shipped in 2021. The more impressive trend is the pricing power of these wafers. The average selling price has skyrocketed due to the increase in mix on the leading edge and with specialty technologies.
+
+While automotive is the largest growth sector on a percentage basis, HPC is the largest growth sector on an absolute dollar basis. The HPC category covers all sorts of processors — from Apple's M1 to AMD CPUs and Nvidia GPUs to networking switch ASICs and NICs — and will continue to be the backbone of growth as Nvidia, AMD, and in-house hyperscaler efforts blossom into full-fledged market dominance.
+
+Moving onto the N3 technology: TSMC continues to reiterate there will be shipment in the beginning of 2023, a 2.5 year gap versus N5. TSMC also continues to reiterate they have more tape outs on N3 than they did on N5 in the same timeframe, given what Apple, Intel, and other customers are doing in the midst of the semiconductor design renaissance.
+
+TSMC made it quite clear these huge expansions are not solely due to Intel's movement. Despite the details of their supply agreement, Intel isn't a risky customer and TSMC is playing the long game.
+
+Despite massively increasing capex again, ASML EUV tool production is not increasing measurably. This is further proof that wafer fabrication equipment spend intensity on lithography tools stops increasing after 3nm nodes. More spending will go to other tool vendors especially in deposition, etch, metrology/inspection, and advanced packaging related tools/testers.
+
+The key insight for investors: semiconductor capital intensity is increasing very fast. TSMC's stock will certainly rise due to this earnings call and the huge increases in expectations for capital expenditure and long-term revenue growth, but TSMC isn't the best stock to buy for this rally — the semiconductor capital equipment names benefit most directly from this spending wave.

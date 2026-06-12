@@ -1,0 +1,46 @@
+TITLE: CXL Is Dead In The AI Era – AI Accelerator Beachfront Considerations, Memory Pooling Negatives, Custom Silicon
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-03-15
+URL: https://www.semianalysis.com/p/cxl-dead-ai-era
+
+Two years ago, much of the datacenter hardware world was chasing CXL as the messiah for heterogenous compute, memory pooling, and composable server architectures. Fast forward to 2024, and many projects have been quietly shelved and most hyperscalers have almost entirely pivoted away. Some folks are forecasting CXL sales of up to $15 billion by 2028 — that is an outright ridiculous claim.
+
+Why CXL Cannot Be the Interconnect for AI
+
+Two fundamental problems: PCIe SerDes bandwidth limitations and beachfront (shoreline) area constraints.
+
+GPU die area is extremely limited. On an H100, the top and bottom sides are 100% dedicated to HBM. The remaining two sides handle all other chip-to-chip IO: PCIe, NVLink, and C2C (for Grace). Nvidia has minimized PCIe to just 16 lanes — the absolute minimum — because beachfront is precious.
+
+A 16-lane PCIe 5.0 interface provides 64 GB/s bandwidth per direction. Nvidia's NVLink provides 450 GB/s per direction. Nvidia's C2C (Grace-Blackwell) provides 450 GB/s per direction. NVLink has 7x the bandwidth of PCIe in each direction.
+
+Even accounting for different beachfront area consumed, Ethernet-style SerDes (NVLink, Google ICI) deliver approximately 3x more bandwidth per mm² of shoreline area compared to PCIe SerDes. This 3x gap persists to next-generation GPUs adopting 224G SerDes vs PCIe 6.0/CXL 3.0.
+
+PCIe SerDes vs Ethernet SerDes: BER Requirements
+
+PCIe requires BER < 1e-12 (extremely stringent) due to PCIe's strict latency requirements. This necessitates very light forward error correction (FEC) — adding more FEC parity bits means more latency overhead, which PCIe cannot tolerate.
+
+Ethernet-style SerDes requires BER of only 1e-4 — 8 orders of magnitude less stringent. This allows much heavier FEC, enabling faster operation, higher bandwidth, and better signal integrity at distance. The result: Ethernet/NVLink SerDes can operate at much higher bit rates than PCIe SerDes for the same silicon area.
+
+NVLink has higher latency than PCIe, but in AI workloads with massively parallel operations, the ~100ns vs ~30ns difference is irrelevant compared to the 3x bandwidth advantage.
+
+AMD's MI300 Problem
+
+The MI300 AID uses most of its beachfront area for PCIe SerDes instead of Ethernet-style SerDes. This gives AMD more configurability (IFIS, CXL, PCIe) but total IO is about 1/3 that of Ethernet-style SerDes. AMD needs to move off PCIe-style SerDes for MI400 to compete with Nvidia's B100. They are developing Open xGMI / Open Infinity Fabric / Accelerated Fabric Link — because CXL is not the correct protocol for AI, they are specifically escaping some standard PCIe 7.0/CXL features for time-to-market and performance reasons.
+
+CXL Memory Pooling Is Also Struggling
+
+Current CXL availability for AI: Nvidia GPUs don't support CXL. AMD MI300A supports CXL for CPU-GPU memory coherency but MI300X (the dominant AI variant) does not expose CXL properly.
+
+Even if available, memory pooling use cases for AI are weaker than for CPU-centric workloads. AI accelerators prioritize HBM bandwidth and capacity co-located on-package — adding CXL latency (even ~100ns) to the critical memory path is unacceptable for large-model training. Memory pooling's value is for CPU servers where DRAM utilization across multi-tenant workloads is low; AI accelerators run at near-100% memory utilization.
+
+The hyperscalers who were excited about CXL for CPU cost savings (Microsoft's claimed 9-10% DRAM reduction) are finding that AI workloads don't benefit from the same disaggregation — you cannot disaggregate HBM.
+
+CXL Memory Expansion for AI: What About Custom Chips?
+
+Some vendors (including Marvell building a custom CXL chip for Google) are pushing CXL memory expansion as a 2nd tier of memory for AI. The use case: attach LPDDR5X or DDR5 over CXL to supplement HBM capacity for models too large to fit in HBM. This is a real niche use case for specific inference workloads, but the latency penalty limits it to model weights serving (which tolerates higher latency) rather than KV cache (which requires tight latency).
+
+For inference, the total addressable market for CXL memory expansion in AI is much smaller than CXL bulls project — limited to inference scenarios where model capacity exceeds HBM capacity and where latency-tolerant workloads can accept the CXL overhead.
+
+Investment Implication
+
+CXL ASICs and switches will not reach $15B by 2028. The real market is more modest: retimers for PCIe/CXL signaling in CPU-adjacent applications, and limited memory expansion use cases in inference. Companies that have over-indexed their growth stories on broad CXL adoption for AI workloads are set for disappointment. The correct interconnect for AI scale-up is proprietary high-bandwidth protocols (NVLink, ICI, Infinity Fabric variants). The correct interconnect for AI scale-out is Ethernet or InfiniBand — not CXL.

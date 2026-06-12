@@ -1,0 +1,28 @@
+TITLE: Microsoft Swallows OpenAI's Core Team – GPU Capacity, Incentive Structure, Intellectual Property
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-11-20
+URL: https://www.semianalysis.com/p/microsoft-swallows-openai-core-team
+
+In November 2023, OpenAI's board fired Sam Altman without notifying investors including Microsoft. Greg Brockman (Chairman) resigned in protest. Most of OpenAI's key researchers — including GPT-4 and GPT-5 leads Jakub Pachocki and Szymon Sidor — left for Microsoft. Satya Nadella announced Sam Altman and Greg Brockman would lead a new advanced AI research team inside Microsoft.
+
+Incentive Structure
+
+OpenAI was about to conduct a secondary share sale at $80B+ valuation. Key employees had Profit Participation Units (PPUs) worth $10M+. The board's action destroyed this. Satya's deal: PPUs pseudo-refreshed as Microsoft equity vesting over multiple years, plus $10M+ compensation packages for multi-year OpenAI employees. The subsidiary may issue its own equity linked to its own P&L — not just Microsoft stock.
+
+Compute Resources
+
+Microsoft was planning >$50B annual datacenter spend for AI. One Arizona training supercomputer was targeting 75,000+ GPUs at a single site by mid-2024. Microsoft directly buying 400,000+ GPUs for 2024 (training + Copilot inference), plus tens of thousands more via CoreWeave, Lambda, and Oracle cloud deals. Microsoft can redirect OpenAI-committed compute credits to the new internal team while maintaining contractual obligations — effectively a reset of compute allocation favoring the new subsidiary.
+
+Intellectual Property
+
+Microsoft has full legal rights to GPT-4 base model weights, fine-tuned variants, and DALL-E 3. Key question: can the new Sam-led team access pre-training data, code, and pipeline from Azure? If yes: negligible speed bump vs. prior OpenAI trajectory. If no: estimated 4-6 month delay only — "talent is everything."
+
+OpenAI Silicon
+
+OpenAI's custom silicon efforts (separate from Microsoft's Maia 100) are effectively dead without Sam and key chip team members. Microsoft's Maia 100 and Athena plans (already separately in flight) are now the primary in-house silicon path. Maia 100 plans accelerated inside the new Microsoft subsidiary.
+
+Strategic Implication
+
+Microsoft ends up stronger: they control the talent, the compute, the IP licenses, and the product roadmap. OpenAI as a legal entity becomes a "rump state" reliant on Microsoft infrastructure with reduced human capital. The new Microsoft AI subsidiary is free from OpenAI's non-profit governance structure and safety board. Sam Altman's track record of aggressive AI development continues, now with Microsoft's balance sheet.
+
+Satya's key negotiating leverage: Nvidia GPU allocation (Microsoft is Nvidia's largest enterprise customer), Azure infrastructure commitment (OpenAI's $13B of Microsoft credits), and the IP licenses ensuring Microsoft doesn't need OpenAI's brand.

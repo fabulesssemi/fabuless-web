@@ -1,0 +1,38 @@
+TITLE: Nvidia's Optical Ascent: >$1B Revenue; The Missing 800G Ramp; AI Head-Fakes
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2023-08-23
+URL: https://www.semianalysis.com/p/nvidia-optical-ascent-800g
+
+Nvidia will sell over $1B of optical transceivers over the next 12 months driven by bundling GPU allocations with optics purchases. The network connecting GPUs is the second-highest AI infrastructure cost after accelerators themselves.
+
+AI Head-Fakes in Optical
+
+Lumentum: delivered one good quarter then guided sequential decline. Datacom revenue weak despite AI narrative. 200G per lane EMLs not shipping at volume until late 2024. Datacom chip business (lower ASP than completed transceivers). 100G per lane EMLs increasingly commoditized. AI inflection for Lumentum is delayed — a head-fake.
+
+Coherent: Largest integrated transceiver + laser company. Vertically integrated but debt-laden. Guidance well below expectations — telecom weakness plus no meaningful datacom ramp. Dropped confusing statement: "several hundred million dollars of additional revenue from AI not included in our guidance" — if real, why not included? Head-fake.
+
+Cisco: Surprisingly NOT a head-fake. Already took $500M+ in orders for AI Ethernet fabrics. Piloting 800G for AI training fabrics. Winning share from Broadcom and Nvidia in some Ethernet switch deployments.
+
+Innolight: Chinese transceiver maker, stock up 350% YTD. Believed to have strong 800G market share at hyperscalers. Real winner but market-embedded volumes of 10M+ units too high. Ramp is real but next year's hyperscaler in-house purchase ramp is when volume explodes.
+
+Nvidia's Real Optical Strategy
+
+External NVLink network: NVLink scale-up using 5,184 copper cables within the rack. Does NOT eliminate optical content — it eliminates optics only from the scale-up (within-rack) network. Scale-out (between-rack and between-cluster) network still requires full optical connectivity: 72 OSFP ports per NVL72 rack at 400G/800G, one per GPU. This is identical optical content per GPU as H100.
+
+Additionally: NVLink scale-up using optical transceivers exists in large multi-rack configurations. Up to 1,152 800G optical transceivers per H100 SuperPOD for the external NVLink scale-up fabric.
+
+Nvidia bundling optics: tripled optics revenue in one quarter to >$1B annual run rate. Only way to achieve 3.2T RDMA/RoCE networking reliably on Nvidia systems is currently with Nvidia's NICs (ConnectX-7). 400G InfiniBand NICs have shorter lead times than 400G Ethernet NICs — same silicon, different SKU — forces customers toward InfiniBand and more expensive Nvidia switches.
+
+The Real 800G Winner
+
+The 800G ramp in late 2023 is driven by Nvidia. They selected a specific transceiver supplier for the 800G launch (details in full report — disclosed as neither Coherent nor Innolight for initial ramp, but a third supplier). This supplier is the primary 800G winner from Nvidia's accelerated optical ramp.
+
+800G Technology
+
+200G per lane (4×200G = 800G): requires EML (Electro-absorption Modulated Laser) for single-mode fiber because 200G VCSEL is not ready until 2024-2025. EML is more expensive than VCSEL — margin benefit to suppliers. 200G VCSEL will dominate volume once available (lower cost, shorter reach applications).
+
+DSP market: Marvell had ~100% share on H100 generation transceivers. Broadcom entering for Blackwell. Linear drive optics (LPO) beginning to replace DSP-based for some applications — Eoptolink focused here. Nvidia's own 1.6T DSP has power issues — same high-power SerDes used on both optics-facing and NIC-facing sides vs optimized separate approaches.
+
+Investment Implication
+
+The 800G transceiver ramp is real and substantial — 72 ports per NVL72 rack × millions of Blackwell GPUs shipping in 2024-2025. Innolight, Fabrinet, Eoptolink are the primary module assemblers. Marvell maintains DSP market share but faces Broadcom competition on Blackwell. The head-fakes (Lumentum, Coherent) are structurally disadvantaged because their vertical integration into lower-margin laser chips and telecom exposure masks AI datacom upside. The real winning supply chain is: Fabrinet/Innolight/Eoptolink (assembly) + Marvell/Broadcom (DSP) + EML laser suppliers.

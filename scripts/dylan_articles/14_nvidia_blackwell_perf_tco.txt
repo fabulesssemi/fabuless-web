@@ -1,0 +1,50 @@
+TITLE: Nvidia Blackwell Perf TCO Analysis - B100 vs B200 vs GB200NVL72
+SOURCE: SemiAnalysis - Dylan Patel
+DATE: 2024-04-09
+URL: https://www.semianalysis.com/p/nvidia-blackwell-perf-tco-analysis
+
+Nvidia's Blackwell announcement received enormous attention. The real question is: what is the actual performance/TCO? Nvidia claimed 30x, but how much is real versus marketing?
+
+Key Specifications
+
+B100 (700W, air-cooled, fits existing HGX chassis): 1,750 TFLOPS FP16/BF16. Memory bandwidth 8.0 TB/s.
+B200 (higher power, faster clocks): 2,250 TFLOPS FP16/BF16.
+GB200 NVL72 (liquid cooled): 2,500 TFLOPS FP16/BF16 — 153% improvement over H100.
+
+Memory bandwidth grows from 3.4 TB/s (H100) to 4.8 TB/s (H200) to 8.0 TB/s (Blackwell). Memory bandwidth is arguably the most important spec for inference since inference is often memory bandwidth constrained.
+
+The 30x Claim Is Cherry-Picked
+
+Nvidia's 30x is based on: (1) comparing GB200 at FP4 vs H200 at FP8 — deliberately handicapping the comparison, (2) benchmark scenario of 32k input, 1k output for GPT-4 with 5-second TTFT constraint — eliminates large batch size configurations on H200 by making the prefill constraint artificially tight, and (3) benchmarking at TP64 on the H200 — the worst parallelism configuration possible on an 8-GPU NVLink domain that was never designed for TP64.
+
+Peeling back the FP4/FP8 difference shows ~18x real performance gain from H200 to GB200 NVL72. Not 30x.
+
+Silicon Area Analysis
+
+Blackwell (~1,600mm2, 208B transistors) is double the area of Hopper (~800mm2, 80B transistors). The B100 at 700W delivers 77% more FP16 FLOPS over H100 — but with ~100% more silicon area, the per-mm2 efficiency actually declined. Only the B200 and GB200 NVL72 show per-silicon-area improvements because higher power unlocks the latent performance of the larger die.
+
+NVL72 Is a System Breakthrough, Not Just a Chip
+
+The key innovation of NVL72 is expanding the set of parallelism configurations enabled by NVLink from 8 GPUs to 72 GPUs. H100/H200 NVLink only allowed a small practical permutation set: (TP1 EP8), (TP2 EP4), (TP4 EP2), (TP8 EP1). Extending TP beyond 8 GPUs onto InfiniBand/Ethernet kills performance.
+
+With NVL72, TP can extend to 72 GPUs at 900 GB/s unidirectional NVLink bandwidth — lower latency than InfiniBand because NVLink only passes through the NVSwitch with pure short-reach copper (no DSPs, optics, or retimers). This unlocks configurations like TP72 for the largest MoE models.
+
+The "H200 bad hair day" benchmark: Nvidia chose TP64 — which extends TP past the 8-GPU NVLink boundary onto InfiniBand — to maximize the advantage of GB200 NVL72's superior scale-up network.
+
+Parallelism Primer for Large Model Inference
+
+Pipeline Parallelism (PP): split model layers across GPUs. No interactivity improvement — each token still passes through all GPUs sequentially. Main benefit is fitting the model in memory. Higher MFU for training than TP due to less communication.
+
+Tensor Parallelism (TP): every layer distributed across GPUs. All-reduce operations across devices for each layer. Pools memory bandwidth — TP16 gets 16x the aggregate memory bandwidth but with all-reduce communication penalty. Each all-reduce adds latency; the more GPUs, the worse this penalty gets past the NVLink domain boundary.
+
+Expert Parallelism (EP): experts split among GPUs, attention replicated on each GPU. More total parameter data loaded per forward pass (attention + one expert vs 1/N of attention in TP). Less all-reduce overhead vs TP for the FFN layers, but all-to-all required for expert routing. Generally better MFU than TP for MoE models at large scales.
+
+Data Parallelism (DP): no sharing, no overhead — multiple independent replicas of the model. Used between islands where inter-island bandwidth is the bottleneck.
+
+GPT-4 inference at scale requires distributing 1,831 GB of parameter data across dozens of GPUs. The optimal parallelism configuration — TP domain size, EP, PP, DP between islands — determines real-world performance/TCO, not just spec sheets.
+
+Key TCO Considerations
+
+A100 had better inference TCO than early H100 because H100 pricing was opportunistically high and memory bandwidth gains were relatively small. Blackwell changes this — pricing is not up nearly as much generationally due to competition from H100/H200 installed base, AMD MI300X, and Intel Gaudi 2/3.
+
+For small models (<100B parameters), H200 running in a single HGX server is still excellent performance/TCO. For models above 100B parameters — increasingly the norm — NVL72's ability to run TP at 900 GB/s across 72 GPUs unlocks dramatically better inference efficiency. The memory wall (memory bandwidth not keeping pace with FLOPS growth) is the biggest constraint going forward.

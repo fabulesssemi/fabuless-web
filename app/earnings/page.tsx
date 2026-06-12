@@ -33,21 +33,21 @@ export default async function Earnings() {
           href={`/earnings/${featured.ticker.toLowerCase()}`}
           className="group block mb-8 rounded-2xl bg-[#111827] text-white overflow-hidden hover:ring-2 hover:ring-amber-400/50 transition-all"
         >
-          <div className="p-7 sm:p-8">
-            <div className="flex items-center gap-2.5 mb-4">
+          <div className="p-5 sm:p-6">
+            <div className="flex items-center gap-2.5 mb-2">
               <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">Next up</span>
               <span className="text-[10px] uppercase tracking-widest text-gray-500">· {featuredRow.date}</span>
             </div>
-            <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div className="flex items-center justify-between gap-6 flex-wrap">
               <div className="min-w-0">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-[13px] font-bold text-amber-400">{featured.ticker}</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="font-mono text-[12px] font-bold text-amber-400">{featured.ticker}</span>
                   <span className="text-[11px] uppercase tracking-widest text-gray-500">{featured.fiscalQuarter}</span>
+                  <h2 className="font-sans text-[20px] font-bold tracking-tight leading-none">
+                    {featured.company}
+                  </h2>
                 </div>
-                <h2 className="font-sans text-[30px] font-bold tracking-tight leading-none mt-1.5">
-                  {featured.company}
-                </h2>
-                <p className="font-serif text-[15px] text-gray-300 leading-relaxed mt-3 max-w-2xl">
+                <p className="font-serif text-[13px] text-gray-400 leading-snug mt-2 max-w-2xl">
                   {featured.centralQuestion}
                 </p>
               </div>

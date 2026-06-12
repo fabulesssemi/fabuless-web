@@ -55,19 +55,14 @@ export default async function AnalystsIndex() {
             <Link
               key={analyst.id}
               href={`/analysts/${analyst.id}`}
-              className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 flex flex-col"
+              className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200 flex flex-col"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
-                    {firmShort}
-                  </div>
-                  <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
-                    {analyst.name}
-                  </div>
+              <div className="min-w-0">
+                <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
+                  {firmShort}
                 </div>
-                <div className="text-right shrink-0 pt-0.5">
-                  <span className="text-[11px] font-semibold text-emerald-600">{bull} buy</span>
+                <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
+                  {analyst.name}
                 </div>
               </div>
 

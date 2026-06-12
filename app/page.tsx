@@ -46,20 +46,11 @@ export default async function Home() {
     .filter((s) => s.stories.length > 0);
   const restIssue = { ...latestIssue, sections: restSections, podcasts: [] };
 
-  const TILES = [
-    { href: "/tracker",      label: "Prediction Tracker", desc: "Who called it. Who missed. Every verdict public.",      accent: "#B45309" },
-    { href: "/earnings",     label: "Earnings Calendar",  desc: "Deep-dives on upcoming semi earnings reports.",         accent: "#059669" },
-    { href: "/companies",    label: "Companies",          desc: "Coverage universe — prices, ratings, analyst targets.", accent: "#1D4ED8" },
-    { href: "/lenses",       label: "Expert Lenses",      desc: "Ask Dylan, Baker, or The Circuit anything.",            accent: "#9A3412" },
-    { href: "/analysts",     label: "Analysts",           desc: "TipRanks-style scorecards for top semi analysts.",      accent: "#065F46" },
-    { href: "/supply-chain", label: "Supply Chain Web",   desc: "Interactive map of every critical chokepoint.",         accent: "#0F4C81" },
-  ];
-
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-7 pb-5 border-b border-gray-200">
-        <div className="flex items-start justify-between gap-8">
+      <section className="pt-7 pb-4">
+        <div className="flex items-start justify-between gap-8 mb-4">
           <div>
             <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-1">
               Semiconductor intelligence for the curious investor.
@@ -73,55 +64,31 @@ export default async function Home() {
             <SubscribeForm compact />
           </div>
         </div>
-      </section>
 
-      {/* Two-column: explore rail left, content right */}
-      <div className="lg:flex lg:gap-10">
-        {/* Explore rail — sticky vertical stack */}
-        <aside className="hidden lg:block w-56 shrink-0 pt-7">
-          <div className="sticky top-6">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Explore</div>
-            <div className="flex flex-col gap-2.5">
-              {TILES.map((tile) => (
-                <a
-                  key={tile.href}
-                  href={tile.href}
-                  className="group block rounded-lg border border-gray-100 bg-white py-3 pr-3 pl-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all relative overflow-hidden"
-                >
-                  <span className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ backgroundColor: tile.accent }} />
-                  <div className="text-[11px] font-bold uppercase tracking-wider mb-0.5" style={{ color: tile.accent }}>
-                    {tile.label}
-                  </div>
-                  <div className="text-[11px] text-gray-500 leading-snug group-hover:text-gray-700 transition-colors">
-                    {tile.desc}
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </aside>
-
-        {/* Mobile: compact tile grid */}
-        <div className="lg:hidden grid grid-cols-2 gap-2.5 pt-6">
-          {TILES.map((tile) => (
+        {/* Compact platform pills */}
+        <div className="flex flex-wrap gap-2">
+          {[
+            { href: "/tracker",      label: "Prediction Tracker", accent: "#B45309" },
+            { href: "/earnings",     label: "Earnings Calendar",  accent: "#059669" },
+            { href: "/companies",    label: "Companies",          accent: "#1D4ED8" },
+            { href: "/lenses",       label: "Expert Lenses",      accent: "#9A3412" },
+            { href: "/analysts",     label: "Analysts",           accent: "#065F46" },
+            { href: "/supply-chain", label: "Supply Chain Web",   accent: "#0F4C81" },
+          ].map((tile) => (
             <a
               key={tile.href}
               href={tile.href}
-              className="block rounded-lg border border-gray-100 bg-white p-3 shadow-sm relative overflow-hidden"
+              className="inline-flex items-center gap-1.5 border border-gray-200 bg-white hover:border-amber-300 rounded-full px-3 py-1 transition-colors"
             >
-              <span className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ backgroundColor: tile.accent }} />
-              <div className="text-[11px] font-bold uppercase tracking-wider pl-1" style={{ color: tile.accent }}>
-                {tile.label}
-              </div>
+              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: tile.accent }} />
+              <span className="text-[11px] font-semibold text-gray-600 hover:text-gray-900 whitespace-nowrap">{tile.label}</span>
             </a>
           ))}
         </div>
-
-        {/* Main content column */}
-        <div className="flex-1 min-w-0">
+      </section>
 
       {/* Latest issue header — above Top Stories */}
-      <section className="pt-7 pb-0">
+      <section className="pt-4 pb-0">
         <div className="mb-5 border-t-2 border-[#111827] pt-4">
           <div className="text-[11px] text-gray-400 uppercase tracking-widest">
             {issueLabel}
@@ -274,9 +241,6 @@ export default async function Home() {
           </div>
         </section>
       )}
-
-        </div>
-      </div>
     </div>
   );
 }

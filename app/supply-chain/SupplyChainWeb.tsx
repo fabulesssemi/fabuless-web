@@ -451,6 +451,26 @@ const SCENARIOS: Omit<Scenario, "count">[] = [
       intel: "EMIB and Foveros are Intel's packaging answer — competes with CoWoS directly",
     },
   },
+  {
+    id: "reticle-limit-era",
+    label: "Reticle limit era — multi-die packaging wars",
+    subtitle: "Rubin Ultra stitches 4 reticle-sized dies into one GPU — packaging becomes as critical and expensive as the silicon itself",
+    nodes: ["intel","tsmc","nvidia","amd","broadcom","marvell","ase","amkor","skhynix","micron","besi"],
+    color: "#7C2D12",
+    why: {
+      intel: "EMIB embeds bridges in a rectangular panel substrate — ~90% utilization vs ~60% for wafer interposers, and the advantage widens as packages grow",
+      tsmc: "CoWoS-L is the flagship AI packaging flow today, but multi-reticle packages approach one interposer per wafer — the economics degrade at exactly the sizes Rubin Ultra needs",
+      nvidia: "Rubin Ultra's 4-die design makes packaging a first-order cost line — whoever packages it cheapest sets Nvidia's gross margin",
+      amd: "MI-series chiplet designs face the same multi-die packaging bill — packaging cost is now a real competitive variable versus Nvidia",
+      broadcom: "TPU and custom XPU programs at hyperscaler scale are the biggest packaging volume after Nvidia — cheaper multi-die assembly flows straight to margins",
+      marvell: "Custom ASIC programs (Trainium, Maia) all need 2.5D assembly — packaging capacity is the gating factor on program timelines",
+      ase: "World's largest OSAT — wins overflow volume regardless of whether CoWoS or bridge-based approaches dominate",
+      amkor: "US-based OSAT with TSMC Arizona co-investment — positioned for onshored multi-die assembly",
+      skhynix: "Every additional HBM stack per package raises interconnect density requirements — HBM count growth drives the packaging escalation",
+      micron: "Same HBM dynamic — more stacks per GPU means more advanced packaging content per unit shipped",
+      besi: "Hybrid bonding equipment is the tooling layer under every advanced packaging roadmap — die-attach precision becomes the binding constraint",
+    },
+  },
 ];
 
 type StockEffect = { dir: "up" | "down" | "mixed" | "neutral"; note: string };
@@ -734,6 +754,19 @@ const STOCK_EFFECTS: Record<string, Record<string, StockEffect>> = {
     broadcom:         { dir: "up",    note: "Broadcom is guiding to $100B in AI revenue by 2027 — packaging optionality improves the economics of TPU and XPU programs" },
     "samsung-foundry":{ dir: "up",    note: "Samsung is a key node in the allied supply chain — a fab plus packaging bundle becomes more competitive against TSMC's offering" },
     intel:            { dir: "up",    note: "18A keeps Intel's foundry alive — EMIB and Foveros advanced packaging gain credibility as real alternatives to TSMC CoWoS" },
+  },
+  "reticle-limit-era": {
+    intel:            { dir: "up",    note: "EMIB's panel-based bridges avoid the wafer-interposer cost spiral — Intel's best near-term foundry business may be packaging Nvidia's chips, not competing with them" },
+    tsmc:             { dir: "mixed", note: "CoWoS demand keeps growing and pricing power holds near-term — but at 4-reticle package sizes the interposer economics break, and the moat narrows" },
+    nvidia:           { dir: "mixed", note: "Multi-die packages make Rubin Ultra possible at all — but packaging is now a structural cost line that monolithic chips never had" },
+    amd:              { dir: "up",    note: "AMD has shipped chiplets since Zen 1 — years of multi-die design experience become an advantage when the whole industry is forced into it" },
+    broadcom:         { dir: "up",    note: "Hyperscaler XPU programs are the largest packaging volume after Nvidia — cheaper multi-die assembly directly widens custom ASIC margins" },
+    marvell:          { dir: "up",    note: "Trainium and Maia generations are gated on packaging capacity — more assembly supply means faster custom silicon program cycles" },
+    ase:              { dir: "up",    note: "The world's largest OSAT wins in every branch — overflow from CoWoS, bridge-based assembly, and test all flow through ASE" },
+    amkor:            { dir: "up",    note: "Arizona co-investment with TSMC puts Amkor at the center of onshored multi-die assembly for Nvidia and Apple" },
+    skhynix:          { dir: "up",    note: "HBM costs more than the TSMC node in Nvidia's bill of materials — every added stack per package compounds that pricing power" },
+    micron:           { dir: "up",    note: "More HBM stacks per GPU means more memory content per unit — the multi-die era is structurally bullish for memory ASPs" },
+    besi:             { dir: "up",    note: "Hybrid bonding precision is the binding constraint under every 2.5D/3D roadmap — tool demand scales with every die added to a package" },
   },
 };
 

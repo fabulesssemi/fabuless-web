@@ -67,6 +67,8 @@ export const NODES: SupplyNode[] = [
     blurb: "Process control and metrology — yields depend on it." },
   { id: "tel", name: "Tokyo Electron", ticker: "8035.T", tier: "equipment", covered: false,
     blurb: "Coaters/developers paired with every EUV tool." },
+  { id: "besi", name: "BE Semiconductor", ticker: "BESI", tier: "equipment", covered: false,
+    blurb: "Hybrid bonding leader — the die-attach tooling under every advanced packaging roadmap." },
 
   // Tier: EDA + IP
   { id: "arm", name: "Arm", ticker: "ARM", tier: "eda_ip", covered: true,
@@ -180,6 +182,9 @@ export const EDGES: SupplyEdge[] = [
   { from: "klac", to: "intel", relation: "supplies_equipment", label: "Process control" },
   { from: "tel", to: "tsmc", relation: "supplies_equipment", label: "Coat/develop" },
   { from: "tel", to: "samsung-foundry", relation: "supplies_equipment", label: "Coat/develop" },
+  { from: "besi", to: "tsmc", relation: "supplies_equipment", label: "Hybrid bonding", critical: true },
+  { from: "besi", to: "ase", relation: "supplies_equipment", label: "Die attach / bonding" },
+  { from: "besi", to: "amkor", relation: "supplies_equipment", label: "Die attach / bonding" },
   { from: "klac", to: "samsung-foundry", relation: "supplies_equipment", label: "Process control" },
   { from: "asml", to: "samsung-memory", relation: "supplies_equipment", label: "EUV for DRAM" },
   { from: "amat", to: "globalfoundries", relation: "supplies_equipment", label: "Deposition/etch" },

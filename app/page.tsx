@@ -56,7 +56,7 @@ export default async function Home() {
               Semiconductor intelligence for the curious investor.
             </h1>
             <p className="font-serif text-[15px] text-[#4a4a4a]">
-              Expert track records, earnings deep-dives, supply chain maps, and analyst consensus — all in one place.
+              Daily news, expert track records, earnings deep-dives, supply chain maps, and analyst consensus — all in one place.
             </p>
           </div>
           <div className="shrink-0 text-right hidden sm:block">

@@ -9,6 +9,7 @@ import type { AnalystView } from "@/lib/analyst/types";
 import { DistributionBar } from "@/app/components/analyst/AnalystConsensusPanel";
 import { ShowMore } from "./ShowMore";
 import { SegmentChart } from "./SegmentChart";
+import { ExpertPulse } from "./ExpertPulse";
 import {
   ChipGroup,
   Pill,
@@ -319,6 +320,9 @@ export function CompanyDashboard({
           </div>
         </div>
       )}
+
+      {/* Expert pulse — live synthesis from Baker, Dylan, Circuit corpora */}
+      <ExpertPulse slug={meta.slug} />
 
       {/* Related companies */}
       <div className="pt-4 border-t border-gray-200 mb-4">

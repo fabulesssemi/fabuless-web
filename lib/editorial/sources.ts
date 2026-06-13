@@ -22,6 +22,7 @@ const RSS_FEEDS = [
   "https://feeds.arstechnica.com/arstechnica/technology",   // Ars Technica — reliable tech images, chip/AI coverage
   "https://www.theregister.com/headlines.atom",             // The Register — chip industry, strong semiconductor beat
   "https://wccftech.com/feed/",                             // WCCFtech — GPU/CPU/chip hardware news
+  "https://www.digitimes.com/rss/daily.xml",               // Digitimes — Asia semiconductor supply chain, TSMC/fab focus
 ];
 
 // CDN domains that hotlink-protect their images — browsers get 403 when the

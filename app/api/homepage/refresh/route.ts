@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { fetchAllNewsItems, fetchAllPodcastFeeds } from "@/lib/editorial/sources";
 import { generateTopStories, generatePodcastPicks } from "@/lib/editorial/curate-stories";
-import { saveHomepageContent } from "@/lib/homepage";
+import { saveHomepageContent, saveAndExpireArticles } from "@/lib/homepage";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -42,11 +42,20 @@ export async function GET(request: Request) {
   }
 
   homepage.podcasts = podcastPicks;
-  const { ok, error } = await saveHomepageContent(homepage);
+
+  // Save issueTitle + podcasts to homepage_content (unchanged)
+  // Save ranked articles to homepage_articles (rolling pool with expiry)
+  const [{ ok, error }, articlesResult] = await Promise.all([
+    saveHomepageContent(homepage),
+    saveAndExpireArticles(homepage.topStories),
+  ]);
+
   if (ok) revalidatePath("/");
 
   return NextResponse.json({
     ok,
+    articlesOk: articlesResult.ok,
+    articlesError: articlesResult.error,
     error,
     storiesCount: homepage.topStories.length,
     podcastPicksCount: podcastPicks.length,

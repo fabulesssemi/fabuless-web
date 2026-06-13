@@ -13,6 +13,7 @@ export type AutoStory = {
   category: string;
   oneliner: string; // one-sentence analyst-style take
   image: string | null;
+  rank?: number;    // 1-15 from Claude; used for rolling article pool
 };
 
 export type AutoPodcast = {
@@ -56,6 +57,141 @@ export async function getHomepageContent(): Promise<HomepageContent | null> {
     };
   } catch {
     return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Rolling article pool — homepage_articles table
+// ---------------------------------------------------------------------------
+
+const ARTICLES_TABLE = "homepage_articles";
+
+function rowToStory(row: Record<string, unknown>): AutoStory {
+  return {
+    headline: row.headline as string,
+    url: row.url as string,
+    source: row.source as string,
+    category: row.category as string,
+    oneliner: row.oneliner as string,
+    image: (row.image as string | null) ?? null,
+    rank: row.rank as number,
+  };
+}
+
+/** Read the current article pool and split into top stories + list. */
+export async function getHomepageArticles(): Promise<{
+  topStories: AutoStory[];
+  listStories: AutoStory[];
+}> {
+  try {
+    const { data, error } = await supabase
+      .from(ARTICLES_TABLE)
+      .select("*")
+      .order("rank", { ascending: true });
+
+    if (error || !data || data.length === 0) return { topStories: [], listStories: [] };
+
+    const now = Date.now();
+    const DAY_MS = 24 * 60 * 60 * 1000;
+
+    // Source cap: max 3 per domain across the whole page
+    const sourceCounts = new Map<string, number>();
+    const eligible: typeof data = [];
+    for (const row of data) {
+      const src = (row.source as string).toLowerCase().trim();
+      const count = sourceCounts.get(src) ?? 0;
+      if (count < 3) {
+        eligible.push(row);
+        sourceCounts.set(src, count + 1);
+      }
+    }
+
+    // Top Stories: articles first seen within the last 24h, up to 4
+    const topStories = eligible
+      .filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS)
+      .slice(0, 4)
+      .map(rowToStory);
+
+    const topUrls = new Set(topStories.map((s) => s.url));
+
+    // List: everything else not already in top stories, up to 11
+    const listStories = eligible
+      .filter((r) => !topUrls.has(r.url as string))
+      .slice(0, 11)
+      .map(rowToStory);
+
+    return { topStories, listStories };
+  } catch {
+    return { topStories: [], listStories: [] };
+  }
+}
+
+/** Upsert today's ranked picks and expire stale articles. */
+export async function saveAndExpireArticles(
+  stories: AutoStory[],
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const now = new Date().toISOString();
+    const urls = stories.map((s) => s.url);
+
+    // Fetch existing rows to preserve first_seen_at + original_rank on update
+    const { data: existing } = await supabase
+      .from(ARTICLES_TABLE)
+      .select("url, first_seen_at, original_rank")
+      .in("url", urls);
+
+    const existingMap = new Map(
+      (existing ?? []).map((r) => [r.url as string, r]),
+    );
+
+    const rows = stories.map((s) => {
+      const ex = existingMap.get(s.url);
+      return {
+        url: s.url,
+        headline: s.headline,
+        source: s.source,
+        category: s.category,
+        oneliner: s.oneliner,
+        image: s.image ?? null,
+        rank: s.rank ?? 99,
+        original_rank: ex ? (ex.original_rank as number) : (s.rank ?? 99),
+        first_seen_at: ex ? (ex.first_seen_at as string) : now,
+        last_seen_at: now,
+      };
+    });
+
+    const { error: upsertError } = await supabase
+      .from(ARTICLES_TABLE)
+      .upsert(rows, { onConflict: "url" });
+
+    if (upsertError) return { ok: false, error: upsertError.message };
+
+    // Expire articles NOT in this run:
+    // - original_rank > 5 (lower tier): expire after 24h
+    // - original_rank <= 5 (top tier): expire after 72h
+    const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const threeDaysAgo = new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString();
+
+    const quotedUrls = `(${urls.map((u) => `'${u.replace(/'/g, "''")}'`).join(",")})`;
+
+    await Promise.all([
+      supabase
+        .from(ARTICLES_TABLE)
+        .delete()
+        .gt("original_rank", 5)
+        .lt("first_seen_at", dayAgo)
+        .not("url", "in", quotedUrls),
+      supabase
+        .from(ARTICLES_TABLE)
+        .delete()
+        .lte("original_rank", 5)
+        .lt("first_seen_at", threeDaysAgo)
+        .not("url", "in", quotedUrls),
+    ]);
+
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: String(e) };
   }
 }
 

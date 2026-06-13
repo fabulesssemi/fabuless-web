@@ -14,6 +14,7 @@ const STORY_SCHEMA = `{
   "issueTitle": "a punchy 8-14 word editorial headline covering the 2-3 biggest themes from your picks — written like a newspaper front page. Example: 'Nvidia's China Risk, TSMC's Arizona Push, and Samsung's Memory Pivot'",
   "stories": [
     {
+      "rank": 1,
       "headline": "exact article headline from the input",
       "url": "exact url from the input — never invent",
       "source": "exact source name from the input",
@@ -36,6 +37,7 @@ const KNOWN_SOURCES: Record<string, string> = {
   "theinformation.com": "The Information", "tomshardware.com": "Tom's Hardware",
   "typepad.com": "Silicon Leverage", "feedburner.com": "Silicon Leverage",
   "arstechnica.com": "Ars Technica", "theregister.com": "The Register",
+  "wccftech.com": "WCCFtech", "digitimes.com": "Digitimes",
 };
 
 function sourceNameFromUrl(url: string): string {
@@ -54,30 +56,28 @@ function sourceNameFromUrl(url: string): string {
 //         sources to fill the grid — we always want at least `target` stories.
 // Never exceeds `max` total.
 // ---------------------------------------------------------------------------
-function diversify(stories: AutoStory[], target = 4, max = 6): AutoStory[] {
-  const seenSources = new Set<string>();
-  const firstPicks: AutoStory[] = [];
-  const secondPicks: AutoStory[] = [];
+// Multi-pass diversity: prefer 1 per source, then 2, then 3.
+// Guarantees at most `maxPerSource` from any single domain.
+function diversify(stories: AutoStory[], target = 15, maxPerSource = 3): AutoStory[] {
+  const sourceCounts = new Map<string, number>();
+  const added = new Set<string>();
+  const result: AutoStory[] = [];
 
-  for (const s of stories) {
-    const src = s.source.toLowerCase().trim();
-    if (!seenSources.has(src)) {
-      seenSources.add(src);
-      firstPicks.push(s);
-    } else {
-      secondPicks.push(s);
+  for (let pass = 1; pass <= maxPerSource && result.length < target; pass++) {
+    for (const s of stories) {
+      if (result.length >= target) break;
+      if (added.has(s.url)) continue;
+      const src = s.source.toLowerCase().trim();
+      const count = sourceCounts.get(src) ?? 0;
+      if (count === pass - 1) {
+        result.push(s);
+        added.add(s.url);
+        sourceCounts.set(src, count + 1);
+      }
     }
   }
 
-  const result = [...firstPicks];
-  // Only add second picks if we're still under the target — prefer diversity
-  // but never leave the grid with fewer than `target` cards.
-  for (const s of secondPicks) {
-    if (result.length >= target) break;
-    result.push(s);
-  }
-
-  return result.slice(0, max);
+  return result;
 }
 
 /**
@@ -139,7 +139,7 @@ export async function generateTopStories(
   const today = new Date().toISOString().slice(0, 10);
   const prompt = `You are a senior semiconductor investment editor at Fabuless, a briefing read by professional investors.
 
-Today is ${today}. From the articles below, rank and return the top 10 most significant for semiconductor equity investors this week.
+Today is ${today}. From the articles below, rank and return the top 15 most significant for semiconductor equity investors. Assign each a "rank" integer from 1 (most important) to 15.
 
 RULES:
 - Prefer stories about SPECIFIC EVENTS: earnings reports, guidance changes, capex announcements, supply chain decisions, export control actions, M&A, major technology milestones, regulatory decisions.
@@ -162,7 +162,7 @@ ${STORY_SCHEMA}`;
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const message = await client.messages.create({
       model: "claude-sonnet-4-6",
-      max_tokens: 4096, // 10 stories × ~200 tokens each + issueTitle — 2048 was too tight
+      max_tokens: 6000, // 15 stories × ~200 tokens each + issueTitle
       messages: [{ role: "user", content: prompt }],
     });
 
@@ -187,11 +187,17 @@ ${STORY_SCHEMA}`;
 
     if (valid.length === 0) return null;
 
-    // Hard-enforce source diversity in code — prompt rules alone are not reliable
-    // when one RSS source dominates the corpus. diversify() guarantees max 1 per
-    // source in the top picks, regardless of what Claude returned.
-    // target=4 keeps the grid full; max=10 allows up to 6 more in the list below.
-    const topStories = diversify(valid, 4, 10);
+    // Assign rank from Claude's output (or fall back to array position)
+    const withRanks = valid.map((s, i) => ({
+      ...s,
+      rank: (s as AutoStory & { rank?: number }).rank ?? i + 1,
+    }));
+
+    // Sort by rank ascending so diversify processes best stories first
+    withRanks.sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
+
+    // Hard-enforce source diversity: target 15, max 3 per source
+    const topStories = diversify(withRanks, 15, 3);
 
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {

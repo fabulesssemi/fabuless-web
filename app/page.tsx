@@ -4,7 +4,7 @@
 
 import { latestIssue } from "@/lib/issues";
 import { IssueView } from "@/app/components/IssueView";
-import { getHomepageContent } from "@/lib/homepage";
+import { getHomepageContent, getHomepageArticles } from "@/lib/homepage";
 import { fetchLatestEpisodePerShow } from "@/lib/editorial/sources";
 import { SubscribeForm } from "@/app/components/SubscribeForm";
 import { XQuotesCard } from "@/app/components/XQuotesCard";
@@ -15,13 +15,21 @@ import { StoryImage } from "@/app/components/StoryImage";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [autoContent, livePodcasts] = await Promise.all([
+  const [autoContent, livePodcasts, articlePool] = await Promise.all([
     getHomepageContent(),
     fetchLatestEpisodePerShow(),
+    getHomepageArticles(),
   ]);
 
-  // ── Auto-curated content (from Sunday pipeline) or static fallback ──────────
-  const autoStories = autoContent?.topStories ?? null;
+  // ── Auto-curated content — rolling article pool takes precedence ────────────
+  // topStories: articles first seen within 24h (shown as image cards)
+  // listStories: older high-rank articles still within their shelf life
+  const autoStories = articlePool.topStories.length > 0
+    ? articlePool.topStories
+    : (autoContent?.topStories ?? null);
+  const autoListStories = articlePool.listStories.length > 0
+    ? articlePool.listStories
+    : null;
   // Always use live RSS data for podcasts — revalidates every 4h, never stale
   const autoPodcasts = livePodcasts.length > 0
     ? livePodcasts.map((ep) => ({ ...ep, oneliner: undefined }))
@@ -154,10 +162,10 @@ export default async function Home() {
               ))}
         </div>
 
-        {/* Remaining auto stories (beyond top 4) in 2-col list */}
-        {autoStories && autoStories.length > 4 && (
+        {/* List stories — rolling pool (up to 11, older high-rank articles) */}
+        {(autoListStories ?? (autoStories && autoStories.length > 4 ? autoStories.slice(4) : null))?.length ? (
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4">
-            {autoStories.slice(4).map((story) => (
+            {(autoListStories ?? autoStories!.slice(4)).map((story) => (
               <div key={story.url} className="py-4 first:pt-0 sm:first:pt-4 odd:sm:pr-8 even:sm:pl-8">
                 <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1">{story.category}</div>
                 <a href={story.url} target="_blank" rel="noopener noreferrer"
@@ -169,7 +177,7 @@ export default async function Home() {
               </div>
             ))}
           </div>
-        )}
+        ) : null}
       </section>
 
       {/* Rest of the manual issue */}

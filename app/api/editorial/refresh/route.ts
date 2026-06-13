@@ -6,7 +6,7 @@ import { generateEditorial } from "@/lib/editorial/generate";
 import { saveEditorial } from "@/lib/editorial/supabase";
 import { fetchAllNewsItems, fetchPodcastEpisodes, fetchAllPodcastFeeds } from "@/lib/editorial/sources";
 import { generateTopStories, generatePodcastPicks } from "@/lib/editorial/curate-stories";
-import { saveHomepageContent } from "@/lib/homepage";
+import { saveHomepageContent, saveAndExpireArticles } from "@/lib/homepage";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -58,7 +58,10 @@ export async function GET(request: Request) {
       // Merge podcast picks into the homepage content
       homepage.podcasts = podcastPicks;
       podcastsGenerated = podcastPicks.length;
-      const { ok } = await saveHomepageContent(homepage);
+      const [{ ok }] = await Promise.all([
+        saveHomepageContent(homepage),
+        saveAndExpireArticles(homepage.topStories),
+      ]);
       storiesOk = ok;
       if (ok) revalidatePath("/");
     }

@@ -101,16 +101,30 @@ function extractItemImage(chunk: string): string | null {
 
 function parseRss(xml: string, limit = 60): RssItem[] {
   const items: RssItem[] = [];
-  const itemRe = /<item>([\s\S]*?)<\/item>/g;
+  // Support both RSS (<item>) and Atom (<entry>) feeds.
+  const itemRe = /<(?:item|entry)>([\s\S]*?)<\/(?:item|entry)>/g;
   let m: RegExpExecArray | null;
   while ((m = itemRe.exec(xml)) !== null && items.length < limit) {
     const chunk = m[1];
-    const title = cdataText(chunk.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? "");
+    const title = cdataText(chunk.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1] ?? "");
+    // Atom uses <summary> or <content> instead of <description>
     const description = stripHtml(
-      cdataText(chunk.match(/<description>([\s\S]*?)<\/description>/)?.[1] ?? ""),
+      cdataText(
+        chunk.match(/<description>([\s\S]*?)<\/description>/)?.[1] ??
+        chunk.match(/<summary[^>]*>([\s\S]*?)<\/summary>/)?.[1] ??
+        chunk.match(/<content[^>]*>([\s\S]*?)<\/content>/)?.[1] ??
+        "",
+      ),
     ).slice(0, 400);
-    const link = cdataText(chunk.match(/<link>([\s\S]*?)<\/link>/)?.[1] ?? "");
-    const pubDate = cdataText(chunk.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1] ?? "");
+    // Atom uses <link href="..." rel="alternate"/> instead of a text-node <link>
+    const link =
+      cdataText(chunk.match(/<link>([\s\S]*?)<\/link>/)?.[1] ?? "") ||
+      (chunk.match(/<link[^>]+href="([^"]+)"/i)?.[1] ?? "");
+    // Atom uses <published> or <updated> instead of <pubDate>
+    const pubDate =
+      cdataText(chunk.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1] ?? "") ||
+      (chunk.match(/<published>([\s\S]*?)<\/published>/)?.[1] ?? "") ||
+      (chunk.match(/<updated>([\s\S]*?)<\/updated>/)?.[1] ?? "");
     const image = extractItemImage(chunk);
     if (title) items.push({ title, description, link, pubDate, image });
   }

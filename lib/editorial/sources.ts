@@ -21,6 +21,7 @@ const RSS_FEEDS = [
   "https://feeds.feedburner.com/typepad/siliconleverage",   // Silicon Leverage — semiconductor analyst blog
   "https://feeds.arstechnica.com/arstechnica/technology",   // Ars Technica — reliable tech images, chip/AI coverage
   "https://www.theregister.com/headlines.atom",             // The Register — chip industry, strong semiconductor beat
+  "https://wccftech.com/feed/",                             // WCCFtech — GPU/CPU/chip hardware news
 ];
 
 // CDN domains that hotlink-protect their images — browsers get 403 when the

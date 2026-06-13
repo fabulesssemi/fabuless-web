@@ -20,10 +20,10 @@ export default function NotFound() {
           Back to home
         </Link>
         <Link
-          href="/lenses"
+          href="/tracker"
           className="px-5 py-2.5 border border-gray-200 text-[#111827] text-[13px] font-medium hover:border-gray-400 transition-colors"
         >
-          Explore Lenses
+          Expert Tracker
         </Link>
       </div>
     </div>

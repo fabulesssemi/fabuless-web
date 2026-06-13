@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { MobileNav } from "@/app/components/MobileNav";
+import { FloatingChat } from "@/app/components/FloatingChat";
 import "./globals.css";
 
 const inter = Inter({
@@ -50,7 +51,6 @@ export default function RootLayout({
               {/* Desktop nav */}
               <div className="hidden md:flex items-center gap-8 text-sm text-gray-400">
                 <Link href="/companies" className="hover:text-amber-400 transition-colors">Companies</Link>
-                <Link href="/lenses" className="hover:text-amber-400 transition-colors">Lenses</Link>
                 <Link href="/tracker" className="hover:text-amber-400 transition-colors">Tracker</Link>
                 <Link href="/analysts" className="hover:text-amber-400 transition-colors">Analysts</Link>
                 <Link href="/supply-chain" className="hover:text-amber-400 transition-colors">Supply Chain</Link>
@@ -76,6 +76,8 @@ export default function RootLayout({
         <main className="flex-1 overflow-y-auto min-h-0">
           {children}
         </main>
+
+        <FloatingChat />
       </body>
     </html>
   );

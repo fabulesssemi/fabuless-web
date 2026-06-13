@@ -34,26 +34,6 @@ function fmtDate(iso: string | null) {
   });
 }
 
-// SVG donut gauge — matches TipRanks success rate circle
-function Gauge({ pct, color }: { pct: number; color: string }) {
-  const r = 36;
-  const circ = 2 * Math.PI * r;
-  const fill = (pct / 100) * circ;
-  return (
-    <svg width="96" height="96" viewBox="0 0 96 96">
-      <circle cx="48" cy="48" r={r} fill="none" stroke="#E5E7EB" strokeWidth="7" />
-      <circle
-        cx="48" cy="48" r={r} fill="none"
-        stroke={color} strokeWidth="7"
-        strokeDasharray={`${fill} ${circ}`}
-        strokeLinecap="round"
-        transform="rotate(-90 48 48)"
-      />
-      <text x="48" y="45" textAnchor="middle" fontSize="15" fontWeight="700" fill="#111827">{pct}%</text>
-      <text x="48" y="59" textAnchor="middle" fontSize="8" fill="#9CA3AF" fontWeight="600" letterSpacing="0.5">BUY RATED</text>
-    </svg>
-  );
-}
 
 export default async function AnalystPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -86,59 +66,54 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
       {/* ── Two-column layout ── */}
       <div className="flex items-start gap-8">
 
-        {/* ── LEFT: Profile card ── */}
-        <div className="w-[300px] shrink-0 border border-gray-200 bg-white shadow-sm sticky top-6">
-
-          {/* Accent bar */}
-          <div className="h-1 w-full" style={{ backgroundColor: analyst.accent }} />
-
-          <div className="p-7 flex flex-col items-center text-center">
-            {/* Name + firm */}
-            <h1 className="text-[18px] font-bold text-[#111827] tracking-tight leading-tight">
+        {/* ── LEFT: Profile panel ── */}
+        <div className="w-[220px] shrink-0 sticky top-6">
+          {/* Accent bar + name */}
+          <div className="pb-4 mb-4" style={{ borderBottom: `2px solid ${analyst.accent}` }}>
+            <h1 className="text-[20px] font-bold text-[#111827] tracking-tight leading-tight">
               {analyst.name}
             </h1>
-            <div className="text-[13px] font-semibold text-gray-600 mt-1">{analyst.firmDisplay}</div>
-            <div className="text-[11px] text-gray-400 mt-0.5 uppercase tracking-wider">Wall Street Analyst</div>
+            <div className="text-[13px] text-gray-500 mt-0.5">{analyst.firmDisplay}</div>
+          </div>
 
-            <div className="w-full h-px bg-gray-200 my-5" />
-
-            {/* Bull rate gauge */}
-            <Gauge pct={bullPct} color={gaugeColor} />
-
-            {/* Avg upside */}
-            <div className="mt-5 w-full border border-gray-200 px-4 py-3 text-center">
-              <div className={`text-[26px] font-bold tabular-nums leading-none ${avgUpside !== null && avgUpside > 0 ? "text-emerald-600" : avgUpside !== null ? "text-rose-500" : "text-gray-400"}`}>
+          {/* Stats — plain rows, no boxes */}
+          <div className="space-y-4">
+            <div>
+              <div className={`text-[22px] font-bold tabular-nums leading-none ${avgUpside !== null && avgUpside > 0 ? "text-emerald-600" : avgUpside !== null ? "text-rose-500" : "text-gray-400"}`}>
                 {avgUpside !== null ? `${avgUpside > 0 ? "+" : ""}${avgUpside}%` : "—"}
               </div>
-              <div className="text-[9px] uppercase tracking-wider text-gray-400 mt-1.5 font-semibold">Avg Implied Upside</div>
+              <div className="text-[10px] uppercase tracking-wider text-gray-400 mt-0.5 font-semibold">Avg Implied Upside</div>
             </div>
 
-            <div className="w-full h-px bg-gray-200 my-5" />
+            <div>
+              <div className={`text-[22px] font-bold tabular-nums leading-none`} style={{ color: gaugeColor }}>
+                {bullPct}%
+              </div>
+              <div className="text-[10px] uppercase tracking-wider text-gray-400 mt-0.5 font-semibold">Buy Rated</div>
+            </div>
 
-            {/* Coverage breakdown */}
-            <div className="w-full grid grid-cols-3 divide-x divide-gray-200">
+            <div className="flex gap-5 pt-1">
               {[
-                { val: bull,    label: "Buys",   color: "text-emerald-600" },
-                { val: neutral, label: "Holds",  color: "text-gray-400"    },
-                { val: bear,    label: "Sells",  color: "text-rose-500"    },
+                { val: bull,    label: "Buys",  color: "text-emerald-600" },
+                { val: neutral, label: "Holds", color: "text-gray-400"    },
+                { val: bear,    label: "Sells", color: "text-rose-500"    },
               ].map((s) => (
-                <div key={s.label} className="flex flex-col items-center py-1">
-                  <span className={`text-[18px] font-bold tabular-nums leading-none ${s.color}`}>{s.val}</span>
-                  <span className="text-[9px] uppercase tracking-wider text-gray-400 mt-1">{s.label}</span>
+                <div key={s.label}>
+                  <div className={`text-[16px] font-bold tabular-nums leading-none ${s.color}`}>{s.val}</div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 mt-0.5 font-semibold">{s.label}</div>
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="w-full h-px bg-gray-200 my-5" />
+          <div className="h-px bg-gray-200 my-5" />
 
-            {/* Known for */}
-            <p className="text-[11px] text-gray-500 leading-relaxed text-left w-full">
-              {analyst.knownFor}
-            </p>
+          <p className="text-[12px] text-gray-500 leading-relaxed">
+            {analyst.knownFor}
+          </p>
 
-            <div className="w-full mt-5 text-[10px] text-gray-400 text-left leading-relaxed">
-              {analyst.coverage.length} companies covered · refreshed hourly
-            </div>
+          <div className="mt-4 text-[10px] text-gray-400 leading-relaxed">
+            {analyst.coverage.length} companies · refreshed hourly
           </div>
         </div>
 

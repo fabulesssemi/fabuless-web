@@ -27,9 +27,11 @@ export default async function Home() {
   const autoStories = articlePool.topStories.length > 0
     ? articlePool.topStories
     : (autoContent?.topStories ?? null);
-  const autoListStories = articlePool.listStories.length > 0
-    ? articlePool.listStories
-    : null;
+  // Guard against the same article appearing in both sections when the top
+  // grid falls back to the legacy blob while the list reads from the pool.
+  const topStoryUrls = new Set((autoStories ?? []).map((s) => s.url));
+  const pooledList = articlePool.listStories.filter((s) => !topStoryUrls.has(s.url));
+  const autoListStories = pooledList.length > 0 ? pooledList : null;
   // Always use live RSS data for podcasts — revalidates every 4h, never stale
   const autoPodcasts = livePodcasts.length > 0
     ? livePodcasts.map((ep) => ({ ...ep, oneliner: undefined }))

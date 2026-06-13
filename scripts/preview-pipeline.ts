@@ -58,8 +58,8 @@ async function main() {
   header("FABULESS PIPELINE — PREVIEW RUN (read-only, nothing saves to the site)");
 
   // ── Step 1: Fetch RSS feeds ───────────────────────────────────────────────
-  step("📡", "Fetching RSS feeds from all 10 sources…");
-  console.log(DIM + "  Reuters · CNBC · NextPlatform · SemiWiki · Benzinga · EE Times · Tom's Hardware · Silicon Leverage · Ars Technica · The Register" + RESET);
+  step("📡", "Fetching RSS feeds from all 13 sources…");
+  console.log(DIM + "  Reuters · CNBC · NextPlatform · SemiWiki · Chipstrat · Benzinga · EE Times · Tom's Hardware · Silicon Leverage · Ars Technica · The Register · WCCFtech · Digitimes" + RESET);
 
   const [allNewsItems, podcastFeeds] = await Promise.all([
     fetchAllNewsItems(),

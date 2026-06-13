@@ -172,7 +172,9 @@ export async function saveAndExpireArticles(
     const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
     const threeDaysAgo = new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString();
 
-    const quotedUrls = `(${urls.map((u) => `'${u.replace(/'/g, "''")}'`).join(",")})`;
+    // PostgREST `in` filter: values must be double-quoted (single quotes are
+    // treated literally and would make the NOT IN exclusion never match).
+    const quotedUrls = `(${urls.map((u) => `"${u.replace(/"/g, '\\"')}"`).join(",")})`;
 
     await Promise.all([
       supabase

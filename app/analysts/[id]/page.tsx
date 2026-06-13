@@ -144,29 +144,31 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
 
         {/* ── RIGHT: Coverage table ── */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-baseline justify-between mb-3">
-            <h2 className="text-[18px] font-bold text-[#111827]">
-              {analyst.name.split(" ")[0]}&apos;s Semiconductor Coverage
-            </h2>
-          </div>
+          <h2 className="text-[20px] font-bold text-[#111827] mb-4">
+            {analyst.name}&apos;s Stock Coverage
+          </h2>
 
           {analyst.coverage.length === 0 ? (
-            <div className="border border-gray-100 py-16 text-center">
+            <div className="py-16 text-center border-t border-gray-200">
               <p className="text-[13px] text-gray-400">No recent coverage data available.</p>
             </div>
           ) : (
-            <div className="border border-gray-200 overflow-x-auto">
+            <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr style={{ borderBottom: `2px solid ${analyst.accent}` }}>
+                  <tr className="border-b-0">
                     {[
-                      { label: "Company",       align: "text-left"  },
-                      { label: "Date",          align: "text-left"  },
-                      { label: "Position",      align: "text-left"  },
-                      { label: "Action",        align: "text-left"  },
-                      { label: "Price Target",  align: "text-right" },
-                    ].map(({ label, align }) => (
-                      <th key={label} className={`px-5 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 bg-white ${align}`}>
+                      { label: "Company",      align: "text-left"  },
+                      { label: "Date",         align: "text-left"  },
+                      { label: "Position",     align: "text-left"  },
+                      { label: "Action",       align: "text-left"  },
+                      { label: "Price Target", align: "text-right" },
+                    ].map(({ label, align }, i) => (
+                      <th
+                        key={label}
+                        style={{ borderBottom: `2px solid ${analyst.accent}` }}
+                        className={`pb-2 pt-0 text-[11px] font-bold uppercase tracking-wider text-gray-500 bg-white ${align} ${i === 0 ? "pr-4" : "px-4"}`}
+                      >
                         {label}
                       </th>
                     ))}
@@ -177,45 +179,45 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
                     const slug = slugByTicker.get(c.ticker);
                     const pos  = positionStyle(c.rating);
                     return (
-                      <tr key={c.ticker} className="border-b border-gray-300 last:border-0 hover:bg-[#FAFAF8] transition-colors">
+                      <tr key={c.ticker} className="border-b border-gray-100 last:border-0 hover:bg-[#FAFAF8] transition-colors">
 
                         {/* Company */}
-                        <td className="px-5 py-3.5">
+                        <td className="pr-4 py-3.5">
                           {slug ? (
                             <Link href={`/companies/${slug}`} className="group block">
-                              <span className="font-mono text-[10px] text-[#B45309] group-hover:underline leading-none">{c.ticker}</span>
+                              <span className="font-mono text-[10px] font-semibold uppercase tracking-wide leading-none" style={{ color: analyst.accent }}>{c.ticker}</span>
                               <span className="block text-[13px] font-semibold text-[#111827] group-hover:text-[#B45309] transition-colors leading-snug mt-0.5">{c.name}</span>
                             </Link>
                           ) : (
                             <>
-                              <span className="font-mono text-[10px] text-gray-400 leading-none block">{c.ticker}</span>
+                              <span className="font-mono text-[10px] font-semibold uppercase tracking-wide text-gray-400 leading-none block">{c.ticker}</span>
                               <span className="block text-[13px] font-semibold text-[#111827] leading-snug mt-0.5">{c.name}</span>
                             </>
                           )}
                         </td>
 
                         {/* Date */}
-                        <td className="px-5 py-3.5 text-[12px] text-gray-500 whitespace-nowrap">
+                        <td className="px-4 py-3.5 text-[12px] text-gray-400 whitespace-nowrap">
                           {fmtDate(c.priceTargetDate)}
                         </td>
 
                         {/* Position */}
-                        <td className="px-5 py-3.5">
-                          <span className={`text-[13px] ${pos.cls}`}>{pos.label}</span>
+                        <td className="px-4 py-3.5">
+                          <span className={`text-[13px] tracking-wide ${pos.cls}`}>{pos.label}</span>
                         </td>
 
                         {/* Action */}
-                        <td className="px-5 py-3.5 text-[12px] text-gray-500">
+                        <td className="px-4 py-3.5 text-[12px] text-gray-500">
                           {actionLabel(c.action)}
                         </td>
 
                         {/* Price Target + Upside */}
-                        <td className="px-5 py-3.5 text-right">
+                        <td className="px-4 py-3.5 text-right">
                           {c.priceTarget ? (
                             <>
                               <div className="text-[14px] font-bold text-[#111827] tabular-nums">${c.priceTarget.toLocaleString()}</div>
                               {c.upsidePct !== null && (
-                                <div className={`text-[11px] font-medium tabular-nums mt-0.5 ${c.upsidePct >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
+                                <div className={`text-[11px] font-semibold tabular-nums mt-0.5 ${c.upsidePct >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
                                   ({c.upsidePct > 0 ? "+" : ""}{c.upsidePct}% {c.upsidePct >= 0 ? "Upside" : "Downside"})
                                 </div>
                               )}
@@ -232,9 +234,9 @@ export default async function AnalystPage({ params }: { params: Promise<{ id: st
             </div>
           )}
 
-          <p className="mt-6 text-[10px] text-gray-400 leading-relaxed">
+          <p className="mt-5 text-[10px] text-gray-400 leading-relaxed">
             Data via Yahoo Finance, refreshed hourly. Most recent rating and price target per company shown.
-            Upside calculated vs. current market price. Analyst names matched to firm&apos;s published ratings.
+            Upside calculated vs. current market price.
           </p>
         </div>
       </div>

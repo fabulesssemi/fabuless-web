@@ -90,7 +90,7 @@ export default async function AnalystsIndex() {
           </div>
           <Link
             href="/analyst-consensus"
-            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#B45309] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#92400e] transition-colors"
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B45309] text-[#B45309] text-[11px] font-bold uppercase tracking-widest hover:bg-[#B45309] hover:text-white transition-colors"
           >
             Consensus view <span className="text-[13px]">→</span>
           </Link>

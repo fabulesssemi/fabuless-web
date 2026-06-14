@@ -131,28 +131,25 @@ export default function TrackerPage() {
                 )}
               </div>
 
-              {/* Domain mini-bars */}
-              <div className="hidden lg:flex flex-col gap-1 w-52 shrink-0">
+              {/* Domain mini-bars — horizontal column chart */}
+              <div className="hidden lg:flex items-end gap-2 h-16 w-52 shrink-0">
                 {DOMAIN_COLS.map((d) => {
                   const pct = domainMap[d.key] ?? null;
+                  const color = pct === null ? "#e5e7eb" : pct >= 75 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#f43f5e";
                   return (
-                    <div key={d.key} className="flex items-center gap-2">
-                      <span className="text-[9px] uppercase tracking-wide text-gray-400 w-10 shrink-0">{d.label}</span>
-                      <div className="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden">
-                        {pct !== null && (
-                          <div
-                            className="h-full rounded-full"
-                            style={{
-                              width: `${pct}%`,
-                              backgroundColor:
-                                pct >= 75 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#f43f5e",
-                            }}
-                          />
-                        )}
+                    <div key={d.key} className="flex flex-col items-center gap-1 flex-1">
+                      <span className="text-[8px] tabular-nums text-gray-400">{pct !== null ? `${pct}%` : "—"}</span>
+                      <div className="w-full bg-gray-100 rounded-sm overflow-hidden" style={{ height: "32px" }}>
+                        <div
+                          className="w-full rounded-sm transition-all"
+                          style={{
+                            height: pct !== null ? `${pct}%` : "4px",
+                            backgroundColor: color,
+                            marginTop: pct !== null ? `${100 - pct}%` : "28px",
+                          }}
+                        />
                       </div>
-                      <span className="text-[9px] tabular-nums text-gray-400 w-6 text-right">
-                        {pct !== null ? `${pct}%` : "—"}
-                      </span>
+                      <span className="text-[8px] uppercase tracking-wide text-gray-400">{d.label}</span>
                     </div>
                   );
                 })}

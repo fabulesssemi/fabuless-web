@@ -88,8 +88,11 @@ export default async function AnalystsIndex() {
               The analysts who move semi stocks. Live ratings and price targets across the coverage universe.
             </p>
           </div>
-          <Link href="/analyst-consensus" className="shrink-0 text-[11px] text-[#B45309] font-semibold hover:underline">
-            Consensus view →
+          <Link
+            href="/analyst-consensus"
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#B45309] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#92400e] transition-colors"
+          >
+            Consensus view <span className="text-[13px]">→</span>
           </Link>
         </div>
       </header>

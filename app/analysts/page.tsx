@@ -19,6 +19,19 @@ function initials(name: string) {
   return name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
 }
 
+// Firm tickers for Parqet logo API (public companies only; private firms fall back to monogram)
+const FIRM_TICKERS: Record<string, string> = {
+  arya:    "BAC",   // BofA Securities → Bank of America
+  moore:   "MS",    // Morgan Stanley
+  mcneill: "JPM",   // JP Morgan
+  curtis:  "JEF",   // Jefferies
+  egan:    "UBS",   // UBS
+  omalley: "BARC",  // Barclays
+  // Bernstein (AllianceBernstein): AB
+  rasgon:  "AB",
+  // Cantor Fitzgerald & Wolfe Research are private — monogram fallback
+};
+
 function bullBearSummary(coverage: { rating: string }[]) {
   let bull = 0, bear = 0, neutral = 0;
   for (const c of coverage) {
@@ -102,12 +115,25 @@ export default async function AnalystsIndex() {
                 style={{ backgroundColor: analyst.accent }}
               />
 
-              {/* Avatar monogram */}
+              {/* Firm logo badge */}
               <div
-                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-[13px] font-bold tracking-tight"
-                style={{ backgroundColor: analyst.accent }}
+                className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden"
+                style={{ backgroundColor: `${analyst.accent}18`, border: `1.5px solid ${analyst.accent}30` }}
               >
-                {initials(analyst.name)}
+                {FIRM_TICKERS[analyst.id] ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={`https://assets.parqet.com/logos/symbol/${FIRM_TICKERS[analyst.id]}?format=png`}
+                    alt={analyst.firmDisplay}
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="text-[13px] font-bold" style={{ color: analyst.accent }}>
+                    {initials(analyst.name)}
+                  </span>
+                )}
               </div>
 
               {/* Name + firm + known-for */}

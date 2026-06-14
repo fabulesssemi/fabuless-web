@@ -13,21 +13,9 @@ import {
 
 export const revalidate = 300; // 5 min — keeps prices fresh
 
-// Direct logo URLs — more reliable than Clearbit for these specific companies
-const LOGO_URLS: Record<string, string> = {
-  nvda:    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/220px-Nvidia_logo.svg.png",
-  amd:     "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/AMD_Logo.svg/220px-AMD_Logo.svg.png",
-  avgo:    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Broadcom_Inc._logo.svg/220px-Broadcom_Inc._logo.svg.png",
-  mrvl:    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Marvell_Technology_logo.svg/220px-Marvell_Technology_logo.svg.png",
-  tsm:     "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/TSMC.logo.svg/220px-TSMC.logo.svg.png",
-  asml:    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/ASML_Holding_NV_logo.svg/220px-ASML_Holding_NV_logo.svg.png",
-  arm:     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Arm_logo_2017.svg/220px-Arm_logo_2017.svg.png",
-  mu:      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Micron_Technology_logo.svg/220px-Micron_Technology_logo.svg.png",
-  intc:    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282006-2020%29.svg/220px-Intel_logo_%282006-2020%29.svg.png",
-  qcom:    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Qualcomm-Logo.svg/220px-Qualcomm-Logo.svg.png",
-  skhynix: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/SK_Hynix_Logo.svg/220px-SK_Hynix_Logo.svg.png",
-  samsung: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/220px-Samsung_Logo.svg.png",
-};
+// Parqet stock logo API — allows hotlinking, returns clean PNGs by ticker
+const logoUrl = (ticker: string) =>
+  `https://assets.parqet.com/logos/symbol/${ticker}?format=png`;
 
 export const metadata: Metadata = {
   title: "Companies — Fabuless",
@@ -67,17 +55,15 @@ export default async function CompaniesIndex() {
               className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200"
             >
               {/* Translucent logo watermark */}
-              {LOGO_URLS[meta.slug] && (
-                <div
-                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-20 h-20 opacity-[0.07]"
-                  style={{
-                    backgroundImage: `url(${LOGO_URLS[meta.slug]})`,
+              <div
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-20 h-20 opacity-[0.08]"
+                style={{
+                  backgroundImage: `url(${logoUrl(meta.ticker)})`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                   }}
                 />
-              )}
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="font-mono text-xs text-[#B45309]">

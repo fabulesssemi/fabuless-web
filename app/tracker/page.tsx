@@ -67,20 +67,24 @@ export default function TrackerPage() {
       {/* Leaderboard */}
       <div className="mb-10 border-t border-gray-200">
         {/* Column headers */}
-        <div className="hidden lg:grid grid-cols-[28px_1fr_200px_80px_72px] gap-4 px-3 py-2 border-b border-gray-100">
+        <div className="hidden lg:grid grid-cols-[28px_260px_1fr_196px_80px_72px] gap-4 px-3 py-2 border-b border-gray-100">
           <div />
           <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Expert</div>
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Coverage</div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">By Domain</div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-right">Resolved</div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-right">Accuracy</div>
         </div>
         {rows.map(({ expert, stats }, i) => {
           const domainMap = Object.fromEntries(stats.domains.map((d) => [d.domain, d.accuracyPct]));
+          const topDomain = stats.domains
+            .filter((d) => d.resolved >= 3 && d.accuracyPct !== null)
+            .sort((a, b) => (b.accuracyPct ?? 0) - (a.accuracyPct ?? 0))[0];
           return (
             <Link
               key={expert.id}
               href={`/tracker/${expert.id}`}
-              className="group grid grid-cols-[28px_1fr_auto] lg:grid-cols-[28px_1fr_200px_80px_72px] gap-4 items-center px-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+              className="group grid grid-cols-[28px_1fr_auto] lg:grid-cols-[28px_260px_1fr_196px_80px_72px] gap-4 items-center px-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
               style={{ minHeight: "56px" }}
             >
               {/* Rank */}
@@ -96,23 +100,28 @@ export default function TrackerPage() {
                 </div>
               </div>
 
-              {/* Domain inline bars */}
-              <div className="hidden lg:flex items-center gap-2">
+              {/* Coverage filler — keeps table feeling full */}
+              <div className="hidden lg:flex items-center gap-3 min-w-0">
+                <span className="text-[11px] text-gray-400 tabular-nums shrink-0">{stats.total} calls</span>
+                {topDomain && (
+                  <>
+                    <span className="text-gray-200 text-[10px]">·</span>
+                    <span className="text-[11px] text-gray-400 truncate">
+                      Best: <span className={`font-semibold ${accuracyColor(topDomain.accuracyPct)}`}>{topDomain.label}</span>
+                      <span className="text-gray-300 ml-1 tabular-nums">{topDomain.accuracyPct}%</span>
+                    </span>
+                  </>
+                )}
+              </div>
+
+              {/* Domain thin bars (Option A) */}
+              <div className="hidden lg:flex items-end gap-[6px]">
                 {DOMAIN_COLS.map((d) => {
                   const pct = domainMap[d.key] ?? null;
                   const color = pct === null ? "#e5e7eb" : pct >= 75 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#f43f5e";
                   return (
-                    <div key={d.key} className="flex flex-col items-center gap-0.5" style={{ width: "26px" }}>
-                      <div className="w-full bg-gray-100 rounded-sm" style={{ height: "16px" }}>
-                        <div
-                          className="w-full rounded-sm"
-                          style={{
-                            height: pct !== null ? `${Math.max(2, Math.round(pct / 100 * 16))}px` : "2px",
-                            backgroundColor: color,
-                            marginTop: pct !== null ? `${16 - Math.max(2, Math.round(pct / 100 * 16))}px` : "14px",
-                          }}
-                        />
-                      </div>
+                    <div key={d.key} className="flex flex-col items-center gap-[3px]">
+                      <div style={{ width: "24px", height: "4px", backgroundColor: color, borderRadius: "1px" }} />
                       <span className="text-[7px] uppercase text-gray-400 leading-none tracking-wide">{d.label}</span>
                     </div>
                   );

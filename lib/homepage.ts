@@ -117,7 +117,12 @@ export async function getHomepageArticles(): Promise<{
       }
     }
 
-    // Top Stories: freshest (first seen within 24h), lowest rank first, up to 4
+    // Top Stories: ONLY articles first seen within the last 24h (lowest rank
+    // first), up to 4. Because this keys off first_seen_at, an article can be a
+    // top story for exactly one day — the day it first appears. The next run it
+    // is >24h old and falls to the list below. So the same article never sits in
+    // Top Stories two days in a row, and a previously-seen article can't be
+    // promoted back into Top Stories.
     const topStories = eligible
       .filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS)
       .slice(0, 4)

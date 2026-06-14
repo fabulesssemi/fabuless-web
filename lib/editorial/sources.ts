@@ -139,13 +139,26 @@ export function filterByKeywords(items: RssItem[], keywords: string[]): RssItem[
   });
 }
 
+// Drop stale articles. Some feeds (e.g. Chipstrat) carry weeks of back-catalog,
+// and Claude would otherwise surface a month-old post as "news". Articles with
+// a missing/unparseable pubDate are KEPT (don't over-filter feeds with odd dates).
+const MAX_ARTICLE_AGE_DAYS = 21;
+
+function isRecent(pubDate: string, maxAgeDays = MAX_ARTICLE_AGE_DAYS): boolean {
+  if (!pubDate) return true;
+  const t = new Date(pubDate).getTime();
+  if (Number.isNaN(t)) return true;
+  return Date.now() - t <= maxAgeDays * 24 * 60 * 60 * 1000;
+}
+
 /** Fetch all configured news/analyst RSS feeds in parallel. Returns merged list. */
 export async function fetchAllNewsItems(): Promise<RssItem[]> {
   const results = await Promise.all(
     RSS_FEEDS.map(async (url) => {
       const xml = await fetchText(url);
       if (!xml) return [];
-      return parseRss(xml);
+      // Recency filter — only articles published within the last few weeks.
+      return parseRss(xml).filter((item) => isRecent(item.pubDate));
     }),
   );
   return results.flat();

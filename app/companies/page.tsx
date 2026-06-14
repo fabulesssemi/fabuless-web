@@ -13,6 +13,21 @@ import {
 
 export const revalidate = 300; // 5 min — keeps prices fresh
 
+const LOGO_DOMAINS: Record<string, string> = {
+  nvda:     "nvidia.com",
+  amd:      "amd.com",
+  avgo:     "broadcom.com",
+  mrvl:     "marvell.com",
+  tsm:      "tsmc.com",
+  asml:     "asml.com",
+  arm:      "arm.com",
+  mu:       "micron.com",
+  intc:     "intel.com",
+  qcom:     "qualcomm.com",
+  skhynix:  "skhynix.com",
+  samsung:  "samsung.com",
+};
+
 export const metadata: Metadata = {
   title: "Companies — Fabuless",
   description:
@@ -51,12 +66,24 @@ export default async function CompaniesIndex() {
               className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200"
             >
               <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="font-mono text-xs text-[#B45309]">
-                    {displayTicker(meta.ticker)}
-                  </div>
-                  <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
-                    {meta.name}
+                <div className="min-w-0 flex items-start gap-3">
+                  {LOGO_DOMAINS[meta.slug] && (
+                    <img
+                      src={`https://logo.clearbit.com/${LOGO_DOMAINS[meta.slug]}`}
+                      alt={meta.name}
+                      width={36}
+                      height={36}
+                      className="rounded-lg shrink-0 mt-0.5 border border-gray-100"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                    />
+                  )}
+                  <div className="min-w-0">
+                    <div className="font-mono text-xs text-[#B45309]">
+                      {displayTicker(meta.ticker)}
+                    </div>
+                    <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
+                      {meta.name}
+                    </div>
                   </div>
                 </div>
                 {quote?.price != null && (

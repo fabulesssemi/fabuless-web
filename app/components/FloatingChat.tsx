@@ -11,10 +11,10 @@ interface Message {
 const ACCENT = "#B45309";
 
 const STARTERS = [
+  "What happened in chip news today?",
   "Is Nvidia still a buy here?",
   "Who wins from the HBM shortage?",
   "What's the Taiwan risk for US chip stocks?",
-  "Explain CoWoS packaging",
 ];
 
 export function FloatingChat() {

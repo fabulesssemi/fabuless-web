@@ -43,7 +43,7 @@ export default function TrackerPage() {
     <div className="max-w-6xl mx-auto px-6 py-10">
       {/* Header */}
       <div className="mb-8">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-1">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6B7280] mb-1">
           Expert Track Records
         </div>
         <div className="flex items-end justify-between gap-4">
@@ -57,7 +57,7 @@ export default function TrackerPage() {
           </div>
           <Link
             href="/tracker/methodology"
-            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B45309] text-[#B45309] text-[11px] font-bold uppercase tracking-widest hover:bg-[#B45309] hover:text-white transition-colors"
+            className="shrink-0 text-[11px] font-semibold text-[#6B7280] underline underline-offset-2 hover:text-[#111827] transition-colors"
           >
             Methodology →
           </Link>
@@ -93,7 +93,7 @@ export default function TrackerPage() {
               {/* Identity */}
               <div className="min-w-0 py-3">
                 <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="font-sans text-[14px] font-bold text-gray-900 group-hover:text-[#B45309] transition-colors leading-tight">
+                  <span className="font-sans text-[14px] font-bold text-[#0A0A0A] group-hover:text-gray-500 transition-colors leading-tight">
                     {expert.name}
                   </span>
                   <span className="text-[10px] font-medium text-gray-400 tracking-wide">{expert.subtitle}</span>

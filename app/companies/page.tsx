@@ -64,27 +64,27 @@ export default async function CompaniesIndex() {
             <Link
               key={meta.slug}
               href={`/companies/${meta.slug}`}
-              className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200"
+              className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200"
             >
+              {/* Translucent logo watermark */}
+              {LOGO_URLS[meta.slug] && (
+                <div
+                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-20 h-20 opacity-[0.07]"
+                  style={{
+                    backgroundImage: `url(${LOGO_URLS[meta.slug]})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                />
+              )}
               <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0 flex items-start gap-3">
-                  {LOGO_URLS[meta.slug] && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={LOGO_URLS[meta.slug]}
-                      alt=""
-                      width={36}
-                      height={36}
-                      className="rounded-lg shrink-0 mt-0.5 border border-gray-100 bg-gray-50 object-contain p-0.5"
-                    />
-                  )}
-                  <div className="min-w-0">
-                    <div className="font-mono text-xs text-[#B45309]">
-                      {displayTicker(meta.ticker)}
-                    </div>
-                    <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
-                      {meta.name}
-                    </div>
+                <div className="min-w-0">
+                  <div className="font-mono text-xs text-[#B45309]">
+                    {displayTicker(meta.ticker)}
+                  </div>
+                  <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
+                    {meta.name}
                   </div>
                 </div>
                 {quote?.price != null && (

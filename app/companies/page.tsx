@@ -3,7 +3,6 @@ import Link from "next/link";
 import { COMPANY_UNIVERSE, getEditorial } from "@/lib/companies";
 import { getQuoteCached } from "@/lib/providers";
 import {
-  Pill,
   changeTone,
   displayTicker,
   fmtMarketCap,
@@ -11,11 +10,27 @@ import {
   fmtPrice,
 } from "@/app/components/company/primitives";
 
-export const revalidate = 300; // 5 min — keeps prices fresh
+export const revalidate = 300;
 
 // Parqet stock logo API — allows hotlinking, returns clean PNGs by ticker
 const logoUrl = (ticker: string) =>
   `https://assets.parqet.com/logos/symbol/${ticker}?format=png`;
+
+// Brand accent colors — used for the card tint and logo badge bg
+const BRAND_COLORS: Record<string, string> = {
+  nvda:    "#76b900",
+  amd:     "#ED1C24",
+  avgo:    "#CC0000",
+  mrvl:    "#005FAD",
+  tsm:     "#0082C8",
+  asml:    "#0071B5",
+  arm:     "#0091BD",
+  mu:      "#E31837",
+  intc:    "#0068B5",
+  qcom:    "#3253DC",
+  skhynix: "#0066B3",
+  samsung: "#1428A0",
+};
 
 export const metadata: Metadata = {
   title: "Companies — Fabuless",
@@ -48,63 +63,96 @@ export default async function CompaniesIndex() {
         </header>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {cards.map(({ meta, quote, hasDeepDive }) => (
-            <Link
-              key={meta.slug}
-              href={`/companies/${meta.slug}`}
-              className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200"
-            >
-              {/* Translucent logo watermark */}
-              <div
-                className="pointer-events-none absolute inset-0 opacity-[0.055]"
+          {cards.map(({ meta, quote, hasDeepDive }) => {
+            const accent = BRAND_COLORS[meta.slug] ?? "#B45309";
+            const isUp = (quote?.changePercent ?? 0) >= 0;
+
+            return (
+              <Link
+                key={meta.slug}
+                href={`/companies/${meta.slug}`}
+                className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200"
                 style={{
-                  backgroundImage: `url(${logoUrl(meta.ticker)})`,
-                  backgroundSize: "45%",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  }}
+                  borderTopColor: accent,
+                  borderTopWidth: "2px",
+                }}
+              >
+                {/* Very subtle brand tint */}
+                <div
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: `${accent}07` }}
                 />
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="font-mono text-xs text-[#B45309]">
-                    {displayTicker(meta.ticker)}
-                  </div>
-                  <div className="font-sans text-xl text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
-                    {meta.name}
-                  </div>
-                </div>
-                {quote?.price != null && (
-                  <div className="text-right shrink-0">
-                    <div className="text-sm font-semibold text-gray-900 tabular-nums">
-                      {fmtPrice(quote.price, quote.currency ?? "USD")}
-                    </div>
+
+                {/* Top row: logo badge + name block + price */}
+                <div className="relative flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 min-w-0">
+                    {/* Logo badge */}
                     <div
-                      className={`text-xs tabular-nums ${changeTone(quote.changePercent)}`}
+                      className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ background: `${accent}18` }}
                     >
-                      {fmtPercent(quote.changePercent)}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={logoUrl(meta.ticker)}
+                        alt={meta.name}
+                        width={26}
+                        height={26}
+                        className="object-contain"
+                      />
+                    </div>
+
+                    {/* Ticker + name */}
+                    <div className="min-w-0 pt-0.5">
+                      <div className="font-mono text-[10px] font-semibold tracking-widest" style={{ color: accent }}>
+                        {displayTicker(meta.ticker)}
+                      </div>
+                      <div className="font-sans text-[1.05rem] font-bold text-gray-900 leading-tight tracking-tight group-hover:text-[#B45309] transition-colors">
+                        {meta.name}
+                      </div>
                     </div>
                   </div>
-                )}
-              </div>
 
-              <p className="mt-3 text-[13px] text-gray-500 leading-snug">
-                {meta.sector}
-              </p>
+                  {/* Price block */}
+                  {quote?.price != null && (
+                    <div className="text-right shrink-0 pt-0.5">
+                      <div className="text-sm font-bold text-gray-900 tabular-nums leading-tight">
+                        {fmtPrice(quote.price, quote.currency ?? "USD")}
+                      </div>
+                      <div className={`text-xs font-semibold tabular-nums ${changeTone(quote.changePercent)}`}>
+                        {fmtPercent(quote.changePercent)}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-[11px] text-gray-400">
-                  {quote?.marketCap != null
-                    ? `Mkt cap ${fmtMarketCap(quote.marketCap, quote.currency ?? "USD")}`
-                    : ""}
-                </span>
-                {hasDeepDive ? (
-                  <Pill tone="emerald">Deep-dive</Pill>
-                ) : (
-                  <Pill tone="neutral">Live data</Pill>
-                )}
-              </div>
-            </Link>
-          ))}
+                {/* Sector */}
+                <p className="relative mt-3 text-[12px] text-gray-500 leading-snug tracking-wide">
+                  {meta.sector}
+                </p>
+
+                {/* Bottom row: mkt cap + badge */}
+                <div className="relative mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-[11px] font-medium text-gray-400 tabular-nums">
+                    {quote?.marketCap != null
+                      ? `Mkt cap ${fmtMarketCap(quote.marketCap, quote.currency ?? "USD")}`
+                      : ""}
+                  </span>
+                  {hasDeepDive ? (
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                      style={{ color: accent, background: `${accent}18` }}
+                    >
+                      Deep-dive
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full text-gray-400 bg-gray-100">
+                      Live data
+                    </span>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

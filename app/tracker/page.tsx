@@ -20,8 +20,20 @@ const DOMAIN_COLS = [
   { key: "financials",   label: "Fin" },
 ] as const;
 
-function pctColor(_pct: number | null): string {
-  return "text-gray-700";
+function recentForm(expertId: string, n = 6): ("CORRECT" | "PARTIAL" | "WRONG")[] {
+  return predictions
+    .filter((p) => p.expert === expertId && p.status !== "TOO_EARLY")
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, n)
+    .map((p) => p.status as "CORRECT" | "PARTIAL" | "WRONG")
+    .reverse();
+}
+
+function accuracyColor(pct: number | null): string {
+  if (pct === null) return "text-gray-400";
+  if (pct >= 75) return "text-emerald-600";
+  if (pct >= 55) return "text-amber-600";
+  return "text-rose-500";
 }
 
 export default function TrackerPage() {
@@ -30,98 +42,148 @@ export default function TrackerPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       {/* Header */}
-      <div className="border-b border-gray-200 pb-4 mb-6 flex items-baseline justify-between gap-4">
-        <div className="flex items-baseline gap-3">
-          <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
-            Prediction Tracker
-          </h1>
-          <span className="font-serif text-[15px] text-[#4a4a4a]">
-            Every prediction on record. Every verdict public. Click any expert for their full scorecard.
-          </span>
+      <div className="mb-8">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-1">
+          Expert Track Records
         </div>
-        <Link href="/tracker/methodology" className="text-[12px] text-[#B45309] font-semibold hover:underline shrink-0">
-          Methodology →
-        </Link>
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
+              Prediction Tracker
+            </h1>
+            <p className="mt-1 font-serif text-[15px] text-[#4a4a4a]">
+              Every prediction on record. Every verdict public. Click any expert for their full scorecard.
+            </p>
+          </div>
+          <Link
+            href="/tracker/methodology"
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B45309] text-[#B45309] text-[11px] font-bold uppercase tracking-widest hover:bg-[#B45309] hover:text-white transition-colors"
+          >
+            Methodology →
+          </Link>
+        </div>
       </div>
 
       {/* Leaderboard */}
-      <div className="border border-[#DDDBD2] bg-white mb-8 overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-100">
-              <th className="text-left px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 w-6">#</th>
-              <th className="text-left px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Expert</th>
-              <th className="text-center px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Overall</th>
-              <th className="hidden sm:table-cell text-center px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-300">Resolved</th>
-              <th className="hidden sm:table-cell text-center px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-300">Open</th>
-              {DOMAIN_COLS.map((d) => (
-                <th key={d.key} className="hidden md:table-cell text-center px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-300">
-                  {d.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(({ expert, stats }, i) => {
-              const domainMap = Object.fromEntries(stats.domains.map((d) => [d.domain, d.accuracyPct]));
-              return (
-                <tr key={expert.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
-                  {/* Rank */}
-                  <td className="px-4 py-3 text-[12px] text-gray-300 font-semibold">{i + 1}</td>
+      <div className="flex flex-col gap-2 mb-10">
+        {rows.map(({ expert, stats }, i) => {
+          const domainMap = Object.fromEntries(stats.domains.map((d) => [d.domain, d.accuracyPct]));
+          const form = recentForm(expert.id);
+          const isFirst = i === 0;
 
-                  {/* Expert name */}
-                  <td className="px-3 py-3">
-                    <Link href={`/tracker/${expert.id}`} className="group flex items-center gap-2.5">
-                      <div className="w-0.5 h-8 shrink-0 rounded-full" style={{ backgroundColor: expert.accent }} />
-                      <div>
-                        <div className="text-[13px] font-bold text-[#111827] leading-tight group-hover:text-[#B45309] transition-colors">{expert.name}</div>
-                        <div className="flex items-center gap-2 mt-0.5">
-                          <span className="text-[11px] text-gray-400">{expert.subtitle}</span>
-                          <span className="text-[10px] font-bold text-white bg-[#B45309] px-2 py-0.5 rounded leading-none tracking-wide">Scorecard →</span>
-                        </div>
-                      </div>
-                    </Link>
-                  </td>
+          return (
+            <Link
+              key={expert.id}
+              href={`/tracker/${expert.id}`}
+              className={`group relative flex items-center gap-5 rounded-xl border px-5 py-4 transition-all duration-150 hover:shadow-md ${
+                isFirst
+                  ? "border-amber-200 bg-amber-50/40 hover:border-amber-300"
+                  : "border-gray-100 bg-white hover:border-gray-200"
+              }`}
+            >
+              {/* Left accent */}
+              <div
+                className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full"
+                style={{ backgroundColor: expert.accent }}
+              />
 
-                  {/* Overall % — hero stat */}
-                  <td className="px-4 py-3 text-center">
-                    {stats.accuracyPct !== null ? (
-                      <span className={`text-[18px] font-bold ${pctColor(stats.accuracyPct)}`}>
-                        {stats.accuracyPct}%
-                      </span>
-                    ) : (
-                      <span className="text-gray-300 text-[13px]">—</span>
-                    )}
-                  </td>
+              {/* Rank */}
+              <div className={`shrink-0 w-7 text-center font-bold tabular-nums ${isFirst ? "text-[#B45309] text-[16px]" : "text-gray-300 text-[14px]"}`}>
+                {i + 1}
+              </div>
 
-                  {/* Resolved */}
-                  <td className="hidden sm:table-cell px-3 py-3 text-center text-[12px] text-gray-500">
-                    {stats.correct}/{stats.resolved}
-                  </td>
+              {/* Identity */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-sans text-[15px] font-bold text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
+                    {expert.name}
+                  </span>
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                    style={{ color: expert.accent, backgroundColor: `${expert.accent}18` }}
+                  >
+                    {expert.subtitle}
+                  </span>
+                  {isFirst && (
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">
+                      #1
+                    </span>
+                  )}
+                </div>
 
-                  {/* Open */}
-                  <td className="hidden sm:table-cell px-3 py-3 text-center text-[12px] text-gray-400">
-                    {stats.tooEarly}
-                  </td>
+                {/* Recent form dots */}
+                {form.length > 0 && (
+                  <div className="flex items-center gap-1 mt-1.5">
+                    <span className="text-[9px] uppercase tracking-widest text-gray-400 mr-1">Recent</span>
+                    {form.map((s, j) => (
+                      <div
+                        key={j}
+                        className="w-2 h-2 rounded-full"
+                        style={{
+                          backgroundColor:
+                            s === "CORRECT" ? "#10b981" :
+                            s === "PARTIAL" ? "#f59e0b" : "#f43f5e",
+                        }}
+                        title={s}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
 
-                  {/* Domain columns */}
-                  {DOMAIN_COLS.map((d) => {
-                    const pct = domainMap[d.key] ?? null;
-                    return (
-                      <td key={d.key} className="hidden md:table-cell px-3 py-3 text-center">
-                        {pct !== null ? (
-                          <span className={`text-[12px] font-semibold ${pctColor(pct)}`}>{pct}%</span>
-                        ) : (
-                          <span className="text-gray-200 text-[12px]">—</span>
+              {/* Domain mini-bars */}
+              <div className="hidden lg:flex flex-col gap-1 w-52 shrink-0">
+                {DOMAIN_COLS.map((d) => {
+                  const pct = domainMap[d.key] ?? null;
+                  return (
+                    <div key={d.key} className="flex items-center gap-2">
+                      <span className="text-[9px] uppercase tracking-wide text-gray-400 w-10 shrink-0">{d.label}</span>
+                      <div className="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden">
+                        {pct !== null && (
+                          <div
+                            className="h-full rounded-full"
+                            style={{
+                              width: `${pct}%`,
+                              backgroundColor:
+                                pct >= 75 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#f43f5e",
+                            }}
+                          />
                         )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                      </div>
+                      <span className="text-[9px] tabular-nums text-gray-400 w-6 text-right">
+                        {pct !== null ? `${pct}%` : "—"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Resolved / Open */}
+              <div className="hidden sm:flex flex-col items-center gap-0.5 w-20 shrink-0">
+                <div className="text-[12px] font-semibold text-gray-700 tabular-nums">{stats.correct}/{stats.resolved}</div>
+                <div className="text-[9px] uppercase tracking-widest text-gray-400">resolved</div>
+                <div className="text-[11px] text-gray-400 tabular-nums mt-0.5">{stats.tooEarly} open</div>
+              </div>
+
+              {/* Accuracy % — hero */}
+              <div className="shrink-0 text-right w-24">
+                {stats.accuracyPct !== null ? (
+                  <>
+                    <div className={`text-[28px] font-bold tabular-nums leading-none ${accuracyColor(stats.accuracyPct)}`}>
+                      {stats.accuracyPct}%
+                    </div>
+                    <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-0.5">accuracy</div>
+                  </>
+                ) : (
+                  <span className="text-gray-300 text-[14px]">—</span>
+                )}
+              </div>
+
+              {/* Chevron */}
+              <div className="shrink-0 text-gray-300 group-hover:text-[#B45309] transition-colors">→</div>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Prediction table */}

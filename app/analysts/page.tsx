@@ -15,9 +15,18 @@ const RATING_SCORE: Record<string, number> = {
   "Underperform": -1, "Underweight": -1, "Sell": -2,
 };
 
-function initials(name: string) {
-  return name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
-}
+// Firm logo domains — Clearbit returns clean logos for financial firms
+const FIRM_LOGOS: Record<string, string> = {
+  arya:    "bofa.com",
+  moore:   "morganstanley.com",
+  rasgon:  "bernstein.com",
+  mcneill: "jpmorgan.com",
+  lu:      "cantor.com",
+  lurie:   "wolferesearch.com",
+  curtis:  "jefferies.com",
+  egan:    "ubs.com",
+  omalley: "barclays.com",
+};
 
 function bullBearSummary(coverage: { rating: string }[]) {
   let bull = 0, bear = 0, neutral = 0;
@@ -102,12 +111,25 @@ export default async function AnalystsIndex() {
                 style={{ backgroundColor: analyst.accent }}
               />
 
-              {/* Avatar monogram */}
+              {/* Firm logo badge */}
               <div
-                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-[13px] font-bold tracking-tight"
-                style={{ backgroundColor: analyst.accent }}
+                className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden"
+                style={{ backgroundColor: `${analyst.accent}18`, border: `1.5px solid ${analyst.accent}30` }}
               >
-                {initials(analyst.name)}
+                {FIRM_LOGOS[analyst.id] ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={`https://logo.clearbit.com/${FIRM_LOGOS[analyst.id]}`}
+                    alt={analyst.firmDisplay}
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="text-[13px] font-bold text-white">
+                    {analyst.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                  </span>
+                )}
               </div>
 
               {/* Name + firm + known-for */}

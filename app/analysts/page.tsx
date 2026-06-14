@@ -47,38 +47,56 @@ export default async function AnalystsIndex() {
         </div>
       </header>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="divide-y divide-gray-200 border-t border-gray-200">
         {analysts.map((analyst) => {
           const { bull, bear, neutral } = bullBearSummary(analyst.coverage);
           return (
             <Link
               key={analyst.id}
               href={`/analysts/${analyst.id}`}
-              className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200 flex flex-col"
+              className="group flex items-stretch gap-4 py-4 hover:bg-[#FAFAF8] transition-colors -mx-3 px-3"
             >
-              <div className="min-w-0">
-                <div className="font-mono text-xs font-semibold" style={{ color: analyst.accent }}>
-                  {analyst.firmDisplay.toUpperCase()}
+              {/* Accent rail */}
+              <div className="w-1 self-stretch rounded-full shrink-0" style={{ backgroundColor: analyst.accent }} />
+
+              {/* Name + known for */}
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="font-sans text-[16px] font-bold text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
+                    {analyst.name}
+                  </span>
+                  <span className="font-mono text-[10px] font-semibold uppercase tracking-wider" style={{ color: analyst.accent }}>
+                    {analyst.firmDisplay}
+                  </span>
                 </div>
-                <div className="font-sans text-[17px] text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight mt-2">
-                  {analyst.name}
+                <p className="mt-1 text-[12.5px] text-gray-500 leading-snug line-clamp-1">
+                  {analyst.knownFor}
+                </p>
+              </div>
+
+              {/* Rating breakdown + coverage count */}
+              <div className="hidden md:flex items-center gap-5 shrink-0 self-center">
+                <div className="flex items-center gap-3 text-[12px] tabular-nums">
+                  <span className="text-emerald-600 font-semibold">{bull} <span className="text-gray-400 font-normal">buy</span></span>
+                  <span className="text-gray-400 font-semibold">{neutral} <span className="text-gray-400 font-normal">hold</span></span>
+                  <span className="text-rose-500 font-semibold">{bear} <span className="text-gray-400 font-normal">sell</span></span>
+                </div>
+                <div className="w-px h-8 bg-gray-200" />
+                <div className="text-right w-[78px]">
+                  <div className="text-[15px] font-bold text-gray-900 tabular-nums leading-none">{analyst.coverage.length}</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wide mt-0.5">stocks</div>
                 </div>
               </div>
 
-              <p className="mt-3 text-[13px] text-gray-500 leading-snug flex-1">
-                {analyst.knownFor}
-              </p>
-
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-[11px] text-gray-400">{analyst.coverage.length} stocks covered</span>
-                <span className="text-[11px] font-semibold" style={{ color: analyst.accent }}>View →</span>
+              <div className="self-center shrink-0 text-[13px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: analyst.accent }}>
+                →
               </div>
             </Link>
           );
         })}
       </div>
 
-      <p className="mt-10 text-[11px] text-gray-400 border-t border-gray-100 pt-4">
+      <p className="mt-8 text-[11px] text-gray-400 border-t border-gray-100 pt-4">
         Data via Yahoo Finance, refreshed hourly. Analyst names are matched to their firm&apos;s published ratings.
       </p>
     </div>

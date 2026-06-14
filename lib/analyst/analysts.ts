@@ -76,6 +76,8 @@ const _CURATED: Record<string, string> = {
   WDC:  "Western Digital", STX:  "Seagate Technology",
   ENTG: "Entegris", SITM: "SiTime", UCTT: "Ultra Clean Holdings",
   PI:   "Impinj", AMBQ: "Ambiq Micro",
+  VECO: "Veeco", SYNA: "Synaptics", CRUS: "Cirrus Logic",
+  PENG: "Penguin Solutions",
 };
 
 function companyName(ticker: string): string {

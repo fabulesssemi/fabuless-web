@@ -1,139 +1,1301 @@
 {
   "updated": "2026-06-12",
   "targets": [
-    { "analyst": "arya", "ticker": "ARM",  "rating": "Hold", "priceTarget": 335,  "date": "2026-06-11", "action": "reit" },
-    { "analyst": "arya", "ticker": "QCOM", "rating": "Sell", "priceTarget": 165,  "date": "2026-06-11", "action": "reit" },
-    { "analyst": "arya", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 350,  "date": "2026-06-11", "action": "reit" },
-    { "analyst": "arya", "ticker": "INTC", "rating": "Buy",  "priceTarget": 135,  "date": "2026-06-11", "action": "up"   },
-    { "analyst": "arya", "ticker": "AMD",  "rating": "Buy",  "priceTarget": 560,  "date": "2026-06-11", "action": "reit" },
-    { "analyst": "arya", "ticker": "AVGO", "rating": "Buy",  "priceTarget": 530,  "date": "2026-06-04", "action": "reit" },
-    { "analyst": "arya", "ticker": "CRDO", "rating": "Buy",  "priceTarget": 252,  "date": "2026-06-02", "action": "reit" },
-    { "analyst": "arya", "ticker": "ADI",  "rating": "Buy",  "priceTarget": null, "date": "2026-06-01", "action": "reit" },
-    { "analyst": "arya", "ticker": "AMBA", "rating": "Hold", "priceTarget": 96,   "date": "2026-05-29", "action": "init" },
-    { "analyst": "arya", "ticker": "SNPS", "rating": "Buy",  "priceTarget": 600,  "date": "2026-05-28", "action": "reit" },
-    { "analyst": "arya", "ticker": "MRVL", "rating": "Buy",  "priceTarget": 240,  "date": "2026-05-28", "action": "reit" },
-    { "analyst": "arya", "ticker": "TXN",  "rating": "Buy",  "priceTarget": 370,  "date": "2026-05-25", "action": "reit" },
-    { "analyst": "arya", "ticker": "ON",   "rating": "Buy",  "priceTarget": 138,  "date": "2026-05-25", "action": "reit" },
-    { "analyst": "arya", "ticker": "AMAT", "rating": "Buy",  "priceTarget": 540,  "date": "2026-05-14", "action": "reit" },
-    { "analyst": "arya", "ticker": "ALAB", "rating": "Hold", "priceTarget": 240,  "date": "2026-05-13", "action": "reit" },
-    { "analyst": "arya", "ticker": "LITE", "rating": "Hold", "priceTarget": 1100, "date": "2026-05-13", "action": "reit" },
-    { "analyst": "arya", "ticker": "MU",   "rating": "Buy",  "priceTarget": 950,  "date": "2026-05-13", "action": "reit" },
-    { "analyst": "arya", "ticker": "MTSI", "rating": "Buy",  "priceTarget": 410,  "date": "2026-05-13", "action": "reit" },
-    { "analyst": "arya", "ticker": "COHR", "rating": "Hold", "priceTarget": 400,  "date": "2026-05-13", "action": "reit" },
-    { "analyst": "arya", "ticker": "MCHP", "rating": "Buy",  "priceTarget": 122,  "date": "2026-05-11", "action": "reit" },
-    { "analyst": "arya", "ticker": "GFS",  "rating": "Sell", "priceTarget": 65,   "date": "2026-05-08", "action": "reit" },
-    { "analyst": "arya", "ticker": "KLAC", "rating": "Buy",  "priceTarget": 2100, "date": "2026-04-30", "action": "reit" },
-    { "analyst": "arya", "ticker": "TER",  "rating": "Buy",  "priceTarget": 365,  "date": "2026-04-29", "action": "reit" },
-    { "analyst": "arya", "ticker": "NXPI", "rating": "Hold", "priceTarget": 275,  "date": "2026-04-29", "action": "reit" },
-    { "analyst": "arya", "ticker": "LRCX", "rating": "Buy",  "priceTarget": null, "date": "2026-04-28", "action": "reit" },
-    { "analyst": "arya", "ticker": "CDNS", "rating": "Buy",  "priceTarget": 400,  "date": "2026-04-28", "action": "reit" },
-    { "analyst": "arya", "ticker": "ALGM", "rating": "Buy",  "priceTarget": 45,   "date": "2026-02-19", "action": "reit" },
-    { "analyst": "arya", "ticker": "SWKS", "rating": "Sell", "priceTarget": 60,   "date": "2026-02-04", "action": "reit" },
-    { "analyst": "arya", "ticker": "NVMI", "rating": "Buy",  "priceTarget": 450,  "date": "2026-01-13", "action": "reit" },
-    { "analyst": "arya", "ticker": "MKSI", "rating": "Buy",  "priceTarget": 215,  "date": "2026-01-13", "action": "reit" },
-
-    { "analyst": "moore", "ticker": "CBRS", "rating": "Buy",  "priceTarget": 250,  "date": "2026-06-08", "action": "init" },
-    { "analyst": "moore", "ticker": "AVGO", "rating": "Buy",  "priceTarget": 502,  "date": "2026-06-04", "action": "reit" },
-    { "analyst": "moore", "ticker": "SNDK", "rating": "Buy",  "priceTarget": 1750, "date": "2026-06-03", "action": "reit" },
-    { "analyst": "moore", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 288,  "date": "2026-06-03", "action": "reit" },
-    { "analyst": "moore", "ticker": "MU",   "rating": "Buy",  "priceTarget": 1050, "date": "2026-06-03", "action": "reit" },
-    { "analyst": "moore", "ticker": "MCHP", "rating": "Hold", "priceTarget": 94,   "date": "2026-06-02", "action": "reit" },
-    { "analyst": "moore", "ticker": "AMBA", "rating": "Buy",  "priceTarget": 96,   "date": "2026-05-29", "action": "reit" },
-    { "analyst": "moore", "ticker": "MRVL", "rating": "Hold", "priceTarget": 195,  "date": "2026-05-28", "action": "reit" },
-    { "analyst": "moore", "ticker": "SMTC", "rating": "Hold", "priceTarget": 175,  "date": "2026-05-27", "action": "init" },
-    { "analyst": "moore", "ticker": "ADI",  "rating": "Buy",  "priceTarget": 428,  "date": "2026-05-21", "action": "init" },
-    { "analyst": "moore", "ticker": "IONQ", "rating": "Hold", "priceTarget": 48.5, "date": "2026-05-07", "action": "reit" },
-    { "analyst": "moore", "ticker": "ALAB", "rating": "Buy",  "priceTarget": 240,  "date": "2026-05-06", "action": "init" },
-    { "analyst": "moore", "ticker": "GFS",  "rating": "Hold", "priceTarget": 65,   "date": "2026-05-06", "action": "reit" },
-    { "analyst": "moore", "ticker": "NVTS", "rating": "Sell", "priceTarget": 13.7, "date": "2026-05-06", "action": "init" },
-    { "analyst": "moore", "ticker": "SWKS", "rating": "Hold", "priceTarget": 76,   "date": "2026-05-06", "action": "reit" },
-    { "analyst": "moore", "ticker": "AMD",  "rating": "Hold", "priceTarget": 410,  "date": "2026-05-06", "action": "reit" },
-    { "analyst": "moore", "ticker": "ON",   "rating": "Hold", "priceTarget": 87,   "date": "2026-05-05", "action": "init" },
-    { "analyst": "moore", "ticker": "QCOM", "rating": "Sell", "priceTarget": 146,  "date": "2026-04-30", "action": "init" },
-    { "analyst": "moore", "ticker": "NXPI", "rating": "Buy",  "priceTarget": 335,  "date": "2026-04-29", "action": "reit" },
-    { "analyst": "moore", "ticker": "AMKR", "rating": "Hold", "priceTarget": 69,   "date": "2026-04-28", "action": "reit" },
-    { "analyst": "moore", "ticker": "INTC", "rating": "Hold", "priceTarget": 73,   "date": "2026-04-24", "action": "reit" },
-    { "analyst": "moore", "ticker": "TXN",  "rating": "Sell", "priceTarget": 221,  "date": "2026-04-23", "action": "init" },
-    { "analyst": "moore", "ticker": "ALGM", "rating": "Buy",  "priceTarget": 51,   "date": "2026-02-13", "action": "up"   },
-    { "analyst": "moore", "ticker": "QRVO", "rating": "Hold", "priceTarget": 84,   "date": "2026-01-28", "action": "reit" },
-
-    { "analyst": "rasgon", "ticker": "TXN",  "rating": "Hold", "priceTarget": 250,  "date": "2026-06-08", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "QCOM", "rating": "Hold", "priceTarget": 140,  "date": "2026-06-08", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "NXPI", "rating": "Hold", "priceTarget": 270,  "date": "2026-06-08", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 315,  "date": "2026-06-08", "action": "init" },
-    { "analyst": "rasgon", "ticker": "INTC", "rating": "Hold", "priceTarget": 65,   "date": "2026-06-08", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "AMD",  "rating": "Buy",  "priceTarget": 525,  "date": "2026-06-08", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "AVGO", "rating": "Buy",  "priceTarget": 550,  "date": "2026-06-04", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "KLAC", "rating": "Buy",  "priceTarget": 1875, "date": "2026-04-30", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "AMAT", "rating": "Buy",  "priceTarget": 525,  "date": "2026-05-15", "action": "reit" },
-    { "analyst": "rasgon", "ticker": "LRCX", "rating": "Buy",  "priceTarget": 285,  "date": "2026-02-09", "action": "reit" },
-
-    { "analyst": "lu", "ticker": "LRCX", "rating": "Buy",  "priceTarget": 425,  "date": "2026-06-10", "action": "reit" },
-    { "analyst": "lu", "ticker": "KLAC", "rating": "Buy",  "priceTarget": 2500, "date": "2026-06-10", "action": "reit" },
-    { "analyst": "lu", "ticker": "AMAT", "rating": "Buy",  "priceTarget": 650,  "date": "2026-06-10", "action": "reit" },
-    { "analyst": "lu", "ticker": "SNDK", "rating": "Buy",  "priceTarget": 2900, "date": "2026-06-08", "action": "reit" },
-    { "analyst": "lu", "ticker": "MU",   "rating": "Buy",  "priceTarget": 1500, "date": "2026-06-08", "action": "reit" },
-    { "analyst": "lu", "ticker": "AVGO", "rating": "Buy",  "priceTarget": 525,  "date": "2026-06-03", "action": "reit" },
-    { "analyst": "lu", "ticker": "MRVL", "rating": "Hold", "priceTarget": 220,  "date": "2026-05-27", "action": "reit" },
-    { "analyst": "lu", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 350,  "date": "2026-05-20", "action": "reit" },
-    { "analyst": "lu", "ticker": "AMD",  "rating": "Buy",  "priceTarget": 500,  "date": "2026-05-11", "action": "reit" },
-    { "analyst": "lu", "ticker": "GFS",  "rating": "Buy",  "priceTarget": 80,   "date": "2026-05-04", "action": "up"   },
-    { "analyst": "lu", "ticker": "MCHP", "rating": "Buy",  "priceTarget": 100,  "date": "2026-05-04", "action": "reit" },
-    { "analyst": "lu", "ticker": "WDC",  "rating": "Buy",  "priceTarget": 660,  "date": "2026-05-01", "action": "reit" },
-    { "analyst": "lu", "ticker": "QCOM", "rating": "Hold", "priceTarget": 150,  "date": "2026-04-29", "action": "reit" },
-    { "analyst": "lu", "ticker": "TER",  "rating": "Buy",  "priceTarget": 400,  "date": "2026-04-27", "action": "reit" },
-    { "analyst": "lu", "ticker": "STX",  "rating": "Buy",  "priceTarget": 700,  "date": "2026-04-27", "action": "reit" },
-
-    { "analyst": "lurie", "ticker": "MU",   "rating": "Buy",  "priceTarget": 1250, "date": "2026-06-11", "action": "reit" },
-    { "analyst": "lurie", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 275,  "date": "2026-06-02", "action": "reit" },
-    { "analyst": "lurie", "ticker": "AMAT", "rating": "Buy",  "priceTarget": 550,  "date": "2026-05-15", "action": "reit" },
-    { "analyst": "lurie", "ticker": "NXPI", "rating": "Buy",  "priceTarget": 320,  "date": "2026-04-29", "action": "reit" },
-    { "analyst": "lurie", "ticker": "TXN",  "rating": "Buy",  "priceTarget": 315,  "date": "2026-04-23", "action": "reit" },
-    { "analyst": "lurie", "ticker": "QRVO", "rating": "Hold", "priceTarget": null, "date": "2026-04-17", "action": "down" },
-
-    { "analyst": "mcneill", "ticker": "AVGO", "rating": "Buy",  "priceTarget": 500,  "date": "2026-06-02", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "SNPS", "rating": "Buy",  "priceTarget": 650,  "date": "2026-05-28", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "MRVL", "rating": "Buy",  "priceTarget": 240,  "date": "2026-05-28", "action": "init" },
-    { "analyst": "mcneill", "ticker": "ADI",  "rating": "Buy",  "priceTarget": 450,  "date": "2026-05-26", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 280,  "date": "2026-05-21", "action": "init" },
-    { "analyst": "mcneill", "ticker": "AMAT", "rating": "Buy",  "priceTarget": 515,  "date": "2026-05-15", "action": "init" },
-    { "analyst": "mcneill", "ticker": "MCHP", "rating": "Buy",  "priceTarget": 120,  "date": "2026-05-08", "action": "init" },
-    { "analyst": "mcneill", "ticker": "ARM",  "rating": "Buy",  "priceTarget": 240,  "date": "2026-05-07", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "ALAB", "rating": "Buy",  "priceTarget": 280,  "date": "2026-05-06", "action": "init" },
-    { "analyst": "mcneill", "ticker": "GFS",  "rating": "Hold", "priceTarget": 70,   "date": "2026-05-06", "action": "init" },
-    { "analyst": "mcneill", "ticker": "AMD",  "rating": "Hold", "priceTarget": 385,  "date": "2026-05-06", "action": "init" },
-    { "analyst": "mcneill", "ticker": "ON",   "rating": "Hold", "priceTarget": 100,  "date": "2026-05-05", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "KLAC", "rating": "Buy",  "priceTarget": 2000, "date": "2026-04-30", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "NXPI", "rating": "Hold", "priceTarget": 295,  "date": "2026-04-29", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "INTC", "rating": "Sell", "priceTarget": 45,   "date": "2026-04-24", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "TXN",  "rating": "Buy",  "priceTarget": 280,  "date": "2026-04-23", "action": "reit" },
-    { "analyst": "mcneill", "ticker": "LRCX", "rating": "Buy",  "priceTarget": 315,  "date": "2026-04-23", "action": "reit" },
-
-    { "analyst": "egan", "ticker": "AVGO", "rating": "Buy",  "priceTarget": 485,  "date": "2026-06-11", "action": "reit" },
-    { "analyst": "egan", "ticker": "AMAT", "rating": "Buy",  "priceTarget": 570,  "date": "2026-06-10", "action": "init" },
-    { "analyst": "egan", "ticker": "LRCX", "rating": "Buy",  "priceTarget": 375,  "date": "2026-06-09", "action": "init" },
-    { "analyst": "egan", "ticker": "KLAC", "rating": "Hold", "priceTarget": 2180, "date": "2026-06-09", "action": "init" },
-    { "analyst": "egan", "ticker": "CBRS", "rating": "Buy",  "priceTarget": 300,  "date": "2026-06-08", "action": "init" },
-    { "analyst": "egan", "ticker": "MU",   "rating": "Buy",  "priceTarget": 1625, "date": "2026-06-08", "action": "reit" },
-    { "analyst": "egan", "ticker": "MRVL", "rating": "Buy",  "priceTarget": 230,  "date": "2026-05-28", "action": "init" },
-    { "analyst": "egan", "ticker": "TER",  "rating": "Buy",  "priceTarget": 440,  "date": "2026-05-27", "action": "reit" },
-    { "analyst": "egan", "ticker": "SMTC", "rating": "Buy",  "priceTarget": 225,  "date": "2026-05-27", "action": "reit" },
-    { "analyst": "egan", "ticker": "NVDA", "rating": "Buy",  "priceTarget": 280,  "date": "2026-05-22", "action": "init" },
-    { "analyst": "egan", "ticker": "ALGM", "rating": "Buy",  "priceTarget": 55,   "date": "2026-05-08", "action": "reit" },
-    { "analyst": "egan", "ticker": "MCHP", "rating": "Buy",  "priceTarget": 130,  "date": "2026-05-08", "action": "reit" },
-    { "analyst": "egan", "ticker": "ARM",  "rating": "Buy",  "priceTarget": 260,  "date": "2026-05-07", "action": "reit" },
-    { "analyst": "egan", "ticker": "SITM", "rating": "Buy",  "priceTarget": 775,  "date": "2026-05-07", "action": "init" },
-    { "analyst": "egan", "ticker": "GFS",  "rating": "Hold", "priceTarget": 77,   "date": "2026-05-06", "action": "reit" },
-    { "analyst": "egan", "ticker": "QRVO", "rating": "Hold", "priceTarget": 100,  "date": "2026-05-06", "action": "reit" },
-    { "analyst": "egan", "ticker": "SWKS", "rating": "Hold", "priceTarget": 75,   "date": "2026-05-06", "action": "reit" },
-    { "analyst": "egan", "ticker": "AMD",  "rating": "Buy",  "priceTarget": 455,  "date": "2026-05-06", "action": "reit" },
-    { "analyst": "egan", "ticker": "UCTT", "rating": "Buy",  "priceTarget": 130,  "date": "2026-05-05", "action": "init" },
-    { "analyst": "egan", "ticker": "WDC",  "rating": "Hold", "priceTarget": 375,  "date": "2026-05-01", "action": "reit" },
-    { "analyst": "egan", "ticker": "QCOM", "rating": "Hold", "priceTarget": 170,  "date": "2026-05-01", "action": "init" },
-    { "analyst": "egan", "ticker": "ENTG", "rating": "Buy",  "priceTarget": 205,  "date": "2026-05-01", "action": "reit" },
-    { "analyst": "egan", "ticker": "PI",   "rating": "Hold", "priceTarget": 175,  "date": "2026-04-30", "action": "reit" },
-    { "analyst": "egan", "ticker": "STX",  "rating": "Hold", "priceTarget": 545,  "date": "2026-04-29", "action": "init" },
-    { "analyst": "egan", "ticker": "INTC", "rating": "Hold", "priceTarget": 83,   "date": "2026-04-24", "action": "init" },
-    { "analyst": "egan", "ticker": "TXN",  "rating": "Buy",  "priceTarget": 295,  "date": "2026-04-23", "action": "reit" }
+    {
+      "analyst": "arya",
+      "ticker": "ARM",
+      "rating": "Hold",
+      "priceTarget": 335,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "QCOM",
+      "rating": "Sell",
+      "priceTarget": 165,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 350,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "INTC",
+      "rating": "Buy",
+      "priceTarget": 135,
+      "date": "2026-06-11",
+      "action": "up"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "AMD",
+      "rating": "Buy",
+      "priceTarget": 560,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 530,
+      "date": "2026-06-04",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "CRDO",
+      "rating": "Buy",
+      "priceTarget": 252,
+      "date": "2026-06-02",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "ADI",
+      "rating": "Buy",
+      "priceTarget": null,
+      "date": "2026-06-01",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "AMBA",
+      "rating": "Hold",
+      "priceTarget": 96,
+      "date": "2026-05-29",
+      "action": "init"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "SNPS",
+      "rating": "Buy",
+      "priceTarget": 600,
+      "date": "2026-05-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "MRVL",
+      "rating": "Buy",
+      "priceTarget": 240,
+      "date": "2026-05-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "TXN",
+      "rating": "Buy",
+      "priceTarget": 370,
+      "date": "2026-05-25",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "ON",
+      "rating": "Buy",
+      "priceTarget": 138,
+      "date": "2026-05-25",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 540,
+      "date": "2026-05-14",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "ALAB",
+      "rating": "Hold",
+      "priceTarget": 240,
+      "date": "2026-05-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "LITE",
+      "rating": "Hold",
+      "priceTarget": 1100,
+      "date": "2026-05-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "MU",
+      "rating": "Buy",
+      "priceTarget": 950,
+      "date": "2026-05-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "MTSI",
+      "rating": "Buy",
+      "priceTarget": 410,
+      "date": "2026-05-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "COHR",
+      "rating": "Hold",
+      "priceTarget": 400,
+      "date": "2026-05-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "MCHP",
+      "rating": "Buy",
+      "priceTarget": 122,
+      "date": "2026-05-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "GFS",
+      "rating": "Sell",
+      "priceTarget": 65,
+      "date": "2026-05-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "KLAC",
+      "rating": "Buy",
+      "priceTarget": 2100,
+      "date": "2026-04-30",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "TER",
+      "rating": "Buy",
+      "priceTarget": 365,
+      "date": "2026-04-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "NXPI",
+      "rating": "Hold",
+      "priceTarget": 275,
+      "date": "2026-04-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "LRCX",
+      "rating": "Buy",
+      "priceTarget": null,
+      "date": "2026-04-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "CDNS",
+      "rating": "Buy",
+      "priceTarget": 400,
+      "date": "2026-04-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "ALGM",
+      "rating": "Buy",
+      "priceTarget": 45,
+      "date": "2026-02-19",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "SWKS",
+      "rating": "Sell",
+      "priceTarget": 60,
+      "date": "2026-02-04",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "NVMI",
+      "rating": "Buy",
+      "priceTarget": 450,
+      "date": "2026-01-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "arya",
+      "ticker": "MKSI",
+      "rating": "Buy",
+      "priceTarget": 215,
+      "date": "2026-01-13",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "CBRS",
+      "rating": "Buy",
+      "priceTarget": 250,
+      "date": "2026-06-08",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 502,
+      "date": "2026-06-04",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "SNDK",
+      "rating": "Buy",
+      "priceTarget": 1750,
+      "date": "2026-06-03",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 288,
+      "date": "2026-06-03",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "MU",
+      "rating": "Buy",
+      "priceTarget": 1050,
+      "date": "2026-06-03",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "MCHP",
+      "rating": "Hold",
+      "priceTarget": 94,
+      "date": "2026-06-02",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "AMBA",
+      "rating": "Buy",
+      "priceTarget": 96,
+      "date": "2026-05-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "MRVL",
+      "rating": "Hold",
+      "priceTarget": 195,
+      "date": "2026-05-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "SMTC",
+      "rating": "Hold",
+      "priceTarget": 175,
+      "date": "2026-05-27",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "ADI",
+      "rating": "Buy",
+      "priceTarget": 428,
+      "date": "2026-05-21",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "IONQ",
+      "rating": "Hold",
+      "priceTarget": 48.5,
+      "date": "2026-05-07",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "ALAB",
+      "rating": "Buy",
+      "priceTarget": 240,
+      "date": "2026-05-06",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "GFS",
+      "rating": "Hold",
+      "priceTarget": 65,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "NVTS",
+      "rating": "Sell",
+      "priceTarget": 13.7,
+      "date": "2026-05-06",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "SWKS",
+      "rating": "Hold",
+      "priceTarget": 76,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "AMD",
+      "rating": "Hold",
+      "priceTarget": 410,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "ON",
+      "rating": "Hold",
+      "priceTarget": 87,
+      "date": "2026-05-05",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "QCOM",
+      "rating": "Sell",
+      "priceTarget": 146,
+      "date": "2026-04-30",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "NXPI",
+      "rating": "Buy",
+      "priceTarget": 335,
+      "date": "2026-04-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "AMKR",
+      "rating": "Hold",
+      "priceTarget": 69,
+      "date": "2026-04-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "INTC",
+      "rating": "Hold",
+      "priceTarget": 73,
+      "date": "2026-04-24",
+      "action": "reit"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "TXN",
+      "rating": "Sell",
+      "priceTarget": 221,
+      "date": "2026-04-23",
+      "action": "init"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "ALGM",
+      "rating": "Buy",
+      "priceTarget": 51,
+      "date": "2026-02-13",
+      "action": "up"
+    },
+    {
+      "analyst": "moore",
+      "ticker": "QRVO",
+      "rating": "Hold",
+      "priceTarget": 84,
+      "date": "2026-01-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "TXN",
+      "rating": "Hold",
+      "priceTarget": 250,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "QCOM",
+      "rating": "Hold",
+      "priceTarget": 140,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "NXPI",
+      "rating": "Hold",
+      "priceTarget": 270,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 315,
+      "date": "2026-06-08",
+      "action": "init"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "INTC",
+      "rating": "Hold",
+      "priceTarget": 65,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "AMD",
+      "rating": "Buy",
+      "priceTarget": 525,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 550,
+      "date": "2026-06-04",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "KLAC",
+      "rating": "Buy",
+      "priceTarget": 1875,
+      "date": "2026-04-30",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 525,
+      "date": "2026-05-15",
+      "action": "reit"
+    },
+    {
+      "analyst": "rasgon",
+      "ticker": "LRCX",
+      "rating": "Buy",
+      "priceTarget": 285,
+      "date": "2026-02-09",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "LRCX",
+      "rating": "Buy",
+      "priceTarget": 425,
+      "date": "2026-06-10",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "KLAC",
+      "rating": "Buy",
+      "priceTarget": 2500,
+      "date": "2026-06-10",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 650,
+      "date": "2026-06-10",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "SNDK",
+      "rating": "Buy",
+      "priceTarget": 2900,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "MU",
+      "rating": "Buy",
+      "priceTarget": 1500,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 525,
+      "date": "2026-06-03",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "MRVL",
+      "rating": "Hold",
+      "priceTarget": 220,
+      "date": "2026-05-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 350,
+      "date": "2026-05-20",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "AMD",
+      "rating": "Buy",
+      "priceTarget": 500,
+      "date": "2026-05-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "GFS",
+      "rating": "Buy",
+      "priceTarget": 80,
+      "date": "2026-05-04",
+      "action": "up"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "MCHP",
+      "rating": "Buy",
+      "priceTarget": 100,
+      "date": "2026-05-04",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "WDC",
+      "rating": "Buy",
+      "priceTarget": 660,
+      "date": "2026-05-01",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "QCOM",
+      "rating": "Hold",
+      "priceTarget": 150,
+      "date": "2026-04-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "TER",
+      "rating": "Buy",
+      "priceTarget": 400,
+      "date": "2026-04-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "lu",
+      "ticker": "STX",
+      "rating": "Buy",
+      "priceTarget": 700,
+      "date": "2026-04-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "lurie",
+      "ticker": "MU",
+      "rating": "Buy",
+      "priceTarget": 1250,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "lurie",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 275,
+      "date": "2026-06-02",
+      "action": "reit"
+    },
+    {
+      "analyst": "lurie",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 550,
+      "date": "2026-05-15",
+      "action": "reit"
+    },
+    {
+      "analyst": "lurie",
+      "ticker": "NXPI",
+      "rating": "Buy",
+      "priceTarget": 320,
+      "date": "2026-04-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "lurie",
+      "ticker": "TXN",
+      "rating": "Buy",
+      "priceTarget": 315,
+      "date": "2026-04-23",
+      "action": "reit"
+    },
+    {
+      "analyst": "lurie",
+      "ticker": "QRVO",
+      "rating": "Hold",
+      "priceTarget": null,
+      "date": "2026-04-17",
+      "action": "down"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 500,
+      "date": "2026-06-02",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "SNPS",
+      "rating": "Buy",
+      "priceTarget": 650,
+      "date": "2026-05-28",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "MRVL",
+      "rating": "Buy",
+      "priceTarget": 240,
+      "date": "2026-05-28",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "ADI",
+      "rating": "Buy",
+      "priceTarget": 450,
+      "date": "2026-05-26",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 280,
+      "date": "2026-05-21",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 515,
+      "date": "2026-05-15",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "MCHP",
+      "rating": "Buy",
+      "priceTarget": 120,
+      "date": "2026-05-08",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "ARM",
+      "rating": "Buy",
+      "priceTarget": 240,
+      "date": "2026-05-07",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "ALAB",
+      "rating": "Buy",
+      "priceTarget": 280,
+      "date": "2026-05-06",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "GFS",
+      "rating": "Hold",
+      "priceTarget": 70,
+      "date": "2026-05-06",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "AMD",
+      "rating": "Hold",
+      "priceTarget": 385,
+      "date": "2026-05-06",
+      "action": "init"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "ON",
+      "rating": "Hold",
+      "priceTarget": 100,
+      "date": "2026-05-05",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "KLAC",
+      "rating": "Buy",
+      "priceTarget": 2000,
+      "date": "2026-04-30",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "NXPI",
+      "rating": "Hold",
+      "priceTarget": 295,
+      "date": "2026-04-29",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "INTC",
+      "rating": "Sell",
+      "priceTarget": 45,
+      "date": "2026-04-24",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "TXN",
+      "rating": "Buy",
+      "priceTarget": 280,
+      "date": "2026-04-23",
+      "action": "reit"
+    },
+    {
+      "analyst": "mcneill",
+      "ticker": "LRCX",
+      "rating": "Buy",
+      "priceTarget": 315,
+      "date": "2026-04-23",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 485,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 570,
+      "date": "2026-06-10",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "LRCX",
+      "rating": "Buy",
+      "priceTarget": 375,
+      "date": "2026-06-09",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "KLAC",
+      "rating": "Hold",
+      "priceTarget": 2180,
+      "date": "2026-06-09",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "CBRS",
+      "rating": "Buy",
+      "priceTarget": 300,
+      "date": "2026-06-08",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "MU",
+      "rating": "Buy",
+      "priceTarget": 1625,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "MRVL",
+      "rating": "Buy",
+      "priceTarget": 230,
+      "date": "2026-05-28",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "TER",
+      "rating": "Buy",
+      "priceTarget": 440,
+      "date": "2026-05-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "SMTC",
+      "rating": "Buy",
+      "priceTarget": 225,
+      "date": "2026-05-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 280,
+      "date": "2026-05-22",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "ALGM",
+      "rating": "Buy",
+      "priceTarget": 55,
+      "date": "2026-05-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "MCHP",
+      "rating": "Buy",
+      "priceTarget": 130,
+      "date": "2026-05-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "ARM",
+      "rating": "Buy",
+      "priceTarget": 260,
+      "date": "2026-05-07",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "SITM",
+      "rating": "Buy",
+      "priceTarget": 775,
+      "date": "2026-05-07",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "GFS",
+      "rating": "Hold",
+      "priceTarget": 77,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "QRVO",
+      "rating": "Hold",
+      "priceTarget": 100,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "SWKS",
+      "rating": "Hold",
+      "priceTarget": 75,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "AMD",
+      "rating": "Buy",
+      "priceTarget": 455,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "UCTT",
+      "rating": "Buy",
+      "priceTarget": 130,
+      "date": "2026-05-05",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "WDC",
+      "rating": "Hold",
+      "priceTarget": 375,
+      "date": "2026-05-01",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "QCOM",
+      "rating": "Hold",
+      "priceTarget": 170,
+      "date": "2026-05-01",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "ENTG",
+      "rating": "Buy",
+      "priceTarget": 205,
+      "date": "2026-05-01",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "PI",
+      "rating": "Hold",
+      "priceTarget": 175,
+      "date": "2026-04-30",
+      "action": "reit"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "STX",
+      "rating": "Hold",
+      "priceTarget": 545,
+      "date": "2026-04-29",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "INTC",
+      "rating": "Hold",
+      "priceTarget": 83,
+      "date": "2026-04-24",
+      "action": "init"
+    },
+    {
+      "analyst": "egan",
+      "ticker": "TXN",
+      "rating": "Buy",
+      "priceTarget": 295,
+      "date": "2026-04-23",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "LRCX",
+      "rating": "Hold",
+      "priceTarget": 335,
+      "date": "2026-06-11",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "KLAC",
+      "rating": "Buy",
+      "priceTarget": 2250,
+      "date": "2026-06-11",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "AMAT",
+      "rating": "Buy",
+      "priceTarget": 590,
+      "date": "2026-06-11",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "CBRS",
+      "rating": "Buy",
+      "priceTarget": 280,
+      "date": "2026-06-08",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "AVGO",
+      "rating": "Buy",
+      "priceTarget": 500,
+      "date": "2026-06-04",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "CRDO",
+      "rating": "Buy",
+      "priceTarget": 260,
+      "date": "2026-06-02",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "ARM",
+      "rating": "Buy",
+      "priceTarget": 360,
+      "date": "2026-06-01",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "INTC",
+      "rating": "Hold",
+      "priceTarget": 100,
+      "date": "2026-06-01",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "AMD",
+      "rating": "Buy",
+      "priceTarget": 665,
+      "date": "2026-06-01",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "MRVL",
+      "rating": "Buy",
+      "priceTarget": 275,
+      "date": "2026-05-29",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "WDC",
+      "rating": "Buy",
+      "priceTarget": 620,
+      "date": "2026-05-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "STX",
+      "rating": "Buy",
+      "priceTarget": 1000,
+      "date": "2026-05-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "MU",
+      "rating": "Buy",
+      "priceTarget": 1175,
+      "date": "2026-05-27",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "SNDK",
+      "rating": "Buy",
+      "priceTarget": 2300,
+      "date": "2026-05-26",
+      "action": "up"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "MTSI",
+      "rating": "Buy",
+      "priceTarget": 450,
+      "date": "2026-05-22",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "NVDA",
+      "rating": "Buy",
+      "priceTarget": 275,
+      "date": "2026-05-21",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "ADI",
+      "rating": "Buy",
+      "priceTarget": 450,
+      "date": "2026-05-21",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "VECO",
+      "rating": "Hold",
+      "priceTarget": 55,
+      "date": "2026-05-18",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "NVMI",
+      "rating": "Buy",
+      "priceTarget": 600,
+      "date": "2026-05-15",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "CAMT",
+      "rating": "Buy",
+      "priceTarget": 185,
+      "date": "2026-05-13",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "MCHP",
+      "rating": "Hold",
+      "priceTarget": 105,
+      "date": "2026-05-11",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "ALGM",
+      "rating": "Buy",
+      "priceTarget": 48,
+      "date": "2026-05-08",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "SYNA",
+      "rating": "Buy",
+      "priceTarget": 110,
+      "date": "2026-05-08",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "ALAB",
+      "rating": "Hold",
+      "priceTarget": 200,
+      "date": "2026-05-07",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "SITM",
+      "rating": "Buy",
+      "priceTarget": 850,
+      "date": "2026-05-07",
+      "action": "up"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "LITE",
+      "rating": "Hold",
+      "priceTarget": 1000,
+      "date": "2026-05-07",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "COHR",
+      "rating": "Buy",
+      "priceTarget": 350,
+      "date": "2026-05-07",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "CRUS",
+      "rating": "Hold",
+      "priceTarget": 140,
+      "date": "2026-05-07",
+      "action": "assign"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "SWKS",
+      "rating": "Buy",
+      "priceTarget": 70,
+      "date": "2026-05-06",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "ON",
+      "rating": "Hold",
+      "priceTarget": 100,
+      "date": "2026-05-05",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "NXPI",
+      "rating": "Buy",
+      "priceTarget": 340,
+      "date": "2026-05-05",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "QCOM",
+      "rating": "Sell",
+      "priceTarget": 150,
+      "date": "2026-04-30",
+      "action": "reit"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "TXN",
+      "rating": "Hold",
+      "priceTarget": 250,
+      "date": "2026-04-23",
+      "action": "up"
+    },
+    {
+      "analyst": "omalley",
+      "ticker": "PENG",
+      "rating": "Hold",
+      "priceTarget": 27,
+      "date": "2026-04-22",
+      "action": "down"
+    }
   ]
 }

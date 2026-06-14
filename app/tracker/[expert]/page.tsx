@@ -149,16 +149,6 @@ function Timeline({ rows }: { rows: Prediction[] }) {
   );
 }
 
-/* ── Heatmap color scale ─────────────────────────────────────────────── */
-// Single green hue, opacity-encoded. Red only for genuinely bad (<40%).
-// Text is always a darker version of the bg tint — never bold white on filled green.
-function heatColor(pct: number | null, resolved: number): { bg: string; fg: string } {
-  if (pct === null || resolved === 0) return { bg: "transparent", fg: "#C4C4C4" };
-  if (pct < 40)  return { bg: "rgba(225,29,72,0.12)",  fg: "#BE123C" }; // rose tint
-  // Green opacity scale: 40% → 0.08 opacity, 100% → 0.55 opacity
-  const opacity = 0.08 + ((pct - 40) / 60) * 0.47;
-  return { bg: `rgba(5,150,105,${opacity.toFixed(2)})`, fg: "#065F46" };
-}
 
 function domainAccuracyColor(pct: number | null): string {
   if (pct === null) return "text-gray-300";
@@ -175,16 +165,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
   const rows = predictions.filter((p) => p.expert === meta.id);
   const stats = statsFor(meta.id);
 
-  const years = [...new Set(rows.map((r) => r.date.slice(0, 4)))].sort();
   const domains = stats.domains;
-  const cell = (year: string, domain: string) => {
-    const subset = rows.filter((r) => r.date.startsWith(year) && r.domain === domain);
-    const c = subset.filter((r) => r.status === "CORRECT").length;
-    const p = subset.filter((r) => r.status === "PARTIAL").length;
-    const w = subset.filter((r) => r.status === "WRONG").length;
-    const resolved = c + p + w;
-    return { resolved, total: subset.length, pct: resolved > 0 ? Math.round(((c + p * 0.5) / resolved) * 100) : null };
-  };
 
   const headline = `${meta.name}: ${stats.accuracyPct}% accurate on ${stats.resolved} resolved semiconductor predictions`;
   const shareUrl = `https://fabuless.ai/tracker/${meta.id}`;
@@ -202,81 +183,59 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
     <div>
       {/* ── Header ── */}
       <div className="border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 pt-5 pb-6">
-          <Link
-            href="/tracker"
-            className="text-[11px] font-semibold text-[#B45309] hover:underline"
-          >
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          <Link href="/tracker" className="text-[11px] text-gray-400 hover:text-gray-600">
             ← Prediction Tracker
           </Link>
 
-          <div className="mt-4 flex flex-wrap items-start justify-between gap-6">
-            {/* Identity block */}
+          <div className="mt-2 flex items-center justify-between gap-6 flex-wrap">
+            {/* Identity */}
             <div>
-              <div className="text-[11px] font-medium text-gray-400 uppercase tracking-widest mb-1">
-                {meta.subtitle}
+              <div className="flex items-baseline gap-2">
+                <h1 className="font-sans text-[17px] font-bold tracking-tight text-[#111827] leading-none">{meta.name}</h1>
+                <span className="text-[12px] text-gray-400">{meta.subtitle}</span>
               </div>
-              <h1 className="font-sans text-[26px] font-bold tracking-tight leading-none text-[#111827]">
-                {meta.name}
-              </h1>
-              <div className="text-[12px] text-gray-400 mt-1.5">
-                {stats.total} predictions tracked · {stats.dateRange} · {stats.sourceCount} sources
+              <div className="text-[11px] text-gray-400 mt-1 tabular-nums">
+                {stats.total} predictions · {stats.dateRange} · {stats.sourceCount} sources
               </div>
             </div>
 
-            {/* Accuracy block */}
-            <div className="flex flex-col items-end gap-2">
-              <div className="flex items-baseline gap-2">
-                <span
-                  className="font-mono text-[44px] font-bold leading-none tabular-nums"
-                  style={{ color: accColor }}
-                >
-                  {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
-                </span>
-                <div className="text-[11px] text-gray-400 leading-tight">
-                  <div className="uppercase tracking-widest">accuracy</div>
-                  <div className="tabular-nums">{stats.resolved} resolved</div>
-                </div>
-              </div>
-
-              {/* Compact inline stat row */}
-              <div className="flex items-center gap-3 text-[12px] tabular-nums">
-                <span className="text-emerald-600 font-semibold">{stats.correct} correct</span>
-                <span className="text-gray-300">·</span>
-                <span className="text-amber-600 font-semibold">{stats.partial} partial</span>
-                <span className="text-gray-300">·</span>
-                <span className="text-rose-500 font-semibold">{stats.wrong} wrong</span>
-                <span className="text-gray-300">·</span>
+            {/* Accuracy + breakdown */}
+            <div className="flex items-baseline gap-4 flex-wrap">
+              <span className="font-mono text-[28px] font-bold leading-none tabular-nums" style={{ color: accColor }}>
+                {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
+              </span>
+              <div className="flex items-center gap-2 text-[11px] tabular-nums">
+                <span className="text-gray-400">{stats.resolved} resolved</span>
+                <span className="text-gray-200">·</span>
+                <span className="text-emerald-600 font-semibold">{stats.correct}c</span>
+                <span className="text-gray-200">·</span>
+                <span className="text-amber-600 font-semibold">{stats.partial}p</span>
+                <span className="text-gray-200">·</span>
+                <span className="text-rose-500 font-semibold">{stats.wrong}w</span>
+                <span className="text-gray-200">·</span>
                 <span className="text-gray-400 font-semibold">{stats.tooEarly} open</span>
               </div>
-
-              <a
-                href={tweetHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                𝕏 Share
-              </a>
+              <a href={tweetHref} target="_blank" rel="noopener noreferrer" className="text-[11px] text-gray-400 hover:text-gray-600">𝕏</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-5xl mx-auto px-6 pt-5 pb-10">
 
         {/* ── Timeline ── */}
-        <section className="mb-12">
+        <section className="mb-6">
           <div className="flex items-center gap-3 mb-1">
             <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">The record, dot by dot</h2>
             <div className="h-px flex-1 bg-gray-200" />
           </div>
-          <p className="text-[11px] text-gray-400 mb-4">Every tracked prediction placed by date made. Hover any dot for the claim.</p>
+          <p className="text-[11px] text-gray-400 mb-2">Every tracked prediction by date. Hover any dot for the claim.</p>
           <Timeline rows={rows} />
         </section>
 
         {/* ── Domain breakdown ── */}
-        <section className="mb-12">
+        <section className="mb-10">
           <div className="flex items-center gap-3 mb-1">
             <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">Where they're sharp — and where they miss</h2>
             <div className="h-px flex-1 bg-gray-200" />
@@ -321,61 +280,6 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
           </div>
         </section>
 
-        {/* ── Heatmap ── */}
-        {years.length > 1 && (
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-1">
-              <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">Accuracy by year and domain</h2>
-              <div className="h-px flex-1 bg-gray-200" />
-            </div>
-            <p className="text-[11px] text-gray-400 mb-4">Single-color green scale — darker = higher accuracy. Red = below 40%. Dash = nothing resolved yet.</p>
-
-            <div>
-              <table className="border-separate" style={{ borderSpacing: "2px 2px" }}>
-                <thead>
-                  <tr>
-                    <th className="text-left pb-2 pr-6" style={{ minWidth: "120px" }} />
-                    {years.map((y) => (
-                      <th key={y} className="pb-2 font-normal text-gray-400 uppercase tracking-wider" style={{ fontSize: "9px", width: "36px", textAlign: "center" }}>
-                        {y}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {domains.map((d) => (
-                    <tr key={d.domain}>
-                      <td className="pr-6 whitespace-nowrap font-normal text-gray-500" style={{ fontSize: "11px" }}>{d.label}</td>
-                      {years.map((y) => {
-                        const c = cell(y, d.domain);
-                        const { bg, fg } = heatColor(c.pct, c.resolved);
-                        return (
-                          <td
-                            key={y}
-                            className="text-center tabular-nums"
-                            style={{
-                              backgroundColor: bg,
-                              color: fg,
-                              height: "28px",
-                              width: "36px",
-                              fontSize: "11px",
-                              fontWeight: 500,
-                              borderRadius: "2px",
-                              verticalAlign: "middle",
-                            }}
-                            title={c.total === 0 ? "No predictions" : `${y} · ${d.label}: ${c.resolved} resolved of ${c.total}`}
-                          >
-                            {c.pct !== null ? c.pct : <span style={{ color: "#D1D5DB", fontWeight: 400 }}>—</span>}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        )}
 
         {/* ── Signature calls ── */}
         {signatures.length > 0 && (

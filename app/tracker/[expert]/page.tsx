@@ -69,91 +69,95 @@ function Timeline({ rows }: { rows: Prediction[] }) {
   const maxTs = new Date(dated[dated.length - 1].date).getTime();
   const span = Math.max(maxTs - minTs, 1);
 
-  const W = 920, PAD_L = 72, PAD_R = 16, PAD_T = 12;
-  const LANE_H = 52;
-  const LANES: PredictionStatus[] = ["CORRECT", "PARTIAL", "WRONG", "TOO_EARLY"];
-  const H = PAD_T + LANES.length * LANE_H + 24;
-  const laneY = (s: PredictionStatus) => PAD_T + LANES.indexOf(s) * LANE_H + LANE_H / 2;
-  const x = (date: string) => PAD_L + ((new Date(date).getTime() - minTs) / span) * (W - PAD_L - PAD_R);
+  const W = 920, PAD_L = 0, PAD_R = 0;
+  // Single band: marks jitter vertically in a 40px band, axis below, legend above
+  const BAND_TOP = 16;   // top of jitter band
+  const BAND_H   = 40;   // height of jitter band
+  const AXIS_Y   = BAND_TOP + BAND_H + 14; // year label baseline
+  const H        = AXIS_Y + 4;
+
+  const xPos = (date: string) =>
+    PAD_L + ((new Date(date).getTime() - minTs) / span) * (W - PAD_L - PAD_R);
 
   const startYear = new Date(minTs).getFullYear();
-  const endYear = new Date(maxTs).getFullYear();
+  const endYear   = new Date(maxTs).getFullYear();
   const years: number[] = [];
   for (let y = startYear + 1; y <= endYear; y++) years.push(y);
 
-  const seen = new Map<string, number>();
+  // Deterministic vertical jitter: hash the prediction id to get a stable Y offset
+  // within the band so marks never overlap but also never shift on re-render
+  const strHash = (s: string) => {
+    let h = 0;
+    for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+    return Math.abs(h);
+  };
+
+  const MARK_R = 3;
   const dots = dated.map((r) => {
-    const key = `${r.status}-${r.date.slice(0, 7)}`;
-    const n = seen.get(key) ?? 0;
-    seen.set(key, n + 1);
-    return { r, cx: x(r.date) + (n % 5) * 4, cy: laneY(r.status) + (Math.floor(n / 5) % 3) * 9 - 9 };
+    const jitter = (strHash(r.id) % 1000) / 1000; // 0–1
+    const cy = BAND_TOP + MARK_R + jitter * (BAND_H - MARK_R * 2);
+    return { r, cx: xPos(r.date), cy };
   });
 
+  const LEGEND = [
+    { status: "CORRECT"   as PredictionStatus, label: "Correct" },
+    { status: "PARTIAL"   as PredictionStatus, label: "Partial"  },
+    { status: "WRONG"     as PredictionStatus, label: "Wrong"    },
+    { status: "TOO_EARLY" as PredictionStatus, label: "Open"     },
+  ];
+
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Prediction timeline">
-      {/* Row background bands */}
-      {LANES.map((s, i) => (
-        <rect
-          key={s}
-          x={PAD_L}
-          y={PAD_T + i * LANE_H}
-          width={W - PAD_L - PAD_R}
-          height={LANE_H}
-          fill={i % 2 === 0 ? "#FAFAFA" : "#F3F4F6"}
-          rx="2"
-        />
-      ))}
+    <div>
+      {/* Inline legend — muted, small, no chrome */}
+      <div className="flex items-center gap-4 mb-3">
+        {LEGEND.map(({ status, label }) => (
+          <div key={status} className="flex items-center gap-1.5">
+            <svg width="8" height="8" viewBox="0 0 8 8">
+              <circle cx="4" cy="4" r="3" fill={STATUS_COLOR[status]} fillOpacity={status === "TOO_EARLY" ? 0.45 : 0.85} />
+            </svg>
+            <span className="text-[10px] text-gray-400">{label}</span>
+          </div>
+        ))}
+      </div>
 
-      {/* Year labels only — no grid lines */}
-      {years.map((y) => {
-        const gx = x(`${y}-01-01`);
-        return (
-          <text key={y} x={gx} y={H - 6} textAnchor="middle" fontSize="10" fill="#9CA3AF">{y}</text>
-        );
-      })}
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full overflow-visible" role="img" aria-label="Prediction timeline">
+        {/* Year axis ticks — muted text only, no lines */}
+        {years.map((y) => (
+          <text key={y} x={xPos(`${y}-01-01`)} y={AXIS_Y} textAnchor="middle" fontSize="9" fill="#C4C4C4" letterSpacing="0.03em">
+            {y}
+          </text>
+        ))}
 
-      {/* Lane labels */}
-      {LANES.map((s) => (
-        <text
-          key={s}
-          x={PAD_L - 8}
-          y={laneY(s) + 4}
-          textAnchor="end"
-          fontSize="10"
-          fontWeight="600"
-          fill={STATUS_COLOR[s]}
-        >
-          {STATUS_LABEL[s]}
-        </text>
-      ))}
-
-      {/* Dots */}
-      {dots.map(({ r, cx, cy }) => (
-        <circle
-          key={r.id}
-          cx={cx}
-          cy={cy}
-          r="5"
-          fill={STATUS_COLOR[r.status]}
-          fillOpacity={r.status === "TOO_EARLY" ? 0.5 : 0.9}
-          stroke="white"
-          strokeWidth="1"
-        >
-          <title>{`${r.date.slice(0, 7)} — ${r.claim.slice(0, 120)}${r.claim.length > 120 ? "…" : ""} [${STATUS_LABEL[r.status]}]`}</title>
-        </circle>
-      ))}
-    </svg>
+        {/* Marks — bottom layer first (open/partial) so correct sits on top */}
+        {[...dots].sort((a, b) => {
+          const order: Record<PredictionStatus, number> = { TOO_EARLY: 0, WRONG: 1, PARTIAL: 2, CORRECT: 3 };
+          return order[a.r.status] - order[b.r.status];
+        }).map(({ r, cx, cy }) => (
+          <circle
+            key={r.id}
+            cx={cx}
+            cy={cy}
+            r={MARK_R}
+            fill={STATUS_COLOR[r.status]}
+            fillOpacity={r.status === "TOO_EARLY" ? 0.35 : 0.8}
+          >
+            <title>{`${r.date.slice(0, 7)} — ${r.claim.slice(0, 120)}${r.claim.length > 120 ? "…" : ""} [${STATUS_LABEL[r.status]}]`}</title>
+          </circle>
+        ))}
+      </svg>
+    </div>
   );
 }
 
 /* ── Heatmap color scale ─────────────────────────────────────────────── */
+// Single green hue, opacity-encoded. Red only for genuinely bad (<40%).
+// Text is always a darker version of the bg tint — never bold white on filled green.
 function heatColor(pct: number | null, resolved: number): { bg: string; fg: string } {
-  if (pct === null || resolved === 0) return { bg: "#F9FAFB", fg: "#D1D5DB" };
-  if (pct >= 90) return { bg: "#065F46", fg: "#D1FAE5" };
-  if (pct >= 75) return { bg: "#059669", fg: "#FFFFFF" };
-  if (pct >= 60) return { bg: "#6EE7B7", fg: "#065F46" };
-  if (pct >= 40) return { bg: "#FCA5A5", fg: "#7F1D1D" };
-  return { bg: "#E11D48", fg: "#FFFFFF" };
+  if (pct === null || resolved === 0) return { bg: "transparent", fg: "#C4C4C4" };
+  if (pct < 40)  return { bg: "rgba(225,29,72,0.12)",  fg: "#BE123C" }; // rose tint
+  // Green opacity scale: 40% → 0.08 opacity, 100% → 0.55 opacity
+  const opacity = 0.08 + ((pct - 40) / 60) * 0.47;
+  return { bg: `rgba(5,150,105,${opacity.toFixed(2)})`, fg: "#065F46" };
 }
 
 function domainAccuracyColor(pct: number | null): string {
@@ -299,13 +303,14 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
                       </span>
                     </div>
                   </div>
-                  <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-gray-100 overflow-hidden" style={{ height: "3px", width: "200px", borderRadius: "1px" }}>
                     {d.accuracyPct !== null && (
                       <div
-                        className="h-full rounded-full"
                         style={{
+                          height: "100%",
                           width: `${d.accuracyPct}%`,
                           backgroundColor: d.accuracyPct >= 75 ? "#059669" : d.accuracyPct >= 55 ? "#D97706" : "#E11D48",
+                          borderRadius: "1px",
                         }}
                       />
                     )}
@@ -323,15 +328,15 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
               <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">Accuracy by year and domain</h2>
               <div className="h-px flex-1 bg-gray-200" />
             </div>
-            <p className="text-[11px] text-gray-400 mb-4">Dark green = high accuracy, red = mostly wrong, empty = nothing resolved.</p>
+            <p className="text-[11px] text-gray-400 mb-4">Single-color green scale — darker = higher accuracy. Red = below 40%. Dash = nothing resolved yet.</p>
 
-            <div className="overflow-x-auto">
-              <table className="border-separate" style={{ borderSpacing: "3px 3px" }}>
+            <div>
+              <table className="border-separate" style={{ borderSpacing: "2px 2px" }}>
                 <thead>
                   <tr>
-                    <th className="text-left text-[10px] font-medium text-gray-400 pr-4 pb-1.5 w-32" />
+                    <th className="text-left pb-2 pr-6" style={{ minWidth: "120px" }} />
                     {years.map((y) => (
-                      <th key={y} className="text-center text-[10px] font-medium text-gray-400 pb-1.5" style={{ minWidth: 44 }}>
+                      <th key={y} className="pb-2 font-normal text-gray-400 uppercase tracking-wider" style={{ fontSize: "9px", width: "36px", textAlign: "center" }}>
                         {y}
                       </th>
                     ))}
@@ -340,23 +345,27 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
                 <tbody>
                   {domains.map((d) => (
                     <tr key={d.domain}>
-                      <td className="text-[11px] font-medium text-gray-500 pr-4 whitespace-nowrap">{d.label}</td>
+                      <td className="pr-6 whitespace-nowrap font-normal text-gray-500" style={{ fontSize: "11px" }}>{d.label}</td>
                       {years.map((y) => {
                         const c = cell(y, d.domain);
                         const { bg, fg } = heatColor(c.pct, c.resolved);
                         return (
                           <td
                             key={y}
-                            className="text-center text-[10px] font-semibold tabular-nums rounded"
+                            className="text-center tabular-nums"
                             style={{
                               backgroundColor: bg,
                               color: fg,
-                              height: 28,
-                              width: 44,
+                              height: "28px",
+                              width: "36px",
+                              fontSize: "11px",
+                              fontWeight: 500,
+                              borderRadius: "2px",
+                              verticalAlign: "middle",
                             }}
                             title={c.total === 0 ? "No predictions" : `${y} · ${d.label}: ${c.resolved} resolved of ${c.total}`}
                           >
-                            {c.pct !== null ? c.pct : ""}
+                            {c.pct !== null ? c.pct : <span style={{ color: "#D1D5DB", fontWeight: 400 }}>—</span>}
                           </td>
                         );
                       })}

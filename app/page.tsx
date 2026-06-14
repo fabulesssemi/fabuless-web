@@ -164,7 +164,7 @@ export default async function Home() {
               ))}
         </div>
 
-        {/* List stories — rolling pool (up to 11, older high-rank articles) */}
+        {/* List stories — rolling pool (up to 8, older high-rank articles) */}
         {(autoListStories ?? (autoStories && autoStories.length > 4 ? autoStories.slice(4) : null))?.length ? (
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4">
             {(autoListStories ?? autoStories!.slice(4)).map((story) => (
@@ -182,10 +182,14 @@ export default async function Home() {
         ) : null}
       </section>
 
-      {/* Rest of the manual issue */}
-      <section className="pt-7 pb-0">
-        <IssueView issue={restSections.length > 0 ? restIssue : latestIssue} showEarnings={false} />
-      </section>
+      {/* Rest of the manual issue — only as a fallback when the auto pool is
+          empty. When the rolling pool is live it IS the homepage, so the
+          hand-curated issue would just duplicate/bloat the page. */}
+      {!autoStories && (
+        <section className="pt-7 pb-0">
+          <IssueView issue={restSections.length > 0 ? restIssue : latestIssue} showEarnings={false} />
+        </section>
+      )}
 
       {/* Podcasts */}
       {(autoPodcasts ?? latestIssue.podcasts).length > 0 && (

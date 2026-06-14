@@ -94,10 +94,21 @@ export async function getHomepageArticles(): Promise<{
     const now = Date.now();
     const DAY_MS = 24 * 60 * 60 * 1000;
 
+    // Shelf-life filter at READ time — guarantees expired articles never show,
+    // even if the DB cleanup delete didn't run or failed:
+    //   top-tier (original_rank <= 5): live for 72h
+    //   lower-tier (original_rank > 5): live for 24h
+    // This is what actually rotates yesterday's worst stories off the page.
+    const alive = data.filter((r) => {
+      const age = now - new Date(r.first_seen_at as string).getTime();
+      const topTier = ((r.original_rank as number) ?? 99) <= 5;
+      return age < (topTier ? 3 * DAY_MS : DAY_MS);
+    });
+
     // Source cap: max 3 per domain across the whole page
     const sourceCounts = new Map<string, number>();
     const eligible: typeof data = [];
-    for (const row of data) {
+    for (const row of alive) {
       const src = (row.source as string).toLowerCase().trim();
       const count = sourceCounts.get(src) ?? 0;
       if (count < 3) {
@@ -106,7 +117,7 @@ export async function getHomepageArticles(): Promise<{
       }
     }
 
-    // Top Stories: articles first seen within the last 24h, up to 4
+    // Top Stories: freshest (first seen within 24h), lowest rank first, up to 4
     const topStories = eligible
       .filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS)
       .slice(0, 4)
@@ -114,10 +125,10 @@ export async function getHomepageArticles(): Promise<{
 
     const topUrls = new Set(topStories.map((s) => s.url));
 
-    // List: everything else not already in top stories, up to 11
+    // List: everything else still within shelf life, up to 8 (total page ≈ 12)
     const listStories = eligible
       .filter((r) => !topUrls.has(r.url as string))
-      .slice(0, 11)
+      .slice(0, 8)
       .map(rowToStory);
 
     return { topStories, listStories };
@@ -166,30 +177,38 @@ export async function saveAndExpireArticles(
 
     if (upsertError) return { ok: false, error: upsertError.message };
 
-    // Expire articles NOT in this run:
-    // - original_rank > 5 (lower tier): expire after 24h
-    // - original_rank <= 5 (top tier): expire after 72h
-    const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-    const threeDaysAgo = new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString();
+    // Expire stale articles. Compute which URLs are expired in JS (robust —
+    // avoids the fragile PostgREST NOT-IN-with-long-URLs filter), then delete
+    // with a safe .in() call. Shelf life:
+    //   top-tier (original_rank <= 5): 72h
+    //   lower-tier (original_rank > 5): 24h
+    // Articles re-picked in this run are never expired (kept their first_seen).
+    const keep = new Set(urls);
+    const DAY = 24 * 60 * 60 * 1000;
+    const nowMs = Date.now();
 
-    // PostgREST `in` filter: values must be double-quoted (single quotes are
-    // treated literally and would make the NOT IN exclusion never match).
-    const quotedUrls = `(${urls.map((u) => `"${u.replace(/"/g, '\\"')}"`).join(",")})`;
+    const { data: allRows } = await supabase
+      .from(ARTICLES_TABLE)
+      .select("url, original_rank, first_seen_at");
 
-    await Promise.all([
-      supabase
-        .from(ARTICLES_TABLE)
-        .delete()
-        .gt("original_rank", 5)
-        .lt("first_seen_at", dayAgo)
-        .not("url", "in", quotedUrls),
-      supabase
-        .from(ARTICLES_TABLE)
-        .delete()
-        .lte("original_rank", 5)
-        .lt("first_seen_at", threeDaysAgo)
-        .not("url", "in", quotedUrls),
-    ]);
+    const expiredUrls = (allRows ?? [])
+      .filter((r) => {
+        if (keep.has(r.url as string)) return false;
+        const age = nowMs - new Date(r.first_seen_at as string).getTime();
+        const topTier = ((r.original_rank as number) ?? 99) <= 5;
+        return age >= (topTier ? 3 * DAY : DAY);
+      })
+      .map((r) => r.url as string);
+
+    if (expiredUrls.length > 0) {
+      // Delete in chunks to keep the URL list well within request limits.
+      for (let i = 0; i < expiredUrls.length; i += 50) {
+        await supabase
+          .from(ARTICLES_TABLE)
+          .delete()
+          .in("url", expiredUrls.slice(i, i + 50));
+      }
+    }
 
     return { ok: true };
   } catch (e) {

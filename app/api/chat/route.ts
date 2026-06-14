@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { retrieveContext, type ChatTurn } from "@/lib/chat/retrieve";
 import { streamChat } from "@/lib/chat/query";
 import { rateLimit } from "@/lib/lenses/shared/rate-limit";
-import { getHomepageArticles } from "@/lib/homepage";
+import { getRssArticles } from "@/lib/homepage";
 
 export const maxDuration = 60;
 
@@ -42,14 +42,13 @@ export async function POST(req: NextRequest) {
     async start(controller) {
       const send = (data: object) => controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
       try {
-        const [chunks, articlePool] = await Promise.all([
+        const [chunks, rssArticles] = await Promise.all([
           retrieveContext(question, conversationHistory),
-          getHomepageArticles(),
+          getRssArticles(60),
         ]);
-        const allArticles = [...articlePool.topStories, ...articlePool.listStories];
-        const currentNews = allArticles.length > 0
-          ? allArticles.map((s, i) =>
-              `${i + 1}. [${s.category}] ${s.headline} (${s.source})\n   ${s.oneliner}`
+        const currentNews = rssArticles.length > 0
+          ? rssArticles.map((a, i) =>
+              `${i + 1}. ${a.title} (${a.source}${a.pub_date ? `, ${new Date(a.pub_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}` : ""})\n   ${a.description}`
             ).join("\n\n")
           : null;
         await streamChat(question, chunks, conversationHistory, currentNews, (text) => {

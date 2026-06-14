@@ -6,23 +6,24 @@ export type RssItem = {
   description: string;
   pubDate: string;
   link: string;
+  source: string;
   image: string | null; // extracted from enclosure / media:content / media:thumbnail
 };
 
-const RSS_FEEDS = [
-  "https://feeds.reuters.com/reuters/technologyNews",
-  "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",
-  "https://www.nextplatform.com/feed/",
-  "https://semiwiki.com/feed/",
-  "https://www.chipstrat.com/feed",                           // Chipstrat (Austin Lyons) — semi strategy, sits between SemiAnalysis and Stratechery
-  "https://www.benzinga.com/feeds/analyst-ratings/rss",
-  "https://www.eetimes.com/feed/",                          // EE Times — deep semiconductor/IC industry coverage
-  "https://www.tomshardware.com/feeds/all",                 // Tom's Hardware — GPU/chip news (images hotlink-blocked, filtered below)
-  "https://feeds.feedburner.com/typepad/siliconleverage",   // Silicon Leverage — semiconductor analyst blog
-  "https://feeds.arstechnica.com/arstechnica/technology",   // Ars Technica — reliable tech images, chip/AI coverage
-  "https://www.theregister.com/headlines.atom",             // The Register — chip industry, strong semiconductor beat
-  "https://wccftech.com/feed/",                             // WCCFtech — GPU/CPU/chip hardware news
-  "https://www.digitimes.com/rss/daily.xml",               // Digitimes — Asia semiconductor supply chain, TSMC/fab focus
+const RSS_FEEDS: { url: string; source: string }[] = [
+  { url: "https://feeds.reuters.com/reuters/technologyNews",                                              source: "Reuters" },
+  { url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",          source: "CNBC" },
+  { url: "https://www.nextplatform.com/feed/",                                                            source: "NextPlatform" },
+  { url: "https://semiwiki.com/feed/",                                                                    source: "SemiWiki" },
+  { url: "https://www.chipstrat.com/feed",                                                                source: "Chipstrat" },
+  { url: "https://www.benzinga.com/feeds/analyst-ratings/rss",                                           source: "Benzinga" },
+  { url: "https://www.eetimes.com/feed/",                                                                 source: "EE Times" },
+  { url: "https://www.tomshardware.com/feeds/all",                                                        source: "Tom's Hardware" },
+  { url: "https://feeds.feedburner.com/typepad/siliconleverage",                                         source: "Silicon Leverage" },
+  { url: "https://feeds.arstechnica.com/arstechnica/technology",                                         source: "Ars Technica" },
+  { url: "https://www.theregister.com/headlines.atom",                                                   source: "The Register" },
+  { url: "https://wccftech.com/feed/",                                                                    source: "WCCFtech" },
+  { url: "https://www.digitimes.com/rss/daily.xml",                                                      source: "Digitimes" },
 ];
 
 // CDN domains that hotlink-protect their images — browsers get 403 when the
@@ -126,7 +127,7 @@ function parseRss(xml: string, limit = 60): RssItem[] {
       (chunk.match(/<published>([\s\S]*?)<\/published>/)?.[1] ?? "") ||
       (chunk.match(/<updated>([\s\S]*?)<\/updated>/)?.[1] ?? "");
     const image = extractItemImage(chunk);
-    if (title) items.push({ title, description, link, pubDate, image });
+    if (title) items.push({ title, description, link, pubDate, source: "", image });
   }
   return items;
 }
@@ -154,11 +155,12 @@ function isRecent(pubDate: string, maxAgeDays = MAX_ARTICLE_AGE_DAYS): boolean {
 /** Fetch all configured news/analyst RSS feeds in parallel. Returns merged list. */
 export async function fetchAllNewsItems(): Promise<RssItem[]> {
   const results = await Promise.all(
-    RSS_FEEDS.map(async (url) => {
+    RSS_FEEDS.map(async ({ url, source }) => {
       const xml = await fetchText(url);
       if (!xml) return [];
-      // Recency filter — only articles published within the last few weeks.
-      return parseRss(xml).filter((item) => isRecent(item.pubDate));
+      return parseRss(xml)
+        .filter((item) => isRecent(item.pubDate))
+        .map((item) => ({ ...item, source }));
     }),
   );
   return results.flat();

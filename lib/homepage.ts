@@ -221,6 +221,61 @@ export async function saveAndExpireArticles(
   }
 }
 
+// ---------------------------------------------------------------------------
+// Full RSS article archive — all fetched items, not just the top 15.
+// Powers the chatbot's current-events knowledge base.
+// ---------------------------------------------------------------------------
+
+const RSS_TABLE = "rss_articles";
+
+export type RssArchiveItem = {
+  url: string;
+  title: string;
+  description: string;
+  source: string;
+  pub_date: string | null;
+};
+
+/** Save all RSS items fetched during a cron run. Upserts on URL, expires >21-day-old rows. */
+export async function saveRssArticles(
+  items: { title: string; description: string; link: string; source: string; pubDate: string }[],
+): Promise<void> {
+  if (!items.length) return;
+  const now = new Date().toISOString();
+  const rows = items.map((item) => ({
+    url: item.link,
+    title: item.title.slice(0, 500),
+    description: item.description.slice(0, 800),
+    source: item.source,
+    pub_date: item.pubDate ? new Date(item.pubDate).toISOString() : null,
+    fetched_at: now,
+  })).filter((r) => r.url);
+
+  // Upsert in chunks to stay within request limits.
+  for (let i = 0; i < rows.length; i += 100) {
+    await supabase.from(RSS_TABLE).upsert(rows.slice(i, i + 100), { onConflict: "url" });
+  }
+
+  // Expire rows older than 21 days.
+  const cutoff = new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString();
+  await supabase.from(RSS_TABLE).delete().lt("pub_date", cutoff);
+}
+
+/** Fetch recent RSS articles for chatbot context — most recent first, up to limit. */
+export async function getRssArticles(limit = 60): Promise<RssArchiveItem[]> {
+  try {
+    const { data, error } = await supabase
+      .from(RSS_TABLE)
+      .select("url, title, description, source, pub_date")
+      .order("pub_date", { ascending: false })
+      .limit(limit);
+    if (error || !data) return [];
+    return data as RssArchiveItem[];
+  } catch {
+    return [];
+  }
+}
+
 export async function saveHomepageContent(
   content: HomepageContent,
 ): Promise<{ ok: boolean; error?: string }> {

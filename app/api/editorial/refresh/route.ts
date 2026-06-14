@@ -6,7 +6,7 @@ import { generateEditorial } from "@/lib/editorial/generate";
 import { saveEditorial } from "@/lib/editorial/supabase";
 import { fetchAllNewsItems, fetchPodcastEpisodes, fetchAllPodcastFeeds } from "@/lib/editorial/sources";
 import { generateTopStories, generatePodcastPicks } from "@/lib/editorial/curate-stories";
-import { saveHomepageContent, saveAndExpireArticles } from "@/lib/homepage";
+import { saveHomepageContent, saveAndExpireArticles, saveRssArticles } from "@/lib/homepage";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -61,6 +61,7 @@ export async function GET(request: Request) {
       const [{ ok }] = await Promise.all([
         saveHomepageContent(homepage),
         saveAndExpireArticles(homepage.topStories),
+        saveRssArticles(allNewsItems),
       ]);
       storiesOk = ok;
       if (ok) revalidatePath("/");

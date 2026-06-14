@@ -13,19 +13,20 @@ import {
 
 export const revalidate = 300; // 5 min — keeps prices fresh
 
-const LOGO_DOMAINS: Record<string, string> = {
-  nvda:     "nvidia.com",
-  amd:      "amd.com",
-  avgo:     "broadcom.com",
-  mrvl:     "marvell.com",
-  tsm:      "tsmc.com",
-  asml:     "asml.com",
-  arm:      "arm.com",
-  mu:       "micron.com",
-  intc:     "intel.com",
-  qcom:     "qualcomm.com",
-  skhynix:  "skhynix.com",
-  samsung:  "samsung.com",
+// Direct logo URLs — more reliable than Clearbit for these specific companies
+const LOGO_URLS: Record<string, string> = {
+  nvda:    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/220px-Nvidia_logo.svg.png",
+  amd:     "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/AMD_Logo.svg/220px-AMD_Logo.svg.png",
+  avgo:    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Broadcom_Inc._logo.svg/220px-Broadcom_Inc._logo.svg.png",
+  mrvl:    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Marvell_Technology_logo.svg/220px-Marvell_Technology_logo.svg.png",
+  tsm:     "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/TSMC.logo.svg/220px-TSMC.logo.svg.png",
+  asml:    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/ASML_Holding_NV_logo.svg/220px-ASML_Holding_NV_logo.svg.png",
+  arm:     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Arm_logo_2017.svg/220px-Arm_logo_2017.svg.png",
+  mu:      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Micron_Technology_logo.svg/220px-Micron_Technology_logo.svg.png",
+  intc:    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282006-2020%29.svg/220px-Intel_logo_%282006-2020%29.svg.png",
+  qcom:    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Qualcomm-Logo.svg/220px-Qualcomm-Logo.svg.png",
+  skhynix: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/SK_Hynix_Logo.svg/220px-SK_Hynix_Logo.svg.png",
+  samsung: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/220px-Samsung_Logo.svg.png",
 };
 
 export const metadata: Metadata = {
@@ -67,14 +68,14 @@ export default async function CompaniesIndex() {
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex items-start gap-3">
-                  {LOGO_DOMAINS[meta.slug] && (
+                  {LOGO_URLS[meta.slug] && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={`https://logo.clearbit.com/${LOGO_DOMAINS[meta.slug]}`}
+                      src={LOGO_URLS[meta.slug]}
                       alt=""
                       width={36}
                       height={36}
-                      className="rounded-lg shrink-0 mt-0.5 border border-gray-100 bg-gray-50"
+                      className="rounded-lg shrink-0 mt-0.5 border border-gray-100 bg-gray-50 object-contain p-0.5"
                     />
                   )}
                   <div className="min-w-0">

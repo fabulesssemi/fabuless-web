@@ -15,6 +15,10 @@ const RATING_SCORE: Record<string, number> = {
   "Underperform": -1, "Underweight": -1, "Sell": -2,
 };
 
+function initials(name: string) {
+  return name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+}
+
 function bullBearSummary(coverage: { rating: string }[]) {
   let bull = 0, bear = 0, neutral = 0;
   for (const c of coverage) {
@@ -26,69 +30,149 @@ function bullBearSummary(coverage: { rating: string }[]) {
   return { bull, bear, neutral };
 }
 
+function avgUpside(coverage: { upsidePct: number | null }[]) {
+  const valid = coverage.map((c) => c.upsidePct).filter((u): u is number => u !== null);
+  if (!valid.length) return null;
+  return Math.round(valid.reduce((a, b) => a + b, 0) / valid.length * 10) / 10;
+}
+
+// Compact stacked bar: bull = green, neutral = gray, bear = red
+function RatingBar({ bull, neutral, bear }: { bull: number; neutral: number; bear: number }) {
+  const total = bull + neutral + bear;
+  if (!total) return null;
+  const bPct = (bull / total) * 100;
+  const nPct = (neutral / total) * 100;
+  const rPct = (bear / total) * 100;
+  return (
+    <div className="flex h-1.5 w-24 rounded-full overflow-hidden gap-px">
+      {bull > 0 && <div className="bg-emerald-500 rounded-l-full" style={{ width: `${bPct}%` }} />}
+      {neutral > 0 && <div className="bg-gray-300" style={{ width: `${nPct}%` }} />}
+      {bear > 0 && <div className="bg-rose-400 rounded-r-full" style={{ width: `${rPct}%` }} />}
+    </div>
+  );
+}
+
 export default async function AnalystsIndex() {
   const analysts = await fetchAnalystCoverage();
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <header className="mb-6 pb-4 border-b border-gray-200">
-        <div className="flex items-baseline justify-between">
+      <header className="mb-8">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-1">
+          Equity Research
+        </div>
+        <div className="flex items-end justify-between gap-4">
           <div>
             <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
               Wall Street Analysts
             </h1>
             <p className="mt-1 font-serif text-[15px] text-[#4a4a4a] leading-relaxed">
-              The analysts who move semi stocks. Current ratings and price targets across the coverage universe.
+              The analysts who move semi stocks. Live ratings and price targets across the coverage universe.
             </p>
           </div>
-          <Link href="/analyst-consensus" className="text-[11px] text-[#B45309] font-semibold hover:underline shrink-0">
+          <Link href="/analyst-consensus" className="shrink-0 text-[11px] text-[#B45309] font-semibold hover:underline">
             Consensus view →
           </Link>
         </div>
       </header>
 
-      <div className="divide-y divide-gray-200 border-t border-gray-200">
+      {/* Column headers */}
+      <div className="hidden md:grid grid-cols-[1fr_160px_180px_100px] gap-4 px-4 mb-2">
+        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Analyst</div>
+        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Sentiment</div>
+        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-center">Buy · Hold · Sell</div>
+        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-right">Avg Upside</div>
+      </div>
+
+      <div className="flex flex-col gap-2">
         {analysts.map((analyst) => {
           const { bull, bear, neutral } = bullBearSummary(analyst.coverage);
+          const upside = avgUpside(analyst.coverage);
+          const bullPct = analyst.coverage.length ? Math.round((bull / analyst.coverage.length) * 100) : 0;
+
           return (
             <Link
               key={analyst.id}
               href={`/analysts/${analyst.id}`}
-              className="group flex items-stretch gap-4 py-4 hover:bg-[#FAFAF8] transition-colors -mx-3 px-3"
+              className="group relative flex items-center gap-4 rounded-xl border border-gray-100 bg-white px-4 py-4 shadow-sm hover:shadow-md hover:border-gray-200 transition-all duration-150"
             >
-              {/* Accent rail */}
-              <div className="w-1 self-stretch rounded-full shrink-0" style={{ backgroundColor: analyst.accent }} />
+              {/* Left accent */}
+              <div
+                className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full"
+                style={{ backgroundColor: analyst.accent }}
+              />
 
-              {/* Name + known for */}
-              <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="font-sans text-[16px] font-bold text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors leading-tight">
+              {/* Avatar monogram */}
+              <div
+                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-[13px] font-bold tracking-tight"
+                style={{ backgroundColor: analyst.accent }}
+              >
+                {initials(analyst.name)}
+              </div>
+
+              {/* Name + firm + known-for */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-sans text-[15px] font-bold text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
                     {analyst.name}
                   </span>
-                  <span className="font-mono text-[10px] font-semibold uppercase tracking-wider" style={{ color: analyst.accent }}>
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                    style={{ color: analyst.accent, backgroundColor: `${analyst.accent}18` }}
+                  >
                     {analyst.firmDisplay}
                   </span>
+                  <span className="text-[10px] text-gray-400 font-medium">{analyst.title}</span>
                 </div>
-                <p className="mt-1 text-[12.5px] text-gray-500 leading-snug line-clamp-1">
+                <p className="mt-0.5 text-[12px] text-gray-500 leading-snug line-clamp-1">
                   {analyst.knownFor}
                 </p>
               </div>
 
-              {/* Rating breakdown + coverage count */}
-              <div className="hidden md:flex items-center gap-5 shrink-0 self-center">
-                <div className="flex items-center gap-3 text-[12px] tabular-nums">
-                  <span className="text-emerald-600 font-semibold">{bull} <span className="text-gray-400 font-normal">buy</span></span>
-                  <span className="text-gray-400 font-semibold">{neutral} <span className="text-gray-400 font-normal">hold</span></span>
-                  <span className="text-rose-500 font-semibold">{bear} <span className="text-gray-400 font-normal">sell</span></span>
-                </div>
-                <div className="w-px h-8 bg-gray-200" />
-                <div className="text-right w-[78px]">
-                  <div className="text-[15px] font-bold text-gray-900 tabular-nums leading-none">{analyst.coverage.length}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wide mt-0.5">stocks</div>
+              {/* Sentiment bar + bull% */}
+              <div className="hidden md:flex flex-col gap-1.5 w-40 shrink-0">
+                <RatingBar bull={bull} neutral={neutral} bear={bear} />
+                <div className="text-[11px] text-gray-400 tabular-nums">
+                  <span className="text-emerald-600 font-semibold">{bullPct}% bullish</span>
+                  {" · "}
+                  <span>{analyst.coverage.length} stocks</span>
                 </div>
               </div>
 
-              <div className="self-center shrink-0 text-[13px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: analyst.accent }}>
+              {/* Buy / Hold / Sell counts */}
+              <div className="hidden md:flex items-center gap-3 w-44 shrink-0 justify-center">
+                <div className="text-center">
+                  <div className="text-[15px] font-bold text-emerald-600 tabular-nums leading-none">{bull}</div>
+                  <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-0.5">Buy</div>
+                </div>
+                <div className="w-px h-6 bg-gray-200" />
+                <div className="text-center">
+                  <div className="text-[15px] font-bold text-gray-400 tabular-nums leading-none">{neutral}</div>
+                  <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-0.5">Hold</div>
+                </div>
+                <div className="w-px h-6 bg-gray-200" />
+                <div className="text-center">
+                  <div className="text-[15px] font-bold text-rose-400 tabular-nums leading-none">{bear}</div>
+                  <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-0.5">Sell</div>
+                </div>
+              </div>
+
+              {/* Avg upside */}
+              <div className="hidden md:block text-right w-24 shrink-0">
+                {upside !== null ? (
+                  <>
+                    <div className={`text-[17px] font-bold tabular-nums leading-none ${upside >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
+                      {upside >= 0 ? "+" : ""}{upside}%
+                    </div>
+                    <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-0.5">avg upside</div>
+                  </>
+                ) : (
+                  <span className="text-[12px] text-gray-300">—</span>
+                )}
+              </div>
+
+              {/* Chevron */}
+              <div className="shrink-0 text-gray-300 group-hover:text-[#B45309] transition-colors text-[13px]">
                 →
               </div>
             </Link>
@@ -96,8 +180,8 @@ export default async function AnalystsIndex() {
         })}
       </div>
 
-      <p className="mt-8 text-[11px] text-gray-400 border-t border-gray-100 pt-4">
-        Data via Yahoo Finance, refreshed hourly. Analyst names are matched to their firm&apos;s published ratings.
+      <p className="mt-6 text-[11px] text-gray-400 border-t border-gray-100 pt-4">
+        Data via Yahoo Finance, refreshed hourly. Avg upside calculated from current price vs. price target across all covered stocks.
       </p>
     </div>
   );

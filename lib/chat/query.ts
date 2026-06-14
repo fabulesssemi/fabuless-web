@@ -29,6 +29,7 @@ export async function streamChat(
   userQuestion: string,
   contextChunks: ContextChunk[],
   history: ChatTurn[],
+  currentNews: string | null,
   onText: (text: string) => void,
 ): Promise<string> {
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -50,14 +51,25 @@ export async function streamChat(
     ]);
   }
 
-  // Background context as plain text document blocks — citations OFF so Claude
-  // never surfaces quotes or source titles.
-  const documentBlocks = contextChunks.map((chunk) => ({
-    type: "document" as const,
-    source: { type: "text" as const, media_type: "text/plain" as const, data: chunk.text },
-    title: "Background context",
-    citations: { enabled: false },
-  }));
+  // Current news injected first so Claude knows what's happening today.
+  // RAG chunks follow as deeper background. Citations OFF on both.
+  const newsBlock = currentNews
+    ? [{
+        type: "document" as const,
+        source: { type: "text" as const, media_type: "text/plain" as const, data: currentNews },
+        title: "Today's semiconductor news headlines",
+        citations: { enabled: false },
+      }]
+    : [];
+  const documentBlocks = [
+    ...newsBlock,
+    ...contextChunks.map((chunk) => ({
+      type: "document" as const,
+      source: { type: "text" as const, media_type: "text/plain" as const, data: chunk.text },
+      title: "Background context",
+      citations: { enabled: false },
+    })),
+  ];
 
   const messages: Anthropic.MessageParam[] = [
     ...historyMessages,

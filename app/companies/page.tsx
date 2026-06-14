@@ -56,12 +56,12 @@ export default async function CompaniesIndex() {
             >
               {/* Translucent logo watermark */}
               <div
-                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-20 h-20 opacity-[0.08]"
+                className="pointer-events-none absolute inset-0 opacity-[0.055]"
                 style={{
                   backgroundImage: `url(${logoUrl(meta.ticker)})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
+                  backgroundSize: "45%",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
                   }}
                 />
               <div className="flex items-start justify-between gap-3">

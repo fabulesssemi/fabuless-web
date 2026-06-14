@@ -68,13 +68,13 @@ export default async function CompaniesIndex() {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex items-start gap-3">
                   {LOGO_DOMAINS[meta.slug] && (
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={`https://logo.clearbit.com/${LOGO_DOMAINS[meta.slug]}`}
-                      alt={meta.name}
+                      alt=""
                       width={36}
                       height={36}
-                      className="rounded-lg shrink-0 mt-0.5 border border-gray-100"
-                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                      className="rounded-lg shrink-0 mt-0.5 border border-gray-100 bg-gray-50"
                     />
                   )}
                   <div className="min-w-0">

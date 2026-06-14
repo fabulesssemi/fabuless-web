@@ -65,110 +65,76 @@ export default function TrackerPage() {
       </div>
 
       {/* Leaderboard */}
-      <div className="flex flex-col gap-2 mb-10">
+      <div className="mb-10 border-t border-gray-200">
+        {/* Column headers */}
+        <div className="hidden lg:grid grid-cols-[28px_1fr_200px_80px_72px] gap-4 px-3 py-2 border-b border-gray-100">
+          <div />
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Expert</div>
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">By Domain</div>
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-right">Resolved</div>
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-right">Accuracy</div>
+        </div>
         {rows.map(({ expert, stats }, i) => {
           const domainMap = Object.fromEntries(stats.domains.map((d) => [d.domain, d.accuracyPct]));
-          const form = recentForm(expert.id);
-          const isFirst = i === 0;
-
           return (
             <Link
               key={expert.id}
               href={`/tracker/${expert.id}`}
-              className={`group relative flex items-center gap-5 rounded-xl border px-5 py-4 transition-all duration-150 hover:shadow-md ${
-                isFirst
-                  ? "border-amber-200 bg-amber-50/40 hover:border-amber-300"
-                  : "border-gray-100 bg-white hover:border-gray-200"
-              }`}
+              className="group grid grid-cols-[28px_1fr_auto] lg:grid-cols-[28px_1fr_200px_80px_72px] gap-4 items-center px-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+              style={{ minHeight: "56px" }}
             >
-              {/* Left accent */}
-              <div
-                className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full"
-                style={{ backgroundColor: expert.accent }}
-              />
-
               {/* Rank */}
-              <div className={`shrink-0 w-7 text-center font-bold tabular-nums ${isFirst ? "text-[#B45309] text-[16px]" : "text-gray-300 text-[14px]"}`}>
-                {i + 1}
-              </div>
+              <span className="text-[12px] font-semibold text-gray-300 tabular-nums">{i + 1}</span>
 
               {/* Identity */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-sans text-[15px] font-bold text-gray-900 tracking-tight group-hover:text-[#B45309] transition-colors">
+              <div className="min-w-0 py-3">
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="font-sans text-[14px] font-bold text-gray-900 group-hover:text-[#B45309] transition-colors leading-tight">
                     {expert.name}
                   </span>
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
-                    style={{ color: expert.accent, backgroundColor: `${expert.accent}18` }}
-                  >
-                    {expert.subtitle}
-                  </span>
-                  {isFirst && (
-                    <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">
-                      #1
-                    </span>
-                  )}
+                  <span className="text-[10px] font-medium text-gray-400 tracking-wide">{expert.subtitle}</span>
                 </div>
-
-                {/* Recent form dots */}
-                {form.length > 0 && (
-                  <div className="flex items-center gap-1 mt-1.5">
-                    <span className="text-[9px] uppercase tracking-widest text-gray-400 mr-1">Recent</span>
-                    {form.map((s, j) => (
-                      <div
-                        key={j}
-                        className="w-2 h-2 rounded-full"
-                        style={{
-                          backgroundColor:
-                            s === "CORRECT" ? "#10b981" :
-                            s === "PARTIAL" ? "#f59e0b" : "#f43f5e",
-                        }}
-                        title={s}
-                      />
-                    ))}
-                  </div>
-                )}
               </div>
 
-              {/* Domain mini-bars — compact column chart */}
-              <div className="hidden lg:flex items-end gap-1.5 w-48 shrink-0" style={{ height: "40px" }}>
+              {/* Domain inline bars */}
+              <div className="hidden lg:flex items-center gap-2">
                 {DOMAIN_COLS.map((d) => {
                   const pct = domainMap[d.key] ?? null;
                   const color = pct === null ? "#e5e7eb" : pct >= 75 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#f43f5e";
-                  const barH = pct !== null ? Math.max(2, Math.round((pct / 100) * 24)) : 2;
                   return (
-                    <div key={d.key} className="flex flex-col items-center justify-end gap-0.5 flex-1" style={{ height: "40px" }}>
-                      <div className="w-full rounded-sm" style={{ height: `${barH}px`, backgroundColor: color }} />
-                      <span className="text-[8px] uppercase tracking-wide text-gray-400 leading-none">{d.label}</span>
+                    <div key={d.key} className="flex flex-col items-center gap-0.5" style={{ width: "26px" }}>
+                      <div className="w-full bg-gray-100 rounded-sm" style={{ height: "16px" }}>
+                        <div
+                          className="w-full rounded-sm"
+                          style={{
+                            height: pct !== null ? `${Math.max(2, Math.round(pct / 100 * 16))}px` : "2px",
+                            backgroundColor: color,
+                            marginTop: pct !== null ? `${16 - Math.max(2, Math.round(pct / 100 * 16))}px` : "14px",
+                          }}
+                        />
+                      </div>
+                      <span className="text-[7px] uppercase text-gray-400 leading-none tracking-wide">{d.label}</span>
                     </div>
                   );
                 })}
               </div>
 
-              {/* Resolved / Open */}
-              <div className="hidden sm:flex flex-col items-center gap-0.5 w-20 shrink-0">
-                <div className="text-[12px] font-semibold text-gray-700 tabular-nums">{stats.correct}/{stats.resolved}</div>
-                <div className="text-[9px] uppercase tracking-widest text-gray-400">resolved</div>
-                <div className="text-[11px] text-gray-400 tabular-nums mt-0.5">{stats.tooEarly} open</div>
+              {/* Resolved */}
+              <div className="hidden lg:block text-right">
+                <span className="text-[12px] font-medium text-gray-500 tabular-nums">{stats.correct}/{stats.resolved}</span>
+                <span className="text-[10px] text-gray-300 ml-1 tabular-nums">+{stats.tooEarly}</span>
               </div>
 
-              {/* Accuracy % — hero */}
-              <div className="shrink-0 text-right w-24">
+              {/* Accuracy */}
+              <div className="text-right">
                 {stats.accuracyPct !== null ? (
-                  <>
-                    <div className={`text-[28px] font-bold tabular-nums leading-none ${accuracyColor(stats.accuracyPct)}`}>
-                      {stats.accuracyPct}%
-                    </div>
-                    <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-0.5">accuracy</div>
-                  </>
+                  <span className={`text-[18px] font-bold tabular-nums ${accuracyColor(stats.accuracyPct)}`}>
+                    {stats.accuracyPct}%
+                  </span>
                 ) : (
-                  <span className="text-gray-300 text-[14px]">—</span>
+                  <span className="text-gray-300 text-[13px]">—</span>
                 )}
               </div>
-
-              {/* Chevron */}
-              <div className="shrink-0 text-gray-300 group-hover:text-[#B45309] transition-colors">→</div>
             </Link>
           );
         })}

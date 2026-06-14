@@ -131,25 +131,16 @@ export default function TrackerPage() {
                 )}
               </div>
 
-              {/* Domain mini-bars — horizontal column chart */}
-              <div className="hidden lg:flex items-end gap-2 h-16 w-52 shrink-0">
+              {/* Domain mini-bars — compact column chart */}
+              <div className="hidden lg:flex items-end gap-1.5 w-48 shrink-0" style={{ height: "40px" }}>
                 {DOMAIN_COLS.map((d) => {
                   const pct = domainMap[d.key] ?? null;
                   const color = pct === null ? "#e5e7eb" : pct >= 75 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#f43f5e";
+                  const barH = pct !== null ? Math.max(2, Math.round((pct / 100) * 24)) : 2;
                   return (
-                    <div key={d.key} className="flex flex-col items-center gap-1 flex-1">
-                      <span className="text-[8px] tabular-nums text-gray-400">{pct !== null ? `${pct}%` : "—"}</span>
-                      <div className="w-full bg-gray-100 rounded-sm overflow-hidden" style={{ height: "32px" }}>
-                        <div
-                          className="w-full rounded-sm transition-all"
-                          style={{
-                            height: pct !== null ? `${pct}%` : "4px",
-                            backgroundColor: color,
-                            marginTop: pct !== null ? `${100 - pct}%` : "28px",
-                          }}
-                        />
-                      </div>
-                      <span className="text-[8px] uppercase tracking-wide text-gray-400">{d.label}</span>
+                    <div key={d.key} className="flex flex-col items-center justify-end gap-0.5 flex-1" style={{ height: "40px" }}>
+                      <div className="w-full rounded-sm" style={{ height: `${barH}px`, backgroundColor: color }} />
+                      <span className="text-[8px] uppercase tracking-wide text-gray-400 leading-none">{d.label}</span>
                     </div>
                   );
                 })}

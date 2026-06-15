@@ -24,30 +24,23 @@ const STATUS_META = {
 
 function TickerPill({
   ticker,
-  color,
-  count,
   active,
   onClick,
 }: {
   ticker: string;
-  color: string;
-  count: number;
   active: boolean;
   onClick: () => void;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`group relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
+      className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
         active
           ? "bg-[#111827] text-white shadow-sm"
           : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
       }`}
     >
       {ticker}
-      <span className={`text-[10px] font-semibold tabular-nums transition-colors ${
-        active ? "text-gray-300" : "text-gray-400 group-hover:text-gray-500"
-      }`}>{count}</span>
     </button>
   );
 }
@@ -122,24 +115,13 @@ export function ExpertCallsFilter({
   tickers: string[];
   colorMap: Record<string, string>;
 }) {
-  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [selected, setSelected] = useState<string | null>(null);
 
-  const toggle = (ticker: string) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(ticker)) next.delete(ticker); else next.add(ticker);
-      return next;
-    });
-  };
-
-  const countPerTicker = useMemo(() => {
-    const m: Record<string, number> = {};
-    for (const t of tickers) m[t] = calls.filter((c) => c.ticker === t).length;
-    return m;
-  }, [calls, tickers]);
+  const toggle = (ticker: string) =>
+    setSelected((prev) => (prev === ticker ? null : ticker));
 
   const filtered = useMemo(
-    () => selected.size === 0 ? calls : calls.filter((c) => selected.has(c.ticker)),
+    () => selected === null ? calls : calls.filter((c) => c.ticker === selected),
     [calls, selected]
   );
 
@@ -161,26 +143,21 @@ export function ExpertCallsFilter({
       {/* Filter bar */}
       <div className="flex items-center gap-2 flex-wrap mb-5">
         <button
-          onClick={() => setSelected(new Set())}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
-            selected.size === 0
+          onClick={() => setSelected(null)}
+          className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
+            selected === null
               ? "bg-[#111827] text-white shadow-sm"
               : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
           }`}
         >
           All
-          <span className={`text-[10px] font-semibold tabular-nums ${selected.size === 0 ? "text-gray-300" : "text-gray-400"}`}>
-            {calls.length}
-          </span>
         </button>
         <div className="w-px h-5 bg-gray-200 mx-1" />
-        {tickers.filter((t) => (countPerTicker[t] ?? 0) > 0).map((ticker) => (
+        {tickers.map((ticker) => (
           <TickerPill
             key={ticker}
             ticker={ticker}
-            color={colorMap[ticker]}
-            count={countPerTicker[ticker] ?? 0}
-            active={selected.has(ticker)}
+            active={selected === ticker}
             onClick={() => toggle(ticker)}
           />
         ))}
@@ -204,9 +181,9 @@ export function ExpertCallsFilter({
             </span>
           </div>
         )}
-        {selected.size > 0 && (
+        {selected !== null && (
           <button
-            onClick={() => setSelected(new Set())}
+            onClick={() => setSelected(null)}
             className="ml-auto text-[10px] text-gray-400 hover:text-gray-700 font-semibold transition-colors"
           >
             Clear filter ×

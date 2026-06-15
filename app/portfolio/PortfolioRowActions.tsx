@@ -109,21 +109,21 @@ export function AddTickerRow({ allHoldings }: { allHoldings: Holding[] }) {
   }
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 border-t border-[#F1F5F9] bg-gray-50/40">
-      <span className="text-[18px] text-gray-300 leading-none select-none">+</span>
+    <div className="flex items-center gap-3 px-4 py-2.5 border-t-2 border-dashed border-gray-200 bg-white hover:border-[#B45309] hover:bg-amber-50/30 transition-colors group">
+      <span className="text-[15px] text-gray-300 group-hover:text-[#B45309] leading-none select-none transition-colors font-bold">+</span>
       <input
         value={tickerInput}
         onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
         onKeyDown={(e) => e.key === "Enter" && startAdd()}
         placeholder="Add a company — type a ticker (NVDA, AMD…)"
-        className="flex-1 text-[13px] text-[#111827] placeholder:text-gray-400 outline-none bg-transparent"
+        className="flex-1 text-[13px] font-semibold text-[#111827] placeholder:text-gray-400 placeholder:font-normal outline-none bg-transparent"
       />
       {tickerInput && (
         <button
           onClick={startAdd}
-          className="shrink-0 rounded-lg bg-[#111827] px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-[#1f2937] transition-colors"
+          className="shrink-0 rounded-lg bg-[#B45309] px-3 py-1.5 text-[11px] font-bold text-white hover:bg-amber-700 transition-colors"
         >
-          Add
+          Add →
         </button>
       )}
     </div>

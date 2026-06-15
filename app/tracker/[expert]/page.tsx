@@ -67,88 +67,96 @@ function Timeline({ rows }: { rows: Prediction[] }) {
 
   const minTs = new Date(dated[0].date).getTime();
   const maxTs = new Date(dated[dated.length - 1].date).getTime();
-  const span = Math.max(maxTs - minTs, 1);
+  const span  = Math.max(maxTs - minTs, 1);
 
-  const W = 920, PAD_L = 0, PAD_R = 0;
-  // Single band: marks jitter vertically in a 40px band, axis below, legend above
-  const BAND_TOP = 16;   // top of jitter band
-  const BAND_H   = 40;   // height of jitter band
-  const AXIS_Y   = BAND_TOP + BAND_H + 14; // year label baseline
-  const H        = AXIS_Y + 4;
+  const W       = 920;
+  const DOT_R   = 4;
+  const BAND_H  = 80;   // total dot band height
+  const BAND_Y  = 1;    // top of band (leave 1px for baseline)
+  const AXIS_Y  = BAND_Y + BAND_H + 14;
+  const H       = AXIS_Y + 4;
 
   const xPos = (date: string) =>
-    PAD_L + ((new Date(date).getTime() - minTs) / span) * (W - PAD_L - PAD_R);
+    (new Date(date).getTime() - minTs) / span * W;
 
   const startYear = new Date(minTs).getFullYear();
   const endYear   = new Date(maxTs).getFullYear();
   const years: number[] = [];
   for (let y = startYear + 1; y <= endYear; y++) years.push(y);
 
-  // Deterministic vertical jitter: hash the prediction id to get a stable Y offset
-  // within the band so marks never overlap but also never shift on re-render
-  const strHash = (s: string) => {
-    let h = 0;
-    for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
-    return Math.abs(h);
-  };
+  // Proximity-based vertical stacking: dots within 2*DOT_R of each other stack
+  const placed: { cx: number; cy: number; r: Prediction }[] = [];
+  for (const r of dated) {
+    const cx = xPos(r.date);
+    const nearby = placed.filter((p) => Math.abs(p.cx - cx) <= DOT_R * 2 + 1);
+    let cy: number;
+    if (nearby.length === 0) {
+      cy = BAND_Y + BAND_H / 2;
+    } else {
+      const stackIdx = nearby.length;
+      const dir = stackIdx % 2 === 1 ? -1 : 1;
+      const level = Math.ceil(stackIdx / 2);
+      cy = BAND_Y + BAND_H / 2 + dir * level * (DOT_R * 2 + 2);
+      cy = Math.max(BAND_Y + DOT_R, Math.min(BAND_Y + BAND_H - DOT_R, cy));
+    }
+    placed.push({ cx, cy, r });
+  }
 
-  const MARK_R = 3;
-  const dots = dated.map((r) => {
-    const jitter = (strHash(r.id) % 1000) / 1000; // 0–1
-    const cy = BAND_TOP + MARK_R + jitter * (BAND_H - MARK_R * 2);
-    return { r, cx: xPos(r.date), cy };
+  // Render open/partial under correct/wrong
+  const sorted = [...placed].sort((a, b) => {
+    const order: Record<PredictionStatus, number> = { TOO_EARLY: 0, PARTIAL: 1, WRONG: 2, CORRECT: 3 };
+    return order[a.r.status] - order[b.r.status];
   });
 
-  const LEGEND = [
-    { status: "CORRECT"   as PredictionStatus, label: "Correct" },
-    { status: "PARTIAL"   as PredictionStatus, label: "Partial"  },
-    { status: "WRONG"     as PredictionStatus, label: "Wrong"    },
-    { status: "TOO_EARLY" as PredictionStatus, label: "Open"     },
+  const LEGEND: { status: PredictionStatus; label: string }[] = [
+    { status: "CORRECT",   label: "Correct" },
+    { status: "PARTIAL",   label: "Partial"  },
+    { status: "WRONG",     label: "Wrong"    },
+    { status: "TOO_EARLY", label: "Open"     },
   ];
 
   return (
     <div>
-      {/* Inline legend — muted, small, no chrome */}
-      <div className="flex items-center gap-4 mb-3">
-        {LEGEND.map(({ status, label }) => (
-          <div key={status} className="flex items-center gap-1.5">
-            <svg width="8" height="8" viewBox="0 0 8 8">
-              <circle cx="4" cy="4" r="3" fill={STATUS_COLOR[status]} fillOpacity={status === "TOO_EARLY" ? 0.45 : 0.85} />
-            </svg>
-            <span className="text-[10px] text-gray-400">{label}</span>
-          </div>
-        ))}
-      </div>
-
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full overflow-visible" role="img" aria-label="Prediction timeline">
-        {/* Year axis ticks — muted text only, no lines */}
+        {/* Baseline anchor — 1px rule at bottom of dot band */}
+        <line x1="0" y1={BAND_Y + BAND_H} x2={W} y2={BAND_Y + BAND_H} stroke="#E5E7EB" strokeWidth="1" />
+
+        {/* Year labels */}
         {years.map((y) => (
           <text key={y} x={xPos(`${y}-01-01`)} y={AXIS_Y} textAnchor="middle" fontSize="9" fill="#C4C4C4" letterSpacing="0.03em">
             {y}
           </text>
         ))}
 
-        {/* Marks — bottom layer first (open/partial) so correct sits on top */}
-        {[...dots].sort((a, b) => {
-          const order: Record<PredictionStatus, number> = { TOO_EARLY: 0, WRONG: 1, PARTIAL: 2, CORRECT: 3 };
-          return order[a.r.status] - order[b.r.status];
-        }).map(({ r, cx, cy }) => (
+        {/* Dots */}
+        {sorted.map(({ r, cx, cy }) => (
           <circle
             key={r.id}
             cx={cx}
             cy={cy}
-            r={MARK_R}
+            r={DOT_R}
             fill={STATUS_COLOR[r.status]}
-            fillOpacity={r.status === "TOO_EARLY" ? 0.35 : 0.8}
+            fillOpacity={r.status === "TOO_EARLY" ? 0.3 : 0.85}
           >
             <title>{`${r.date.slice(0, 7)} — ${r.claim.slice(0, 120)}${r.claim.length > 120 ? "…" : ""} [${STATUS_LABEL[r.status]}]`}</title>
           </circle>
         ))}
       </svg>
+
+      {/* Legend below axis */}
+      <div className="flex items-center gap-4 mt-1">
+        {LEGEND.map(({ status, label }) => (
+          <div key={status} className="flex items-center gap-1.5">
+            <svg width="7" height="7" viewBox="0 0 7 7">
+              <circle cx="3.5" cy="3.5" r="3" fill={STATUS_COLOR[status]} fillOpacity={status === "TOO_EARLY" ? 0.4 : 0.85} />
+            </svg>
+            <span className="text-[10px] text-gray-400">{label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
 
 function domainAccuracyColor(pct: number | null): string {
   if (pct === null) return "text-gray-300";
@@ -162,13 +170,12 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
   const meta = getExpert(expert);
   if (!meta) notFound();
 
-  const rows = predictions.filter((p) => p.expert === meta.id);
-  const stats = statsFor(meta.id);
-
+  const rows    = predictions.filter((p) => p.expert === meta.id);
+  const stats   = statsFor(meta.id);
   const domains = stats.domains;
 
-  const headline = `${meta.name}: ${stats.accuracyPct}% accurate on ${stats.resolved} resolved semiconductor predictions`;
-  const shareUrl = `https://fabuless.ai/tracker/${meta.id}`;
+  const headline  = `${meta.name}: ${stats.accuracyPct}% accurate on ${stats.resolved} resolved semiconductor predictions`;
+  const shareUrl  = `https://fabuless.ai/tracker/${meta.id}`;
   const tweetHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(headline + " — via fabuless.ai")}&url=${encodeURIComponent(shareUrl)}`;
 
   const signatures = (SIGNATURE_CALLS[meta.id] ?? [])
@@ -181,42 +188,48 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
 
   return (
     <div>
-      {/* ── Header ── */}
+      {/* ── Hero header ── target ~72px ── */}
       <div className="border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-6 py-4">
           <Link href="/tracker" className="text-[11px] text-gray-400 hover:text-gray-600">
             ← Prediction Tracker
           </Link>
 
-          <div className="mt-2 flex items-center justify-between gap-6 flex-wrap">
+          <div className="mt-2 flex items-start justify-between gap-6 flex-wrap">
             {/* Identity */}
             <div>
               <div className="flex items-baseline gap-2">
-                <h1 className="font-sans text-[17px] font-bold tracking-tight text-[#111827] leading-none">{meta.name}</h1>
-                <span className="text-[12px] text-gray-400">{meta.subtitle}</span>
+                <h1 className="font-sans text-[24px] font-bold tracking-tight text-[#111827] leading-none">{meta.name}</h1>
+                <span className="text-[14px] text-gray-400">{meta.subtitle}</span>
               </div>
-              <div className="text-[11px] text-gray-400 mt-1 tabular-nums">
+              <div className="text-[12px] text-gray-400 mt-1 tabular-nums">
                 {stats.total} predictions · {stats.dateRange} · {stats.sourceCount} sources
               </div>
             </div>
 
-            {/* Accuracy + breakdown */}
-            <div className="flex items-baseline gap-4 flex-wrap">
-              <span className="font-mono text-[28px] font-bold leading-none tabular-nums" style={{ color: accColor }}>
+            {/* Accuracy + full stat row */}
+            <div className="flex flex-col items-end gap-1">
+              <span
+                className="font-mono text-[48px] font-bold leading-none tabular-nums"
+                style={{ color: accColor }}
+              >
                 {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
               </span>
-              <div className="flex items-center gap-2 text-[11px] tabular-nums">
-                <span className="text-gray-400">{stats.resolved} resolved</span>
-                <span className="text-gray-200">·</span>
-                <span className="text-emerald-600 font-semibold">{stats.correct}c</span>
-                <span className="text-gray-200">·</span>
-                <span className="text-amber-600 font-semibold">{stats.partial}p</span>
-                <span className="text-gray-200">·</span>
-                <span className="text-rose-500 font-semibold">{stats.wrong}w</span>
-                <span className="text-gray-200">·</span>
-                <span className="text-gray-400 font-semibold">{stats.tooEarly} open</span>
+              <div className="flex items-center text-[12px] tabular-nums divide-x divide-gray-200">
+                <span className="text-gray-500 pr-3">{stats.resolved} resolved</span>
+                <span className="text-emerald-600 font-medium px-3">{stats.correct} correct</span>
+                <span className="text-amber-600 font-medium px-3">{stats.partial} partial</span>
+                <span className="text-rose-500 font-medium px-3">{stats.wrong} wrong</span>
+                <span className="text-gray-400 font-medium px-3">{stats.tooEarly} open</span>
+                <a
+                  href={tweetHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[12px] text-gray-400 hover:text-gray-600 pl-3"
+                >
+                  Share
+                </a>
               </div>
-              <a href={tweetHref} target="_blank" rel="noopener noreferrer" className="text-[11px] text-gray-400 hover:text-gray-600">𝕏</a>
             </div>
           </div>
         </div>
@@ -226,27 +239,25 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
 
         {/* ── Timeline ── */}
         <section className="mb-6">
-          <div className="flex items-center gap-3 mb-1">
-            <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">The record, dot by dot</h2>
-            <div className="h-px flex-1 bg-gray-200" />
+          <div className="flex items-center gap-3 mb-3">
+            <h2 className="text-[11px] font-semibold text-gray-400 shrink-0">The record, dot by dot</h2>
+            <div className="h-px flex-1 bg-gray-100" />
           </div>
-          <p className="text-[11px] text-gray-400 mb-2">Every tracked prediction by date. Hover any dot for the claim.</p>
           <Timeline rows={rows} />
         </section>
 
-        {/* ── Domain breakdown ── */}
-        <section className="mb-10">
-          <div className="flex items-center gap-3 mb-1">
-            <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">Where they're sharp — and where they miss</h2>
-            <div className="h-px flex-1 bg-gray-200" />
+        {/* ── Domain breakdown ── 24px gap from timeline above ── */}
+        <section className="mb-10 mt-6">
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-[11px] font-semibold text-gray-400 shrink-0">Where they&rsquo;re sharp</h2>
+            <div className="h-px flex-1 bg-gray-100" />
           </div>
-          <p className="text-[11px] text-gray-400 mb-5">Accuracy on resolved predictions by domain. Partial calls count half.</p>
 
           <div className="grid sm:grid-cols-2 gap-x-12 gap-y-3">
             {domains.map((d) => {
               const noData = d.resolved === 0;
               return (
-                <div key={d.domain} className={noData ? "opacity-40" : ""}>
+                <div key={d.domain} className={noData ? "opacity-35" : ""}>
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-[12px] font-semibold text-gray-700">{d.label}</span>
                     <div className="flex items-baseline gap-2 text-[11px]">
@@ -262,7 +273,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
                       </span>
                     </div>
                   </div>
-                  <div className="bg-gray-100 overflow-hidden" style={{ height: "3px", width: "200px", borderRadius: "1px" }}>
+                  <div className="bg-gray-100 overflow-hidden" style={{ height: "3px", width: "180px", borderRadius: "1px" }}>
                     {d.accuracyPct !== null && (
                       <div
                         style={{
@@ -280,13 +291,12 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
           </div>
         </section>
 
-
         {/* ── Signature calls ── */}
         {signatures.length > 0 && (
           <section className="mb-12">
-            <div className="flex items-center gap-3 mb-5">
-              <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">Signature calls</h2>
-              <div className="h-px flex-1 bg-gray-200" />
+            <div className="flex items-center gap-3 mb-4">
+              <h2 className="text-[11px] font-semibold text-gray-400 shrink-0">Signature calls</h2>
+              <div className="h-px flex-1 bg-gray-100" />
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               {signatures.map(({ pred, why }) => (
@@ -305,7 +315,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
                     </span>
                   </div>
                   <blockquote className="font-serif text-[15px] text-[#1a1a1a] leading-relaxed flex-1">
-                    "{pred.claim}"
+                    &ldquo;{pred.claim}&rdquo;
                   </blockquote>
                   <p className="text-[12px] text-gray-500 leading-relaxed mt-3 pt-3 border-t border-gray-100">{why}</p>
                 </div>
@@ -317,8 +327,8 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
         {/* ── Full record ── */}
         <section>
           <div className="flex items-center gap-3 mb-5">
-            <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400">The full record</h2>
-            <div className="h-px flex-1 bg-gray-200" />
+            <h2 className="text-[11px] font-semibold text-gray-400 shrink-0">Full record</h2>
+            <div className="h-px flex-1 bg-gray-100" />
           </div>
           <PredictionTable rows={rows} hideExpertFilter />
         </section>

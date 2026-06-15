@@ -47,7 +47,7 @@ export function PortfolioTabs({
     { label: "Home",         href: `/portfolio${hParam}` },
     { label: "Earnings",     href: `/portfolio/earnings${hParam}` },
     { label: "Expert Calls", href: `/portfolio/expert-calls${hParam}` },
-    { label: "Analysts",     href: "/analysts" },
+    { label: "Analysts",     href: `/portfolio/analysts${hParam}` },
   ];
 
   return (

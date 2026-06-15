@@ -1,0 +1,69 @@
+name: Daily Newsletter
+
+on:
+  schedule:
+    - cron: "0 17 * * 1-5"   # 1pm ET Mon–Fri
+  workflow_dispatch: {}        # manual trigger any time
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/python/requirements.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      # ── 1. Generate today's draft ────────────────────────────────────────
+      - name: Run pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          cd scripts/python
+          python pipeline.py
+          # draft writes to CWD → scripts/python/draft_YYYY-MM-DD.txt
+          DRAFT=$(ls draft_*.txt | sort | tail -1)
+          echo "DRAFT_PATH=scripts/python/$DRAFT" >> $GITHUB_ENV
+
+      # ── 2. Build the issue (updates lib/issues.ts + archive page) ────────
+      - name: Publish issue
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/python/publish.py ${{ env.DRAFT_PATH }} --auto
+
+      # ── 3. Commit + push the updated site ────────────────────────────────
+      - name: Commit & push
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git add lib/issues.ts app/archive/
+          git diff --staged --quiet || git commit -m "chore: daily newsletter $(date +%Y-%m-%d) [skip ci]"
+          git push
+
+      # ── 4. Trigger Vercel ISR cache flush ────────────────────────────────
+      - name: Refresh homepage cache
+        run: curl -fsS -X GET "https://fabuless.ai/api/homepage/refresh" || true
+
+      # ── 5. Send to subscribers ───────────────────────────────────────────
+      - name: Send newsletter
+        env:
+          ANTHROPIC_API_KEY:              ${{ secrets.ANTHROPIC_API_KEY }}
+          RESEND_API_KEY:                 ${{ secrets.RESEND_API_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL:       ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY:  ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: npx tsx scripts/send-newsletter.ts --auto

@@ -7,8 +7,9 @@
 //   set -a && source .env.local && set +a && npx tsx scripts/send-newsletter.ts
 // ---------------------------------------------------------------------------
 
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
+import type { QuantumArticle } from "../lib/quantum/articles";
 try {
   const envPath = resolve(process.cwd(), ".env.local");
   const lines = readFileSync(envPath, "utf-8").split("\n");
@@ -172,6 +173,45 @@ function quotesBlock(quotes: Quote[]): string {
     </tr>`;
 }
 
+function loadQuantumArticles(n = 2): QuantumArticle[] {
+  const p = resolve(process.cwd(), "data/quantum-articles.json");
+  if (!existsSync(p)) return [];
+  try {
+    const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
+    return all
+      .filter((a) => a.category !== "consciousness")
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+      .slice(0, n);
+  } catch { return []; }
+}
+
+function quantumCornerBlock(articles: QuantumArticle[]): string {
+  if (!articles.length) return "";
+  const rows = articles.map((a) => `
+    <tr>
+      <td style="padding:10px 0 8px;">
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#6366f1;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 4px 0;">${esc(a.source)}</p>
+        <a href="${esc(a.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:#111827;text-decoration:none;line-height:1.35;display:block;margin-bottom:5px;">${esc(a.title)}</a>
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;color:#4b5563;margin:0;line-height:1.55;">${esc(a.summary.split(". ").slice(0, 2).join(". ") + ".")}</p>
+      </td>
+    </tr>
+    <tr><td style="border-top:1px solid #e0e7ff;padding:0;"></td></tr>`).join("");
+
+  return `
+    <tr>
+      <td style="padding:22px 32px 6px;">
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#6366f1;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">✦ Quantum Corner</p>
+        <hr style="border:none;border-top:2px solid #6366f1;margin:0;">
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:0 32px 16px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">${rows}</table>
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#9ca3af;margin:8px 0 0;"><a href="https://fabuless.ai/quantum" style="color:#6366f1;text-decoration:none;">More quantum coverage →</a></p>
+      </td>
+    </tr>`;
+}
+
 function buildEmailHtml(issue: Issue): string {
   const CAT_ORDER = ["Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other"];
 
@@ -190,6 +230,7 @@ function buildEmailHtml(issue: Issue): string {
 
   const podcastsHtml = issue.podcasts.map(podcastRow).join("");
   const quotesHtml = quotesBlock(issue.quotes ?? []);
+  const quantumHtml = quantumCornerBlock(loadQuantumArticles(2));
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
   return `<!DOCTYPE html>
@@ -254,6 +295,9 @@ function buildEmailHtml(issue: Issue): string {
         <!-- X Quotes -->
         ${quotesHtml}
 
+        <!-- Quantum Corner -->
+        ${quantumHtml}
+
         <!-- CTA -->
         <tr>
           <td align="center" style="padding:24px 32px 28px;">
@@ -295,6 +339,7 @@ async function confirm(question: string): Promise<boolean> {
 }
 
 async function main() {
+  const autoMode = process.argv.includes("--auto");
   const issue = issues[0];
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
@@ -305,6 +350,7 @@ async function main() {
   console.log(`Stories : ${totalStories}`);
   console.log(`Pods    : ${issue.podcasts.length}`);
   console.log(`Quotes  : ${(issue.quotes ?? []).length}`);
+  if (autoMode) console.log("Mode    : AUTO (no prompt)");
   console.log(bar);
 
   issue.sections.forEach((s) => {
@@ -322,8 +368,12 @@ async function main() {
   console.log(`From       : newsletter@fabuless.ai`);
   console.log(bar);
 
-  const ok = await confirm("\nSend? (y/n): ");
-  if (!ok) { console.log("Cancelled."); process.exit(0); }
+  if (!autoMode) {
+    const ok = await confirm("\nSend? (y/n): ");
+    if (!ok) { console.log("Cancelled."); process.exit(0); }
+  } else {
+    console.log("\nAuto mode — sending immediately...");
+  }
 
   const resend = new Resend(process.env.RESEND_API_KEY!);
   const html = buildEmailHtml(issue);

@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
   { label: "Home",         href: "/portfolio" },
@@ -42,6 +44,7 @@ export function PortfolioTabs({
   tickers?: string[];
   pastSummaries?: unknown;
 }) {
+  const pathname = usePathname();
   const upcomingCount = earnings.length;
 
   return (
@@ -54,20 +57,24 @@ export function PortfolioTabs({
         </p>
       </div>
 
-      {/* Nav links — go to dedicated pages */}
       <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1 shrink-0 mt-1">
-        {NAV_LINKS.map(({ label, href }) => (
-          <Link
-            key={href}
-            href={href}
-            className="px-3 py-1.5 text-[11px] font-semibold text-gray-500 hover:text-gray-800 hover:bg-white rounded-md transition-colors flex items-center gap-1"
-          >
-            {label}
-            {label === "Earnings" && upcomingCount > 0 && (
-              <span className="text-[9px] font-bold tabular-nums text-[#B45309]">{upcomingCount}</span>
-            )}
-          </Link>
-        ))}
+        {NAV_LINKS.map(({ label, href }) => {
+          const active = pathname === href || (href !== "/portfolio" && pathname.startsWith(href));
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`px-3 py-1.5 text-[11px] font-semibold rounded-md transition-colors flex items-center gap-1 ${
+                active ? "bg-[#111827] text-white" : "text-gray-500 hover:text-gray-800 hover:bg-white"
+              }`}
+            >
+              {label}
+              {label === "Earnings" && upcomingCount > 0 && (
+                <span className={`text-[9px] font-bold tabular-nums ${active ? "text-amber-300" : "text-[#B45309]"}`}>{upcomingCount}</span>
+              )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

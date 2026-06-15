@@ -98,7 +98,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 >
                   {article.title}
                 </a>
-                <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug">{article.summary}</p>
+                <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug line-clamp-2">{article.summary}</p>
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-[10px] text-gray-400">{article.source}</span>
                   <Link href={`/quantum/${article.id}`} className="text-[10px] text-indigo-500 hover:text-indigo-700 font-semibold transition-colors">

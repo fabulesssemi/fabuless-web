@@ -123,6 +123,9 @@ export const QUANTUM_KEYWORDS = [
   "topological qubit", "trapped ion", "superconducting qubit", "photonic qubit",
   "IonQ", "Rigetti", "D-Wave", "IBM Quantum", "Google Willow", "Azure Quantum",
   "AWS Braket", "CUDA-Q", "Majorana", "Ocelot", "error rate", "logical qubit",
+  // Investing / market
+  "quantum stock", "quantum ETF", "quantum investment", "quantum funding", "quantum IPO",
+  "quantum startup", "quantum valuation", "quantum market", "IONQ", "RGTI", "QBTS", "QUBT",
   // Consciousness / philosophy / worldview
   "quantum consciousness", "quantum mind", "quantum biology", "quantum brain",
   "observer effect", "wave function", "wave function collapse", "many worlds",

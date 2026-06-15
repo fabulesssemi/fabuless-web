@@ -81,22 +81,27 @@ async function analyzeArticle(
   description: string,
   source: string,
 ): Promise<AnalysisResult> {
-  const prompt = `You are an editor at Fabuless Quantum. Your audience is curious, intelligent adults — NOT just engineers or investors. You cover two kinds of content equally:
+  const prompt = `You are an editor at Fabuless Quantum. Your audience is everyday people just getting into quantum — curious, smart, but NOT researchers or engineers. Think: someone who reads about tech stocks and wants to understand what's happening in quantum before it goes mainstream.
 
-1. Quantum TECH: hardware breakthroughs, algorithms, company news, policy, funding.
-2. Quantum MIND: consciousness, observer effect, quantum biology, philosophy of reality, worldview-changing ideas that overlap with quantum physics.
+The site covers three lanes equally:
+1. INVESTING: quantum stocks, hot companies, funding rounds, who's winning, market moves. (IonQ, Rigetti, D-Wave, IBM, Google, Microsoft, Amazon)
+2. BIG PICTURE: breakthroughs explained simply, policy shifts, what countries are betting on quantum and why it matters.
+3. MIND-BLOWING: quantum consciousness, observer effect, quantum biology, how quantum changes our understanding of reality — written for a general reader, not a physicist.
+
+AVOID: dense academic jargon, papers written for researchers, anything that reads like a press release for engineers.
+PREFER: stories with a "whoa" factor, investment angles, "why should I care" clarity.
 
 Article from ${source}:
 Title: ${title}
 Excerpt: ${description}
 
-Write ONE short sentence (max 20 words) — the sharpest possible investment or curiosity angle. No filler, no "this article discusses". Just the signal.
+Write ONE punchy sentence (max 18 words) — the investment angle or "why this matters to a normal person." No jargon. No filler.
 
 Classify into exactly one category:
   hardware    — qubit advances, new processors, quantum computers
   software    — algorithms, error correction, SDKs, simulators
-  market      — stocks, funding rounds, company earnings, deals
-  research    — academic breakthroughs, papers, experiments
+  market      — stocks, funding rounds, company earnings, deals, investing
+  research    — breakthroughs explained simply, experiments with real-world implications
   policy      — government programs, export controls, standards
   consciousness — quantum mind, observer effect, reality/physics philosophy, quantum biology, Dean Radin, IONS, worldview topics
 
@@ -129,13 +134,14 @@ async function pickTopStories(articles: QuantumArticle[]): Promise<Set<string>> 
     .map((a, i) => `${i + 1}. [${a.category.toUpperCase()}] "${a.title}" — ${a.source}\n   ${a.summary}`)
     .join("\n\n");
 
-  const prompt = `You are the editor-in-chief at Fabuless Quantum. Below are today's new articles — a mix of quantum tech and consciousness/philosophy stories.
+  const prompt = `You are the editor-in-chief at Fabuless Quantum. Your readers are everyday people just getting into quantum — interested in investing, big-picture trends, and mind-blowing ideas. NOT researchers.
 
-Pick the 4 most compelling for a curious general reader. Prioritize:
-- Genuine breakthroughs or unexpected findings
-- Stories the average person would share with a friend ("whoa, did you see this?")
+Pick the 4 most compelling articles from the list below. Prioritize:
+- Stock/investing angles — who's winning, funding, market moves
+- Stories a non-technical person would share ("did you see this quantum stock exploded?")
+- Big-picture "why it matters" stories over technical deep dives
 - Source diversity — don't pick 4 from the same outlet
-- Include at least 1 consciousness/worldview story if one is strong
+- Include a consciousness/worldview story if one is genuinely interesting to a general reader
 
 Articles:
 ${list}

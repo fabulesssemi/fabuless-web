@@ -53,10 +53,6 @@ function TickerPill({
           : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
       }`}
     >
-      <span
-        className="w-2 h-2 rounded-full shrink-0"
-        style={{ backgroundColor: active ? "white" : color, opacity: active ? 0.8 : 1 }}
-      />
       {ticker}
       <span className={`text-[10px] font-semibold tabular-nums ${
         active ? "text-gray-300" : "text-gray-400 group-hover:text-gray-500"

@@ -59,16 +59,12 @@ function TickerPill({
   return (
     <button
       onClick={onClick}
-      className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
+      className={`group px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
         active
           ? "bg-[#111827] text-white shadow-sm"
           : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
       }`}
     >
-      <span
-        className="w-2 h-2 rounded-full shrink-0"
-        style={{ backgroundColor: active ? "white" : color, opacity: active ? 0.8 : 1 }}
-      />
       {ticker}
     </button>
   );

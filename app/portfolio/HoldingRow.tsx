@@ -66,7 +66,7 @@ export function HoldingRow({
 
   return (
     <div style={{ borderTop: isFirst ? undefined : "1px solid #F1F5F9" }}>
-      <div className={`relative grid ${gridCols} items-center gap-3 px-4 py-3.5 hover:bg-slate-50 transition-colors`}>
+      <div className={`relative grid ${gridCols} items-center gap-3 px-4 py-2 hover:bg-slate-50 transition-colors`}>
         {r.covered && r.slug && (
           <Link href={`/companies/${r.slug}`} className="absolute inset-0 z-0" aria-label={`${r.ticker} company page`} />
         )}

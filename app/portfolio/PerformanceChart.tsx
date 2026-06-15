@@ -200,12 +200,12 @@ export function PortfolioPerformance({
         </p>
       )}
 
-      {loading && <div className="h-[240px] flex items-center justify-center text-[12px] text-gray-400">Loading chart…</div>}
-      {error && <div className="h-[240px] flex items-center justify-center text-[12px] text-gray-400">Chart unavailable</div>}
+      {loading && <div className="h-[320px] flex items-center justify-center text-[12px] text-gray-400">Loading chart…</div>}
+      {error && <div className="h-[320px] flex items-center justify-center text-[12px] text-gray-400">Chart unavailable</div>}
 
       {!loading && !error && data.length > 0 && (
         <>
-          <ResponsiveContainer width="100%" height={240}>
+          <ResponsiveContainer width="100%" height={320}>
             <LineChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: 0 }}>
               <XAxis dataKey="date" tickFormatter={fmtAxis} tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} interval="preserveStartEnd" />
               <YAxis tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}%`} tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={52} />

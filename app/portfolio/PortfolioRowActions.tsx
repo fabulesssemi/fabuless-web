@@ -116,7 +116,7 @@ export function AddTickerRow({ allHoldings }: { allHoldings: Holding[] }) {
         onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
         onKeyDown={(e) => e.key === "Enter" && startAdd()}
         placeholder="Add a company — type a ticker (NVDA, AMD…)"
-        className="flex-1 text-[13px] font-semibold text-[#111827] placeholder:text-[#111827] placeholder:font-semibold outline-none bg-transparent"
+        className="flex-1 text-[13px] font-semibold text-[#111827] placeholder:text-gray-400 placeholder:font-semibold outline-none bg-transparent"
       />
       {tickerInput && (
         <button

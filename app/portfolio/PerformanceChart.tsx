@@ -242,10 +242,21 @@ export function PortfolioPerformance({
                 </div>
               );
             })}
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-0.5 rounded-sm" style={{ backgroundColor: SPX_COLOR }} />
-              <span className="text-[11px] font-semibold text-gray-400">S&amp;P 500</span>
-            </div>
+            {(() => {
+              const last = [...data].reverse().find((row) => "S&P 500" in row);
+              const pct = last ? (last["S&P 500"] as number) : null;
+              return (
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-0.5 rounded-sm" style={{ backgroundColor: SPX_COLOR }} />
+                  <span className="text-[11px] font-semibold text-gray-400">S&amp;P 500</span>
+                  {pct !== null && (
+                    <span className={`text-[11px] font-semibold tabular-nums ${pct >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
+                      {pct >= 0 ? "+" : ""}{pct.toFixed(1)}%
+                    </span>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         </>
       )}

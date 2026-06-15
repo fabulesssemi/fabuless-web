@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const LINKS = [
   { href: "/companies",        label: "Companies" },
   { href: "/supply-chain",     label: "Supply Chain" },
-  { href: "/tracker",          label: "Tracker" },
   { href: "/analyst-consensus",label: "Analysts" },
+  { href: "/tracker",          label: "Tracker" },
   { href: "/insider-trading",  label: "Insider Trades" },
   { href: "/earnings",         label: "Earnings" },
   { href: "/about",            label: "About" },

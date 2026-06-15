@@ -169,7 +169,7 @@ export default async function PortfolioPage({
       {/* Main two-column: holdings left, chart right */}
       <div className="flex gap-6 mb-8 items-start">
         {/* LEFT — condensed holdings table */}
-        <div className="w-[560px] shrink-0">
+        <div className="w-[420px] shrink-0">
           {/* Edit Holdings — prominent, above the list */}
           <Suspense fallback={null}>
             <EditHoldings holdings={holdings} />

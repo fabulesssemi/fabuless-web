@@ -70,18 +70,12 @@ export default function TrackerPage() {
             </Link>
           </div>
 
-          {/* Summary pills */}
-          <div className="mt-5 flex items-center gap-3 flex-wrap">
-            {[
-              { label: "Experts", value: rows.length },
-              { label: "Predictions", value: totalPredictions },
-              { label: "Resolved", value: totalResolved },
-            ].map(({ label, value }) => (
-              <div key={label} className="flex items-center gap-2 bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 shadow-sm">
-                <span className="text-[11px] text-slate-400 uppercase tracking-wide font-medium">{label}</span>
-                <span className="text-[13px] font-bold text-[#0F172A] tabular-nums">{value}</span>
-              </div>
-            ))}
+          <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-400">
+            <span><strong className="text-slate-600 tabular-nums">{rows.length}</strong> experts</span>
+            <span>·</span>
+            <span><strong className="text-slate-600 tabular-nums">{totalPredictions}</strong> predictions</span>
+            <span>·</span>
+            <span><strong className="text-slate-600 tabular-nums">{totalResolved}</strong> resolved</span>
           </div>
         </div>
 

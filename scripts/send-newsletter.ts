@@ -52,22 +52,14 @@ function esc(str: string): string {
     .replace(/"/g, "&quot;");
 }
 
-// Category accent colors — matches the website
-const CAT_COLORS: Record<string, string> = {
-  "Compute":               "#7C3AED",
-  "Memory & Networking":   "#0284C7",
-  "Capital Flows":         "#059669",
-  "Geopolitics & Policy":  "#D97706",
-  "Other":                 "#6B7280",
-};
+const TEAL = "#0E7490";
 
 function categoryHeader(label: string): string {
-  const color = CAT_COLORS[label] ?? "#6B7280";
   return `
     <tr>
       <td style="padding:26px 32px 0px;">
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:${color};letter-spacing:0.18em;text-transform:uppercase;margin:0 0 8px 0;">${esc(label)}</p>
-        <hr style="border:none;border-top:2px solid ${color};margin:0;">
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:${TEAL};letter-spacing:0.18em;text-transform:uppercase;margin:0 0 8px 0;">${esc(label)}</p>
+        <hr style="border:none;border-top:1px solid ${TEAL};margin:0;">
       </td>
     </tr>`;
 }
@@ -105,9 +97,8 @@ function storyRow(story: Story, showImage: boolean, featured: boolean = false): 
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td style="vertical-align:top;">
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 5px 0;">${esc(story.source)}</p>
-              <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:#111827;text-decoration:none;line-height:1.35;display:block;margin-bottom:7px;">${esc(story.headline)}</a>
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12.5px;color:#B45309;font-weight:600;margin:0;line-height:1.5;">${esc(story.oneliner)}</p>
+              <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:${TEAL};text-decoration:none;line-height:1.35;display:block;margin-bottom:6px;">${esc(story.headline)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(story.source)})</span></a>
+              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12.5px;color:#374151;font-style:italic;font-weight:400;margin:0;line-height:1.5;">${esc(story.oneliner)}</p>
               ${xQuotesHtml}
             </td>
             ${imgCell}

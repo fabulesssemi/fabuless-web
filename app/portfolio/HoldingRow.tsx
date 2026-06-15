@@ -47,7 +47,7 @@ function money(n: number): string {
 }
 
 export function HoldingRow({
-  r, color, gridCols, hasReturnData, allHoldings, isFirst,
+  r, color, gridCols, hasReturnData, allHoldings, isFirst, compact,
 }: {
   r: RowData;
   color: string;
@@ -55,6 +55,7 @@ export function HoldingRow({
   hasReturnData: boolean;
   allHoldings: Holding[];
   isFirst: boolean;
+  compact?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -72,13 +73,15 @@ export function HoldingRow({
 
         {/* Expand caret + color dot + holding */}
         <div className="relative z-10 min-w-0 flex items-center gap-2">
-          <button
-            onClick={() => setExpanded((v) => !v)}
-            title={expanded ? "Hide chart" : "Show chart"}
-            className="shrink-0 w-4 h-4 flex items-center justify-center text-gray-300 hover:text-gray-600 transition-colors"
-          >
-            <span className={`text-[9px] transition-transform ${expanded ? "rotate-90" : ""}`}>▶</span>
-          </button>
+          {!compact && (
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              title={expanded ? "Hide chart" : "Show chart"}
+              className="shrink-0 w-4 h-4 flex items-center justify-center text-gray-300 hover:text-gray-600 transition-colors"
+            >
+              <span className={`text-[9px] transition-transform ${expanded ? "rotate-90" : ""}`}>▶</span>
+            </button>
+          )}
           <span className="shrink-0 w-2 h-2 rounded-sm" style={{ backgroundColor: color }} />
           <span className="font-sans text-[14px] font-bold text-gray-900 tabular-nums pointer-events-none">{r.ticker}</span>
           <span className="text-[12px] text-gray-400 truncate pointer-events-none">{r.name}</span>
@@ -95,32 +98,32 @@ export function HoldingRow({
           {r.changePercent != null ? `${up ? "+" : ""}${r.changePercent.toFixed(1)}%` : "—"}
         </div>
 
-        {/* Consensus */}
-        <div className="relative z-10 pointer-events-none flex justify-end">
-          <ConsensusBar dist={r.dist} />
-        </div>
-
-        {/* Open calls */}
-        <div className="relative z-10 text-right">
-          {r.openCount > 0 ? (
-            <Link href={`/tracker?company=${r.ticker}`} className="text-[13px] font-bold text-[#B45309] tabular-nums hover:underline">
-              {r.openCount}
-            </Link>
-          ) : (
-            <span className="text-[12px] text-gray-300 pointer-events-none">—</span>
-          )}
-        </div>
-
-        {/* Earnings */}
-        <div className="relative z-10 pointer-events-none text-right">
-          {r.earningsLabel ? (
-            <span className={`text-[12px] font-semibold tabular-nums ${r.earningsSoon ? "text-[#B45309]" : "text-gray-500"}`}>
-              {r.earningsLabel.replace(/^[A-Za-z]{3,}\s+/, "")}
-            </span>
-          ) : (
-            <span className="text-[12px] text-gray-300">—</span>
-          )}
-        </div>
+        {/* Consensus / Open calls / Earnings — hidden in compact mode */}
+        {!compact && (
+          <>
+            <div className="relative z-10 pointer-events-none flex justify-end">
+              <ConsensusBar dist={r.dist} />
+            </div>
+            <div className="relative z-10 text-right">
+              {r.openCount > 0 ? (
+                <Link href={`/tracker?company=${r.ticker}`} className="text-[13px] font-bold text-[#B45309] tabular-nums hover:underline">
+                  {r.openCount}
+                </Link>
+              ) : (
+                <span className="text-[12px] text-gray-300 pointer-events-none">—</span>
+              )}
+            </div>
+            <div className="relative z-10 pointer-events-none text-right">
+              {r.earningsLabel ? (
+                <span className={`text-[12px] font-semibold tabular-nums ${r.earningsSoon ? "text-[#B45309]" : "text-gray-500"}`}>
+                  {r.earningsLabel.replace(/^[A-Za-z]{3,}\s+/, "")}
+                </span>
+              ) : (
+                <span className="text-[12px] text-gray-300">—</span>
+              )}
+            </div>
+          </>
+        )}
 
         {/* Your return + Value */}
         {hasReturnData && (
@@ -144,7 +147,7 @@ export function HoldingRow({
       </div>
 
       {/* Expanded per-holding chart */}
-      {expanded && (
+      {!compact && expanded && (
         <div className="px-6 pb-5 pt-1 bg-slate-50/40 border-t border-[#F1F5F9]">
           <MiniHoldingChart ticker={r.ticker} purchasePrice={r.purchasePrice} purchaseDate={r.purchaseDate} color={color} />
         </div>

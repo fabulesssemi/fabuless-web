@@ -140,15 +140,6 @@ export default async function PortfolioPage({
 
   const hasReturnData = holdings.some((h) => h.purchasePrice && h.purchaseDate);
 
-  // Grid cols: holding · price · day · consensus · open calls · earnings · [return] · [value] · remove
-  const gridCols = hasReturnData
-    ? "grid-cols-[1fr_76px_56px_80px_72px_92px_92px_72px_20px]"
-    : "grid-cols-[1fr_88px_64px_96px_88px_104px_20px]";
-
-  const headers = hasReturnData
-    ? ["Holding", "Price", "Day", "Consensus", "Open calls", "Earnings", "Your return", "Value", ""]
-    : ["Holding", "Price", "Day", "Consensus", "Open calls", "Earnings", ""];
-
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
       {/* Header */}
@@ -171,6 +162,39 @@ export default async function PortfolioPage({
         </div>
       </header>
 
+      {/* Main two-column: holdings left, chart right */}
+      <div className="flex gap-6 mb-8 items-start">
+        {/* LEFT — condensed holdings table */}
+        <div className="w-[340px] shrink-0 rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+          {/* Column headers — condensed: no consensus */}
+          <div className="grid grid-cols-[1fr_72px_56px_20px] items-center gap-2 px-4 py-2.5 border-b border-gray-100 bg-gray-50/60">
+            {["Holding", "Price", "Day", ""].map((h, i) => (
+              <span key={i} className={`text-[9px] font-bold uppercase tracking-widest text-gray-400 ${i === 0 ? "" : "text-right"}`}>{h}</span>
+            ))}
+          </div>
+          {rows.map((r, i) => (
+            <HoldingRow
+              key={r.ticker}
+              r={r}
+              color={colorMap[r.ticker]}
+              gridCols="grid-cols-[1fr_72px_56px_20px]"
+              hasReturnData={false}
+              allHoldings={holdings}
+              isFirst={i === 0}
+              compact
+            />
+          ))}
+          <AddTickerRow allHoldings={holdings} />
+        </div>
+
+        {/* RIGHT — performance chart */}
+        <div className="flex-1 min-w-0">
+          <Suspense fallback={null}>
+            <PortfolioPerformance holdings={holdings} livePrices={livePrices} />
+          </Suspense>
+        </div>
+      </div>
+
       {/* Tabs — Earnings · Expert Calls · Analysts */}
       <PortfolioTabs
         earnings={earningsRows}
@@ -179,37 +203,6 @@ export default async function PortfolioPage({
         analystRows={analystRows}
         tickers={tickers}
       />
-
-      {/* Performance — summary strip + cost-basis anchored chart */}
-      <Suspense fallback={null}>
-        <PortfolioPerformance holdings={holdings} livePrices={livePrices} />
-      </Suspense>
-
-      {/* Portfolio table */}
-      <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden mb-8">
-        {/* Column headers */}
-        <div className={`grid ${gridCols} items-center gap-3 px-4 py-2.5 border-b border-gray-100 bg-gray-50/60`}>
-          {headers.map((h, i) => (
-            <span key={i} className={`text-[9px] font-bold uppercase tracking-widest text-gray-400 ${i === 0 ? "" : "text-right"}`}>
-              {h}
-            </span>
-          ))}
-        </div>
-
-        {rows.map((r, i) => (
-          <HoldingRow
-            key={r.ticker}
-            r={r}
-            color={colorMap[r.ticker]}
-            gridCols={gridCols}
-            hasReturnData={hasReturnData}
-            allHoldings={holdings}
-            isFirst={i === 0}
-          />
-        ))}
-
-        <AddTickerRow allHoldings={holdings} />
-      </div>
 
 
       <p className="mt-10 pt-5 border-t border-gray-100 font-serif text-[11px] text-[#4a4a4a] leading-relaxed max-w-2xl">

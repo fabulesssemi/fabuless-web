@@ -181,7 +181,8 @@ function loadQuantumArticles(): QuantumArticle[] {
     const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
     return all
       .filter((a) => a.publishedAt >= cutoff)
-      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+      .slice(0, 6);
   } catch { return []; }
 }
 

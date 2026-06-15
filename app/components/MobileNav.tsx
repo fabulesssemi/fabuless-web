@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
+  { href: "/portfolio",        label: "My Portfolio" },
   { href: "/companies",        label: "Companies" },
   { href: "/supply-chain",     label: "Supply Chain" },
   { href: "/analyst-consensus",label: "Analysts" },
   { href: "/tracker",          label: "Tracker" },
-  { href: "/portfolio",        label: "Portfolio" },
   { href: "/insider-trading",  label: "Insider Trades" },
   { href: "/earnings",         label: "Earnings" },
   { href: "/about",            label: "About" },

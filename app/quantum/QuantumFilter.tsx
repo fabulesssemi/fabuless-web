@@ -111,34 +111,6 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
         </div>
       )}
 
-      {/* ── Category filter pills ── */}
-      <div className="flex flex-wrap gap-2 mb-8">
-        <button
-          onClick={() => setActive(null)}
-          className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-colors border ${
-            active === null ? "bg-[#111827] text-white border-[#111827]" : "border-gray-200 text-gray-500 hover:border-gray-400"
-          }`}
-        >
-          All {nonTop.length}
-        </button>
-        {CATEGORIES.filter((c) => nonTop.some((a) => a.category === c)).map((cat) => {
-          const count = nonTop.filter((a) => a.category === cat).length;
-          const isActive = active === cat;
-          return (
-            <button
-              key={cat}
-              onClick={() => setActive(isActive ? null : cat)}
-              className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-colors border ${
-                isActive
-                  ? `${CATEGORY_META[cat].activeColor} border-transparent`
-                  : "border-gray-200 text-gray-500 hover:border-gray-400"
-              }`}
-            >
-              {CATEGORY_META[cat].label} {count}
-            </button>
-          );
-        })}
-      </div>
 
       {/* ── Sectioned by category (no filter active) ── */}
       {!active && filtered.length > 0 && (

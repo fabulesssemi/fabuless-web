@@ -41,7 +41,7 @@ export default function RootLayout({
           <div className="h-[3px] bg-[#B45309]" />
           <div className="bg-[#111827]">
             <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-10">
                 <Link
                   href="/"
                   className="font-sans text-[1.6rem] font-extrabold text-white tracking-tight"

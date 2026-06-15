@@ -138,7 +138,6 @@ function loadQuantumArticles(n = 2): QuantumArticle[] {
   if (!existsSync(p)) return [];
   const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
   return all
-    .filter((a) => a.category !== "consciousness")
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, n);
 }

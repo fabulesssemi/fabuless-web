@@ -45,14 +45,8 @@ function StoryCard({ article }: { article: QuantumArticle }) {
         <p className="font-serif text-[12px] text-[#4a4a4a] mt-1.5 leading-snug line-clamp-2">
           {article.summary}
         </p>
-        <div className="mt-auto pt-2.5 flex items-center justify-between">
+        <div className="mt-auto pt-2.5">
           <span className="text-[10px] text-gray-400">{article.source}</span>
-          <Link
-            href={`/quantum/${article.id}`}
-            className="text-[10px] text-indigo-500 hover:text-indigo-700 font-semibold transition-colors"
-          >
-            Summary →
-          </Link>
         </div>
       </div>
     </div>
@@ -108,11 +102,8 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   {article.title}
                 </a>
                 <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug line-clamp-1">{article.summary}</p>
-                <div className="flex items-center justify-between mt-1">
+                <div className="mt-1">
                   <span className="text-[10px] text-gray-400">{article.source}</span>
-                  <Link href={`/quantum/${article.id}`} className="text-[10px] text-indigo-500 hover:text-indigo-700 font-semibold transition-colors">
-                    Summary →
-                  </Link>
                 </div>
               </div>
             ))}

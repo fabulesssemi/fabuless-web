@@ -163,19 +163,12 @@ function quotesBlock(quotes: Quote[]): string {
     </tr>`;
 }
 
-function todayMidnightET(): string {
-  const etOffset = 4 * 60 * 60 * 1000;
-  const etNow = new Date(Date.now() - etOffset);
-  const midnight = new Date(Date.UTC(etNow.getUTCFullYear(), etNow.getUTCMonth(), etNow.getUTCDate()));
-  return new Date(midnight.getTime() + etOffset).toISOString();
-}
-
 function loadQuantumArticles(): QuantumArticle[] {
   const p = resolve(process.cwd(), "data/quantum-articles.json");
   if (!existsSync(p)) return [];
   try {
     const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
-    const cutoff = todayMidnightET();
+    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
     return all
       .filter((a) => a.publishedAt >= cutoff)
       .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))

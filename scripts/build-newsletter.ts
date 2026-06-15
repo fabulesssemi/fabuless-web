@@ -74,19 +74,9 @@ function formatDate(d = new Date()): string {
   return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
-// Midnight ET of the current day
-function todayMidnightET(): string {
-  const now = new Date();
-  // ET is UTC-5 (EST) or UTC-4 (EDT); use UTC-4 as conservative offset
-  const etOffset = 4 * 60 * 60 * 1000;
-  const etNow = new Date(now.getTime() - etOffset);
-  const midnight = new Date(Date.UTC(etNow.getUTCFullYear(), etNow.getUTCMonth(), etNow.getUTCDate()));
-  return new Date(midnight.getTime() + etOffset).toISOString();
-}
-
 // ── Step 1: fetch semi articles from Supabase ─────────────────────────────────
 async function fetchSemiArticles(): Promise<RssRow[]> {
-  const cutoff = todayMidnightET(); // only today's articles
+  const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
   const { data, error } = await supabase
     .from("rss_articles")
     .select("url, title, description, source, pub_date")
@@ -147,7 +137,7 @@ function loadQuantumArticles(): QuantumArticle[] {
   const p = resolve(process.cwd(), "data/quantum-articles.json");
   if (!existsSync(p)) return [];
   const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
-  const cutoff = todayMidnightET();
+  const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
   return all
     .filter((a) => a.publishedAt >= cutoff)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))

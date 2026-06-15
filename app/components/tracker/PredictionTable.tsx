@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { ExpertId, Prediction, PredictionStatus } from "@/lib/tracker/predictions";
 
 const STATUS_META: Record<PredictionStatus, { label: string; bg: string; text: string; dot: string }> = {
@@ -51,9 +52,11 @@ function HorizonBadge({ horizon }: { horizon: string }) {
 }
 
 export function PredictionTable({ rows, hideExpertFilter = false }: { rows: Prediction[]; hideExpertFilter?: boolean }) {
+  const searchParams = useSearchParams();
+  const initialCompany = searchParams.get("company")?.toUpperCase() ?? "all";
   const [expert, setExpert]   = useState<ExpertFilter>("all");
   const [status, setStatus]   = useState<StatusFilter>("all");
-  const [company, setCompany] = useState<string>("all");
+  const [company, setCompany] = useState<string>(initialCompany);
   const [sortKey, setSortKey] = useState<SortKey>("status");
   const [asc, setAsc]         = useState(true);
   const [expanded, setExpanded] = useState<string | null>(null);

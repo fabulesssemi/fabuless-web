@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { predictions } from "@/lib/tracker/predictions";
 import { statsFor } from "@/lib/tracker/stats";
@@ -160,7 +161,9 @@ export default function TrackerPage() {
 
         {/* Prediction feed */}
         <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-sm p-6">
-          <PredictionTable rows={predictions} />
+          <Suspense fallback={null}>
+            <PredictionTable rows={predictions} />
+          </Suspense>
         </div>
 
         {/* Footer note */}

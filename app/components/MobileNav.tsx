@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/supply-chain",     label: "Supply Chain" },
   { href: "/analyst-consensus",label: "Analysts" },
   { href: "/tracker",          label: "Tracker" },
+  { href: "/portfolio",        label: "Portfolio" },
   { href: "/insider-trading",  label: "Insider Trades" },
   { href: "/earnings",         label: "Earnings" },
   { href: "/about",            label: "About" },

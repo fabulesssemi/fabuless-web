@@ -81,6 +81,13 @@ export function PortfolioGate() {
 
       {/* Pending holdings — inline detail form */}
       {pending.length > 0 && (
+        <div className="mb-2">
+          <p className="text-[12px] font-semibold text-gray-600 mb-2">
+            Add purchase details <span className="font-normal text-gray-400">(optional — enables return tracking vs. S&P 500)</span>
+          </p>
+        </div>
+      )}
+      {pending.length > 0 && (
         <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden mb-5">
           {pending.map((p, i) => (
             <div

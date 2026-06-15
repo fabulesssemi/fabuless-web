@@ -190,6 +190,20 @@ export default async function PortfolioPage({
         </div>
       </header>
 
+      {/* Tabs — Earnings · Expert Calls · Analysts */}
+      <PortfolioTabs
+        earnings={earningsRows}
+        calls={recentCalls}
+        experts={expertsMap}
+        analystRows={analystRows}
+        tickers={tickers}
+      />
+
+      {/* Performance chart — always shown, falls back to 90-day window */}
+      <Suspense fallback={null}>
+        <PerformanceChart holdings={holdings} />
+      </Suspense>
+
       {/* Portfolio table */}
       <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden mb-8">
         {/* Column headers */}
@@ -284,21 +298,6 @@ export default async function PortfolioPage({
         <AddTickerRow allHoldings={holdings} />
       </div>
 
-      {/* Performance chart — only when any holding has purchase price + date */}
-      {hasReturnData && (
-        <Suspense fallback={null}>
-          <PerformanceChart holdings={holdings} />
-        </Suspense>
-      )}
-
-      {/* Tabs */}
-      <PortfolioTabs
-        earnings={earningsRows}
-        calls={recentCalls}
-        experts={expertsMap}
-        analystRows={analystRows}
-        tickers={tickers}
-      />
 
       <p className="mt-10 pt-5 border-t border-gray-100 font-serif text-[11px] text-[#4a4a4a] leading-relaxed max-w-2xl">
         Prices and consensus via Yahoo Finance, refreshed every 5 minutes. Performance calculations use closing prices and do not account for dividends, splits, or fees. Independent analysis — not investment advice.

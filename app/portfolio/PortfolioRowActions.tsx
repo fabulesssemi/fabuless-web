@@ -67,6 +67,9 @@ export function AddTickerRow({ allHoldings }: { allHoldings: Holding[] }) {
   if (step === "detail") {
     return (
       <div className="border-t border-[#F1F5F9] px-4 py-3 bg-gray-50/40">
+        <p className="text-[11px] text-gray-400 mb-2.5">
+          Optional — add purchase details to track your return vs. the S&P 500.
+        </p>
         {pending.map((p, i) => (
           <div key={p.ticker} className="flex items-center gap-3 flex-wrap mb-2">
             <span className="font-sans text-[13px] font-bold text-gray-900 w-12 shrink-0">{p.ticker}</span>
@@ -106,16 +109,20 @@ export function AddTickerRow({ allHoldings }: { allHoldings: Holding[] }) {
   }
 
   return (
-    <div className="flex items-center gap-2 px-4 py-2.5 border-t border-[#F1F5F9]">
+    <div className="flex items-center gap-3 px-4 py-3 border-t border-[#F1F5F9] bg-gray-50/40">
+      <span className="text-[18px] text-gray-300 leading-none select-none">+</span>
       <input
         value={tickerInput}
         onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
         onKeyDown={(e) => e.key === "Enter" && startAdd()}
-        placeholder="Add ticker…"
-        className="flex-1 text-[13px] text-[#111827] placeholder:text-gray-300 outline-none bg-transparent"
+        placeholder="Add a company — type a ticker (NVDA, AMD…)"
+        className="flex-1 text-[13px] text-[#111827] placeholder:text-gray-400 outline-none bg-transparent"
       />
       {tickerInput && (
-        <button onClick={startAdd} className="shrink-0 text-[11px] font-semibold text-[#B45309] hover:underline">
+        <button
+          onClick={startAdd}
+          className="shrink-0 rounded-lg bg-[#111827] px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-[#1f2937] transition-colors"
+        >
           Add
         </button>
       )}

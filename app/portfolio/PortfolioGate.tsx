@@ -2,46 +2,54 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { readPortfolio, writePortfolio, encodeHoldings, parseTickersToHoldings, type Holding } from "./storage";
 
-const STORAGE_KEY = "fabuless_portfolio_tickers";
+type PendingHolding = { ticker: string; purchasePrice: string; purchaseDate: string; shares: string };
 
-export function parseTickers(raw: string): string[] {
-  return raw
-    .split(/[,\s]+/)
-    .map((s) => s.trim().toUpperCase())
-    .filter(Boolean)
-    .filter((v, i, a) => a.indexOf(v) === i);
+function blankPending(ticker: string): PendingHolding {
+  return { ticker, purchasePrice: "", purchaseDate: "", shares: "" };
 }
 
 export function PortfolioGate() {
   const router = useRouter();
-  const [value, setValue] = useState("");
   const [checked, setChecked] = useState(false);
+  const [tickerInput, setTickerInput] = useState("");
+  const [pending, setPending] = useState<PendingHolding[]>([]);
 
-  // On mount: if we already have saved tickers, jump straight to the dashboard.
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const tickers = saved ? parseTickers(saved) : [];
-    if (tickers.length > 0) {
-      router.replace(`/portfolio?t=${encodeURIComponent(tickers.join(","))}`);
+    const store = readPortfolio();
+    if (store.holdings.length > 0) {
+      router.replace(`/portfolio?h=${encodeHoldings(store.holdings)}`);
     } else {
       setChecked(true);
     }
   }, [router]);
 
-  function save() {
-    const tickers = parseTickers(value);
+  function addTickers() {
+    const tickers = parseTickersToHoldings(tickerInput).filter(
+      (t) => !pending.some((p) => p.ticker === t)
+    );
     if (tickers.length === 0) return;
-    const joined = tickers.join(",");
-    localStorage.setItem(STORAGE_KEY, joined);
-    router.push(`/portfolio?t=${encodeURIComponent(joined)}`);
+    setPending((prev) => [...prev, ...tickers.map(blankPending)]);
+    setTickerInput("");
   }
 
-  // Avoid a flash of the input while we check localStorage / redirect.
+  function save() {
+    if (pending.length === 0) return;
+    const holdings: Holding[] = pending.map((p) => ({
+      ticker: p.ticker,
+      purchasePrice: p.purchasePrice ? parseFloat(p.purchasePrice) : null,
+      purchaseDate: p.purchaseDate || null,
+      shares: p.shares ? parseFloat(p.shares) : null,
+    }));
+    writePortfolio({ holdings });
+    router.push(`/portfolio?h=${encodeHoldings(holdings)}`);
+  }
+
   if (!checked) return null;
 
   return (
-    <div className="max-w-xl mx-auto px-6 pt-28 pb-16 text-center">
+    <div className="max-w-xl mx-auto px-6 pt-28 pb-16">
       <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-2">
         Your Holdings
       </div>
@@ -49,26 +57,82 @@ export function PortfolioGate() {
         Enter the tickers you follow
       </h1>
       <p className="font-serif text-[15px] text-[#4a4a4a] leading-relaxed mb-7">
-        Build a personalized view — live prices, analyst consensus, open expert calls, and earnings
-        ahead, filtered to your stocks.
+        Build a personalized view — live prices, analyst consensus, expert calls, and earnings filtered to your stocks.
+        Add purchase details to track your return vs. the S&P 500.
       </p>
-      <div className="flex items-center gap-2">
+
+      {/* Ticker entry */}
+      <div className="flex items-center gap-2 mb-5">
         <input
-          autoFocus
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && save()}
+          autoFocus={pending.length === 0}
+          value={tickerInput}
+          onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
+          onKeyDown={(e) => e.key === "Enter" && addTickers()}
           placeholder="NVDA, AMD, INTC, TSM"
           className="flex-1 rounded-lg border border-gray-200 px-4 py-2.5 text-[14px] text-[#111827] placeholder:text-gray-300 outline-none focus:border-[#B45309] transition-colors"
         />
         <button
-          onClick={save}
-          className="shrink-0 rounded-lg bg-[#111827] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1f2937] transition-colors"
+          onClick={addTickers}
+          className="shrink-0 rounded-lg border border-gray-200 px-4 py-2.5 text-[13px] font-semibold text-gray-600 hover:border-gray-400 transition-colors"
         >
-          Save
+          Add
         </button>
       </div>
-      <p className="mt-3 text-[11px] text-gray-400">Comma or space separated. Saved to this browser only.</p>
+
+      {/* Pending holdings — inline detail form */}
+      {pending.length > 0 && (
+        <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden mb-5">
+          {pending.map((p, i) => (
+            <div
+              key={p.ticker}
+              className="px-4 py-3 flex items-center gap-3 flex-wrap"
+              style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
+            >
+              <span className="font-sans text-[13px] font-bold text-gray-900 w-14 shrink-0">{p.ticker}</span>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={p.purchasePrice}
+                onChange={(e) => setPending((prev) => prev.map((x) => x.ticker === p.ticker ? { ...x, purchasePrice: e.target.value } : x))}
+                placeholder="$0.00"
+                className="w-24 rounded border border-gray-200 px-2 py-1 text-[12px] text-[#111827] placeholder:text-gray-300 outline-none focus:border-[#B45309] transition-colors"
+              />
+              <input
+                type="date"
+                value={p.purchaseDate}
+                onChange={(e) => setPending((prev) => prev.map((x) => x.ticker === p.ticker ? { ...x, purchaseDate: e.target.value } : x))}
+                className="rounded border border-gray-200 px-2 py-1 text-[12px] text-[#111827] outline-none focus:border-[#B45309] transition-colors"
+              />
+              <input
+                type="number"
+                min="0"
+                step="any"
+                value={p.shares}
+                onChange={(e) => setPending((prev) => prev.map((x) => x.ticker === p.ticker ? { ...x, shares: e.target.value } : x))}
+                placeholder="shares"
+                className="w-20 rounded border border-gray-200 px-2 py-1 text-[12px] text-[#111827] placeholder:text-gray-300 outline-none focus:border-[#B45309] transition-colors"
+              />
+              <button
+                onClick={() => setPending((prev) => prev.filter((x) => x.ticker !== p.ticker))}
+                className="ml-auto text-gray-300 hover:text-rose-400 transition-colors text-[14px]"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {pending.length > 0 && (
+        <button
+          onClick={save}
+          className="w-full rounded-lg bg-[#111827] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1f2937] transition-colors"
+        >
+          Save portfolio
+        </button>
+      )}
+      <p className="mt-3 text-[11px] text-gray-400">Purchase details are optional. Saved to this browser only.</p>
     </div>
   );
 }

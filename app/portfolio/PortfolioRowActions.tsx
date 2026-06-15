@@ -2,29 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { parseTickers } from "./PortfolioGate";
+import { readPortfolio, writePortfolio, encodeHoldings, parseTickersToHoldings, type Holding } from "./storage";
 
-const STORAGE_KEY = "fabuless_portfolio_tickers";
-
-function updateTickers(next: string[]) {
-  if (next.length === 0) {
-    localStorage.removeItem(STORAGE_KEY);
-    return "";
-  }
-  const joined = next.join(",");
-  localStorage.setItem(STORAGE_KEY, joined);
-  return joined;
-}
-
-export function RemoveTicker({ ticker, allTickers }: { ticker: string; allTickers: string[] }) {
+export function RemoveTicker({ ticker, allHoldings }: { ticker: string; allHoldings: Holding[] }) {
   const router = useRouter();
   function remove() {
-    const next = allTickers.filter((t) => t !== ticker);
-    const joined = updateTickers(next);
-    if (joined) {
-      router.push(`/portfolio?t=${encodeURIComponent(joined)}`);
-    } else {
+    const next = allHoldings.filter((h) => h.ticker !== ticker);
+    writePortfolio({ holdings: next });
+    if (next.length === 0) {
       router.push("/portfolio");
+    } else {
+      router.push(`/portfolio?h=${encodeHoldings(next)}`);
     }
   }
   return (
@@ -38,33 +26,96 @@ export function RemoveTicker({ ticker, allTickers }: { ticker: string; allTicker
   );
 }
 
-export function AddTickerRow({ allTickers }: { allTickers: string[] }) {
-  const router = useRouter();
-  const [value, setValue] = useState("");
+type PendingAdd = { ticker: string; purchasePrice: string; purchaseDate: string; shares: string };
 
-  function add() {
-    const toAdd = parseTickers(value).filter((t) => !allTickers.includes(t));
-    if (toAdd.length === 0) { setValue(""); return; }
-    const next = [...allTickers, ...toAdd];
-    const joined = updateTickers(next);
-    setValue("");
-    router.push(`/portfolio?t=${encodeURIComponent(joined)}`);
+export function AddTickerRow({ allHoldings }: { allHoldings: Holding[] }) {
+  const router = useRouter();
+  const [step, setStep] = useState<"idle" | "detail">("idle");
+  const [tickerInput, setTickerInput] = useState("");
+  const [pending, setPending] = useState<PendingAdd[]>([]);
+
+  function startAdd() {
+    const tickers = parseTickersToHoldings(tickerInput).filter(
+      (t) => !allHoldings.some((h) => h.ticker === t)
+    );
+    if (tickers.length === 0) return;
+    setPending(tickers.map((t) => ({ ticker: t, purchasePrice: "", purchaseDate: "", shares: "" })));
+    setTickerInput("");
+    setStep("detail");
+  }
+
+  function save() {
+    const newHoldings: Holding[] = pending.map((p) => ({
+      ticker: p.ticker,
+      purchasePrice: p.purchasePrice ? parseFloat(p.purchasePrice) : null,
+      purchaseDate: p.purchaseDate || null,
+      shares: p.shares ? parseFloat(p.shares) : null,
+    }));
+    const next = [...allHoldings, ...newHoldings];
+    writePortfolio({ holdings: next });
+    setStep("idle");
+    setPending([]);
+    router.push(`/portfolio?h=${encodeHoldings(next)}`);
+  }
+
+  function cancel() {
+    setStep("idle");
+    setPending([]);
+    setTickerInput("");
+  }
+
+  if (step === "detail") {
+    return (
+      <div className="border-t border-[#F1F5F9] px-4 py-3 bg-gray-50/40">
+        {pending.map((p, i) => (
+          <div key={p.ticker} className="flex items-center gap-3 flex-wrap mb-2">
+            <span className="font-sans text-[13px] font-bold text-gray-900 w-12 shrink-0">{p.ticker}</span>
+            <input
+              type="number" min="0" step="0.01"
+              value={p.purchasePrice}
+              onChange={(e) => setPending((prev) => prev.map((x, j) => j === i ? { ...x, purchasePrice: e.target.value } : x))}
+              placeholder="Buy price"
+              autoFocus={i === 0}
+              className="w-24 rounded border border-gray-200 px-2 py-1 text-[12px] text-[#111827] placeholder:text-gray-300 outline-none focus:border-[#B45309]"
+            />
+            <input
+              type="date"
+              value={p.purchaseDate}
+              onChange={(e) => setPending((prev) => prev.map((x, j) => j === i ? { ...x, purchaseDate: e.target.value } : x))}
+              className="rounded border border-gray-200 px-2 py-1 text-[12px] text-[#111827] outline-none focus:border-[#B45309]"
+            />
+            <input
+              type="number" min="0" step="any"
+              value={p.shares}
+              onChange={(e) => setPending((prev) => prev.map((x, j) => j === i ? { ...x, shares: e.target.value } : x))}
+              placeholder="Shares"
+              className="w-20 rounded border border-gray-200 px-2 py-1 text-[12px] text-[#111827] placeholder:text-gray-300 outline-none focus:border-[#B45309]"
+            />
+          </div>
+        ))}
+        <div className="flex gap-2 mt-2">
+          <button onClick={save} className="text-[11px] font-semibold text-white bg-[#111827] rounded px-3 py-1.5 hover:bg-[#1f2937] transition-colors">
+            Add
+          </button>
+          <button onClick={cancel} className="text-[11px] font-semibold text-gray-400 hover:text-gray-600 px-2 transition-colors">
+            Cancel
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="flex items-center gap-2 px-4 py-2.5 border-t border-[#F1F5F9]">
       <input
-        value={value}
-        onChange={(e) => setValue(e.target.value.toUpperCase())}
-        onKeyDown={(e) => e.key === "Enter" && add()}
+        value={tickerInput}
+        onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
+        onKeyDown={(e) => e.key === "Enter" && startAdd()}
         placeholder="Add ticker…"
         className="flex-1 text-[13px] text-[#111827] placeholder:text-gray-300 outline-none bg-transparent"
       />
-      {value && (
-        <button
-          onClick={add}
-          className="shrink-0 text-[11px] font-semibold text-[#B45309] hover:underline"
-        >
+      {tickerInput && (
+        <button onClick={startAdd} className="shrink-0 text-[11px] font-semibold text-[#B45309] hover:underline">
           Add
         </button>
       )}

@@ -124,7 +124,7 @@ export default async function QuantumArticlePage({ params }: { params: Promise<{
                 <div key={co.ticker} className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white px-4 py-2.5">
                   <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${co.accent}18` }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={`https://assets.parqet.com/logos/symbol/${co.ticker}?format=png`} alt={co.ticker} width={20} height={20} className="object-contain" onError={(e) => { e.currentTarget.style.display = "none"; }} />
+                    <img src={`https://assets.parqet.com/logos/symbol/${co.ticker}?format=png`} alt={co.ticker} width={20} height={20} className="object-contain" />
                   </div>
                   <div>
                     <span className="font-sans text-[12px] font-bold text-gray-900">{co.ticker}</span>

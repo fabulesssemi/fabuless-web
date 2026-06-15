@@ -106,7 +106,6 @@ export default async function QuantumPage() {
                           width={22}
                           height={22}
                           className="object-contain"
-                          onError={(e) => { e.currentTarget.style.display = "none"; }}
                         />
                       </div>
                       <div className="min-w-0 flex-1">

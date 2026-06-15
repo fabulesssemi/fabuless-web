@@ -82,7 +82,24 @@ export function HoldingRow({
               <span className={`text-[9px] transition-transform ${expanded ? "rotate-90" : ""}`}>▶</span>
             </button>
           )}
-          <span className="shrink-0 w-2 h-2 rounded-sm" style={{ backgroundColor: color }} />
+          {/* Company logo with color-tinted bg, falls back to color dot */}
+          <div className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden" style={{ background: `${color}22` }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://assets.parqet.com/logos/symbol/${r.ticker}?format=png`}
+              alt={r.ticker}
+              width={20}
+              height={20}
+              className="object-contain"
+              onError={(e) => {
+                const el = e.currentTarget;
+                el.style.display = "none";
+                const dot = document.createElement("span");
+                dot.style.cssText = `width:8px;height:8px;border-radius:2px;background:${color};display:block`;
+                el.parentElement?.appendChild(dot);
+              }}
+            />
+          </div>
           <span className="font-sans text-[14px] font-bold text-gray-900 tabular-nums pointer-events-none">{r.ticker}</span>
           <span className="text-[12px] text-gray-400 truncate pointer-events-none">{r.name}</span>
           {!r.covered && <span className="text-[9px] uppercase tracking-wide text-gray-300 font-semibold pointer-events-none">no coverage</span>}

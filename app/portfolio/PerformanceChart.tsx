@@ -170,25 +170,56 @@ export function PortfolioPerformance({
         Performance vs. S&amp;P 500
       </h2>
 
-      {/* Summary strip */}
+      {/* Summary block */}
       {strip && (
-        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1 mb-4 pb-4 border-b border-gray-100">
-          <div>
-            <span className="text-[11px] uppercase tracking-widest text-gray-400 mr-2">Your holdings</span>
-            <span className={`text-[20px] font-bold tabular-nums ${strip.pnl >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
-              {money(strip.pnl)}
-            </span>
-            <span className={`text-[13px] font-semibold tabular-nums ml-1.5 ${strip.pnl >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
-              ({strip.pnlPct >= 0 ? "+" : ""}{strip.pnlPct.toFixed(1)}%)
-            </span>
+        <div
+          className="mb-5 rounded-lg overflow-hidden"
+          style={{ background: "rgba(16,185,129,0.04)", border: "1px solid rgba(16,185,129,0.12)" }}
+        >
+          {/* Two-column row */}
+          <div className="flex divide-x" style={{ borderColor: "#1F2937" }}>
+            {/* Left — your holdings */}
+            <div className="flex-1 px-5 py-4">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Your Holdings</p>
+              <div className="flex items-baseline gap-2">
+                <span
+                  className="text-[36px] font-bold tabular-nums leading-none"
+                  style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}
+                >
+                  {money(strip.pnl)}
+                </span>
+                <span
+                  className="text-[20px] tabular-nums leading-none"
+                  style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}
+                >
+                  ({strip.pnlPct >= 0 ? "+" : ""}{strip.pnlPct.toFixed(1)}%)
+                </span>
+              </div>
+            </div>
+
+            {/* Right — S&P comparison */}
+            <div className="flex-1 px-5 py-4" style={{ borderColor: "#1F2937" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">S&amp;P 500 (same money)</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-[36px] font-bold tabular-nums leading-none text-gray-400">
+                  {strip.spyPct >= 0 ? "+" : ""}{strip.spyPct.toFixed(1)}%
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="text-[13px] text-gray-500">
-            <span className="text-gray-400">Same money in S&amp;P:</span>{" "}
-            <span className="font-semibold tabular-nums">{strip.spyPct >= 0 ? "+" : ""}{strip.spyPct.toFixed(1)}%</span>
-          </div>
-          <div className={`text-[13px] font-semibold tabular-nums ${strip.beatBy >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
-            {strip.beatBy >= 0 ? "Beating the market by " : "Trailing the market by "}
-            {money(Math.abs(strip.beatBy)).replace(/^[+]/, "")} ({strip.beatByPct >= 0 ? "+" : ""}{strip.beatByPct.toFixed(1)}%)
+
+          {/* Full-width beat row */}
+          <div
+            className="px-5 py-2.5"
+            style={{ borderTop: "1px solid rgba(16,185,129,0.12)" }}
+          >
+            <span
+              className="text-[14px] tabular-nums"
+              style={{ color: strip.beatBy >= 0 ? "#10B981" : "#F43F5E" }}
+            >
+              {strip.beatBy >= 0 ? "↑ Beating the market by " : "↓ Trailing the market by "}
+              {money(Math.abs(strip.beatBy)).replace(/^[+]/, "")} ({strip.beatByPct >= 0 ? "+" : ""}{strip.beatByPct.toFixed(1)}%)
+            </span>
           </div>
         </div>
       )}

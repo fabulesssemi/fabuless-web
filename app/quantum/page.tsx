@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getLatestArticles } from "@/lib/quantum/articles";
 import { QUANTUM_COMPANIES } from "@/lib/quantum/companies";
+import { QuantumFilter } from "./QuantumFilter";
 
 export const revalidate = 3600;
 
@@ -11,20 +11,13 @@ export const metadata: Metadata = {
     "Coverage of the quantum computing industry — hardware breakthroughs, market moves, research, and the companies building the next computing paradigm.",
 };
 
-const CATEGORY_META: Record<string, { label: string; color: string }> = {
-  hardware:  { label: "Hardware",  color: "bg-violet-100 text-violet-700" },
-  software:  { label: "Software",  color: "bg-indigo-100 text-indigo-700" },
-  market:    { label: "Market",    color: "bg-sky-100 text-sky-700" },
-  research:  { label: "Research",  color: "bg-emerald-100 text-emerald-700" },
-  policy:    { label: "Policy",    color: "bg-amber-100 text-amber-700" },
+const CATEGORY_LABELS: Record<string, string> = {
+  hardware: "Hardware", software: "Software", market: "Market", research: "Research", policy: "Policy",
 };
-
 const CATEGORY_ORDER = ["hardware", "software", "market", "research", "policy"];
 
 export default async function QuantumPage() {
   const articles = getLatestArticles(24);
-  const featured = articles[0] ?? null;
-  const rest = articles.slice(1);
 
   const purePlay = QUANTUM_COMPANIES.filter((c) => c.category === "pure-play");
   const bigTech  = QUANTUM_COMPANIES.filter((c) => c.category === "big-tech");
@@ -58,7 +51,7 @@ export default async function QuantumPage() {
               const count = articles.filter((a) => a.category === cat).length;
               return (
                 <span key={cat} className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-white/70 border border-white/10">
-                  {CATEGORY_META[cat].label} {count > 0 && <span className="text-indigo-300">{count}</span>}
+                  {CATEGORY_LABELS[cat]} {count > 0 && <span className="text-indigo-300">{count}</span>}
                 </span>
               );
             })}
@@ -74,93 +67,11 @@ export default async function QuantumPage() {
             <div className="text-[11px] font-bold uppercase tracking-widest text-indigo-400 mb-2">Pipeline ready</div>
             <p className="font-serif text-[15px] text-gray-500">
               Articles load after the first pipeline run.<br />
-              Run: <code className="text-indigo-600 text-[13px]">GROQ_API_KEY=gsk_... npx tsx scripts/update-quantum-articles.ts</code>
+              <code className="text-indigo-600 text-[13px]">GROQ_API_KEY=gsk_... npx tsx scripts/update-quantum-articles.ts</code>
             </p>
           </div>
         ) : (
-          <>
-            {/* Featured article */}
-            {featured && (
-              <div className="mb-10">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-indigo-500 mb-4">Latest</div>
-                <a
-                  href={featured.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block rounded-2xl border border-indigo-100 bg-white overflow-hidden hover:border-indigo-300 hover:shadow-lg transition-all"
-                >
-                  <div className="flex gap-0 flex-col md:flex-row">
-                    {featured.image && (
-                      <div className="md:w-80 shrink-0 h-48 md:h-auto overflow-hidden bg-indigo-50">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={featured.image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      </div>
-                    )}
-                    <div className="p-6 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${CATEGORY_META[featured.category]?.color ?? "bg-gray-100 text-gray-500"}`}>
-                            {CATEGORY_META[featured.category]?.label}
-                          </span>
-                          {featured.companies.slice(0, 3).map((t) => (
-                            <span key={t} className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600 border border-indigo-100">{t}</span>
-                          ))}
-                        </div>
-                        <h2 className="font-sans text-[18px] font-bold text-gray-900 leading-snug mb-2 group-hover:text-indigo-700 transition-colors">
-                          {featured.title}
-                        </h2>
-                        <p className="font-serif text-[13px] text-gray-500 leading-relaxed line-clamp-3">{featured.summary}</p>
-                      </div>
-                      <div className="flex items-center gap-3 mt-4">
-                        <span className="text-[11px] font-semibold text-indigo-500">{featured.source}</span>
-                        <span className="text-[10px] text-gray-400">{new Date(featured.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            )}
-
-            {/* Article grid */}
-            {rest.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
-                {rest.map((article) => (
-                  <a
-                    key={article.id}
-                    href={article.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col rounded-xl border border-gray-100 bg-white hover:border-indigo-200 hover:shadow-md transition-all overflow-hidden"
-                  >
-                    {article.image && (
-                      <div className="h-36 overflow-hidden bg-indigo-50 shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      </div>
-                    )}
-                    <div className="p-4 flex flex-col flex-1">
-                      <div className="flex items-center gap-1.5 mb-2 flex-wrap">
-                        <span className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ${CATEGORY_META[article.category]?.color ?? "bg-gray-100 text-gray-500"}`}>
-                          {CATEGORY_META[article.category]?.label}
-                        </span>
-                        {article.companies.slice(0, 2).map((t) => (
-                          <span key={t} className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{t}</span>
-                        ))}
-                      </div>
-                      <h3 className="font-sans text-[13px] font-bold text-gray-900 leading-snug mb-1.5 line-clamp-2 group-hover:text-indigo-700 transition-colors flex-1">
-                        {article.title}
-                      </h3>
-                      <p className="font-serif text-[11.5px] text-gray-400 leading-snug line-clamp-2 mb-3">{article.summary}</p>
-                      <div className="flex items-center justify-between mt-auto">
-                        <span className="text-[10px] font-semibold text-indigo-500">{article.source}</span>
-                        <span className="text-[10px] text-gray-400">{new Date(article.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            )}
-          </>
+          <QuantumFilter articles={articles} />
         )}
 
         {/* ── Who's Building Quantum ── */}

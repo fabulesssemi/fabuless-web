@@ -60,6 +60,7 @@ export default function RootLayout({
                   <span className="cursor-default hover:text-amber-400 transition-colors py-4">More ▾</span>
                   <div className="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
                     <div className="bg-[#111827] border border-gray-700 py-1.5 w-44 shadow-lg">
+                      <Link href="/quantum" className="block px-4 py-2 hover:text-indigo-400 hover:bg-white/5 transition-colors">Quantum ✦</Link>
                       <Link href="/insider-trading" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Insider Trades</Link>
                       <Link href="/archive" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Archive</Link>
                       <Link href="/about" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">About</Link>

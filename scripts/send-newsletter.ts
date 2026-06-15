@@ -7,7 +7,7 @@
 //   set -a && source .env.local && set +a && npx tsx scripts/send-newsletter.ts
 // ---------------------------------------------------------------------------
 
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import type { QuantumArticle } from "../lib/quantum/articles";
 try {
@@ -341,6 +341,17 @@ async function confirm(question: string): Promise<boolean> {
 
 async function main() {
   const autoMode = process.argv.includes("--auto");
+  const previewMode = process.argv.includes("--preview");
+
+  if (previewMode) {
+    const issue = issues[0];
+    const html = buildEmailHtml(issue);
+    const outPath = resolve(process.cwd(), "newsletter-preview.html");
+    writeFileSync(outPath, html);
+    console.log(`\n✅ Preview saved → ${outPath}`);
+    console.log("   open newsletter-preview.html");
+    return;
+  }
   const issue = issues[0];
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 

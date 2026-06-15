@@ -3,10 +3,13 @@ import Link from "next/link";
 import { COMPANY_UNIVERSE } from "@/lib/companies";
 import { getCompanyData } from "@/lib/providers";
 import { predictions } from "@/lib/tracker/predictions";
-import { getExpert } from "@/lib/tracker/experts";
+import { EXPERTS } from "@/lib/tracker/experts";
+import { fetchAnalystCoverage } from "@/lib/analyst/analysts";
 import { PortfolioGate } from "./PortfolioGate";
 import { EditHoldings } from "./EditHoldings";
 import { RemoveTicker, AddTickerRow } from "./PortfolioRowActions";
+import { PortfolioTabs } from "./PortfolioTabs";
+import type { AnalystRow, EarningsRow } from "./PortfolioTabs";
 
 export const revalidate = 300;
 
@@ -16,12 +19,6 @@ export const metadata: Metadata = {
     "Your holdings, in context. Live prices, analyst consensus, open expert predictions, and upcoming earnings — filtered to the stocks you follow.",
 };
 
-const STATUS_META = {
-  CORRECT:   { label: "Correct", bg: "bg-emerald-500", text: "text-white" },
-  PARTIAL:   { label: "Partial", bg: "bg-amber-400",   text: "text-white" },
-  WRONG:     { label: "Wrong",   bg: "bg-rose-500",    text: "text-white" },
-  TOO_EARLY: { label: "Open",    bg: "bg-gray-100",    text: "text-gray-500" },
-} as const;
 
 const METABYTICKER = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c]));
 
@@ -114,16 +111,60 @@ export default async function PortfolioPage({
     }),
   );
 
-  // What to watch — upcoming earnings within 30 days, soonest first
-  const upcoming = rows
+  // Earnings tab data
+  const earningsRows: EarningsRow[] = rows
     .filter((r) => r.earningsDate && daysUntil(r.earningsDate) >= 0 && daysUntil(r.earningsDate) <= 30)
-    .sort((a, b) => a.earningsDate!.getTime() - b.earningsDate!.getTime());
+    .sort((a, b) => a.earningsDate!.getTime() - b.earningsDate!.getTime())
+    .map((r) => ({ ticker: r.ticker, label: r.earningsLabel!, daysUntil: daysUntil(r.earningsDate!) }));
 
-  // What to watch — recent expert predictions on held tickers, newest first
-  const recent = predictions
+  // Expert calls tab data — all predictions on held tickers, newest first
+  const recentCalls = predictions
     .filter((p) => (p.companies ?? []).some((c) => tickers.includes(c)))
     .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 5);
+    .slice(0, 20);
+
+  // Experts map for tab component
+  const expertsMap = Object.fromEntries(EXPERTS.map((e) => [e.id, e]));
+
+  // Analysts tab data — coverage filtered to held tickers
+  const allAnalysts = await fetchAnalystCoverage();
+  const analystRows: AnalystRow[] = tickers
+    .map((ticker) => {
+      const meta = METABYTICKER.get(ticker);
+      const analystEntries = allAnalysts
+        .map((a) => {
+          const cov = a.coverage.find((c) => c.ticker === ticker);
+          if (!cov) return null;
+          return {
+            id: a.id,
+            name: a.name,
+            firmDisplay: a.firmDisplay,
+            rating: cov.rating,
+            priceTarget: cov.priceTarget,
+            upsidePct: cov.upsidePct,
+            action: cov.action,
+            accent: a.accent,
+          };
+        })
+        .filter((x): x is NonNullable<typeof x> => x !== null)
+        .sort((a, b) => (b.priceTarget ?? 0) - (a.priceTarget ?? 0));
+
+      if (analystEntries.length === 0) return null;
+
+      const targets = analystEntries.map((a) => a.priceTarget).filter((p): p is number => p !== null);
+      const upsides = analystEntries.map((a) => a.upsidePct).filter((u): u is number => u !== null);
+      const avgTarget = targets.length ? Math.round(targets.reduce((a, b) => a + b, 0) / targets.length) : null;
+      const avgUpside = upsides.length ? Math.round(upsides.reduce((a, b) => a + b, 0) / upsides.length * 10) / 10 : null;
+
+      return {
+        ticker,
+        companyName: meta?.name ?? ticker,
+        analysts: analystEntries,
+        avgTarget,
+        avgUpside,
+      };
+    })
+    .filter((r): r is AnalystRow => r !== null);
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
@@ -245,83 +286,14 @@ export default async function PortfolioPage({
         <AddTickerRow allTickers={tickers} />
       </div>
 
-      {/* What to watch */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Upcoming earnings */}
-        <section>
-          <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-700 mb-3">
-            Upcoming earnings
-          </h2>
-          {upcoming.length === 0 ? (
-            <p className="font-serif text-[13px] text-[#4a4a4a]">No earnings in the next 30 days for your holdings.</p>
-          ) : (
-            <ul className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-              {upcoming.map((r, i) => {
-                const d = daysUntil(r.earningsDate!);
-                const soon = d <= 7;
-                return (
-                  <li
-                    key={r.ticker}
-                    className="flex items-center justify-between px-4 py-3"
-                    style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-sans text-[13px] font-bold text-gray-900 tabular-nums w-12">{r.ticker}</span>
-                      <span className="text-[12px] text-gray-500 tabular-nums">{r.earningsLabel?.replace(/^[A-Za-z]{3,}\s+/, "")}</span>
-                    </div>
-                    <span
-                      className={`text-[11px] font-semibold tabular-nums ${soon ? "text-[#B45309]" : "text-gray-400"}`}
-                    >
-                      {d === 0 ? "today" : d === 1 ? "tomorrow" : `${d} days`}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </section>
-
-        {/* Recent analyst activity */}
-        <section>
-          <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-700 mb-3">
-            Recent expert calls on your stocks
-          </h2>
-          {recent.length === 0 ? (
-            <p className="font-serif text-[13px] text-[#4a4a4a]">No tracked predictions on your holdings yet.</p>
-          ) : (
-            <ul className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-              {recent.map((p, i) => {
-                const expert = getExpert(p.expert);
-                const sm = STATUS_META[p.status];
-                const heldTickers = (p.companies ?? []).filter((c) => tickers.includes(c));
-                return (
-                  <li
-                    key={p.id}
-                    style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
-                  >
-                    <Link href={`/tracker/${p.expert}`} className="block px-4 py-3 hover:bg-slate-50 transition-colors">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <span className="text-[12px] font-bold text-gray-900">{expert?.name ?? p.speaker}</span>
-                          {heldTickers.map((tk) => (
-                            <span key={tk} className="text-[9px] font-bold px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded border border-gray-200 tracking-wide">
-                              {tk}
-                            </span>
-                          ))}
-                        </div>
-                        <span className={`shrink-0 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${sm.bg} ${sm.text}`}>
-                          {sm.label}
-                        </span>
-                      </div>
-                      <p className="font-serif text-[12.5px] text-[#4a4a4a] leading-snug line-clamp-2">{p.claim}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </section>
-      </div>
+      {/* Tabs: Earnings · Expert Calls · Analysts */}
+      <PortfolioTabs
+        earnings={earningsRows}
+        calls={recentCalls}
+        experts={expertsMap}
+        analystRows={analystRows}
+        tickers={tickers}
+      />
 
       <p className="mt-10 pt-5 border-t border-gray-100 font-serif text-[11px] text-[#4a4a4a] leading-relaxed max-w-2xl">
         Prices and consensus via Yahoo Finance, refreshed every few minutes. Predictions are editorial judgments

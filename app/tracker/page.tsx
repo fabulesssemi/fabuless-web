@@ -101,19 +101,6 @@ export default function TrackerPage() {
               .sort((a, b) => (b.accuracyPct ?? 0) - (a.accuracyPct ?? 0))[0];
             const accent = accuracyHex(stats.accuracyPct);
 
-            // Recent activity dots — last 16 resolved predictions
-            const recentResolved = predictions
-              .filter((p) => p.expert === expert.id && p.status !== "TOO_EARLY")
-              .sort((a, b) => b.date.localeCompare(a.date))
-              .slice(0, 16)
-              .reverse();
-
-            const dotColor: Record<string, string> = {
-              CORRECT: C_GREEN,
-              PARTIAL: C_AMBER,
-              WRONG:   C_RED,
-            };
-
             return (
               <Link
                 key={expert.id}
@@ -169,21 +156,6 @@ export default function TrackerPage() {
                         <div style={{ width: "20px", height: "4px", backgroundColor: color, borderRadius: "2px" }} />
                         <span className="text-[7px] uppercase text-slate-400 leading-none tracking-wide">{d.label}</span>
                       </div>
-                    );
-                  })}
-                </div>
-
-                {/* Activity dots grid */}
-                <div className="hidden xl:grid grid-cols-8 gap-[3px] shrink-0">
-                  {Array.from({ length: 16 }, (_, idx) => {
-                    const p = recentResolved[idx];
-                    return (
-                      <div
-                        key={idx}
-                        className="w-[7px] h-[7px] rounded-sm"
-                        style={{ backgroundColor: p ? dotColor[p.status] ?? "#E5E7EB" : "#F3F4F6" }}
-                        title={p ? `${p.date.slice(0, 7)} · ${p.claim.slice(0, 60)}…` : ""}
-                      />
                     );
                   })}
                 </div>

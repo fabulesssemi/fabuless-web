@@ -187,7 +187,10 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
     >
       {/* ── Hero card ── */}
       <div className="max-w-5xl mx-auto px-6 pt-8 pb-6">
-        <Link href="/tracker" className="inline-flex items-center gap-1.5 text-[11px] text-gray-400 hover:text-gray-600 transition-colors mb-5">
+        <Link
+          href="/tracker"
+          className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-600 bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 shadow-sm hover:border-slate-300 hover:text-slate-900 transition-all mb-5"
+        >
           ← Prediction Tracker
         </Link>
 
@@ -215,10 +218,10 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
               {/* Accuracy */}
               <div className="mt-5 flex items-end gap-3">
                 <span
-                  className="font-mono text-[64px] font-bold leading-none tabular-nums"
+                  className="font-mono text-[48px] font-bold leading-none tabular-nums"
                   style={{
                     color: accColor,
-                    textShadow: stats.accuracyPct !== null && stats.accuracyPct >= 80 ? `0 0 28px ${accColor}33` : "none",
+                    textShadow: stats.accuracyPct !== null && stats.accuracyPct >= 80 ? `0 0 24px ${accColor}2A` : "none",
                   }}
                 >
                   {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
@@ -293,9 +296,6 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
                   ) : (
                     <span className="text-[11px] text-gray-300">—</span>
                   )}
-                  <span className="text-[10px] text-gray-400 tabular-nums ml-auto">
-                    {d.resolved}r · {d.total - d.resolved}o
-                  </span>
                 </div>
                 <div className="bg-slate-100 rounded-full overflow-hidden" style={{ height: "5px", width: "170px" }}>
                   {d.accuracyPct !== null && (

@@ -1,1 +1,911 @@
-{}
+{
+  "NVDA": {
+    "ticker": "NVDA",
+    "companyName": "NVIDIA",
+    "nextDate": "2026-08-26",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 2.07925,
+    "revEstB": 91.7,
+    "barToBeat": "To move the stock, NVIDIA needs to deliver a strong Q3 beat, with consensus whisper numbers suggesting a 7-10% EPS surprise, driven by robust growth in its gaming and datacenter segments. The buy-side is also looking for confirmation of a stable or improving demand environment in key end-markets such as cloud computing, artificial intelligence, and gaming.",
+    "watchPoints": [
+      {
+        "title": "Gaming Revenue Growth",
+        "why": "NVIDIA's gaming segment is a key driver of revenue growth, and investors will be watching for signs of continued strength in this area, particularly given the recent launch of new graphics cards and the ongoing popularity of PC gaming.",
+        "metric": "+15% YoY"
+      },
+      {
+        "title": "Datacenter Momentum",
+        "why": "The datacenter segment is a critical growth driver for NVIDIA, and investors will be looking for evidence of continued traction in this area, including the adoption of NVIDIA's AI and high-performance computing solutions by key cloud and enterprise customers."
+      },
+      {
+        "title": "Q4 Guidance",
+        "why": "NVIDIA's Q4 guidance will be closely watched for signs of a strong holiday season and continued growth in key end-markets, with investors looking for evidence that the company can maintain its momentum into the end of the year.",
+        "metric": "$92B-$95B revenue range"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that NVIDIA's strong product cycles, including the recent launch of new graphics cards and the growing adoption of its AI and datacenter solutions, will drive a significant beat and raise, particularly if the company can demonstrate continued traction in key end-markets such as cloud computing and gaming.",
+    "bearSetup": "The key risk to the bear case is that a slowdown in demand from key customers such as cloud providers, combined with increased competition from rivals such as AMD and Intel, could lead to a disappointing Q3 print and reduced Q4 guidance, potentially causing the stock to pull back.",
+    "generatedAt": "2026-06-15T07:31:14.859Z"
+  },
+  "AMD": {
+    "ticker": "AMD",
+    "companyName": "AMD",
+    "nextDate": "2026-08-04",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 1.60563,
+    "revEstB": 11.3,
+    "barToBeat": "To move the stock, AMD needs to deliver a strong beat to the $1.61 EPS estimate and demonstrate robust growth in its data center and gaming segments, with the buy-side whisper expecting at least 5% revenue upside to the $11.3B consensus. Given the recent outperformance, the stock is pricing in a high bar for execution and guidance.",
+    "watchPoints": [
+      {
+        "title": "Data Center Growth",
+        "why": "Data center revenue is a key driver of AMD's growth, and investors will be watching for signs of continued market share gains and strong demand for EPYC servers, particularly in the cloud and hyperscale markets.",
+        "metric": "20%+ YoY growth"
+      },
+      {
+        "title": "Gaming Segment",
+        "why": "The gaming segment is a significant contributor to AMD's revenue, and investors will be looking for updates on the adoption of Radeon RX 7000 series GPUs and the impact of console sales on the company's top-line."
+      },
+      {
+        "title": "Guidance Raise",
+        "why": "Given the strong execution in recent quarters, investors expect AMD to raise its full-year guidance, and a meaningful increase to the revenue and EPS outlook would be a significant positive catalyst for the stock, with a metric of at least $45B in annual revenue implied.",
+        "metric": "$45B+ annual revenue guidance"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that AMD's strong product portfolio, led by its EPYC and Radeon data center and gaming offerings, will continue to drive market share gains and revenue outperformance, particularly in the data center and cloud markets.",
+    "bearSetup": "The key risk to the bear case is that AMD's high-growth data center business may be impacted by a slowdown in cloud capital expenditures or increased competition from Intel and NVIDIA, which could lead to a guidance miss and negative stock reaction.",
+    "generatedAt": "2026-06-15T18:21:48.713Z"
+  },
+  "AVGO": {
+    "ticker": "AVGO",
+    "companyName": "Broadcom",
+    "nextDate": "2026-09-03",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 3.23688,
+    "revEstB": 29.4,
+    "barToBeat": "To move the stock, Broadcom needs to deliver a strong Q3 beat, with consensus whisper numbers suggesting an EPS of at least $3.40 and revenue growth of 5% or more, driven by robust demand from cloud and enterprise customers. The buy-side is also looking for reassurance on the company's ability to navigate the current semiconductor cycle and maintain its pricing power.",
+    "watchPoints": [
+      {
+        "title": "Wireless Revenue Growth",
+        "why": "Wireless revenue is a key driver of Broadcom's top-line growth, and a strong performance in this segment would be a significant positive catalyst for the stock. The company's exposure to the iPhone supply chain and 5G infrastructure build-out makes this metric particularly important.",
+        "metric": "10% YoY growth"
+      },
+      {
+        "title": "Gross Margin Expansion",
+        "why": "Gross margin expansion is critical for Broadcom's profitability, and the company needs to demonstrate its ability to maintain pricing power and manage costs effectively in a competitive semiconductor landscape. This will be closely watched by investors as a sign of the company's ability to execute on its business model."
+      },
+      {
+        "title": "Data Center Outlook",
+        "why": "The data center market is a key growth driver for Broadcom, and the company's outlook on this segment will be closely watched by investors. A positive commentary on data center demand and the company's ability to gain share in this market would be a significant positive catalyst for the stock.",
+        "metric": "20% YoY growth guidance"
+      }
+    ],
+    "bullSetup": "A strong Q3 beat, driven by robust demand from cloud and enterprise customers, combined with a positive outlook on the data center market and wireless revenue growth, would set up a bullish narrative for the stock, driven by the company's ability to execute on its business model and navigate the current semiconductor cycle.",
+    "bearSetup": "A miss on Q3 earnings or a disappointing outlook on the data center market, combined with signs of pricing pressure or margin compression, would be a significant bearish catalyst for the stock, highlighting the company's vulnerability to semiconductor market volatility and competition.",
+    "generatedAt": "2026-06-15T18:21:51.531Z"
+  },
+  "MRVL": {
+    "ticker": "MRVL",
+    "companyName": "Marvell",
+    "nextDate": "2026-08-27",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.92735,
+    "revEstB": 2.7,
+    "barToBeat": "To move the stock, Marvell needs to deliver a strong Q3 beat, with EPS above $0.95 and revenue growth of at least 10% YoY, as the buy-side is whispering about a potential upside from the NVIDIA partnership and the new CFO's impact on operations. The stock has already priced in some of this optimism, so a modest beat may not be enough to drive significant upside.",
+    "watchPoints": [
+      {
+        "title": "Data Center Revenue",
+        "why": "Data center revenue is a key growth driver for Marvell, and a strong performance in this segment could drive upside to the stock. The company's partnership with NVIDIA is expected to contribute to growth in this area.",
+        "metric": "$1.2B"
+      },
+      {
+        "title": "5G Product Ramp",
+        "why": "Marvell's 5G product portfolio is expected to be a significant contributor to growth in the coming quarters, and any update on the ramp of these products will be closely watched by investors."
+      },
+      {
+        "title": "Gross Margin Guidance",
+        "why": "Gross margin guidance will be important to watch, as it will provide insight into the company's ability to maintain profitability in the face of rising costs and competitive pressures. A guidance range of 64-65% would be seen as a positive sign.",
+        "metric": "64.5%"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Marvell's strategic partnerships, including the one with NVIDIA, will drive significant growth in the data center and 5G segments, leading to a strong Q3 beat and upside to estimates.",
+    "bearSetup": "The key risk to the bear case is that Marvell's growth may be hindered by intense competition in the semiconductor industry, particularly in the 5G segment, which could lead to pricing pressure and margin erosion.",
+    "generatedAt": "2026-06-15T18:21:54.136Z"
+  },
+  "TSM": {
+    "ticker": "TSM",
+    "companyName": "TSMC",
+    "nextDate": "2026-07-16",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 3.74091,
+    "revEstB": 1261.9,
+    "barToBeat": "To move the stock, TSMC needs to deliver a strong Q2 2026 earnings beat, with a whisper number above $3.80, and provide reassuring guidance on its ability to maintain market share in the 5G and high-performance computing (HPC) end-markets. The buy-side is also looking for confirmation of a stable or improving pricing environment, which is already partially priced in after the recent semiconductor sector rally.",
+    "watchPoints": [
+      {
+        "title": "5G Smartphone Demand",
+        "why": "TSMC's exposure to the 5G smartphone market, particularly through its major customer Apple, makes this a key metric to watch, as any signs of slowing demand could impact the company's near-term growth prospects.",
+        "metric": "Q2 2026 smartphone-related revenue growth"
+      },
+      {
+        "title": "HPC Segment Growth",
+        "why": "The HPC segment, which includes datacenter and cloud computing applications, is a key growth driver for TSMC, and any update on the company's progress in this area will be closely watched by investors."
+      },
+      {
+        "title": "CapEx Guidance",
+        "why": "TSMC's capital expenditure plans are crucial to its ability to maintain its technological lead and meet growing demand, and any changes to its CapEx guidance could impact the stock, with a metric to watch being the company's 2026 CapEx budget, currently estimated at around $40-50 billion.",
+        "metric": "$40-50 billion"
+      }
+    ],
+    "bullSetup": "The bull case for TSMC going into earnings is that the company will continue to benefit from its strong position in the 5G and HPC end-markets, with its advanced process technologies and manufacturing capabilities allowing it to maintain its market share and drive long-term growth.",
+    "bearSetup": "The key risk for TSMC is that a slowdown in the global semiconductor market, driven by factors such as inventory corrections or macroeconomic uncertainty, could impact the company's near-term revenue and earnings growth, and potentially lead to downward revisions to its full-year guidance.",
+    "generatedAt": "2026-06-15T18:21:57.208Z"
+  },
+  "ASML": {
+    "ticker": "ASML",
+    "companyName": "ASML",
+    "nextDate": "2026-07-15",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 6.84519,
+    "revEstB": 8.9,
+    "barToBeat": "To move the stock, ASML needs to deliver a strong beat to its revenue estimate of $8.9B and reaffirm its 2026 total net sales guidance of €36-40 billion, as the buy-side is whispering about potential upside from the ongoing EUV lithography cycle. Beating EPS estimates of $6.85 alone may not be enough, given the stock's recent run-up.",
+    "watchPoints": [
+      {
+        "title": "EUV Lithography Sales",
+        "why": "ASML's EUV lithography sales are a key driver of revenue growth, and a strong performance in this segment could drive upside to estimates. The company's ability to meet EUV demand from major semiconductor manufacturers will be closely watched.",
+        "metric": "$2.5B+"
+      },
+      {
+        "title": "Gross Margin Trends",
+        "why": "ASML's gross margin has been a focus area for investors, given the company's high operating leverage. Any signs of margin pressure or upside could significantly impact the stock's multiple."
+      },
+      {
+        "title": "2026 Sales Guidance",
+        "why": "ASML's sales guidance for 2026 will be closely watched, as it will provide insight into the company's visibility on EUV demand and its ability to execute on its growth strategy. A reaffirmation or increase to the €36-40 billion range could drive confidence in the stock.",
+        "metric": "€38B mid-point"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that ASML's EUV lithography sales will continue to drive revenue growth, and the company will benefit from its strong position in the semiconductor equipment market, driven by the ongoing transition to 5G and artificial intelligence applications.",
+    "bearSetup": "The key risk to the bear case is that ASML's sales growth may slow due to potential delays in EUV adoption or increased competition from Chinese semiconductor equipment manufacturers, which could lead to a downward revision to the company's 2026 sales guidance.",
+    "generatedAt": "2026-06-15T18:22:00.076Z"
+  },
+  "ARM": {
+    "ticker": "ARM",
+    "companyName": "Arm Holdings",
+    "nextDate": "2026-07-29",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.4004,
+    "revEstB": 1.3,
+    "barToBeat": "To move the stock, ARM needs to deliver a strong beat on both EPS and revenue, with a whisper number north of $0.45 and revenue guidance above $1.35B, as the market has already priced in a modest beat. The buy-side is also looking for reassurance on the company's licensing and royalty revenue growth, particularly from its non-related party members.",
+    "watchPoints": [
+      {
+        "title": "Licensing Revenue",
+        "why": "Licensing revenue is a key driver of ARM's top-line growth, and a strong performance in this segment would be a significant positive catalyst for the stock. The market will be watching for any signs of acceleration in licensing revenue from non-related party members.",
+        "metric": "$650M"
+      },
+      {
+        "title": "Royalty Rate Trends",
+        "why": "Royalty rates have been a focus area for investors, and any changes to the company's royalty rate structure or outlook could have a significant impact on the stock. The market will be listening for any updates on royalty rate trends, particularly in the context of the current semiconductor cycle."
+      },
+      {
+        "title": "5G and AI Adoption",
+        "why": "ARM's technology is increasingly being used in 5G and AI applications, and the company's growth prospects are closely tied to the adoption of these technologies. The market will be watching for any commentary on the traction ARM is seeing in these areas, particularly in terms of design wins and customer engagements.",
+        "metric": "10% YoY growth"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that ARM will deliver a strong beat on EPS and revenue, driven by robust demand for its IP in 5G, AI, and IoT applications, and that the company will provide upbeat guidance on its licensing and royalty revenue growth, driven by its strong position in the semiconductor industry.",
+    "bearSetup": "The bear case is that ARM will face increasing competition from rival IP providers, particularly in the AI and 5G spaces, which could lead to pricing pressure and slower-than-expected growth in its licensing and royalty revenue, causing the company to miss on revenue and guidance.",
+    "generatedAt": "2026-06-15T18:22:02.755Z"
+  },
+  "MU": {
+    "ticker": "MU",
+    "companyName": "Micron",
+    "nextDate": "2026-06-24",
+    "fiscalQuarter": "Q2 FY26",
+    "epsEst": 19.68667,
+    "revEstB": 34.5,
+    "barToBeat": "To move the stock, Micron needs to deliver a significant beat to the high end of its previously guided EPS range of $18.90-$19.15, as well as demonstrate continued strength in its memory and storage products, particularly in the AI sector. The buy-side whisper is for a print above $20.00, which would require a substantial upside surprise to revenue and margin expansion.",
+    "watchPoints": [
+      {
+        "title": "AI Demand Trends",
+        "why": "Micron's exposure to the AI sector is a key driver of its growth, and any signs of slowing demand or increased competition in this space could negatively impact the stock. The company's ability to maintain its technology leadership and pricing power in AI-related products will be closely watched.",
+        "metric": "AI-related revenue growth"
+      },
+      {
+        "title": "China Exposure",
+        "why": "Micron's significant exposure to the Chinese market, particularly in the cloud and AI sectors, makes it vulnerable to any changes in China's economic policies or trade relationships. Any commentary from management on the impact of China's economic slowdown on Micron's business will be closely monitored."
+      },
+      {
+        "title": "Gross Margin Expansion",
+        "why": "Micron's ability to maintain and expand its gross margins will be critical to its ability to deliver on its EPS guidance, particularly in the face of rising costs and potential pricing pressure. The company's progress on its cost reduction initiatives and its ability to maintain pricing power will be key to achieving its margin targets.",
+        "metric": "gross margin percentage"
+      }
+    ],
+    "bullSetup": "A strong print from Micron, driven by continued demand for its memory and storage products in the AI sector, could propel the stock higher, particularly if the company is able to demonstrate a clear path to sustained margin expansion and revenue growth.",
+    "bearSetup": "Any signs of slowing demand in the AI sector, increased competition, or margin pressure due to rising costs or pricing pressure could negatively impact the stock, particularly if Micron is unable to deliver on its EPS guidance or provide a positive outlook for the remainder of the year.",
+    "generatedAt": "2026-06-15T18:22:05.503Z"
+  },
+  "INTC": {
+    "ticker": "INTC",
+    "companyName": "Intel",
+    "nextDate": "2026-07-23",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.21129,
+    "revEstB": 14.4,
+    "barToBeat": "To move the stock, Intel needs to deliver a Q2 EPS beat of at least $0.25 and provide upbeat guidance for Q3, as the buy-side is whispering about a potential inflection point in the company's core client computing group (CCG) segment. The stock is already pricing in some level of improvement in the data center group (DCG) segment, so a strong beat there is essential to sustain momentum.",
+    "watchPoints": [
+      {
+        "title": "Client Computing Growth",
+        "why": "A rebound in CCG revenue growth is crucial for Intel to regain market share and demonstrate the effectiveness of its strategic priorities, such as the introduction of new Core series processors.",
+        "metric": "+5% YoY"
+      },
+      {
+        "title": "Data Center Margin Expansion",
+        "why": "Investors are watching for signs of margin improvement in the DCG segment, driven by the adoption of Intel's Xeon scalable processors and increasing demand from cloud service providers."
+      },
+      {
+        "title": "Guidance for Q3",
+        "why": "Intel's forward-looking guidance for Q3 will be closely scrutinized, particularly in light of the ongoing PC demand uncertainty and potential risks from the macroeconomic environment, with a metric of $15.0B in revenue implying a return to growth.",
+        "metric": "$15.0B"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Intel's execution on its strategic priorities, combined with an improving demand environment for PCs and data center infrastructure, will drive a strong Q2 beat and set the stage for a sustained recovery in the second half of 2026.",
+    "bearSetup": "The key risk for Intel is that a slower-than-expected recovery in PC demand, exacerbated by macroeconomic headwinds and increased competition from AMD and other players, will lead to a disappointing Q2 report and guidance that falls short of investor expectations.",
+    "generatedAt": "2026-06-15T18:22:08.561Z"
+  },
+  "QCOM": {
+    "ticker": "QCOM",
+    "companyName": "Qualcomm",
+    "nextDate": "2026-07-29",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 2.22835,
+    "revEstB": 9.7,
+    "barToBeat": "To move the stock, Qualcomm needs to deliver a Q3 beat and guide Q4 above the current consensus, with a whisper number of $2.30+ in EPS and revenue above $9.8B, as the buy-side is looking for signs of sustained growth in automotive and IoT segments. The stock has already priced in some of this growth, so a modest beat may not be enough to drive significant upside.",
+    "watchPoints": [
+      {
+        "title": "Automotive Revenue",
+        "why": "Qualcomm's automotive revenues have been a key growth driver, and the company's ability to sustain 20%+ year-over-year growth in this segment will be closely watched. A strong showing here could drive upside to the stock.",
+        "metric": "20% YoY growth"
+      },
+      {
+        "title": "Handset Demand",
+        "why": "The near-term handset outlook has been impacted by industry-wide memory supply constraints, and Qualcomm's guidance on this front will be important. A more optimistic view on handset demand could drive upside to the stock."
+      },
+      {
+        "title": "QCT Margin",
+        "why": "Qualcomm's QCT segment margins have been under pressure due to memory supply constraints and related pricing, and a stabilization or improvement in margins here could drive upside to the stock. The company's ability to maintain margins above 15% will be closely watched.",
+        "metric": "15%+ QCT segment margin"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Qualcomm's diversified revenue streams, including automotive and IoT, will continue to drive growth and offset any weakness in the handset market, leading to a beat and raise quarter.",
+    "bearSetup": "The key risk to the bear case is that Qualcomm's guidance for Q4 will be impacted by a slower-than-expected recovery in the handset market, leading to a disappointing outlook and downward revisions to estimates.",
+    "generatedAt": "2026-06-15T18:22:11.142Z"
+  },
+  "005930.KS": {
+    "ticker": "005930.KS",
+    "companyName": "Samsung Electronics",
+    "nextDate": "2026-07-29",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 11032.841,
+    "revEstB": 168678.7,
+    "barToBeat": "To move the stock, Samsung Electronics needs to deliver a significant beat to the current EPS estimate of $11032.84, with the buy-side whisper number hovering around $12000, and also demonstrate strong revenue growth driven by its semiconductor and mobile divisions. The market is already pricing in a moderate beat, so a substantial upside surprise is required to drive meaningful stock appreciation.",
+    "watchPoints": [
+      {
+        "title": "Semiconductor Revenue",
+        "why": "Samsung's semiconductor business is expected to drive growth, and a strong revenue performance from this segment will be closely watched, particularly given the current global chip shortage and the company's significant market share in the space.",
+        "metric": "$40000B"
+      },
+      {
+        "title": "Mobile Division Margin",
+        "why": "The mobile division's margin performance will be a key indicator of the company's ability to maintain profitability in a highly competitive market, with investors looking for signs of stabilization or improvement in this segment."
+      },
+      {
+        "title": "Capex Guidance",
+        "why": "Samsung's capital expenditure guidance will provide insight into the company's investment plans for the remainder of the year, particularly in its semiconductor and display businesses, and a higher-than-expected capex could indicate increased confidence in future demand.",
+        "metric": ">$40000B"
+      }
+    ],
+    "bullSetup": "A strong earnings report, driven by robust demand for Samsung's semiconductor and mobile products, particularly in the context of the ongoing global 5G rollout and increasing adoption of premium smartphones, could propel the stock higher and validate the bull case for the company's growth prospects.",
+    "bearSetup": "The bear case centers around the risk of a slower-than-expected recovery in the global semiconductor market, combined with intensifying competition in the mobile space, which could lead to disappointing revenue and margin performance, and undermine the stock's recent gains.",
+    "generatedAt": "2026-06-15T18:22:13.900Z"
+  },
+  "4063.T": {
+    "ticker": "4063.T",
+    "companyName": "Shin-Etsu",
+    "nextDate": "2026-07-27",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 67.69529,
+    "revEstB": 682.8,
+    "barToBeat": "To move the stock, Shin-Etsu needs to deliver a meaningful beat to the current EPS estimate of $67.70, with the buy-side whisper number hovering around $70, as well as provide reassurance on the semiconductor and electronics end-markets, which have been experiencing a slowdown. The market is also looking for signs of stabilization in the PVC and chlor-alkali segments, which have been impacted by raw material costs and supply chain disruptions.",
+    "watchPoints": [
+      {
+        "title": "Semiconductor Demand",
+        "why": "As a key supplier of semiconductor materials, Shin-Etsu's revenue growth is heavily influenced by the demand for these products, particularly from major customers in the memory and foundry segments. A strong outlook for semiconductor demand would be a positive catalyst for the stock.",
+        "metric": "guidance for 2H26 semiconductor materials sales"
+      },
+      {
+        "title": "PVC Pricing",
+        "why": "PVC is a significant contributor to Shin-Etsu's revenue, and pricing trends in this segment have a direct impact on the company's profitability. The market will be watching for any signs of improvement in PVC pricing, which has been under pressure due to oversupply and weak demand."
+      },
+      {
+        "title": "Capex Guidance",
+        "why": "Shin-Etsu's capital expenditure plans are closely tied to its growth strategy, particularly in the semiconductor and electronics segments. The company's capex guidance for the remainder of 2026 will be closely watched, as it will provide insight into management's confidence in the outlook for these end-markets.",
+        "metric": "FY26 capex guidance"
+      }
+    ],
+    "bullSetup": "A strong earnings report, combined with a positive outlook for the semiconductor and electronics end-markets, could set up Shin-Etsu for a significant rally, as the stock has been trading at a relatively low multiple to its peers and has a history of outperforming during periods of industry growth.",
+    "bearSetup": "A disappointing earnings report, particularly if it is accompanied by a weak outlook for the semiconductor and electronics segments, could lead to a sharp decline in the stock, as investors may become increasingly concerned about the company's ability to navigate a slowing demand environment and maintain its profitability.",
+    "generatedAt": "2026-06-15T18:22:16.562Z"
+  },
+  "3436.T": {
+    "ticker": "3436.T",
+    "companyName": "SUMCO",
+    "nextDate": "2026-08-06",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": -6.3389,
+    "revEstB": 110.9,
+    "barToBeat": "To move the stock, SUMCO needs to deliver a significant improvement in profitability, with the buy-side whisper expecting at least a 20% quarter-over-quarter reduction in losses, which is not yet fully priced in. Beating the consensus EPS estimate of $-6.34 alone may not be enough to drive a meaningful rally.",
+    "watchPoints": [
+      {
+        "title": "Wafer Demand Trends",
+        "why": "As a leading silicon wafer supplier, SUMCO's revenue is heavily influenced by demand from the semiconductor industry, particularly from memory and foundry customers. A strong uptick in wafer demand would be a positive catalyst for the stock.",
+        "metric": "Wafer shipment volumes"
+      },
+      {
+        "title": "Cost Reduction Progress",
+        "why": "SUMCO has been focusing on reducing its production costs to mitigate the impact of declining ASPs. The company's ability to deliver on its cost savings targets will be closely watched by investors."
+      },
+      {
+        "title": "CapEx Guidance",
+        "why": "With the semiconductor industry experiencing a downturn, investors will be looking for signs of discipline in SUMCO's capital expenditure plans. A reduction in CapEx guidance would be viewed as a positive, as it would preserve cash and reduce balance sheet risk.",
+        "metric": "FY2026 CapEx guidance"
+      }
+    ],
+    "bullSetup": "A bull case scenario is setting up, as SUMCO's valuation multiples have contracted significantly, and the company is poised to benefit from a potential recovery in semiconductor demand driven by the rollout of 5G and AI-related technologies.",
+    "bearSetup": "However, the bear case remains intact, as a prolonged downturn in the semiconductor industry could lead to further declines in wafer prices and volumes, exacerbating SUMCO's losses and putting pressure on its already-stretched balance sheet.",
+    "generatedAt": "2026-06-15T18:22:20.455Z"
+  },
+  "AMAT": {
+    "ticker": "AMAT",
+    "companyName": "Applied Materials",
+    "nextDate": "2026-08-13",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 3.38323,
+    "revEstB": 9,
+    "barToBeat": "To move the stock, Applied Materials needs to deliver a strong beat to the $3.38 EPS estimate and provide reassurance on the semiconductor industry's growth prospects, with the buy-side whispering about a potential upside to revenue guidance. Given the recent outperformance, the stock has already priced in a solid earnings beat, so the focus will be on the company's ability to maintain its momentum in the face of industry headwinds.",
+    "watchPoints": [
+      {
+        "title": "Semiconductor Revenue",
+        "why": "As the largest contributor to Applied Materials' top-line, semiconductor revenue will be closely watched for signs of strength or weakness in the industry, with particular attention to the company's exposure to foundry and logic customers. The metric to watch is a revenue beat of at least 2% above the $6.5B segment estimate.",
+        "metric": "$6.7B"
+      },
+      {
+        "title": "Display and Adjacencies",
+        "why": "The display and adjacencies segment has been a area of focus for Applied Materials, with the company investing in new technologies and products to drive growth, so any update on this segment's performance and outlook will be closely watched for signs of traction or challenges."
+      },
+      {
+        "title": "Capital Equipment Guidance",
+        "why": "Applied Materials' capital equipment guidance will provide insight into the company's expectations for the semiconductor industry's capital spending trends, with a metric to watch being a raise to the full-year capital equipment spend forecast above $80B, which would be a positive indicator for the company's future revenue growth.",
+        "metric": "$82B"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Applied Materials will continue to benefit from the strong demand for semiconductor equipment, driven by the industry's transition to more advanced nodes and the growing need for specialized equipment, which could lead to a significant beat to revenue and earnings estimates.",
+    "bearSetup": "The key risk to the bear case is that Applied Materials will face challenges in maintaining its revenue growth momentum, due to potential industry headwinds such as a slowdown in semiconductor demand or increased competition from Chinese equipment suppliers, which could lead to a miss to estimates and a negative reaction in the stock.",
+    "generatedAt": "2026-06-15T18:22:23.629Z"
+  },
+  "LRCX": {
+    "ticker": "LRCX",
+    "companyName": "Lam Research",
+    "nextDate": "2026-07-29",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 1.67434,
+    "revEstB": 6.7,
+    "barToBeat": "To move the stock, Lam Research needs to deliver a strong Q2 2026 earnings report with revenue and EPS beats, as well as positive guidance that supports the buy-side whisper of a sustained semiconductor capital equipment upcycle driven by 5G and AI-related demand. The company must also demonstrate progress in its efforts to expand its addressable market and improve profitability.",
+    "watchPoints": [
+      {
+        "title": "Foundry and Logic Sales",
+        "why": "As a key player in the semiconductor capital equipment market, Lam Research's foundry and logic sales are crucial to its top-line growth, and a strong performance in this segment would be a significant positive catalyst for the stock. The company's ability to secure large orders from major foundry and logic customers will be closely watched.",
+        "metric": "$2.5B"
+      },
+      {
+        "title": "Etch and Deposition Trends",
+        "why": "Lam Research's etch and deposition product lines are critical to its competitive positioning and profitability, and any signs of market share gains or losses in these areas will be closely monitored by investors. The company's ability to maintain its technological leadership and pricing power in these segments will be key to its long-term success."
+      },
+      {
+        "title": "Guidance and Inventory",
+        "why": "Lam Research's Q3 2026 guidance and inventory levels will be closely watched for signs of a potential slowdown in semiconductor demand or a buildup of excess inventory, which could negatively impact the company's future earnings. A metric to watch is the company's backlog-to-sales ratio, which should remain above 1.5 to support a positive outlook.",
+        "metric": "1.5"
+      }
+    ],
+    "bullSetup": "A strong Q2 2026 earnings report with beats on revenue and EPS, combined with positive guidance and signs of continued market share gains in etch and deposition, would set up a bullish narrative for Lam Research's stock, driven by the ongoing 5G and AI-related semiconductor upcycle and the company's expanding addressable market.",
+    "bearSetup": "A miss on Q2 2026 earnings or a disappointing guidance, potentially driven by a slowdown in foundry and logic sales or a loss of market share in etch and deposition, would be a significant negative catalyst for the stock, as it would raise concerns about the company's ability to sustain its growth momentum and maintain its competitive positioning in the semiconductor capital equipment market.",
+    "generatedAt": "2026-06-15T18:22:26.803Z"
+  },
+  "KLAC": {
+    "ticker": "KLAC",
+    "companyName": "KLA",
+    "nextDate": "2026-07-30",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.99538,
+    "revEstB": 3.6,
+    "barToBeat": "To move the stock, KLA needs to deliver a Q2 EPS beat of at least 5% and provide reassuring guidance on its process control and yield management businesses, as the buy-side is whispering about potential semiconductor capex cuts in 2H26. The stock is already pricing in a modest beat, given the recent trend of positive earnings surprises.",
+    "watchPoints": [
+      {
+        "title": "Semiconductor Revenue",
+        "why": "As a leading provider of process control and yield management solutions, KLA's semiconductor revenue is a key indicator of its growth prospects, and any signs of weakness could impact the stock. The company's exposure to the foundry and logic segments will be particularly closely watched.",
+        "metric": "$2.5B"
+      },
+      {
+        "title": "Gross Margin Trends",
+        "why": "KLA's gross margin has been under pressure due to rising component costs and supply chain constraints, and any improvement in this metric could be a positive catalyst for the stock. The company's ability to maintain its pricing power and manage costs will be closely monitored."
+      },
+      {
+        "title": "FY27 Guidance",
+        "why": "Given the uncertainty surrounding semiconductor capex spend in 2027, KLA's FY27 guidance will be closely watched for any signs of caution or optimism. A guidance range of $14.50-$15.50 in EPS would be seen as a positive, assuming it implies a modest growth trajectory.",
+        "metric": "$14.50-$15.50"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that KLA's diversified customer base, including leading foundries and logic manufacturers, will continue to drive demand for its advanced process control and yield management solutions, supporting a Q2 beat and positive guidance.",
+    "bearSetup": "The key risk to the bear case is that a sharper-than-expected slowdown in semiconductor capex spend, particularly in the memory segment, could lead to a guidance cut and a subsequent stock decline, as KLA's revenue growth becomes increasingly dependent on a few large customers.",
+    "generatedAt": "2026-06-15T18:22:29.669Z"
+  },
+  "8035.T": {
+    "ticker": "8035.T",
+    "companyName": "Tokyo Electron",
+    "nextDate": "2026-07-30",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 367.75702,
+    "revEstB": 761.2,
+    "barToBeat": "To move the stock, Tokyo Electron needs to deliver a strong beat to the current EPS estimate of $367.76, with a whisper number north of $400, as well as demonstrate a solid revenue growth trajectory, particularly in its semiconductor equipment business. The buy-side is also looking for reassurance on the company's ability to navigate the current semiconductor industry downturn.",
+    "watchPoints": [
+      {
+        "title": "Semiconductor Revenue",
+        "why": "As a major player in the semiconductor equipment market, Tokyo Electron's revenue from this segment is a key indicator of its overall performance, and any signs of weakness could impact the stock. The recent slowdown in semiconductor demand is a concern for investors.",
+        "metric": "$650B"
+      },
+      {
+        "title": "Guidance Update",
+        "why": "The company's guidance for the next quarter will be closely watched, as it will provide insight into the management's expectations for the semiconductor industry's recovery and Tokyo Electron's ability to adapt to changing market conditions."
+      },
+      {
+        "title": "Operating Margin",
+        "why": "Tokyo Electron's operating margin is a key metric to watch, as it will indicate the company's ability to maintain profitability in a challenging environment, with a metric of 25% or higher considered a positive sign",
+        "metric": "25%"
+      }
+    ],
+    "bullSetup": "A strong earnings report, combined with signs of a rebound in semiconductor demand, particularly in the memory and foundry segments, could propel the stock higher, as investors become more optimistic about the company's growth prospects.",
+    "bearSetup": "A disappointing earnings report, or a downward revision to the company's guidance, could reignite concerns about the semiconductor industry's downturn and Tokyo Electron's ability to navigate it, posing a significant risk to the stock's near-term performance.",
+    "generatedAt": "2026-06-15T18:22:32.022Z"
+  },
+  "CDNS": {
+    "ticker": "CDNS",
+    "companyName": "Cadence",
+    "nextDate": "2026-07-27",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 2.05477,
+    "revEstB": 1.6,
+    "barToBeat": "To move the stock, Cadence needs to deliver a strong Q2 beat, with EPS exceeding $2.10 and revenue growth of at least 18% year-over-year, as the buy-side is whispering about potential upside from accelerating AI demand and a robust backlog. The stock has already priced in a solid beat, so anything less than a 5% EPS surprise may be met with skepticism.",
+    "watchPoints": [
+      {
+        "title": "AI-Driven Revenue",
+        "why": "Investors will be watching for signs that Cadence's AI-driven portfolio is gaining traction, particularly in the semiconductor and system design markets, as this is a key driver of the company's growth story. Strong AI-driven revenue growth would be a significant positive catalyst for the stock.",
+        "metric": "20%+ year-over-year growth"
+      },
+      {
+        "title": "Backlog Growth",
+        "why": "A growing backlog is essential for Cadence, as it reflects customer commitment to the company's products and provides visibility into future revenue. A record backlog would be a strong indication of the company's ability to execute on its growth strategy."
+      },
+      {
+        "title": "Guidance Raise",
+        "why": "Given the strong demand trends and robust backlog, investors will be looking for Cadence to raise its full-year revenue guidance, which would provide further evidence of the company's momentum and growth potential. A guidance raise of at least 1% would be seen as a positive signal.",
+        "metric": "$6.1B+ revenue guidance"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Cadence's AI-driven portfolio and strong backlog position the company for a significant beat and raise, driven by accelerating demand from semiconductor and system design customers, which would propel the stock to new highs.",
+    "bearSetup": "The key risk to the bear case is that a potential slowdown in semiconductor demand, driven by macroeconomic uncertainty or inventory corrections, could lead to a disappointing revenue growth and guidance, which would likely result in a stock pullback.",
+    "generatedAt": "2026-06-15T18:22:37.105Z"
+  },
+  "GFS": {
+    "ticker": "GFS",
+    "companyName": "GlobalFoundries",
+    "nextDate": "2026-08-04",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.43044,
+    "revEstB": 1.8,
+    "barToBeat": "To move the stock, GlobalFoundries needs to deliver a strong beat to the $0.43 EPS estimate and reaffirm its 2026 revenue target, with the buy-side whisper expecting a significant upside driven by continued growth in automotive and data center end markets. The stock is already pricing in a modest beat, so a substantial upside surprise is required to drive meaningful outperformance.",
+    "watchPoints": [
+      {
+        "title": "Gross Margin Expansion",
+        "why": "Gross margin expansion is critical for GlobalFoundries, as it drives profitability and is a key indicator of the company's ability to navigate the competitive semiconductor landscape. A gross margin above 27% would be a positive signal.",
+        "metric": "27%"
+      },
+      {
+        "title": "Auto and Data Center Growth",
+        "why": "The automotive and data center end markets are key growth drivers for GlobalFoundries, and strong revenue growth in these segments would be a significant positive catalyst for the stock. The company's ability to capitalize on the rapid growth in these markets will be closely watched."
+      },
+      {
+        "title": "CapEx and R&D Guidance",
+        "why": "GlobalFoundries' capital expenditures and R&D investments are critical for driving long-term growth and competitiveness, and guidance on these metrics will be closely watched. A significant increase in CapEx and R&D would be a positive signal, indicating the company's commitment to investing in its future growth.",
+        "metric": "$1.5B CapEx"
+      }
+    ],
+    "bullSetup": "The bull case for GlobalFoundries going into earnings is driven by the company's strong position in high-growth end markets, including automotive and data center, and its ability to drive gross margin expansion through a mix shift towards these high-value segments.",
+    "bearSetup": "The key risk for GlobalFoundries is a potential slowdown in demand from the automotive and data center end markets, which could negatively impact revenue growth and gross margin expansion, and lead to a downward revision of the company's 2026 revenue target.",
+    "generatedAt": "2026-06-15T18:22:42.840Z"
+  },
+  "ASX": {
+    "ticker": "ASX",
+    "companyName": "ASE Technology",
+    "nextDate": "2026-07-30",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.23908,
+    "revEstB": 189.2,
+    "barToBeat": "To move the stock, ASE Technology needs to deliver a meaningful beat to the $0.24 EPS consensus estimate and provide reassurance on the sustainability of its revenue growth, particularly in the outsourced semiconductor packaging and testing segments. The buy-side is whispering about a potential upside to $0.27-$0.30, which would require a strong showing in the ATM assembly, testing, and material business segment.",
+    "watchPoints": [
+      {
+        "title": "ATM Segment Growth",
+        "why": "The ATM assembly, testing, and material business segment has been a key driver of ASE Technology's revenue growth, and its performance will be closely watched for signs of continued momentum in the outsourced semiconductor packaging and testing markets.",
+        "metric": "29.3% year-over-year increase"
+      },
+      {
+        "title": "Guidance Commentary",
+        "why": "Investors will be looking for any commentary on guidance, particularly with regards to the company's ability to maintain its revenue growth trajectory in the face of a highly competitive semiconductor industry and potential disruptions in commercial activities."
+      },
+      {
+        "title": "Net Revenue Growth",
+        "why": "Net revenue growth will be closely watched, particularly in light of the 19.2% year-over-year increase in Q1 2026, and the company's ability to maintain this momentum will be a key factor in determining the stock's reaction to the earnings report.",
+        "metric": "19.2% year-over-year increase"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that ASE Technology will continue to benefit from the strong demand for outsourced semiconductor packaging, testing, and electronic manufacturing services, driven by the ongoing growth in the automotive, industrial, and cloud computing end-markets.",
+    "bearSetup": "The bear case is that the company's revenue growth may be disrupted by the highly competitive nature of the semiconductor industry, potential supply chain disruptions, and the risk of a slowdown in demand from key end-markets such as automotive and industrial.",
+    "generatedAt": "2026-06-15T18:22:48.246Z"
+  },
+  "AMKR": {
+    "ticker": "AMKR",
+    "companyName": "Amkor",
+    "nextDate": "2026-07-27",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.47463,
+    "revEstB": 1.8,
+    "barToBeat": "To move the stock, Amkor needs to deliver a Q2 EPS of at least $0.50, exceeding the current consensus estimate of $0.47, and provide strong guidance for the second half of 2026, as the buy-side is whispering about potential upside from improving automotive and industrial end-markets. The stock has already priced in some level of outperformance, given its recent rally, so a modest beat may not be enough to sustain momentum.",
+    "watchPoints": [
+      {
+        "title": "Advanced Node Growth",
+        "why": "Amkor's ability to ramp production of advanced nodes, such as 5nm and 3nm, will be closely watched, as this is a key driver of revenue growth and margin expansion. Strong growth in this area could signal a sustained uptrend in the stock.",
+        "metric": "20% QoQ growth"
+      },
+      {
+        "title": "Auto and Industrial Demand",
+        "why": "As a major supplier to the automotive and industrial sectors, Amkor's exposure to these end-markets makes its Q2 results a bellwether for the broader electronics industry. Weakening demand in these areas could weigh on the stock, while strength could provide a positive catalyst."
+      },
+      {
+        "title": "Gross Margin Expansion",
+        "why": "Amkor's gross margin has been under pressure in recent quarters due to rising materials costs and pricing competition. A return to gross margin expansion, potentially driven by improving utilization and pricing power, could be a key positive surprise, with a metric to watch being a 50bps QoQ increase.",
+        "metric": "50bps QoQ increase"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Amkor's diversified customer base, including major players in the automotive, industrial, and consumer electronics sectors, positions the company for a strong second half of 2026, driven by a rebound in global electronics demand and the company's own operational improvements.",
+    "bearSetup": "The key risk to the bear case is that Amkor's Q2 results and guidance are negatively impacted by ongoing supply chain disruptions, particularly in the automotive sector, which could lead to a guidance cut and a subsequent sell-off in the stock.",
+    "generatedAt": "2026-06-15T18:22:53.267Z"
+  },
+  "ALAB": {
+    "ticker": "ALAB",
+    "companyName": "Astera Labs",
+    "nextDate": "2026-08-04",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.69059,
+    "revEstB": 0.4,
+    "barToBeat": "To move the stock, Astera Labs needs to deliver a strong Q2 2026 earnings report with revenue growth above $0.4B and EPS of at least $0.72, as the buy-side is whispering about potential upside from the company's exposure to the growing cloud and artificial intelligence markets. The stock has already priced in a modest beat, so a significant upside surprise is required to drive meaningful outperformance.",
+    "watchPoints": [
+      {
+        "title": "Cloud Revenue Growth",
+        "why": "Astera Labs' cloud business is a key driver of growth, and investors will be watching for signs of continued momentum in this segment, particularly given the recent strength in cloud infrastructure spending.",
+        "metric": "20%+ YoY cloud revenue growth"
+      },
+      {
+        "title": "Product Cycle Updates",
+        "why": "The company's product cycle is critical to its long-term growth prospects, and investors will be looking for updates on new product introductions and design win activity, particularly in the areas of AI acceleration and high-performance computing."
+      },
+      {
+        "title": "Gross Margin Expansion",
+        "why": "Gross margin expansion is a key lever for Astera Labs' profitability, and investors will be watching for signs of improvement in this metric, particularly given the company's efforts to optimize its supply chain and manufacturing operations.",
+        "metric": "50.5%+ gross margin"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Astera Labs will deliver a strong earnings report driven by its exposure to the growing cloud and AI markets, with potential upside from new product introductions and design wins, setting the stock up for a significant move higher.",
+    "bearSetup": "The key risk to the bear case is that Astera Labs will face increased competition in its core markets, leading to pricing pressure and gross margin erosion, which could offset any revenue growth and lead to a disappointing earnings report.",
+    "generatedAt": "2026-06-15T18:22:59.023Z"
+  },
+  "SMCI": {
+    "ticker": "SMCI",
+    "companyName": "Supermicro",
+    "nextDate": "2026-08-04",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.70898,
+    "revEstB": 11.7,
+    "barToBeat": "To move the stock, Supermicro needs to deliver a strong Q2 2026 with an EPS beat of at least 15% and revenue growth of 10% YoY, as the buy-side is whispering about the company's ability to sustain its momentum in the datacenter and cloud markets. The stock has already priced in a moderate beat, so a significant upside surprise is needed to drive further appreciation.",
+    "watchPoints": [
+      {
+        "title": "Datacenter Growth",
+        "why": "As a key end-market for Supermicro, datacenter growth will be closely watched, particularly in the context of cloud infrastructure spending and the adoption of new technologies like AI and edge computing.",
+        "metric": "20% YoY growth"
+      },
+      {
+        "title": "Margin Expansion",
+        "why": "Investors will be looking for signs of margin expansion driven by operational efficiencies, supply chain optimization, and pricing power, as this will be a key driver of earnings growth and profitability."
+      },
+      {
+        "title": "Guidance Update",
+        "why": "The company's guidance for Q3 2026 and FY2026 will be closely watched, particularly in light of the current macroeconomic uncertainty and potential risks to demand, with a metric of at least $12.5B in FY2026 revenue",
+        "metric": "$12.5B"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Supermicro's strong execution, combined with its exposure to growth areas like cloud, AI, and edge computing, will drive a significant beat and raise, as the company continues to gain share in the datacenter market and expands its margins.",
+    "bearSetup": "The key risk to the bear case is that a slowdown in cloud infrastructure spending, combined with increased competition from peers and potential supply chain disruptions, could lead to a miss on revenue and earnings, causing the stock to pull back from its recent highs.",
+    "generatedAt": "2026-06-15T18:23:03.870Z"
+  },
+  "DELL": {
+    "ticker": "DELL",
+    "companyName": "Dell",
+    "nextDate": "2026-09-03",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 4.87972,
+    "revEstB": 44.4,
+    "barToBeat": "To move the stock, Dell needs to deliver a significant beat to the current EPS estimate of $4.88 and demonstrate strong momentum in its PC and server businesses, with the buy-side whisper expecting at least a 10% upside to consensus estimates. The stock has already priced in some level of outperformance, given its 32.8% increase following the Q2 2026 earnings report.",
+    "watchPoints": [
+      {
+        "title": "PC Demand Trends",
+        "why": "Dell's PC business is a key driver of revenue, and any signs of slowing demand or increased competition from Asian manufacturers could impact the stock. The company's ability to maintain its market share and pricing power will be closely watched.",
+        "metric": "PC revenue growth vs. -5% YoY consensus"
+      },
+      {
+        "title": "Server Growth",
+        "why": "Dell's server business has been a bright spot in recent quarters, driven by cloud and enterprise demand. Any acceleration or deceleration in server growth could significantly impact the company's overall revenue and profitability."
+      },
+      {
+        "title": "Margin Expansion",
+        "why": "Dell's ability to expand its operating margins will be critical to delivering earnings growth, particularly given the current inflationary environment and potential pressure on component pricing. The company's margin performance will be closely watched, with a metric of at least 50 basis points of expansion vs. the prior year.",
+        "metric": "Non-GAAP operating margin > 10.5%"
+      }
+    ],
+    "bullSetup": "A strong earnings report, driven by robust demand for Dell's PCs and servers, particularly in the enterprise and cloud segments, could propel the stock higher, as the company's execution and commitment to financial targets continue to impress investors.",
+    "bearSetup": "Any signs of slowing demand in the PC or server markets, particularly if driven by macroeconomic weakness or increased competition, could pose a significant risk to the stock, as investors may reassess their growth expectations and valuation multiples for the company.",
+    "generatedAt": "2026-06-15T18:23:09.807Z"
+  },
+  "2317.TW": {
+    "ticker": "2317.TW",
+    "companyName": "Foxconn",
+    "nextDate": "2026-08-13",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 4.04696,
+    "revEstB": 2373.3,
+    "barToBeat": "To move the stock, Foxconn needs to deliver a Q2 EPS surprise of at least +5% and guide Q3 revenue above $2400B, as the buy-side is whispering about a strong iPhone 14 cycle and improving PC demand. This is partly priced in, but a beat and raise would solidify the bullish narrative.",
+    "watchPoints": [
+      {
+        "title": "iPhone Revenue Growth",
+        "why": "As the largest iPhone manufacturer, Foxconn's revenue growth is heavily influenced by Apple's product cycle, and a strong iPhone 14 cycle could drive upside to estimates.",
+        "metric": "+10% YoY"
+      },
+      {
+        "title": "Server Demand Trends",
+        "why": "Foxconn's server business has been a growth driver, and any signs of slowing demand from cloud customers could impact the stock, while a strong outlook would reinforce the bull case."
+      },
+      {
+        "title": "China Tariff Update",
+        "why": "Any commentary on the potential impact of US-China trade tensions and tariffs on Foxconn's supply chain and profitability will be closely watched, with a metric of $0 tariff-related charges",
+        "metric": "$0"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Foxconn will benefit from a strong iPhone 14 cycle, improving PC demand, and a rebound in server sales, driving revenue and earnings upside and solidifying the company's position as a key player in the tech supply chain.",
+    "bearSetup": "The key risk is that Foxconn's guidance will be impacted by slowing demand from cloud customers, ongoing supply chain disruptions, and potential tariff-related charges, which could drive estimates lower and pressure the stock.",
+    "generatedAt": "2026-06-15T18:23:13.291Z"
+  },
+  "ANET": {
+    "ticker": "ANET",
+    "companyName": "Arista Networks",
+    "nextDate": "2026-08-04",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 0.88346,
+    "revEstB": 2.8,
+    "barToBeat": "To move the stock, Arista needs to deliver a strong revenue beat and guide Q3 above consensus, as the buy-side is whispering $2.9B+ in revenue and EPS of $0.95+, already pricing in a robust cloud capex cycle. The company must also demonstrate improving gross margins, which have been a focus for investors.",
+    "watchPoints": [
+      {
+        "title": "Cloud Revenue Growth",
+        "why": "Cloud titans' capex cycles are a key driver of Arista's revenue, and a strong cloud revenue growth would indicate the company's ability to maintain its market share in this critical end-market.",
+        "metric": "30%+ YoY growth"
+      },
+      {
+        "title": "Product Cycle Updates",
+        "why": "Arista's 725 and 730 series product cycles have been closely watched, and any update on their adoption and traction would provide insight into the company's ability to drive growth through new product introductions."
+      },
+      {
+        "title": "Gross Margin Expansion",
+        "why": "Gross margin expansion is crucial for Arista's profitability, and investors will be watching for signs of improvement, particularly given the company's efforts to optimize its supply chain and reduce component costs.",
+        "metric": "52%+ gross margin"
+      }
+    ],
+    "bullSetup": "A strong earnings report, driven by robust cloud demand and improving gross margins, could propel the stock higher, as investors remain optimistic about Arista's ability to capitalize on the growing need for high-performance networking solutions.",
+    "bearSetup": "A miss on revenue or gross margin, coupled with a disappointing guide, could reignite concerns about Arista's ability to navigate a potentially slowing cloud capex environment and increasing competition from rivals like Cisco and Juniper.",
+    "generatedAt": "2026-06-15T18:23:17.951Z"
+  },
+  "LITE": {
+    "ticker": "LITE",
+    "companyName": "Lumentum",
+    "nextDate": "2026-08-12",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 2.96184,
+    "revEstB": 1,
+    "barToBeat": "To move the stock, Lumentum needs to deliver a strong beat to the $2.96 EPS consensus estimate and guide Q1 revenue above $1.05B, as the buy-side is whispering about a potential inflection in the optical communications market driven by 5G and cloud infrastructure investments. The stock has already priced in some of this optimism, so a modest beat may not be enough to sustain momentum.",
+    "watchPoints": [
+      {
+        "title": "Optical Revenue Growth",
+        "why": "Lumentum's optical communications revenue is a key indicator of the company's ability to capitalize on the 5G and cloud infrastructure build-out, and a strong growth rate would be a positive catalyst for the stock. A decline in optical revenue would raise concerns about the company's competitive position.",
+        "metric": "10%+ QoQ growth"
+      },
+      {
+        "title": "Industrial Laser Demand",
+        "why": "The industrial laser market is a significant contributor to Lumentum's revenue, and a slowdown in demand could impact the company's top-line growth. The buy-side will be watching for any signs of weakness in this end-market, particularly in the context of a potentially slowing global economy."
+      },
+      {
+        "title": "Q1 Gross Margin Guidance",
+        "why": "Lumentum's gross margin guidance is a key indicator of the company's ability to maintain profitability in the face of rising component costs and pricing pressure. A guidance range of 45-47% would be seen as a positive, while a range below 44% could raise concerns about the company's pricing power.",
+        "metric": "45%+"
+      }
+    ],
+    "bullSetup": "A strong earnings report and guidance from Lumentum could confirm the bull case that the company is poised to benefit from a multi-year cycle of investment in optical communications infrastructure, driven by the rollout of 5G networks and the growing demand for cloud-based services.",
+    "bearSetup": "A disappointing earnings report or guidance could raise concerns that Lumentum is facing increased competition and pricing pressure in its optical communications business, potentially limiting the company's ability to achieve its long-term growth targets and maintain its current valuation multiple.",
+    "generatedAt": "2026-06-15T18:23:21.894Z"
+  },
+  "AAPL": {
+    "ticker": "AAPL",
+    "companyName": "Apple",
+    "nextDate": "2026-07-30",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 1.89541,
+    "revEstB": 109,
+    "barToBeat": "{\n  \"barToBeat\": \"To move the stock, Apple needs to deliver a revenue beat of at least 2% above consensus, coupled with reassuring guidance on iPhone demand and Services growth, as the buy-side is whispering about potential softness in the iPhone 17 lineup's second-half sales trajectory. The stock is already pricing in a modest EPS beat, so a mere in-line print may not be enough to sustain momentum.\",\n  \"watchPoints\": [\n    { \"title\": \"iPhone Revenue Growth\", \"why\": \"iPhone sales are the primary driver of Apple's revenue, and any signs of slowing growth could impact the stock. The iPhone 17 lineup's performance will be closely watched, particularly in the face of increasing competition from Android vendors.\", \"metric\": \"15% YoY growth\" },\n    { \"title\": \"Services Segment\", \"why\": \"The Services segment has been a key growth engine for Apple, and investors will be looking for continued strength in areas like Apple Music, Apple TV+, and Apple Arcade. Any weakness in Services could raise concerns about the company's ability to diversify its revenue streams.\" },\n    { \"title\": \"Gross Margin Guidance\", \"why\": \"Apple's gross margin has been under pressure due to component costs and supply chain constraints. Investors will be watching for any changes to the company's gross margin guidance, which could impact profitability and earnings growth. A metric to watch is a gross margin of at least 38.5%.\", \"metric\": \"38.5%\" }\n  ],\n  \"bullSetup\": \"The bull case going into print is that Apple's strong brand loyalty, combined with the ongoing demand for premium smartphones and the company's growing ecosystem of Services, will drive a revenue beat and support a higher valuation multiple.\",\n  \"bearSetup\": \"The key risk is that Apple's iPhone sales may be peaking, and the company's inability to offset slowing hardware growth with Services revenue could lead to a downward revision in earnings estimates and a multiple compression.\"",
+    "watchPoints": [],
+    "bullSetup": "",
+    "bearSetup": "",
+    "generatedAt": "2026-06-15T18:23:27.730Z"
+  },
+  "GOOGL": {
+    "ticker": "GOOGL",
+    "companyName": "Alphabet (Google)",
+    "nextDate": "2026-07-23",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 2.87003,
+    "revEstB": 116.7,
+    "barToBeat": "To move the stock, Alphabet needs to deliver a significant beat to the consensus revenue estimate of $116.7B, with a whisper number north of $120B, as well as demonstrate continued strength in its cloud and advertising businesses. The company must also provide reassurance on its ability to navigate the current macroeconomic uncertainty and its impact on the digital advertising market.",
+    "watchPoints": [
+      {
+        "title": "Cloud Revenue Growth",
+        "why": "Alphabet's cloud business is a key growth driver, and investors will be watching for signs of continued momentum in this segment, particularly in light of increasing competition from Amazon Web Services and Microsoft Azure. A strong cloud revenue growth number will be seen as a positive indicator of the company's ability to expand its offerings beyond advertising.",
+        "metric": "25% YoY growth"
+      },
+      {
+        "title": "YouTube Ad Revenue",
+        "why": "YouTube's advertising revenue is a significant contributor to Alphabet's overall top-line, and investors will be looking for signs of resilience in this business, despite the current macroeconomic uncertainty and its potential impact on the digital advertising market."
+      },
+      {
+        "title": "Operating Margin Expansion",
+        "why": "Alphabet's operating margin has been under pressure in recent quarters, and investors will be watching for signs of expansion, driven by the company's efforts to improve efficiency and reduce costs, particularly in its cloud and hardware businesses. A metric to watch is an operating margin of at least 25%",
+        "metric": "25%"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Alphabet's diversified revenue streams, including its cloud, advertising, and hardware businesses, will enable the company to deliver a strong top-line performance, despite the current macroeconomic uncertainty, and provide a positive outlook for the remainder of the year.",
+    "bearSetup": "The key risk to the bear case is that a slowdown in the digital advertising market, driven by macroeconomic uncertainty, will have a disproportionate impact on Alphabet's revenue and profitability, particularly if the company is unable to offset this decline with growth in its cloud and hardware businesses.",
+    "generatedAt": "2026-06-15T18:23:33.468Z"
+  },
+  "AMZN": {
+    "ticker": "AMZN",
+    "companyName": "Amazon",
+    "nextDate": "2026-07-30",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 1.81592,
+    "revEstB": 195.7,
+    "barToBeat": "To move the stock, Amazon needs to deliver a strong beat on the top-line, with consensus whisper numbers suggesting revenue growth of at least 20% year-over-year, driven by continued strength in AWS and advertising sales. The buy-side is also looking for reassurance on the company's ability to maintain profitability margins despite increased investments in AI, chips, and robotics.",
+    "watchPoints": [
+      {
+        "title": "AWS Growth Rate",
+        "why": "AWS remains a key driver of Amazon's profitability, and a slowdown in growth could raise concerns about the company's ability to maintain its competitive position in the cloud computing market. A growth rate of at least 25% year-over-year is expected to reassure investors.",
+        "metric": "25% YoY growth"
+      },
+      {
+        "title": "Advertising Sales",
+        "why": "Advertising sales have been a significant contributor to Amazon's revenue growth, and a strong performance in this segment could help offset any potential slowdown in other areas. The company's ability to continue to take share from traditional advertising platforms is a key focus area."
+      },
+      {
+        "title": "Operating Margin Guidance",
+        "why": "Amazon's operating margin guidance will be closely watched, as the company's investments in new technologies and areas such as AI, chips, and robotics are expected to weigh on profitability. A guidance range of at least 4-5% operating margin is expected to be seen as a positive sign.",
+        "metric": "4-5% operating margin guidance"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Amazon's strong position in key growth areas such as cloud computing, advertising, and e-commerce, combined with its significant investments in AI, chips, and robotics, will drive long-term revenue and profitability growth, and that the company will deliver a strong beat on both the top and bottom lines.",
+    "bearSetup": "The key risk to the bear case is that Amazon's investments in new technologies and areas will weigh too heavily on profitability, and that the company will miss on operating margin guidance, leading to a negative reaction in the stock.",
+    "generatedAt": "2026-06-15T18:23:38.176Z"
+  },
+  "MSFT": {
+    "ticker": "MSFT",
+    "companyName": "Microsoft",
+    "nextDate": "2026-07-29",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 4.23745,
+    "revEstB": 87.7,
+    "barToBeat": "To move the stock, Microsoft needs to deliver a strong top-line beat, with consensus whisper estimates suggesting a revenue number above $90 billion, as well as robust growth in its cloud and AI segments. The buy-side is also looking for confirmation of the company's ability to maintain its high-margin profile, with a non-GAAP operating margin above 43%.",
+    "watchPoints": [
+      {
+        "title": "Cloud Revenue Growth",
+        "why": "Microsoft's cloud business is a key driver of growth, and investors will be watching for a continuation of the 29% year-over-year growth seen in Q1. A strong cloud revenue number will be seen as a positive indicator of the company's ability to execute on its cloud strategy.",
+        "metric": "29% YoY growth"
+      },
+      {
+        "title": "AI Revenue Update",
+        "why": "Microsoft's AI business has been a major growth driver, with revenue surpassing an annual run rate of $37 billion in Q1. Investors will be looking for an update on the company's AI revenue trajectory and any potential catalysts for further growth."
+      },
+      {
+        "title": "Azure Growth Acceleration",
+        "why": "Azure is a key component of Microsoft's cloud business, and investors will be watching for signs of growth acceleration in the segment. A strong Azure growth number will be seen as a positive indicator of the company's ability to compete with other cloud providers.",
+        "metric": "40%+ YoY growth"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Microsoft's strong cloud and AI momentum will continue, driven by growing demand for cloud services and the company's successful execution on its cloud strategy, leading to a top-line beat and upward revisions to estimates.",
+    "bearSetup": "The key risk to the bear case is that a potential slowdown in PC sales, driven by macroeconomic uncertainty and a challenging end-market, could weigh on Microsoft's Windows and device revenue, leading to a disappointing top-line number and downward revisions to estimates.",
+    "generatedAt": "2026-06-15T18:23:43.805Z"
+  },
+  "META": {
+    "ticker": "META",
+    "companyName": "Meta",
+    "nextDate": "2026-07-29",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 7.20067,
+    "revEstB": 60.2,
+    "barToBeat": "To move the stock, Meta needs to deliver a revenue beat of at least 2-3% above the $60.2B consensus, coupled with reassuring guidance on ad revenue growth and user engagement, as the buy-side is whispering about potential headwinds from increased competition in the digital advertising space. The stock's recent underperformance despite strong earnings surprises suggests that the market is already pricing in a high bar for growth and profitability.",
+    "watchPoints": [
+      {
+        "title": "Ad Revenue Growth",
+        "why": "As a key driver of Meta's top-line growth, ad revenue growth will be closely watched, particularly in the face of increasing competition from newer platforms and evolving consumer behaviors.",
+        "metric": "10% YoY growth"
+      },
+      {
+        "title": "Reels Engagement",
+        "why": "The success of Reels, Meta's short-form video platform, is crucial to the company's efforts to attract and retain younger users and increase average revenue per user (ARPU), and any updates on engagement metrics will be closely scrutinized."
+      },
+      {
+        "title": "Operating Margin Guidance",
+        "why": "Given the current macroeconomic uncertainty and rising operational costs, Meta's guidance on operating margins will be important in assessing the company's ability to maintain profitability and invest in growth initiatives, with a metric of at least 35% being seen as a positive signal.",
+        "metric": "35% operating margin"
+      }
+    ],
+    "bullSetup": "A strong bull case for Meta going into earnings is that the company will demonstrate continued traction in its e-commerce and online services initiatives, driving revenue growth and expanding its user base, particularly in emerging markets where digital adoption is accelerating.",
+    "bearSetup": "The key risk for Meta is that the company will report a decline in ad revenue growth due to increased competition from newer platforms and a potential slowdown in consumer spending, which could lead to a downward revision in guidance and negatively impact the stock price.",
+    "generatedAt": "2026-06-15T18:23:49.466Z"
+  },
+  "ORCL": {
+    "ticker": "ORCL",
+    "companyName": "Oracle",
+    "nextDate": "2026-09-09",
+    "fiscalQuarter": "Q3 FY26",
+    "epsEst": 1.96241,
+    "revEstB": 19.1,
+    "barToBeat": "To move the stock, Oracle needs to deliver a strong beat to consensus estimates, with a whisper number north of $2.05 in EPS, and demonstrate continued momentum in its Cloud Infrastructure business, which is already priced in to some extent after the Q2 beat. The company must also provide reassuring guidance for Q2 FY 2027, with total revenue growth of at least 25% and cloud revenue growth of 55% or higher.",
+    "watchPoints": [
+      {
+        "title": "Cloud Growth Rate",
+        "why": "Oracle's cloud growth rate is a key metric to watch, as it drives the company's top-line growth and profitability. A strong cloud growth rate would indicate that the company is successfully executing its cloud strategy and gaining market share.",
+        "metric": "57-63% cloud revenue growth"
+      },
+      {
+        "title": "Operating Margin",
+        "why": "Oracle's operating margin is under scrutiny, given the significant capital investments required to support the growth of its Cloud Infrastructure business. A stable or expanding operating margin would alleviate concerns about the company's ability to maintain profitability while investing in growth."
+      },
+      {
+        "title": "Guidance Raise",
+        "why": "The company's guidance for Q2 FY 2027 will be closely watched, as it will provide insight into Oracle's visibility and confidence in its growth prospects. A guidance raise would be a positive catalyst for the stock, while a disappointing guidance would raise concerns about the company's ability to sustain its growth momentum.",
+        "metric": "total revenue growth of 25% or higher"
+      }
+    ],
+    "bullSetup": "The bull case going into print is that Oracle will continue to benefit from the strong demand for cloud infrastructure and applications, driven by the growing adoption of digital transformation and AI technologies, and that the company will be able to maintain its pricing power and operating leverage despite the significant investments in its cloud business.",
+    "bearSetup": "The key risk to the bear case is that Oracle's cloud growth may slow down due to increasing competition from other cloud players, such as Amazon Web Services and Microsoft Azure, and that the company's significant capital investments in its Cloud Infrastructure business may not yield the expected returns, leading to margin pressure and disappointing guidance.",
+    "generatedAt": "2026-06-15T18:23:55.379Z"
+  }
+}

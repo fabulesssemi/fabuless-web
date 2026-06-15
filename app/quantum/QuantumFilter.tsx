@@ -66,20 +66,32 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
   return (
     <>
       {/* ── Top Stories — 4-col image cards ── */}
-      {topStories.length > 0 && (
-        <section className="pb-6 border-b border-gray-200">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="h-px flex-1 bg-gray-200" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 shrink-0">Top Stories</span>
-            <div className="h-px flex-1 bg-gray-200" />
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {topStories.map((article) => (
-              <StoryCard key={article.id} article={article} />
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="pb-6 border-b border-gray-200">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="h-px flex-1 bg-gray-200" />
+          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 shrink-0">Top Stories</span>
+          <div className="h-px flex-1 bg-gray-200" />
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {topStories.length > 0
+            ? topStories.map((article) => <StoryCard key={article.id} article={article} />)
+            : Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="bg-white border border-[#DDDBD2] flex flex-col">
+                  <div className="aspect-[16/9] bg-indigo-50 animate-pulse" />
+                  <div className="p-4 pt-3 flex flex-col gap-2">
+                    <div className="h-2.5 w-20 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-4 w-3/4 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-3 w-1/2 bg-gray-100 rounded animate-pulse mt-1" />
+                  </div>
+                </div>
+              ))
+          }
+        </div>
+        {topStories.length === 0 && (
+          <p className="text-center text-[11px] text-gray-400 font-serif mt-3">Pipeline runs tonight — top stories will populate automatically.</p>
+        )}
+      </section>
 
       {/* ── Rest — 2-col text list ── */}
       {rest.length > 0 && (

@@ -90,7 +90,7 @@ Article from ${source}:
 Title: ${title}
 Excerpt: ${description}
 
-Write a tight 2-3 sentence summary a curious non-technical reader would find fascinating. Be concrete, not vague. Make the "so what" clear.
+Write ONE short sentence (max 20 words) — the sharpest possible investment or curiosity angle. No filler, no "this article discusses". Just the signal.
 
 Classify into exactly one category:
   hardware    — qubit advances, new processors, quantum computers

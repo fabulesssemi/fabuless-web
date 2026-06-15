@@ -179,17 +179,17 @@ export function PortfolioPerformance({
           {/* Two-column row */}
           <div className="flex divide-x" style={{ borderColor: "#1F2937" }}>
             {/* Left — your holdings */}
-            <div className="flex-1 px-5 py-4">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Your Holdings</p>
-              <div className="flex items-baseline gap-2">
+            <div className="flex-1 px-4 py-2.5">
+              <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">Your Holdings</p>
+              <div className="flex items-baseline gap-1.5">
                 <span
-                  className="text-[36px] font-bold tabular-nums leading-none"
+                  className="text-[20px] font-bold tabular-nums leading-none"
                   style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}
                 >
                   {money(strip.pnl)}
                 </span>
                 <span
-                  className="text-[20px] tabular-nums leading-none"
+                  className="text-[13px] tabular-nums leading-none"
                   style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}
                 >
                   ({strip.pnlPct >= 0 ? "+" : ""}{strip.pnlPct.toFixed(1)}%)
@@ -198,10 +198,10 @@ export function PortfolioPerformance({
             </div>
 
             {/* Right — S&P comparison */}
-            <div className="flex-1 px-5 py-4" style={{ borderColor: "#1F2937" }}>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">S&amp;P 500 (same money)</p>
-              <div className="flex items-baseline gap-2">
-                <span className="text-[36px] font-bold tabular-nums leading-none text-gray-400">
+            <div className="flex-1 px-4 py-2.5" style={{ borderColor: "#1F2937" }}>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">S&amp;P 500 (same money)</p>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-[20px] font-bold tabular-nums leading-none text-gray-400">
                   {strip.spyPct >= 0 ? "+" : ""}{strip.spyPct.toFixed(1)}%
                 </span>
               </div>
@@ -210,11 +210,11 @@ export function PortfolioPerformance({
 
           {/* Full-width beat row */}
           <div
-            className="px-5 py-2.5"
+            className="px-4 py-1.5"
             style={{ borderTop: "1px solid rgba(16,185,129,0.12)" }}
           >
             <span
-              className="text-[14px] tabular-nums"
+              className="text-[11px] tabular-nums"
               style={{ color: strip.beatBy >= 0 ? "#10B981" : "#F43F5E" }}
             >
               {strip.beatBy >= 0 ? "↑ Beating the market by " : "↓ Trailing the market by "}

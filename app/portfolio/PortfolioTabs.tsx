@@ -6,6 +6,7 @@ import type { Prediction } from "@/lib/tracker/predictions";
 import type { ExpertMeta } from "@/lib/tracker/experts";
 import type { EarningsSummary } from "@/lib/earnings/summaries";
 import type { TickerEarnings } from "@/app/api/earnings-history/route";
+import type { EarningsPreviewGenerated } from "@/scripts/update-earnings-previews";
 
 const STATUS_META = {
   CORRECT:   { label: "Correct", bg: "bg-emerald-500", text: "text-white" },
@@ -141,48 +142,109 @@ function PastQuarterCard({ s, ticker }: { s: EarningsSummary; ticker: string }) 
 
 type ForwardEst = TickerEarnings["forward"][number];
 
-function UpcomingEarningsCard({ ticker, companyName, label, daysUntil, earningsSlug, forward }: EarningsRow & { forward: ForwardEst[] }) {
+function UpcomingEarningsCard({ ticker, label, daysUntil, earningsSlug, forward, preview }: EarningsRow & { forward: ForwardEst[]; preview: EarningsPreviewGenerated | null }) {
+  const [open, setOpen] = useState(false);
   const soon = daysUntil >= 0 && daysUntil <= 7;
   const nextEst = forward.find((f) => f.period === "0q" || f.period === "+1q");
+  const epsEst = preview?.epsEst ?? nextEst?.epsEst ?? null;
+  const revEstB = preview?.revEstB ?? (nextEst?.revEst != null ? Math.round(nextEst.revEst / 1e9 * 10) / 10 : null);
+  const hasPreview = !!(preview?.barToBeat || preview?.watchPoints?.length);
+
   return (
-    <div className={`rounded-lg border ${soon ? "border-amber-300 bg-amber-50/40" : "border-gray-100 bg-white"} overflow-hidden`}>
-      <div className="flex items-center justify-between gap-4 px-4 py-3">
-        <div className="flex items-center gap-3">
-          <span className="font-sans text-[13px] font-bold text-gray-900 w-12 tabular-nums">{ticker}</span>
+    <div className={`rounded-lg border ${soon ? "border-amber-300 bg-amber-50/30" : "border-gray-200 bg-white"} overflow-hidden`}>
+      {/* Header row */}
+      <button
+        onClick={() => hasPreview && setOpen((v) => !v)}
+        className={`w-full flex items-center justify-between gap-4 px-4 py-3 text-left ${hasPreview ? "hover:bg-gray-50" : ""} transition-colors`}
+      >
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className={`text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded ${soon ? "bg-amber-100 text-amber-700" : "bg-gray-100 text-gray-500"}`}>
+            {daysUntil === 0 ? "today" : daysUntil === 1 ? "tomorrow" : `in ${daysUntil}d`}
+          </span>
           <span className="font-serif text-[12px] text-[#4a4a4a]">{label}</span>
-          {nextEst?.epsEst != null && (
-            <span className="text-[11px] text-gray-400">
-              EPS est. <span className="font-semibold text-gray-700">${nextEst.epsEst.toFixed(2)}</span>
-            </span>
+          {epsEst != null && (
+            <span className="text-[11px] text-gray-400">EPS est. <span className="font-semibold text-gray-700">${epsEst.toFixed(2)}</span></span>
           )}
-          {nextEst?.revEst != null && (
-            <span className="text-[11px] text-gray-400">
-              Rev est. <span className="font-semibold text-gray-700">${(nextEst.revEst / 1000).toFixed(1)}B</span>
-            </span>
+          {revEstB != null && (
+            <span className="text-[11px] text-gray-400">Rev est. <span className="font-semibold text-gray-700">${revEstB}B</span></span>
           )}
         </div>
-        <div className="flex items-center gap-3">
-          <span className={`text-[11px] font-semibold tabular-nums ${soon ? "text-[#B45309]" : "text-gray-400"}`}>
-            {daysUntil === 0 ? "today" : daysUntil === 1 ? "tomorrow" : `${daysUntil}d`}
-          </span>
+        <div className="flex items-center gap-2 shrink-0">
           {earningsSlug && (
             <Link
               href={`/earnings/${earningsSlug}`}
-              className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 bg-[#B45309] text-white rounded hover:bg-amber-800 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+              className="text-[10px] font-bold uppercase tracking-wide px-2 py-1 bg-[#B45309] text-white rounded hover:bg-amber-800 transition-colors"
             >
               Deep dive →
             </Link>
           )}
+          {hasPreview && (
+            <span className="text-[11px] text-gray-400">{open ? "▲" : "▼"}</span>
+          )}
         </div>
-      </div>
+      </button>
+
+      {/* What to watch panel */}
+      {open && preview && (
+        <div className="px-4 pb-4 pt-2 border-t border-gray-100 bg-gray-50/40">
+          {preview.barToBeat && (
+            <div className="mb-3">
+              <div className="text-[9px] font-bold uppercase tracking-widest text-[#B45309] mb-1">Bar to beat</div>
+              <p className="font-serif text-[12.5px] text-[#4a4a4a] leading-relaxed">{preview.barToBeat}</p>
+            </div>
+          )}
+
+          {preview.watchPoints?.length > 0 && (
+            <div className="mb-3">
+              <div className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2">What to watch</div>
+              <div className="flex flex-col gap-2">
+                {preview.watchPoints.map((wp, i) => (
+                  <div key={i} className="flex gap-2.5">
+                    <span className="shrink-0 font-mono text-[10px] text-gray-300 mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <div className="text-[12px] font-bold text-gray-800">{wp.title}</div>
+                      <p className="font-serif text-[11.5px] text-gray-500 leading-snug">{wp.why}</p>
+                      {wp.metric && (
+                        <div className="mt-0.5 flex items-start gap-1.5">
+                          <span className="text-[9px] font-bold uppercase tracking-wide text-gray-400 mt-0.5 shrink-0">Watch</span>
+                          <span className="text-[11px] text-gray-600 font-medium">{wp.metric}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {(preview.bullSetup || preview.bearSetup) && (
+            <div className="flex gap-3 mt-3">
+              {preview.bullSetup && (
+                <div className="flex-1 bg-emerald-50 border border-emerald-100 rounded px-3 py-2">
+                  <div className="text-[9px] font-bold uppercase tracking-widest text-emerald-700 mb-0.5">Bull</div>
+                  <p className="font-serif text-[11.5px] text-emerald-800 leading-snug">{preview.bullSetup}</p>
+                </div>
+              )}
+              {preview.bearSetup && (
+                <div className="flex-1 bg-rose-50 border border-rose-100 rounded px-3 py-2">
+                  <div className="text-[9px] font-bold uppercase tracking-widest text-rose-700 mb-0.5">Bear</div>
+                  <p className="font-serif text-[11.5px] text-rose-800 leading-snug">{preview.bearSetup}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
-function EarningsTabContent({ tickers, upcoming, pastSummaries }: {
+function EarningsTabContent({ tickers, upcoming, pastSummaries, generatedPreviews }: {
   tickers: string[];
   upcoming: (EarningsRow & { forward: ForwardEst[] })[];
   pastSummaries: Record<string, EarningsSummary[]>;
+  generatedPreviews: Record<string, EarningsPreviewGenerated | null>;
 }) {
   if (tickers.length === 0) {
     return <p className="font-serif text-[13px] text-[#4a4a4a]">Add holdings to see earnings data.</p>;
@@ -204,7 +266,7 @@ function EarningsTabContent({ tickers, upcoming, pastSummaries }: {
             <div className="flex flex-col gap-2">
               {/* Upcoming */}
               {upcomingForTicker.map((u) => (
-                <UpcomingEarningsCard key={`upcoming-${u.ticker}`} {...u} />
+                <UpcomingEarningsCard key={`upcoming-${u.ticker}`} {...u} preview={generatedPreviews[u.ticker] ?? null} />
               ))}
 
               {/* Past quarters */}
@@ -232,6 +294,7 @@ export function PortfolioTabs({
   analystRows,
   tickers,
   pastSummaries,
+  generatedPreviews,
 }: {
   earnings: EarningsRow[];
   calls: Prediction[];
@@ -239,6 +302,7 @@ export function PortfolioTabs({
   analystRows: AnalystRow[];
   tickers: string[];
   pastSummaries: Record<string, EarningsSummary[]>;
+  generatedPreviews: Record<string, EarningsPreviewGenerated | null>;
 }) {
   const [tab, setTab] = useState<Tab>("earnings");
   // Forward estimates fetched client-side (not blocking SSR)
@@ -289,6 +353,7 @@ export function PortfolioTabs({
           tickers={tickers}
           upcoming={upcomingWithForward}
           pastSummaries={pastSummaries}
+          generatedPreviews={generatedPreviews}
         />
       )}
 

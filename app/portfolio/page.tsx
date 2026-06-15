@@ -7,6 +7,7 @@ import { EXPERTS } from "@/lib/tracker/experts";
 import { fetchAnalystCoverage } from "@/lib/analyst/analysts";
 import { tickersWithPreview } from "@/lib/earnings/previews";
 import { getSummaries } from "@/lib/earnings/summaries";
+import { getGeneratedPreview } from "@/lib/earnings/generated-previews";
 import { decodeHoldings, type Holding } from "./storage";
 import { buildColorMap } from "./colors";
 import { PortfolioGate } from "./PortfolioGate";
@@ -118,6 +119,11 @@ export default async function PortfolioPage({
     tickers.map((t) => [t, getSummaries(t, 3)])
   );
 
+  // Auto-generated "what to watch" previews for upcoming earners
+  const generatedPreviews = Object.fromEntries(
+    tickers.map((t) => [t, getGeneratedPreview(t)])
+  );
+
   // Expert calls tab
   const recentCalls = predictions
     .filter((p) => (p.companies ?? []).some((c) => tickers.includes(c)))
@@ -217,6 +223,7 @@ export default async function PortfolioPage({
         analystRows={analystRows}
         tickers={tickers}
         pastSummaries={pastSummaries}
+        generatedPreviews={generatedPreviews}
       />
 
 

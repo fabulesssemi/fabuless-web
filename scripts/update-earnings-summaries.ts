@@ -5,13 +5,13 @@
  *   1. Fetch last 3 reported quarters' earnings dates + EPS/rev data from Yahoo Finance
  *   2. Locate the Motley Fool transcript URL (tries multiple slug patterns)
  *   3. Fetch + parse the transcript (management turns only)
- *   4. Call Claude to generate a 3-sentence summary + key quote
+ *   4. Call Groq (free) to generate a 3-sentence summary + key quote
  *   5. Compute stock price move on earnings day
  *   6. Write to data/earnings-summaries.json
  *
  * Run:
  *   cd ~/projects/fabuless-web
- *   ANTHROPIC_API_KEY=sk-... npx tsx scripts/update-earnings-summaries.ts
+ *   GROQ_API_KEY=gsk_... npx tsx scripts/update-earnings-summaries.ts
  *
  * Or with --ticker=NVDA to refresh a single ticker.
  * Or with --force to regenerate existing summaries (otherwise skips already-done quarters).
@@ -19,13 +19,13 @@
 
 import fs from "fs";
 import path from "path";
-import Anthropic from "@anthropic-ai/sdk";
+import Groq from "groq-sdk";
 import YahooFinance from "yahoo-finance2";
 import { COMPANY_UNIVERSE } from "../lib/companies";
 import type { EarningsSummary, EarningsSummariesStore } from "../lib/earnings/summaries";
 
 const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const DATA_PATH = path.resolve(__dirname, "../data/earnings-summaries.json");
 const FOOL_BASE = "https://www.fool.com/earnings/call-transcripts";
@@ -214,13 +214,13 @@ Respond in this exact JSON format:
   "keyQuote": "..." or null
 }`;
 
-  const msg = await anthropic.messages.create({
-    model: "claude-haiku-4-5-20251001",
+  const msg = await groq.chat.completions.create({
+    model: "llama-3.1-70b-versatile",
     max_tokens: 600,
     messages: [{ role: "user", content: prompt }],
   });
 
-  const text = msg.content[0].type === "text" ? msg.content[0].text : "";
+  const text = msg.choices[0]?.message?.content ?? "";
   try {
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
@@ -405,8 +405,8 @@ async function main() {
   const tickerFilter = args.find((a) => a.startsWith("--ticker="))?.split("=")[1]?.toUpperCase();
   const force = args.includes("--force");
 
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error("ANTHROPIC_API_KEY is required");
+  if (!process.env.GROQ_API_KEY) {
+    console.error("GROQ_API_KEY is required. Get a free key at console.groq.com");
     process.exit(1);
   }
 

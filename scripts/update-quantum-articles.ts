@@ -16,12 +16,12 @@
 
 import fs from "fs";
 import path from "path";
-import Groq from "groq-sdk";
+import Anthropic from "@anthropic-ai/sdk";
 import { fetchQuantumNewsItems } from "../lib/quantum/sources";
 import { QUANTUM_KEYWORDS, QUANTUM_COMPANIES } from "../lib/quantum/companies";
 import type { QuantumArticle, QuantumArticlesStore } from "../lib/quantum/articles";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const DATA_PATH = path.resolve(__dirname, "../data/quantum-articles.json");
 
 // Target 10-12 high-quality articles per run
@@ -103,14 +103,13 @@ Classify into exactly one category:
 Respond in this exact JSON format (no markdown, no extra text):
 {"summary": "...", "category": "hardware|software|market|research|policy|consciousness"}`;
 
-  const msg = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+  const msg = await anthropic.messages.create({
+    model: "claude-haiku-4-5-20251001",
     max_tokens: 300,
-    temperature: 0.3,
     messages: [{ role: "user", content: prompt }],
   });
 
-  const text = msg.choices[0]?.message?.content ?? "";
+  const text = msg.content[0]?.type === "text" ? msg.content[0].text : "";
   try {
     const m = text.match(/\{[\s\S]*\}/);
     if (m) {
@@ -143,14 +142,13 @@ ${list}
 
 Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7, 9]). No other text.`;
 
-  const msg = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+  const msg = await anthropic.messages.create({
+    model: "claude-haiku-4-5-20251001",
     max_tokens: 50,
-    temperature: 0.2,
     messages: [{ role: "user", content: prompt }],
   });
 
-  const text = msg.choices[0]?.message?.content ?? "";
+  const text = msg.content[0]?.type === "text" ? msg.content[0].text : "";
   const nums = text.match(/\[[\d,\s]+\]/)?.[0];
   if (!nums) return new Set();
 

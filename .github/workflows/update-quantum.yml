@@ -30,7 +30,7 @@ jobs:
 
       - name: Run quantum article pipeline
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.force }}" = "true" ]; then

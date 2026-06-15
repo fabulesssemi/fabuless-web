@@ -22,7 +22,7 @@ export const WALL_STREET_ANALYSTS: WallStreetAnalyst[] = [
   { id: "mcneill", name: "Harlan Sur",      firm: "JP Morgan",           firmDisplay: "JP Morgan",            title: "Managing Director", knownFor: "Broad semi coverage with focus on MRVL, AVGO, and NVDA",           accent: "#17202A" },
   { id: "lu",      name: "C.J. Muse",       firm: "Cantor Fitzgerald",   firmDisplay: "Cantor Fitzgerald",    title: "Senior Analyst",    knownFor: "Equipment specialist covering ASML, litho, and EUV cycle dynamics", accent: "#1F618D" },
   { id: "lurie",   name: "Chris Caso",      firm: "Wolfe Research",      firmDisplay: "Wolfe Research",       title: "Managing Director", knownFor: "Mobile and PC cycle analyst covering QCOM, INTC, and foundry",     accent: "#784212" },
-  { id: "rolland", name: "Pierre Ferragu",  firm: "New Street Research", firmDisplay: "New Street Research",  title: "Partner",           knownFor: "NVDA mega-bull behind the GPU compute buildout thesis",            accent: "#6C3483" },
+  { id: "curtis",  name: "Blayne Curtis",   firm: "Jefferies",           firmDisplay: "Jefferies",            title: "Managing Director", knownFor: "Top-ranked semis analyst spanning AI compute, analog, and equipment", accent: "#6C3483" },
   { id: "egan",    name: "Timothy Arcuri",  firm: "UBS",                 firmDisplay: "UBS",                  title: "Managing Director", knownFor: "Leading-edge fab economist covering TSM, ASML, and capex cycles",  accent: "#1A5276" },
   { id: "omalley", name: "Thomas O'Malley", firm: "Barclays",            firmDisplay: "Barclays",             title: "Managing Director", knownFor: "Barclays semiconductor equity research",                           accent: "#00AEEF" },
 ];

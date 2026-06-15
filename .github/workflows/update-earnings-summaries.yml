@@ -1,0 +1,58 @@
+name: Update Earnings Summaries
+
+on:
+  schedule:
+    # Every Monday at 7am ET — catches weekend earnings + pre-market updates
+    - cron: "0 12 * * 1"
+    # Also run Wed (mid-week earnings season) and Fri
+    - cron: "0 12 * * 3"
+    - cron: "0 12 * * 5"
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: "Single ticker to refresh (blank = all)"
+        required: false
+        default: ""
+      force:
+        description: "Force regenerate existing summaries"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run earnings summary update
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.ticker }}" ]; then
+            ARGS="--ticker=${{ github.event.inputs.ticker }}"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            ARGS="$ARGS --force"
+          fi
+          npx tsx scripts/update-earnings-summaries.ts $ARGS
+
+      - name: Commit updated summaries
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/earnings-summaries.json
+          git diff --staged --quiet || git commit -m "chore: update earnings summaries [skip ci]"
+          git push

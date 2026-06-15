@@ -5,6 +5,8 @@ import { getCompanyData } from "@/lib/providers";
 import { predictions } from "@/lib/tracker/predictions";
 import { EXPERTS } from "@/lib/tracker/experts";
 import { fetchAnalystCoverage } from "@/lib/analyst/analysts";
+import { tickersWithPreview } from "@/lib/earnings/previews";
+import { getSummaries } from "@/lib/earnings/summaries";
 import { decodeHoldings, type Holding } from "./storage";
 import { buildColorMap } from "./colors";
 import { PortfolioGate } from "./PortfolioGate";
@@ -98,11 +100,23 @@ export default async function PortfolioPage({
   const livePrices: Record<string, number | null> = Object.fromEntries(built.map((b) => [b.row.ticker, b.price]));
   const colorMap = buildColorMap(tickers);
 
-  // Earnings tab
+  // Earnings tab — upcoming (any future date, not just 30 days)
+  const previewTickers = new Set(tickersWithPreview());
   const earningsRows: EarningsRow[] = built
-    .filter((b) => b.earningsDate && daysUntil(b.earningsDate) >= 0 && daysUntil(b.earningsDate) <= 30)
+    .filter((b) => b.earningsDate && daysUntil(b.earningsDate) >= 0)
     .sort((a, b) => a.earningsDate!.getTime() - b.earningsDate!.getTime())
-    .map((b) => ({ ticker: b.row.ticker, label: b.row.earningsLabel!, daysUntil: daysUntil(b.earningsDate!) }));
+    .map((b) => ({
+      ticker: b.row.ticker,
+      companyName: b.row.name,
+      label: b.row.earningsLabel!,
+      daysUntil: daysUntil(b.earningsDate!),
+      earningsSlug: previewTickers.has(b.row.ticker) ? b.row.ticker.toLowerCase() : null,
+    }));
+
+  // Past earnings summaries from static JSON (auto-updated by pipeline)
+  const pastSummaries = Object.fromEntries(
+    tickers.map((t) => [t, getSummaries(t, 3)])
+  );
 
   // Expert calls tab
   const recentCalls = predictions
@@ -202,6 +216,7 @@ export default async function PortfolioPage({
         experts={expertsMap}
         analystRows={analystRows}
         tickers={tickers}
+        pastSummaries={pastSummaries}
       />
 
 

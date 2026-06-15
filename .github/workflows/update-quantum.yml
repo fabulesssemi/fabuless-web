@@ -2,8 +2,7 @@ name: Update Quantum Articles
 
 on:
   schedule:
-    - cron: "0 13 * * 1"   # Monday 9am ET
-    - cron: "0 13 * * 4"   # Thursday 9am ET
+    - cron: "0 13 * * *"   # Every day 9am ET
   workflow_dispatch:
     inputs:
       force:

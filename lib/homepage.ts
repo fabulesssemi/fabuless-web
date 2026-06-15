@@ -94,15 +94,13 @@ export async function getHomepageArticles(): Promise<{
     const now = Date.now();
     const DAY_MS = 24 * 60 * 60 * 1000;
 
-    // Shelf-life filter at READ time — guarantees expired articles never show,
-    // even if the DB cleanup delete didn't run or failed:
-    //   top-tier (original_rank <= 5): live for 72h
-    //   lower-tier (original_rank > 5): live for 24h
-    // This is what actually rotates yesterday's worst stories off the page.
+    // Shelf-life filter at READ time:
+    //   top-tier (original_rank <= 5): 7 days
+    //   lower-tier (original_rank > 5): 3 days
     const alive = data.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
       const topTier = ((r.original_rank as number) ?? 99) <= 5;
-      return age < (topTier ? 3 * DAY_MS : DAY_MS);
+      return age < (topTier ? 7 * DAY_MS : 3 * DAY_MS);
     });
 
     // Source cap: max 3 per domain across the whole page
@@ -201,7 +199,7 @@ export async function saveAndExpireArticles(
         if (keep.has(r.url as string)) return false;
         const age = nowMs - new Date(r.first_seen_at as string).getTime();
         const topTier = ((r.original_rank as number) ?? 99) <= 5;
-        return age >= (topTier ? 3 * DAY : DAY);
+        return age >= (topTier ? 7 * DAY : 3 * DAY);
       })
       .map((r) => r.url as string);
 

@@ -201,7 +201,7 @@ export function PortfolioPerformance({
             <div className="flex-1 px-4 py-2.5" style={{ borderColor: "#1F2937" }}>
               <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">S&amp;P 500 (same money)</p>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-[20px] font-bold tabular-nums leading-none text-gray-400">
+                <span className="text-[20px] font-bold tabular-nums leading-none text-gray-700">
                   {strip.spyPct >= 0 ? "+" : ""}{strip.spyPct.toFixed(1)}%
                 </span>
               </div>

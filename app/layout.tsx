@@ -56,11 +56,16 @@ export default function RootLayout({
                 <Link href="/tracker" className="hover:text-amber-400 transition-colors">Tracker</Link>
                 <Link href="/portfolio" className="hover:text-amber-400 transition-colors">Portfolio</Link>
                 <Link href="/earnings" className="hover:text-amber-400 transition-colors">Earnings</Link>
+                <Link
+                  href="/quantum"
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600/40 hover:text-indigo-300 transition-all text-[13px] font-semibold"
+                >
+                  ✦ Quantum
+                </Link>
                 <div className="relative group">
                   <span className="cursor-default hover:text-amber-400 transition-colors py-4">More ▾</span>
                   <div className="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
                     <div className="bg-[#111827] border border-gray-700 py-1.5 w-44 shadow-lg">
-                      <Link href="/quantum" className="block px-4 py-2 hover:text-indigo-400 hover:bg-white/5 transition-colors">Quantum ✦</Link>
                       <Link href="/insider-trading" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Insider Trades</Link>
                       <Link href="/archive" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">Archive</Link>
                       <Link href="/about" className="block px-4 py-2 hover:text-amber-400 hover:bg-white/5 transition-colors">About</Link>

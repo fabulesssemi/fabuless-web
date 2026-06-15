@@ -121,10 +121,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 32.5,
-      "summary": "",
-      "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:14:25.728Z"
+      "summary": "Marvell reported Q2 2026 earnings with an EPS of $0.80, beating estimates of $0.79. The main narrative emphasized by management was the company's strong financial and operational position, as well as the appointment of a new CFO, Dan Durn, who brings significant industry experience. The company reaffirmed its financial outlook for the second quarter of fiscal 2027, and the stock moved up 32.5% on the earnings day, likely due to the positive earnings surprise and the optimism surrounding the new CFO appointment.",
+      "keyQuote": "Having served on our board for the past two years, Dan intimately knows Marvell and its long-term growth strategy. He has also spent the majority of his career in the semiconductor industry, serving as CFO at GlobalFoundries, Freescale Semiconductor, NXP Semiconductors, and Applied Materials, and brings a level of industry-specific fluency that is rare.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1835632/000119312526267688/d151562dex991.htm",
+      "generatedAt": "2026-06-15T07:25:04.455Z"
     },
     {
       "ticker": "MRVL",
@@ -136,10 +136,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 18.4,
-      "summary": "",
-      "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:14:35.970Z"
+      "summary": "Marvell reported Q1 2026 earnings with an EPS of $0.80, beating estimates of $0.79. The main narrative emphasized by management was the strategic partnership with NVIDIA, which is expected to deliver greater choice and flexibility for customers and drive growth for Marvell. The stock moved up 18.4% on the earnings day, likely driven by the positive earnings surprise and the promising partnership with NVIDIA, which includes a $2 billion investment in Marvell.",
+      "keyQuote": "The inference inflection has arrived. Token generation demand is surging, and the world is racing to build AI factories,",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1835632/000119312526134462/d113606dex991.htm",
+      "generatedAt": "2026-06-15T07:25:06.261Z"
     }
   ],
   "TSM": [
@@ -153,10 +153,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 6.4,
-      "summary": "",
+      "summary": "TSMC reported Q1 2026 earnings with an EPS of $3.49, beating estimates of $3.33. The company's strong results were driven by its position as the world's leading dedicated semiconductor foundry, supporting a thriving ecosystem of global customers and partners with the industry's leading process technologies. The stock moved 6.4% on earnings day, likely due to the company's solid performance and its commitment to innovation and customer support, although specific guidance or outlook was not provided in the text.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:14:46.591Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000302/tsm-agmx20260604x6k.htm",
+      "generatedAt": "2026-06-15T07:25:08.346Z"
     },
     {
       "ticker": "TSM",
@@ -168,10 +168,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 5.5,
-      "summary": "",
+      "summary": "TSMC reported Q4 2025 earnings with an EPS of $3.14, beating estimates of $2.98. The company's strong results were driven by its position in the semiconductor industry, although the text does not provide specific details on the drivers of the results. The stock moved up 5.5% on earnings day, likely due to the positive earnings surprise, and the company also announced an adjusted cash dividend of NT$6.00003573 per common share for the third quarter of 2025.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:14:56.843Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000027/tsm-dividendadjustmentx202.htm",
+      "generatedAt": "2026-06-15T07:25:09.984Z"
     }
   ],
   "ASML": [
@@ -185,10 +185,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 8.8,
-      "summary": "",
+      "summary": "ASML reported Q1 2026 earnings with EPS of $7.15, beating estimates of $6.62, and total net sales of €8.8 billion. The company's strong results were driven by its solid performance in the quarter, although the text does not provide specific details on the main narrative or theme that management emphasized. ASML now expects 2026 total net sales to be between €36 billion and €40 billion, with a gross margin between 51% and 53%, which led to an 8.8% increase in stock price on the earnings day.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:07.987Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026025147/form6-kquarterlyfilings.htm",
+      "generatedAt": "2026-06-15T07:25:12.342Z"
     },
     {
       "ticker": "ASML",
@@ -217,10 +217,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 16.2,
-      "summary": "",
+      "summary": "Arm Holdings reported Q1 2026 earnings with an EPS of $0.60, beating the estimated $0.58. The main narrative driving these results is not explicitly stated in the provided text, but the strong earnings suggest a positive performance. The stock moved 16.2% on earnings day, likely due to the company's beat on estimates, although specific guidance or outlook is not provided in the text.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:28.513Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1973239/000197323926000062/arm-20260506.htm",
+      "generatedAt": "2026-06-15T07:25:14.236Z"
     },
     {
       "ticker": "ARM",
@@ -232,10 +232,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 11.6,
-      "summary": "",
+      "summary": "ARM Holdings reported Q4 2025 earnings with an EPS of $0.43, beating the estimated $0.41. The company's strong performance was driven by its licensing and royalty revenue, with both non-related and related party members contributing to the growth. The stock moved up 11.6% on the earnings day, likely due to the positive earnings surprise and the company's outlook, although the specific guidance is not provided in the given text.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:38.719Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1973239/000197323926000006/arm-20251231.htm",
+      "generatedAt": "2026-06-15T07:25:16.043Z"
     }
   ],
   "MU": [
@@ -348,7 +348,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:53.949Z"
+      "generatedAt": "2026-06-15T07:25:18.478Z"
     },
     {
       "ticker": "000660.KS",
@@ -363,7 +363,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:54.868Z"
+      "generatedAt": "2026-06-15T07:25:19.405Z"
     }
   ],
   "005930.KS": [
@@ -380,7 +380,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:56.135Z"
+      "generatedAt": "2026-06-15T07:25:20.735Z"
     },
     {
       "ticker": "005930.KS",
@@ -395,7 +395,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:57.045Z"
+      "generatedAt": "2026-06-15T07:25:21.628Z"
     }
   ],
   "4063.T": [
@@ -412,7 +412,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:58.332Z"
+      "generatedAt": "2026-06-15T07:25:22.922Z"
     },
     {
       "ticker": "4063.T",
@@ -427,7 +427,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:15:59.248Z"
+      "generatedAt": "2026-06-15T07:25:23.847Z"
     }
   ],
   "3436.T": [
@@ -444,7 +444,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:16:00.520Z"
+      "generatedAt": "2026-06-15T07:25:25.140Z"
     },
     {
       "ticker": "3436.T",
@@ -459,7 +459,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:16:01.422Z"
+      "generatedAt": "2026-06-15T07:25:26.044Z"
     }
   ],
   "AMAT": [
@@ -572,7 +572,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:16:11.117Z"
+      "generatedAt": "2026-06-15T07:25:28.474Z"
     },
     {
       "ticker": "8035.T",
@@ -587,7 +587,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:16:12.050Z"
+      "generatedAt": "2026-06-15T07:25:29.392Z"
     }
   ],
   "SNPS": [
@@ -665,10 +665,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 14.9,
-      "summary": "",
+      "summary": "GlobalFoundries reported Q1 2026 earnings with an EPS of $0.40, beating the estimated $0.35. The main narrative driving these results is not explicitly stated in the provided text, but the strong earnings suggest a positive performance. The stock moved 14.9% on earnings day, likely due to the company's ability to exceed expectations, although specific guidance or outlook is not provided in the text.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:16:51.749Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1709048/000170904826000111/form6-kshellxearningsrelea.htm",
+      "generatedAt": "2026-06-15T07:25:32.945Z"
     },
     {
       "ticker": "GFS",
@@ -680,10 +680,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 16.3,
-      "summary": "",
+      "summary": "GlobalFoundries reported Q4 2025 earnings with an EPS of $0.55, beating estimates of $0.47, and revenue of $1.83 billion, up 8% sequentially and flat year over year. The company's results were driven by rapid growth in automotive, data center, and communications infrastructure end markets, with a gross margin mix shift away from mobile devices toward these high-value segments. The stock moved up 16.3% on the earnings day, driven by strong guidance, including a 2026 revenue target of $1.625 billion and a gross margin expectation of 27%, as well as a substantial share buyback program and significant investments in manufacturing and R&D.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:17:01.885Z"
+      "transcriptUrl": "https://www.fool.com/earnings/call-transcripts/2026/02/11/globalfoundries-gfs-q4-2025-earnings-transcript/",
+      "generatedAt": "2026-06-15T07:25:49.927Z"
     }
   ],
   "ASX": [
@@ -697,10 +697,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 11.9,
-      "summary": "",
+      "summary": "ASE Technology reported Q1 2026 earnings with an EPS of $0.20, beating estimates of $0.17, driven by strong growth in net revenues, which increased 19.2% year-over-year to 62,247 million NT$, with the ATM assembly, testing and material business segment showing a 29.3% year-over-year increase. The company's revenue growth was fueled by demand for outsourced semiconductor packaging, testing, and electronic manufacturing services. The stock moved up 11.9% on the earnings day, likely due to the positive earnings surprise and the company's solid revenue growth, although no specific guidance was provided in the press release.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:17:12.547Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1122411/000095010326006979/dp246487_6k.htm",
+      "generatedAt": "2026-06-15T07:25:52.169Z"
     },
     {
       "ticker": "ASX",
@@ -712,10 +712,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -7.8,
-      "summary": "",
+      "summary": "ASE Technology reported Q4 2025 earnings with an EPS of $0.21, beating estimates of $0.20, however the stock moved -7.8% on earnings day. The company's net revenues for January 2026 showed a 21.3% year-over-year increase, driven by growth in the ATM assembly, testing, and material business. The stock's decline despite beating estimates may be due to concerns over the highly competitive semiconductor industry and potential disruptions in commercial activities, with management providing no explicit guidance in the press release.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:17:22.736Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1122411/000095010326001874/dp241377_6k.htm",
+      "generatedAt": "2026-06-15T07:25:53.825Z"
     }
   ],
   "AMKR": [
@@ -761,10 +761,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 17.7,
-      "summary": "",
+      "summary": "Astera Labs reported Q1 2026 earnings with an EPS of $0.61, beating the estimated $0.54. The press release does not provide details on the main narrative or theme that drove the results, but the strong earnings suggest a positive performance. The stock moved up 17.7% on the earnings day, likely due to the company's ability to exceed expectations, although specific guidance or outlook is not provided in the text.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:17:37.238Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1736297/000173629726000017/alab-20260505.htm",
+      "generatedAt": "2026-06-15T07:25:56.269Z"
     },
     {
       "ticker": "ALAB",
@@ -776,10 +776,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -21.4,
-      "summary": "",
+      "summary": "Astera Labs reported Q4 2025 earnings with an EPS of $0.58, beating the estimated $0.51. The main narrative of the earnings report was the retirement of Chief Financial Officer Michael Tate and the appointment of Desmond Lynch as the new CFO, with details of his compensation package. The stock moved -21.4% on earnings day, possibly due to concerns over the CFO transition, despite the company beating earnings expectations.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:17:47.387Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1736297/000110465926012649/tm265461d2_8k.htm",
+      "generatedAt": "2026-06-15T07:25:58.010Z"
     }
   ],
   "SMCI": [
@@ -808,10 +808,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 13.8,
-      "summary": "",
+      "summary": "Supermicro reported Q4 2025 earnings with an EPS of $0.69, beating the estimated $0.49. The main narrative driving these results is not explicitly stated in the provided text, but the strong earnings suggest a positive performance. The stock moved 13.8% on earnings day, likely due to the significant beat in EPS, although specific guidance or outlook is not provided in the text.",
       "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:17:59.876Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000006/smci-20260203.htm",
+      "generatedAt": "2026-06-15T07:26:00.160Z"
     }
   ],
   "DELL": [
@@ -860,7 +860,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:18:05.786Z"
+      "generatedAt": "2026-06-15T07:26:01.824Z"
     },
     {
       "ticker": "2317.TW",
@@ -875,7 +875,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:18:06.707Z"
+      "generatedAt": "2026-06-15T07:26:02.747Z"
     }
   ],
   "ANET": [
@@ -1212,7 +1212,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:20:06.837Z"
+      "generatedAt": "2026-06-15T07:26:18.936Z"
     },
     {
       "ticker": "CRWV",
@@ -1227,7 +1227,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:20:17.124Z"
+      "generatedAt": "2026-06-15T07:26:29.112Z"
     }
   ]
 }

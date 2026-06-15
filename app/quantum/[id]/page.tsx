@@ -7,11 +7,12 @@ import { QUANTUM_COMPANIES } from "@/lib/quantum/companies";
 export const revalidate = 3600;
 
 const CATEGORY_META: Record<string, { label: string; color: string }> = {
-  hardware:  { label: "Hardware",  color: "bg-violet-100 text-violet-700" },
-  software:  { label: "Software",  color: "bg-indigo-100 text-indigo-700" },
-  market:    { label: "Market",    color: "bg-sky-100 text-sky-700" },
-  research:  { label: "Research",  color: "bg-emerald-100 text-emerald-700" },
-  policy:    { label: "Policy",    color: "bg-amber-100 text-amber-700" },
+  hardware:      { label: "Hardware",      color: "bg-violet-100 text-violet-700" },
+  software:      { label: "Software",      color: "bg-indigo-100 text-indigo-700" },
+  market:        { label: "Market",        color: "bg-sky-100 text-sky-700" },
+  research:      { label: "Research",      color: "bg-emerald-100 text-emerald-700" },
+  policy:        { label: "Policy",        color: "bg-amber-100 text-amber-700" },
+  consciousness: { label: "Consciousness", color: "bg-fuchsia-100 text-fuchsia-700" },
 };
 
 export async function generateStaticParams() {

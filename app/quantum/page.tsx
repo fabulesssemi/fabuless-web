@@ -12,9 +12,10 @@ export const metadata: Metadata = {
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
-  hardware: "Hardware", software: "Software", market: "Market", research: "Research", policy: "Policy",
+  hardware: "Hardware", software: "Software", market: "Market",
+  research: "Research", policy: "Policy", consciousness: "Consciousness",
 };
-const CATEGORY_ORDER = ["hardware", "software", "market", "research", "policy"];
+const CATEGORY_ORDER = ["hardware", "software", "market", "research", "policy", "consciousness"];
 
 export default async function QuantumPage() {
   const articles = getLatestArticles(24);
@@ -42,7 +43,7 @@ export default async function QuantumPage() {
             The Race to Useful Quantum
           </h1>
           <p className="mt-4 font-serif text-[16px] text-indigo-200 leading-relaxed max-w-xl">
-            Hardware breakthroughs, market moves, and the companies building the next computing paradigm. Updated twice a week.
+            From qubit breakthroughs to quantum consciousness — the stories changing how we understand reality. Updated twice a week.
           </p>
 
           {/* Category pills */}
@@ -127,7 +128,7 @@ export default async function QuantumPage() {
 
         {/* ── Footer note ── */}
         <p className="pt-5 border-t border-gray-100 font-serif text-[11px] text-gray-400 leading-relaxed">
-          Fabuless Quantum covers the quantum computing industry for investors and researchers. Articles sourced from The Quantum Insider, Quantum Computing Report, IEEE Spectrum, MIT Technology Review, arXiv, and corporate research blogs. Summaries AI-generated — always read the source. Not investment advice.
+          Fabuless Quantum covers quantum computing, consciousness research, and the ideas changing how we understand reality. Articles sourced from Quanta Magazine, The Quantum Insider, Quantum Computing Report, Nautilus, Aeon, Big Think, MIT Tech Review, Scientific American, IEEE Spectrum, Wired, New Scientist, and major news outlets. Summaries AI-generated — always read the source. Not investment advice.
         </p>
       </div>
     </div>

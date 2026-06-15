@@ -116,10 +116,19 @@ export const QUANTUM_COMPANIES: QuantumCompany[] = [
 ];
 
 export const QUANTUM_KEYWORDS = [
+  // Core tech
   "quantum", "qubit", "superposition", "entanglement", "quantum computing",
   "quantum error correction", "quantum supremacy", "quantum advantage",
   "quantum network", "quantum cryptography", "quantum annealing",
   "topological qubit", "trapped ion", "superconducting qubit", "photonic qubit",
   "IonQ", "Rigetti", "D-Wave", "IBM Quantum", "Google Willow", "Azure Quantum",
   "AWS Braket", "CUDA-Q", "Majorana", "Ocelot", "error rate", "logical qubit",
+  // Consciousness / philosophy / worldview
+  "quantum consciousness", "quantum mind", "quantum biology", "quantum brain",
+  "observer effect", "wave function", "wave function collapse", "many worlds",
+  "Penrose", "Hameroff", "Orch OR", "quantum reality", "quantum weirdness",
+  "Schrödinger", "quantum physics", "quantum mechanics", "quantum theory",
+  "Dean Radin", "noetic", "consciousness and physics", "quantum entanglement",
+  "double slit", "nonlocality", "quantum nonlocality", "spooky action",
+  "quantum measurement", "quantum field", "quantum universe",
 ];

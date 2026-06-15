@@ -35,8 +35,16 @@ function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
 }
 
+const TOO_TECHNICAL = [
+  "arxiv", "preprint", "lattice qcd", "hamiltonian", "fidelity threshold",
+  "variational quantum eigensolver", "vqe", "ansatz", "hilbert space",
+  "qubit coherence time", "t1 time", "t2 time", "gate fidelity",
+  "density matrix", "bloch sphere", "pauli", "clifford circuit",
+];
+
 function isQuantumRelevant(title: string, description: string): boolean {
   const text = `${title} ${description}`.toLowerCase();
+  if (TOO_TECHNICAL.some((t) => text.includes(t))) return false;
   return QUANTUM_KEYWORDS.some((kw) => text.includes(kw.toLowerCase()));
 }
 
@@ -127,7 +135,7 @@ Respond in this exact JSON format (no markdown, no extra text):
   return { summary: title, category: "research" };
 }
 
-async function pickTopStories(articles: QuantumArticle[]): Promise<Set<string>> {
+async function pickTopStories(articles: QuantumArticle[], forceConsciousness = false): Promise<Set<string>> {
   if (articles.length === 0) return new Set();
 
   const list = articles
@@ -141,7 +149,7 @@ Pick the 4 most compelling articles from the list below. Prioritize:
 - Stories a non-technical person would share ("did you see this quantum stock exploded?")
 - Big-picture "why it matters" stories over technical deep dives
 - Source diversity — don't pick 4 from the same outlet
-- Include a consciousness/worldview story if one is genuinely interesting to a general reader
+${forceConsciousness ? "- MUST include exactly 1 consciousness/worldview/quantum-mind story in your 4 picks" : "- Include a consciousness/worldview story if one is genuinely interesting"}
 
 Articles:
 ${list}
@@ -232,11 +240,35 @@ async function main() {
   // Pick top 4 from this batch — only articles with images are eligible
   if (newArticles.length > 0) {
     console.log("\nPicking top stories...");
-    const topIds = await pickTopStories(newArticles.filter((a) => a.image));
+
+    // Every other day, force a consciousness article into top stories.
+    // Check if the previous run already had a consciousness top story.
+    const lastConsciousnessTop = store.find((a) => a.topStory && a.category === "consciousness");
+    const consciousnessWasTopRecently = lastConsciousnessTop
+      ? Date.now() - new Date(lastConsciousnessTop.generatedAt).getTime() < 36 * 60 * 60 * 1000
+      : false;
+    const forceConsciousness = !consciousnessWasTopRecently;
+
+    const withImages = newArticles.filter((a) => a.image);
+    const topIds = await pickTopStories(withImages, forceConsciousness);
+
+    // If forcing consciousness but Claude didn't pick one, manually slot the best one in
+    if (forceConsciousness && !newArticles.some((a) => topIds.has(a.id) && a.category === "consciousness")) {
+      const bestConsciousness = withImages.find((a) => a.category === "consciousness");
+      if (bestConsciousness) {
+        // Drop the last top pick and replace with consciousness article
+        const topArr = [...topIds];
+        topArr[topArr.length - 1] = bestConsciousness.id;
+        topIds.clear();
+        topArr.forEach((id) => topIds.add(id));
+        console.log(`  🧠 Force-slotted consciousness: ${bestConsciousness.title.slice(0, 50)}`);
+      }
+    }
+
     for (const a of newArticles) {
       if (topIds.has(a.id)) {
         a.topStory = true;
-        console.log(`  ⭐ ${a.title.slice(0, 60)}`);
+        console.log(`  ⭐ [${a.category}] ${a.title.slice(0, 55)}`);
       }
     }
     // Clear topStory on previous run so only today's top 4 are marked

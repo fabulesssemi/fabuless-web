@@ -7,7 +7,6 @@ import { EXPERTS } from "@/lib/tracker/experts";
 import { fetchAnalystCoverage } from "@/lib/analyst/analysts";
 import { tickersWithPreview } from "@/lib/earnings/previews";
 import { getSummaries } from "@/lib/earnings/summaries";
-import { getGeneratedPreview } from "@/lib/earnings/generated-previews";
 import { decodeHoldings, type Holding } from "./storage";
 import { buildColorMap } from "./colors";
 import { PortfolioGate } from "./PortfolioGate";
@@ -119,11 +118,6 @@ export default async function PortfolioPage({
     tickers.map((t) => [t, getSummaries(t, 3)])
   );
 
-  // Auto-generated "what to watch" previews for upcoming earners
-  const generatedPreviews = Object.fromEntries(
-    tickers.map((t) => [t, getGeneratedPreview(t)])
-  );
-
   // Expert calls tab
   const recentCalls = predictions
     .filter((p) => (p.companies ?? []).some((c) => tickers.includes(c)))
@@ -162,27 +156,7 @@ export default async function PortfolioPage({
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-      {/* Header */}
-      <header className="mb-7">
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-1">
-              Your Holdings
-            </div>
-            <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">
-              My Portfolio
-            </h1>
-            <p className="mt-1 font-serif text-[15px] text-[#4a4a4a] leading-relaxed max-w-xl">
-              Your stocks in context — live prices, analyst consensus, open expert calls, and earnings ahead.
-            </p>
-          </div>
-          <Suspense fallback={null}>
-            <EditHoldings holdings={holdings} />
-          </Suspense>
-        </div>
-      </header>
-
-      {/* Tabs — above everything */}
+      {/* Header with tabs top-right */}
       <PortfolioTabs
         earnings={earningsRows}
         calls={recentCalls}
@@ -190,33 +164,38 @@ export default async function PortfolioPage({
         analystRows={analystRows}
         tickers={tickers}
         pastSummaries={pastSummaries}
-        generatedPreviews={generatedPreviews}
       />
 
       {/* Main two-column: holdings left, chart right */}
       <div className="flex gap-6 mb-8 items-start">
         {/* LEFT — condensed holdings table */}
-        <div className="w-[380px] shrink-0 rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-          {/* Add ticker row at TOP */}
-          <AddTickerRow allHoldings={holdings} />
-          {/* Column headers */}
-          <div className="grid grid-cols-[1fr_80px_60px_20px] items-center gap-2 px-3 py-2.5 border-t border-b border-gray-100 bg-gray-50/60">
-            {["Holding", "Price", "Day", ""].map((h, i) => (
-              <span key={i} className={`text-[9px] font-bold uppercase tracking-widest text-gray-400 ${i === 0 ? "" : "text-right"}`}>{h}</span>
+        <div className="w-[380px] shrink-0">
+          {/* Edit Holdings — prominent, above the list */}
+          <Suspense fallback={null}>
+            <EditHoldings holdings={holdings} />
+          </Suspense>
+          <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden mt-2">
+            {/* Add ticker row at TOP */}
+            <AddTickerRow allHoldings={holdings} />
+            {/* Column headers */}
+            <div className="grid grid-cols-[1fr_80px_60px_20px] items-center gap-2 px-3 py-2.5 border-t border-b border-gray-100 bg-gray-50/60">
+              {["Holding", "Price", "Day", ""].map((h, i) => (
+                <span key={i} className={`text-[9px] font-bold uppercase tracking-widest text-gray-400 ${i === 0 ? "" : "text-right"}`}>{h}</span>
+              ))}
+            </div>
+            {rows.map((r, i) => (
+              <HoldingRow
+                key={r.ticker}
+                r={r}
+                color={colorMap[r.ticker]}
+                gridCols="grid-cols-[1fr_80px_60px_20px]"
+                hasReturnData={false}
+                allHoldings={holdings}
+                isFirst={i === 0}
+                compact
+              />
             ))}
           </div>
-          {rows.map((r, i) => (
-            <HoldingRow
-              key={r.ticker}
-              r={r}
-              color={colorMap[r.ticker]}
-              gridCols="grid-cols-[1fr_80px_60px_20px]"
-              hasReturnData={false}
-              allHoldings={holdings}
-              isFirst={i === 0}
-              compact
-            />
-          ))}
         </div>
 
         {/* RIGHT — performance chart */}

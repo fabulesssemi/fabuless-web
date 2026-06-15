@@ -238,42 +238,66 @@ function UpcomingEarningsCard({ ticker, label, daysUntil, earningsSlug, forward,
   );
 }
 
-function EarningsTabContent({ tickers, upcoming, pastSummaries, generatedPreviews }: {
+function EarningsTabContent({ tickers, upcoming, pastSummaries, earningsRows }: {
   tickers: string[];
   upcoming: (EarningsRow & { forward: ForwardEst[] })[];
   pastSummaries: Record<string, EarningsSummary[]>;
-  generatedPreviews: Record<string, EarningsPreviewGenerated | null>;
+  earningsRows: EarningsRow[];
 }) {
   if (tickers.length === 0) {
     return <p className="font-serif text-[13px] text-[#4a4a4a]">Add holdings to see earnings data.</p>;
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      {tickers.map((ticker) => {
-        const upcomingForTicker = upcoming.filter((u) => u.ticker === ticker);
+    <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+      {tickers.map((ticker, i) => {
+        const upcomingForTicker = upcoming.find((u) => u.ticker === ticker);
         const past = pastSummaries[ticker] ?? [];
+        const earningsRow = earningsRows.find((e) => e.ticker === ticker);
+        const slug = earningsRow?.earningsSlug ?? null;
+        const href = slug ? `/earnings/${slug}` : null;
+        const companyName = upcomingForTicker?.companyName ?? earningsRow?.companyName ?? ticker;
 
         return (
-          <div key={ticker}>
-            <div className="flex items-center gap-2 mb-2.5">
-              <span className="font-sans text-[12px] font-bold text-gray-900">{ticker}</span>
-              <span className="text-[11px] text-gray-400">{upcomingForTicker[0]?.companyName ?? ""}</span>
+          <div
+            key={ticker}
+            className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-gray-50 transition-colors"
+            style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
+          >
+            {/* Left: ticker + company + upcoming badge */}
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="font-sans text-[12px] font-bold text-gray-900 w-12 shrink-0">{ticker}</span>
+              <span className="text-[11px] text-gray-400 truncate hidden sm:block">{companyName}</span>
+              {upcomingForTicker && (
+                <span className={`text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded shrink-0 ${upcomingForTicker.daysUntil <= 7 ? "bg-amber-100 text-amber-700" : "bg-gray-100 text-gray-500"}`}>
+                  {upcomingForTicker.daysUntil === 0 ? "today" : upcomingForTicker.daysUntil === 1 ? "tomorrow" : `in ${upcomingForTicker.daysUntil}d`}
+                </span>
+              )}
             </div>
 
-            <div className="flex flex-col gap-2">
-              {/* Upcoming */}
-              {upcomingForTicker.map((u) => (
-                <UpcomingEarningsCard key={`upcoming-${u.ticker}`} {...u} preview={generatedPreviews[u.ticker] ?? null} />
-              ))}
-
-              {/* Past quarters */}
-              {past.length > 0 ? (
-                past.map((s) => <PastQuarterCard key={s.date} s={s} ticker={ticker} />)
-              ) : (
-                <div className="border border-dashed border-gray-200 rounded-lg px-4 py-3">
-                  <p className="text-[12px] text-gray-400 font-serif">Past earnings data loading — runs weekly via pipeline.</p>
+            {/* Right: last 2 quarter chips + link */}
+            <div className="flex items-center gap-3 shrink-0">
+              {past.slice(0, 2).map((s) => (
+                <div key={s.date} className="flex items-center gap-1.5">
+                  <span className="text-[10px] text-gray-400 font-medium">{s.quarter}</span>
+                  {s.epsActual != null && s.epsEstimate != null && (
+                    <span className={`text-[10px] font-bold px-1 py-0.5 rounded ${s.epsActual >= s.epsEstimate ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-600"}`}>
+                      {s.epsActual >= s.epsEstimate ? "beat" : "miss"}
+                    </span>
+                  )}
+                  {s.priceMoveDay != null && (
+                    <span className={`text-[10px] font-semibold tabular-nums ${s.priceMoveDay >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
+                      {s.priceMoveDay >= 0 ? "+" : ""}{s.priceMoveDay.toFixed(1)}%
+                    </span>
+                  )}
                 </div>
+              ))}
+              {href ? (
+                <Link href={href} className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 bg-[#111827] text-white rounded hover:bg-[#1f2937] transition-colors">
+                  View →
+                </Link>
+              ) : (
+                <span className="text-[10px] text-gray-300 w-14 text-right">no page</span>
               )}
             </div>
           </div>
@@ -292,7 +316,6 @@ export function PortfolioTabs({
   analystRows,
   tickers,
   pastSummaries,
-  generatedPreviews,
 }: {
   earnings: EarningsRow[];
   calls: Prediction[];
@@ -300,10 +323,8 @@ export function PortfolioTabs({
   analystRows: AnalystRow[];
   tickers: string[];
   pastSummaries: Record<string, EarningsSummary[]>;
-  generatedPreviews: Record<string, EarningsPreviewGenerated | null>;
 }) {
   const [tab, setTab] = useState<Tab>("earnings");
-  // Forward estimates fetched client-side (not blocking SSR)
   const [forwardData, setForwardData] = useState<Record<string, TickerEarnings>>({});
 
   useEffect(() => {
@@ -320,29 +341,36 @@ export function PortfolioTabs({
   }));
 
   const tabBtn = (key: Tab) =>
-    `px-4 py-2 text-[12px] font-semibold transition-colors border-b-2 ${
+    `px-3 py-1.5 text-[11px] font-semibold transition-colors rounded-md ${
       tab === key
-        ? "text-[#111827] border-[#111827]"
-        : "text-gray-400 border-transparent hover:text-gray-600"
+        ? "bg-[#111827] text-white"
+        : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
     }`;
-
-  const upcomingCount = earnings.length;
 
   return (
     <div className="mb-8">
-      {/* Tab bar */}
-      <div className="flex gap-1 border-b border-gray-100 mb-5">
-        {TABS.map(({ key, label }) => (
-          <button key={key} onClick={() => setTab(key)} className={tabBtn(key)}>
-            {label}
-            {key === "earnings" && upcomingCount > 0 && (
-              <span className="ml-1.5 text-[10px] font-bold text-[#B45309] tabular-nums">{upcomingCount}</span>
-            )}
-            {key === "calls" && calls.length > 0 && (
-              <span className="ml-1.5 text-[10px] font-bold text-[#B45309] tabular-nums">{calls.length}</span>
-            )}
-          </button>
-        ))}
+      {/* Header row: title left, tabs right */}
+      <div className="flex items-start justify-between gap-4 mb-6">
+        <div>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B45309] mb-1">Your Holdings</div>
+          <h1 className="font-sans text-2xl font-bold text-[#111827] tracking-tight">My Portfolio</h1>
+          <p className="mt-1 font-serif text-[15px] text-[#4a4a4a] leading-relaxed max-w-xl">
+            Your stocks in context — live prices, analyst consensus, open expert calls, and earnings ahead.
+          </p>
+        </div>
+        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1 shrink-0 mt-1">
+          {TABS.map(({ key, label }) => (
+            <button key={key} onClick={() => setTab(key)} className={tabBtn(key)}>
+              {label}
+              {key === "earnings" && earnings.length > 0 && (
+                <span className="ml-1 text-[9px] font-bold tabular-nums opacity-70">{earnings.length}</span>
+              )}
+              {key === "calls" && calls.length > 0 && (
+                <span className="ml-1 text-[9px] font-bold tabular-nums opacity-70">{calls.length}</span>
+              )}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Earnings tab */}
@@ -351,7 +379,7 @@ export function PortfolioTabs({
           tickers={tickers}
           upcoming={upcomingWithForward}
           pastSummaries={pastSummaries}
-          generatedPreviews={generatedPreviews}
+          earningsRows={earnings}
         />
       )}
 

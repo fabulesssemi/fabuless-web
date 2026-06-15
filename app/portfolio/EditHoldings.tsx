@@ -54,9 +54,9 @@ export function EditHoldings({ holdings }: { holdings: Holding[] }) {
     return (
       <button
         onClick={openEdit}
-        className="shrink-0 mt-1 text-[12px] font-semibold text-gray-500 hover:text-[#B45309] transition-colors"
+        className="w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-[#111827] hover:bg-[#1f2937] text-white text-[11px] font-bold uppercase tracking-wide rounded-lg transition-colors"
       >
-        Edit holdings
+        <span>✎</span> Edit holdings
       </button>
     );
   }

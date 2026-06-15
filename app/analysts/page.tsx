@@ -97,13 +97,6 @@ export default async function AnalystsIndex() {
         </div>
       </header>
 
-      {/* Column headers */}
-      <div className="hidden md:grid grid-cols-[1fr_160px_180px_100px] gap-4 px-4 mb-2">
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Analyst</div>
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Sentiment</div>
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-center">Buy · Hold · Sell</div>
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 text-right">Avg Upside</div>
-      </div>
 
       <div className="flex flex-col gap-2">
         {analysts.map((analyst) => {

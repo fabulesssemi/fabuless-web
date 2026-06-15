@@ -20,18 +20,24 @@ const DOMAIN_COLS = [
   { key: "financials",   label: "Fin" },
 ] as const;
 
+// Refined financial-analytics palette
+const C_GREEN = "#15803D"; // sophisticated success
+const C_AMBER = "#B45309"; // warm gold partial
+const C_RED   = "#B91C1C"; // muted deep red
+const C_SLATE = "#64748B"; // cool neutral
+
 function accuracyHex(pct: number | null): string {
-  if (pct === null) return "#9CA3AF";
-  if (pct >= 75) return "#10B981";
-  if (pct >= 55) return "#D97706";
-  return "#EF4444";
+  if (pct === null) return C_SLATE;
+  if (pct >= 75) return C_GREEN;
+  if (pct >= 55) return C_AMBER;
+  return C_RED;
 }
 
 function accuracyColor(pct: number | null): string {
-  if (pct === null) return "text-gray-400";
-  if (pct >= 75) return "text-emerald-500";
-  if (pct >= 55) return "text-amber-600";
-  return "text-red-500";
+  if (pct === null) return "text-slate-500";
+  if (pct >= 75) return "text-green-700";
+  if (pct >= 55) return "text-amber-700";
+  return "text-red-700";
 }
 
 export default function TrackerPage() {
@@ -45,9 +51,9 @@ export default function TrackerPage() {
     <div
       className="min-h-screen"
       style={{
-        backgroundImage: "radial-gradient(circle, #E5E7EB 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, #E2E8F0 1px, transparent 1px)",
         backgroundSize: "24px 24px",
-        backgroundColor: "#F9FAFB",
+        backgroundColor: "#F8FAFC",
       }}
     >
       <div className="max-w-5xl mx-auto px-6 py-10">
@@ -73,18 +79,16 @@ export default function TrackerPage() {
 
           {/* Summary pills */}
           <div className="mt-5 flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-1.5 shadow-sm">
-              <span className="text-[11px] text-gray-400 uppercase tracking-wide font-medium">Experts</span>
-              <span className="text-[13px] font-bold text-gray-900 tabular-nums">{rows.length}</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-1.5 shadow-sm">
-              <span className="text-[11px] text-gray-400 uppercase tracking-wide font-medium">Predictions</span>
-              <span className="text-[13px] font-bold text-gray-900 tabular-nums">{totalPredictions}</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-1.5 shadow-sm">
-              <span className="text-[11px] text-gray-400 uppercase tracking-wide font-medium">Resolved</span>
-              <span className="text-[13px] font-bold text-gray-900 tabular-nums">{totalResolved}</span>
-            </div>
+            {[
+              { label: "Experts", value: rows.length },
+              { label: "Predictions", value: totalPredictions },
+              { label: "Resolved", value: totalResolved },
+            ].map(({ label, value }) => (
+              <div key={label} className="flex items-center gap-2 bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 shadow-sm">
+                <span className="text-[11px] text-slate-400 uppercase tracking-wide font-medium">{label}</span>
+                <span className="text-[13px] font-bold text-[#0F172A] tabular-nums">{value}</span>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -105,16 +109,16 @@ export default function TrackerPage() {
               .reverse();
 
             const dotColor: Record<string, string> = {
-              CORRECT: "#10B981",
-              PARTIAL: "#F59E0B",
-              WRONG:   "#EF4444",
+              CORRECT: C_GREEN,
+              PARTIAL: C_AMBER,
+              WRONG:   C_RED,
             };
 
             return (
               <Link
                 key={expert.id}
                 href={`/tracker/${expert.id}`}
-                className="group relative flex items-center gap-5 rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm hover:shadow-lg hover:border-gray-300 transition-all duration-200"
+                className="group relative flex items-center gap-5 rounded-2xl border border-[#E2E8F0] bg-white px-5 py-4 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-200"
               >
                 {/* Left accent rail */}
                 <div
@@ -124,8 +128,8 @@ export default function TrackerPage() {
 
                 {/* Rank badge */}
                 <div
-                  className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold tabular-nums"
-                  style={{ backgroundColor: `${accent}18`, color: accent }}
+                  className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-[12px] font-bold tabular-nums"
+                  style={{ backgroundColor: `${accent}14`, color: accent, boxShadow: `inset 0 0 0 1px ${accent}22` }}
                 >
                   {i + 1}
                 </div>
@@ -159,11 +163,11 @@ export default function TrackerPage() {
                 <div className="hidden lg:flex items-end gap-[5px] shrink-0">
                   {DOMAIN_COLS.map((d) => {
                     const pct = domainMap[d.key] ?? null;
-                    const color = pct === null ? "#E5E7EB" : pct >= 75 ? "#10B981" : pct >= 50 ? "#F59E0B" : "#EF4444";
+                    const color = pct === null ? "#E2E8F0" : pct >= 75 ? C_GREEN : pct >= 50 ? C_AMBER : C_RED;
                     return (
                       <div key={d.key} className="flex flex-col items-center gap-[3px]">
                         <div style={{ width: "20px", height: "4px", backgroundColor: color, borderRadius: "2px" }} />
-                        <span className="text-[7px] uppercase text-gray-400 leading-none tracking-wide">{d.label}</span>
+                        <span className="text-[7px] uppercase text-slate-400 leading-none tracking-wide">{d.label}</span>
                       </div>
                     );
                   })}
@@ -186,35 +190,38 @@ export default function TrackerPage() {
 
                 {/* Resolved */}
                 <div className="hidden lg:block text-right shrink-0 w-20">
-                  <div className="text-[12px] font-semibold text-gray-700 tabular-nums">{stats.correct}/{stats.resolved}</div>
-                  <div className="text-[10px] text-gray-400 tabular-nums">+{stats.tooEarly} open</div>
+                  <div className="text-[12px] font-semibold text-slate-700 tabular-nums">{stats.correct}/{stats.resolved}</div>
+                  <div className="text-[10px] text-slate-400 tabular-nums">+{stats.tooEarly} open</div>
                 </div>
 
                 {/* Accuracy */}
                 <div className="text-right shrink-0 w-16">
                   <span
-                    className="text-[24px] font-bold tabular-nums leading-none"
-                    style={{ color: accent }}
+                    className="text-[26px] font-bold tabular-nums leading-none"
+                    style={{
+                      color: accent,
+                      textShadow: stats.accuracyPct !== null && stats.accuracyPct >= 80 ? `0 0 18px ${accent}30` : "none",
+                    }}
                   >
                     {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
                   </span>
-                  <div className="text-[9px] text-gray-400 uppercase tracking-wider mt-0.5">accuracy</div>
+                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">accuracy</div>
                 </div>
 
                 {/* Chevron */}
-                <span className="text-gray-300 group-hover:text-gray-500 transition-colors shrink-0 text-[14px]">→</span>
+                <span className="text-slate-300 group-hover:text-slate-500 transition-colors shrink-0 text-[14px]">→</span>
               </Link>
             );
           })}
         </div>
 
         {/* Prediction feed */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+        <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-sm p-6">
           <PredictionTable rows={predictions} />
         </div>
 
         {/* Footer note */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
+        <div className="mt-8 pt-6 border-t border-[#E2E8F0]">
           <p className="text-[11px] text-gray-400 leading-relaxed max-w-2xl">
             All predictions are drawn from publicly available articles, podcasts, and interviews.
             Verdicts are editorial judgments based on verifiable outcomes, graded per the{" "}

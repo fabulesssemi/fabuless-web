@@ -8,11 +8,17 @@ import { PredictionTable } from "@/app/components/tracker/PredictionTable";
 
 export const dynamic = "force-static";
 
+// Refined financial-analytics palette
+const C_GREEN = "#15803D";
+const C_AMBER = "#B45309";
+const C_RED   = "#B91C1C";
+const C_SLATE = "#64748B";
+
 const STATUS_COLOR: Record<PredictionStatus, string> = {
-  CORRECT:   "#10B981",
-  PARTIAL:   "#F59E0B",
-  WRONG:     "#EF4444",
-  TOO_EARLY: "#9CA3AF",
+  CORRECT:   C_GREEN,
+  PARTIAL:   C_AMBER,
+  WRONG:     C_RED,
+  TOO_EARLY: C_SLATE,
 };
 
 const STATUS_LABEL: Record<PredictionStatus, string> = {
@@ -77,8 +83,8 @@ function Timeline({ rows }: { rows: Prediction[] }) {
   const span  = Math.max(maxTs - minTs, 1);
 
   const W      = 920;
-  const DOT_R  = 4;
-  const BAND_H = 72;
+  const DOT_R  = 4.5;
+  const BAND_H = 76;
   const BAND_Y = 1;
   const AXIS_Y = BAND_Y + BAND_H + 14;
   const H      = AXIS_Y + 4;
@@ -137,16 +143,16 @@ function Timeline({ rows }: { rows: Prediction[] }) {
 }
 
 function domainAccuracyColor(pct: number | null): string {
-  if (pct === null) return "text-gray-300";
-  if (pct >= 75) return "text-emerald-500";
-  if (pct >= 55) return "text-amber-600";
-  return "text-red-500";
+  if (pct === null) return "text-slate-300";
+  if (pct >= 75) return "text-green-700";
+  if (pct >= 55) return "text-amber-700";
+  return "text-red-700";
 }
 
 function domainBarColor(pct: number): string {
-  if (pct >= 75) return "#10B981";
-  if (pct >= 55) return "#F59E0B";
-  return "#EF4444";
+  if (pct >= 75) return C_GREEN;
+  if (pct >= 55) return C_AMBER;
+  return C_RED;
 }
 
 export default async function ExpertScorecard({ params }: { params: Promise<{ expert: string }> }) {
@@ -167,16 +173,16 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
     .filter((s): s is { pred: Prediction; why: string } => Boolean(s.pred));
 
   const accColor = stats.accuracyPct !== null
-    ? stats.accuracyPct >= 80 ? "#10B981" : stats.accuracyPct >= 70 ? "#F59E0B" : "#EF4444"
-    : "#374151";
+    ? stats.accuracyPct >= 80 ? C_GREEN : stats.accuracyPct >= 70 ? C_AMBER : C_RED
+    : "#334155";
 
   return (
     <div
       className="min-h-screen"
       style={{
-        backgroundImage: "radial-gradient(circle, #E5E7EB 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, #E2E8F0 1px, transparent 1px)",
         backgroundSize: "24px 24px",
-        backgroundColor: "#F9FAFB",
+        backgroundColor: "#F8FAFC",
       }}
     >
       {/* ── Hero card ── */}
@@ -185,7 +191,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
           ← Prediction Tracker
         </Link>
 
-        <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+        <div className="rounded-2xl border border-[#E2E8F0] bg-white shadow-sm overflow-hidden">
           {/* Colored top stripe */}
           <div className="h-1 w-full" style={{ backgroundColor: accColor }} />
 
@@ -209,24 +215,27 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
               {/* Accuracy */}
               <div className="mt-5 flex items-end gap-3">
                 <span
-                  className="font-mono text-[52px] font-bold leading-none tabular-nums"
-                  style={{ color: accColor }}
+                  className="font-mono text-[64px] font-bold leading-none tabular-nums"
+                  style={{
+                    color: accColor,
+                    textShadow: stats.accuracyPct !== null && stats.accuracyPct >= 80 ? `0 0 28px ${accColor}33` : "none",
+                  }}
                 >
                   {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
                 </span>
-                <div className="pb-1">
-                  <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">accuracy</div>
-                  <div className="text-[12px] text-gray-500 tabular-nums mt-0.5">{stats.resolved} resolved</div>
+                <div className="pb-2">
+                  <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">accuracy</div>
+                  <div className="text-[12px] text-slate-500 tabular-nums mt-0.5">{stats.resolved} resolved</div>
                 </div>
               </div>
 
               {/* Stat breakdown — four colored pills */}
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-5 grid grid-cols-2 gap-2">
                 {[
-                  { label: "Correct", value: stats.correct,   color: "#10B981", bg: "#D1FAE5" },
-                  { label: "Partial", value: stats.partial,   color: "#D97706", bg: "#FEF3C7" },
-                  { label: "Wrong",   value: stats.wrong,     color: "#EF4444", bg: "#FEE2E2" },
-                  { label: "Open",    value: stats.tooEarly,  color: "#6B7280", bg: "#F3F4F6" },
+                  { label: "Correct", value: stats.correct,   color: C_GREEN, bg: "#DCFCE7" },
+                  { label: "Partial", value: stats.partial,   color: C_AMBER, bg: "#FEF3C7" },
+                  { label: "Wrong",   value: stats.wrong,     color: C_RED,   bg: "#FEE2E2" },
+                  { label: "Open",    value: stats.tooEarly,  color: C_SLATE, bg: "#F1F5F9" },
                 ].map(({ label, value, color, bg }) => (
                   <div key={label} className="flex items-center gap-2 rounded-lg px-3 py-2" style={{ backgroundColor: bg }}>
                     <span className="text-[16px] font-bold tabular-nums leading-none" style={{ color }}>{value}</span>
@@ -270,7 +279,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
       <div className="max-w-5xl mx-auto px-6 pb-12">
 
         {/* Domain breakdown */}
-        <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 mb-4">
+        <div className="rounded-2xl border border-[#E2E8F0] bg-white shadow-sm p-6 mb-4">
           <h2 className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-5">Where they&rsquo;re sharp</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-5">
             {domains.map((d) => (
@@ -288,12 +297,12 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
                     {d.resolved}r · {d.total - d.resolved}o
                   </span>
                 </div>
-                <div className="bg-gray-100 rounded-full overflow-hidden" style={{ height: "4px", width: "160px" }}>
+                <div className="bg-slate-100 rounded-full overflow-hidden" style={{ height: "5px", width: "170px" }}>
                   {d.accuracyPct !== null && (
                     <div style={{
                       height: "100%",
                       width: `${d.accuracyPct}%`,
-                      backgroundColor: domainBarColor(d.accuracyPct),
+                      background: `linear-gradient(90deg, ${domainBarColor(d.accuracyPct)}CC, ${domainBarColor(d.accuracyPct)})`,
                       borderRadius: "9999px",
                     }} />
                   )}
@@ -305,7 +314,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
 
         {/* Signature calls */}
         {signatures.length > 0 && (
-          <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 mb-4">
+          <div className="rounded-2xl border border-[#E2E8F0] bg-white shadow-sm p-6 mb-4">
             <h2 className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-5">Signature calls</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {signatures.map(({ pred, why }) => (
@@ -333,7 +342,7 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
         )}
 
         {/* Full record */}
-        <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-6">
+        <div className="rounded-2xl border border-[#E2E8F0] bg-white shadow-sm p-6">
           <h2 className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-5">Full record</h2>
           <PredictionTable rows={rows} hideExpertFilter />
         </div>

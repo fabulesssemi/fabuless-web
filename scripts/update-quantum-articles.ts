@@ -223,10 +223,10 @@ async function main() {
     await sleep(500);
   }
 
-  // Pick top 4 from this batch
+  // Pick top 4 from this batch — only articles with images are eligible
   if (newArticles.length > 0) {
     console.log("\nPicking top stories...");
-    const topIds = await pickTopStories(newArticles);
+    const topIds = await pickTopStories(newArticles.filter((a) => a.image));
     for (const a of newArticles) {
       if (topIds.has(a.id)) {
         a.topStory = true;

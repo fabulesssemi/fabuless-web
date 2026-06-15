@@ -37,9 +37,9 @@ const TICKER_CIK: Record<string, string> = {
   AMD:   "0000002488",
   AVGO:  "0001730168",
   MRVL:  "0001835632",
-  TSM:   "0001046179",
-  ASML:  "0000937556",
-  ARM:   "0001973239",
+  TSM:   "0001046179",  // FPI → files 6-K
+  ASML:  "0000937966",  // FPI → files 6-K (was wrong)
+  ARM:   "0001973239",  // FPI → files 6-K
   MU:    "0000723125",
   INTC:  "0000050863",
   QCOM:  "0000804328",
@@ -48,16 +48,16 @@ const TICKER_CIK: Record<string, string> = {
   KLAC:  "0000319201",
   SNPS:  "0000883241",
   CDNS:  "0000813672",
-  GFS:   "0001816316",
-  ASX:   "0001109189",
+  GFS:   "0001709048",  // FPI → files 6-K (was wrong)
+  ASX:   "0001122411",  // FPI → files 6-K (was wrong)
   AMKR:  "0001090425",
-  ALAB:  "0001990169",
-  SMCI:  "0000910638",
+  ALAB:  "0001736297",  // was wrong
+  SMCI:  "0001375365",  // was wrong
   DELL:  "0001571123",
-  ANET:  "0001313925",
+  ANET:  "0001596532",  // was wrong
   COHR:  "0000021175",
-  LITE:  "0001166388",
-  FN:    "0001102993",
+  LITE:  "0001633978",  // was wrong
+  FN:    "0001408710",  // was wrong
   AAPL:  "0000320193",
   GOOGL: "0001652044",
   AMZN:  "0001018724",
@@ -66,6 +66,9 @@ const TICKER_CIK: Record<string, string> = {
   ORCL:  "0001341439",
   CRWV:  "0002053914",
 };
+
+// Tickers that are foreign private issuers — file 6-K instead of 8-K
+const SIX_K_FILERS = new Set(["TSM", "ASML", "ARM", "GFS", "ASX"]);
 
 // Motley Fool company slug map (fallback)
 const FOOL_COMPANY_SLUG: Record<string, string> = {
@@ -137,6 +140,7 @@ async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ t
   const cik = TICKER_CIK[ticker];
   if (!cik) return null;
 
+  const targetForm = SIX_K_FILERS.has(ticker) ? "6-K" : "8-K";
   const cikDecimal = cik.replace(/^0+/, "");
   const windowStart = quarterEndDate; // quarter end
   const windowEnd = new Date(quarterEndDate + "T00:00:00Z");
@@ -144,7 +148,7 @@ async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ t
   const windowEndStr = windowEnd.toISOString().slice(0, 10);
 
   try {
-    // 1. Fetch submission history — gives all 8-K filings with dates
+    // 1. Fetch submission history
     const subUrl = `https://data.sec.gov/submissions/CIK${cik}.json`;
     const subR = await fetch(subUrl, { headers: { "User-Agent": EDGAR_UA } });
     if (!subR.ok) return null;
@@ -162,10 +166,10 @@ async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ t
 
     const { form, filingDate, accessionNumber, primaryDocument } = sub.filings.recent;
 
-    // 2. Find 8-K filings in the earnings window
+    // 2. Find filings in the earnings window
     const candidates = form
       .map((f, i) => ({ form: f, date: filingDate[i], acc: accessionNumber[i], doc: primaryDocument[i] }))
-      .filter((f) => f.form === "8-K" && f.date >= windowStart && f.date <= windowEndStr);
+      .filter((f) => f.form === targetForm && f.date >= windowStart && f.date <= windowEndStr);
 
     if (candidates.length === 0) return null;
 

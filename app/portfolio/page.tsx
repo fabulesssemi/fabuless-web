@@ -182,12 +182,25 @@ export default async function PortfolioPage({
         </div>
       </header>
 
+      {/* Tabs — above everything */}
+      <PortfolioTabs
+        earnings={earningsRows}
+        calls={recentCalls}
+        experts={expertsMap}
+        analystRows={analystRows}
+        tickers={tickers}
+        pastSummaries={pastSummaries}
+        generatedPreviews={generatedPreviews}
+      />
+
       {/* Main two-column: holdings left, chart right */}
       <div className="flex gap-6 mb-8 items-start">
         {/* LEFT — condensed holdings table */}
-        <div className="w-[340px] shrink-0 rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-          {/* Column headers — condensed: no consensus */}
-          <div className="grid grid-cols-[1fr_72px_56px_20px] items-center gap-2 px-4 py-2.5 border-b border-gray-100 bg-gray-50/60">
+        <div className="w-[380px] shrink-0 rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+          {/* Add ticker row at TOP */}
+          <AddTickerRow allHoldings={holdings} />
+          {/* Column headers */}
+          <div className="grid grid-cols-[1fr_80px_60px_20px] items-center gap-2 px-3 py-2.5 border-t border-b border-gray-100 bg-gray-50/60">
             {["Holding", "Price", "Day", ""].map((h, i) => (
               <span key={i} className={`text-[9px] font-bold uppercase tracking-widest text-gray-400 ${i === 0 ? "" : "text-right"}`}>{h}</span>
             ))}
@@ -197,14 +210,13 @@ export default async function PortfolioPage({
               key={r.ticker}
               r={r}
               color={colorMap[r.ticker]}
-              gridCols="grid-cols-[1fr_72px_56px_20px]"
+              gridCols="grid-cols-[1fr_80px_60px_20px]"
               hasReturnData={false}
               allHoldings={holdings}
               isFirst={i === 0}
               compact
             />
           ))}
-          <AddTickerRow allHoldings={holdings} />
         </div>
 
         {/* RIGHT — performance chart */}
@@ -215,16 +227,6 @@ export default async function PortfolioPage({
         </div>
       </div>
 
-      {/* Tabs — Earnings · Expert Calls · Analysts */}
-      <PortfolioTabs
-        earnings={earningsRows}
-        calls={recentCalls}
-        experts={expertsMap}
-        analystRows={analystRows}
-        tickers={tickers}
-        pastSummaries={pastSummaries}
-        generatedPreviews={generatedPreviews}
-      />
 
 
       <p className="mt-10 pt-5 border-t border-gray-100 font-serif text-[11px] text-[#4a4a4a] leading-relaxed max-w-2xl">

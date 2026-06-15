@@ -143,7 +143,7 @@ function PastQuarterCard({ s, ticker }: { s: EarningsSummary; ticker: string }) 
 type ForwardEst = TickerEarnings["forward"][number];
 
 function UpcomingEarningsCard({ ticker, label, daysUntil, earningsSlug, forward, preview }: EarningsRow & { forward: ForwardEst[]; preview: EarningsPreviewGenerated | null }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // collapsed by default
   const soon = daysUntil >= 0 && daysUntil <= 7;
   const nextEst = forward.find((f) => f.period === "0q" || f.period === "+1q");
   const epsEst = preview?.epsEst ?? nextEst?.epsEst ?? null;
@@ -151,11 +151,11 @@ function UpcomingEarningsCard({ ticker, label, daysUntil, earningsSlug, forward,
   const hasPreview = !!(preview?.barToBeat || preview?.watchPoints?.length);
 
   return (
-    <div className={`rounded-lg border ${soon ? "border-amber-300 bg-amber-50/30" : "border-gray-200 bg-white"} overflow-hidden`}>
-      {/* Header row */}
+    <div className={`rounded-lg border ${soon ? "border-amber-300 bg-amber-50/30" : "border-gray-100 bg-white"} overflow-hidden`}>
+      {/* Header row — always visible, click to expand what-to-watch */}
       <button
-        onClick={() => hasPreview && setOpen((v) => !v)}
-        className={`w-full flex items-center justify-between gap-4 px-4 py-3 text-left ${hasPreview ? "hover:bg-gray-50" : ""} transition-colors`}
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between gap-4 px-4 py-2.5 text-left hover:bg-gray-50 transition-colors"
       >
         <div className="flex items-center gap-3 flex-wrap">
           <span className={`text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded ${soon ? "bg-amber-100 text-amber-700" : "bg-gray-100 text-gray-500"}`}>
@@ -170,7 +170,7 @@ function UpcomingEarningsCard({ ticker, label, daysUntil, earningsSlug, forward,
           )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          {earningsSlug && (
+          {earningsSlug && !open && (
             <Link
               href={`/earnings/${earningsSlug}`}
               onClick={(e) => e.stopPropagation()}
@@ -179,9 +179,7 @@ function UpcomingEarningsCard({ ticker, label, daysUntil, earningsSlug, forward,
               Deep dive →
             </Link>
           )}
-          {hasPreview && (
-            <span className="text-[11px] text-gray-400">{open ? "▲" : "▼"}</span>
-          )}
+          <span className="text-[10px] text-gray-400 font-medium">{open ? "▲ hide" : "▼ what to watch"}</span>
         </div>
       </button>
 

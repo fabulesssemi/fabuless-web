@@ -1,1 +1,254 @@
-[]
+[
+  {
+    "id": "passive-quantum-error-correction-doubles-qubit-lifetime-reac",
+    "title": "Passive quantum error correction doubles qubit lifetime, reaching break-even point",
+    "summary": "Researchers at the University of Massachusetts Amherst have developed a passive quantum error correction technique that leverages energy dissipation to correct qubit errors, effectively doubling qubit lifetime. This breakthrough achieves a break-even point, marking a significant step towards practical quantum computing. The innovative protocol has the potential to revolutionize quantum computing by transforming a fundamental limitation into a beneficial asset.",
+    "source": "Phys.org",
+    "sourceUrl": "https://phys.org/news/2026-06-passive-quantum-error-qubit-lifetime.html",
+    "publishedAt": "2026-06-15T13:40:08.000Z",
+    "category": "research",
+    "companies": [],
+    "image": "https://scx1.b-cdn.net/csz/news/tmb/2026/passive-error-correcti.jpg",
+    "generatedAt": "2026-06-15T18:25:14.331Z"
+  },
+  {
+    "id": "what-changes-as-quantum-computing-moves-from-prototypes-to-c",
+    "title": "What Changes as Quantum Computing Moves from Prototypes to Commercial Production",
+    "summary": "As quantum computing transitions from laboratory prototypes to commercial production, the principles of Reliability, Availability, and Serviceability (RAS) become increasingly crucial. This shift from prototypes to production requires significant changes in the development and deployment of quantum computing systems. The industry's evolution towards commercial production will depend on addressing these key considerations to ensure the long-term viability of quantum computing solutions.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/what-changes-as-quantum-computing-moves-from-prototypes-to-commercial-production/",
+    "publishedAt": "2026-06-12T23:34:31.000Z",
+    "category": "hardware",
+    "companies": [
+      "IBM"
+    ],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:13.085Z"
+  },
+  {
+    "id": "alumni-ventures-executes-initial-japanese-capital-allocation",
+    "title": "Alumni Ventures Executes Initial Japanese Capital Allocation via Yaqumo Seed Extension Round",
+    "summary": "Alumni Ventures, a US-based venture capital firm, has made its first investment in Japan through a seed extension financing round in Yaqumo Inc., a Tokyo-based startup. Yaqumo is developing neutral-atom quantum computing hardware, a promising area of research in the quantum computing field. This investment marks Alumni Ventures' entry into the Japanese market and demonstrates growing interest in quantum computing technologies.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/alumni-ventures-executes-initial-japanese-capital-allocation-via-yaqumo-seed-extension-round/",
+    "publishedAt": "2026-06-13T02:08:10.000Z",
+    "category": "hardware",
+    "companies": [],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:11.950Z"
+  },
+  {
+    "id": "sealsq-and-wisekey-outline-strategic-progress-on-space-based",
+    "title": "SEALSQ and WISeKey Outline Strategic Progress on Space-Based Quantum Spatial Orbital Cloud",
+    "summary": "SEALSQ Corp and WISeKey International Holding Ltd have outlined key milestones for their Quantum Spatial Orbital Cloud platform, a space-based infrastructure that utilizes low-Earth orbit satellites as secure computing nodes for post-quantum cryptography. The QSOC platform aims to provide tamper-resistant computing capabilities, addressing the need for secure data processing in a post-quantum world. By leveraging satellite-based architecture, SEALSQ and WISeKey seek to establish a robust and secure cloud infrastructure for sensitive applications.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/sealsq-and-wisekey-outline-strategic-progress-on-space-based-quantum-spatial-orbital-cloud/",
+    "publishedAt": "2026-06-13T02:26:00.000Z",
+    "category": "hardware",
+    "companies": [],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:10.952Z"
+  },
+  {
+    "id": "wisekey-subsidiaries-formalize-multi-year-joint-operation-of",
+    "title": "WISeKey Subsidiaries Formalize Multi-Year Joint Operation of Quantum Spatial Orbital Cloud",
+    "summary": "WISeKey International Holding Ltd has finalized a commercial agreement between its subsidiaries to co-develop and deploy the Quantum Spatial Orbital Cloud, a subscription-based managed cloud platform. The platform is targeted at banking institutions, national defense agencies, and enterprise clients, offering a secure cloud solution. The Quantum Spatial Orbital Cloud is positioned as a key player in the emerging quantum computing market, providing a secure and managed cloud platform for sensitive applications.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/wisekey-subsidiaries-formalize-multi-year-joint-operation-of-quantum-spatial-orbital-cloud/",
+    "publishedAt": "2026-06-13T02:38:38.000Z",
+    "category": "software",
+    "companies": [],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:09.503Z"
+  },
+  {
+    "id": "quix-quantum-integrates-with-baden-w-rttemberg-networks-to-e",
+    "title": "QuiX Quantum Integrates with Baden-Württemberg Networks to Expand European Photonics Corridor",
+    "summary": "QuiX Quantum, a Dutch-German hardware developer, has joined QuantumBW and Photonics BW, two innovation networks in Baden-Württemberg, Germany, to expand its presence in the European photonics corridor. This move builds on the company's existing cross-border presence, including an engineering office at the ARENA2036 research campus. The integration is expected to drive technology transfer and industrial scaling in the region, further solidifying QuiX Quantum's position in the European quantum computing landscape.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/quix-quantum-integrates-with-baden-wurttemberg-networks-to-expand-european-photonics-corridor/",
+    "publishedAt": "2026-06-13T03:28:24.000Z",
+    "category": "hardware",
+    "companies": [],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:08.393Z"
+  },
+  {
+    "id": "who-s-news-strategic-leadership-appointments-at-diraq-iqm-qu",
+    "title": "Who’s News: Strategic Leadership Appointments at Diraq, IQM Quantum Computers, EigenQ, and BosonQ Psi",
+    "summary": "Who’s News: Strategic Leadership Appointments at Diraq, IQM Quantum Computers, EigenQ, and BosonQ Psi",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/whos-news-strategic-leadership-appointments-at-diraq-iqm-eigenq-bqp-and-the-texas-quantum-initiative/",
+    "publishedAt": "2026-06-13T03:31:24.000Z",
+    "category": "research",
+    "companies": [
+      "MSFT"
+    ],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:07.366Z"
+  },
+  {
+    "id": "ibm-is-using-ai-to-help-identify-new-quantum-error-correctio",
+    "title": "IBM is Using AI to Help Identify New Quantum Error Correction Codes",
+    "summary": "IBM has developed OpenEvolve, an open-source AI framework that leverages large language models to identify new quantum error correction codes, aiming to alleviate a significant bottleneck in quantum computing development. This approach has the potential to significantly reduce the time and computational resources required to find optimal QEC codes. By introducing AI-guided evolutionary methods, IBM researchers are pushing the boundaries of quantum error correction and paving the way for more robust quantum computing systems.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/ibm-is-using-ai-to-help-identify-new-quantum-error-correction-codes/",
+    "publishedAt": "2026-06-14T04:14:52.000Z",
+    "category": "research",
+    "companies": [
+      "IBM"
+    ],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:06.136Z"
+  },
+  {
+    "id": "quera-outlines-2028-roadmap-for-256-logical-qubit-8220-libra",
+    "title": "QuEra Outlines 2028 Roadmap for 256-Logical-Qubit &#8220;Libra&#8221; System and Expanded AWS Cloud Partnership",
+    "summary": "QuEra Computing has outlined its 2028 roadmap for the Libra system, a 256-logical-qubit quantum computer classified as a 'megaquop-class' processor, designed to achieve fault tolerance. The company is collaborating with Amazon Web Services (AWS) on a multi-year strategic partnership to bring this system to the cloud. The Libra system is expected to be a significant milestone in the development of quantum computing, with potential applications in various fields.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/quera-outlines-2028-roadmap-for-256-logical-qubit-libra-system-and-expanded-aws-cloud-partnership/",
+    "publishedAt": "2026-06-15T14:18:47.000Z",
+    "category": "hardware",
+    "companies": [
+      "AMZN"
+    ],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:04.859Z"
+  },
+  {
+    "id": "quantum-motion-establishes-silicon-cmos-hardware-base-within",
+    "title": "Quantum Motion Establishes Silicon CMOS Hardware Base within Discovery District Maryland",
+    "summary": "Quantum Motion, a silicon spin-qubit developer, has established an engineering facility in Discovery District Maryland, joining a cluster of quantum hardware companies. This move marks the company's expansion into the US market, leveraging the region's established quantum technology ecosystem. The new facility will support the development of Quantum Motion's silicon CMOS hardware, further solidifying the company's presence in the global quantum computing industry.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/quantum-motion-establishes-silicon-cmos-hardware-base-within-discovery-district-maryland/",
+    "publishedAt": "2026-06-15T14:53:00.000Z",
+    "category": "hardware",
+    "companies": [
+      "MSFT"
+    ],
+    "image": null,
+    "generatedAt": "2026-06-15T18:25:03.640Z"
+  },
+  {
+    "id": "eigenq-announces-collaboration-with-td-synnex-to-advance-pos",
+    "title": "EigenQ Announces Collaboration With TD SYNNEX to Advance Post-Quantum Security Readiness for AMD EPYC CPU-based Server Environments",
+    "summary": "EigenQ has partnered with TD SYNNEX to help organizations prepare their AMD EPYC CPU-based server environments for the transition to post-quantum security, addressing the need to migrate from classical public-key cryptography. This collaboration aims to support public-sector, defense, and enterprise customers in assessing and advancing their post-quantum security readiness. The partnership will facilitate the development of quantum-resistant solutions for AMD EPYC processor-based servers, enhancing the security of critical infrastructure and enterprise systems.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/eigenq-announces-collaboration-with-td-synnex-to-advance-post-quantum-security-readiness-for-amd-epyc-cpu-based-server-environments/",
+    "publishedAt": "2026-06-15T12:42:13.000Z",
+    "category": "software",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-15_19-16.png",
+    "generatedAt": "2026-06-15T18:25:02.552Z"
+  },
+  {
+    "id": "atom-computing-and-phasecraft-announce-strategic-collaborati",
+    "title": "Atom Computing and Phasecraft Announce Strategic Collaboration to Accelerate Development of Next-Generation Materials",
+    "summary": "Atom Computing and Phasecraft have signed a Memorandum of Understanding to collaborate on accelerating the development of next-generation materials using application-focused algorithms. The partnership aims to benchmark progress toward utility-scale quantum computers and drive the adoption of quantum solutions in key areas. This strategic collaboration will explore the potential of quantum computing to deliver innovative materials and solutions, leveraging the strengths of both companies.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/atom-computing-and-phasecraft-announce-strategic-collaboration-to-accelerate-development-of-next-generation-materials/",
+    "publishedAt": "2026-06-15T13:05:00.000Z",
+    "category": "research",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/Logo-Atom.png",
+    "generatedAt": "2026-06-15T18:25:01.222Z"
+  },
+  {
+    "id": "quera-announces-2028-fault-tolerant-quantum-computer-and-exp",
+    "title": "QuEra Announces 2028 Fault-Tolerant Quantum Computer and Expanded Multi-Year Strategic Collaboration with AWS",
+    "summary": "QuEra Computing has announced the upcoming release of Libra, a fault-tolerant quantum computer, in 2028, which is designed to run longer and deeper than current models. This development is accompanied by an expanded multi-year strategic collaboration with Amazon Web Services (AWS) to make the technology available in the cloud. The partnership aims to bring fault-tolerant quantum computing capabilities to a broader range of users and applications, potentially accelerating the adoption of quantum technology.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/quera-announces-2028-fault-tolerant-quantum-computer-and-expanded-aws-collaboration/",
+    "publishedAt": "2026-06-15T13:10:00.000Z",
+    "category": "hardware",
+    "companies": [
+      "AMZN"
+    ],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-12_20-49.png",
+    "generatedAt": "2026-06-15T18:24:59.916Z"
+  },
+  {
+    "id": "report-u-s-still-leads-in-quantum-technology-but-china-is-cl",
+    "title": "Report: U.S. Still Leads in Quantum Technology, But China is Closing the Gap",
+    "summary": "The United States maintains a narrow lead over China in quantum technology development, but China's coordinated national strategy is rapidly closing the gap. A new report from the Special Competitive Studies Project highlights the shifting landscape, with China making significant strides in research, manufacturing, and commercialization. The US advantage is expected to continue eroding as China's efforts gain momentum, potentially altering the global quantum technology landscape.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/report-u-s-still-leads-in-quantum-technology-but-china-is-closing-the-gap/",
+    "publishedAt": "2026-06-15T13:33:38.000Z",
+    "category": "policy",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/Screenshot-2026-06-15-at-4.05.55-AM.png",
+    "generatedAt": "2026-06-15T18:24:58.866Z"
+  },
+  {
+    "id": "chiron-project-launches-quantum-communication-network-initia",
+    "title": "CHIRON Project Launches Quantum Communication Network Initiative in Germany",
+    "summary": "The CHIRON project has launched a quantum communication network initiative in Germany, aiming to build a scalable, entanglement-based infrastructure to secure digital networks against emerging cyber threats. This initiative brings together leading German research institutions and technology companies to address the existential pressure on current encryption methods. The project's goal is to create a secure quantum communication infrastructure for Europe's digital networks.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/chiron-project-launches-quantum-communication-network-initiative/",
+    "publishedAt": "2026-06-15T13:52:43.000Z",
+    "category": "research",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-15_18-51.png",
+    "generatedAt": "2026-06-15T18:24:57.726Z"
+  },
+  {
+    "id": "quantonation-strengthens-platform-with-two-global-deep-tech-",
+    "title": "Quantonation Strengthens Platform with Two Global Deep-Tech Industry Executives",
+    "summary": "Quantonation, a leading venture firm for quantum and physics technologies, has appointed Magnus Bengtsson and Elizabeth Ruetsch as Venture Partners to support portfolio companies in scaling from scientific breakthroughs to global businesses. The appointments aim to strengthen Quantonation's platform and enhance its ability to guide companies through the transition from research to commercialization. This move is expected to bolster Quantonation's position in the quantum industry and foster growth among its portfolio companies.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/quantonation-strengthens-platform-with-two-global-deep-tech-industry-executives/",
+    "publishedAt": "2026-06-15T14:04:28.000Z",
+    "category": "market",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-15_19-03.png",
+    "generatedAt": "2026-06-15T18:24:56.614Z"
+  },
+  {
+    "id": "capital-of-quantum-welcomes-quantum-motion-to-discovery-dist",
+    "title": "Capital of Quantum Welcomes Quantum Motion to Discovery District Maryland",
+    "summary": "The Capital of Quantum has announced that Quantum Motion, a UK-based company, will establish a facility in Discovery District Maryland, expanding the region's quantum ecosystem. Quantum Motion specializes in developing full-stack silicon CMOS quantum computers, bringing its expertise to the area. This move reinforces the region's position as a hub for quantum innovation and development, attracting global leaders in the field. ",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/capital-of-quantum-welcomes-quantum-motion-to-discovery-district-maryland/",
+    "publishedAt": "2026-06-15T14:12:02.000Z",
+    "category": "hardware",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-15_19-06.png",
+    "generatedAt": "2026-06-15T18:24:55.280Z"
+  },
+  {
+    "id": "uk-japan-expand-quantum-partnership-with-focus-on-commercial",
+    "title": "UK, Japan Expand Quantum Partnership With Focus on Commercial Deployment",
+    "summary": "The UK and Japan are expanding their quantum partnership to focus on commercial deployment, infrastructure integration, and industrial coordination, in addition to research collaboration. The new Frontier Technology Partnership prioritizes quantum technologies alongside AI, cybersecurity, and advanced communications. This partnership aims to drive long-term growth and coordination in key technology areas, including quantum computing, with a focus on commercialization and industrial applications.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/uk-japan-expand-quantum-partnership-with-focus-on-commercial-deployment/",
+    "publishedAt": "2026-06-15T14:57:35.000Z",
+    "category": "policy",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/UK-Japan-1.png",
+    "generatedAt": "2026-06-15T18:24:54.161Z"
+  },
+  {
+    "id": "digitalxforce-launches-ai-and-quantum-risk-management-platfo",
+    "title": "DigitalXForce Launches AI and Quantum Risk Management Platform",
+    "summary": "DigitalXForce has launched an Enterprise TRiSCM platform, a comprehensive risk management solution for the AI and quantum era, offering continuous assurance, operational intelligence, and autonomous risk operation. This platform introduces a new operating model for organizations to manage trust, risk, security, and compliance. The launch marks a significant development in the industry's efforts to address the complex risk management challenges posed by emerging technologies.",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/digitalxforce-launches-ai-and-quantum-risk-management-platform/",
+    "publishedAt": "2026-06-15T14:59:13.000Z",
+    "category": "software",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-15_19-58.png",
+    "generatedAt": "2026-06-15T18:24:53.001Z"
+  },
+  {
+    "id": "wimi-develops-quantum-kernel-convolution-method-for-nisq-qua",
+    "title": "WiMi Develops Quantum Kernel Convolution Method for NISQ Quantum Devices",
+    "summary": "WiMi Hologram Cloud Inc. has developed a Quantum Kernel Convolution method for NISQ quantum devices, enabling the implementation of hybrid Quantum Convolutional Neural Networks. This core technology, known as Quantum Kernel Convolution, allows for the execution of quantum convolutional neural networks on near-term quantum devices. The release of this technology demonstrates WiMi's advancements in quantum computing and its potential applications in hologram augmented reality",
+    "source": "The Quantum Insider",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/15/wimi-implements-quantum-kernel-convolution-scheme-for-nisq-devices/",
+    "publishedAt": "2026-06-15T15:14:16.000Z",
+    "category": "research",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-15_20-12.png",
+    "generatedAt": "2026-06-15T18:24:51.803Z"
+  }
+]

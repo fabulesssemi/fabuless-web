@@ -50,13 +50,13 @@ export default function RootLayout({
 
               {/* Desktop nav */}
               <div className="hidden md:flex items-center gap-8 text-sm text-gray-400">
-                <Link href="/companies" className="hover:text-amber-400 transition-colors">Companies</Link>
                 <Link
                   href="/quantum"
                   className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-indigo-600/25 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-600/50 hover:text-white transition-all text-[14px] font-bold"
                 >
                   ✦ Quantum
                 </Link>
+                <Link href="/companies" className="hover:text-amber-400 transition-colors">Companies</Link>
                 <Link href="/supply-chain" className="hover:text-amber-400 transition-colors">Supply Chain</Link>
                 <Link href="/analysts" className="hover:text-amber-400 transition-colors">Analysts</Link>
                 <Link href="/tracker" className="hover:text-amber-400 transition-colors">Tracker</Link>

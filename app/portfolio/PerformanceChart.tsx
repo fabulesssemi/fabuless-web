@@ -82,12 +82,11 @@ export function PortfolioPerformance({
 
   const colorMap = buildColorMap(holdings.map((h) => h.ticker));
 
-  // Holdings that have a cost basis (price + date) drive the anchored chart
+  // Always chart all holdings — use cost basis where available, fallback to 90-day window otherwise
   const anchored = holdings.filter((h) => h.purchasePrice && h.purchaseDate);
   const usingFallback = anchored.length === 0;
 
-  // Chart window start
-  const charted = usingFallback ? holdings : anchored;
+  const charted = holdings;
   const fromDates = charted.map((h) => h.purchaseDate ?? ninetyDaysAgo());
   const earliest = fromDates.sort()[0] ?? ninetyDaysAgo();
   const tickers = charted.map((h) => h.ticker);

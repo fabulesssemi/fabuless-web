@@ -95,7 +95,7 @@ async function curateWithClaude(articles: RssRow[]): Promise<ClaudeResponse> {
 
   const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors.
 
-From the articles below, select the 8-12 most investment-relevant stories published today. Skip duplicates, thin earnings recaps, retail/consumer fluff, and analyst price calls with no underlying news.
+From the articles below, select ALL genuinely investment-relevant stories from the last 24 hours. Skip duplicates, thin earnings recaps, retail/consumer fluff, and analyst price calls with no underlying news. Include everything that matters — do not apply an arbitrary cap.
 
 For each selected story, write:
 - A short punchy one-liner (max 15 words) stating the single most investment-relevant implication
@@ -133,13 +133,14 @@ ${articleList}`;
 }
 
 // ── Step 3: load top quantum articles ────────────────────────────────────────
-function loadQuantumArticles(n = 2): QuantumArticle[] {
+function loadQuantumArticles(): QuantumArticle[] {
   const p = resolve(process.cwd(), "data/quantum-articles.json");
   if (!existsSync(p)) return [];
   const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
+  const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
   return all
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-    .slice(0, n);
+    .filter((a) => a.publishedAt >= cutoff)
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 // ── Step 4: build the Issue TS string ────────────────────────────────────────
@@ -247,7 +248,7 @@ async function main() {
   console.log(`  → Title: "${curated.title}"`);
   curated.stories.forEach((s) => console.log(`     · [${s.category}] ${s.headline.slice(0, 60)}`));
 
-  const quantum = loadQuantumArticles(6);
+  const quantum = loadQuantumArticles();
   console.log(`\n  → ${quantum.length} quantum articles loaded`);
 
   console.log("\n[3/4] Building Issue...");

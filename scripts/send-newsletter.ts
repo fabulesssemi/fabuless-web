@@ -173,14 +173,15 @@ function quotesBlock(quotes: Quote[]): string {
     </tr>`;
 }
 
-function loadQuantumArticles(n = 2): QuantumArticle[] {
+function loadQuantumArticles(): QuantumArticle[] {
   const p = resolve(process.cwd(), "data/quantum-articles.json");
   if (!existsSync(p)) return [];
   try {
     const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
+    const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
     return all
-      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-      .slice(0, n);
+      .filter((a) => a.publishedAt >= cutoff)
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
   } catch { return []; }
 }
 
@@ -229,7 +230,7 @@ function buildEmailHtml(issue: Issue): string {
 
   const podcastsHtml = issue.podcasts.map(podcastRow).join("");
   const quotesHtml = quotesBlock(issue.quotes ?? []);
-  const quantumHtml = quantumCornerBlock(loadQuantumArticles(6));
+  const quantumHtml = quantumCornerBlock(loadQuantumArticles());
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
   return `<!DOCTYPE html>

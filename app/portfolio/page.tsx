@@ -6,6 +6,7 @@ import { predictions } from "@/lib/tracker/predictions";
 import { getExpert } from "@/lib/tracker/experts";
 import { PortfolioGate } from "./PortfolioGate";
 import { EditHoldings } from "./EditHoldings";
+import { RemoveTicker, AddTickerRow } from "./PortfolioRowActions";
 
 export const revalidate = 300;
 
@@ -147,10 +148,10 @@ export default async function PortfolioPage({
       {/* Portfolio table — the hero */}
       <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden mb-10">
         {/* Column header */}
-        <div className="grid grid-cols-[1fr_88px_64px_96px_88px_104px] items-center gap-3 px-4 py-2.5 border-b border-gray-100 bg-gray-50/60">
-          {["Holding", "Price", "Day", "Consensus", "Open calls", "Earnings"].map((h, i) => (
+        <div className="grid grid-cols-[1fr_88px_64px_96px_88px_104px_20px] items-center gap-3 px-4 py-2.5 border-b border-gray-100 bg-gray-50/60">
+          {["Holding", "Price", "Day", "Consensus", "Open calls", "Earnings", ""].map((h, i) => (
             <span
-              key={h}
+              key={i}
               className={`text-[9px] font-bold uppercase tracking-widest text-gray-400 ${i === 0 ? "" : "text-right"}`}
             >
               {h}
@@ -167,7 +168,7 @@ export default async function PortfolioPage({
           return (
             <div
               key={r.ticker}
-              className="relative grid grid-cols-[1fr_88px_64px_96px_88px_104px] items-center gap-3 px-4 py-3.5 hover:bg-slate-50 transition-colors"
+              className="relative grid grid-cols-[1fr_88px_64px_96px_88px_104px_20px] items-center gap-3 px-4 py-3.5 hover:bg-slate-50 transition-colors"
               style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
             >
               {/* Full-row click target — sibling (not parent) of the open-calls link */}
@@ -235,9 +236,13 @@ export default async function PortfolioPage({
                   <span className="text-[12px] text-gray-300">—</span>
                 )}
               </div>
+
+              {/* Remove */}
+              <RemoveTicker ticker={r.ticker} allTickers={tickers} />
             </div>
           );
         })}
+        <AddTickerRow allTickers={tickers} />
       </div>
 
       {/* What to watch */}

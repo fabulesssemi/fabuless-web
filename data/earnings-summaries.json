@@ -348,7 +348,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:18.478Z"
+      "generatedAt": "2026-06-15T21:50:10.349Z"
     },
     {
       "ticker": "000660.KS",
@@ -363,7 +363,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:19.405Z"
+      "generatedAt": "2026-06-15T21:50:11.225Z"
     }
   ],
   "005930.KS": [
@@ -380,7 +380,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:20.735Z"
+      "generatedAt": "2026-06-15T21:50:12.430Z"
     },
     {
       "ticker": "005930.KS",
@@ -395,7 +395,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:21.628Z"
+      "generatedAt": "2026-06-15T21:50:13.304Z"
     }
   ],
   "4063.T": [
@@ -412,7 +412,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:22.922Z"
+      "generatedAt": "2026-06-15T21:50:14.549Z"
     },
     {
       "ticker": "4063.T",
@@ -427,7 +427,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:23.847Z"
+      "generatedAt": "2026-06-15T21:50:15.451Z"
     }
   ],
   "3436.T": [
@@ -444,7 +444,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:25.140Z"
+      "generatedAt": "2026-06-15T21:50:16.660Z"
     },
     {
       "ticker": "3436.T",
@@ -459,7 +459,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:26.044Z"
+      "generatedAt": "2026-06-15T21:50:17.536Z"
     }
   ],
   "AMAT": [
@@ -572,7 +572,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:28.474Z"
+      "generatedAt": "2026-06-15T21:50:19.836Z"
     },
     {
       "ticker": "8035.T",
@@ -587,7 +587,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:25:29.392Z"
+      "generatedAt": "2026-06-15T21:50:20.714Z"
     }
   ],
   "SNPS": [
@@ -860,7 +860,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:26:01.824Z"
+      "generatedAt": "2026-06-15T21:50:25.100Z"
     },
     {
       "ticker": "2317.TW",
@@ -875,7 +875,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:26:02.747Z"
+      "generatedAt": "2026-06-15T21:50:26.034Z"
     }
   ],
   "ANET": [
@@ -889,10 +889,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -13.6,
-      "summary": "",
-      "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:18:17.293Z"
+      "summary": "Arista Networks reported Q1 2026 earnings with revenue of $2.709 billion, representing 35.1% year-over-year growth, and non-GAAP diluted earnings per share of $0.87, beating estimates of $0.81. Management emphasized the company's strong start to the year, driven by its unique position in delivering mission-critical networking solutions, as well as its disciplined execution in a dynamic macro and supply chain environment. The company provided guidance for Q2 2026, expecting revenue of approximately $2.8 billion and non-GAAP diluted net income per share of approximately $0.88, but the stock still moved -13.6% on earnings day, potentially due to high expectations or other market factors.",
+      "keyQuote": "Arista is off to a strong start in Q1 2026, with both our results and our industry-leading net promoter score,",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000074/ex991q126-earningsrelease.htm",
+      "generatedAt": "2026-06-15T21:50:28.503Z"
     },
     {
       "ticker": "ANET",
@@ -904,10 +904,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 8.7,
-      "summary": "",
-      "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:18:27.412Z"
+      "summary": "Arista Networks reported Q4 earnings with EPS of $0.82, beating estimates of $0.76, driven by strong revenue growth of 28.9% year-over-year, which management attributed to the validation of their Arista 2.0 momentum and the company's ability to deliver profitable growth. The main narrative emphasized by management was the strong operating leverage inherent in their model, which provided a powerful exit rate as they head into 2026. The company provided guidance for Q1 2026, expecting revenue of approximately $2.6 billion, and the stock moved up 8.7% on the earnings day, likely due to the strong beat and positive outlook.",
+      "keyQuote": "2025 was the year of validation of our Arista 2.0 momentum, as we hit the milestone of shipping a cumulative of 150 million ports.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000010/ex991q425-earningsrelease.htm",
+      "generatedAt": "2026-06-15T21:50:30.310Z"
     }
   ],
   "COHR": [
@@ -953,10 +953,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 16.5,
-      "summary": "",
-      "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:18:42.118Z"
+      "summary": "Lumentum reported Q3 FY2026 EPS of $2.37, beating estimates of $2.27, with net revenue of $808.4 million, driven by a 90% year-over-year increase. The company's strong results were attributed to margin expansion, driven by operational rigor, pricing discipline, and product mix, with strength in laser chips and 'scale-across' components. Lumentum provided guidance for Q4 FY2026, expecting net revenue of $960-1.01 billion and non-GAAP diluted EPS of $2.85-3.05, which likely contributed to the 16.5% stock price increase on the earnings day.",
+      "keyQuote": "Lumentum delivered an exceptional third quarter, with revenue growing 90% year over year to a record $808 million. While our top line growth continues to garner headlines, the more impressive part of our recent performance has been our margin expansion.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1633978/000162828026030530/lite_ex991xq3fy26.htm",
+      "generatedAt": "2026-06-15T21:50:33.351Z"
     },
     {
       "ticker": "LITE",
@@ -968,10 +968,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 11.7,
-      "summary": "",
-      "keyQuote": null,
-      "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:18:52.276Z"
+      "summary": "Lumentum reported Q4 2025 earnings with an EPS of $1.67, beating the estimated $1.41, driven by the company's strong position in optical and photonic technologies that power AI, cloud computing, and next-generation communications. The main narrative emphasized by management was the strategic partnership with NVIDIA to develop state-of-the-art optics technology, which will accelerate innovation in advanced optics technologies and enable next-generation AI infrastructure and systems designs. The stock moved up 11.7% on the earnings day, likely due to the positive earnings surprise and the promising outlook for the company's future growth and collaboration with NVIDIA.",
+      "keyQuote": "AI has reinvented computing and is driving the largest computing infrastructure buildout in history,",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1633978/000119312526085412/d41019dex991.htm",
+      "generatedAt": "2026-06-15T21:50:35.240Z"
     }
   ],
   "FN": [
@@ -1212,7 +1212,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:26:18.936Z"
+      "generatedAt": "2026-06-15T21:50:58.340Z"
     },
     {
       "ticker": "CRWV",
@@ -1227,7 +1227,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-15T07:26:29.112Z"
+      "generatedAt": "2026-06-15T21:51:10.069Z"
     }
   ]
 }

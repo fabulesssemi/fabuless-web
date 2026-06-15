@@ -46,7 +46,7 @@ export function PortfolioTabs({
   const NAV_LINKS = [
     { label: "Home",         href: `/portfolio${hParam}` },
     { label: "Earnings",     href: `/portfolio/earnings${hParam}` },
-    { label: "Expert Calls", href: "/tracker" },
+    { label: "Expert Calls", href: `/portfolio/expert-calls${hParam}` },
     { label: "Analysts",     href: "/analysts" },
   ];
 

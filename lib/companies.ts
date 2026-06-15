@@ -230,6 +230,109 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
     ],
     fiscalLabel: "FY2024",
   },
+
+  // ---------------------------------------------------------------------------
+  // Supply-chain universe — every public company in the supply-chain graph.
+  // Live data (price, consensus, earnings) works for all of these immediately;
+  // editorial deep-dives are filled in by the refresh cron over time.
+  // ---------------------------------------------------------------------------
+
+  // Materials
+  { slug: "shin-etsu", ticker: "4063.T", name: "Shin-Etsu", yahooSymbol: "4063.T",
+    sector: "Silicon Wafers & Materials", exchangeLabel: "TSE: 4063",
+    newsKeywords: ["shin-etsu", "shin etsu"] },
+  { slug: "sumco", ticker: "3436.T", name: "SUMCO", yahooSymbol: "3436.T",
+    sector: "Silicon Wafers", exchangeLabel: "TSE: 3436",
+    newsKeywords: ["sumco"] },
+
+  // Equipment
+  { slug: "amat", ticker: "AMAT", name: "Applied Materials", yahooSymbol: "AMAT",
+    sector: "Wafer Fab Equipment (Deposition/Etch)",
+    newsKeywords: ["applied materials", "amat"] },
+  { slug: "lrcx", ticker: "LRCX", name: "Lam Research", yahooSymbol: "LRCX",
+    sector: "Etch & Deposition Equipment",
+    newsKeywords: ["lam research", "lrcx"] },
+  { slug: "klac", ticker: "KLAC", name: "KLA", yahooSymbol: "KLAC",
+    sector: "Process Control & Metrology",
+    newsKeywords: ["kla corporation", "kla-tencor", "klac"] },
+  { slug: "tokyo-electron", ticker: "8035.T", name: "Tokyo Electron", yahooSymbol: "8035.T",
+    sector: "Wafer Fab Equipment", exchangeLabel: "TSE: 8035",
+    newsKeywords: ["tokyo electron"] },
+  { slug: "besi", ticker: "BESI", name: "BE Semiconductor", yahooSymbol: "BESI",
+    sector: "Hybrid Bonding / Advanced Packaging Tools",
+    newsKeywords: ["be semiconductor", "besi", "besemiconductor"] },
+
+  // EDA & IP
+  { slug: "synopsys", ticker: "SNPS", name: "Synopsys", yahooSymbol: "SNPS",
+    sector: "EDA Software & Design IP",
+    newsKeywords: ["synopsys", "snps"] },
+  { slug: "cadence", ticker: "CDNS", name: "Cadence", yahooSymbol: "CDNS",
+    sector: "EDA Software & Design IP",
+    newsKeywords: ["cadence design", "cadence systems", "cdns"] },
+
+  // Foundry
+  { slug: "globalfoundries", ticker: "GFS", name: "GlobalFoundries", yahooSymbol: "GFS",
+    sector: "Trailing-Edge Foundry (RF/Auto/Legacy)",
+    newsKeywords: ["globalfoundries", "global foundries", "gfs"] },
+
+  // Packaging (OSAT)
+  { slug: "ase", ticker: "ASX", name: "ASE Technology", yahooSymbol: "ASX",
+    sector: "Assembly & Test (OSAT)",
+    newsKeywords: ["ase technology", "ase group", "advanced semiconductor engineering"] },
+  { slug: "amkor", ticker: "AMKR", name: "Amkor", yahooSymbol: "AMKR",
+    sector: "Assembly & Test (OSAT)",
+    newsKeywords: ["amkor"] },
+
+  // Designers
+  { slug: "astera", ticker: "ALAB", name: "Astera Labs", yahooSymbol: "ALAB",
+    sector: "PCIe/CXL Connectivity Silicon",
+    newsKeywords: ["astera labs", "astera", "alab"] },
+
+  // Integrators / Systems / Optical
+  { slug: "supermicro", ticker: "SMCI", name: "Supermicro", yahooSymbol: "SMCI",
+    sector: "AI Server Systems",
+    newsKeywords: ["supermicro", "super micro", "smci"] },
+  { slug: "dell", ticker: "DELL", name: "Dell", yahooSymbol: "DELL",
+    sector: "AI Server Systems & Infrastructure",
+    newsKeywords: ["dell technologies", "dell"] },
+  { slug: "foxconn", ticker: "2317.TW", name: "Foxconn", yahooSymbol: "2317.TW",
+    sector: "Electronics & AI Rack Assembly", exchangeLabel: "TWSE: 2317",
+    newsKeywords: ["foxconn", "hon hai"] },
+  { slug: "arista", ticker: "ANET", name: "Arista Networks", yahooSymbol: "ANET",
+    sector: "AI Datacenter Networking",
+    newsKeywords: ["arista networks", "arista", "anet"] },
+  { slug: "coherent", ticker: "COHR", name: "Coherent", yahooSymbol: "COHR",
+    sector: "Optical Transceivers & Lasers",
+    newsKeywords: ["coherent corp", "coherent", "cohr"] },
+  { slug: "lumentum", ticker: "LITE", name: "Lumentum", yahooSymbol: "LITE",
+    sector: "Laser Chips & Optical Components",
+    newsKeywords: ["lumentum", "lite"] },
+  { slug: "fabrinet", ticker: "FN", name: "Fabrinet", yahooSymbol: "FN",
+    sector: "Contract Optical Manufacturing",
+    newsKeywords: ["fabrinet"] },
+
+  // Customers / Hyperscalers
+  { slug: "apple", ticker: "AAPL", name: "Apple", yahooSymbol: "AAPL",
+    sector: "Custom Silicon & Devices",
+    newsKeywords: ["apple", "aapl", "apple silicon"] },
+  { slug: "google", ticker: "GOOGL", name: "Alphabet (Google)", yahooSymbol: "GOOGL",
+    sector: "TPUs & Hyperscale AI",
+    newsKeywords: ["alphabet", "google", "googl", "tpu"] },
+  { slug: "amazon", ticker: "AMZN", name: "Amazon", yahooSymbol: "AMZN",
+    sector: "Trainium/Inferentia & AWS",
+    newsKeywords: ["amazon", "aws", "trainium", "inferentia", "amzn"] },
+  { slug: "microsoft", ticker: "MSFT", name: "Microsoft", yahooSymbol: "MSFT",
+    sector: "Maia ASIC & Azure AI",
+    newsKeywords: ["microsoft", "azure", "maia", "msft"] },
+  { slug: "meta", ticker: "META", name: "Meta", yahooSymbol: "META",
+    sector: "MTIA ASIC & Hyperscale AI",
+    newsKeywords: ["meta platforms", "facebook", "mtia"] },
+  { slug: "oracle", ticker: "ORCL", name: "Oracle", yahooSymbol: "ORCL",
+    sector: "OCI GPU Cloud & Stargate",
+    newsKeywords: ["oracle", "oci", "stargate", "orcl"] },
+  { slug: "coreweave", ticker: "CRWV", name: "CoreWeave", yahooSymbol: "CRWV",
+    sector: "Pure-Play GPU Cloud",
+    newsKeywords: ["coreweave", "crwv"] },
 ];
 
 const metaBySlug = new Map(COMPANY_UNIVERSE.map((c) => [c.slug, c]));

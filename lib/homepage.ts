@@ -95,12 +95,12 @@ export async function getHomepageArticles(): Promise<{
     const DAY_MS = 24 * 60 * 60 * 1000;
 
     // Shelf-life filter at READ time:
-    //   top-tier (original_rank <= 5): 7 days
-    //   lower-tier (original_rank > 5): 3 days
+    //   top-tier (original_rank <= 5): 3 days
+    //   lower-tier (original_rank > 5): 1 day
     const alive = data.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
       const topTier = ((r.original_rank as number) ?? 99) <= 5;
-      return age < (topTier ? 7 * DAY_MS : 3 * DAY_MS);
+      return age < (topTier ? 3 * DAY_MS : DAY_MS);
     });
 
     // Source cap: max 3 per domain across the whole page
@@ -128,10 +128,10 @@ export async function getHomepageArticles(): Promise<{
 
     const topUrls = new Set(topStories.map((s) => s.url));
 
-    // List: everything else still within shelf life, up to 8 (total page ≈ 12)
+    // List: everything else still within shelf life, up to 20
     const listStories = eligible
       .filter((r) => !topUrls.has(r.url as string))
-      .slice(0, 8)
+      .slice(0, 20)
       .map(rowToStory);
 
     return { topStories, listStories };
@@ -199,7 +199,7 @@ export async function saveAndExpireArticles(
         if (keep.has(r.url as string)) return false;
         const age = nowMs - new Date(r.first_seen_at as string).getTime();
         const topTier = ((r.original_rank as number) ?? 99) <= 5;
-        return age >= (topTier ? 7 * DAY : 3 * DAY);
+        return age >= (topTier ? 3 * DAY : DAY);
       })
       .map((r) => r.url as string);
 

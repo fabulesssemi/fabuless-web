@@ -48,14 +48,7 @@ export default function TrackerPage() {
   const totalResolved    = rows.reduce((s, r) => s + r.stats.resolved, 0);
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundImage: "radial-gradient(circle, #E2E8F0 1px, transparent 1px)",
-        backgroundSize: "24px 24px",
-        backgroundColor: "#F8FAFC",
-      }}
-    >
+    <div className="min-h-screen">
       <div className="max-w-5xl mx-auto px-6 py-10">
 
         {/* Header */}
@@ -92,8 +85,8 @@ export default function TrackerPage() {
           </div>
         </div>
 
-        {/* Expert cards */}
-        <div className="flex flex-col gap-3 mb-12">
+        {/* Expert leaderboard — compact table rows */}
+        <div className="mb-8 rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
           {rows.map(({ expert, stats }, i) => {
             const domainMap = Object.fromEntries(stats.domains.map((d) => [d.domain, d.accuracyPct]));
             const topDomain = stats.domains
@@ -105,83 +98,67 @@ export default function TrackerPage() {
               <Link
                 key={expert.id}
                 href={`/tracker/${expert.id}`}
-                className="group relative flex items-center gap-5 rounded-2xl border border-[#E2E8F0] bg-white px-5 py-4 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-200"
+                className="group relative flex items-center gap-4 px-4 py-3 hover:bg-slate-50 transition-colors duration-150"
+                style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
               >
                 {/* Left accent rail */}
                 <div
-                  className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full"
+                  className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full"
                   style={{ backgroundColor: accent }}
                 />
 
-                {/* Rank badge */}
-                <div
-                  className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-[12px] font-bold tabular-nums"
-                  style={{ backgroundColor: `${accent}14`, color: accent, boxShadow: `inset 0 0 0 1px ${accent}22` }}
-                >
+                {/* Rank */}
+                <span className="shrink-0 w-5 text-[12px] font-bold tabular-nums text-center" style={{ color: accent }}>
                   {i + 1}
-                </div>
+                </span>
 
                 {/* Identity */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="font-sans text-[15px] font-bold text-gray-900 leading-tight">
-                      {expert.name}
+                <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+                  <span className="font-sans text-[14px] font-bold text-gray-900 leading-none">
+                    {expert.name}
+                  </span>
+                  <span className="text-[11px] text-gray-400">{expert.subtitle}</span>
+                  {topDomain && (
+                    <span className="text-[10px] text-gray-400 hidden lg:inline">
+                      · Best:{" "}
+                      <span className={`font-semibold ${accuracyColor(topDomain.accuracyPct)}`}>{topDomain.label}</span>
+                      <span className="text-gray-300 ml-0.5">{topDomain.accuracyPct}%</span>
                     </span>
-                    <span className="text-[11px] text-gray-400 font-medium">{expert.subtitle}</span>
-                  </div>
-                  <div className="mt-0.5 flex items-center gap-2 text-[11px] text-gray-400">
-                    <span className="tabular-nums">{stats.total} predictions</span>
-                    {topDomain && (
-                      <>
-                        <span className="text-gray-200">·</span>
-                        <span>
-                          Best:{" "}
-                          <span className={`font-semibold ${accuracyColor(topDomain.accuracyPct)}`}>
-                            {topDomain.label}
-                          </span>
-                          <span className="text-gray-300 ml-1 tabular-nums">{topDomain.accuracyPct}%</span>
-                        </span>
-                      </>
-                    )}
-                  </div>
+                  )}
                 </div>
 
                 {/* Domain bars */}
-                <div className="hidden lg:flex items-end gap-[5px] shrink-0">
+                <div className="hidden lg:flex items-center gap-[4px] shrink-0">
                   {DOMAIN_COLS.map((d) => {
                     const pct = domainMap[d.key] ?? null;
                     const color = pct === null ? "#E2E8F0" : pct >= 75 ? C_GREEN : pct >= 50 ? C_AMBER : C_RED;
                     return (
-                      <div key={d.key} className="flex flex-col items-center gap-[3px]">
-                        <div style={{ width: "20px", height: "4px", backgroundColor: color, borderRadius: "2px" }} />
-                        <span className="text-[7px] uppercase text-slate-400 leading-none tracking-wide">{d.label}</span>
+                      <div key={d.key} className="flex flex-col items-center gap-[2px]">
+                        <div style={{ width: "18px", height: "3px", backgroundColor: color, borderRadius: "2px" }} />
+                        <span className="text-[6px] uppercase text-slate-400 leading-none tracking-wide">{d.label}</span>
                       </div>
                     );
                   })}
                 </div>
 
                 {/* Resolved */}
-                <div className="hidden lg:block text-right shrink-0 w-20">
-                  <div className="text-[12px] font-semibold text-slate-700 tabular-nums">{stats.correct}/{stats.resolved}</div>
-                  <div className="text-[10px] text-slate-400 tabular-nums">+{stats.tooEarly} open</div>
+                <div className="hidden lg:block text-right shrink-0 w-16">
+                  <span className="text-[11px] text-slate-500 tabular-nums">{stats.correct}/{stats.resolved}</span>
+                  <span className="text-[10px] text-slate-400 tabular-nums ml-1">+{stats.tooEarly}</span>
                 </div>
 
                 {/* Accuracy */}
-                <div className="text-right shrink-0 w-16">
+                <div className="text-right shrink-0 w-14">
                   <span
-                    className="text-[26px] font-bold tabular-nums leading-none"
-                    style={{
-                      color: accent,
-                      textShadow: stats.accuracyPct !== null && stats.accuracyPct >= 80 ? `0 0 18px ${accent}30` : "none",
-                    }}
+                    className="text-[18px] font-bold tabular-nums leading-none"
+                    style={{ color: accent }}
                   >
                     {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
                   </span>
-                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">accuracy</div>
                 </div>
 
                 {/* Chevron */}
-                <span className="text-slate-300 group-hover:text-slate-500 transition-colors shrink-0 text-[14px]">→</span>
+                <span className="text-slate-300 group-hover:text-slate-500 transition-colors shrink-0 text-[12px]">→</span>
               </Link>
             );
           })}

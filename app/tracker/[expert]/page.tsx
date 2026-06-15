@@ -18,9 +18,16 @@ const STATUS_COLOR: Record<PredictionStatus, string> = {
 const STATUS_LABEL: Record<PredictionStatus, string> = {
   CORRECT: "Correct",
   PARTIAL: "Partial",
-  WRONG: "Wrong",
+  WRONG:   "Wrong",
   TOO_EARLY: "Open",
 };
+
+const TIMELINE_LEGEND: { status: PredictionStatus; label: string }[] = [
+  { status: "CORRECT",   label: "Correct" },
+  { status: "PARTIAL",   label: "Partial"  },
+  { status: "WRONG",     label: "Wrong"    },
+  { status: "TOO_EARLY", label: "Open"     },
+];
 
 const SIGNATURE_CALLS: Record<string, [string, string][]> = {
   dylan: [
@@ -60,7 +67,7 @@ export async function generateMetadata({ params }: { params: Promise<{ expert: s
   };
 }
 
-/* ── Timeline ─────────────────────────────────────────────────────────── */
+/* ── Timeline ──────────────────────────────────────────────────────────── */
 function Timeline({ rows }: { rows: Prediction[] }) {
   const dated = rows.filter((r) => r.date).slice().sort((a, b) => a.date.localeCompare(b.date));
   if (dated.length === 0) return null;
@@ -69,12 +76,12 @@ function Timeline({ rows }: { rows: Prediction[] }) {
   const maxTs = new Date(dated[dated.length - 1].date).getTime();
   const span  = Math.max(maxTs - minTs, 1);
 
-  const W       = 920;
-  const DOT_R   = 4;
-  const BAND_H  = 80;   // total dot band height
-  const BAND_Y  = 1;    // top of band (leave 1px for baseline)
-  const AXIS_Y  = BAND_Y + BAND_H + 14;
-  const H       = AXIS_Y + 4;
+  const W      = 920;
+  const DOT_R  = 4;
+  const BAND_H = 80;
+  const BAND_Y = 1;
+  const AXIS_Y = BAND_Y + BAND_H + 14;
+  const H      = AXIS_Y + 4;
 
   const xPos = (date: string) =>
     (new Date(date).getTime() - minTs) / span * W;
@@ -84,77 +91,48 @@ function Timeline({ rows }: { rows: Prediction[] }) {
   const years: number[] = [];
   for (let y = startYear + 1; y <= endYear; y++) years.push(y);
 
-  // Proximity-based vertical stacking: dots within 2*DOT_R of each other stack
+  // Proximity stacking — dots within 2×radius stack vertically, never overlap
   const placed: { cx: number; cy: number; r: Prediction }[] = [];
   for (const r of dated) {
-    const cx = xPos(r.date);
+    const cx     = xPos(r.date);
     const nearby = placed.filter((p) => Math.abs(p.cx - cx) <= DOT_R * 2 + 1);
     let cy: number;
     if (nearby.length === 0) {
       cy = BAND_Y + BAND_H / 2;
     } else {
-      const stackIdx = nearby.length;
-      const dir = stackIdx % 2 === 1 ? -1 : 1;
-      const level = Math.ceil(stackIdx / 2);
+      const dir   = nearby.length % 2 === 1 ? -1 : 1;
+      const level = Math.ceil(nearby.length / 2);
       cy = BAND_Y + BAND_H / 2 + dir * level * (DOT_R * 2 + 2);
       cy = Math.max(BAND_Y + DOT_R, Math.min(BAND_Y + BAND_H - DOT_R, cy));
     }
     placed.push({ cx, cy, r });
   }
 
-  // Render open/partial under correct/wrong
   const sorted = [...placed].sort((a, b) => {
     const order: Record<PredictionStatus, number> = { TOO_EARLY: 0, PARTIAL: 1, WRONG: 2, CORRECT: 3 };
     return order[a.r.status] - order[b.r.status];
   });
 
-  const LEGEND: { status: PredictionStatus; label: string }[] = [
-    { status: "CORRECT",   label: "Correct" },
-    { status: "PARTIAL",   label: "Partial"  },
-    { status: "WRONG",     label: "Wrong"    },
-    { status: "TOO_EARLY", label: "Open"     },
-  ];
-
   return (
-    <div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full overflow-visible" role="img" aria-label="Prediction timeline">
-        {/* Baseline anchor — 1px rule at bottom of dot band */}
-        <line x1="0" y1={BAND_Y + BAND_H} x2={W} y2={BAND_Y + BAND_H} stroke="#E5E7EB" strokeWidth="1" />
-
-        {/* Year labels */}
-        {years.map((y) => (
-          <text key={y} x={xPos(`${y}-01-01`)} y={AXIS_Y} textAnchor="middle" fontSize="9" fill="#C4C4C4" letterSpacing="0.03em">
-            {y}
-          </text>
-        ))}
-
-        {/* Dots */}
-        {sorted.map(({ r, cx, cy }) => (
-          <circle
-            key={r.id}
-            cx={cx}
-            cy={cy}
-            r={DOT_R}
-            fill={STATUS_COLOR[r.status]}
-            fillOpacity={r.status === "TOO_EARLY" ? 0.3 : 0.85}
-          >
-            <title>{`${r.date.slice(0, 7)} — ${r.claim.slice(0, 120)}${r.claim.length > 120 ? "…" : ""} [${STATUS_LABEL[r.status]}]`}</title>
-          </circle>
-        ))}
-      </svg>
-
-      {/* Legend below axis */}
-      <div className="flex items-center gap-4 mt-1">
-        {LEGEND.map(({ status, label }) => (
-          <div key={status} className="flex items-center gap-1.5">
-            <svg width="7" height="7" viewBox="0 0 7 7">
-              <circle cx="3.5" cy="3.5" r="3" fill={STATUS_COLOR[status]} fillOpacity={status === "TOO_EARLY" ? 0.4 : 0.85} />
-            </svg>
-            <span className="text-[10px] text-gray-400">{label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full overflow-visible" role="img" aria-label="Prediction timeline">
+      {/* Baseline rule */}
+      <line x1="0" y1={BAND_Y + BAND_H} x2={W} y2={BAND_Y + BAND_H} stroke="#E5E7EB" strokeWidth="1" />
+      {/* Year labels */}
+      {years.map((y) => (
+        <text key={y} x={xPos(`${y}-01-01`)} y={AXIS_Y} textAnchor="middle" fontSize="9" fill="#C4C4C4" letterSpacing="0.03em">
+          {y}
+        </text>
+      ))}
+      {/* Dots */}
+      {sorted.map(({ r, cx, cy }) => (
+        <circle key={r.id} cx={cx} cy={cy} r={DOT_R}
+          fill={STATUS_COLOR[r.status]}
+          fillOpacity={r.status === "TOO_EARLY" ? 0.3 : 0.85}
+        >
+          <title>{`${r.date.slice(0, 7)} — ${r.claim.slice(0, 120)}${r.claim.length > 120 ? "…" : ""} [${STATUS_LABEL[r.status]}]`}</title>
+        </circle>
+      ))}
+    </svg>
   );
 }
 
@@ -163,6 +141,13 @@ function domainAccuracyColor(pct: number | null): string {
   if (pct >= 75) return "text-emerald-600";
   if (pct >= 55) return "text-amber-600";
   return "text-rose-500";
+}
+
+function domainAccuracyHex(pct: number | null): string {
+  if (pct === null) return "#E5E7EB";
+  if (pct >= 75) return "#059669";
+  if (pct >= 55) return "#D97706";
+  return "#E11D48";
 }
 
 export default async function ExpertScorecard({ params }: { params: Promise<{ expert: string }> }) {
@@ -188,101 +173,117 @@ export default async function ExpertScorecard({ params }: { params: Promise<{ ex
 
   return (
     <div>
-      {/* ── Hero header ── target ~72px ── */}
+      {/* ── Hero — left accent rail, identity left, accuracy right ── */}
       <div className="border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 py-4">
-          <Link href="/tracker" className="text-[11px] text-gray-400 hover:text-gray-600">
+        <div className="max-w-5xl mx-auto px-6 py-5">
+          <Link href="/tracker" className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
             ← Prediction Tracker
           </Link>
 
-          <div className="mt-2 flex items-start justify-between gap-6 flex-wrap">
-            {/* Identity */}
-            <div>
-              <div className="flex items-baseline gap-2">
-                <h1 className="font-sans text-[24px] font-bold tracking-tight text-[#111827] leading-none">{meta.name}</h1>
-                <span className="text-[14px] text-gray-400">{meta.subtitle}</span>
-              </div>
-              <div className="text-[12px] text-gray-400 mt-1 tabular-nums">
-                {stats.total} predictions · {stats.dateRange} · {stats.sourceCount} sources
-              </div>
-            </div>
+          {/* Accent rail + content */}
+          <div className="relative mt-3 pl-4">
+            {/* Left accent — color-encoded by accuracy */}
+            <div
+              className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full"
+              style={{ backgroundColor: accColor }}
+            />
 
-            {/* Accuracy + full stat row */}
-            <div className="flex flex-col items-end gap-1">
-              <span
-                className="font-mono text-[48px] font-bold leading-none tabular-nums"
-                style={{ color: accColor }}
-              >
-                {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
-              </span>
-              <div className="flex items-center text-[12px] tabular-nums divide-x divide-gray-200">
-                <span className="text-gray-500 pr-3">{stats.resolved} resolved</span>
-                <span className="text-emerald-600 font-medium px-3">{stats.correct} correct</span>
-                <span className="text-amber-600 font-medium px-3">{stats.partial} partial</span>
-                <span className="text-rose-500 font-medium px-3">{stats.wrong} wrong</span>
-                <span className="text-gray-400 font-medium px-3">{stats.tooEarly} open</span>
-                <a
-                  href={tweetHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[12px] text-gray-400 hover:text-gray-600 pl-3"
+            <div className="flex items-start justify-between gap-8 flex-wrap">
+              {/* Identity */}
+              <div>
+                <div className="flex items-baseline gap-2.5">
+                  <h1 className="font-sans text-[24px] font-bold tracking-tight text-[#111827] leading-none">
+                    {meta.name}
+                  </h1>
+                  <span className="text-[14px] text-gray-400 leading-none">{meta.subtitle}</span>
+                </div>
+                <div className="text-[12px] text-gray-400 mt-1.5 tabular-nums">
+                  {stats.total} predictions · {stats.dateRange} · {stats.sourceCount} sources
+                </div>
+              </div>
+
+              {/* Accuracy block */}
+              <div className="flex flex-col items-end gap-1.5">
+                <span
+                  className="font-mono text-[48px] font-bold leading-none tabular-nums"
+                  style={{ color: accColor }}
                 >
-                  Share
-                </a>
+                  {stats.accuracyPct !== null ? `${stats.accuracyPct}%` : "—"}
+                </span>
+                <div className="flex items-center text-[12px] tabular-nums divide-x divide-gray-200">
+                  <span className="text-gray-500 pr-3">{stats.resolved} resolved</span>
+                  <span className="text-emerald-600 font-medium px-3">{stats.correct} correct</span>
+                  <span className="text-amber-600 font-medium px-3">{stats.partial} partial</span>
+                  <span className="text-rose-500 font-medium px-3">{stats.wrong} wrong</span>
+                  <span className="text-gray-400 font-medium px-3">{stats.tooEarly} open</span>
+                  <a href={tweetHref} target="_blank" rel="noopener noreferrer"
+                    className="text-[12px] text-gray-400 hover:text-gray-600 pl-3 transition-colors">
+                    Share
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 pt-5 pb-10">
+      <div className="max-w-5xl mx-auto px-6 pt-6 pb-10">
 
-        {/* ── Timeline ── */}
+        {/* ── Timeline — legend inline with title ── */}
         <section className="mb-6">
           <div className="flex items-center gap-3 mb-3">
             <h2 className="text-[11px] font-semibold text-gray-400 shrink-0">The record, dot by dot</h2>
             <div className="h-px flex-1 bg-gray-100" />
+            {/* Legend right-aligned inline with section title */}
+            <div className="flex items-center gap-3 shrink-0">
+              {TIMELINE_LEGEND.map(({ status, label }) => (
+                <div key={status} className="flex items-center gap-1.5">
+                  <svg width="7" height="7" viewBox="0 0 7 7">
+                    <circle cx="3.5" cy="3.5" r="3"
+                      fill={STATUS_COLOR[status]}
+                      fillOpacity={status === "TOO_EARLY" ? 0.4 : 0.85} />
+                  </svg>
+                  <span className="text-[10px] text-gray-400">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
           <Timeline rows={rows} />
         </section>
 
-        {/* ── Domain breakdown ── 24px gap from timeline above ── */}
+        {/* ── Domain breakdown — 24px gap ── */}
         <section className="mb-10 mt-6">
           <div className="flex items-center gap-3 mb-4">
             <h2 className="text-[11px] font-semibold text-gray-400 shrink-0">Where they&rsquo;re sharp</h2>
             <div className="h-px flex-1 bg-gray-100" />
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-3">
+          <div className="grid sm:grid-cols-2 gap-x-16 gap-y-4">
             {domains.map((d) => {
               const noData = d.resolved === 0;
               return (
                 <div key={d.domain} className={noData ? "opacity-35" : ""}>
-                  <div className="flex items-baseline justify-between mb-1">
-                    <span className="text-[12px] font-semibold text-gray-700">{d.label}</span>
-                    <div className="flex items-baseline gap-2 text-[11px]">
-                      {d.accuracyPct !== null ? (
-                        <span className={`font-bold tabular-nums ${domainAccuracyColor(d.accuracyPct)}`}>
-                          {d.accuracyPct}%
-                        </span>
-                      ) : (
-                        <span className="text-gray-300">—</span>
-                      )}
-                      <span className="text-gray-400 tabular-nums">
-                        {d.resolved}r · {d.total - d.resolved}o
+                  <div className="flex items-baseline gap-3 mb-1.5">
+                    <span className="text-[12px] font-semibold text-gray-700 w-28 shrink-0">{d.label}</span>
+                    {d.accuracyPct !== null ? (
+                      <span className={`text-[12px] font-bold tabular-nums ${domainAccuracyColor(d.accuracyPct)}`}>
+                        {d.accuracyPct}%
                       </span>
-                    </div>
+                    ) : (
+                      <span className="text-[12px] text-gray-300">—</span>
+                    )}
+                    <span className="text-[11px] text-gray-400 tabular-nums">
+                      {d.resolved}r · {d.total - d.resolved}o
+                    </span>
                   </div>
-                  <div className="bg-gray-100 overflow-hidden" style={{ height: "3px", width: "180px", borderRadius: "1px" }}>
+                  <div className="bg-gray-100 overflow-hidden ml-0" style={{ height: "3px", width: "180px", borderRadius: "1px" }}>
                     {d.accuracyPct !== null && (
-                      <div
-                        style={{
-                          height: "100%",
-                          width: `${d.accuracyPct}%`,
-                          backgroundColor: d.accuracyPct >= 75 ? "#059669" : d.accuracyPct >= 55 ? "#D97706" : "#E11D48",
-                          borderRadius: "1px",
-                        }}
-                      />
+                      <div style={{
+                        height: "100%",
+                        width: `${d.accuracyPct}%`,
+                        backgroundColor: domainAccuracyHex(d.accuracyPct),
+                        borderRadius: "1px",
+                      }} />
                     )}
                   </div>
                 </div>

@@ -103,7 +103,7 @@ export function PredictionTable({ rows, hideExpertFilter = false }: { rows: Pred
       {/* Divider + section label */}
       <div className="flex items-center gap-3 mb-5">
         <div className="h-px flex-1 bg-gray-200" />
-        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Prediction Feed</span>
+        <span className="text-[11px] font-bold uppercase tracking-widest text-gray-700">Prediction Feed</span>
         <div className="h-px flex-1 bg-gray-200" />
       </div>
 

@@ -97,8 +97,7 @@ function storyRow(story: Story, showImage: boolean, featured: boolean = false): 
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td style="vertical-align:top;">
-              <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:${TEAL};text-decoration:none;line-height:1.35;display:block;margin-bottom:6px;">${esc(story.headline)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(story.source)})</span></a>
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12.5px;color:#374151;font-style:italic;font-weight:400;margin:0;line-height:1.5;">${esc(story.oneliner)}</p>
+              <a href="${esc(story.url)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:${TEAL};text-decoration:none;line-height:1.35;display:block;">${esc(story.headline)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(story.source)})</span></a>
               ${xQuotesHtml}
             </td>
             ${imgCell}
@@ -164,12 +163,19 @@ function quotesBlock(quotes: Quote[]): string {
     </tr>`;
 }
 
+function todayMidnightET(): string {
+  const etOffset = 4 * 60 * 60 * 1000;
+  const etNow = new Date(Date.now() - etOffset);
+  const midnight = new Date(Date.UTC(etNow.getUTCFullYear(), etNow.getUTCMonth(), etNow.getUTCDate()));
+  return new Date(midnight.getTime() + etOffset).toISOString();
+}
+
 function loadQuantumArticles(): QuantumArticle[] {
   const p = resolve(process.cwd(), "data/quantum-articles.json");
   if (!existsSync(p)) return [];
   try {
     const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
-    const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+    const cutoff = todayMidnightET();
     return all
       .filter((a) => a.publishedAt >= cutoff)
       .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
@@ -181,17 +187,12 @@ const QUANTUM_COLOR = "#164e63";
 
 function quantumCornerBlock(articles: QuantumArticle[]): string {
   if (!articles.length) return "";
-  const rows = articles.map((a) => {
-    const oneliner = a.summary.split(". ").slice(0, 2).join(". ") + ".";
-    return `
-    <tr>
-      <td style="padding:12px 32px 13px;">
-        <a href="${esc(a.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:${QUANTUM_COLOR};text-decoration:none;line-height:1.35;display:block;margin-bottom:6px;">${esc(a.title)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(a.source)})</span></a>
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12.5px;color:#374151;font-style:italic;font-weight:400;margin:0;line-height:1.5;">${esc(oneliner)}</p>
-      </td>
-    </tr>
-    <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f0f0f0;margin:0;"></td></tr>`;
-  }).join("");
+  const rows = articles.map((a) => [
+    `<tr><td style="padding:12px 32px 13px;">`,
+    `<a href="${esc(a.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:${QUANTUM_COLOR};text-decoration:none;line-height:1.35;display:block;">${esc(a.title)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(a.source)})</span></a>`,
+    `</td></tr>`,
+    `<tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f0f0f0;margin:0;"></td></tr>`,
+  ].join("")).join("");
 
   return `
     <tr>

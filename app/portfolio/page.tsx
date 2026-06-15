@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 import { COMPANY_UNIVERSE } from "@/lib/companies";
 import { getCompanyData } from "@/lib/providers";
@@ -7,11 +6,13 @@ import { predictions } from "@/lib/tracker/predictions";
 import { EXPERTS } from "@/lib/tracker/experts";
 import { fetchAnalystCoverage } from "@/lib/analyst/analysts";
 import { decodeHoldings, type Holding } from "./storage";
+import { buildColorMap } from "./colors";
 import { PortfolioGate } from "./PortfolioGate";
 import { EditHoldings } from "./EditHoldings";
-import { RemoveTicker, AddTickerRow } from "./PortfolioRowActions";
+import { AddTickerRow } from "./PortfolioRowActions";
 import { PortfolioTabs } from "./PortfolioTabs";
-import { PerformanceChart } from "./PerformanceChart";
+import { PortfolioPerformance } from "./PerformanceChart";
+import { HoldingRow, type RowData } from "./HoldingRow";
 import type { AnalystRow, EarningsRow } from "./PortfolioTabs";
 
 export const revalidate = 300;
@@ -38,38 +39,6 @@ function daysUntil(d: Date): number {
   return Math.ceil((d.getTime() - Date.now()) / 86_400_000);
 }
 
-function ConsensusBar({ dist }: { dist?: { strongBuy: number; buy: number; hold: number; sell: number; strongSell: number } }) {
-  if (!dist) return <span className="text-[12px] text-gray-300">—</span>;
-  const buy = dist.strongBuy + dist.buy;
-  const hold = dist.hold;
-  const sell = dist.sell + dist.strongSell;
-  const total = buy + hold + sell;
-  if (!total) return <span className="text-[12px] text-gray-300">—</span>;
-  return (
-    <div className="flex h-1 w-20 rounded-full overflow-hidden gap-px">
-      {buy > 0 && <div className="bg-emerald-500" style={{ width: `${(buy / total) * 100}%` }} />}
-      {hold > 0 && <div className="bg-gray-300" style={{ width: `${(hold / total) * 100}%` }} />}
-      {sell > 0 && <div className="bg-rose-400" style={{ width: `${(sell / total) * 100}%` }} />}
-    </div>
-  );
-}
-
-type Row = {
-  holding: Holding;
-  covered: boolean;
-  slug?: string;
-  name: string;
-  price?: number;
-  changePercent?: number;
-  dist?: { strongBuy: number; buy: number; hold: number; sell: number; strongSell: number };
-  openCount: number;
-  earningsLabel?: string;
-  earningsDate: Date | null;
-  // performance
-  myReturn: number | null;   // % from purchase price to today
-  value: number | null;      // shares × price
-};
-
 export default async function PortfolioPage({
   searchParams,
 }: {
@@ -84,44 +53,56 @@ export default async function PortfolioPage({
 
   const tickers = holdings.map((h) => h.ticker);
 
-  const rows: Row[] = await Promise.all(
-    holdings.map(async (holding): Promise<Row> => {
+  const built = await Promise.all(
+    holdings.map(async (holding) => {
       const meta = METABYTICKER.get(holding.ticker);
       const symbol = meta?.yahooSymbol ?? holding.ticker;
       const data = await getCompanyData(symbol, meta?.newsKeywords);
       const openCount = predictions.filter(
         (p) => (p.companies ?? []).includes(holding.ticker) && p.status === "TOO_EARLY",
       ).length;
-      const earningsLabel = data.earnings?.nextEarningsDate;
-      const price = data.quote?.price;
+      const earningsLabel = data.earnings?.nextEarningsDate ?? null;
+      const earningsDate = parseEarningsDate(earningsLabel ?? undefined);
+      const price = data.quote?.price ?? null;
       const myReturn =
         holding.purchasePrice && price != null
           ? Math.round(((price - holding.purchasePrice) / holding.purchasePrice) * 1000) / 10
           : null;
-      const value =
-        holding.shares && price != null ? holding.shares * price : null;
-      return {
-        holding,
+      const value = holding.shares && price != null ? holding.shares * price : null;
+      const cost = holding.shares && holding.purchasePrice ? holding.shares * holding.purchasePrice : null;
+      const pnl = value != null && cost != null ? value - cost : null;
+      const dUntil = earningsDate ? daysUntil(earningsDate) : null;
+
+      const row: RowData = {
+        ticker: holding.ticker,
         covered: !!meta,
-        slug: meta?.slug,
+        slug: meta?.slug ?? null,
         name: meta?.name ?? data.profile?.name ?? holding.ticker,
         price,
-        changePercent: data.quote?.changePercent,
-        dist: data.consensus?.distribution,
+        changePercent: data.quote?.changePercent ?? null,
+        dist: data.consensus?.distribution ?? null,
         openCount,
         earningsLabel,
-        earningsDate: parseEarningsDate(earningsLabel),
+        earningsSoon: dUntil !== null && dUntil >= 0 && dUntil <= 14,
         myReturn,
         value,
+        pnl,
+        purchasePrice: holding.purchasePrice,
+        purchaseDate: holding.purchaseDate,
       };
+      return { row, earningsDate, price };
     }),
   );
 
+  const rows = built.map((b) => b.row);
+  const livePrices: Record<string, number | null> = Object.fromEntries(built.map((b) => [b.row.ticker, b.price]));
+  const colorMap = buildColorMap(tickers);
+
   // Earnings tab
-  const earningsRows: EarningsRow[] = rows
-    .filter((r) => r.earningsDate && daysUntil(r.earningsDate) >= 0 && daysUntil(r.earningsDate) <= 30)
+  const earningsRows: EarningsRow[] = built
+    .filter((b) => b.earningsDate && daysUntil(b.earningsDate) >= 0 && daysUntil(b.earningsDate) <= 30)
     .sort((a, b) => a.earningsDate!.getTime() - b.earningsDate!.getTime())
-    .map((r) => ({ ticker: r.holding.ticker, label: r.earningsLabel!, daysUntil: daysUntil(r.earningsDate!) }));
+    .map((b) => ({ ticker: b.row.ticker, label: b.row.earningsLabel!, daysUntil: daysUntil(b.earningsDate!) }));
 
   // Expert calls tab
   const recentCalls = predictions
@@ -161,7 +142,7 @@ export default async function PortfolioPage({
 
   // Grid cols: holding · price · day · consensus · open calls · earnings · [return] · [value] · remove
   const gridCols = hasReturnData
-    ? "grid-cols-[1fr_80px_60px_88px_80px_96px_80px_80px_20px]"
+    ? "grid-cols-[1fr_76px_56px_80px_72px_92px_92px_72px_20px]"
     : "grid-cols-[1fr_88px_64px_96px_88px_104px_20px]";
 
   const headers = hasReturnData
@@ -199,9 +180,9 @@ export default async function PortfolioPage({
         tickers={tickers}
       />
 
-      {/* Performance chart — always shown, falls back to 90-day window */}
+      {/* Performance — summary strip + cost-basis anchored chart */}
       <Suspense fallback={null}>
-        <PerformanceChart holdings={holdings} />
+        <PortfolioPerformance holdings={holdings} livePrices={livePrices} />
       </Suspense>
 
       {/* Portfolio table */}
@@ -215,85 +196,17 @@ export default async function PortfolioPage({
           ))}
         </div>
 
-        {rows.map((r, i) => {
-          const up = (r.changePercent ?? 0) > 0;
-          const down = (r.changePercent ?? 0) < 0;
-          const dUntil = r.earningsDate ? daysUntil(r.earningsDate) : null;
-          const earningsSoon = dUntil !== null && dUntil >= 0 && dUntil <= 14;
-          const retUp = r.myReturn !== null && r.myReturn > 0;
-          const retDown = r.myReturn !== null && r.myReturn < 0;
-
-          return (
-            <div
-              key={r.holding.ticker}
-              className={`relative grid ${gridCols} items-center gap-3 px-4 py-3.5 hover:bg-slate-50 transition-colors`}
-              style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
-            >
-              {r.covered && r.slug && (
-                <Link href={`/companies/${r.slug}`} className="absolute inset-0 z-0" aria-label={`${r.holding.ticker} company page`} />
-              )}
-
-              {/* Holding */}
-              <div className="relative z-10 pointer-events-none min-w-0 flex items-baseline gap-2">
-                <span className="font-sans text-[14px] font-bold text-gray-900 tabular-nums">{r.holding.ticker}</span>
-                <span className="text-[12px] text-gray-400 truncate">{r.name}</span>
-                {!r.covered && <span className="text-[9px] uppercase tracking-wide text-gray-300 font-semibold">no coverage</span>}
-              </div>
-
-              {/* Price */}
-              <div className="relative z-10 pointer-events-none text-right text-[13px] font-semibold text-gray-800 tabular-nums">
-                {r.price != null ? `$${r.price.toFixed(2)}` : "—"}
-              </div>
-
-              {/* Day % */}
-              <div className={`relative z-10 pointer-events-none text-right text-[12px] font-semibold tabular-nums ${up ? "text-emerald-600" : down ? "text-rose-500" : "text-gray-400"}`}>
-                {r.changePercent != null ? `${up ? "+" : ""}${r.changePercent.toFixed(1)}%` : "—"}
-              </div>
-
-              {/* Consensus */}
-              <div className="relative z-10 pointer-events-none flex justify-end">
-                <ConsensusBar dist={r.dist} />
-              </div>
-
-              {/* Open predictions */}
-              <div className="relative z-10 text-right">
-                {r.openCount > 0 ? (
-                  <Link href={`/tracker?company=${r.holding.ticker}`} className="text-[13px] font-bold text-[#B45309] tabular-nums hover:underline">
-                    {r.openCount}
-                  </Link>
-                ) : (
-                  <span className="text-[12px] text-gray-300 pointer-events-none">—</span>
-                )}
-              </div>
-
-              {/* Earnings */}
-              <div className="relative z-10 pointer-events-none text-right">
-                {r.earningsLabel ? (
-                  <span className={`text-[12px] font-semibold tabular-nums ${earningsSoon ? "text-[#B45309]" : "text-gray-500"}`}>
-                    {r.earningsLabel.replace(/^[A-Za-z]{3,}\s+/, "")}
-                  </span>
-                ) : (
-                  <span className="text-[12px] text-gray-300">—</span>
-                )}
-              </div>
-
-              {/* Your return + Value — only when hasReturnData */}
-              {hasReturnData && (
-                <>
-                  <div className={`relative z-10 pointer-events-none text-right text-[13px] font-bold tabular-nums ${retUp ? "text-emerald-600" : retDown ? "text-rose-500" : "text-gray-300"}`}>
-                    {r.myReturn !== null ? `${r.myReturn > 0 ? "+" : ""}${r.myReturn.toFixed(1)}%` : "—"}
-                  </div>
-                  <div className="relative z-10 pointer-events-none text-right text-[12px] text-gray-400 tabular-nums">
-                    {r.value != null ? `$${r.value >= 1000 ? `${(r.value / 1000).toFixed(1)}k` : r.value.toFixed(0)}` : "—"}
-                  </div>
-                </>
-              )}
-
-              {/* Remove */}
-              <RemoveTicker ticker={r.holding.ticker} allHoldings={holdings} />
-            </div>
-          );
-        })}
+        {rows.map((r, i) => (
+          <HoldingRow
+            key={r.ticker}
+            r={r}
+            color={colorMap[r.ticker]}
+            gridCols={gridCols}
+            hasReturnData={hasReturnData}
+            allHoldings={holdings}
+            isFirst={i === 0}
+          />
+        ))}
 
         <AddTickerRow allHoldings={holdings} />
       </div>

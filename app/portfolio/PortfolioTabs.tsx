@@ -1,13 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const NAV_LINKS = [
-  { label: "Home",         href: "/portfolio" },
-  { label: "Earnings",     href: "/earnings" },
-  { label: "Expert Calls", href: "/tracker" },
-  { label: "Analysts",     href: "/analysts" },
-];
+import { usePathname, useSearchParams } from "next/navigation";
 
 export type EarningsRow = {
   ticker: string;
@@ -45,7 +38,17 @@ export function PortfolioTabs({
   pastSummaries?: unknown;
 }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const h = searchParams.get("h") ?? "";
+  const hParam = h ? `?h=${h}` : "";
   const upcomingCount = earnings.length;
+
+  const NAV_LINKS = [
+    { label: "Home",         href: `/portfolio${hParam}` },
+    { label: "Earnings",     href: `/portfolio/earnings${hParam}` },
+    { label: "Expert Calls", href: "/tracker" },
+    { label: "Analysts",     href: "/analysts" },
+  ];
 
   return (
     <div className="flex items-start justify-between gap-4 mb-8">
@@ -59,7 +62,7 @@ export function PortfolioTabs({
 
       <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1 shrink-0 mt-1">
         {NAV_LINKS.map(({ label, href }) => {
-          const active = pathname === href || (href !== "/portfolio" && pathname.startsWith(href));
+          const active = pathname === href.split("?")[0] || (href.split("?")[0] !== "/portfolio" && pathname.startsWith(href.split("?")[0]));
           return (
             <Link
               key={href}

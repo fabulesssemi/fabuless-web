@@ -247,7 +247,7 @@ async function main() {
   console.log(`  → Title: "${curated.title}"`);
   curated.stories.forEach((s) => console.log(`     · [${s.category}] ${s.headline.slice(0, 60)}`));
 
-  const quantum = loadQuantumArticles(2);
+  const quantum = loadQuantumArticles(6);
   console.log(`\n  → ${quantum.length} quantum articles loaded`);
 
   console.log("\n[3/4] Building Issue...");

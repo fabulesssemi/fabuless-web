@@ -229,7 +229,7 @@ function buildEmailHtml(issue: Issue): string {
 
   const podcastsHtml = issue.podcasts.map(podcastRow).join("");
   const quotesHtml = quotesBlock(issue.quotes ?? []);
-  const quantumHtml = quantumCornerBlock(loadQuantumArticles(2));
+  const quantumHtml = quantumCornerBlock(loadQuantumArticles(6));
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
   return `<!DOCTYPE html>

@@ -58,34 +58,49 @@ function quarterLabel(date: string, fiscalYearOffset = 0): string {
   return `Q${q} FY${String(d.getFullYear() + fiscalYearOffset).slice(2)}`;
 }
 
+function toDateStr(v: Date | string | number | undefined | null): string | null {
+  if (v == null) return null;
+  if (v instanceof Date) return v.toISOString().slice(0, 10);
+  if (typeof v === "string") return v.slice(0, 10);
+  if (typeof v === "number") return new Date(v * 1000).toISOString().slice(0, 10);
+  return null;
+}
+
+function toNum(v: unknown): number | null {
+  if (v == null) return null;
+  if (typeof v === "number") return v;
+  // legacy { raw: number } format
+  if (typeof v === "object" && v !== null && "raw" in v && typeof (v as { raw: unknown }).raw === "number") {
+    return (v as { raw: number }).raw;
+  }
+  return null;
+}
+
 async function getNextEarningsDate(symbol: string): Promise<{ date: string; epsEst: number | null; revEstB: number | null } | null> {
   try {
     const summary = await yf.quoteSummary(
       symbol,
       { modules: ["calendarEvents", "earningsTrend"] as never[] },
       { validateResult: false },
-    ) as unknown as {
-      calendarEvents?: { earnings?: { earningsDate?: { raw: number }[] } };
-      earningsTrend?: {
-        trend?: {
-          period?: string;
-          earningsEstimate?: { avg?: { raw: number } };
-          revenueEstimate?: { avg?: { raw: number } };
-        }[];
-      };
-    };
+    ) as unknown as Record<string, unknown>;
 
-    const dates = summary.calendarEvents?.earnings?.earningsDate ?? [];
-    const nextRaw = dates[0]?.raw;
-    if (!nextRaw) return null;
+    // calendarEvents.earnings.earningsDate — array of Date|number|{raw}
+    const cal = summary.calendarEvents as Record<string, unknown> | undefined;
+    const earningsDates = (cal?.earnings as Record<string, unknown>)?.earningsDate as unknown[] | undefined ?? [];
 
-    const date = new Date(nextRaw * 1000).toISOString().slice(0, 10);
-    if (date < new Date().toISOString().slice(0, 10)) return null; // already passed
+    let date: string | null = null;
+    const today = new Date().toISOString().slice(0, 10);
+    for (const d of earningsDates) {
+      const s = toDateStr(d as Date | string | number);
+      if (s && s >= today) { date = s; break; }
+    }
+    if (!date) return null;
 
-    const trend = summary.earningsTrend?.trend ?? [];
+    // earningsTrend.trend — find current quarter "0q"
+    const trend = ((summary.earningsTrend as Record<string, unknown>)?.trend as Record<string, unknown>[] | undefined) ?? [];
     const currentQ = trend.find((t) => t.period === "0q");
-    const epsEst = currentQ?.earningsEstimate?.avg?.raw ?? null;
-    const revRaw = currentQ?.revenueEstimate?.avg?.raw ?? null;
+    const epsEst = toNum((currentQ?.earningsEstimate as Record<string, unknown>)?.avg);
+    const revRaw = toNum((currentQ?.revenueEstimate as Record<string, unknown>)?.avg);
     const revEstB = revRaw != null ? Math.round(revRaw / 1e9 * 10) / 10 : null;
 
     return { date, epsEst, revEstB };

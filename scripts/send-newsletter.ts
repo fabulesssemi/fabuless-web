@@ -52,7 +52,7 @@ function esc(str: string): string {
     .replace(/"/g, "&quot;");
 }
 
-const TEAL = "#0E7490";
+const TEAL = "#155e75";
 
 function categoryHeader(label: string): string {
   return `

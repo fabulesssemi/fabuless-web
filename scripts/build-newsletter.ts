@@ -95,7 +95,7 @@ async function curateWithClaude(articles: RssRow[]): Promise<ClaudeResponse> {
 
   const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors.
 
-From the articles below, select the 8-12 most investment-relevant stories. Skip duplicates, thin earnings recaps, retail/consumer fluff, and analyst price calls with no underlying news.
+From the articles below, select the best stories — no more than 12. Skip duplicates, thin earnings recaps, retail/consumer fluff, and analyst price calls with no underlying news.
 
 For each selected story, write:
 - A short punchy one-liner (max 15 words) stating the single most investment-relevant implication
@@ -141,7 +141,7 @@ function loadQuantumArticles(): QuantumArticle[] {
   return all
     .filter((a) => a.publishedAt >= cutoff)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-    .slice(0, 6);
+    .slice(0, 8);
 }
 
 // ── Step 4: build the Issue TS string ────────────────────────────────────────

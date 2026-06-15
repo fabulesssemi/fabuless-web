@@ -172,7 +172,7 @@ function loadQuantumArticles(): QuantumArticle[] {
     return all
       .filter((a) => a.publishedAt >= cutoff)
       .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-      .slice(0, 6);
+      .slice(0, 8);
   } catch { return []; }
 }
 

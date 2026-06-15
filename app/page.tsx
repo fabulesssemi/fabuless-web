@@ -77,25 +77,17 @@ export default async function Home() {
 
       </section>
 
-      {/* Latest issue header — above Top Stories */}
-      <section className="pt-4 pb-0">
-        <div className="mb-5 border-t-2 border-[#111827] pt-4">
-          <div className="text-[11px] text-gray-400 uppercase tracking-widest">
-            {issueLabel}
-          </div>
-          <h2 className="font-sans text-2xl font-bold text-[#111827] tracking-tight leading-tight mt-1">
+      {/* Latest issue header + Top Stories */}
+      <section className="pt-3 pb-6 border-b border-gray-200">
+        <div className="flex items-baseline justify-between border-t-2 border-[#111827] pt-2 mb-4">
+          <h2 className="font-sans text-lg font-bold text-[#111827] tracking-tight leading-tight">
             {issueTitle}
           </h2>
+          <span className="text-[10px] text-gray-400 uppercase tracking-widest shrink-0 ml-4">{issueLabel}</span>
         </div>
-      </section>
-
-      {/* Top Stories — FT style */}
-      <section className="pt-4 pb-8 border-b border-gray-200">
-        <div className="flex items-center gap-4 mb-5">
+        <div className="flex items-center gap-4 mb-4">
           <div className="h-px flex-1 bg-gray-200" />
-          <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 shrink-0">
-            Top Stories
-          </span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 shrink-0">Top Stories</span>
           <div className="h-px flex-1 bg-gray-200" />
         </div>
 

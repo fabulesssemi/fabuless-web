@@ -155,7 +155,7 @@ export default async function PortfolioPage({
   const hasReturnData = holdings.some((h) => h.purchasePrice && h.purchaseDate);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto pl-4 pr-6 py-10">
       {/* Header with tabs top-right */}
       <PortfolioTabs
         earnings={earningsRows}

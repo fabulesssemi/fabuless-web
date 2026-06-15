@@ -35,28 +35,16 @@ export default async function QuantumPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full opacity-20"
           style={{ background: "radial-gradient(ellipse, #818CF8 0%, transparent 70%)" }} />
 
-        <div className="relative max-w-5xl mx-auto px-6 py-20">
-          <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400 mb-3">
+        <div className="relative max-w-5xl mx-auto px-6 py-8">
+          <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-indigo-400 mb-2">
             Fabuless Quantum
           </div>
-          <h1 className="font-sans text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight max-w-2xl">
+          <h1 className="font-sans text-3xl font-bold text-white tracking-tight leading-tight">
             The Race to Useful Quantum
           </h1>
-          <p className="mt-4 font-serif text-[16px] text-indigo-200 leading-relaxed max-w-xl">
-            From qubit breakthroughs to quantum consciousness — the stories changing how we understand reality. Updated twice a week.
+          <p className="mt-2 font-serif text-[14px] text-indigo-200 leading-relaxed max-w-xl">
+            From qubit breakthroughs to quantum consciousness — the stories changing how we understand reality.
           </p>
-
-          {/* Category pills */}
-          <div className="flex flex-wrap gap-2 mt-8">
-            {CATEGORY_ORDER.map((cat) => {
-              const count = articles.filter((a) => a.category === cat).length;
-              return (
-                <span key={cat} className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-white/70 border border-white/10">
-                  {CATEGORY_LABELS[cat]} {count > 0 && <span className="text-indigo-300">{count}</span>}
-                </span>
-              );
-            })}
-          </div>
         </div>
       </div>
 

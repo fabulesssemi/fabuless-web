@@ -352,6 +352,22 @@ async function main() {
     console.log("   open newsletter-preview.html");
     return;
   }
+
+  const testMode = process.argv.includes("--test");
+  if (testMode) {
+    const issue = issues[0];
+    const resend = new Resend(process.env.RESEND_API_KEY!);
+    const html = buildEmailHtml(issue);
+    const { error } = await resend.emails.send({
+      from: "Fabuless <newsletter@fabuless.ai>",
+      to: "harrica@bc.edu",
+      subject: `[TEST] Fabuless Semi | ${issue.title}`,
+      html,
+    });
+    if (error) { console.error(`Failed: ${error.message}`); process.exit(1); }
+    console.log("\n✅ Test email sent to harrica@bc.edu");
+    return;
+  }
   const issue = issues[0];
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 

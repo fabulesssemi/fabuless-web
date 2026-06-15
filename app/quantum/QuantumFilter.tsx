@@ -88,9 +88,6 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
               ))
           }
         </div>
-        {topStories.length === 0 && (
-          <p className="text-center text-[11px] text-gray-400 font-serif mt-3">Pipeline runs tonight — top stories will populate automatically.</p>
-        )}
       </section>
 
       {/* ── Rest — 2-col text list ── */}

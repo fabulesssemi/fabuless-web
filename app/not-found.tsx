@@ -9,7 +9,7 @@ export default function NotFound() {
       <h1 className="font-sans text-4xl font-bold text-[#111827] tracking-tight mb-4">
         Page not found
       </h1>
-      <p className="text-[15px] text-gray-500 mb-10">
+      <p className="font-serif text-[15px] text-[#4a4a4a] mb-10">
         This page doesn't exist. The chip you were looking for may have been discontinued.
       </p>
       <div className="flex gap-4 justify-center flex-wrap">

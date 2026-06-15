@@ -58,7 +58,7 @@ export default function TrackerPage() {
               <h1 className="font-sans text-[28px] font-bold text-[#0F172A] tracking-tight leading-none">
                 Prediction Tracker
               </h1>
-              <p className="mt-2 text-[14px] text-gray-500 max-w-lg leading-relaxed">
+              <p className="mt-2 font-serif text-[15px] text-[#4a4a4a] max-w-lg leading-relaxed">
                 Every falsifiable semiconductor call, verbatim — graded publicly when the verdict lands.
               </p>
             </div>

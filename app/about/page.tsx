@@ -85,7 +85,7 @@ export default function About() {
         <h2 className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#111827] mb-3">
           Get the newsletter
         </h2>
-        <p className="text-[14px] text-gray-500 mb-5">
+        <p className="font-serif text-[14px] text-[#4a4a4a] mb-5">
           Every Friday. Free. No spam.
         </p>
         <SubscribeForm />

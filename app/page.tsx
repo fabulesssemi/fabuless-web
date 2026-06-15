@@ -115,7 +115,7 @@ export default async function Home() {
                       className="font-sans text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#B45309] transition-colors">
                       {story.headline}
                     </a>
-                    <p className="text-[12px] text-gray-500 mt-1.5 leading-snug line-clamp-2">
+                    <p className="font-serif text-[12px] text-[#4a4a4a] mt-1.5 leading-snug line-clamp-2">
                       {story.oneliner}
                     </p>
                     <div className="mt-auto pt-2.5 flex items-center justify-between">
@@ -145,7 +145,7 @@ export default async function Home() {
                       className="font-sans text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#B45309] transition-colors">
                       {story.headline}
                     </a>
-                    <p className="text-[12px] text-gray-500 mt-1.5 leading-snug line-clamp-2">
+                    <p className="font-serif text-[12px] text-[#4a4a4a] mt-1.5 leading-snug line-clamp-2">
                       {story.oneliner}
                     </p>
                     <div className="mt-auto pt-2.5 flex items-center justify-between">
@@ -174,7 +174,7 @@ export default async function Home() {
                   className="block font-sans text-[0.95rem] font-bold text-[#111827] hover:text-[#B45309] transition-colors leading-snug mb-1">
                   {story.headline}
                 </a>
-                <p className="text-[12px] text-gray-500 leading-snug">{story.oneliner}</p>
+                <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug">{story.oneliner}</p>
                 <div className="text-[10px] text-gray-400 mt-1">{story.source}</div>
               </div>
             ))}
@@ -226,7 +226,7 @@ export default async function Home() {
                       {p.title}
                     </a>
                     {p.oneliner && (
-                      <p className="text-[12px] text-gray-500 leading-snug mt-1">{p.oneliner}</p>
+                      <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug mt-1">{p.oneliner}</p>
                     )}
                   </div>
                 </div>

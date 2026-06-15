@@ -42,7 +42,7 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                   </a>
 
                   {/* One-liner deck */}
-                  <p className="text-[13px] text-gray-500 leading-relaxed">
+                  <p className="font-serif text-[13px] text-[#4a4a4a] leading-relaxed">
                     {story.oneliner}
                   </p>
                 </div>
@@ -98,7 +98,7 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                       {p.title}
                     </a>
                     {p.oneliner && (
-                      <p className="text-[12px] text-gray-500 leading-snug mt-1">
+                      <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug mt-1">
                         {p.oneliner}
                       </p>
                     )}

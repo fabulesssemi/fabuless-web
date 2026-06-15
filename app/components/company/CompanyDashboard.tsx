@@ -164,7 +164,7 @@ export function CompanyDashboard({
               )}
             </>
           ) : (
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="font-serif text-sm text-[#4a4a4a] leading-relaxed">
               {profile?.description ??
                 `Our full editorial deep-dive for ${meta.name} is in progress.`}
             </p>
@@ -182,7 +182,7 @@ export function CompanyDashboard({
               <div className={`text-3xl font-semibold mb-0.5 ${ratingColor}`}>
                 {analyst.consensusRating ?? "—"}
               </div>
-              <p className="text-[13px] text-gray-500 mb-4">
+              <p className="font-serif text-[13px] text-[#4a4a4a] mb-4">
                 {analyst.numberOfAnalysts != null ? `${analyst.numberOfAnalysts} analysts` : ""}
                 {analyst.impliedUpsidePct != null && (
                   <>

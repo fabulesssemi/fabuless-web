@@ -177,31 +177,30 @@ function loadQuantumArticles(): QuantumArticle[] {
   } catch { return []; }
 }
 
+const QUANTUM_COLOR = "#164e63";
+
 function quantumCornerBlock(articles: QuantumArticle[]): string {
   if (!articles.length) return "";
-  const rows = articles.map((a) => `
+  const rows = articles.map((a) => {
+    const oneliner = a.summary.split(". ").slice(0, 2).join(". ") + ".";
+    return `
     <tr>
-      <td style="padding:10px 0 8px;">
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#6366f1;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 4px 0;">${esc(a.source)}</p>
-        <a href="${esc(a.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:#111827;text-decoration:none;line-height:1.35;display:block;margin-bottom:5px;">${esc(a.title)}</a>
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;color:#4b5563;margin:0;line-height:1.55;">${esc(a.summary.split(". ").slice(0, 2).join(". ") + ".")}</p>
+      <td style="padding:12px 32px 13px;">
+        <a href="${esc(a.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:${QUANTUM_COLOR};text-decoration:none;line-height:1.35;display:block;margin-bottom:6px;">${esc(a.title)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(a.source)})</span></a>
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:12.5px;color:#374151;font-style:italic;font-weight:400;margin:0;line-height:1.5;">${esc(oneliner)}</p>
       </td>
     </tr>
-    <tr><td style="border-top:1px solid #e0e7ff;padding:0;"></td></tr>`).join("");
+    <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f0f0f0;margin:0;"></td></tr>`;
+  }).join("");
 
   return `
     <tr>
-      <td style="padding:22px 32px 6px;">
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#6366f1;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">✦ Quantum Corner</p>
-        <hr style="border:none;border-top:2px solid #6366f1;margin:0;">
+      <td style="padding:26px 32px 0px;">
+        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:${QUANTUM_COLOR};letter-spacing:0.18em;text-transform:uppercase;margin:0 0 8px 0;">✦ Quantum Corner</p>
+        <hr style="border:none;border-top:1px solid ${QUANTUM_COLOR};margin:0;">
       </td>
     </tr>
-    <tr>
-      <td style="padding:0 32px 16px;">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">${rows}</table>
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#9ca3af;margin:8px 0 0;"><a href="https://fabuless.ai/quantum" style="color:#6366f1;text-decoration:none;">More quantum coverage →</a></p>
-      </td>
-    </tr>`;
+    ${rows}`;
 }
 
 function buildEmailHtml(issue: Issue): string {

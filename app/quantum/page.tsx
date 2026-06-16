@@ -27,17 +27,6 @@ export default async function QuantumPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero ── */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
-          <h1 className="font-sans text-base font-bold text-gray-900 tracking-tight leading-tight shrink-0">
-            The Race to Useful Quantum
-          </h1>
-          <p className="font-serif text-[13px] text-gray-500 leading-snug border-l border-gray-300 pl-6">
-            From qubit breakthroughs to quantum consciousness — the stories changing how we understand reality.
-          </p>
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 py-8">
 
         {/* ── Articles ── */}

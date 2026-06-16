@@ -9,7 +9,6 @@
 
 import { readFileSync, existsSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import type { QuantumArticle } from "../lib/quantum/articles";
 try {
   const envPath = resolve(process.cwd(), ".env.local");
   const lines = readFileSync(envPath, "utf-8").split("\n");
@@ -163,39 +162,6 @@ function quotesBlock(quotes: Quote[]): string {
     </tr>`;
 }
 
-function loadQuantumArticles(): QuantumArticle[] {
-  const p = resolve(process.cwd(), "data/quantum-articles.json");
-  if (!existsSync(p)) return [];
-  try {
-    const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
-    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-    return all
-      .filter((a) => a.publishedAt >= cutoff)
-      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-      .slice(0, 8);
-  } catch { return []; }
-}
-
-const QUANTUM_COLOR = "#164e63";
-
-function quantumCornerBlock(articles: QuantumArticle[]): string {
-  if (!articles.length) return "";
-  const rows = articles.map((a) => [
-    `<tr><td style="padding:12px 32px 13px;">`,
-    `<a href="${esc(a.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:${QUANTUM_COLOR};text-decoration:none;line-height:1.35;display:block;">${esc(a.title)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(a.source)})</span></a>`,
-    `</td></tr>`,
-    `<tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f0f0f0;margin:0;"></td></tr>`,
-  ].join("")).join("");
-
-  return `
-    <tr>
-      <td style="padding:26px 32px 0px;">
-        <p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:${QUANTUM_COLOR};letter-spacing:0.18em;text-transform:uppercase;margin:0 0 8px 0;">✦ Quantum Corner</p>
-        <hr style="border:none;border-top:1px solid ${QUANTUM_COLOR};margin:0;">
-      </td>
-    </tr>
-    ${rows}`;
-}
 
 function buildEmailHtml(issue: Issue): string {
   const CAT_ORDER = ["Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other"];
@@ -215,7 +181,6 @@ function buildEmailHtml(issue: Issue): string {
 
   const podcastsHtml = issue.podcasts.map(podcastRow).join("");
   const quotesHtml = quotesBlock(issue.quotes ?? []);
-  const quantumHtml = quantumCornerBlock(loadQuantumArticles());
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
   return `<!DOCTYPE html>
@@ -279,9 +244,6 @@ function buildEmailHtml(issue: Issue): string {
 
         <!-- X Quotes -->
         ${quotesHtml}
-
-        <!-- Quantum Corner -->
-        ${quantumHtml}
 
         <!-- CTA -->
         <tr>

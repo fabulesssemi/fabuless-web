@@ -16,7 +16,6 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { resolve } from "path";
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@supabase/supabase-js";
-import type { QuantumArticle } from "../lib/quantum/articles";
 import type { IssueSection } from "../lib/issues";
 
 // ── env ──────────────────────────────────────────────────────────────────────
@@ -146,19 +145,7 @@ ${articleList}`;
   return JSON.parse(jsonMatch[0]) as ClaudeResponse;
 }
 
-// ── Step 3: load top quantum articles ────────────────────────────────────────
-function loadQuantumArticles(): QuantumArticle[] {
-  const p = resolve(process.cwd(), "data/quantum-articles.json");
-  if (!existsSync(p)) return [];
-  const all: QuantumArticle[] = JSON.parse(readFileSync(p, "utf-8"));
-  const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  return all
-    .filter((a) => a.publishedAt >= cutoff)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-    .slice(0, 8);
-}
-
-// ── Step 4: build the Issue TS string ────────────────────────────────────────
+// ── Step 3: build the Issue TS string ────────────────────────────────────────
 function buildIssueTs(issueNum: number, dateStr: string, curated: ClaudeResponse): string {
   const CAT_ORDER: IssueSection["category"][] = [
     "Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other",
@@ -263,9 +250,6 @@ async function main() {
   console.log(`  → Title: "${curated.title}"`);
   curated.stories.forEach((s) => console.log(`     · [${s.category}] ${s.headline.slice(0, 60)}`));
 
-  const quantum = loadQuantumArticles();
-  console.log(`\n  → ${quantum.length} quantum articles loaded`);
-
   console.log("\n[3/4] Building Issue...");
   const issueNum = getCurrentIssueNumber() + 1;
   const dateStr = formatDate();
@@ -276,7 +260,7 @@ async function main() {
 
   console.log(`\n${"=".repeat(52)}`);
   console.log(`Issue #${issueNum}: ${curated.title}`);
-  console.log(`Stories: ${curated.stories.length} semi + ${quantum.length} quantum`);
+  console.log(`Stories: ${curated.stories.length}`);
   console.log("=".repeat(52));
   console.log("\n✅ Done. Run send-newsletter.ts to blast to subscribers.");
 }

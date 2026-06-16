@@ -1,29 +1,25 @@
 import YahooFinance from "yahoo-finance2";
 import { unstable_cache } from "next/cache";
 
-const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
+const yf = new YahooFinance({ suppressNotices: ["yahooSurvey", "ripHistorical"] });
 
 export type PricePoint = { date: string; close: number };
 
 async function fetchPriceHistory(symbol: string): Promise<PricePoint[]> {
   try {
-    const end = new Date();
     const start = new Date();
     start.setFullYear(start.getFullYear() - 1);
 
-    const result = await yf.historical(symbol, {
+    const result = await yf.chart(symbol, {
       period1: start.toISOString().slice(0, 10),
-      period2: end.toISOString().slice(0, 10),
       interval: "1d",
     });
 
-    return (result ?? [])
-      .filter((r: { close?: number }) => r.close != null)
-      .map((r: { date: Date | string; close: number }) => ({
-        date: (r.date instanceof Date ? r.date : new Date(r.date))
-          .toISOString()
-          .slice(0, 10),
-        close: r.close,
+    return (result.quotes ?? [])
+      .filter((r: { close?: number | null }) => r.close != null)
+      .map((r: { date: Date; close: number | null }) => ({
+        date: r.date.toISOString().slice(0, 10),
+        close: r.close as number,
       }))
       .sort((a: PricePoint, b: PricePoint) => a.date.localeCompare(b.date));
   } catch {

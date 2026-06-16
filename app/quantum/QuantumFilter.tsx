@@ -19,19 +19,26 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 function StoryCard({ article }: { article: QuantumArticle }) {
   return (
-    <div className="bg-white border border-[#DDDBD2] flex flex-col">
+    <div className="bg-white border border-[#DDDBD2] border-t-2 border-t-indigo-500 flex flex-col">
       <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className="block">
-        <div className="aspect-[16/9] overflow-hidden bg-indigo-50">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={article.image!}
-            alt={article.title}
-            className="w-full h-full object-cover"
-          />
+        <div className="aspect-[16/9] overflow-hidden bg-indigo-50 flex items-center justify-center">
+          {article.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-full object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center">
+              <span className="text-indigo-300 text-3xl">✦</span>
+            </div>
+          )}
         </div>
       </a>
       <div className="p-4 pt-3 flex flex-col flex-1">
-        <div className={`text-[11px] font-bold uppercase tracking-wider mb-1.5 ${CATEGORY_COLORS[article.category] ?? "text-indigo-600"}`}>
+        <div className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider mb-1.5">
           {CATEGORY_LABELS[article.category]}
         </div>
         <a
@@ -54,8 +61,9 @@ function StoryCard({ article }: { article: QuantumArticle }) {
 }
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
-  const topStories = articles.filter((a) => a.topStory && a.image).slice(0, 4);
-  const rest = articles.filter((a) => !a.topStory || !a.image);
+  const topStories = articles.filter((a) => a.topStory).slice(0, 4);
+  const topIds = new Set(topStories.map((a) => a.id));
+  const rest = articles.filter((a) => !topIds.has(a.id));
 
   return (
     <>
@@ -90,7 +98,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4">
             {rest.map((article) => (
               <div key={article.id} className="py-4 first:pt-0 sm:first:pt-4 odd:sm:pr-8 even:sm:pl-8">
-                <div className={`text-[11px] font-bold uppercase tracking-wider mb-1 ${CATEGORY_COLORS[article.category] ?? "text-indigo-600"}`}>
+                <div className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider mb-1">
                   {CATEGORY_LABELS[article.category]}
                 </div>
                 <a

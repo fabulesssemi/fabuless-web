@@ -142,14 +142,22 @@ async function pickTopStories(articles: QuantumArticle[], forceConsciousness = f
     .map((a, i) => `${i + 1}. [${a.category.toUpperCase()}] "${a.title}" — ${a.source}\n   ${a.summary}`)
     .join("\n\n");
 
-  const prompt = `You are the editor-in-chief at Fabuless Quantum. Your readers are everyday people just getting into quantum — interested in investing, big-picture trends, and mind-blowing ideas. NOT researchers.
+  const prompt = `You are the editor-in-chief at Fabuless Quantum. Your readers are curious non-experts — retail investors, tech enthusiasts, and people fascinated by big ideas. They are NOT physicists or researchers.
 
-Pick the 4 most compelling articles from the list below. Prioritize:
-- Stock/investing angles — who's winning, funding, market moves
-- Stories a non-technical person would share ("did you see this quantum stock exploded?")
-- Big-picture "why it matters" stories over technical deep dives
-- Source diversity — don't pick 4 from the same outlet
-${forceConsciousness ? "- MUST include exactly 1 consciousness/worldview/quantum-mind story in your 4 picks" : "- Include a consciousness/worldview story if one is genuinely interesting"}
+Pick the 4 most compelling articles from the list below.
+
+HARD RULES — automatically disqualify any article that:
+- Mentions qubits, error rates, gate fidelity, decoherence, algorithms, or circuit depth in a technical way
+- Is a paper, preprint, or academic announcement with no real-world implication
+- Would require a physics degree to care about
+
+PRIORITIZE in this order:
+1. Money/market stories — funding rounds, stock moves, acquisitions, partnerships, company wins
+2. "Why it matters to regular people" stories — breakthroughs explained simply, timelines, what quantum unlocks
+3. Government/policy — CHIPS Act, national programs, geopolitical angles
+4. Consciousness, philosophy of mind, or reality-bending ideas a curious person would share at dinner
+5. Source diversity — never pick 2 from the same outlet
+${forceConsciousness ? "- MUST include exactly 1 consciousness/worldview/quantum-mind story in your 4 picks" : "- Include a consciousness/worldview story if one qualifies"}
 
 Articles:
 ${list}

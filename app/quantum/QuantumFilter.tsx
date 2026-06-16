@@ -7,20 +7,17 @@ const CATEGORY_LABELS: Record<string, string> = {
   research: "Research", policy: "Policy", consciousness: "Consciousness",
 };
 
-const CATEGORY_COLORS: Record<string, string> = {
-  hardware:      "text-indigo-600",
-  software:      "text-violet-600",
-  market:        "text-sky-600",
-  research:      "text-emerald-600",
-  policy:        "text-amber-600",
-  consciousness: "text-fuchsia-600",
-};
+// Single accent color — matches the quantum page header (#312E81 indigo)
+const ACCENT = "#4338CA";
+
+function TopLabel() {
+  return <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: ACCENT }}>Top Stories</span>;
+}
 
 function CategoryLabel({ category }: { category: string }) {
-  const color = CATEGORY_COLORS[category] ?? "text-indigo-600";
   return (
-    <span className={`text-[11px] font-semibold uppercase tracking-widest ${color}`}>
-      {CATEGORY_LABELS[category]}
+    <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: ACCENT }}>
+      {CATEGORY_LABELS[category] ?? category}
     </span>
   );
 }
@@ -64,12 +61,12 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   style={{ maxHeight: "320px" }}
                 />
               </a>
-              <CategoryLabel category={hero.category} />
+              <TopLabel />
               <a
                 href={hero.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block mt-2 font-serif text-[1.75rem] font-bold text-[#111827] leading-tight hover:text-indigo-700 transition-colors"
+                className="block mt-2 font-serif text-[1.75rem] font-bold text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
               >
                 {hero.title}
               </a>
@@ -93,12 +90,12 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     style={{ maxHeight: "160px" }}
                   />
                 </a>
-                <CategoryLabel category={article.category} />
+                <TopLabel />
                 <a
                   href={article.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-1.5 font-serif text-[1.1rem] font-bold text-[#111827] leading-snug hover:text-indigo-700 transition-colors"
+                  className="block mt-1.5 font-serif text-[1.1rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                 >
                   {article.title}
                 </a>
@@ -113,12 +110,12 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
             <div className="flex flex-col divide-y divide-gray-100">
               {rail.map((article) => (
                 <div key={article.id} className="py-3 first:pt-0">
-                  <CategoryLabel category={article.category} />
+                  <TopLabel />
                   <a
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block mt-1 font-serif text-[0.9rem] font-bold text-[#111827] leading-snug hover:text-indigo-700 transition-colors"
+                    className="block mt-1 font-serif text-[0.9rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
                     {article.title}
                   </a>
@@ -142,7 +139,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   href={article.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-1.5 font-serif text-[1rem] font-bold text-[#111827] leading-snug hover:text-indigo-700 transition-colors mb-1.5"
+                  className="block mt-1.5 font-serif text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
                 >
                   {article.title}
                 </a>

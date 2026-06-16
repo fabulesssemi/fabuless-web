@@ -240,10 +240,10 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
   // Materials
   { slug: "shin-etsu", ticker: "4063.T", name: "Shin-Etsu", yahooSymbol: "4063.T",
     sector: "Silicon Wafers & Materials", exchangeLabel: "TSE: 4063",
-    newsKeywords: ["shin-etsu", "shin etsu"] },
+    newsKeywords: ["shin-etsu", "shin etsu", "shin etsu chemical", "silicon wafer"] },
   { slug: "sumco", ticker: "3436.T", name: "SUMCO", yahooSymbol: "3436.T",
     sector: "Silicon Wafers", exchangeLabel: "TSE: 3436",
-    newsKeywords: ["sumco"] },
+    newsKeywords: ["sumco", "silicon wafer", "sumco corporation"] },
 
   // Equipment
   { slug: "amat", ticker: "AMAT", name: "Applied Materials", yahooSymbol: "AMAT",
@@ -257,10 +257,10 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
     newsKeywords: ["kla corporation", "kla-tencor", "klac"] },
   { slug: "tokyo-electron", ticker: "8035.T", name: "Tokyo Electron", yahooSymbol: "8035.T",
     sector: "Wafer Fab Equipment", exchangeLabel: "TSE: 8035",
-    newsKeywords: ["tokyo electron"] },
+    newsKeywords: ["tokyo electron", "tel semiconductor", "8035.T"] },
   { slug: "besi", ticker: "BESI", name: "BE Semiconductor", yahooSymbol: "BESI",
     sector: "Hybrid Bonding / Advanced Packaging Tools",
-    newsKeywords: ["be semiconductor", "besi", "besemiconductor"] },
+    newsKeywords: ["be semiconductor", "besi", "hybrid bonding", "advanced packaging"] },
 
   // EDA & IP
   { slug: "synopsys", ticker: "SNPS", name: "Synopsys", yahooSymbol: "SNPS",
@@ -273,20 +273,20 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
   // Foundry
   { slug: "globalfoundries", ticker: "GFS", name: "GlobalFoundries", yahooSymbol: "GFS",
     sector: "Trailing-Edge Foundry (RF/Auto/Legacy)",
-    newsKeywords: ["globalfoundries", "global foundries", "gfs"] },
+    newsKeywords: ["globalfoundries", "global foundries", "gfs", "gf foundry"] },
 
   // Packaging (OSAT)
   { slug: "ase", ticker: "ASX", name: "ASE Technology", yahooSymbol: "ASX",
     sector: "Assembly & Test (OSAT)",
-    newsKeywords: ["ase technology", "ase group", "advanced semiconductor engineering"] },
+    newsKeywords: ["ase technology", "ase group", "advanced semiconductor engineering", "osat"] },
   { slug: "amkor", ticker: "AMKR", name: "Amkor", yahooSymbol: "AMKR",
     sector: "Assembly & Test (OSAT)",
-    newsKeywords: ["amkor"] },
+    newsKeywords: ["amkor", "amkor technology", "amkr"] },
 
   // Designers
   { slug: "astera", ticker: "ALAB", name: "Astera Labs", yahooSymbol: "ALAB",
     sector: "PCIe/CXL Connectivity Silicon",
-    newsKeywords: ["astera labs", "astera", "alab"] },
+    newsKeywords: ["astera labs", "astera", "alab", "cxl connectivity", "pcie connectivity"] },
 
   // Integrators / Systems / Optical
   { slug: "supermicro", ticker: "SMCI", name: "Supermicro", yahooSymbol: "SMCI",
@@ -303,13 +303,13 @@ export const COMPANY_UNIVERSE: CompanyMeta[] = [
     newsKeywords: ["arista networks", "arista", "anet"] },
   { slug: "coherent", ticker: "COHR", name: "Coherent", yahooSymbol: "COHR",
     sector: "Optical Transceivers & Lasers",
-    newsKeywords: ["coherent corp", "coherent", "cohr"] },
+    newsKeywords: ["coherent corp", "cohr", "optical transceiver", "800g optics"] },
   { slug: "lumentum", ticker: "LITE", name: "Lumentum", yahooSymbol: "LITE",
     sector: "Laser Chips & Optical Components",
-    newsKeywords: ["lumentum", "lite"] },
+    newsKeywords: ["lumentum", "lite", "lumentum holdings", "optical components"] },
   { slug: "fabrinet", ticker: "FN", name: "Fabrinet", yahooSymbol: "FN",
     sector: "Contract Optical Manufacturing",
-    newsKeywords: ["fabrinet"] },
+    newsKeywords: ["fabrinet", "fabrinet thailand", "optical manufacturing"] },
 
   // Customers / Hyperscalers
   { slug: "apple", ticker: "AAPL", name: "Apple", yahooSymbol: "AAPL",

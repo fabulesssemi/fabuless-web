@@ -128,18 +128,20 @@ async function collectNews(
     return primaryFiltered.slice(0, limit);
   }
 
-  // Secondary search: if the ticker search returned items but none matched
-  // keywords (e.g. Korean stocks, or tickers Yahoo maps to generic news),
-  // try searching by the primary keyword phrase instead.
+  // Secondary search: try ALL keyword phrases in parallel, not just the first.
+  // Covers niche companies (BESI, SUMCO, Fabrinet, ASE, etc.) where the ticker
+  // search returns generic news and none of it passes the keyword filter.
   // Never fall back to unfiltered results — that shows irrelevant articles.
-  if (keywords?.length && primaryAll.length > 0) {
+  if (keywords?.length) {
     const secondaryLists = await Promise.all(
-      newsProviders.map((p) => safe(() => p.getNews(keywords[0], { limit: limit * 2 }))),
+      keywords.flatMap((kw) =>
+        newsProviders.map((p) => safe(() => p.getNews(kw, { limit: limit * 2 }))),
+      ),
     );
     const secondaryAll = dedup(secondaryLists, seen);
     const secondaryFiltered = applyKeywords([...primaryAll, ...secondaryAll]);
     secondaryFiltered.sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
-    return secondaryFiltered.slice(0, limit);
+    if (secondaryFiltered.length > 0) return secondaryFiltered.slice(0, limit);
   }
 
   return [];

@@ -27,7 +27,7 @@ export default async function QuantumPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero ── */}
-      <div className="border-b border-gray-200">
+      <div>
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
           <h1 className="font-sans text-2xl font-bold text-gray-900 tracking-tight leading-tight shrink-0">
             The Race to Useful Quantum

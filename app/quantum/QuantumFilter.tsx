@@ -63,7 +63,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 href={hero.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block mt-2 font-serif text-[2.1rem] font-bold text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
+                className="block mt-2 font-serif text-[2.1rem] font-normal text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
               >
                 {hero.title}
               </a>

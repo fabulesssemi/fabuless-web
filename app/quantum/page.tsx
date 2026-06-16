@@ -25,7 +25,7 @@ export default async function QuantumPage() {
   const infra    = QUANTUM_COMPANIES.filter((c) => c.category === "infrastructure");
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* ── Hero ── */}
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">

@@ -39,7 +39,7 @@ const AUTO = process.argv.includes("--auto");
 const ai = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );
 
 // ── types ─────────────────────────────────────────────────────────────────────
@@ -96,6 +96,8 @@ async function curateWithClaude(articles: RssRow[]): Promise<ClaudeResponse> {
   const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors.
 
 From the articles below, select the best stories — no more than 12. Skip duplicates, thin earnings recaps, retail/consumer fluff, and analyst price calls with no underlying news.
+
+SOURCE DIVERSITY RULE: Select at most 2 articles from any single source. Prioritize breadth — spread picks across as many different sources as possible. If two articles cover the same event from different angles, pick only the better one.
 
 For each selected story, write:
 - A short punchy one-liner (max 15 words) stating the single most investment-relevant implication

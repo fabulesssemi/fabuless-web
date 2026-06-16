@@ -44,10 +44,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
       {/* ── 3-column hero section ── */}
       <section className="pb-8 border-b border-gray-200">
 
-        {/* Top rule */}
-        <div className="border-t-2 border-[#312E81] mb-6" />
-
-        <div className="grid grid-cols-1 lg:grid-cols-[52fr_28fr_20fr] gap-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[50fr_26fr_24fr] gap-0">
 
           {/* LEFT — hero story */}
           {hero && (
@@ -78,7 +75,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
           )}
 
           {/* MIDDLE — 2 stacked stories with photos */}
-          <div className="lg:px-8 flex flex-col gap-6 border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
+          <div className="lg:px-5 flex flex-col gap-6 border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
             {mid.map((article) => (
               <div key={article.id}>
                 <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className="block mb-3">
@@ -105,7 +102,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
           </div>
 
           {/* RIGHT RAIL — text-only headlines */}
-          <div className="lg:pl-8 flex flex-col border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
+          <div className="lg:pl-5 flex flex-col border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
             <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">More Stories</div>
             <div className="flex flex-col divide-y divide-gray-100">
               {rail.map((article) => (

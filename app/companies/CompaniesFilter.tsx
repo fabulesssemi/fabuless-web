@@ -40,31 +40,37 @@ export const SLUG_CATEGORY: Record<string, string> = {
   synopsys: "eda",
   cadence: "eda",
 
-  // Infrastructure (servers, networking, optics, hyperscalers)
+  // Optical
+  coherent: "optical",
+  lumentum: "optical",
+  fabrinet: "optical",
+
+  // Hyperscalers
+  apple: "hyperscalers",
+  google: "hyperscalers",
+  amazon: "hyperscalers",
+  microsoft: "hyperscalers",
+  meta: "hyperscalers",
+  oracle: "hyperscalers",
+  coreweave: "hyperscalers",
+
+  // Infrastructure (servers, networking)
   supermicro: "infra",
   dell: "infra",
   foxconn: "infra",
   arista: "infra",
-  coherent: "infra",
-  lumentum: "infra",
-  fabrinet: "infra",
-  apple: "infra",
-  google: "infra",
-  amazon: "infra",
-  microsoft: "infra",
-  meta: "infra",
-  oracle: "infra",
-  coreweave: "infra",
 };
 
 const CATEGORIES = [
-  { key: "all",        label: "All" },
-  { key: "designers",  label: "Chip Design" },
-  { key: "foundry",    label: "Foundry & Memory" },
-  { key: "equipment",  label: "Equipment" },
-  { key: "packaging",  label: "Packaging" },
-  { key: "eda",        label: "EDA" },
-  { key: "infra",      label: "Infrastructure" },
+  { key: "all",          label: "All" },
+  { key: "designers",    label: "Chip Design" },
+  { key: "foundry",      label: "Foundry & Memory" },
+  { key: "equipment",    label: "Equipment" },
+  { key: "packaging",    label: "Packaging" },
+  { key: "eda",          label: "EDA" },
+  { key: "optical",      label: "Optical" },
+  { key: "infra",        label: "Infrastructure" },
+  { key: "hyperscalers", label: "Hyperscalers" },
 ];
 
 type CardData = {

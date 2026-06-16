@@ -2,7 +2,7 @@ name: Daily Newsletter
 
 on:
   schedule:
-    - cron: "0 12 * * 1-5"   # 8am ET Mon-Fri
+    - cron: "0 15 * * 1-5"   # 11am ET Mon-Fri
   workflow_dispatch: {}
 
 jobs:

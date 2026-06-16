@@ -2,7 +2,7 @@ name: Update Quantum Articles
 
 on:
   schedule:
-    - cron: "15 12 * * *"   # 8:15am ET daily
+    - cron: "15 15 * * *"   # 11:15am ET daily
   workflow_dispatch:
     inputs:
       force:

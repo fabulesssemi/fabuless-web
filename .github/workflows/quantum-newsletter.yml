@@ -2,7 +2,7 @@ name: Quantum Newsletter
 
 on:
   schedule:
-    - cron: "0 13 * * 1-5"   # 9am ET Mon-Fri
+    - cron: "0 16 * * 1-5"   # 12pm ET Mon-Fri
   workflow_dispatch:
 
 jobs:

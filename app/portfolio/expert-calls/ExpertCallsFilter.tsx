@@ -69,14 +69,7 @@ function CallCard({ call, tickerColor }: { call: Call; tickerColor: string }) {
               {call.expert}
             </span>
             {/* Ticker chip — supporting context, not the lead */}
-            <span
-              className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
-              style={{
-                color: tickerColor,
-                borderColor: tickerColor + "40",
-                backgroundColor: tickerColor + "12",
-              }}
-            >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#111827] text-white border border-[#111827] shrink-0">
               {call.ticker}
             </span>
           </div>

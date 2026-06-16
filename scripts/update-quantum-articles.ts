@@ -25,7 +25,7 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const DATA_PATH = path.resolve(__dirname, "../data/quantum-articles.json");
 
 // Target 10-12 high-quality articles per run
-const TARGET_ARTICLES = 12;
+const TARGET_ARTICLES = 16;
 // Process at most this many raw candidates (Groq rate limit safety)
 const MAX_CANDIDATES = 40;
 

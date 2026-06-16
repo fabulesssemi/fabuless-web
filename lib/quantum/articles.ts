@@ -52,8 +52,10 @@ export function getArticlesByTicker(ticker: string): QuantumArticle[] {
   return getAllArticles().filter((a) => a.companies.includes(ticker));
 }
 
-export function getLatestArticles(limit = 12): QuantumArticle[] {
+export function getLatestArticles(limit = 48): QuantumArticle[] {
+  const cutoff = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
   return getAllArticles()
+    .filter((a) => a.publishedAt >= cutoff)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, limit);
 }

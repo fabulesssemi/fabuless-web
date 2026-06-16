@@ -141,39 +141,61 @@ export function EarningsFilter({
             </span>
           </div>
 
+          {/* Column headers */}
+          <div className="flex items-center gap-4 pb-1.5 border-b border-gray-200 text-[9px] font-bold uppercase tracking-widest text-gray-400">
+            <span className="w-[40px] shrink-0 text-right">In</span>
+            <span className="flex-1 min-w-0 pl-1">Company</span>
+            <span className="w-[80px] shrink-0 text-right">Prior EPS</span>
+            <span className="w-[80px] shrink-0 text-right">Day Move</span>
+            <span className="w-[100px] shrink-0 text-right">Reports</span>
+            <span className="w-[80px] shrink-0 text-right" />
+          </div>
+
           <div className="divide-y divide-gray-100">
             {visibleUpcoming.map((u) => {
-              const beat = lastBeat.get(u.ticker);
               const urgent = u.daysAway <= 7;
               const accent = colorMap[u.ticker] ?? "#9CA3AF";
+              // Pull prior quarter data for context columns
+              const prior = pastRows.find((r) => r.ticker === u.ticker)?.summaries[0] ?? null;
+              const priorEps = prior?.epsActual ?? null;
+              const priorMove = prior?.priceMoveDay ?? null;
               return (
-                <div key={u.ticker} className="flex items-center gap-4 py-2 group">
-                  {/* Countdown — inline, de-emphasised unless urgent */}
-                  <span className={`shrink-0 font-sans text-[12px] font-bold tabular-nums w-[44px] text-right ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
+                <div key={u.ticker} className="flex items-center gap-4 py-2">
+                  {/* Countdown */}
+                  <span className={`w-[40px] shrink-0 text-right font-sans text-[12px] font-bold tabular-nums ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
                     {u.daysAway}d
                   </span>
 
-                  {/* Ticker chip */}
-                  <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
-                    style={{ color: accent, borderColor: accent + "40", backgroundColor: accent + "12" }}
-                  >
-                    {u.ticker}
+                  {/* Ticker + Name */}
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <span
+                      className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
+                      style={{ color: accent, borderColor: accent + "40", backgroundColor: accent + "12" }}
+                    >
+                      {u.ticker}
+                    </span>
+                    <span className="font-sans text-[13px] font-semibold text-[#111827] truncate">
+                      {u.name}
+                    </span>
+                  </div>
+
+                  {/* Prior EPS actual */}
+                  <span className="w-[80px] shrink-0 text-right font-sans text-[13px] font-semibold text-[#111827] tabular-nums">
+                    {priorEps !== null ? `$${priorEps.toFixed(2)}` : <span className="text-gray-300">—</span>}
                   </span>
 
-                  {/* Name */}
-                  <span className="font-sans text-[13px] font-semibold text-[#111827] flex-1 truncate">
-                    {u.name}
+                  {/* Prior day-of price move */}
+                  <span className={`w-[80px] shrink-0 text-right font-sans text-[13px] font-semibold tabular-nums ${
+                    priorMove === null ? "text-gray-300" : priorMove >= 0 ? "text-emerald-600" : "text-red-500"
+                  }`}>
+                    {priorMove !== null ? `${priorMove >= 0 ? "+" : ""}${priorMove.toFixed(1)}%` : "—"}
                   </span>
 
-                  {/* Right: date · beat badge · action */}
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="text-[11px] text-gray-400 tabular-nums">{u.label}</span>
-                    {beat === true && (
-                      <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 border border-emerald-200 bg-emerald-50 text-emerald-700">
-                        Beat Last Q
-                      </span>
-                    )}
+                  {/* Report date */}
+                  <span className="w-[100px] shrink-0 text-right text-[11px] text-gray-500 tabular-nums">{u.label}</span>
+
+                  {/* Action */}
+                  <div className="w-[80px] shrink-0 text-right">
                     {u.hasPreview ? (
                       <Link
                         href={`/earnings/${u.ticker.toLowerCase()}${u.hParam}`}

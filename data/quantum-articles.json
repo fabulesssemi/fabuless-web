@@ -1,5 +1,44 @@
 [
   {
+    "id": "the-quantum-kid-podcast-how-do-you-build-a-quantum-startup",
+    "title": "The Quantum Kid Podcast: How Do You Build a Quantum Startup?",
+    "summary": "A podcast making quantum accessible to everyone might be the best PR move startups have for attracting talent and investors.",
+    "source": "The Quantum Daily",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/16/the-quantum-kid-podcast-how-do-you-build-a-quantum-startup/",
+    "publishedAt": "2026-06-16T21:13:25.000Z",
+    "category": "market",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/ZuriQ-pic.png",
+    "topStory": true,
+    "generatedAt": "2026-06-16T22:02:44.642Z"
+  },
+  {
+    "id": "researchers-calculate-fastest-quantum-evolution-using-geodes",
+    "title": "Researchers Calculate Fastest Quantum Evolution Using Geodesic Arcs",
+    "summary": "Scientists found faster shortcuts for quantum computers to solve problems, potentially speeding up calculations that matter for real applications.",
+    "source": "Quantum Zeitgeist",
+    "sourceUrl": "https://quantumzeitgeist.com/quantum-evolution-geodesic-arcs/",
+    "publishedAt": "2026-06-16T19:18:00.000Z",
+    "category": "research",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-16T22:02:46.033Z"
+  },
+  {
+    "id": "atom-computing-reaches-300-million-funding-milestone-to-depl",
+    "title": "Atom Computing Reaches $300 Million Funding Milestone to Deploy Fault-Tolerant Neutral-Atom Hardware",
+    "summary": "A dark-horse quantum startup just scored $300M to build the computers that might actually work.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/atom-computing-reaches-300-million-funding-milestone-to-deploy-fault-tolerant-neutral-atom-hardware/",
+    "publishedAt": "2026-06-16T18:39:12.000Z",
+    "category": "market",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-16T22:02:47.501Z"
+  },
+  {
     "id": "light-multiplication-unlocks-faster-quantum-computations",
     "title": "Light Multiplication Unlocks Faster Quantum Computations",
     "summary": "Quantum computers could run faster with way fewer physical components—potentially cutting hardware costs dramatically.",
@@ -22,7 +61,7 @@
     "category": "market",
     "companies": [],
     "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-16_20-47.png",
-    "topStory": true,
+    "topStory": false,
     "generatedAt": "2026-06-16T18:01:03.104Z"
   },
   {
@@ -37,6 +76,19 @@
     "image": null,
     "topStory": false,
     "generatedAt": "2026-06-16T18:01:06.002Z"
+  },
+  {
+    "id": "a-quantum-state-that-lasts-forever-may-finally-be-within-our",
+    "title": "A quantum state that lasts forever may finally be within our grasp",
+    "summary": "Scientists may have cracked how to freeze quantum states permanently—potentially unlocking quantum computers that never lose information.",
+    "source": "New Scientist",
+    "sourceUrl": "https://www.newscientist.com/article/2529039-a-quantum-state-that-lasts-forever-may-finally-be-within-our-grasp/?utm_campaign=RSS%7CNSNS&#038;utm_source=NSNS&#038;utm_medium=RSS&#038;utm_content=home",
+    "publishedAt": "2026-06-16T14:00:05.000Z",
+    "category": "research",
+    "companies": [],
+    "image": "https://images.newscientist.com/wp-content/uploads/2026/06/16102025/SEI_301079228.jpg",
+    "topStory": true,
+    "generatedAt": "2026-06-16T22:02:49.730Z"
   },
   {
     "id": "wimi-develops-quantum-kernel-convolution-method-for-nisq-qua",
@@ -143,7 +195,7 @@
     "category": "market",
     "companies": [],
     "image": "https://images.newscientist.com/wp-content/uploads/2026/06/15110211/SEI_301507625.jpg",
-    "topStory": true,
+    "topStory": false,
     "generatedAt": "2026-06-16T18:01:07.492Z"
   },
   {
@@ -236,7 +288,7 @@
     "category": "consciousness",
     "companies": [],
     "image": "https://bigthink.com/wp-content/uploads/2026/06/cover.jpg?quality=85&#038;w=640",
-    "topStory": true,
+    "topStory": false,
     "generatedAt": "2026-06-16T18:00:57.676Z"
   },
   {

@@ -110,12 +110,11 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
             <div className="flex flex-col divide-y divide-gray-100">
               {rail.map((article) => (
                 <div key={article.id} className="py-3 first:pt-0">
-                  <TopLabel />
                   <a
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block mt-1 font-serif text-[0.9rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                    className="block font-serif text-[0.9rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
                     {article.title}
                   </a>
@@ -134,12 +133,11 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
             {rest.map((article) => (
               <div key={article.id} className="py-5 first:pt-0 sm:first:pt-5 odd:sm:pr-8 even:sm:pl-8 border-b border-gray-100 last:border-b-0">
-                <CategoryLabel category={article.category} />
                 <a
                   href={article.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-1.5 font-serif text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
+                  className="block font-serif text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
                 >
                   {article.title}
                 </a>

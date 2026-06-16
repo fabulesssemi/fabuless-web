@@ -31,6 +31,14 @@ const MAX_CANDIDATES = 40;
 
 function sleep(ms: number) { return new Promise((r) => setTimeout(r, ms)); }
 
+async function imageIsAccessible(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, { method: "HEAD", signal: AbortSignal.timeout(4000) });
+    const ct = res.headers.get("content-type") ?? "";
+    return res.ok && ct.startsWith("image/");
+  } catch { return false; }
+}
+
 function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
 }
@@ -225,6 +233,10 @@ async function main() {
     const { summary, category } = await analyzeArticle(item.title, item.description, item.source);
     const companies = detectCompanies(`${item.title} ${item.description}`);
 
+    const rawImage = item.image ?? null;
+    const image = rawImage && await imageIsAccessible(rawImage) ? rawImage : null;
+    if (rawImage && !image) console.log(`  ⚠ image failed HEAD check — cleared`);
+
     const article: QuantumArticle = {
       id: slugify(item.title),
       title: item.title,
@@ -234,7 +246,7 @@ async function main() {
       publishedAt: item.pubDate ? new Date(item.pubDate).toISOString() : new Date().toISOString(),
       category,
       companies,
-      image: item.image ?? null,
+      image,
       topStory: false,
       generatedAt: new Date().toISOString(),
     };

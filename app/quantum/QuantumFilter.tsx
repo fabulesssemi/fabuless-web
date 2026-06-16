@@ -61,7 +61,7 @@ function StoryCard({ article }: { article: QuantumArticle }) {
 }
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
-  const topStories = articles.filter((a) => a.topStory).slice(0, 4);
+  const topStories = articles.filter((a) => a.topStory && a.image).slice(0, 4);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id));
 

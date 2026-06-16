@@ -26,8 +26,11 @@ try {
 
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import Anthropic from "@anthropic-ai/sdk";
 import * as readline from "readline";
 import type { QuantumArticle } from "../lib/quantum/articles";
+
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const INDIGO = "#3730A3";
 const INDIGO_DARK = "#1e1b4b";
@@ -37,6 +40,16 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );
+
+async function generateTitle(articles: QuantumArticle[]): Promise<string> {
+  const top = articles.slice(0, 5).map((a) => a.title).join("\n");
+  const msg = await anthropic.messages.create({
+    model: "claude-haiku-4-5-20251001",
+    max_tokens: 30,
+    messages: [{ role: "user", content: `Write a punchy 5-6 word email subject line for a quantum newsletter based on these headlines. No "Fabuless" prefix. Examples: "Google's Qubit Leap Changes Everything" or "Consciousness, Capital, and Quantum Race". Headlines:\n${top}\n\nRespond with ONLY the subject line, nothing else.` }],
+  });
+  return msg.content[0].type === "text" ? msg.content[0].text.trim().replace(/^["']|["']$/g, "") : "Today in Quantum";
+}
 
 async function getSubscribers(): Promise<string[]> {
   const { data, error } = await supabase.from("subscribers").select("email");
@@ -280,7 +293,8 @@ async function main() {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY!);
-  const subject = `Fabuless Quantum | ${dateStr}`;
+  const title = await generateTitle(articles);
+  const subject = `Fabuless Quantum | ${title}`;
   let sent = 0, failed = 0;
 
   for (const email of subscribers) {

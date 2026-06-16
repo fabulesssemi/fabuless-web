@@ -115,7 +115,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
 
           {/* RIGHT RAIL — text-only headlines */}
           <div className="lg:pl-6 flex flex-col border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">More Stories</div>
+            <div className="text-[11px] font-semibold uppercase tracking-widest mb-4" style={{ color: ACCENT }}>More Stories</div>
             <div className="flex flex-col divide-y divide-gray-100">
               {rail.map((article) => (
                 <div key={article.id} className="py-3 first:pt-0">

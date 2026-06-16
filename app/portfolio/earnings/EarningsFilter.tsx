@@ -10,6 +10,7 @@ type UpcomingItem = {
   daysAway: number;
   hasPreview: boolean;
   hParam: string;
+  epsEstimate: number | null;
 };
 
 type EarningsSummary = {
@@ -146,7 +147,7 @@ export function EarningsFilter({
             <span className="w-[40px] shrink-0 text-right">In</span>
             <span className="flex-1 min-w-0 pl-1">Company</span>
             <span className="w-[80px] shrink-0 text-right">Prior EPS</span>
-            <span className="w-[80px] shrink-0 text-right">Day Move</span>
+            <span className="w-[80px] shrink-0 text-right">Est. EPS</span>
             <span className="w-[100px] shrink-0 text-right">Reports</span>
             <span className="w-[80px] shrink-0 text-right" />
           </div>
@@ -158,7 +159,6 @@ export function EarningsFilter({
               // Pull prior quarter data for context columns
               const prior = pastRows.find((r) => r.ticker === u.ticker)?.summaries[0] ?? null;
               const priorEps = prior?.epsActual ?? null;
-              const priorMove = prior?.priceMoveDay ?? null;
               return (
                 <div key={u.ticker} className="flex items-center gap-4 py-2">
                   {/* Countdown */}
@@ -184,11 +184,9 @@ export function EarningsFilter({
                     {priorEps !== null ? `$${priorEps.toFixed(2)}` : <span className="text-gray-300">—</span>}
                   </span>
 
-                  {/* Prior day-of price move */}
-                  <span className={`w-[80px] shrink-0 text-right font-sans text-[13px] font-semibold tabular-nums ${
-                    priorMove === null ? "text-gray-300" : priorMove >= 0 ? "text-emerald-600" : "text-red-500"
-                  }`}>
-                    {priorMove !== null ? `${priorMove >= 0 ? "+" : ""}${priorMove.toFixed(1)}%` : "—"}
+                  {/* Next quarter EPS estimate */}
+                  <span className="w-[80px] shrink-0 text-right font-sans text-[13px] font-semibold text-[#111827] tabular-nums">
+                    {u.epsEstimate !== null ? `$${u.epsEstimate.toFixed(2)}` : <span className="text-gray-300">—</span>}
                   </span>
 
                   {/* Report date */}

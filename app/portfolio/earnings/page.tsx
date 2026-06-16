@@ -60,6 +60,7 @@ export default async function PortfolioEarningsPage({
         daysAway: date ? daysUntil(date) : null,
         hasPreview: !!getPreview(ticker),
         hParam,
+        epsEstimate: data.earnings?.nextQuarterEpsEstimate ?? null,
       };
     })
   );

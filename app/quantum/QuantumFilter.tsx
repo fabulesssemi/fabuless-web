@@ -44,7 +44,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
       {/* ── 3-column hero section ── */}
       <section className="pb-8 border-b border-gray-200">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[46fr_26fr_28fr] gap-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[46fr_26fr_28fr] gap-0 lg:divide-x lg:divide-gray-200">
 
           {/* LEFT — hero story */}
           {hero && (
@@ -75,7 +75,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
           )}
 
           {/* MIDDLE — 2 stacked stories with photos */}
-          <div className="lg:px-5 flex flex-col gap-6 border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
+          <div className="lg:px-6 flex flex-col gap-6 border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
             {[0, 1].map((i) => {
               const article = mid[i];
               if (article) return (
@@ -114,7 +114,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
           </div>
 
           {/* RIGHT RAIL — text-only headlines */}
-          <div className="lg:pl-5 flex flex-col border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
+          <div className="lg:pl-6 flex flex-col border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
             <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">More Stories</div>
             <div className="flex flex-col divide-y divide-gray-100">
               {rail.map((article) => (

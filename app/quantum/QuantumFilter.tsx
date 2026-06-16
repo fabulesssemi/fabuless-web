@@ -42,9 +42,9 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
   return (
     <>
       {/* ── 3-column hero section ── */}
-      <section className="pb-8 border-b border-gray-200">
+      <section className="pb-8 border-b border-black">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[46fr_26fr_28fr] gap-0 lg:divide-x lg:divide-gray-200">
+        <div className="grid grid-cols-1 lg:grid-cols-[46fr_26fr_28fr] gap-0 lg:divide-x lg:divide-black">
 
           {/* LEFT — hero story */}
           {hero && (

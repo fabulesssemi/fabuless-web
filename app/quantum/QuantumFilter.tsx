@@ -94,7 +94,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block mt-1.5 font-serif text-[1.35rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                    className="block mt-1.5 font-serif text-[1.35rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
                     {article.title}
                   </a>
@@ -123,7 +123,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block font-serif text-[1.05rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                    className="block font-serif text-[1.05rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
                     {article.title}
                   </a>
@@ -146,7 +146,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   href={article.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block font-serif text-[1.15rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
+                  className="block font-serif text-[1.15rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
                 >
                   {article.title}
                 </a>

@@ -60,6 +60,121 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 6,
+    date: "June 16, 2026",
+    slug: "issue-6",
+    title: "NAND Crisis Deepens, Qualcomm Eyes Tenstorrent, Packaging Frontiers Expand",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "ASML, TSMC, and imec move 2D transistors closer to manufacturing reality",
+            url: "https://www.digitimes.com/news/a20260616VL216/tsmc-asml-imec-transistor-manufacturing-materials.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "300mm wafer integration of 2D materials signals the post-FinFET roadmap is on track.",
+          },
+          {
+            headline: "TSMC says panel packaging won't replace CoWoS anytime soon for the largest future AI processors — wafer-level tech can scale to 58 massive dies in one package",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/tsmc-says-panel-packaging-wont-replace-cowos-anytime-soon-for-the-largest-future-ai-processors-wafer-level-tech-can-scale-to-58-massive-dies-in-one-package",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "CoWoS retains its AI packaging moat; panel-level scaling remains years from displacing it.",
+          },
+          {
+            headline: "Non-x86 servers now nearly half the market, IDC says",
+            url: "https://www.theregister.com/systems/2026/06/16/non-x86-servers-now-nearly-half-the-market-idc-says/5256248",
+            source: "The Register",
+            image: null,
+            oneliner: "Arm and custom silicon's datacenter surge structurally erodes Intel and AMD x86 server share.",
+          },
+          {
+            headline: "QuEra's Libra Fault-Tolerant Quantum System Heading To AWS Braket Service",
+            url: "https://www.nextplatform.com/compute/2026/06/16/queras-libra-fault-tolerant-quantum-system-heading-to-aws-braket-service/5256477",
+            source: "NextPlatform",
+            image: null,
+            oneliner: "First fault-tolerant quantum system on a major cloud platform marks a commercialization milestone.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SMI's PCIe 6.0 SSD controller for consumer SSDs coming next year, but severe NAND shortages will get even worse in 2027 as AI data centers swallow supply",
+            url: "https://www.tomshardware.com/pc-components/ssds/smis-pcie-6-0-ssd-controller-for-consumer-ssds-coming-next-year-but-severe-nand-shortages-will-get-even-worse-in-2027-as-ai-data-centers-swallow-supply-an-interview-with-silicon-motions-svp-nelson-duann",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "AI datacenters consuming NAND supply will price consumer SSD makers out through 2027.",
+          },
+          {
+            headline: "AMD Snaps MEXT to Break the Memory Wall",
+            url: "https://www.eetimes.com/amd-snaps-mext-to-break-the-memory-wall/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AMD's MEXT acquisition targets AI memory bandwidth bottleneck, expanding its system-level stack.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Qualcomm mulls taking over Jim Keller's Tenstorrent, report claims — deal for AI chipmaker would value the company at between $8 billion and $10 billion",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/qualcomm-mulls-taking-over-jim-kellers-tenstorrent-report-claims-deal-for-ai-chipmaker-would-value-the-company-at-between-usd8-billion-and-usd10-billion",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "Qualcomm's $10B RISC-V AI bet signals serious challenge to Nvidia's inference dominance.",
+          },
+          {
+            headline: "Nvidia sells US$25 billion in bonds as investors seek foothold in AI boom",
+            url: "https://www.digitimes.com/news/a20260616VL218/nvidia-funding-investment-ai.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "$85B in orders for Nvidia's bond shows unprecedented investor demand to fund AI capex.",
+          },
+          {
+            headline: "AI chip race sends semiconductor equipment sales to record US$36.55 billion",
+            url: "https://www.digitimes.com/news/a20260616VL217/ai-chip-semiconductors-equipment-investment-manufacturing-packaging.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Record Q1 equipment spend confirms AI-driven capex supercycle is accelerating, not plateauing.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Gloway And KingBank Ditch Samsung, Micron, And SK Hynix, Building 48 GB DDR5 Kits From China-Made 24 Gb Chips",
+            url: "https://wccftech.com/gloway-and-kingbank-ditch-samsung-micron-and-sk-hynix-building-48-gb-ddr5-kits-from-china-made-24-gb-chips/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Chinese domestic DRAM reaching commercial DDR5 density threatens Western suppliers' last pricing floor.",
+          },
+          {
+            headline: "Chinese fab SMIC's 7nm metal pitch beats Intel 18A but lags 38% on density, teardown finds",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/semianalysis-opens-its-own-chip-teardown-lab",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "SMIC's sanctions-beaten 7nm closing gap with Intel 18A raises fresh export control urgency.",
+          },
+          {
+            headline: "Finland charges Russian captain and crew member of ship suspected of damaging undersea cables — prosecutors claim ship had eight more targets before it was stopped",
+            url: "https://www.tomshardware.com/networking/finland-charges-russian-captain-and-crew-member-of-ship-suspected-of-damaging-undersea-cables-prosecutors-claim-ship-had-eight-more-targets-before-it-was-stopped-by-coast-guard",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "Systematic undersea cable sabotage campaign exposes critical vulnerability in global digital infrastructure.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 5,
     date: "June 16, 2026",
     slug: "issue-5",

@@ -152,17 +152,17 @@ export function EarningsFilter({
                   className="bg-white border border-[#E5E7EB] border-t-2 border-t-[#B45309] flex items-stretch overflow-hidden hover:border-gray-300 transition-colors"
                 >
                   {/* Countdown — left-dominant event signal */}
-                  <div className={`shrink-0 flex flex-col items-center justify-center w-[68px] border-r border-gray-100 py-4 ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
-                    <span className="font-sans text-[1.6rem] font-bold leading-none tabular-nums">
+                  <div className={`shrink-0 flex flex-col items-center justify-center w-[56px] border-r border-gray-100 py-2.5 ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
+                    <span className="font-sans text-[1.2rem] font-bold leading-none tabular-nums">
                       {u.daysAway}
                     </span>
-                    <span className="text-[9px] font-semibold uppercase tracking-widest mt-1">
+                    <span className="text-[9px] font-semibold uppercase tracking-widest mt-0.5">
                       {u.daysAway === 1 ? "day" : "days"}
                     </span>
                   </div>
 
                   {/* Company + date */}
-                  <div className="flex flex-1 items-center gap-4 px-5 py-3.5">
+                  <div className="flex flex-1 items-center gap-4 px-4 py-2.5">
                     <div className="flex items-center gap-2.5 flex-1 min-w-0">
                       <span
                         className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"

@@ -151,7 +151,7 @@ def generate_oneliners(client, stories):
             continue
         prompt = f"Headline: {s['headline']}\nSource: {s['source']}\nSummary: {s['summary'][:800]}"
         msg = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-haiku-4-5-20251001",
             max_tokens=80,
             system=ONELINER_PROMPT,
             messages=[{"role": "user", "content": prompt}],
@@ -163,7 +163,7 @@ def generate_oneliners(client, stories):
 def generate_title(client, stories):
     headlines = "\n".join(f"- {s['headline']}" for s in stories[:8])
     msg = client.messages.create(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=60,
         system=TITLE_PROMPT,
         messages=[{"role": "user", "content": f"Headlines:\n{headlines}"}],

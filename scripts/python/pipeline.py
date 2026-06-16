@@ -524,7 +524,7 @@ Content: {content}
 Write a Fabuless summary for this article. If full content is not available, write the best one-liner you can from the headline alone — do not SKIP just because content is missing."""
 
     message = client.messages.create(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=400,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": prompt}]
@@ -539,7 +539,7 @@ Show notes: {ep['summary'][:1500]}
 Write the one-liner."""
 
     message = client.messages.create(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=120,
         system=PODCAST_ONELINER_PROMPT,
         messages=[{"role": "user", "content": prompt}]

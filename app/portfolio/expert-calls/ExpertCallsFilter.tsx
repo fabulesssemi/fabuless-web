@@ -36,8 +36,8 @@ function TickerPill({
       onClick={onClick}
       className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
         active
-          ? "bg-[#111827] text-white shadow-sm"
-          : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
+          ? "bg-[#B45309] text-white border border-[#B45309]"
+          : "bg-transparent border border-[#B45309] text-[#B45309] hover:bg-[#B45309] hover:text-white"
       }`}
     >
       {ticker}
@@ -179,8 +179,8 @@ export function ExpertCallsFilter({
           onClick={() => setSelected(null)}
           className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
             selected === null
-              ? "bg-[#111827] text-white shadow-sm"
-              : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
+              ? "bg-[#B45309] text-white border border-[#B45309]"
+              : "bg-transparent border border-[#B45309] text-[#B45309] hover:bg-[#B45309] hover:text-white"
           }`}
         >
           All

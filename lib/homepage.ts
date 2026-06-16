@@ -94,33 +94,26 @@ export async function getHomepageArticles(): Promise<{
     const now = Date.now();
     const DAY_MS = 24 * 60 * 60 * 1000;
 
-    // Shelf-life filter at READ time:
-    //   top-tier (original_rank <= 5): 3 days
-    //   lower-tier (original_rank > 5): 2 days
+    // All articles live for 3 days regardless of rank —
+    // so at any time the pool has today's + yesterday's + day-before-yesterday's.
     const alive = data.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
-      const topTier = ((r.original_rank as number) ?? 99) <= 5;
-      return age < (topTier ? 3 * DAY_MS : 2 * DAY_MS);
+      return age < 3 * DAY_MS;
     });
 
-    // Source cap: max 3 per domain across the whole page
+    // Source cap: max 2 per domain across the whole page
     const sourceCounts = new Map<string, number>();
     const eligible: typeof data = [];
     for (const row of alive) {
       const src = (row.source as string).toLowerCase().trim();
       const count = sourceCounts.get(src) ?? 0;
-      if (count < 3) {
+      if (count < 2) {
         eligible.push(row);
         sourceCounts.set(src, count + 1);
       }
     }
 
-    // Top Stories: ONLY articles first seen within the last 24h (lowest rank
-    // first), up to 4. Because this keys off first_seen_at, an article can be a
-    // top story for exactly one day — the day it first appears. The next run it
-    // is >24h old and falls to the list below. So the same article never sits in
-    // Top Stories two days in a row, and a previously-seen article can't be
-    // promoted back into Top Stories.
+    // Top Stories: articles first seen within the last 24h, best rank first, up to 4.
     const topStories = eligible
       .filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS)
       .slice(0, 4)
@@ -128,10 +121,12 @@ export async function getHomepageArticles(): Promise<{
 
     const topUrls = new Set(topStories.map((s) => s.url));
 
-    // List: everything else still within shelf life, up to 20
+    // List: remaining articles sorted by first_seen_at desc (today's remainder
+    // first, then yesterday's, then day before), capped at 12.
     const listStories = eligible
       .filter((r) => !topUrls.has(r.url as string))
-      .slice(0, 20)
+      .sort((a, b) => new Date(b.first_seen_at as string).getTime() - new Date(a.first_seen_at as string).getTime())
+      .slice(0, 12)
       .map(rowToStory);
 
     return { topStories, listStories };
@@ -180,11 +175,7 @@ export async function saveAndExpireArticles(
 
     if (upsertError) return { ok: false, error: upsertError.message };
 
-    // Expire stale articles. Compute which URLs are expired in JS (robust —
-    // avoids the fragile PostgREST NOT-IN-with-long-URLs filter), then delete
-    // with a safe .in() call. Shelf life:
-    //   top-tier (original_rank <= 5): 72h
-    //   lower-tier (original_rank > 5): 48h
+    // Expire articles older than 3 days — all tiers same shelf life.
     // Articles re-picked in this run are never expired (kept their first_seen).
     const keep = new Set(urls);
     const DAY = 24 * 60 * 60 * 1000;
@@ -198,8 +189,7 @@ export async function saveAndExpireArticles(
       .filter((r) => {
         if (keep.has(r.url as string)) return false;
         const age = nowMs - new Date(r.first_seen_at as string).getTime();
-        const topTier = ((r.original_rank as number) ?? 99) <= 5;
-        return age >= (topTier ? 3 * DAY : 2 * DAY);
+        return age >= 3 * DAY;
       })
       .map((r) => r.url as string);
 

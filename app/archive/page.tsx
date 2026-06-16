@@ -16,7 +16,6 @@ export default function Archive() {
       <div className="space-y-0 divide-y divide-gray-200">
         {issues.map((issue) => {
           const allStories = issue.sections.flatMap((s) => s.stories);
-          const preview = allStories.slice(0, 3);
 
           return (
             <Link
@@ -33,31 +32,28 @@ export default function Archive() {
               </div>
 
               {/* Issue title */}
-              <h2 className="font-sans text-xl font-bold text-[#111827] leading-snug mb-4 group-hover:text-[#B45309] transition-colors">
+              <h2 className="font-sans text-xl font-bold text-[#111827] leading-snug mb-3 group-hover:text-[#B45309] transition-colors">
                 {issue.title}
               </h2>
 
-              {/* Story preview list */}
-              <ul className="space-y-1.5 mb-4">
-                {preview.map((story) => (
-                  <li key={story.url} className="flex items-start gap-2">
-                    <span className="text-[#B45309] mt-[3px] shrink-0 text-[10px]">▸</span>
-                    <div className="min-w-0">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mr-2">
-                        {story.source}
-                      </span>
-                      <span className="text-[13px] text-gray-600 leading-snug">
-                        {story.headline}
-                      </span>
-                    </div>
-                  </li>
+              {/* Story count + read time */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[11px] text-gray-400">{allStories.length} stories</span>
+                <span className="text-[11px] text-gray-300">·</span>
+                <span className="text-[11px] text-gray-400">~{Math.ceil(allStories.length * 0.6)} min read</span>
+              </div>
+
+              {/* Category pills — The Information-style content badges */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {issue.sections.filter((s) => s.stories.length > 0).map((s) => (
+                  <span
+                    key={s.category}
+                    className="text-[10px] font-semibold px-2 py-0.5 border border-gray-200 text-gray-500 uppercase tracking-wider"
+                  >
+                    {s.category}
+                  </span>
                 ))}
-                {allStories.length > 3 && (
-                  <li className="text-[12px] text-gray-400 pl-4">
-                    +{allStories.length - 3} more stories
-                  </li>
-                )}
-              </ul>
+              </div>
 
               <span className="text-[12px] font-semibold text-[#B45309] group-hover:underline underline-offset-2">
                 Read issue →

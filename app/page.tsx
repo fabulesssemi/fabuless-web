@@ -59,13 +59,13 @@ export default async function Home() {
   return (
     <div className="max-w-6xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-7 pb-4">
+      <section className="pt-10 pb-5">
         <div className="flex items-start justify-between gap-8 mb-4">
           <div>
-            <h1 className="font-sans text-2xl font-bold text-[#111827] leading-tight tracking-tight mb-1">
+            <h1 className="font-sans text-[1.85rem] font-bold text-[#111827] leading-tight tracking-tight mb-2">
               Semiconductor intelligence for the curious investor.
             </h1>
-            <p className="font-serif text-[15px] text-[#4a4a4a]">
+            <p className="font-serif text-base text-[#4a4a4a] leading-relaxed">
               Daily news, expert track records, earnings deep-dives, supply chain maps, and analyst consensus — all in one place.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default async function Home() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {autoStories
             ? autoStories.slice(0, 4).map((story) => (
-                <div key={story.url} className="bg-white border border-[#DDDBD2] flex flex-col">
+                <div key={story.url} className="bg-white border border-[#DDDBD2] border-t-2 border-t-[#B45309] flex flex-col">
                   <a href={story.url} target="_blank" rel="noopener noreferrer" className="block">
                     <StoryImage image={story.image} source={story.source} headline={story.headline} />
                   </a>
@@ -111,7 +111,7 @@ export default async function Home() {
                       {story.oneliner}
                     </p>
                     <div className="mt-auto pt-2.5 flex items-center justify-between">
-                      <span className="text-[10px] text-gray-400">{story.source}</span>
+                      <span className="text-[10px] text-gray-400">{story.source} · 2 min</span>
                       <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(story.headline + " — via fabuless.ai")}`}
                         target="_blank" rel="noopener noreferrer"
@@ -125,7 +125,7 @@ export default async function Home() {
                 </div>
               ))
             : staticFeatured.map(({ story, category }) => (
-                <div key={story.url} className="bg-white border border-[#DDDBD2] flex flex-col">
+                <div key={story.url} className="bg-white border border-[#DDDBD2] border-t-2 border-t-[#B45309] flex flex-col">
                   <a href={story.url} target="_blank" rel="noopener noreferrer" className="block">
                     <StoryImage image={story.image} source={story.source} headline={story.headline} />
                   </a>
@@ -141,7 +141,7 @@ export default async function Home() {
                       {story.oneliner}
                     </p>
                     <div className="mt-auto pt-2.5 flex items-center justify-between">
-                      <span className="text-[10px] text-gray-400">{story.source}</span>
+                      <span className="text-[10px] text-gray-400">{story.source} · 2 min</span>
                       <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(story.headline + " — via fabuless.ai")}`}
                         target="_blank" rel="noopener noreferrer"

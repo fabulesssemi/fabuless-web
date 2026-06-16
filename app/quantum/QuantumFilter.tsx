@@ -48,7 +48,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
 
           {/* LEFT — hero story */}
           {hero && (
-            <div className="lg:pr-8 pb-6 lg:pb-0">
+            <div className="lg:pr-10 pb-6 lg:pb-0 lg:-ml-6">
               <a href={hero.sourceUrl} target="_blank" rel="noopener noreferrer" className="block mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

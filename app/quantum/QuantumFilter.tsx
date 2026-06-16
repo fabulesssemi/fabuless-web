@@ -47,7 +47,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
         {/* Top rule */}
         <div className="border-t-2 border-[#312E81] mb-6" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[50fr_30fr_20fr] gap-0 lg:divide-x lg:divide-gray-200">
+        <div className="grid grid-cols-1 lg:grid-cols-[52fr_28fr_20fr] gap-0">
 
           {/* LEFT — hero story */}
           {hero && (

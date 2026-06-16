@@ -122,13 +122,25 @@ Return ONLY valid JSON with this exact shape:
 ARTICLES:
 ${articleList}`;
 
-  const msg = await ai.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 3000,
-    messages: [{ role: "user", content: prompt }],
-  });
+  let msg;
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      msg = await ai.messages.create({
+        model: "claude-sonnet-4-6",
+        max_tokens: 3000,
+        messages: [{ role: "user", content: prompt }],
+      });
+      break;
+    } catch (e: unknown) {
+      const isOverloaded = e instanceof Error && e.message.includes("overloaded");
+      if (!isOverloaded || attempt === 4) throw e;
+      const wait = attempt * 30000;
+      console.log(`  Anthropic overloaded — retrying in ${wait / 1000}s (attempt ${attempt}/4)...`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
 
-  const text = msg.content[0].type === "text" ? msg.content[0].text : "";
+  const text = msg!.content[0].type === "text" ? msg!.content[0].text : "";
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("Claude returned no JSON");
   return JSON.parse(jsonMatch[0]) as ClaudeResponse;

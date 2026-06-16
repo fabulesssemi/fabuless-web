@@ -29,9 +29,9 @@ import { Resend } from "resend";
 import * as readline from "readline";
 import type { QuantumArticle } from "../lib/quantum/articles";
 
-const INDIGO = "#4338CA";
-const INDIGO_DARK = "#312E81";
-const INDIGO_MID = "#1a1040";
+const INDIGO = "#3730A3";
+const INDIGO_DARK = "#1e1b4b";
+const INDIGO_MID = "#0f0c29";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

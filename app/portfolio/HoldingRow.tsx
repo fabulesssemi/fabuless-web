@@ -83,7 +83,7 @@ export function HoldingRow({
             </button>
           )}
           {/* Company logo with color-tinted bg, falls back to color dot */}
-          <div className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden" style={{ background: `${color}22` }}>
+          <div className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden" style={{ background: `${color}40` }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`https://assets.parqet.com/logos/symbol/${r.ticker}?format=png`}

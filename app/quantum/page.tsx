@@ -29,7 +29,7 @@ export default async function QuantumPage() {
       {/* ── Hero ── */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
-          <h1 className="font-sans text-2xl font-bold text-gray-900 tracking-tight leading-tight shrink-0">
+          <h1 className="font-sans text-base font-bold text-gray-900 tracking-tight leading-tight shrink-0">
             The Race to Useful Quantum
           </h1>
           <p className="font-serif text-[13px] text-gray-500 leading-snug border-l border-gray-300 pl-6">

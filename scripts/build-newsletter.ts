@@ -102,7 +102,7 @@ For each selected story, write:
 - A short punchy one-liner (max 15 words) stating the single most investment-relevant implication
 - The correct category from: Compute | Memory & Networking | Capital Flows | Geopolitics & Policy | Other
 
-Also write an 8-12 word issue title summarizing today's 2-3 biggest themes.
+Also write a short, punchy issue title — max 6 words, no fluff. Think newspaper front page: name the biggest story or theme. Examples: "TSMC Holds. NVIDIA Wins. AMD Waits." or "Memory Glut Ends, AI Capex Soars".
 
 Return ONLY valid JSON with this exact shape:
 {

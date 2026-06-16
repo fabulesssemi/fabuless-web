@@ -27,12 +27,12 @@ export default async function QuantumPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero ── */}
-      <div style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1040 50%, #0f172a 100%)" }}>
+      <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
-          <h1 className="font-sans text-2xl font-bold text-white tracking-tight leading-tight shrink-0">
+          <h1 className="font-sans text-2xl font-bold text-gray-900 tracking-tight leading-tight shrink-0">
             The Race to Useful Quantum
           </h1>
-          <p className="font-serif text-[13px] text-indigo-300 leading-snug border-l border-indigo-500/40 pl-6">
+          <p className="font-serif text-[13px] text-gray-500 leading-snug border-l border-gray-300 pl-6">
             From qubit breakthroughs to quantum consciousness — the stories changing how we understand reality.
           </p>
         </div>

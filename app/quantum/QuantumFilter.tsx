@@ -76,29 +76,41 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
 
           {/* MIDDLE — 2 stacked stories with photos */}
           <div className="lg:px-5 flex flex-col gap-6 border-t border-gray-200 lg:border-t-0 pt-6 lg:pt-0">
-            {mid.map((article) => (
-              <div key={article.id}>
-                <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className="block mb-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={article.image!}
-                    alt={article.title}
-                    className="w-full object-cover"
-                    style={{ maxHeight: "160px" }}
-                  />
-                </a>
-                <TopLabel />
-                <a
-                  href={article.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-1.5 font-serif text-[1.35rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
-                >
-                  {article.title}
-                </a>
-                <p className="mt-1 text-[11px] text-gray-400">{article.source}</p>
-              </div>
-            ))}
+            {[0, 1].map((i) => {
+              const article = mid[i];
+              if (article) return (
+                <div key={article.id}>
+                  <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className="block mb-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={article.image!}
+                      alt={article.title}
+                      className="w-full object-cover"
+                      style={{ maxHeight: "160px" }}
+                    />
+                  </a>
+                  <TopLabel />
+                  <a
+                    href={article.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mt-1.5 font-serif text-[1.35rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                  >
+                    {article.title}
+                  </a>
+                  <p className="mt-1 text-[11px] text-gray-400">{article.source}</p>
+                </div>
+              );
+              return (
+                <div key={`placeholder-${i}`}>
+                  <div className="w-full bg-indigo-50 animate-pulse mb-3" style={{ height: "160px" }} />
+                  <div className="h-2.5 w-20 bg-gray-200 rounded animate-pulse mb-2" />
+                  <div className="h-5 bg-gray-200 rounded animate-pulse mb-1.5" />
+                  <div className="h-5 w-3/4 bg-gray-200 rounded animate-pulse mb-2" />
+                  <div className="h-2.5 w-24 bg-gray-100 rounded animate-pulse" />
+                </div>
+              );
+            })}
           </div>
 
           {/* RIGHT RAIL — text-only headlines */}

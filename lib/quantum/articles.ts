@@ -37,7 +37,7 @@ export function getAllArticles(): QuantumArticle[] {
   } catch { return []; }
 }
 
-export function getTopStories(limit = 4): QuantumArticle[] {
+export function getTopStories(limit = 3): QuantumArticle[] {
   return getAllArticles()
     .filter((a) => a.topStory)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))

@@ -152,7 +152,7 @@ async function pickTopStories(articles: QuantumArticle[], forceConsciousness = f
 
   const prompt = `You are the editor-in-chief at Fabuless Quantum. Your readers are curious non-experts — retail investors, tech enthusiasts, and people fascinated by big ideas. They are NOT physicists or researchers.
 
-Pick the 4 most compelling articles from the list below.
+Pick the 3 most compelling articles from the list below.
 
 HARD RULES — automatically disqualify any article that:
 - Mentions qubits, error rates, gate fidelity, decoherence, algorithms, or circuit depth in a technical way
@@ -165,12 +165,12 @@ PRIORITIZE in this order:
 3. Government/policy — CHIPS Act, national programs, geopolitical angles
 4. Consciousness, philosophy of mind, or reality-bending ideas a curious person would share at dinner
 5. Source diversity — never pick 2 from the same outlet
-${forceConsciousness ? "- MUST include exactly 1 consciousness/worldview/quantum-mind story in your 4 picks" : "- Include a consciousness/worldview story if one qualifies"}
+${forceConsciousness ? "- MUST include exactly 1 consciousness/worldview/quantum-mind story in your 3 picks" : "- Include a consciousness/worldview story if one qualifies"}
 
 Articles:
 ${list}
 
-Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7, 9]). No other text.`;
+Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7]). No other text.`;
 
   const msg = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
@@ -187,7 +187,7 @@ Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7,
     return new Set(
       picks
         .filter((n) => n >= 1 && n <= articles.length)
-        .slice(0, 4)
+        .slice(0, 3)
         .map((n) => articles[n - 1].id)
     );
   } catch { return new Set(); }
@@ -257,7 +257,7 @@ async function main() {
     await sleep(500);
   }
 
-  // Pick top 4 from this batch — only articles with images are eligible
+  // Pick top 3 from this batch — only articles with images are eligible
   if (newArticles.length > 0) {
     console.log("\nPicking top stories...");
 

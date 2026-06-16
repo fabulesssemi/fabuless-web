@@ -26,7 +26,7 @@ function CategoryLabel({ category }: { category: string }) {
 }
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
-  const topStories = articles.filter((a) => a.topStory && a.image).slice(0, 4);
+  const topStories = articles.filter((a) => a.topStory && a.image).slice(0, 3);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id)).slice(0, 12);
 

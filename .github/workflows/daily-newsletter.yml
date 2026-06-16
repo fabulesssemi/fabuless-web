@@ -2,27 +2,22 @@ name: Daily Newsletter
 
 on:
   schedule:
-    - cron: "0 14 * * 1-5"   # 10am ET Mon–Fri
-  workflow_dispatch: {}        # manual trigger any time
+    - cron: "0 12 * * 1-5"   # 8am ET Mon-Fri
+  workflow_dispatch: {}
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
-
       - name: Install dependencies
         run: npm ci
-
-      # ── 1. Pull articles from Supabase, curate with Claude, build issue ───
       - name: Build issue
         env:
           ANTHROPIC_API_KEY:              ${{ secrets.ANTHROPIC_API_KEY }}
@@ -30,8 +25,6 @@ jobs:
           NEXT_PUBLIC_SUPABASE_ANON_KEY:  ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_KEY:           ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: npx tsx scripts/build-newsletter.ts --auto
-
-      # ── 2. Commit + push (triggers Vercel deploy) ─────────────────────────
       - name: Commit & push
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -39,12 +32,8 @@ jobs:
           git add lib/issues.ts app/archive/
           git diff --staged --quiet || git commit -m "chore: daily newsletter $(date +%Y-%m-%d) [skip ci]"
           git push
-
-      # ── 3. Flush ISR cache ────────────────────────────────────────────────
       - name: Refresh homepage cache
         run: curl -fsS "https://fabuless.ai/api/homepage/refresh" || true
-
-      # ── 4. Send to subscribers ────────────────────────────────────────────
       - name: Send newsletter
         env:
           ANTHROPIC_API_KEY:              ${{ secrets.ANTHROPIC_API_KEY }}

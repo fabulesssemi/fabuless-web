@@ -2,7 +2,7 @@ name: Quantum Newsletter
 
 on:
   schedule:
-    - cron: "0 15 * * 1-5"  # Mon–Fri 11am ET (1hr after quantum update at 10am ET)
+    - cron: "0 13 * * 1-5"   # 9am ET Mon-Fri
   workflow_dispatch:
 
 jobs:
@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
-
       - run: npm ci
-
       - name: Send Quantum Newsletter
         run: npx tsx scripts/send-quantum-newsletter.ts --auto
         env:

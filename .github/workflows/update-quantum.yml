@@ -2,7 +2,7 @@ name: Update Quantum Articles
 
 on:
   schedule:
-    - cron: "0 13 * * *"   # Every day 9am ET
+    - cron: "15 12 * * *"   # 8:15am ET daily
   workflow_dispatch:
     inputs:
       force:
@@ -16,18 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
-
       - name: Install dependencies
         run: npm ci
-
       - name: Run quantum article pipeline
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -38,7 +34,6 @@ jobs:
             ARGS="--force"
           fi
           npx tsx scripts/update-quantum-articles.ts $ARGS
-
       - name: Commit updated data
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"

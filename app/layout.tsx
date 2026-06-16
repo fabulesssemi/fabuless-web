@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { MobileNav } from "@/app/components/MobileNav";
+import { NavWrapper } from "@/app/components/NavWrapper";
 import { FloatingChat } from "@/app/components/FloatingChat";
 import "./globals.css";
 
@@ -39,7 +40,7 @@ export default function RootLayout({
       <body className="h-screen flex flex-col text-[#18181B] font-sans overflow-hidden">
         <header className="relative z-40">
           <div className="h-[3px] bg-[#B45309]" />
-          <div className="bg-[#111827]">
+          <NavWrapper>
             <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
               <Link
                 href="/"
@@ -77,7 +78,7 @@ export default function RootLayout({
               {/* Mobile hamburger */}
               <MobileNav />
             </nav>
-          </div>
+          </NavWrapper>
         </header>
 
         <main className="flex-1 overflow-y-auto min-h-0">

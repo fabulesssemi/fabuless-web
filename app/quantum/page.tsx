@@ -27,12 +27,8 @@ export default async function QuantumPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero ── */}
-      <div className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1040 50%, #0f172a 100%)" }}>
-        <div className="absolute inset-0 opacity-[0.07]"
-          style={{ backgroundImage: "linear-gradient(#6366F1 1px, transparent 1px), linear-gradient(90deg, #6366F1 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full opacity-20"
-          style={{ background: "radial-gradient(ellipse, #818CF8 0%, transparent 70%)" }} />
-        <div className="relative max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
+      <div style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1040 50%, #0f172a 100%)" }}>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
           <h1 className="font-sans text-2xl font-bold text-white tracking-tight leading-tight shrink-0">
             The Race to Useful Quantum
           </h1>

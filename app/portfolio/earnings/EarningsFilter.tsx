@@ -168,7 +168,7 @@ export function EarningsFilter({
 
                   {/* Ticker + Name */}
                   <div className="flex items-center gap-2 flex-1 min-w-0">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#111827] text-white border border-[#111827] shrink-0">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-transparent text-gray-500 border border-[#D1D5DB] shrink-0">
                       {u.ticker}
                     </span>
                     <span className="font-sans text-[13px] font-semibold text-[#111827] truncate">
@@ -224,7 +224,7 @@ export function EarningsFilter({
                 <div key={ticker}>
                   {/* Company header */}
                   <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#111827] text-white border border-[#111827] shrink-0">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-transparent text-gray-500 border border-[#D1D5DB] shrink-0">
                       {ticker}
                     </span>
                     <span className="font-sans text-[16px] font-bold text-[#111827]">{name}</span>

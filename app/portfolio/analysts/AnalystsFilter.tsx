@@ -99,7 +99,7 @@ function AnalystCard({ entry, tickerColor }: { entry: AnalystEntry; tickerColor:
             {/* Firm */}
             <span className="text-[11px] text-gray-500 shrink-0">{entry.firm}</span>
             {/* Ticker chip — supporting context */}
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#111827] text-white border border-[#111827] shrink-0">
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-transparent text-gray-500 border border-[#D1D5DB] shrink-0">
               {entry.ticker}
             </span>
           </div>

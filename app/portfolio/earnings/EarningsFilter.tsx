@@ -35,7 +35,7 @@ function BeatBadge({ surprisePct }: { surprisePct: number | null }) {
   if (surprisePct === null) return null;
   const beat = surprisePct > 0;
   return (
-    <span className={`inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border ${
+    <span className={`inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 border ${
       beat
         ? "bg-emerald-50 text-emerald-700 border-emerald-200"
         : "bg-red-50 text-red-700 border-red-200"
@@ -59,7 +59,7 @@ function TickerPill({
   return (
     <button
       onClick={onClick}
-      className={`group px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
+      className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
         active
           ? "bg-[#111827] text-white shadow-sm"
           : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
@@ -83,6 +83,14 @@ export function EarningsFilter({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
 
+  // Cross-reference pastRows to surface "Beat Last Q" on upcoming cards
+  const lastBeat = new Map<string, boolean | null>();
+  for (const row of pastRows) {
+    if (row.summaries.length > 0 && row.summaries[0].surprisePct !== null) {
+      lastBeat.set(row.ticker, row.summaries[0].surprisePct > 0);
+    }
+  }
+
   const visibleUpcoming = selected ? upcoming.filter((u) => u.ticker === selected) : upcoming;
   const visiblePast = selected ? pastRows.filter((r) => r.ticker === selected) : pastRows;
   const isEmpty = visibleUpcoming.length === 0 && visiblePast.length === 0;
@@ -90,10 +98,10 @@ export function EarningsFilter({
   return (
     <div>
       {/* Ticker filter pills */}
-      <div className="flex items-center gap-2 flex-wrap mb-6">
+      <div className="flex items-center gap-2 flex-wrap mb-8">
         <button
           onClick={() => setSelected(null)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
+          className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
             selected === null
               ? "bg-[#111827] text-white shadow-sm"
               : "bg-white border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
@@ -120,86 +128,126 @@ export function EarningsFilter({
         </div>
       )}
 
-      {/* Upcoming */}
+      {/* ── Upcoming catalysts ─────────────────────────────────────────── */}
       {visibleUpcoming.length > 0 && (
-        <section className="mb-10">
-          <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Upcoming</div>
-          <div className="space-y-2">
-            {visibleUpcoming.map((u) => (
-              <div
-                key={u.ticker}
-                className="relative flex items-center gap-4 bg-white border border-[#E5E7EB] px-5 py-3.5 overflow-hidden hover:border-gray-300 transition-colors"
-              >
+        <section className="mb-12">
+          <div className="flex items-center gap-2 border-t-2 border-[#111827] pt-2 mb-5">
+            <span className="font-sans text-[13px] font-bold text-[#111827] uppercase tracking-tight">
+              Upcoming
+            </span>
+            <span className="text-[10px] text-gray-300">·</span>
+            <span className="text-[11px] text-gray-400">
+              {visibleUpcoming.length} {visibleUpcoming.length === 1 ? "event" : "events"}
+            </span>
+          </div>
+
+          <div className="space-y-3">
+            {visibleUpcoming.map((u) => {
+              const beat = lastBeat.get(u.ticker);
+              const urgent = u.daysAway <= 7;
+              const accent = colorMap[u.ticker] ?? "#9CA3AF";
+              return (
                 <div
-                  className="absolute left-0 top-0 bottom-0 w-[3px]"
-                  style={{ backgroundColor: colorMap[u.ticker] ?? "#9CA3AF" }}
-                />
-                <span
-                  className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
-                  style={{
-                    color: colorMap[u.ticker],
-                    borderColor: (colorMap[u.ticker] ?? "#9CA3AF") + "33",
-                    backgroundColor: (colorMap[u.ticker] ?? "#9CA3AF") + "12",
-                  }}
+                  key={u.ticker}
+                  className="bg-white border border-[#E5E7EB] border-t-2 border-t-[#B45309] flex items-stretch overflow-hidden hover:border-gray-300 transition-colors"
                 >
-                  {u.ticker}
-                </span>
-                <span className="font-sans text-[13px] font-semibold text-[#111827] flex-1">{u.name}</span>
-                <span className="text-[12px] text-gray-500 shrink-0">{u.label}</span>
-                <span className={`text-[11px] font-bold tabular-nums shrink-0 ${u.daysAway <= 7 ? "text-amber-600" : "text-gray-400"}`}>
-                  {u.daysAway === 0 ? "Today" : u.daysAway === 1 ? "Tomorrow" : `${u.daysAway}d away`}
-                </span>
-                {u.hasPreview ? (
-                  <Link
-                    href={`/earnings/${u.ticker.toLowerCase()}${u.hParam}`}
-                    className="shrink-0 text-[11px] font-semibold text-[#B45309] hover:underline"
-                  >
-                    Deep dive →
-                  </Link>
-                ) : (
-                  <span className="shrink-0 text-[11px] text-gray-300">No preview yet</span>
-                )}
-              </div>
-            ))}
+                  {/* Countdown — left-dominant event signal */}
+                  <div className={`shrink-0 flex flex-col items-center justify-center w-[68px] border-r border-gray-100 py-4 ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
+                    <span className="font-sans text-[1.6rem] font-bold leading-none tabular-nums">
+                      {u.daysAway}
+                    </span>
+                    <span className="text-[9px] font-semibold uppercase tracking-widest mt-1">
+                      {u.daysAway === 1 ? "day" : "days"}
+                    </span>
+                  </div>
+
+                  {/* Company + date */}
+                  <div className="flex flex-1 items-center gap-4 px-5 py-3.5">
+                    <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                      <span
+                        className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
+                        style={{
+                          color: accent,
+                          borderColor: accent + "40",
+                          backgroundColor: accent + "12",
+                        }}
+                      >
+                        {u.ticker}
+                      </span>
+                      <span className="font-sans text-[14px] font-semibold text-[#111827] truncate">
+                        {u.name}
+                      </span>
+                    </div>
+
+                    {/* Right side: date + badges + action */}
+                    <div className="flex items-center gap-3 shrink-0">
+                      <span className="text-[12px] text-gray-500 tabular-nums">{u.label}</span>
+
+                      {beat === true && (
+                        <span className="text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 border border-emerald-200 bg-emerald-50 text-emerald-700">
+                          Beat Last Q
+                        </span>
+                      )}
+
+                      {u.hasPreview ? (
+                        <Link
+                          href={`/earnings/${u.ticker.toLowerCase()}${u.hParam}`}
+                          className="text-[11px] font-semibold text-[#B45309] hover:underline"
+                        >
+                          Deep dive →
+                        </Link>
+                      ) : (
+                        <span className="text-[10px] text-gray-300 italic">Brief pending</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
 
-      {/* Past results */}
+      {/* ── Past results ───────────────────────────────────────────────── */}
       {visiblePast.length > 0 && (
         <section>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Past Results</div>
-          <div className="space-y-10">
-            {visiblePast.map(({ ticker, name, summaries }) => (
-              <div key={ticker}>
-                <div
-                  className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100"
-                >
-                  <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
-                    style={{
-                      color: colorMap[ticker],
-                      borderColor: (colorMap[ticker] ?? "#9CA3AF") + "33",
-                      backgroundColor: (colorMap[ticker] ?? "#9CA3AF") + "12",
-                    }}
-                  >
-                    {ticker}
-                  </span>
-                  <span className="font-sans text-[15px] font-bold text-[#111827]">{name}</span>
-                </div>
+          <div className="flex items-center gap-2 border-t-2 border-[#111827] pt-2 mb-7">
+            <span className="font-sans text-[13px] font-bold text-[#111827] uppercase tracking-tight">
+              Past Results
+            </span>
+          </div>
 
-                <div className="space-y-4">
-                  {summaries.map((s) => (
-                    <div
-                      key={s.quarter}
-                      className="relative bg-white border border-[#E5E7EB] p-5 overflow-hidden hover:border-gray-300 transition-colors"
+          <div className="space-y-10">
+            {visiblePast.map(({ ticker, name, summaries }) => {
+              const accent = colorMap[ticker] ?? "#9CA3AF";
+              return (
+                <div key={ticker}>
+                  {/* Company header */}
+                  <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
+                    <span
+                      className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
+                      style={{
+                        color: accent,
+                        borderColor: accent + "40",
+                        backgroundColor: accent + "12",
+                      }}
                     >
+                      {ticker}
+                    </span>
+                    <span className="font-sans text-[16px] font-bold text-[#111827]">{name}</span>
+                    <span className="ml-auto text-[11px] text-gray-400 tabular-nums">
+                      {summaries.length} {summaries.length === 1 ? "quarter" : "quarters"}
+                    </span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {summaries.map((s) => (
                       <div
-                        className="absolute left-0 top-0 bottom-0 w-[3px]"
-                        style={{ backgroundColor: colorMap[ticker] ?? "#9CA3AF" }}
-                      />
-                      <div className="pl-1">
-                        <div className="flex items-center gap-3 mb-3 flex-wrap">
+                        key={s.quarter}
+                        className="bg-white border border-[#E5E7EB] border-t-2 border-t-[#B45309] p-5 hover:border-gray-300 transition-colors"
+                      >
+                        {/* Quarter header row */}
+                        <div className="flex items-center gap-3 mb-4 flex-wrap">
                           <span className="font-sans text-[13px] font-bold text-[#111827]">{s.quarter}</span>
                           <span className="text-[11px] text-gray-400">{s.date}</span>
                           <BeatBadge surprisePct={s.surprisePct} />
@@ -210,35 +258,46 @@ export function EarningsFilter({
                           )}
                         </div>
 
-                        {(s.epsActual !== null || s.epsEstimate !== null) && (
-                          <div className="flex items-center gap-6 mb-3 text-[12px]">
+                        {/* EPS / revenue block — enlarged, labeled, separated from narrative */}
+                        {(s.epsActual !== null || s.epsEstimate !== null || s.revActual !== null) && (
+                          <div className="flex items-end gap-8 mb-4 pb-4 border-b border-gray-100">
                             {s.epsActual !== null && (
                               <div>
-                                <span className="text-gray-400 mr-1">EPS actual</span>
-                                <span className="font-bold text-[#111827] tabular-nums">${s.epsActual.toFixed(2)}</span>
+                                <div className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-1">EPS Actual</div>
+                                <span className="font-sans text-[1.1rem] font-bold text-[#111827] tabular-nums">
+                                  ${s.epsActual.toFixed(2)}
+                                </span>
                               </div>
                             )}
                             {s.epsEstimate !== null && (
                               <div>
-                                <span className="text-gray-400 mr-1">vs est.</span>
-                                <span className="font-bold text-gray-600 tabular-nums">${s.epsEstimate.toFixed(2)}</span>
+                                <div className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-1">Consensus</div>
+                                <span className="font-sans text-[1.1rem] font-semibold text-gray-400 tabular-nums">
+                                  ${s.epsEstimate.toFixed(2)}
+                                </span>
                               </div>
                             )}
                             {s.revActual !== null && (
                               <div>
-                                <span className="text-gray-400 mr-1">Revenue</span>
-                                <span className="font-bold text-[#111827] tabular-nums">${(s.revActual / 1000).toFixed(1)}B</span>
+                                <div className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-1">Revenue</div>
+                                <span className="font-sans text-[1.1rem] font-bold text-[#111827] tabular-nums">
+                                  ${(s.revActual / 1000).toFixed(1)}B
+                                </span>
                               </div>
                             )}
                           </div>
                         )}
 
+                        {/* Research narrative */}
                         {s.summary && (
-                          <p className="font-serif text-[13px] text-[#4a4a4a] leading-relaxed">{s.summary}</p>
+                          <p className="font-serif text-[13.5px] text-[#4a4a4a] leading-[1.75]">
+                            {s.summary}
+                          </p>
                         )}
 
+                        {/* Key quote — amber accent consistent with site system */}
                         {s.keyQuote && (
-                          <blockquote className="mt-3 pl-3 border-l-2 border-amber-400 font-serif text-[12px] text-gray-500 italic leading-relaxed">
+                          <blockquote className="mt-4 pl-3 border-l-2 border-[#B45309] font-serif text-[12px] text-gray-500 italic leading-relaxed">
                             "{s.keyQuote}"
                           </blockquote>
                         )}
@@ -254,11 +313,11 @@ export function EarningsFilter({
                           </a>
                         )}
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}

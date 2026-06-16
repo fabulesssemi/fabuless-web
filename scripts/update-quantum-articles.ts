@@ -157,7 +157,7 @@ ${list}
 Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7, 9]). No other text.`;
 
   const msg = await anthropic.messages.create({
-    model: "claude-haiku-4-5-20251001",
+    model: "claude-sonnet-4-6",
     max_tokens: 50,
     messages: [{ role: "user", content: prompt }],
   });

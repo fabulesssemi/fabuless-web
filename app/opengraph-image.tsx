@@ -36,7 +36,7 @@ export default function Image() {
           }}
         />
 
-        {/* EVERY FRIDAY label */}
+        {/* EVERY WEEKDAY label */}
         <div
           style={{
             display: "flex",
@@ -55,7 +55,7 @@ export default function Image() {
               letterSpacing: "3px",
             }}
           >
-            EVERY FRIDAY
+            EVERY WEEKDAY
           </div>
         </div>
 

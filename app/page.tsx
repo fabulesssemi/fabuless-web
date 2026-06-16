@@ -70,7 +70,7 @@ export default async function Home() {
             </p>
           </div>
           <div className="shrink-0 text-right hidden sm:block">
-            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">Every Friday</p>
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">Every weekday</p>
             <SubscribeForm compact />
           </div>
         </div>

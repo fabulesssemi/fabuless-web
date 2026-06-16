@@ -9,7 +9,7 @@ export default function Archive() {
           Archive
         </h1>
         <p className="font-serif text-[15px] text-[#4a4a4a] mt-1">
-          Every issue, in order. Shipped Fridays.
+          Every issue, in order. Updated daily.
         </p>
       </div>
 

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "A weekly briefing on the fabless semiconductor industry — for investors who track chips seriously.",
   openGraph: {
     title: "Fabuless — Semiconductor Intelligence",
-    description: "The semiconductor briefing for serious investors. Every Friday.",
+    description: "The semiconductor briefing for serious investors. Every weekday.",
     url: "https://fabuless.ai",
     siteName: "Fabuless",
     type: "website",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Fabuless — Semiconductor Intelligence",
-    description: "The semiconductor briefing for serious investors. Every Friday.",
+    description: "The semiconductor briefing for serious investors. Every weekday.",
   },
 };
 

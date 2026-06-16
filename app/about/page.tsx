@@ -17,7 +17,7 @@ export default function About() {
           Fabuless is a semiconductor intelligence platform. We track the stories, data, and companies that drive the chip industry and make it accessible to people who don't want to spend hours scouring the internet or decoding technical research just to stay up to speed.
         </p>
         <p>
-          It started as a weekly newsletter. That's still at the core: every Friday, a concise briefing on the week's most important semiconductor developments, written with a finance lens and no PhD required.
+          It started as a weekly newsletter. That's still at the core: every weekday, a concise briefing on the most important semiconductor developments, written with a finance lens and no PhD required.
         </p>
         <p>
           But it's become more than a newsletter. The platform now includes live analyst consensus data, insider trading signals, earnings tracking, and a set of AI tools called Lenses that let you go deep on specific companies and the thinking of the industry's most respected voices.
@@ -51,7 +51,7 @@ export default function About() {
         </h2>
         <div className="space-y-0">
           {[
-            ["Weekly Newsletter", "The week's most important semiconductor stories, every Friday. Finance lens, no PhD required."],
+            ["Daily Newsletter", "The day's most important semiconductor stories, every weekday. Finance lens, no PhD required."],
             ["Analyst Consensus", "Live price targets, ratings, and sentiment shifts across the top semiconductor names."],
             ["Insider Trading", "Form 4 signals sourced directly from SEC EDGAR. Who's buying, who's selling, and what the pattern looks like."],
             ["Earnings Tracker", "Key metrics and guidance from semiconductor earnings calls, updated each quarter."],
@@ -86,7 +86,7 @@ export default function About() {
           Get the newsletter
         </h2>
         <p className="font-serif text-[14px] text-[#4a4a4a] mb-5">
-          Every Friday. Free. No spam.
+          Every weekday. Free. No spam.
         </p>
         <SubscribeForm />
       </div>

@@ -25,7 +25,7 @@ export function SubscribeForm({ compact }: { compact?: boolean }) {
   }
 
   if (status === "success") {
-    return <p className="text-sm text-emerald-700 font-medium">You&apos;re in. See you Friday.</p>;
+    return <p className="text-sm text-emerald-700 font-medium">You&apos;re in. See you tomorrow.</p>;
   }
 
   return (

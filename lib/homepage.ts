@@ -96,11 +96,11 @@ export async function getHomepageArticles(): Promise<{
 
     // Shelf-life filter at READ time:
     //   top-tier (original_rank <= 5): 3 days
-    //   lower-tier (original_rank > 5): 1 day
+    //   lower-tier (original_rank > 5): 2 days
     const alive = data.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
       const topTier = ((r.original_rank as number) ?? 99) <= 5;
-      return age < (topTier ? 3 * DAY_MS : DAY_MS);
+      return age < (topTier ? 3 * DAY_MS : 2 * DAY_MS);
     });
 
     // Source cap: max 3 per domain across the whole page
@@ -184,7 +184,7 @@ export async function saveAndExpireArticles(
     // avoids the fragile PostgREST NOT-IN-with-long-URLs filter), then delete
     // with a safe .in() call. Shelf life:
     //   top-tier (original_rank <= 5): 72h
-    //   lower-tier (original_rank > 5): 24h
+    //   lower-tier (original_rank > 5): 48h
     // Articles re-picked in this run are never expired (kept their first_seen).
     const keep = new Set(urls);
     const DAY = 24 * 60 * 60 * 1000;
@@ -199,7 +199,7 @@ export async function saveAndExpireArticles(
         if (keep.has(r.url as string)) return false;
         const age = nowMs - new Date(r.first_seen_at as string).getTime();
         const topTier = ((r.original_rank as number) ?? 99) <= 5;
-        return age >= (topTier ? 3 * DAY : DAY);
+        return age >= (topTier ? 3 * DAY : 2 * DAY);
       })
       .map((r) => r.url as string);
 

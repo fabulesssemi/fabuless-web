@@ -44,7 +44,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
       {/* ── 3-column hero section ── */}
       <section className="pb-8 border-b border-gray-200">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[50fr_26fr_24fr] gap-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[46fr_26fr_28fr] gap-0">
 
           {/* LEFT — hero story */}
           {hero && (
@@ -63,7 +63,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 href={hero.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block mt-2 font-serif text-[1.75rem] font-bold text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
+                className="block mt-2 font-serif text-[2.1rem] font-bold text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
               >
                 {hero.title}
               </a>
@@ -92,7 +92,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   href={article.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-1.5 font-serif text-[1.1rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                  className="block mt-1.5 font-serif text-[1.35rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                 >
                   {article.title}
                 </a>
@@ -111,7 +111,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block font-serif text-[0.9rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                    className="block font-serif text-[1.05rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
                     {article.title}
                   </a>
@@ -134,7 +134,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   href={article.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block font-serif text-[1rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
+                  className="block font-serif text-[1.15rem] font-bold text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
                 >
                   {article.title}
                 </a>

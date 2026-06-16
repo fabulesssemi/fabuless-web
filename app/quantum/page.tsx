@@ -35,7 +35,7 @@ export default async function QuantumPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full opacity-20"
           style={{ background: "radial-gradient(ellipse, #818CF8 0%, transparent 70%)" }} />
 
-        <div className="relative max-w-5xl mx-auto px-6 py-4 flex items-center gap-6">
+        <div className="relative max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
           <h1 className="font-sans text-2xl font-bold text-white tracking-tight leading-tight shrink-0">
             The Race to Useful Quantum
           </h1>
@@ -45,7 +45,7 @@ export default async function QuantumPage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-8">
 
         {/* ── Articles ── */}
         {articles.length === 0 ? (

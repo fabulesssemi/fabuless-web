@@ -2,22 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import YahooFinance from "yahoo-finance2";
 import { unstable_cache } from "next/cache";
 
-const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
+const yf = new YahooFinance({ suppressNotices: ["yahooSurvey", "ripHistorical"] });
 
 type DayPrice = { date: string; close: number }; // date = "YYYY-MM-DD"
 
 async function fetchHistory(symbol: string, from: string): Promise<DayPrice[]> {
   try {
-    const rows = await yf.historical(
-      symbol,
-      { period1: from, period2: new Date(), interval: "1d" },
-      { validateResult: false },
-    ) as unknown as { date: Date; adjClose?: number; close?: number }[];
-    return rows
-      .filter((r) => r.close != null || r.adjClose != null)
+    const result = await yf.chart(symbol, { period1: from, interval: "1d" });
+    return (result.quotes ?? [])
+      .filter((r) => r.close != null)
       .map((r) => ({
-        date: r.date.toISOString().slice(0, 10),
-        close: (r.adjClose ?? r.close)!,
+        date: (r.date as Date).toISOString().slice(0, 10),
+        close: r.close!,
       }));
   } catch {
     return [];

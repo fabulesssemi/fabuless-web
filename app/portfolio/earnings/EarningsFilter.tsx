@@ -141,65 +141,49 @@ export function EarningsFilter({
             </span>
           </div>
 
-          <div className="space-y-1.5">
+          <div className="divide-y divide-gray-100">
             {visibleUpcoming.map((u) => {
               const beat = lastBeat.get(u.ticker);
               const urgent = u.daysAway <= 7;
               const accent = colorMap[u.ticker] ?? "#9CA3AF";
               return (
-                <div
-                  key={u.ticker}
-                  className="bg-white border border-[#E5E7EB] border-t-2 border-t-[#B45309] flex items-stretch overflow-hidden hover:border-gray-300 transition-colors"
-                >
-                  {/* Countdown — left-dominant event signal */}
-                  <div className={`shrink-0 flex flex-col items-center justify-center w-[52px] border-r border-gray-100 py-2 ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
-                    <span className="font-sans text-[1rem] font-bold leading-none tabular-nums">
-                      {u.daysAway}
-                    </span>
-                    <span className="text-[8px] font-semibold uppercase tracking-widest mt-0.5">
-                      {u.daysAway === 1 ? "day" : "days"}
-                    </span>
-                  </div>
+                <div key={u.ticker} className="flex items-center gap-4 py-2 group">
+                  {/* Countdown — inline, de-emphasised unless urgent */}
+                  <span className={`shrink-0 font-sans text-[12px] font-bold tabular-nums w-[44px] text-right ${urgent ? "text-[#B45309]" : "text-gray-400"}`}>
+                    {u.daysAway}d
+                  </span>
 
-                  {/* Company + date */}
-                  <div className="flex flex-1 items-center gap-4 px-4 py-2">
-                    <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                      <span
-                        className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
-                        style={{
-                          color: accent,
-                          borderColor: accent + "40",
-                          backgroundColor: accent + "12",
-                        }}
+                  {/* Ticker chip */}
+                  <span
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
+                    style={{ color: accent, borderColor: accent + "40", backgroundColor: accent + "12" }}
+                  >
+                    {u.ticker}
+                  </span>
+
+                  {/* Name */}
+                  <span className="font-sans text-[13px] font-semibold text-[#111827] flex-1 truncate">
+                    {u.name}
+                  </span>
+
+                  {/* Right: date · beat badge · action */}
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="text-[11px] text-gray-400 tabular-nums">{u.label}</span>
+                    {beat === true && (
+                      <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 border border-emerald-200 bg-emerald-50 text-emerald-700">
+                        Beat Last Q
+                      </span>
+                    )}
+                    {u.hasPreview ? (
+                      <Link
+                        href={`/earnings/${u.ticker.toLowerCase()}${u.hParam}`}
+                        className="text-[11px] font-semibold text-[#B45309] hover:underline"
                       >
-                        {u.ticker}
-                      </span>
-                      <span className="font-sans text-[13px] font-semibold text-[#111827] truncate">
-                        {u.name}
-                      </span>
-                    </div>
-
-                    {/* Right side: date + badges + action */}
-                    <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-[12px] text-gray-500 tabular-nums">{u.label}</span>
-
-                      {beat === true && (
-                        <span className="text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 border border-emerald-200 bg-emerald-50 text-emerald-700">
-                          Beat Last Q
-                        </span>
-                      )}
-
-                      {u.hasPreview ? (
-                        <Link
-                          href={`/earnings/${u.ticker.toLowerCase()}${u.hParam}`}
-                          className="text-[11px] font-semibold text-[#B45309] hover:underline"
-                        >
-                          Deep dive →
-                        </Link>
-                      ) : (
-                        <span className="text-[10px] text-gray-300 italic">Brief pending</span>
-                      )}
-                    </div>
+                        Deep dive →
+                      </Link>
+                    ) : (
+                      <span className="text-[10px] text-gray-300 italic">Brief pending</span>
+                    )}
                   </div>
                 </div>
               );

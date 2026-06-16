@@ -81,15 +81,15 @@ export function Section({
     <section className={className}>
       <div className="mb-5">
         {eyebrow && (
-          <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] mb-0.5 ${eyebrowColor}`}>
+          <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-0.5 ${eyebrowColor}`}>
             {live && <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shrink-0" />}
             {eyebrow}
           </div>
         )}
-        <h2 className="font-sans text-[1.05rem] font-bold text-gray-900 tracking-tight">
+        <h2 className="font-sans text-[1.15rem] font-bold text-gray-900 tracking-tight">
           {title}
         </h2>
-        <div className="mt-3 h-px bg-gray-100" />
+        <div className="mt-3 h-px bg-gray-200" />
       </div>
       {children}
     </section>
@@ -105,14 +105,14 @@ export function Pill({
   tone?: "neutral" | "amber" | "emerald" | "rose" | "cyan";
 }) {
   const tones: Record<string, string> = {
-    neutral: "bg-gray-100 text-gray-600",
-    amber:   "bg-amber-50 text-amber-700",
-    emerald: "bg-teal-50 text-teal-700",
-    rose:    "bg-rose-50 text-rose-700",
-    cyan:    "bg-sky-50 text-sky-700",
+    neutral: "border border-gray-200 text-gray-500",
+    amber:   "border border-[#B45309] text-[#B45309]",
+    emerald: "border border-emerald-300 text-emerald-700",
+    rose:    "border border-rose-300 text-rose-700",
+    cyan:    "border border-[#B45309] text-[#B45309]",
   };
   return (
-    <span className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ${tones[tone]}`}>
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold bg-transparent ${tones[tone]}`}>
       {children}
     </span>
   );
@@ -129,11 +129,11 @@ export function Stat({
   tone?: string;
 }) {
   return (
-    <div>
-      <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">
+    <div className="border-t border-gray-200 pt-3">
+      <div className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">
         {label}
       </div>
-      <div className={`text-sm font-semibold tabular-nums ${tone ?? "text-gray-900"}`}>
+      <div className={`text-[15px] font-semibold tabular-nums ${tone ?? "text-gray-900"}`}>
         {value}
       </div>
     </div>

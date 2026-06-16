@@ -133,14 +133,14 @@ export function CompanyDashboard({
           </div>
           {editorial ? (
             <>
-              <p className="text-[14px] leading-relaxed text-gray-700 italic mb-4">
+              <p className="text-[15px] leading-relaxed text-gray-800 italic mb-4">
                 {editorial.quickTake}
               </p>
               {/* Key themes as compact chips */}
               {editorial.keyThemes.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {editorial.keyThemes.slice(0, 3).map((t) => (
-                    <span key={t.title} className="text-[11px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                    <span key={t.title} className="text-[11px] bg-transparent border border-gray-200 text-gray-600 px-2.5 py-0.5 rounded-full font-medium">
                       {t.title}
                     </span>
                   ))}
@@ -179,7 +179,7 @@ export function CompanyDashboard({
 
           {analyst?.consensusRating || analyst?.avgPriceTarget ? (
             <>
-              <div className={`text-3xl font-semibold mb-0.5 ${ratingColor}`}>
+              <div className={`text-3xl font-bold mb-0.5 ${ratingColor}`}>
                 {analyst.consensusRating ?? "—"}
               </div>
               <p className="font-serif text-[13px] text-[#4a4a4a] mb-4">
@@ -270,12 +270,12 @@ export function CompanyDashboard({
                 {merged.map((n) => (
                   <li key={n.url} className="py-3 first:pt-0 last:pb-0">
                     <a href={n.url} target="_blank" rel="noopener noreferrer" className="group">
-                      <span className="text-[14px] text-gray-800 group-hover:text-[#B45309] group-hover:underline underline-offset-2 decoration-[#B45309]/50 transition-colors leading-snug block">
+                      <span className="text-[14px] font-medium text-gray-800 group-hover:text-[#B45309] group-hover:underline underline-offset-2 decoration-[#B45309]/50 transition-colors leading-snug block">
                         {n.title}
                       </span>
                     </a>
                     <div className="mt-0.5 flex items-center gap-2 text-[11px] text-gray-400">
-                      {n.source && <span>{n.source}</span>}
+                      {n.source && <span className="text-gray-500">{n.source}</span>}
                       {n.source && n.publishedAt && <span>·</span>}
                       {n.publishedAt && <span>{timeAgo(n.publishedAt)}</span>}
                     </div>
@@ -383,9 +383,9 @@ function CaseColumn({ title, points, tone, max = 99 }: { title: string; points: 
         {points.map((p, i) => (
           <li key={i} className="list-none py-2.5 border-t border-gray-200 first:border-t-0 first:pt-0">
             <p className="text-[13px] text-gray-700 leading-relaxed">
-              <span className="text-gray-300 mr-0.5 select-none">&ldquo;&ldquo;</span>
+              <span className="text-gray-400 mr-0.5 select-none">&ldquo;</span>
               {p}
-              <span className="text-gray-300 ml-0.5 select-none">&rdquo;&rdquo;</span>
+              <span className="text-gray-400 ml-0.5 select-none">&rdquo;</span>
             </p>
           </li>
         ))}

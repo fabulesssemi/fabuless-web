@@ -56,6 +56,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   alt={hero.title}
                   className="w-full object-cover"
                   style={{ maxHeight: "320px" }}
+                  referrerPolicy="no-referrer"
                 />
               </a>
               <TopLabel />
@@ -87,6 +88,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                       alt={article.title}
                       className="w-full object-cover"
                       style={{ maxHeight: "160px" }}
+                      referrerPolicy="no-referrer"
                     />
                   </a>
                   <TopLabel />

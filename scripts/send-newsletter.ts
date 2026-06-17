@@ -32,7 +32,7 @@ import { issues, type Issue, type Story, type Podcast, type Quote, type StoryQuo
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
 async function getSubscribers(): Promise<string[]> {

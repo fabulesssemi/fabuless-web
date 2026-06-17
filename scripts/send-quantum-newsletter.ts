@@ -32,7 +32,7 @@ import type { QuantumArticle } from "../lib/quantum/articles";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const INDIGO = "#3730A3";
+const INDIGO = "#1e1b4b";
 const INDIGO_DARK = "#1e1b4b";
 const INDIGO_MID = "#0f0c29";
 

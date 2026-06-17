@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { readPortfolio, writePortfolio, encodeHoldings, parseTickersToHoldings, type Holding } from "./storage";
+import { encodeHoldings, parseTickersToHoldings, type Holding } from "./storage";
+import { usePortfolioSync } from "./usePortfolioSync";
 
 type PendingHolding = { ticker: string; purchasePrice: string; purchaseDate: string; shares: string };
 
@@ -12,18 +13,20 @@ function blankPending(ticker: string): PendingHolding {
 
 export function PortfolioGate() {
   const router = useRouter();
+  const { load, save } = usePortfolioSync();
   const [checked, setChecked] = useState(false);
   const [tickerInput, setTickerInput] = useState("");
   const [pending, setPending] = useState<PendingHolding[]>([]);
 
   useEffect(() => {
-    const store = readPortfolio();
-    if (store.holdings.length > 0) {
-      router.replace(`/portfolio?h=${encodeHoldings(store.holdings)}`);
-    } else {
-      setChecked(true);
-    }
-  }, [router]);
+    load().then((holdings) => {
+      if (holdings.length > 0) {
+        router.replace(`/portfolio?h=${encodeHoldings(holdings)}`);
+      } else {
+        setChecked(true);
+      }
+    });
+  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function addTickers() {
     const tickers = parseTickersToHoldings(tickerInput).filter(
@@ -34,7 +37,7 @@ export function PortfolioGate() {
     setTickerInput("");
   }
 
-  function save() {
+  function handleSave() {
     if (pending.length === 0) return;
     const holdings: Holding[] = pending.map((p) => ({
       ticker: p.ticker,
@@ -42,7 +45,7 @@ export function PortfolioGate() {
       purchaseDate: p.purchaseDate || null,
       shares: p.shares ? parseFloat(p.shares) : null,
     }));
-    writePortfolio({ holdings });
+    save(holdings);
     router.push(`/portfolio?h=${encodeHoldings(holdings)}`);
   }
 
@@ -133,13 +136,13 @@ export function PortfolioGate() {
 
       {pending.length > 0 && (
         <button
-          onClick={save}
+          onClick={handleSave}
           className="w-full rounded-lg bg-[#111827] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1f2937] transition-colors"
         >
           Save portfolio
         </button>
       )}
-      <p className="mt-3 text-[11px] text-gray-400">Purchase details are optional. Saved to this browser only.</p>
+      <p className="mt-3 text-[11px] text-gray-400">Purchase details are optional. Sign in to sync across devices.</p>
     </div>
   );
 }

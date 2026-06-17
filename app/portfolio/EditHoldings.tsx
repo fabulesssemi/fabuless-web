@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { readPortfolio, writePortfolio, encodeHoldings, type Holding } from "./storage";
+import { encodeHoldings, type Holding } from "./storage";
+import { usePortfolioSync } from "./usePortfolioSync";
 
 type PendingHolding = { ticker: string; purchasePrice: string; purchaseDate: string; shares: string };
 
@@ -17,14 +18,15 @@ function holdingToPending(h: Holding): PendingHolding {
 
 export function EditHoldings({ holdings }: { holdings: Holding[] }) {
   const router = useRouter();
+  const { save: syncSave } = usePortfolioSync();
   const [editing, setEditing] = useState(false);
   const [pending, setPending] = useState<PendingHolding[]>([]);
 
   useEffect(() => {
     if (holdings.length > 0) {
-      writePortfolio({ holdings });
+      syncSave(holdings);
     }
-  }, [holdings]);
+  }, [holdings]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function openEdit() {
     setPending(holdings.map(holdingToPending));
@@ -41,11 +43,11 @@ export function EditHoldings({ holdings }: { holdings: Holding[] }) {
         shares: p.shares ? parseFloat(p.shares) : null,
       }));
     if (next.length === 0) {
-      writePortfolio({ holdings: [] });
+      syncSave([]);
       router.push("/portfolio");
       return;
     }
-    writePortfolio({ holdings: next });
+    syncSave(next);
     setEditing(false);
     router.push(`/portfolio?h=${encodeHoldings(next)}`);
   }

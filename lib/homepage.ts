@@ -113,21 +113,32 @@ export async function getHomepageArticles(): Promise<{
       }
     }
 
-    // Top Stories: articles first seen within the last 24h, best rank first, up to 4.
-    const topStories = eligible
-      .filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS)
-      .slice(0, 4)
-      .map(rowToStory);
+    // Bucket articles by age tier
+    const today    = eligible.filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS);
+    const yesterday = eligible.filter((r) => {
+      const age = now - new Date(r.first_seen_at as string).getTime();
+      return age >= DAY_MS && age < 2 * DAY_MS;
+    });
+    const dayBefore = eligible.filter((r) => {
+      const age = now - new Date(r.first_seen_at as string).getTime();
+      return age >= 2 * DAY_MS && age < 3 * DAY_MS;
+    });
 
+    // Top Stories: best 4 from today (rank asc = most important first)
+    const topStories = today.slice(0, 4).map(rowToStory);
     const topUrls = new Set(topStories.map((s) => s.url));
 
-    // List: remaining articles sorted by first_seen_at desc (today's remainder
-    // first, then yesterday's, then day before), capped at 12.
-    const listStories = eligible
-      .filter((r) => !topUrls.has(r.url as string))
-      .sort((a, b) => new Date(b.first_seen_at as string).getTime() - new Date(a.first_seen_at as string).getTime())
-      .slice(0, 12)
-      .map(rowToStory);
+    // List: fill to guarantee minimums — 8 today, 4 yesterday, 4 day-before
+    // Today's remainder (after top stories), best rank first
+    const todayRemainder = today.filter((r) => !topUrls.has(r.url as string));
+    const todayList    = todayRemainder.slice(0, Math.max(8 - topStories.length, 4));
+    const usedUrls     = new Set([...topUrls, ...todayList.map((r) => r.url as string)]);
+    const yesterdayList = yesterday.filter((r) => !usedUrls.has(r.url as string)).slice(0, 4);
+    yesterdayList.forEach((r) => usedUrls.add(r.url as string));
+    const dayBeforeList = dayBefore.filter((r) => !usedUrls.has(r.url as string)).slice(0, 4);
+
+    // Combine: today remainder first (freshest), then yesterday, then day-before
+    const listStories = [...todayList, ...yesterdayList, ...dayBeforeList].map(rowToStory);
 
     return { topStories, listStories };
   } catch {

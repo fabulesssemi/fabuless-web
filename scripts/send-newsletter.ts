@@ -28,6 +28,32 @@ import { Resend } from "resend";
 import * as readline from "readline";
 import { issues, type Issue, type Story, type Podcast, type Quote, type StoryQuote } from "../lib/issues";
 
+const PODCAST_FEEDS = [
+  { show: "The Circuit",          url: "https://feeds.transistor.fm/the-circuit" },
+  { show: "Chip Stock Investor",  url: "https://anchor.fm/s/e2cacf78/podcast/rss" },
+  { show: "Invest Like the Best", url: "https://feeds.megaphone.fm/investlikethebest" },
+];
+
+async function fetchLivePodcasts(): Promise<Podcast[]> {
+  const results = await Promise.all(
+    PODCAST_FEEDS.map(async ({ show, url }) => {
+      try {
+        const res = await fetch(url, { signal: AbortSignal.timeout(8000), headers: { "User-Agent": "Fabuless/1.0" } });
+        if (!res.ok) return null;
+        const xml = await res.text();
+        const channelArt = xml.match(/<itunes:image[^>]+href="([^"]+)"/i)?.[1] ?? null;
+        const item = xml.match(/<item[\s\S]*?<\/item>/)?.[0];
+        if (!item) return null;
+        const title = item.match(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>/)?.[1] ?? item.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? "";
+        const link = item.match(/<enclosure[^>]+url="([^"]+)"/)?.[1] ?? item.match(/<link>([\s\S]*?)<\/link>/)?.[1] ?? url;
+        const epArt = item.match(/<itunes:image[^>]+href="([^"]+)"/i)?.[1] ?? channelArt;
+        return { show, title: title.trim(), url: link, image: epArt ?? null, oneliner: "" } as Podcast;
+      } catch { return null; }
+    })
+  );
+  return results.filter((x): x is Podcast => x !== null);
+}
+
 // ── Supabase ─────────────────────────────────────────────────────────────────
 
 const supabase = createClient(
@@ -163,7 +189,7 @@ function quotesBlock(quotes: Quote[]): string {
 }
 
 
-function buildEmailHtml(issue: Issue): string {
+function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = []): string {
   const CAT_ORDER = ["Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other"];
 
   // Build stories HTML grouped by category
@@ -179,7 +205,8 @@ function buildEmailHtml(issue: Issue): string {
     }).join("");
   }
 
-  const podcastsHtml = issue.podcasts.map(podcastRow).join("");
+  const pods = livePodcasts.length ? livePodcasts : issue.podcasts;
+  const podcastsHtml = pods.map(podcastRow).join("");
   const quotesHtml = quotesBlock(issue.quotes ?? []);
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
@@ -281,9 +308,11 @@ async function main() {
   const autoMode = process.argv.includes("--auto");
   const previewMode = process.argv.includes("--preview");
 
+  const livePodcasts = await fetchLivePodcasts();
+
   if (previewMode) {
     const issue = issues[0];
-    const html = buildEmailHtml(issue);
+    const html = buildEmailHtml(issue, livePodcasts);
     const outPath = resolve(process.cwd(), "newsletter-preview.html");
     writeFileSync(outPath, html);
     console.log(`\n✅ Preview saved → ${outPath}`);
@@ -295,7 +324,7 @@ async function main() {
   if (testMode) {
     const issue = issues[0];
     const resend = new Resend(process.env.RESEND_API_KEY!);
-    const html = buildEmailHtml(issue);
+    const html = buildEmailHtml(issue, livePodcasts);
     const { error } = await resend.emails.send({
       from: "Fabuless <newsletter@fabuless.ai>",
       to: "harrica@bc.edu",
@@ -314,7 +343,7 @@ async function main() {
   console.log(`Issue   : #${issue.number} · ${issue.date}`);
   console.log(`Title   : ${issue.title}`);
   console.log(`Stories : ${totalStories}`);
-  console.log(`Pods    : ${issue.podcasts.length}`);
+  console.log(`Pods    : ${livePodcasts.length} (live)`);
   console.log(`Quotes  : ${(issue.quotes ?? []).length}`);
   if (autoMode) console.log("Mode    : AUTO (no prompt)");
   console.log(bar);
@@ -342,7 +371,7 @@ async function main() {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY!);
-  const html = buildEmailHtml(issue);
+  const html = buildEmailHtml(issue, livePodcasts);
   const subject = `Fabuless Semi | ${issue.title}`;
   let sent = 0, failed = 0;
 

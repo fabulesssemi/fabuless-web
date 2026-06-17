@@ -121,7 +121,7 @@ function articleRow(article: QuantumArticle, featured = false): string {
           <tr>
             <td style="vertical-align:top;">
               <a href="${esc(article.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:${INDIGO};text-decoration:none;line-height:1.35;display:block;">${esc(article.title)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(article.source)})</span></a>
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;margin:6px 0 0 0;line-height:1.5;">${esc(article.summary.split(/\s+/).slice(0, 12).join(" ").replace(/[,;:]$/, "") + "…")}</p>
+              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;margin:6px 0 0 0;line-height:1.5;">${esc(article.summary)}</p>
             </td>
             ${imgCell}
           </tr>

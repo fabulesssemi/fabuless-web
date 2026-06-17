@@ -101,25 +101,13 @@ export async function getHomepageArticles(): Promise<{
       return age < 3 * DAY_MS;
     });
 
-    // Source cap: max 2 per domain across the whole page
-    const sourceCounts = new Map<string, number>();
-    const eligible: typeof data = [];
-    for (const row of alive) {
-      const src = (row.source as string).toLowerCase().trim();
-      const count = sourceCounts.get(src) ?? 0;
-      if (count < 2) {
-        eligible.push(row);
-        sourceCounts.set(src, count + 1);
-      }
-    }
-
-    // Bucket articles by age tier
-    const today    = eligible.filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS);
-    const yesterday = eligible.filter((r) => {
+    // Bucket articles by age tier (no pre-cap — we enforce it globally below)
+    const today    = alive.filter((r) => now - new Date(r.first_seen_at as string).getTime() < DAY_MS);
+    const yesterday = alive.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
       return age >= DAY_MS && age < 2 * DAY_MS;
     });
-    const dayBefore = eligible.filter((r) => {
+    const dayBefore = alive.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
       return age >= 2 * DAY_MS && age < 3 * DAY_MS;
     });
@@ -129,7 +117,6 @@ export async function getHomepageArticles(): Promise<{
     const topUrls = new Set(topStories.map((s) => s.url));
 
     // List: fill to guarantee minimums — 8 today, 4 yesterday, 4 day-before
-    // Today's remainder (after top stories), best rank first
     const todayRemainder = today.filter((r) => !topUrls.has(r.url as string));
     const todayList    = todayRemainder.slice(0, Math.max(8 - topStories.length, 4));
     const usedUrls     = new Set([...topUrls, ...todayList.map((r) => r.url as string)]);
@@ -137,10 +124,29 @@ export async function getHomepageArticles(): Promise<{
     yesterdayList.forEach((r) => usedUrls.add(r.url as string));
     const dayBeforeList = dayBefore.filter((r) => !usedUrls.has(r.url as string)).slice(0, 4);
 
-    // Combine: today remainder first (freshest), then yesterday, then day-before
-    const listStories = [...todayList, ...yesterdayList, ...dayBeforeList].map(rowToStory);
+    // Combine then enforce hard source cap of 2 across the ENTIRE page output
+    const allCandidates = [
+      ...topStories,
+      ...[...todayList, ...yesterdayList, ...dayBeforeList].map(rowToStory),
+    ];
+    const finalCounts = new Map<string, number>();
+    const cappedTop: AutoStory[] = [];
+    const cappedList: AutoStory[] = [];
+    const topUrlSet = new Set(topStories.map((s) => s.url));
 
-    return { topStories, listStories };
+    for (const story of allCandidates) {
+      const src = story.source.toLowerCase().trim().replace(/\s+/g, " ");
+      const count = finalCounts.get(src) ?? 0;
+      if (count >= 2) continue;
+      finalCounts.set(src, count + 1);
+      if (topUrlSet.has(story.url) && cappedTop.length < 4) {
+        cappedTop.push(story);
+      } else {
+        cappedList.push(story);
+      }
+    }
+
+    return { topStories: cappedTop, listStories: cappedList };
   } catch {
     return { topStories: [], listStories: [] };
   }

@@ -310,30 +310,30 @@
   "4063.T": {
     "ticker": "4063.T",
     "companyName": "Shin-Etsu",
-    "nextDate": "2026-07-27",
+    "nextDate": "2026-07-24",
     "fiscalQuarter": "Q3 FY26",
     "epsEst": 67.69529,
     "revEstB": 682.8,
-    "barToBeat": "To move the stock, Shin-Etsu needs to deliver a meaningful beat to the current EPS estimate of $67.70, with the buy-side whisper number hovering around $70, as well as provide reassurance on the semiconductor and electronics end-markets, which have been experiencing a slowdown. The market is also looking for signs of stabilization in the PVC and chlor-alkali segments, which have been impacted by raw material costs and supply chain disruptions.",
+    "barToBeat": "To move the stock, Shin-Etsu needs to deliver a significant beat to the consensus EPS estimate of $67.70, with the buy-side whisper number hovering around $70, and also provide reassurance on the semiconductor silicon wafer demand, which has been a key driver of the company's growth. The market is also pricing in a strong recovery in the photovoltaic and semiconductor end-markets.",
     "watchPoints": [
       {
-        "title": "Semiconductor Demand",
-        "why": "As a key supplier of semiconductor materials, Shin-Etsu's revenue growth is heavily influenced by the demand for these products, particularly from major customers in the memory and foundry segments. A strong outlook for semiconductor demand would be a positive catalyst for the stock.",
-        "metric": "guidance for 2H26 semiconductor materials sales"
+        "title": "Silicon Wafer Demand",
+        "why": "As a major supplier of silicon wafers to the semiconductor industry, Shin-Etsu's revenue growth is heavily influenced by the demand for these wafers, particularly from leading-edge foundries. A strong demand environment would be a significant positive catalyst for the stock.",
+        "metric": "10% YoY growth"
       },
       {
         "title": "PVC Pricing",
-        "why": "PVC is a significant contributor to Shin-Etsu's revenue, and pricing trends in this segment have a direct impact on the company's profitability. The market will be watching for any signs of improvement in PVC pricing, which has been under pressure due to oversupply and weak demand."
+        "why": "Shin-Etsu is a major producer of PVC, and the company's profitability in this segment is highly sensitive to changes in PVC pricing, which has been volatile in recent quarters due to fluctuations in raw material costs and global demand."
       },
       {
         "title": "Capex Guidance",
-        "why": "Shin-Etsu's capital expenditure plans are closely tied to its growth strategy, particularly in the semiconductor and electronics segments. The company's capex guidance for the remainder of 2026 will be closely watched, as it will provide insight into management's confidence in the outlook for these end-markets.",
-        "metric": "FY26 capex guidance"
+        "why": "Shin-Etsu's capital expenditure plans are closely watched by investors, as they provide insight into the company's growth strategy and commitment to expanding its production capacity, particularly in the semiconductor silicon wafer segment. A significant increase in capex guidance would be viewed as a positive signal.",
+        "metric": "5% increase YoY"
       }
     ],
-    "bullSetup": "A strong earnings report, combined with a positive outlook for the semiconductor and electronics end-markets, could set up Shin-Etsu for a significant rally, as the stock has been trading at a relatively low multiple to its peers and has a history of outperforming during periods of industry growth.",
-    "bearSetup": "A disappointing earnings report, particularly if it is accompanied by a weak outlook for the semiconductor and electronics segments, could lead to a sharp decline in the stock, as investors may become increasingly concerned about the company's ability to navigate a slowing demand environment and maintain its profitability.",
-    "generatedAt": "2026-06-15T18:22:16.562Z"
+    "bullSetup": "A strong earnings report, driven by robust demand for semiconductor silicon wafers and a recovery in PVC pricing, could propel the stock higher, as investors regain confidence in the company's growth prospects and its ability to navigate the challenging macro environment.",
+    "bearSetup": "A disappointing earnings report, characterized by weak demand for silicon wafers and downward pressure on PVC pricing, would exacerbate concerns about the company's growth trajectory and its exposure to the highly cyclical semiconductor and chemicals industries.",
+    "generatedAt": "2026-06-17T19:52:47.862Z"
   },
   "3436.T": {
     "ticker": "3436.T",

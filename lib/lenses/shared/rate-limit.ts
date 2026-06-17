@@ -13,7 +13,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-const MAX_REQUESTS = 10;
+const MAX_REQUESTS = 5;
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 // Use service key so this table doesn't need RLS

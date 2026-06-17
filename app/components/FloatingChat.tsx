@@ -183,7 +183,7 @@ export function FloatingChat() {
               </button>
             </div>
             <p className="text-[10px] text-gray-400 mt-2 leading-tight">
-              General information, not investment advice.
+              General information, not investment advice. 5 questions per day.
             </p>
           </div>
         </div>

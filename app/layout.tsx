@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MobileNav } from "@/app/components/MobileNav";
 import { NavWrapper } from "@/app/components/NavWrapper";
 import { FloatingChat } from "@/app/components/FloatingChat";
+import { SessionProviderWrapper } from "@/app/components/SessionProviderWrapper";
+import { AuthButton } from "@/app/components/AuthButton";
 import "./globals.css";
 
 const inter = Inter({
@@ -38,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="h-screen flex flex-col text-[#18181B] font-sans overflow-hidden">
+        <SessionProviderWrapper>
         <header className="relative z-40">
           <div className="h-[3px] bg-[#B45309]" />
           <NavWrapper>
@@ -75,6 +78,8 @@ export default function RootLayout({
                 </div>
               </div>
 
+              <AuthButton />
+
               {/* Mobile hamburger */}
               <MobileNav />
             </nav>
@@ -86,6 +91,7 @@ export default function RootLayout({
         </main>
 
         <FloatingChat />
+        </SessionProviderWrapper>
       </body>
     </html>
   );

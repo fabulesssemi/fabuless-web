@@ -196,8 +196,8 @@ ${STORY_SCHEMA}`;
     // Sort by rank ascending so diversify processes best stories first
     withRanks.sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
 
-    // Hard-enforce source diversity: target 15, max 3 per source
-    const topStories = diversify(withRanks, 15, 3);
+    // Hard-enforce source diversity: target 15, max 2 per source
+    const topStories = diversify(withRanks, 15, 2);
 
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {

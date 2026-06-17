@@ -11,19 +11,36 @@ export type RssItem = {
 };
 
 const RSS_FEEDS: { url: string; source: string }[] = [
+  // Core semi / tech news
   { url: "https://feeds.reuters.com/reuters/technologyNews",                                              source: "Reuters" },
   { url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",          source: "CNBC" },
+  { url: "https://feeds.arstechnica.com/arstechnica/technology",                                         source: "Ars Technica" },
+  { url: "https://www.theregister.com/headlines.atom",                                                   source: "The Register" },
+  { url: "https://feeds.theverge.com/tech",                                                              source: "The Verge" },
+  { url: "https://wired.com/feed/rss",                                                                   source: "Wired" },
+  { url: "https://www.technologyreview.com/feed/",                                                       source: "MIT Tech Review" },
+  // Semi-specific
   { url: "https://www.nextplatform.com/feed/",                                                            source: "NextPlatform" },
   { url: "https://semiwiki.com/feed/",                                                                    source: "SemiWiki" },
   { url: "https://www.chipstrat.com/feed",                                                                source: "Chipstrat" },
-  { url: "https://www.benzinga.com/feeds/analyst-ratings/rss",                                           source: "Benzinga" },
   { url: "https://www.eetimes.com/feed/",                                                                 source: "EE Times" },
   { url: "https://www.tomshardware.com/feeds/all",                                                        source: "Tom's Hardware" },
   { url: "https://feeds.feedburner.com/typepad/siliconleverage",                                         source: "Silicon Leverage" },
-  { url: "https://feeds.arstechnica.com/arstechnica/technology",                                         source: "Ars Technica" },
-  { url: "https://www.theregister.com/headlines.atom",                                                   source: "The Register" },
   { url: "https://wccftech.com/feed/",                                                                    source: "WCCFtech" },
   { url: "https://www.digitimes.com/rss/daily.xml",                                                      source: "Digitimes" },
+  { url: "https://www.semianalysis.com/feed",                                                            source: "SemiAnalysis" },
+  { url: "https://www.fabricatedknowledge.com/feed",                                                     source: "Fabricated Knowledge" },
+  { url: "https://thechipletter.substack.com/feed",                                                      source: "The Chip Letter" },
+  { url: "https://digitstodollars.com/feed/",                                                            source: "Digits to Dollars" },
+  { url: "https://siliconangle.com/feed/",                                                               source: "SiliconAngle" },
+  { url: "https://www.semiconductor-digest.com/feed/",                                                   source: "Semiconductor Digest" },
+  { url: "https://spectrum.ieee.org/feeds/topic/semiconductors.rss",                                     source: "IEEE Spectrum" },
+  // Finance / markets
+  { url: "https://www.benzinga.com/feeds/analyst-ratings/rss",                                           source: "Benzinga" },
+  { url: "https://feeds.marketwatch.com/marketwatch/topstories/",                                        source: "MarketWatch" },
+  { url: "https://finance.yahoo.com/news/rssindex",                                                      source: "Yahoo Finance" },
+  { url: "https://feeds.a.dj.com/rss/RSSWSJD.xml",                                                      source: "WSJ" },
+  { url: "https://www.ft.com/technology?format=rss",                                                     source: "Financial Times" },
 ];
 
 // CDN domains that hotlink-protect their images — browsers get 403 when the

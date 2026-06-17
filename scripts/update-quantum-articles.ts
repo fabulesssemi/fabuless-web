@@ -39,6 +39,18 @@ async function imageIsAccessible(url: string): Promise<boolean> {
   } catch { return false; }
 }
 
+// Top story hero images must be substantial — at least 60KB (real editorial photos).
+// Headshots, podcast thumbnails, and tiny icons are typically <40KB and look bad as hero.
+async function imageIsHeroQuality(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, { method: "HEAD", signal: AbortSignal.timeout(4000) });
+    const ct = res.headers.get("content-type") ?? "";
+    if (!res.ok || !ct.startsWith("image/")) return false;
+    const size = parseInt(res.headers.get("content-length") ?? "0", 10);
+    return size === 0 || size >= 60_000; // 0 = server didn't send size, allow through
+  } catch { return false; }
+}
+
 function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
 }
@@ -269,10 +281,15 @@ async function main() {
       : false;
     const forceConsciousness = !consciousnessWasTopRecently;
 
-    // Build candidate pool: today's articles first, then fill from recent store if <3 have images
+    // Build candidate pool: only articles with hero-quality images (≥60KB)
     const cutoff48h = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
-    const recentWithImages = store.filter((a) => a.image && a.publishedAt >= cutoff48h && !newArticles.some((n) => n.id === a.id));
-    const candidatePool = [...newArticles.filter((a) => a.image), ...recentWithImages].slice(0, 20);
+    const heroCheck = async (a: QuantumArticle) => a.image && await imageIsHeroQuality(a.image);
+    const newHeroEligible = (await Promise.all(newArticles.map(async (a) => ({ a, ok: await heroCheck(a) })))).filter(x => x.ok).map(x => x.a);
+    const recentHeroEligible = (await Promise.all(
+      store.filter((a) => a.image && a.publishedAt >= cutoff48h && !newArticles.some((n) => n.id === a.id))
+           .map(async (a) => ({ a, ok: await heroCheck(a) }))
+    )).filter(x => x.ok).map(x => x.a);
+    const candidatePool = [...newHeroEligible, ...recentHeroEligible].slice(0, 20);
     const withImages = candidatePool;
     const topIds = await pickTopStories(withImages, forceConsciousness);
 

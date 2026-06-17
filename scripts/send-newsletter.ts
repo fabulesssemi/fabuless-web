@@ -338,6 +338,21 @@ async function main() {
   const issue = issues[0];
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
+  // Guard: never send more than once per calendar day (ET)
+  if (autoMode) {
+    const todayET = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+    const { data: sentToday } = await supabase
+      .from("newsletter_send_log")
+      .select("id")
+      .eq("newsletter", "semi")
+      .gte("sent_at", `${todayET}T00:00:00-04:00`)
+      .limit(1);
+    if (sentToday && sentToday.length > 0) {
+      console.log(`Already sent semi newsletter today (${todayET}). Skipping.`);
+      process.exit(0);
+    }
+  }
+
   const bar = "─".repeat(56);
   console.log(`\n${bar}`);
   console.log(`Issue   : #${issue.number} · ${issue.date}`);
@@ -391,6 +406,9 @@ async function main() {
     }
   }
 
+  if (sent > 0) {
+    await supabase.from("newsletter_send_log").insert({ newsletter: "semi", sent_at: new Date().toISOString(), recipient_count: sent });
+  }
   console.log(`\nDone. Sent: ${sent}, Failed: ${failed}`);
 }
 

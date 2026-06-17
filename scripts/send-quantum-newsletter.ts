@@ -121,7 +121,7 @@ function articleRow(article: QuantumArticle, featured = false): string {
           <tr>
             <td style="vertical-align:top;">
               <a href="${esc(article.sourceUrl)}" style="font-family:Georgia,'Times New Roman',serif;font-size:${headlineSize};font-weight:${headlineWeight};color:${INDIGO};text-decoration:none;line-height:1.35;display:block;">${esc(article.title)} <span style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:400;color:#9ca3af;">(${esc(article.source)})</span></a>
-              <p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;margin:6px 0 0 0;line-height:1.5;">${esc(article.summary)}</p>
+              ${article.summary ? `<p style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#374151;margin:6px 0 0 0;line-height:1.4;">${esc(article.summary.length > 100 ? article.summary.slice(0, 97) + "…" : article.summary)}</p>` : ""}
             </td>
             ${imgCell}
           </tr>
@@ -275,6 +275,21 @@ async function main() {
     return;
   }
 
+  // Guard: never send more than once per calendar day (ET)
+  if (autoMode) {
+    const todayET = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }); // YYYY-MM-DD
+    const { data: sentToday } = await supabase
+      .from("newsletter_send_log")
+      .select("id")
+      .eq("newsletter", "quantum")
+      .gte("sent_at", `${todayET}T00:00:00-04:00`)
+      .limit(1);
+    if (sentToday && sentToday.length > 0) {
+      console.log(`Already sent quantum newsletter today (${todayET}). Skipping.`);
+      process.exit(0);
+    }
+  }
+
   const bar = "─".repeat(56);
   console.log(`\n${bar}`);
   console.log(`Fabuless Quantum Newsletter — ${dateStr}`);
@@ -308,6 +323,9 @@ async function main() {
     else { console.log(`  ✓ ${email}`); sent++; }
   }
 
+  if (sent > 0) {
+    await supabase.from("newsletter_send_log").insert({ newsletter: "quantum", sent_at: new Date().toISOString(), recipient_count: sent });
+  }
   console.log(`\nDone. Sent: ${sent}, Failed: ${failed}`);
 }
 

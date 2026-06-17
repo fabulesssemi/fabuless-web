@@ -1,5 +1,57 @@
 [
   {
+    "id": "diraq-doubles-palo-alto-team-to-scale-silicon-based-quantum-",
+    "title": "Diraq Doubles Palo Alto Team to Scale Silicon-Based Quantum Computing",
+    "summary": "Silicon quantum startup Diraq is betting big on the most chip-factory-friendly approach to scaling quantum computers.",
+    "source": "Quantum Zeitgeist",
+    "sourceUrl": "https://quantumzeitgeist.com/silicon-based-quantum-computing-diraq-doubles/",
+    "publishedAt": "2026-06-17T21:37:45.000Z",
+    "category": "market",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-17T22:18:55.614Z"
+  },
+  {
+    "id": "psiquantum-sharpens-quality-control-via-griffith-university-",
+    "title": "PsiQuantum Sharpens Quality Control via Griffith University Test &#038; Validation Lab",
+    "summary": "PsiQuantum builds dedicated lab to catch manufacturing flaws before they tank quantum chips.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/psiquantum-sharpens-quality-control-via-griffith-university-test-validation-lab/",
+    "publishedAt": "2026-06-17T19:40:34.000Z",
+    "category": "hardware",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-17T22:18:56.907Z"
+  },
+  {
+    "id": "iqm-highlights-commercial-progress-and-quantum-roadmap-at-in",
+    "title": "IQM Highlights Commercial Progress and Quantum Roadmap at Investor Event",
+    "summary": "European quantum startup IQM is pushing toward real products—a sign the race for commercial quantum computers is heating up.",
+    "source": "The Quantum Daily",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/17/iqm-highlights-commercial-progress-and-quantum-roadmap-at-investor-event/",
+    "publishedAt": "2026-06-17T17:46:43.000Z",
+    "category": "market",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-17T22:18:53.908Z"
+  },
+  {
+    "id": "is-the-mind-quantum",
+    "title": "Is the Mind Quantum?",
+    "summary": "If your brain runs on quantum mechanics, that changes everything about consciousness, free will, and what AI could never replicate.",
+    "source": "Noetic Sciences (IONS)",
+    "sourceUrl": "https://noetic.org/blog/is-the-mind-quantum/",
+    "publishedAt": "2026-06-17T15:44:18.000Z",
+    "category": "consciousness",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-17T22:18:58.352Z"
+  },
+  {
     "id": "the-quantum-kid-podcast-how-do-you-build-a-quantum-startup",
     "title": "The Quantum Kid Podcast: How Do You Build a Quantum Startup?",
     "summary": "A podcast making quantum accessible to everyone might be the best PR move startups have for attracting talent and investors.",
@@ -61,7 +113,7 @@
     "category": "market",
     "companies": [],
     "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-16_20-47.png",
-    "topStory": false,
+    "topStory": true,
     "generatedAt": "2026-06-16T18:01:03.104Z"
   },
   {

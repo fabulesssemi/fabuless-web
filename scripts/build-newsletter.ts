@@ -75,7 +75,7 @@ function formatDate(d = new Date()): string {
 
 // ── Step 1: fetch semi articles from Supabase ─────────────────────────────────
 async function fetchSemiArticles(): Promise<RssRow[]> {
-  const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
   const { data, error } = await supabase
     .from("rss_articles")
     .select("url, title, description, source, pub_date")

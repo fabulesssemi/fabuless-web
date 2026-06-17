@@ -231,16 +231,8 @@ function buildEmailHtml(issue: Issue): string {
         <!-- Stories by category -->
         ${storiesHtml}
 
-        <!-- Podcasts header -->
-        <tr>
-          <td style="padding:22px 32px 6px;">
-            <p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#0E7490;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">From the Pods</p>
-            <hr style="border:none;border-top:1px solid #e5e7eb;margin:0;">
-          </td>
-        </tr>
-
-        <!-- Podcasts -->
-        ${podcastsHtml}
+        <!-- Podcasts (only shown when present) -->
+        ${podcastsHtml ? `<tr><td style="padding:22px 32px 6px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#0E7490;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">From the Pods</p><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr>${podcastsHtml}` : ""}
 
         <!-- X Quotes -->
         ${quotesHtml}

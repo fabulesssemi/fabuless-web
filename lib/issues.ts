@@ -60,6 +60,64 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 7,
+    date: "June 17, 2026",
+    slug: "issue-7",
+    title: "Glass Substrates, Quantum Cloud, Edge AI",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "TSMC Bets on Glass for CoWoS as Silicon-Mimicking Thermals Beat Organic Substrates, Yet Mass Production Stays Distant",
+            url: "https://wccftech.com/tsmc-bets-on-glass-for-cowos-as-silicon-mimicking-thermals-beat-organic-substrates-yet-mass-production-stays-distant/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "TSMC's glass substrate push signals advanced packaging supply chain is reshaping — watch substrate vendors.",
+          },
+          {
+            headline: "QuEra's Libra Fault-Tolerant Quantum System Heading To AWS Braket Service",
+            url: "https://www.nextplatform.com/compute/2026/06/16/queras-libra-fault-tolerant-quantum-system-heading-to-aws-braket-service/5256477",
+            source: "NextPlatform",
+            image: null,
+            oneliner: "First fault-tolerant quantum system on a major cloud marks a commercialization inflection point.",
+          },
+          {
+            headline: "SiMa Launches Agentic Development Environment for Physical AI",
+            url: "https://www.eetimes.com/sima-launches-agentic-development-environment-for-physical-ai/",
+            source: "EE Times",
+            image: null,
+            oneliner: "SiMa slashes edge AI deployment friction, strengthening its competitive moat against Hailo and Qualcomm.",
+          },
+          {
+            headline: "GPU-native mask rule checking eliminates the curvilinear mask rule check bottleneck",
+            url: "https://semiwiki.com/eda/siemens-eda/370278-gpu-native-mask-rule-checking-eliminates-the-curvilinear-mask-rule-check-bottleneck/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "GPU-accelerated EDA for curvilinear masks cuts advanced-node OPC bottlenecks, benefiting Siemens EDA.",
+          },
+          {
+            headline: "Snap unveils $2,195 AR glasses as CEO Evan Spiegel bets on post-smartphone future",
+            url: "https://www.cnbc.com/2026/06/16/snap-unveils-2195-specs-ar-glasses-spiegel-bets-on-post-smartphone.html",
+            source: "CNBC",
+            image: null,
+            oneliner: "Snap's mass-market AR push will drive demand for low-power display and edge-AI silicon.",
+          },
+          {
+            headline: "Apple's First 1.4nm Chipset, The A22 Pro, Could Be Powering iPhones In Just A Couple Of Years",
+            url: "https://wccftech.com/apple-a22-pro-first-1-4nm-chipset-arriving-in-a-couple-of-years/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Apple's 1.4nm roadmap locks in TSMC's N14 node lead and cements long-term foundry revenue visibility.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 6,
     date: "June 16, 2026",
     slug: "issue-6",

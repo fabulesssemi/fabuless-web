@@ -269,7 +269,11 @@ async function main() {
       : false;
     const forceConsciousness = !consciousnessWasTopRecently;
 
-    const withImages = newArticles.filter((a) => a.image);
+    // Build candidate pool: today's articles first, then fill from recent store if <3 have images
+    const cutoff48h = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+    const recentWithImages = store.filter((a) => a.image && a.publishedAt >= cutoff48h && !newArticles.some((n) => n.id === a.id));
+    const candidatePool = [...newArticles.filter((a) => a.image), ...recentWithImages].slice(0, 20);
+    const withImages = candidatePool;
     const topIds = await pickTopStories(withImages, forceConsciousness);
 
     // If forcing consciousness but Claude didn't pick one, manually slot the best one in
@@ -285,14 +289,15 @@ async function main() {
       }
     }
 
-    for (const a of newArticles) {
+    // Clear all existing top story flags first
+    for (const a of store) a.topStory = false;
+    // Apply top story flag to both new and store articles
+    for (const a of [...newArticles, ...store]) {
       if (topIds.has(a.id)) {
         a.topStory = true;
         console.log(`  ⭐ [${a.category}] ${a.title.slice(0, 55)}`);
       }
     }
-    // Clear topStory on previous run so only today's top 4 are marked
-    for (const a of store) a.topStory = false;
   }
 
   // Merge new articles into store (dedupe by id/url)

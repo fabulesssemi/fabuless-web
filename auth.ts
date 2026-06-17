@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -9,17 +8,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  adapter: SupabaseAdapter({
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    secret: process.env.SUPABASE_SERVICE_KEY!,
-  }),
+  session: { strategy: "jwt" },
   callbacks: {
-    session({ session, user }) {
-      session.user.id = user.id;
+    jwt({ token, user }) {
+      if (user) token.id = user.id;
+      return token;
+    },
+    session({ session, token }) {
+      if (token.sub) session.user.id = token.sub;
       return session;
     },
     async signIn({ user }) {
-      // Auto-subscribe to newsletter on first sign-in
       if (user.email) {
         try {
           const { createClient } = await import("@supabase/supabase-js");
@@ -35,7 +34,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return true;
     },
   },
-  pages: {
-    signIn: "/signin",
-  },
+  pages: { signIn: "/signin" },
 });

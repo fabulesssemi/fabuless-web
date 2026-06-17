@@ -136,8 +136,12 @@ export async function getHomepageArticles(): Promise<{
 
     for (const story of allCandidates) {
       const src = story.source.toLowerCase().trim().replace(/\s+/g, " ");
+      const isDigitimes = src === "digitimes";
+      const cap = isDigitimes ? 1 : 2;
       const count = finalCounts.get(src) ?? 0;
-      if (count >= 2) continue;
+      if (count >= cap) continue;
+      // Digitimes can never be a top story
+      if (isDigitimes && topUrlSet.has(story.url)) continue;
       finalCounts.set(src, count + 1);
       if (topUrlSet.has(story.url) && cappedTop.length < 4) {
         cappedTop.push(story);

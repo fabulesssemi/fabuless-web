@@ -92,17 +92,22 @@ async function curateWithClaude(articles: RssRow[]): Promise<ClaudeResponse> {
     `[${i + 1}] SOURCE: ${a.source}\nHEADLINE: ${a.title}\nSUMMARY: ${a.description.slice(0, 300)}\nURL: ${a.url}`
   ).join("\n\n");
 
-  const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors.
+  const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors. This is SEMI only — chips, foundry, memory, packaging, EDA, capital equipment, supply chain, and chip-driven policy/capital flows.
 
-From the articles below, select the best stories — no more than 12. Skip duplicates, thin earnings recaps, retail/consumer fluff, and analyst price calls with no underlying news.
+HARD RULES — violating any of these is a failure:
+1. Select EXACTLY 10–12 stories. Never fewer than 10.
+2. Spread across AT LEAST 3 different categories. Do not put everything in Compute.
+3. EXCLUDE quantum computing platform stories (QuEra, IonQ, IBM quantum systems, AWS Braket quantum — those go in the quantum newsletter, not here).
+4. EXCLUDE pure consumer product launches with no direct silicon supply chain angle (e.g. Snap glasses announcement alone is not enough — only include if it meaningfully drives chip demand).
+5. EXCLUDE analyst price target updates with no underlying news event.
+6. At most 2 articles from any single source.
+7. If two articles cover the same event, pick only the better one.
 
-SOURCE DIVERSITY RULE: Select at most 2 articles from any single source. Prioritize breadth — spread picks across as many different sources as possible. If two articles cover the same event from different angles, pick only the better one.
+For each story, write:
+- A punchy one-liner (max 15 words) — the single most investment-relevant implication. Be specific: name companies, name the supply chain consequence.
+- The correct category: Compute | Memory & Networking | Capital Flows | Geopolitics & Policy | Other
 
-For each selected story, write:
-- A short punchy one-liner (max 15 words) stating the single most investment-relevant implication
-- The correct category from: Compute | Memory & Networking | Capital Flows | Geopolitics & Policy | Other
-
-Also write a short, punchy issue title — max 6 words, no fluff. Think newspaper front page: name the biggest story or theme. Examples: "TSMC Holds. NVIDIA Wins. AMD Waits." or "Memory Glut Ends, AI Capex Soars".
+Also write a punchy issue title — max 6 words, newspaper front page style. Name the biggest story. Examples: "TSMC Holds. NVIDIA Wins. AMD Waits." or "Memory Glut Ends, AI Capex Soars".
 
 Return ONLY valid JSON with this exact shape:
 {

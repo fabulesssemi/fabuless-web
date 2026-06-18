@@ -95,7 +95,7 @@ async function curateWithClaude(articles: RssRow[]): Promise<ClaudeResponse> {
   const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors. This is SEMI only — chips, foundry, memory, packaging, EDA, capital equipment, supply chain, and chip-driven policy/capital flows.
 
 HARD RULES — violating any of these is a failure:
-1. Select EXACTLY 10–12 stories. Never fewer than 10.
+1. Select EXACTLY 13–16 stories. Never fewer than 13.
 2. Spread across AT LEAST 3 different categories. Do not put everything in Compute.
 3. EXCLUDE quantum computing platform stories (QuEra, IonQ, IBM quantum systems, AWS Braket quantum — those go in the quantum newsletter, not here).
 4. EXCLUDE pure consumer product launches with no direct silicon supply chain angle (e.g. Snap glasses announcement alone is not enough — only include if it meaningfully drives chip demand).

@@ -131,7 +131,7 @@ ${articleList}`;
     try {
       msg = await ai.messages.create({
         model: "claude-sonnet-4-6",
-        max_tokens: 3000,
+        max_tokens: 6000,
         messages: [{ role: "user", content: prompt }],
       });
       break;
@@ -147,7 +147,17 @@ ${articleList}`;
   const text = msg!.content[0].type === "text" ? msg!.content[0].text : "";
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("Claude returned no JSON");
-  return JSON.parse(jsonMatch[0]) as ClaudeResponse;
+  const raw = jsonMatch[0];
+  try {
+    return JSON.parse(raw) as ClaudeResponse;
+  } catch {
+    // Truncated JSON — strip trailing incomplete entry and close the structure
+    const repaired = raw
+      .replace(/,\s*\{[^{}]*$/, "")   // remove last incomplete object
+      .replace(/,\s*$/, "")            // remove trailing comma
+      + "]}]}";                         // close stories array + root object
+    return JSON.parse(repaired) as ClaudeResponse;
+  }
 }
 
 // ── Step 3: build the Issue TS string ────────────────────────────────────────

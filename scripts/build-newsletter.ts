@@ -95,13 +95,12 @@ async function curateWithClaude(articles: RssRow[]): Promise<ClaudeResponse> {
   const prompt = `You are the editor of Fabuless Semi, a daily semiconductor industry briefing for serious investors. This is SEMI only — chips, foundry, memory, packaging, EDA, capital equipment, supply chain, and chip-driven policy/capital flows.
 
 HARD RULES — violating any of these is a failure:
-1. Select EXACTLY 13–16 stories. Never fewer than 13.
+1. Select the best 25–30 relevant stories. Do NOT self-filter by source — pick as many good stories as exist, even if many come from the same source.
 2. Spread across AT LEAST 3 different categories. Do not put everything in Compute.
 3. EXCLUDE quantum computing platform stories (QuEra, IonQ, IBM quantum systems, AWS Braket quantum — those go in the quantum newsletter, not here).
-4. EXCLUDE pure consumer product launches with no direct silicon supply chain angle (e.g. Snap glasses announcement alone is not enough — only include if it meaningfully drives chip demand).
+4. EXCLUDE pure consumer product launches with no direct silicon supply chain angle.
 5. EXCLUDE analyst price target updates with no underlying news event.
-6. At most 2 articles from any single source — EXCEPT Digitimes: maximum 1 Digitimes article total. Digitimes is heavily paywalled; do not lead with it.
-7. If two articles cover the same event, pick only the better one.
+6. If two articles cover the same event, pick only the better one.
 
 For each story, write:
 - A punchy one-liner (max 15 words) — the single most investment-relevant implication. Be specific: name companies, name the supply chain consequence.
@@ -262,18 +261,20 @@ async function main() {
   console.log("\n[2/4] Curating with Claude...");
   const curated = await curateWithClaude(articles);
 
-  // Hard cap: max 1 Digitimes article, max 2 from any other source
+  // Hard cap: max 1 Digitimes, max 2 from any other source, then slice to 13-16
   const sourceCounts = new Map<string, number>();
-  curated.stories = curated.stories.filter((s) => {
-    const src = s.source.toLowerCase().trim();
-    const cap = src === "digitimes" ? 1 : 2;
-    const count = sourceCounts.get(src) ?? 0;
-    if (count >= cap) return false;
-    sourceCounts.set(src, count + 1);
-    return true;
-  });
+  curated.stories = curated.stories
+    .filter((s) => {
+      const src = s.source.toLowerCase().trim();
+      const cap = src === "digitimes" ? 1 : 2;
+      const count = sourceCounts.get(src) ?? 0;
+      if (count >= cap) return false;
+      sourceCounts.set(src, count + 1);
+      return true;
+    })
+    .slice(0, 16);
 
-  console.log(`  → ${curated.stories.length} stories selected`);
+  console.log(`  → ${curated.stories.length} stories after source caps (target 13–16)`);
   console.log(`  → Title: "${curated.title}"`);
   curated.stories.forEach((s) => console.log(`     · [${s.category}] ${s.headline.slice(0, 60)}`));
 

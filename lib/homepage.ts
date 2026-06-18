@@ -118,8 +118,8 @@ export async function getHomepageArticles(): Promise<{
 
     // List: fill to guarantee minimums — 8 today, 4 yesterday, 4 day-before
     const todayRemainder = today.filter((r) => !topUrls.has(r.url as string));
-    const todayList    = todayRemainder.slice(0, Math.max(8 - topStories.length, 4));
-    const usedUrls     = new Set([...topUrls, ...todayList.map((r) => r.url as string)]);
+    const todayList     = todayRemainder.slice(0, 8);
+    const usedUrls      = new Set([...topUrls, ...todayList.map((r) => r.url as string)]);
     const yesterdayList = yesterday.filter((r) => !usedUrls.has(r.url as string)).slice(0, 4);
     yesterdayList.forEach((r) => usedUrls.add(r.url as string));
     const dayBeforeList = dayBefore.filter((r) => !usedUrls.has(r.url as string)).slice(0, 4);

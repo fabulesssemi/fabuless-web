@@ -1,8 +1,6 @@
 name: Daily Newsletter
 
 on:
-  schedule:
-    - cron: "0 8 * * 1-5"   # targets ~11am ET (GitHub runs ~7h late on low-traffic repos)
   workflow_dispatch: {}
 
 jobs:

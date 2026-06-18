@@ -1,12 +1,6 @@
 name: Update Earnings Summaries
 
 on:
-  schedule:
-    # Every Monday at 7am ET — catches weekend earnings + pre-market updates
-    - cron: "0 12 * * 1"
-    # Also run Wed (mid-week earnings season) and Fri
-    - cron: "0 12 * * 3"
-    - cron: "0 12 * * 5"
   workflow_dispatch:
     inputs:
       ticker:

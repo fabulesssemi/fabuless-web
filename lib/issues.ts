@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 8,
+    date: "June 18, 2026",
+    slug: "issue-8",
+    title: "Intel–Apple Deal Powers Foundry. Memory Crunch Hits Margins.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel surges 9% after Trump says company will partner with Apple on U.S. chip design",
+            url: "https://www.cnbc.com/2026/06/18/trump-intel-apple-chip-design-deal.html",
+            source: "CNBC",
+            image: null,
+            oneliner: "Trump confirms Intel–Apple foundry partnership; reshapes US onshore chip supply chain geopolitics.",
+          },
+          {
+            headline: "Elon Musk aims for record maximum usable compute per wafer for AI6 chip",
+            url: "https://www.digitimes.com/news/a20260618PD212/wafer-elon-musk-2026-design-tesla.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Tesla AI6 targets record compute density per wafer; signals aggressive yield-aware scaling post-AI5 tape-out.",
+          },
+          {
+            headline: "SpaceX acquires Cursor to bolster xAI and court AI developers",
+            url: "https://www.digitimes.com/news/a20260618PD207/spacex-xai-data-competition-software.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "SpaceX $60B Cursor acquisition fuels xAI developer ecosystem; extends Musk competition into AI toolchain layer.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Tim Cook says Apple price hikes are unavoidable as AI squeezes memory supply",
+            url: "https://www.digitimes.com/news/a20260618VL203/apple-dram-nand-price-tim-cook.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Apple forced to raise prices as AI data center demand crushes DRAM/NAND supply; margin squeeze spreads.",
+          },
+          {
+            headline: "AI data center boom drives Taiwan passive component makers to record sales",
+            url: "https://www.digitimes.com/news/a20260618PD231/yageo-walsin-passive-components-data-center-revenue-taiwan.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Yageo, Walsin hit record sales; book-to-bill >1.3 as AI data center power demand strains passive supply.",
+          },
+          {
+            headline: "Exclusive: Winbond NOR flash reportedly enters Nvidia supply chain",
+            url: "https://www.digitimes.com/news/a20260618PD216/flash-winbond-nvidia-supply-chain-demand.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Winbond NOR flash enters Nvidia Vera Rubin supply chain; memory diversification tightens ahead of H2 ramp.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "AI chip boom strains probe card supply, Taiwan test interface maker weighs prepayment deals",
+            url: "https://www.digitimes.com/news/a20260618PD208/mpi-ai-chip-probe-card-test-interface-demand.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "MPI probe card capacity maxed; pursues prepayment lock-in as AI wafer test demand strains supply visibility.",
+          },
+          {
+            headline: "Nearly 80% of data center capacity is at elevated risk to climate hazards like flooding and fire, study says",
+            url: "https://www.cnbc.com/2026/06/18/data-center-climate-change-study.html",
+            source: "CNBC",
+            image: null,
+            oneliner: "80% of data centers face climate risk; forces geographic dispersion, reshapes capex and supply chain resilience.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Chinese makers of DRAM modules, SSDs have a serious advantage over American and Taiwanese suppliers, says SMI SVP",
+            url: "https://www.tomshardware.com/pc-components/ssds/chinese-makers-of-dram-modules-ssds-have-a-serious-advantage-over-american-and-taiwanese-suppliers-says-smi-svp-state-guidance-secures-local-dram-and-ssd-supply-while-the-big-three-chase-ai-margins",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "State guidance locks Chinese DRAM/SSD makers into domestic supply; SKM, Samsung, Micron cede non-AI margin pools.",
+          },
+          {
+            headline: "Foxconn chairman maps out Taiwan's global AI and manufacturing expansion strategy",
+            url: "https://www.digitimes.com/news/a20260618PD230/taiwan-manufacturing-foxconn-chairman-expansion.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Foxconn pivots to AI/data center substrate role; signals Taiwan supply chain shift from consumer to enterprise.",
+          },
+          {
+            headline: "Japan lasers in on India's Assam state for chip and infrastructure corridor",
+            url: "https://www.digitimes.com/news/a20260618PD224/infrastructure-investment-market-business-region.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Japan PM Takaichi leads 50+ companies into Assam chip corridor; counters China influence in South Asia supply chain.",
+          },
+          {
+            headline: "G7 AI talks reveal trust gap behind US model power",
+            url: "https://www.digitimes.com/news/a20260618VL204/anthropic-openai-policy-technology-europe.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "G7 summit exposes US dominance in frontier AI rules-setting; European, allied chip fabs face regulatory headwinds.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "SiC cuts AI data center costs; 5% efficiency gain saves US$5 billion",
+            url: "https://www.digitimes.com/news/a20260618PD225/renesas-sic-data-center-efficiency-electricity.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Renesas SiC power conversion cuts data center electricity waste $5B annually; reshapes power chip economics.",
+          },
+          {
+            headline: "BoolSi raises $6M to compile ordinary code into custom chips",
+            url: "https://siliconangle.com/2026/06/18/boolsi-raises-6m-compile-ordinary-code-custom-chips/",
+            source: "SiliconAngle",
+            image: null,
+            oneliner: "BoolSi $6M seed funds software-to-hardware compiler; disintermediates traditional chip design talent bottleneck.",
+          },
+          {
+            headline: "Imec, Sony unveil backside interconnect method for 3D chip stacking",
+            url: "https://www.digitimes.com/news/a20260618VL207/imec-sony-3d-silicon-tsv-wafer.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Imec–Sony backside interconnect enables 3D stacking without via-in-pad; unlocks chiplet density gains for foundries.",
+          },
+          {
+            headline: "Smart glasses race pulls Taiwan and China optical suppliers into waveguide battle",
+            url: "https://www.digitimes.com/news/a20260618PD211/shipments-taiwan-smart-glasses-growth-gseo.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "Taiwan optical suppliers race China competitors for smart glass waveguide share; supply chain bifurcates by region.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 7,
     date: "June 17, 2026",
     slug: "issue-7",

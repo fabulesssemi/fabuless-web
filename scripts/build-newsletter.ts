@@ -100,7 +100,7 @@ HARD RULES — violating any of these is a failure:
 3. EXCLUDE quantum computing platform stories (QuEra, IonQ, IBM quantum systems, AWS Braket quantum — those go in the quantum newsletter, not here).
 4. EXCLUDE pure consumer product launches with no direct silicon supply chain angle (e.g. Snap glasses announcement alone is not enough — only include if it meaningfully drives chip demand).
 5. EXCLUDE analyst price target updates with no underlying news event.
-6. At most 2 articles from any single source.
+6. At most 2 articles from any single source — EXCEPT Digitimes: maximum 1 Digitimes article total. Digitimes is heavily paywalled; do not lead with it.
 7. If two articles cover the same event, pick only the better one.
 
 For each story, write:
@@ -261,6 +261,18 @@ async function main() {
 
   console.log("\n[2/4] Curating with Claude...");
   const curated = await curateWithClaude(articles);
+
+  // Hard cap: max 1 Digitimes article, max 2 from any other source
+  const sourceCounts = new Map<string, number>();
+  curated.stories = curated.stories.filter((s) => {
+    const src = s.source.toLowerCase().trim();
+    const cap = src === "digitimes" ? 1 : 2;
+    const count = sourceCounts.get(src) ?? 0;
+    if (count >= cap) return false;
+    sourceCounts.set(src, count + 1);
+    return true;
+  });
+
   console.log(`  → ${curated.stories.length} stories selected`);
   console.log(`  → Title: "${curated.title}"`);
   curated.stories.forEach((s) => console.log(`     · [${s.category}] ${s.headline.slice(0, 60)}`));

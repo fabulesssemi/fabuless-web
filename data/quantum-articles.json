@@ -1,5 +1,57 @@
 [
   {
+    "id": "complex-equations-lack-simple-solutions-physicists-now-confi",
+    "title": "Complex Equations Lack Simple Solutions, Physicists Now Confirm",
+    "summary": "Quantum computers will need smarter problem-solving shortcuts—old math tricks just won't cut it.",
+    "source": "Quantum Zeitgeist",
+    "sourceUrl": "https://quantumzeitgeist.com/klein-gordon-equation-alpha-attractors/",
+    "publishedAt": "2026-06-18T16:14:00.000Z",
+    "category": "research",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-18T16:46:50.019Z"
+  },
+  {
+    "id": "new-industry-study-finds-quantum-computing-has-entered-a-cap",
+    "title": "New Industry Study Finds Quantum Computing Has Entered a Capability Era, With Early Movers Building an Advantage Later Entrants Will Struggle to Close",
+    "summary": "Companies that master quantum computing now will lock in advantages competitors may never overcome.",
+    "source": "The Quantum Daily",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/18/new-industry-study-finds-quantum-computing-has-entered-a-capability-era-with-early-movers-building-an-advantage-later-entrants-will-struggle-to-close/",
+    "publishedAt": "2026-06-18T13:07:36.000Z",
+    "category": "market",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/IQM-SoQ-PR.jpg",
+    "topStory": true,
+    "generatedAt": "2026-06-18T16:46:48.568Z"
+  },
+  {
+    "id": "how-a-single-atom-contains-the-entire-quantum-universe",
+    "title": "How a single atom contains the entire quantum Universe",
+    "summary": "Understanding how quantum particles encode universal information could unlock entirely new computing architectures.",
+    "source": "Big Think",
+    "sourceUrl": "https://bigthink.com/starts-with-a-bang/entire-quantum-universe-inside-single-atom/",
+    "publishedAt": "2026-06-18T06:00:00.000Z",
+    "category": "research",
+    "companies": [],
+    "image": "https://bigthink.com/wp-content/uploads/2023/01/atoms-1.jpg?quality=85&#038;w=640",
+    "topStory": true,
+    "generatedAt": "2026-06-18T16:46:52.966Z"
+  },
+  {
+    "id": "china-s-superconducting-quantum-computer-integrates-post-qua",
+    "title": "China’s Superconducting Quantum Computer Integrates Post-Quantum Cryptography Architecture",
+    "summary": "China's quantum computer just proved it can handle a million real tasks securely—a major geopolitical move in the quantum race.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/chinas-superconducting-quantum-computer-integrates-post-quantum-cryptography-architecture/",
+    "publishedAt": "2026-06-18T01:07:21.000Z",
+    "category": "policy",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-18T16:46:51.522Z"
+  },
+  {
     "id": "diraq-doubles-palo-alto-team-to-scale-silicon-based-quantum-",
     "title": "Diraq Doubles Palo Alto Team to Scale Silicon-Based Quantum Computing",
     "summary": "Silicon quantum startup Diraq is betting big on the most chip-factory-friendly approach to scaling quantum computers.",
@@ -113,7 +165,7 @@
     "category": "market",
     "companies": [],
     "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-16_20-47.png",
-    "topStory": true,
+    "topStory": false,
     "generatedAt": "2026-06-16T18:01:03.104Z"
   },
   {
@@ -139,7 +191,7 @@
     "category": "research",
     "companies": [],
     "image": "https://images.newscientist.com/wp-content/uploads/2026/06/16102025/SEI_301079228.jpg",
-    "topStory": true,
+    "topStory": false,
     "generatedAt": "2026-06-16T22:02:49.730Z"
   },
   {

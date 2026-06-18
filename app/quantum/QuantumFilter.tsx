@@ -25,11 +25,12 @@ function CategoryLabel({ category }: { category: string }) {
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
   const topStories = articles.filter((a) => a.topStory && a.image).slice(0, 3);
   const topIds = new Set(topStories.map((a) => a.id));
-  const rest = articles.filter((a) => !topIds.has(a.id)).slice(0, 12);
+  const rest = articles.filter((a) => !topIds.has(a.id));
 
   const hero = topStories[0] ?? null;
   const mid = topStories.slice(1, 3);
-  const rail = topStories.slice(3, 4).concat(rest.slice(0, 4));
+  const rail = rest.slice(0, 6);
+  const below = rest.slice(6, 12);
 
   if (articles.length === 0) {
     return (
@@ -139,10 +140,10 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
       </section>
 
       {/* ── Story feed below ── */}
-      {rest.length > 0 && (
+      {below.length > 0 && (
         <section className="pt-6 pb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-            {rest.map((article) => (
+            {below.map((article) => (
               <div key={article.id} className="py-5 first:pt-0 sm:first:pt-5 odd:sm:pr-8 even:sm:pl-8 border-b border-gray-100 last:border-b-0">
                 <a
                   href={article.sourceUrl}

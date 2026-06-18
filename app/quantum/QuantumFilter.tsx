@@ -23,7 +23,12 @@ function CategoryLabel({ category }: { category: string }) {
 }
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
-  const topStories = articles.filter((a) => a.topStory && a.image).slice(0, 3);
+  const DAY_MS = 24 * 60 * 60 * 1000;
+  const now = Date.now();
+  // Top stories must be from today AND have an image
+  const topStories = articles
+    .filter((a) => a.topStory && a.image && now - new Date(a.publishedAt).getTime() < DAY_MS)
+    .slice(0, 3);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id));
 
@@ -65,7 +70,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 href={hero.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block mt-2 font-serif text-[2.1rem] font-normal text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
+                className="block mt-2 font-serif text-[1.55rem] font-normal text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
               >
                 {hero.title}
               </a>

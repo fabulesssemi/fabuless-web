@@ -41,6 +41,16 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );
 
+async function generateLede(articles: QuantumArticle[]): Promise<string> {
+  const titles = articles.slice(0, 10).map((a) => `[${a.category}] ${a.title}`).join("\n");
+  const msg = await anthropic.messages.create({
+    model: "claude-haiku-4-5-20251001",
+    max_tokens: 150,
+    messages: [{ role: "user", content: `You are the editor of Fabuless Quantum, a newsletter covering quantum computing, markets, and quantum consciousness for curious non-experts.\n\nToday's stories:\n${titles}\n\nWrite a 2-3 sentence editor's lede — what's actually happening in quantum today. Accessible and intriguing: one big theme tying the stories together. Specific company names or research findings if relevant. No "today we cover" or "in this issue".\n\nRespond with ONLY the lede, nothing else.` }],
+  });
+  return msg.content[0].type === "text" ? msg.content[0].text.trim() : "";
+}
+
 async function generateTitle(articles: QuantumArticle[]): Promise<string> {
   const top = articles.slice(0, 5).map((a) => a.title).join("\n");
   const msg = await anthropic.messages.create({
@@ -130,7 +140,7 @@ function articleRow(article: QuantumArticle, featured = false): string {
     <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #f0f0f0;margin:0;"></td></tr>`;
 }
 
-function buildEmailHtml(articles: QuantumArticle[], dateStr: string): string {
+function buildEmailHtml(articles: QuantumArticle[], dateStr: string, lede = ""): string {
   const topStories = articles.filter((a) => a.topStory).slice(0, 3);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id));
@@ -196,6 +206,9 @@ function buildEmailHtml(articles: QuantumArticle[], dateStr: string): string {
           </td>
         </tr>
 
+        <!-- Editor's lede -->
+        ${lede ? `<tr><td style="padding:14px 32px 4px;"><p style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:#374151;line-height:1.75;margin:0;border-left:3px solid ${INDIGO};padding-left:14px;">${esc(lede)}</p></td></tr>` : ""}
+
         <!-- Top Stories header -->
         ${topStories.length ? categoryHeader("Top Stories") : ""}
 
@@ -252,7 +265,11 @@ async function main() {
   const articles = loadQuantumArticles();
   if (!articles.length) { console.error("No quantum articles found. Run update-quantum-articles.ts first."); process.exit(1); }
 
-  const html = buildEmailHtml(articles, dateStr);
+  console.log("Generating lede...");
+  const lede = await generateLede(articles);
+  console.log(`  Lede: ${lede.slice(0, 80)}...`);
+
+  const html = buildEmailHtml(articles, dateStr, lede);
 
   if (previewMode) {
     const outPath = resolve(process.cwd(), "quantum-newsletter-preview.html");

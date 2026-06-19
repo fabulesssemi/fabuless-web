@@ -10,10 +10,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 6.3,
-      "summary": "NVIDIA reported Q2 2026 earnings with an EPS of $1.87, beating the estimated $1.77, driven by strong performance across its segments, although the text does not provide specific details on the drivers of the results. The main narrative emphasized by management is not explicitly stated in the provided text, which focuses on the appointment of a new board member and related compensatory arrangements. The stock moved 6.3% on the earnings day, likely due to the positive earnings surprise, although the text does not provide explicit guidance or outlook for future periods.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000028/nvda-20260507.htm",
-      "generatedAt": "2026-06-15T07:01:20.589Z"
+      "summary": "NVIDIA reported Q2 2026 EPS of $1.87, beating estimates by 5.5%, driven by record Data Center revenue of $75.2 billion, up 92% year-over-year, and strong growth in Edge Computing. The company's performance was driven by the buildout of AI factories, with management citing the adoption of agentic AI and the company's position at the center of this transformation. The stock reacted positively, moving up 6.3% on earnings day, driven by the strong headline beat and record revenue, as well as the company's increased quarterly cash dividend and additional $80 billion share repurchase authorization.",
+      "keyQuote": "The buildout of AI factories — the largest infrastructure expansion in human history — is accelerating at extraordinary speed.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000051/q1fy27pr.htm",
+      "generatedAt": "2026-06-19T17:20:02.469Z"
     },
     {
       "ticker": "NVDA",
@@ -25,10 +25,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 7.9,
-      "summary": "NVIDIA reported Q1 2026 earnings with an EPS of $1.62, beating the estimated $1.54, driven by strong corporate performance, although the specific drivers of the results are not detailed in the provided text. The company's adoption of the Variable Compensation Plan for Fiscal Year 2027 highlights its focus on achieving specified revenue goals and corporate performance. The stock moved 7.9% on earnings day, likely due to the positive earnings surprise, but the text does not provide explicit guidance or outlook from management.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000024/nvda-20260302.htm",
-      "generatedAt": "2026-06-15T07:01:22.416Z"
+      "summary": "NVIDIA reported Q1 2026 EPS of $1.62, beating estimates by 5.3%, driven by record quarterly Data Center revenue of $62.3 billion, up 22% from Q3 and 75% from a year ago. The strong performance was driven by the major platform shifts in accelerated computing and AI, with management citing the success of the NVIDIA Blackwell and Rubin platforms, as well as partnerships with major cloud providers. The stock reacted positively, moving up 7.9% on earnings day, driven by the headline beat and strong forward guidance, including revenue expectations of $78.0 billion for Q1 2027.",
+      "keyQuote": "Computing demand is growing exponentially — the agentic AI inflection point has arrived. Grace Blackwell with NVLink is the king of inference today — delivering an order-of-magnitude lower cost per token — and Vera Rubin will extend that leadership even further.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000019/q4fy26pr.htm",
+      "generatedAt": "2026-06-19T17:20:04.819Z"
     },
     {
       "ticker": "NVDA",
@@ -57,10 +57,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 18.6,
-      "summary": "AMD reported Q1 2026 earnings with an EPS of $1.37, beating the estimated $1.29, driven by strong performance in its key segments, although the specific drivers of the results are not detailed in the provided text. The main narrative or theme management emphasized is not explicitly stated in the text, but the company's financial results presentation is attached as Exhibit 99.2, which may provide further insight. The stock moved 18.6% on earnings day, likely due to the positive earnings surprise and potentially upbeat guidance, although the text does not provide explicit guidance or outlook.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/amd-20260505.htm",
-      "generatedAt": "2026-06-15T07:14:10.223Z"
+      "summary": "AMD reported Q1 2026 EPS of $1.37, beating estimates by 5.8%, driven by strong performance in the data center segment. The company's data center AI accelerator opportunity and strategic partnerships, such as the one with Meta, were key drivers of the beat. The stock reacted positively, moving up 18.6% on earnings day, driven by the headline beat and the company's strong financial foundation.",
+      "keyQuote": "AMD's large growth opportunities across diverse set of markets; AMD's data center AI accelerator opportunity; the expected plans, benefits and timing of AMD's strategic collaborations; the strategic partnership with Meta and the deployment of up to six gigawatts of AMD Instinct GPUs",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/amdq126earningsslidesfin.htm",
+      "generatedAt": "2026-06-19T17:20:08.505Z"
     },
     {
       "ticker": "AMD",
@@ -72,10 +72,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -17.3,
-      "summary": "AMD reported Q4 2025 earnings with an EPS of $1.53, beating the estimated $1.32, however the stock moved -17.3% on earnings day, the main narrative or theme management emphasized is not explicitly stated in the text but the results are presented in the attached Exhibits 99.1 and 99.2, the guidance or outlook is also not explicitly stated but the non-GAAP financial measures are provided in the data tables at the end of the attached Exhibits 99.1 and 99.2, the stock movement could be due to various factors not mentioned in the text",
+      "summary": "AMD reported Q4 2025 EPS of $1.53, beating estimates by 16.0%, driven by strong performance in the data center segment, although specific numbers are not provided in the given text. The company's ability to expand its data center and AI leadership, as well as its large growth opportunities across diverse markets, were key areas of focus for investors. The stock moved -17.3% on earnings day, suggesting that despite the EPS beat, forward guidance or segment performance may not have met investor expectations.",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/amd-20260203.htm",
-      "generatedAt": "2026-06-15T07:14:12.569Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/amdq425earningsslidesfin.htm",
+      "generatedAt": "2026-06-19T17:20:11.168Z"
     }
   ],
   "AVGO": [
@@ -84,15 +84,15 @@
       "quarter": "Q2 2026",
       "date": "2026-04-30",
       "epsActual": 2.44,
-      "epsEstimate": 2.39724,
-      "surprisePct": 1.8,
+      "epsEstimate": 2.39835,
+      "surprisePct": 1.7,
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -12.6,
-      "summary": "Broadcom reported Q2 2026 earnings with an EPS of $2.44, beating estimates of $2.40, however the stock moved -12.6% on earnings day. The main narrative of the earnings release was not explicitly stated in the provided text, but it appears to focus on the company's debt management strategy, including the commencement of cash tender offers to purchase certain outstanding debt securities. The company's outlook and guidance were not explicitly stated in the provided text, but the stock's movement may be attributed to the company's decision to repurchase debt, which could be perceived as a strategic move to optimize its capital structure, although the exact reasoning behind the stock's movement is not clear from the text.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000119312526266777/d152717dex991.htm",
-      "generatedAt": "2026-06-15T07:14:14.926Z"
+      "summary": "Broadcom reported Q2 EPS of $2.44, beating estimates by 1.7%, driven by a 143% year-over-year growth in AI semiconductor revenue to $10.8 billion, which exceeded forecasts. The strong performance was attributed to increasing demand for custom AI accelerators and AI networking, with management citing accelerating growth in AI semiconductor revenue. The stock fell 12.6% despite the beat, likely due to the forward guidance, which although robust, may not have met elevated investor expectations, particularly the third quarter revenue guidance of $29.4 billion, an 84% year-over-year increase.",
+      "keyQuote": "Q2 semiconductor revenue from AI of $10.8 billion grew 143% year-over-year, above our forecast, driven by increasing demand for custom AI accelerators and AI networking,",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000051/avgo-05032026x8kxex99.htm",
+      "generatedAt": "2026-06-19T17:20:21.793Z"
     },
     {
       "ticker": "AVGO",
@@ -104,10 +104,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 7.2,
-      "summary": "Broadcom reported Q1 2026 earnings with an EPS of $2.05, beating the estimated $2.02, driven by the company's strong financial performance. The main narrative emphasized the company's ability to deliver solid results, although the text does not provide specific details on what drove the results. The stock moved up 7.2% on the earnings day, likely due to the positive earnings surprise and the announcement of a new CFO, Amie Thuener, who will succeed Kirsten M. Spears.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000119312526140574/d109450d8k.htm",
-      "generatedAt": "2026-06-15T07:04:31.365Z"
+      "summary": "Broadcom reported Q1 EPS of $2.05, beating estimates by 1.3%, driven by a 106% year-over-year growth in AI semiconductor solutions revenue to $8.4 billion, which exceeded forecasts. The strong performance was attributed to robust demand for custom AI accelerators and AI networking, with management citing accelerating AI revenue growth. The stock reacted positively, moving up 7.2% on earnings day, driven by the headline beat and strong forward guidance, including a 47% year-over-year revenue growth expectation for Q2 to $22.0 billion.",
+      "keyQuote": "Our AI revenue growth is accelerating, and we expect AI semiconductor revenue to be $10.7 billion in Q2.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000011/avgo-02012026x8kxex99.htm",
+      "generatedAt": "2026-06-19T17:20:34.210Z"
     }
   ],
   "MRVL": [
@@ -121,10 +121,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 32.5,
-      "summary": "Marvell reported Q2 2026 earnings with an EPS of $0.80, beating estimates of $0.79. The main narrative emphasized by management was the company's strong financial and operational position, as well as the appointment of a new CFO, Dan Durn, who brings significant industry experience. The company reaffirmed its financial outlook for the second quarter of fiscal 2027, and the stock moved up 32.5% on the earnings day, likely due to the positive earnings surprise and the optimism surrounding the new CFO appointment.",
-      "keyQuote": "Having served on our board for the past two years, Dan intimately knows Marvell and its long-term growth strategy. He has also spent the majority of his career in the semiconductor industry, serving as CFO at GlobalFoundries, Freescale Semiconductor, NXP Semiconductors, and Applied Materials, and brings a level of industry-specific fluency that is rare.",
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1835632/000119312526267688/d151562dex991.htm",
-      "generatedAt": "2026-06-15T07:25:04.455Z"
+      "summary": "Marvell reported Q2 2026 EPS of $0.80, beating estimates by 0.6%, driven by strength in its data center business, with revenue growing 28% year-over-year to $2.418 billion. Management cited exceptional AI-related bookings and strong demand for specific products, including 800G and 1.6T scale-out optics, which matched investor focus on these areas. The stock reacted positively, moving up 32.5%, driven by the raised revenue outlook for fiscal 2027 and 2028, as well as the strong guidance for the second quarter, with expected revenue of $2.700 billion.",
+      "keyQuote": "We are seeing exceptional AI-related bookings, and as a result, we are significantly raising Marvell's revenue outlook for both fiscal 2027 and fiscal 2028 compared with the guidance we provided last quarter.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000014/q127_8kx522026ex-991.htm",
+      "generatedAt": "2026-06-19T17:20:46.461Z"
     },
     {
       "ticker": "MRVL",
@@ -136,10 +136,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 18.4,
-      "summary": "Marvell reported Q1 2026 earnings with an EPS of $0.80, beating estimates of $0.79. The main narrative emphasized by management was the strategic partnership with NVIDIA, which is expected to deliver greater choice and flexibility for customers and drive growth for Marvell. The stock moved up 18.4% on the earnings day, likely driven by the positive earnings surprise and the promising partnership with NVIDIA, which includes a $2 billion investment in Marvell.",
-      "keyQuote": "The inference inflection has arrived. Token generation demand is surging, and the world is racing to build AI factories,",
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1835632/000119312526134462/d113606dex991.htm",
-      "generatedAt": "2026-06-15T07:25:06.261Z"
+      "summary": "Marvell reported Q4 EPS of $0.80, beating estimates by 1.1%, driven by robust AI demand and record revenue of $2.219 billion, with the data center business being a key growth driver. The company's strong performance was attributed to continued strength in AI demand, with management citing design wins in fiscal 2026 hitting an all-time record, which is expected to fuel future growth. The stock reacted positively, moving up 18.4% on earnings day, driven by the headline beat and forward guidance, which includes expected year-over-year revenue growth acceleration in fiscal 2027.",
+      "keyQuote": "We expect year-over-year revenue growth to accelerate each quarter in fiscal 2027, driven by continued strength in our data center business, with bookings continuing to grow at a record pace.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000006/q426_8kx1312026ex-991.htm",
+      "generatedAt": "2026-06-19T17:20:59.089Z"
     }
   ],
   "TSM": [
@@ -153,10 +153,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 6.4,
-      "summary": "TSMC reported Q1 2026 earnings with an EPS of $3.49, beating estimates of $3.33. The company's strong results were driven by its position as the world's leading dedicated semiconductor foundry, supporting a thriving ecosystem of global customers and partners with the industry's leading process technologies. The stock moved 6.4% on earnings day, likely due to the company's solid performance and its commitment to innovation and customer support, although specific guidance or outlook was not provided in the text.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000302/tsm-agmx20260604x6k.htm",
-      "generatedAt": "2026-06-15T07:25:08.346Z"
+      "summary": "TSMC reported Q1 2026 EPS of $3.49, beating estimates by 4.7%, driven by strong demand from various segments, with revenue reaching NT$1,134.10 billion. The company's performance was driven by its advanced technology capacity and fab construction, with management citing long-term capacity plans based on market demand forecasts and TSMC's technology development roadmap. The stock moved +6.4% on earnings day, likely due to the headline beat and the approval of capital appropriations for advanced technology capacity and fab construction, which suggests a positive outlook for the company's future growth.",
+      "keyQuote": "To meet long-term capacity plans based on market demand forecasts and TSMC's technology development roadmap, the Board approved capital appropriations of approximately US$31,284.30 million for purposes mainly including: 1) Installation of advanced technology capacity; 2) Fab construction, and installation of fab facility systems.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000274/tsm-boardx20260512.htm",
+      "generatedAt": "2026-06-19T17:21:08.099Z"
     },
     {
       "ticker": "TSM",
@@ -168,10 +168,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 5.5,
-      "summary": "TSMC reported Q4 2025 earnings with an EPS of $3.14, beating estimates of $2.98. The company's strong results were driven by its position in the semiconductor industry, although the text does not provide specific details on the drivers of the results. The stock moved up 5.5% on earnings day, likely due to the positive earnings surprise, and the company also announced an adjusted cash dividend of NT$6.00003573 per common share for the third quarter of 2025.",
+      "summary": "TSMC reported Q4 2025 EPS of $3.14, beating estimates by 5.5%, driven by strong demand from various segments, although specific segment details were not provided. The company's performance was likely driven by its advanced technology capacity and packaging services, which have been in high demand. The stock reacted positively, moving up 5.5% on the earnings day, likely due to the headline beat and the company's capital appropriation plans for future growth.",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000027/tsm-dividendadjustmentx202.htm",
-      "generatedAt": "2026-06-15T07:25:09.984Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000017/tsm-boardx20260210x6k.htm",
+      "generatedAt": "2026-06-19T17:21:18.442Z"
     }
   ],
   "ASML": [
@@ -185,10 +185,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 8.8,
-      "summary": "ASML reported Q1 2026 earnings with EPS of $7.15, beating estimates of $6.62, and total net sales of €8.8 billion. The company's strong results were driven by its solid performance in the quarter, although the text does not provide specific details on the main narrative or theme that management emphasized. ASML now expects 2026 total net sales to be between €36 billion and €40 billion, with a gross margin between 51% and 53%, which led to an 8.8% increase in stock price on the earnings day.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026025147/form6-kquarterlyfilings.htm",
-      "generatedAt": "2026-06-15T07:25:12.342Z"
+      "summary": "ASML reported Q1 2026 EPS of $7.15, beating estimates by 8.0%, driven by strong demand for its lithography systems, particularly in the semiconductor industry, with total net sales of €8.8 billion. The company's performance was driven by ongoing AI-related infrastructure investments, which led to increased demand for chips and accelerated capacity expansion plans by its customers. The stock reacted positively, moving up 8.8% on earnings day, largely due to the company's raised 2026 total net sales guidance to €36-40 billion, with a gross margin of 51-53%.",
+      "keyQuote": "The semiconductor industry's growth outlook continues to solidify, driven by ongoing AI-related infrastructure investments. Demand for chips is outpacing supply. In response, our customers are accelerating their capacity expansion plans for 2026 and beyond, supported by long-term agreements with their customers.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026025147/pressreleasefinancialresul.htm",
+      "generatedAt": "2026-06-19T17:21:31.484Z"
     },
     {
       "ticker": "ASML",
@@ -200,10 +200,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 8.8,
-      "summary": "ASML reported Q4 2025 EPS of $7.34, missing the estimated $7.55, however the stock still moved up 8.8% on earnings day. The main narrative is not present in the provided text as it appears to be about Masimo Corporation's acquisition by Danaher Corporation, not ASML's earnings. The guidance or outlook is also not available in the given text, but the stock's movement could be due to other factors not mentioned in the provided information.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/937556/000110465926015904/tm266533d1_ex99-1.htm",
-      "generatedAt": "2026-06-15T07:15:09.927Z"
+      "summary": "ASML reported Q4 EPS of $7.34, missing estimates by 2.7%, with total net sales of €9.7 billion driven by record EUV sales and growth in installed base business sales. Management cited a notable step-up in customers' medium-term capacity plans, driven by robust expectations of AI-related demand, as a key driver of performance. The stock moved up 8.8% on the earnings day, likely driven by the company's forward guidance of 2026 total net sales between €34 billion and €39 billion, which suggests a growth year ahead.",
+      "keyQuote": "In the last months, many of our customers have shared a notably more positive assessment of the medium-term market situation, primarily based on more robust expectations of the sustainability of AI-related demand.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm",
+      "generatedAt": "2026-06-19T17:21:45.371Z"
     }
   ],
   "ARM": [
@@ -217,10 +217,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 16.2,
-      "summary": "Arm Holdings reported Q1 2026 earnings with an EPS of $0.60, beating the estimated $0.58. The main narrative driving these results is not explicitly stated in the provided text, but the strong earnings suggest a positive performance. The stock moved 16.2% on earnings day, likely due to the company's beat on estimates, although specific guidance or outlook is not provided in the text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1973239/000197323926000062/arm-20260506.htm",
-      "generatedAt": "2026-06-15T07:25:14.236Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:21:48.001Z"
     },
     {
       "ticker": "ARM",
@@ -232,10 +232,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 11.6,
-      "summary": "ARM Holdings reported Q4 2025 earnings with an EPS of $0.43, beating the estimated $0.41. The company's strong performance was driven by its licensing and royalty revenue, with both non-related and related party members contributing to the growth. The stock moved up 11.6% on the earnings day, likely due to the positive earnings surprise and the company's outlook, although the specific guidance is not provided in the given text.",
+      "summary": "Arm Holdings reported Q4 2025 EPS of $0.43, beating estimates by 5.1%, driven by strong performance in license and royalty revenue segments, with specific numbers not provided in the given text. The company's performance was likely driven by growth in key product lines and customer demand, although specific details are not available. The stock reacted positively, moving up 11.6% on the earnings day, likely due to the headline beat and potential positive forward guidance, although the exact drivers are unclear.",
       "keyQuote": null,
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1973239/000197323926000006/arm-20251231.htm",
-      "generatedAt": "2026-06-15T07:25:16.043Z"
+      "generatedAt": "2026-06-19T17:22:06.247Z"
     }
   ],
   "MU": [
@@ -249,10 +249,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -9.9,
-      "summary": "Micron reported Q2 2026 earnings with EPS of $12.20, beating estimates of $9.16, on revenue of $23.86 billion, driven by strong demand and tight industry supply. Management emphasized that in the AI era, memory has become a strategic asset for customers, and the company is investing in its global manufacturing footprint to support growing demand. The company provided strong guidance for Q3 2026, with expected EPS of $18.90-$19.15, but the stock still moved -9.9% on earnings day, despite the beat and positive outlook.",
-      "keyQuote": "Micron set new records across revenue, gross margin, EPS, and free cash flow in fiscal Q2, driven by a strong demand environment, tight industry supply, and our strong execution, and we expect significant records again in fiscal Q3",
+      "summary": "Micron reported a significant earnings beat with EPS of $12.20, exceeding estimates by 33.2%, driven by strong demand in its Cloud Memory and Core Data Center business units, which reported revenues of $7,749 million and $5,687 million, respectively. The company's performance was driven by a strong demand environment, tight industry supply, and its strategic position in the AI era, with management citing memory as a strategic asset for its customers. The stock reacted negatively, falling 9.9% on earnings day, likely due to the forward guidance, which although strong, may not have met investor expectations, with revenue guidance of $33.5 billion and gross margin of approximately 81% for the third quarter.",
+      "keyQuote": "In the AI era, memory has become a strategic asset for our customers, and we are investing in our global manufacturing footprint to support their growing demand.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000004/a2026q2ex991-pressrelease.htm",
-      "generatedAt": "2026-06-15T07:15:41.453Z"
+      "generatedAt": "2026-06-19T17:22:21.418Z"
     },
     {
       "ticker": "MU",
@@ -264,10 +264,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 10.5,
-      "summary": "Micron reported Q1 2026 earnings with EPS of $4.78, beating estimates of $3.96, driven by strong demand for memory and storage products, particularly in the AI sector. The company's CEO, Sanjay Mehrotra, emphasized that Micron's technology leadership, differentiated product portfolio, and strong operational execution positioned the company as an essential AI enabler, driving record revenue and margin expansion. Micron provided guidance for Q2 2026, with revenue expected to be $18.70 billion, and the stock moved up 10.5% on the earnings day, likely due to the strong beat and positive outlook.",
+      "summary": "Micron reported Q1 EPS of $4.78, beating estimates by 20.6%, driven by strong performance in its Cloud Memory Business Unit, which saw revenue of $5.284 billion and gross margin of 66%. The company's performance was driven by accelerating AI demand and strong execution across its business units, with management citing its technology leadership and differentiated product portfolio as key factors. The stock reacted positively to the earnings beat and strong forward guidance, with the company forecasting Q2 revenue of $18.70 billion and non-GAAP EPS of $8.42, driving a 10.5% increase in the stock price on earnings day.",
       "keyQuote": "Our Q2 outlook reflects substantial records across revenue, gross margin, EPS and free cash flow, and we anticipate our business performance to continue strengthening through fiscal 2026.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000044/a2026q1ex991-pressrelease.htm",
-      "generatedAt": "2026-06-15T07:15:43.535Z"
+      "generatedAt": "2026-06-19T17:22:36.433Z"
     }
   ],
   "INTC": [
@@ -281,10 +281,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 23.6,
-      "summary": "Intel reported Q1 2026 earnings per share (EPS) of $0.29, beating estimates of $0.01, driven by strong performance in its core business segments. The company's management emphasized the solid execution and progress in its strategic priorities, which contributed to the better-than-expected results. The stock moved up 23.6% on the earnings day, likely due to the significant beat in EPS and the positive outlook for the second quarter of 2026.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000077/intc-20260423.htm",
-      "generatedAt": "2026-06-15T07:15:46.258Z"
+      "summary": "Intel reported a significant earnings beat with EPS of $0.29, surpassing estimates by 2108.7%, driven by a 22% year-over-year increase in Data Center and AI (DCAI) revenue, which reached $5.1 billion. The strong performance was attributed to growing demand for Intel's CPUs and wafer and advanced packaging offerings, particularly in the AI era, with management citing the launch of new products such as Intel Xeon 600 processors and collaborations with Google and NVIDIA. The stock reacted positively, moving up 23.6% on earnings day, largely due to the headline beat and robust revenue growth, as well as the company's disciplined execution and expanded available supply.",
+      "keyQuote": "The next wave of AI will bring intelligence closer to the end user, moving from foundational models to inference to agentic. This shift is significantly increasing the need for Intel’s CPUs and wafer and advanced packaging offerings.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000077/q126earningsrelease.htm",
+      "generatedAt": "2026-06-19T17:22:50.597Z"
     },
     {
       "ticker": "INTC",
@@ -296,10 +296,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -17,
-      "summary": "Intel reported Q4 2025 earnings per share of $0.15, beating estimates of $0.08, driven by the company's efforts to navigate the current market conditions, although the specific drivers of the results are not detailed in the provided text. The main narrative emphasized by management is not explicitly stated in the text, but the press release includes non-GAAP financial measures and reconciliations to GAAP measures, indicating a focus on operational performance. The stock moved -17.0% on earnings day, potentially due to the company's forward-looking statements and guidance for the first quarter of 2026, which may not have met investor expectations, although the specific guidance is not provided in the text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000009/intc-20260122.htm",
-      "generatedAt": "2026-06-15T07:15:48.621Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:22:52.631Z"
     }
   ],
   "QCOM": [
@@ -313,10 +313,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 15.1,
-      "summary": "Qualcomm reported Q2 fiscal 2026 earnings with non-GAAP EPS of $2.65, beating estimates of $2.56, on revenues of $10.6 billion. The company's results were driven by solid execution in a challenging memory environment, with a focus on diversification and growth in areas such as automotive and IoT, which saw combined revenues grow 20% year-over-year. The stock moved up 15.1% on the earnings day, likely due to the positive earnings surprise and the company's guidance for the third quarter, which includes estimated revenues of $9.2B to $10.0B and non-GAAP diluted EPS of $2.10 to $2.30.",
-      "keyQuote": "We are pleased to deliver results in line with our guidance, reflecting solid execution as we navigate a challenging memory environment.",
+      "summary": "Qualcomm reported Q1 2026 EPS of $2.65, beating estimates by 3.6%, driven by a 20% year-over-year growth in combined QCT Automotive and IoT revenues, which reached $2.7 billion. The company's performance was driven by strong demand in the automotive and IoT segments, with QCT Automotive revenues growing 38% year-over-year to $1.326 billion. The stock reacted positively, moving up 15.1% on earnings day, driven by the headline beat and the company's announcement of a new $20 billion share repurchase authorization.",
+      "keyQuote": "We are in a period of profound industry transformation — the rise of AI agents is reshaping our roadmap across every platform we develop.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/804328/000080432826000060/qcom032926erex991.htm",
-      "generatedAt": "2026-06-15T07:15:50.818Z"
+      "generatedAt": "2026-06-19T17:23:02.866Z"
     },
     {
       "ticker": "QCOM",
@@ -328,10 +328,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -8.5,
-      "summary": "Qualcomm reported Q1 fiscal 2026 earnings with non-GAAP EPS of $3.50, beating estimates of $3.40, on record revenues of $12.3 billion. The company's strong quarterly results were driven by growing momentum across personal, industrial, and physical AI, as well as record QCT automotive revenues, despite near-term handset outlook being impacted by industry-wide memory supply constraints. The stock moved -8.5% on earnings day, possibly due to the company's guidance for Q2 fiscal 2026, which includes the estimated impact of memory supply constraints and related pricing on demand from several handset customers, with non-GAAP diluted EPS expected to be $2.45 - $2.65.",
-      "keyQuote": "We are pleased to deliver strong quarterly results, with record total company revenues.",
+      "summary": "Qualcomm reported Q1 FY26 EPS of $3.50, beating estimates by 2.9%, driven by record QCT revenues, particularly in the automotive segment, which reached $1.1 billion, up 15% year-over-year. Management cited strong demand for premium and high-tier smartphones, despite industry-wide memory supply constraints, which impacted near-term handset outlook. The stock fell 8.5% on earnings day, likely due to forward guidance that included the estimated impact of memory supply constraints on demand from several handset customers, with Q2 FY26 revenue guidance of $10.2-11.0 billion, below some expectations.",
+      "keyQuote": "While our near-term handsets outlook is impacted by industry-wide memory supply constraints, we are encouraged by end-consumer demand for premium and high tier smartphones, and remain on track to achieve our fiscal 2029 revenue goals.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/804328/000080432826000016/qcom122825erex991.htm",
-      "generatedAt": "2026-06-15T07:15:52.661Z"
+      "generatedAt": "2026-06-19T17:23:14.661Z"
     }
   ],
   "000660.KS": [
@@ -348,7 +348,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:47.598Z"
+      "generatedAt": "2026-06-19T17:23:16.488Z"
     },
     {
       "ticker": "000660.KS",
@@ -359,11 +359,11 @@
       "surprisePct": 20.8,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": -11.5,
+      "priceMoveDay": 9.3,
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:48.481Z"
+      "generatedAt": "2026-06-19T17:23:17.382Z"
     }
   ],
   "005930.KS": [
@@ -380,7 +380,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:49.728Z"
+      "generatedAt": "2026-06-19T17:23:19.228Z"
     },
     {
       "ticker": "005930.KS",
@@ -391,11 +391,11 @@
       "surprisePct": 23.2,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": -11.7,
+      "priceMoveDay": 11.4,
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:50.636Z"
+      "generatedAt": "2026-06-19T17:23:20.120Z"
     }
   ],
   "4063.T": [
@@ -412,7 +412,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:51.890Z"
+      "generatedAt": "2026-06-19T17:23:21.949Z"
     },
     {
       "ticker": "4063.T",
@@ -427,7 +427,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:52.807Z"
+      "generatedAt": "2026-06-19T17:23:22.852Z"
     }
   ],
   "3436.T": [
@@ -444,7 +444,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:54.058Z"
+      "generatedAt": "2026-06-19T17:23:24.684Z"
     },
     {
       "ticker": "3436.T",
@@ -459,7 +459,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:54.940Z"
+      "generatedAt": "2026-06-19T17:23:25.569Z"
     }
   ],
   "AMAT": [
@@ -473,10 +473,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 11.2,
-      "summary": "Applied Materials reported Q2 2026 earnings per share of $2.86, beating the estimated $2.69, driven by strong performance in its semiconductor business, with the company's results indicating a positive trend in the industry. The main narrative emphasized by management is not explicitly stated in the provided text, but the beat in earnings suggests a strong operational performance. The stock moved 11.2% on earnings day, likely due to the positive earnings surprise and the overall solid financial performance, although specific guidance or outlook is not provided in the text.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/6951/000162828026035071/amat-20260514.htm",
-      "generatedAt": "2026-06-15T07:16:03.569Z"
+      "summary": "Applied Materials reported Q2 EPS of $2.86, beating estimates by 6.5%, driven by record revenue of $7.91 billion, up 11% year over year, with the Semiconductor Systems segment being a key contributor, accounting for 75% of total revenue. The company's performance was driven by the rapid global build-out of AI computing infrastructure, with management citing strong leadership positions in leading-edge logic, DRAM, and advanced packaging. The stock reacted positively, moving up 11.2% on the earnings day, likely due to the strong headline beat and the company's raised guidance for the third quarter, with expected revenue of $8.95 billion and non-GAAP diluted EPS of $3.36.",
+      "keyQuote": "The rapid global build-out of AI computing infrastructure combined with Applied's strong leadership positions in leading-edge logic, DRAM and advanced packaging provide an exceptionally strong foundation for sustained, multi-year revenue and profit growth.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/6951/000162828026035071/exhibit991q22026earningsre.htm",
+      "generatedAt": "2026-06-19T17:23:28.589Z"
     },
     {
       "ticker": "AMAT",
@@ -488,10 +488,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -8.3,
-      "summary": "Applied Materials reported Q1 2026 earnings per share of $2.38, beating the estimated $2.21, however the stock moved -8.3% on earnings day, the company's results were driven by its strong performance in the semiconductor industry, although the text does not provide specific details on the main narrative or theme management emphasized, the earnings beat suggests a positive outlook, the stock's decline may be attributed to factors not directly related to the earnings report, such as market expectations or industry trends, which were not explicitly stated in the provided text.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/6951/000162828026007661/amat-20260212.htm",
-      "generatedAt": "2026-06-15T07:16:05.618Z"
+      "summary": "Applied Materials reported Q1 EPS of $2.38, beating estimates by 7.9%, driven by record DRAM revenue in the Semiconductor Systems segment, which accounted for 34% of the segment's revenue. The company's performance was fueled by the acceleration of industry investments in AI computing, with management citing high growth rates for leading-edge logic, high-bandwidth memory, and advanced packaging. The stock fell 8.3% despite the beat, likely due to the revenue guidance for Q2, which was in line with expectations, and the lack of upside to estimates, as the non-GAAP diluted EPS guidance of $2.64 was only slightly above the current consensus.",
+      "keyQuote": "The need for higher performance and more energy-efficient chips is driving high growth rates for leading-edge logic, high-bandwidth memory and advanced packaging. These are areas where Applied is the process equipment leader, and we expect to grow our semiconductor equipment business over 20 percent this calendar year.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/6951/000162828026007661/exhibit991q12026earningsre.htm",
+      "generatedAt": "2026-06-19T17:23:41.080Z"
     }
   ],
   "LRCX": [
@@ -505,10 +505,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 9.9,
-      "summary": "Lam Research reported Q1 2026 earnings per share of $1.47, beating estimates of $1.36. The main narrative driving these results is not explicitly stated in the provided text, but the company's financial performance is outlined in the attached press release. The stock moved 9.9% on earnings day, likely due to the positive earnings surprise, although specific guidance or outlook is not provided in the given text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/707549/000070754926000020/lrcx-20260422.htm",
-      "generatedAt": "2026-06-15T07:07:45.439Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:23:43.376Z"
     },
     {
       "ticker": "LRCX",
@@ -520,10 +520,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -8.8,
-      "summary": "Lam Research reported Q4 2025 earnings with an EPS of $1.27, beating estimates of $1.17. The main narrative driving results is not explicitly stated in the provided text, but the appointment of new directors and changes in executive positions may indicate a focus on innovation and technology. The stock moved -8.8% on earnings day, possibly due to concerns about the impact of these changes on the company's future performance or guidance, although specific guidance is not mentioned in the text.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/707549/000070754926000012/lrcx-20260130.htm",
-      "generatedAt": "2026-06-15T07:07:47.194Z"
+      "summary": "Lam Research reported Q4 2025 EPS of $1.27, beating estimates by 8.7%, driven by strong performance in its wafer fabrication equipment and services business, although specific segment details were not provided. The company's leadership transition, with Sesha Varadarajan becoming COO and Karthik Rammohan assuming an expanded role, is expected to drive operational velocity and growth in the AI era. The stock fell 8.8% despite the earnings beat, possibly due to concerns over the leadership transition or forward guidance, which was not explicitly provided in the release. ",
+      "keyQuote": "With Sesha's and Karthik's newly expanded roles, we are increasing velocity across our operations from product strategy and manufacturing to installation and maintenance to drive Lam's outperformance in the AI era.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/707549/000070754926000012/lrcx_exx992managementtrans.htm",
+      "generatedAt": "2026-06-19T17:23:49.477Z"
     }
   ],
   "KLAC": [
@@ -537,10 +537,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 8,
-      "summary": "KLA Corporation reported Q1 2026 earnings per share (EPS) of $0.94, beating estimates of $0.92. The company's management emphasized a long-term innovation and growth strategy, as evidenced by the announcement of a ten-to-one forward stock split to improve share accessibility and liquidity. The stock moved 8.0% higher on the earnings day, likely driven by the positive earnings surprise and the increased quarterly dividend payment of $2.30 per share, which represents a 21% increase.",
-      "keyQuote": "This stock split is intended to improve the accessibility and liquidity of KLA shares, while maintaining consistency with our long-term capital allocation strategy.",
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/319201/000119312526212093/d116682dex991.htm",
-      "generatedAt": "2026-06-15T07:16:08.059Z"
+      "summary": "KLA reported Q1 2026 EPS of $0.94, beating estimates by 2.5%, driven by strong revenue of $3.415 billion, which exceeded the midpoint of the guidance range, with the company's process control and process-enabling solutions contributing to the beat. The performance was driven by the company's critical role in the AI ecosystem and the global AI infrastructure buildout, with management citing continued market share momentum in process control. The stock reacted positively, moving up 8.0% on the earnings day, driven by the headline beat and the company's increased dividend and additional $7 billion stock repurchase authorization, which underscored management's confidence in the company's durable value creation.",
+      "keyQuote": "KLA delivered strong March quarter results exceeding the midpoint of our guidance ranges on both revenue and earnings per share. Our business momentum remains robust, and we are highly confident in our outlook for calendar year 2026",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/319201/000031920126000014/exhibit991earningsrelease3.htm",
+      "generatedAt": "2026-06-19T17:24:01.558Z"
     },
     {
       "ticker": "KLAC",
@@ -552,10 +552,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -15.2,
-      "summary": "KLA reported Q4 2025 EPS of $0.89, beating estimates of $0.88, but the stock still declined 15.2% on earnings day. The company's results were driven by its continued innovation and collaboration with leading customers across the globe, providing advanced process control and process-enabling solutions for manufacturing. The stock's decline may be attributed to factors not explicitly stated in the provided text, as the earnings beat and declaration of a quarterly cash dividend of $1.90 per share could be seen as positive developments, but the text does not provide guidance or outlook to fully explain the stock's movement.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/319201/000119312526039637/d80148dex991.htm",
-      "generatedAt": "2026-06-15T07:16:09.829Z"
+      "summary": "KLA reported Q4 2025 EPS of $0.89, beating estimates by 0.6%, driven by a record quarter for revenue, non-GAAP operating income, and free cash flow generation, with the company's differentiated product portfolio and solid execution in the foundry/logic and memory markets contributing to the beat. Management cited the increasing relevance of process control at the leading edge for foundry/logic and memory as a key driver of performance, which was in line with investor expectations going into the quarter. The stock reacted negatively, falling 15.2% on earnings day, likely due to the forward guidance, which may not have been as strong as investors had hoped, despite the company's positive outlook on its position in the AI ecosystem and the buildout of AI infrastructure across various growth vectors.",
+      "keyQuote": "KLA delivered a record quarter and calendar 2025 for revenue, non-GAAP operating income, and free cash flow generation. This performance was fueled by our differentiated product portfolio and solid company execution in an environment where the relevance of process control at the leading edge for foundry/logic and memory is increasing.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/319201/000031920126000006/exhibit991earningsrelease1.htm",
+      "generatedAt": "2026-06-19T17:24:13.437Z"
     }
   ],
   "8035.T": [
@@ -568,11 +568,11 @@
       "surprisePct": 14.6,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 13.4,
+      "priceMoveDay": 10.3,
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:57.306Z"
+      "generatedAt": "2026-06-19T17:24:15.406Z"
     },
     {
       "ticker": "8035.T",
@@ -587,7 +587,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:51:58.205Z"
+      "generatedAt": "2026-06-19T17:24:16.305Z"
     }
   ],
   "SNPS": [
@@ -601,10 +601,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -8.6,
-      "summary": "Synopsys reported Q2 2026 earnings with an EPS of $3.35, beating estimates of $3.16. Management emphasized the company's strategic focus and disciplined execution, as well as its position to benefit from increasing AI investment and engineering complexity, with the appointment of Jesse Cohn to the board of directors expected to further drive value for stockholders. The stock moved -8.6% on earnings day, despite the earnings beat, potentially due to investor expectations and the company's outlook, although specific guidance was not provided in the text.",
-      "keyQuote": "Synopsys is essential to the global chip industry and is well-positioned to benefit from increasing AI investment and engineering complexity,",
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/883241/000119312526241920/d96543dex991.htm",
-      "generatedAt": "2026-06-15T07:16:14.836Z"
+      "summary": "Synopsys reported Q2 EPS of $3.35, beating estimates by 6.0%, driven by strong performance across the business, particularly in the Design Automation segment, with revenue of $2.276 billion exceeding prior guidance. Management cited AI-driven semiconductor demand, architectural diversity, and complexity of chips and systems as key drivers of growth, with CEO Sassine Ghazi noting the company's momentum, leadership roadmap, and deep customer engagements as a strong foundation for sustained growth. The stock fell 8.6% despite the beat, likely due to forward guidance that, while raised, may not have fully met investor expectations, particularly given the impending close of the Processor IP Solutions business and its impact on revenue.",
+      "keyQuote": "AI is scaling semiconductor demand, architectural diversity and complexity of chips and the systems they power—driving demand across our portfolio.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/883241/000119312526241911/d126227dex991.htm",
+      "generatedAt": "2026-06-19T17:24:27.262Z"
     },
     {
       "ticker": "SNPS",
@@ -616,10 +616,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -8.5,
-      "summary": "Synopsys reported Q1 2026 earnings with an EPS of $3.77, beating the estimated $3.56, however the stock moved -8.5% on earnings day. The company initiated a $250 million accelerated share repurchase agreement, demonstrating its commitment to returning value to shareholders. The stock's decline despite beating estimates may be due to market and economic conditions, as well as the risks associated with the share repurchase agreement, which are more fully described in the company's SEC filings.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/883241/000119312526084396/d113900dex991.htm",
-      "generatedAt": "2026-06-15T07:16:19.546Z"
+      "summary": "Synopsys reported Q1 EPS of $3.77, beating estimates by 6.0%, driven by strong performance in its Design Automation segment, which includes advanced silicon design and verification products. The company's CEO cited AI-fueled robust system-level and semiconductor R&D as a key driver of growth, with increasing AI capabilities throughout the portfolio strengthening the company's strategic advantage. The stock fell 8.5% despite the beat, likely due to forward guidance that was in line with expectations, rather than exceeding them, and potentially disappointing investors who were looking for a stronger outlook.",
+      "keyQuote": "AI continues to fuel robust system-level and semiconductor R&D, and the increasing AI capabilities throughout our portfolio strengthen our strategic advantage and accelerate our customers’ innovation.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/883241/000119312526071601/d921168dex991.htm",
+      "generatedAt": "2026-06-19T17:24:39.754Z"
     }
   ],
   "CDNS": [
@@ -632,11 +632,11 @@
       "surprisePct": 4,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 10.5,
-      "summary": "Cadence reported Q1 2026 earnings with non-GAAP diluted net income per share of $1.96, beating estimates of $1.89. The company's strong results were driven by accelerating AI demand and a record backlog, reflecting customer commitment to its AI-driven portfolio, with broad-based strength across all businesses. Cadence raised its 2026 revenue outlook to 17% year-over-year growth, prompting a 10.5% stock price increase on the earnings day, as the company continues to lead the agentic AI transformation in semiconductor and system design.",
-      "keyQuote": "Cadence had a strong start to 2026, delivering a solid Q1 with accelerating AI demand and record backlog, reflecting strong customer commitment to our AI-driven portfolio",
+      "priceMoveDay": 8.5,
+      "summary": "Cadence reported Q1 2026 EPS of $1.96, beating estimates by 4.0%, driven by strong performance in its core EDA business, which grew 18% year-over-year, and record hardware demand from AI and high-performance computing customers. The company's AI-driven solutions and expanding customer adoption were key drivers of performance, with management citing accelerating AI demand and a record backlog of $8.0 billion. The stock reacted positively, moving up 8.5% on the earnings day, driven by the headline beat and raised 2026 revenue outlook to 17% year-over-year growth.",
+      "keyQuote": "Cadence had a strong start to 2026, delivering a solid Q1 with accelerating AI demand and record backlog, reflecting strong customer commitment to our AI-driven portfolio.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000044/cdns04272026ex9901.htm",
-      "generatedAt": "2026-06-15T07:16:29.887Z"
+      "generatedAt": "2026-06-19T17:24:52.303Z"
     },
     {
       "ticker": "CDNS",
@@ -648,10 +648,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 7.6,
-      "summary": "Cadence reported Q4 2025 earnings with non-GAAP diluted net income per share of $1.99, beating estimates of $1.91, driven by strong customer demand for its expanding AI-driven product portfolio and the essential nature of Cadence's engineering software. The company's results were fueled by broad-based strength across the business, including a 14% revenue growth and a record backlog of $7.8 billion, with management emphasizing the massive opportunities in the AI era. Cadence provided guidance for fiscal year 2026, expecting revenue in the range of $5.9 billion to $6.0 billion, and the stock moved up 7.6% on earnings day, likely due to the company's strong finish to 2025 and excellent momentum heading into 2026.",
-      "keyQuote": "Cadence delivered excellent results for the fourth quarter, closing an outstanding 2025 with over 14% revenue growth and 20% non-GAAP EPS growth,",
+      "summary": "Cadence reported Q4 EPS of $1.99, beating estimates by 4.1%, driven by 14% revenue growth with strong performance in its Core EDA business, which grew 13% in 2025, and its IP business, which grew nearly 25% year-over-year. The company's performance was driven by broad hyperscaler adoption, expanding digital full-flow deployments, and growing proliferation of its AI-driven products, with management citing strong customer demand for its expanding AI-driven product portfolio. The stock reacted positively, moving up 7.6% on the earnings day, driven by the headline beat and the company's record backlog of $7.8 billion, as well as its forward guidance, which includes revenue growth and non-GAAP operating margin expansion.",
+      "keyQuote": "Cadence delivered excellent results for the fourth quarter, closing an outstanding 2025 with over 14% revenue growth and 20% non-GAAP EPS growth, Strong customer demand for our expanding AI-driven product portfolio and the essential nature of Cadence's engineering software position us well to capture the massive opportunities in the AI era.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000013/cdns02172026ex9901.htm",
-      "generatedAt": "2026-06-15T07:16:41.153Z"
+      "generatedAt": "2026-06-19T17:25:05.251Z"
     }
   ],
   "GFS": [
@@ -665,10 +665,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 14.9,
-      "summary": "GlobalFoundries reported Q1 2026 earnings with an EPS of $0.40, beating the estimated $0.35. The main narrative driving these results is not explicitly stated in the provided text, but the strong earnings suggest a positive performance. The stock moved 14.9% on earnings day, likely due to the company's ability to exceed expectations, although specific guidance or outlook is not provided in the text.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1709048/000170904826000111/form6-kshellxearningsrelea.htm",
-      "generatedAt": "2026-06-15T07:25:32.945Z"
+      "summary": "GlobalFoundries (GFS) reported Q1 2026 EPS of $0.40, beating estimates by 14.0%, driven by growth in AI-centric markets and its unique global manufacturing footprint, with the data center segment being a key driver. The company's performance was driven by its ability to deliver differentiated, power-efficient, and high-performance solutions for high-growth markets, with management citing multiple secular megatrends reshaping the semiconductor industry. The stock reacted positively, moving up 14.9% on earnings day, driven by the headline beat and the announcement of the company's first-ever quarterly dividend, which underscored the company's confidence in its long-term growth prospects.",
+      "keyQuote": "As we shared at today's Investor Day, GF is positioned at the center of multiple secular megatrends that are reshaping the semiconductor industry,",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1709048/000170904826000120/investordayrecappressrelea.htm",
+      "generatedAt": "2026-06-19T17:25:15.388Z"
     },
     {
       "ticker": "GFS",
@@ -680,10 +680,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 16.3,
-      "summary": "GlobalFoundries reported Q4 2025 earnings with an EPS of $0.55, beating estimates of $0.47, and revenue of $1.83 billion, up 8% sequentially and flat year over year. The company's results were driven by rapid growth in automotive, data center, and communications infrastructure end markets, with a gross margin mix shift away from mobile devices toward these high-value segments. The stock moved up 16.3% on the earnings day, driven by strong guidance, including a 2026 revenue target of $1.625 billion and a gross margin expectation of 27%, as well as a substantial share buyback program and significant investments in manufacturing and R&D.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.fool.com/earnings/call-transcripts/2026/02/11/globalfoundries-gfs-q4-2025-earnings-transcript/",
-      "generatedAt": "2026-06-15T07:25:49.927Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:25:17.807Z"
     }
   ],
   "ASX": [
@@ -696,11 +696,11 @@
       "surprisePct": 16.3,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 11.9,
-      "summary": "ASE Technology reported Q1 2026 earnings with an EPS of $0.20, beating estimates of $0.17, driven by strong growth in net revenues, which increased 19.2% year-over-year to 62,247 million NT$, with the ATM assembly, testing and material business segment showing a 29.3% year-over-year increase. The company's revenue growth was fueled by demand for outsourced semiconductor packaging, testing, and electronic manufacturing services. The stock moved up 11.9% on the earnings day, likely due to the positive earnings surprise and the company's solid revenue growth, although no specific guidance was provided in the press release.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1122411/000095010326006979/dp246487_6k.htm",
-      "generatedAt": "2026-06-15T07:25:52.169Z"
+      "priceMoveDay": 8.8,
+      "summary": "ASE Technology reported Q1 2026 EPS of $0.20, beating estimates by 16.3%, driven by strong performance in the ATM segment, which saw a 30% year-over-year revenue increase. The company's packaging and testing businesses were key drivers of this growth, with revenue increases of 29% and 31%, respectively. The stock reacted positively to the earnings beat and forward guidance, which included projected 7-9% quarter-over-quarter revenue growth and a 20-100 basis point increase in gross margin.",
+      "keyQuote": "Based on our current business outlook and exchange rate assumptions of 1 US dollar to 31.8 NT dollars, management projects overall performance for the second quarter of 2026 to be as follows",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1122411/000095010326006340/dp245879_6k.htm",
+      "generatedAt": "2026-06-19T17:25:32.549Z"
     },
     {
       "ticker": "ASX",
@@ -711,11 +711,11 @@
       "surprisePct": 6.2,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": -7.8,
-      "summary": "ASE Technology reported Q4 2025 earnings with an EPS of $0.21, beating estimates of $0.20, however the stock moved -7.8% on earnings day. The company's net revenues for January 2026 showed a 21.3% year-over-year increase, driven by growth in the ATM assembly, testing, and material business. The stock's decline despite beating estimates may be due to concerns over the highly competitive semiconductor industry and potential disruptions in commercial activities, with management providing no explicit guidance in the press release.",
-      "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1122411/000095010326001874/dp241377_6k.htm",
-      "generatedAt": "2026-06-15T07:25:53.825Z"
+      "priceMoveDay": 6.7,
+      "summary": "ASE Technology reported Q4 2025 EPS of $0.21, beating estimates by 6.2%, driven by a 25% year-over-year increase in ATM revenue, with LEAP services reaching $1.6 billion, up from $0.6 billion in 2024. The company's strong performance was attributed to the AI supercycle, mainstream business recovery, and leadership in manufacturing, with management citing the Taiwan cluster's efficiency in infrastructure development and resource planning as a key driver. The stock reacted positively, moving up 6.7% on earnings day, likely due to the headline beat and forward guidance, including expectations for LEAP services to double to $3.2 billion in 2026.",
+      "keyQuote": "For ATM business, LEAP services to double from US$1.6 billion to US$3.2 billion, with roughly 75% from packaging and 25% from testing.",
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1122411/000095010326001662/dp241167_6k.htm",
+      "generatedAt": "2026-06-19T17:25:49.391Z"
     }
   ],
   "AMKR": [
@@ -728,11 +728,11 @@
       "surprisePct": 35.6,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 11.7,
-      "summary": "Amkor's Q1 2026 earnings reported EPS of $0.33, beating estimates of $0.24. However, the provided text does not discuss Amkor's earnings, but rather Lamar Advertising Company's dividend announcement, so there is no narrative on what drove Amkor's results. The stock moved 11.7% on earnings day, likely due to the positive earnings surprise, but the text does not provide information on Amkor's guidance or outlook.",
+      "priceMoveDay": 10.1,
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1090425/000119312526224221/d74412dex991.htm",
-      "generatedAt": "2026-06-15T07:17:24.953Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:25:52.468Z"
     },
     {
       "ticker": "AMKR",
@@ -744,10 +744,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 12.1,
-      "summary": "Amkor's Q4 2025 earnings reported an EPS of $0.69, beating the estimated $0.44, with the stock moving up 12.1% on the earnings day. However, the provided text does not discuss Amkor's earnings, instead focusing on Lamar Advertising Company's announcement of a quarterly cash dividend and extension of its stock and debt repurchase programs. The stock's movement can be attributed to the positive earnings surprise, but the text does not provide specific guidance or outlook from Amkor's management, making it unclear what drove the results beyond the earnings beat.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1090425/000119312526076937/d25344dex991.htm",
-      "generatedAt": "2026-06-15T07:17:26.724Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:25:53.492Z"
     }
   ],
   "ALAB": [
@@ -761,10 +761,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 17.7,
-      "summary": "Astera Labs reported Q1 2026 earnings with an EPS of $0.61, beating the estimated $0.54. The press release does not provide details on the main narrative or theme that drove the results, but the strong earnings suggest a positive performance. The stock moved up 17.7% on the earnings day, likely due to the company's ability to exceed expectations, although specific guidance or outlook is not provided in the text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1736297/000173629726000017/alab-20260505.htm",
-      "generatedAt": "2026-06-15T07:25:56.269Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:25:55.759Z"
     },
     {
       "ticker": "ALAB",
@@ -776,10 +776,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -21.4,
-      "summary": "Astera Labs reported Q4 2025 earnings with an EPS of $0.58, beating the estimated $0.51. The main narrative of the earnings report was the retirement of Chief Financial Officer Michael Tate and the appointment of Desmond Lynch as the new CFO, with details of his compensation package. The stock moved -21.4% on earnings day, possibly due to concerns over the CFO transition, despite the company beating earnings expectations.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1736297/000110465926012649/tm265461d2_8k.htm",
-      "generatedAt": "2026-06-15T07:25:58.010Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:25:58.128Z"
     }
   ],
   "SMCI": [
@@ -793,10 +793,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 24.5,
-      "summary": "Supermicro reported Q1 2026 earnings with an EPS of $0.84, beating estimates of $0.62. The company's strong results were driven by its ability to execute and deliver on its strategy, although the specific details are not provided in the given text. The stock moved up 24.5% on the earnings day, likely due to the significant beat in earnings, but the text does not provide guidance or outlook from the company.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/910638/000162828026033666/ddd-20260511.htm",
-      "generatedAt": "2026-06-15T07:17:49.645Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:26:00.984Z"
     },
     {
       "ticker": "SMCI",
@@ -808,10 +808,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 13.8,
-      "summary": "Supermicro reported Q4 2025 earnings with an EPS of $0.69, beating the estimated $0.49. The main narrative driving these results is not explicitly stated in the provided text, but the strong earnings suggest a positive performance. The stock moved 13.8% on earnings day, likely due to the significant beat in EPS, although specific guidance or outlook is not provided in the text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000006/smci-20260203.htm",
-      "generatedAt": "2026-06-15T07:26:00.160Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:26:03.483Z"
     }
   ],
   "DELL": [
@@ -825,10 +825,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 32.8,
-      "summary": "Dell's Q2 2026 earnings reported EPS of $4.86, beating estimates of $2.96, however the provided text is for SAIC's Q1 2027 earnings which reported revenues of $1.91 billion, a 2% growth, and diluted earnings per share of $2.61, an 84% increase from the prior year. The main narrative emphasized by management is the company's focus on execution and commitment to financial targets, driven by improved profitability across the contract portfolio and a $12 million gain from the sale of an investment. SAIC increased its fiscal year 2027 guidance for adjusted EBITDA, adjusted EBITDA margin, and adjusted diluted EPS, which may have contributed to the stock's 32.8% increase on earnings day, although the provided text does not mention Dell's stock movement, it can be inferred that a similar earnings beat and guidance increase would have a significant positive impact on the stock price.",
-      "keyQuote": "I am proud of our team’s performance this quarter, delivering record margin and modest organic growth. These results reflect our focus on execution and our commitment to our financial targets. We are raising our guidance to reflect this strong start, while continuing to invest for the future.",
+      "summary": "Dell's Q2 2026 earnings report is not provided, instead, the earnings report for SAIC is given, which shows an EPS beat of 64.0% with actual EPS of $4.86 vs estimate of $2.96, and revenue growth of 2% to $1.91 billion, driven by improved profitability across the contract portfolio and a $12 million gain from the sale of an investment. The specific business segments driving the beat are not explicitly stated, but the company mentions improved profitability across its contract portfolio. The stock reaction was a 32.8% increase, likely driven by the significant EPS beat and raised guidance for adjusted EBITDA, adjusted EBITDA margin, and adjusted diluted EPS.",
+      "keyQuote": "I am proud of our team's performance this quarter, delivering record margin and modest organic growth, these results reflect our focus on execution and our commitment to our financial targets.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1571123/000157112326000077/saic06012026ex991earningsr.htm",
-      "generatedAt": "2026-06-15T07:18:02.768Z"
+      "generatedAt": "2026-06-19T17:26:07.079Z"
     },
     {
       "ticker": "DELL",
@@ -840,10 +840,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 21.9,
-      "summary": "Dell reported Q1 2026 earnings with an EPS of $3.89, beating estimates of $3.51. However, the provided text does not discuss Dell's earnings, but rather Science Applications International Corporation's report, which does not include information on Dell's earnings or management's narrative. The stock moved 21.9% on earnings day, likely due to the positive earnings surprise, but the text does not provide information on Dell's guidance or outlook.",
+      "summary": "Dell's Q1 2026 earnings report showed an EPS beat of 10.7% with actual EPS of $3.89 vs $3.51 estimate, however the provided text does not specify which business segments drove the beat, the performance was likely driven by specific product lines or customers that management cited, although the text does not provide this information. Investors were likely focused on the company's ability to meet expectations, and the reality appears to have matched or exceeded these expectations. The stock reaction was a 21.9% increase, likely driven by the headline beat and potentially other factors such as forward guidance or segment surprises, although the text does not provide specific information on this.",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1571123/000157112326000025/saic-20260316.htm",
-      "generatedAt": "2026-06-15T07:18:04.506Z"
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1571123/000119312526053003/d93127dex991.htm",
+      "generatedAt": "2026-06-19T17:26:09.763Z"
     }
   ],
   "2317.TW": [
@@ -856,11 +856,11 @@
       "surprisePct": 1.5,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 9.9,
+      "priceMoveDay": 5.3,
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:52:02.802Z"
+      "generatedAt": "2026-06-19T17:26:11.599Z"
     },
     {
       "ticker": "2317.TW",
@@ -871,11 +871,11 @@
       "surprisePct": -27.3,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 6.3,
+      "priceMoveDay": -3.8,
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:52:03.730Z"
+      "generatedAt": "2026-06-19T17:26:12.501Z"
     }
   ],
   "ANET": [
@@ -889,10 +889,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -13.6,
-      "summary": "Arista Networks reported Q1 2026 earnings with revenue of $2.709 billion, representing 35.1% year-over-year growth, and non-GAAP diluted earnings per share of $0.87, beating estimates of $0.81. Management emphasized the company's strong start to the year, driven by its unique position in delivering mission-critical networking solutions, as well as its disciplined execution in a dynamic macro and supply chain environment. The company provided guidance for Q2 2026, expecting revenue of approximately $2.8 billion and non-GAAP diluted net income per share of approximately $0.88, but the stock still moved -13.6% on earnings day, potentially due to high expectations or other market factors.",
-      "keyQuote": "Arista is off to a strong start in Q1 2026, with both our results and our industry-leading net promoter score,",
+      "summary": "Arista Networks reported Q1 2026 EPS of $0.87, beating estimates by 7.7%, driven by 35.1% year-over-year revenue growth to $2.709 billion, with the data center segment being a key driver. The company's performance was driven by its mission-critical confluence of secure client-to-campus-to-cloud and AI networking, with the introduction of XPO high-density liquid-cooled pluggable optics and the universal AI spine powered by the 7800. The stock reacted negatively, falling 13.6% on earnings day, likely due to the forward guidance of $2.8 billion in revenue and non-GAAP operating margin of 46-47%, which may have been perceived as conservative despite beating estimates.",
+      "keyQuote": "We are uniquely positioned to deliver the mission-critical confluence of secure client-to-campus-to-cloud and AI networking.",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000074/ex991q126-earningsrelease.htm",
-      "generatedAt": "2026-06-15T21:50:28.503Z"
+      "generatedAt": "2026-06-19T17:26:25.126Z"
     },
     {
       "ticker": "ANET",
@@ -904,10 +904,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 8.7,
-      "summary": "Arista Networks reported Q4 earnings with EPS of $0.82, beating estimates of $0.76, driven by strong revenue growth of 28.9% year-over-year, which management attributed to the validation of their Arista 2.0 momentum and the company's ability to deliver profitable growth. The main narrative emphasized by management was the strong operating leverage inherent in their model, which provided a powerful exit rate as they head into 2026. The company provided guidance for Q1 2026, expecting revenue of approximately $2.6 billion, and the stock moved up 8.7% on the earnings day, likely due to the strong beat and positive outlook.",
-      "keyQuote": "2025 was the year of validation of our Arista 2.0 momentum, as we hit the milestone of shipping a cumulative of 150 million ports.",
+      "summary": "Arista Networks reported Q4 EPS of $0.82, beating estimates by 8.2%, driven by a 28.9% year-over-year increase in revenue to $2.488 billion, with strength in AI networking and campus expansion. The company's performance was driven by its Arista 2.0 momentum, including the shipment of 150 million cumulative ports, and the introduction of new products such as the R4 series platforms for AI, data center, and routed backbone deployment. The stock reacted positively, moving up 8.7% on earnings day, driven by the headline beat and the company's forward guidance, including revenue expectations of approximately $2.6 billion for the first quarter of 2026.",
+      "keyQuote": "Our Q4 results underscore the strong operating leverage inherent in our model, providing a powerful exit rate as we head into 2026,",
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000010/ex991q425-earningsrelease.htm",
-      "generatedAt": "2026-06-15T21:50:30.310Z"
+      "generatedAt": "2026-06-19T17:26:37.205Z"
     }
   ],
   "COHR": [
@@ -920,11 +920,11 @@
       "surprisePct": 1.1,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 17.6,
-      "summary": "Coherent (COHR) reported Q1 2026 earnings with an EPS of $1.41, beating estimates of $1.39. The company's results were driven by its underwriting strategies, which focused on generating profitable returns in a challenging market, with management emphasizing the need for a conservative approach given uncertainties around longer-tailed classes of business. The stock moved up 17.6% on the earnings day, likely due to the company's ability to navigate the current market dynamics and its focus on sustainable performance, despite some headwinds from catastrophe impacts and prior period development.",
-      "keyQuote": "We have implemented targeted underwriting actions to address the underlying headwinds, but these actions will take time to translate into results.",
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/21175/000002117526000029/q12026ex994earningsremarks.htm",
-      "generatedAt": "2026-06-15T07:18:29.697Z"
+      "priceMoveDay": 13.3,
+      "summary": "Coherent (COHR) reported Q1 2026 EPS of $1.41, beating estimates by 1.1%, driven by higher investment income and a lower expense ratio in its P&C segments, which generated net written premium growth of 1% in the quarter. The company's P&C underlying combined ratio was 94.5%, compared with 92.1% in the prior year quarter, with a P&C underlying loss ratio of 64.1% and an expense ratio of 29.9%. The stock reacted positively, moving up 13.3% on the earnings day, likely due to the headline beat and the company's disciplined execution across its portfolio, as evidenced by its renewal premium change of +3% and written rate of +2%. ",
+      "keyQuote": null,
+      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/21175/000002117526000029/cnaq12026earningspresent.htm",
+      "generatedAt": "2026-06-19T17:26:52.357Z"
     },
     {
       "ticker": "COHR",
@@ -935,11 +935,11 @@
       "surprisePct": 6.8,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 15.4,
-      "summary": "Coherent (COHR) reported Q4 2025 earnings with an EPS of $1.29, beating estimates of $1.21. The main driver of the results was strong underwriting and investment performance, with record core income for 2025 and lower catastrophe losses. The stock moved up 15.4% on the earnings day, likely due to the positive earnings surprise and the company's increased quarterly cash dividend of 4% to $0.48 per share, as well as a special dividend of $2.00 per share.",
+      "priceMoveDay": -9.6,
+      "summary": "Coherent (COHR) reported Q4 EPS of $1.29, beating estimates by 6.8%, driven by strong performance in its Property & Casualty (P&C) segment, which generated net written premium growth of 2% and a combined ratio of 93.8%. The company's P&C core income of $449 million was driven by higher net investment income and lower underlying underwriting results, partially offset by higher catastrophe losses. The stock reacted negatively, falling 9.6% on the earnings day, likely due to the miss in the Life & Group segment and the decrease in net investment income from limited partnerships and common stock.",
       "keyQuote": null,
       "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/21175/000002117526000008/q42025ex993earningsprese.htm",
-      "generatedAt": "2026-06-15T07:18:31.539Z"
+      "generatedAt": "2026-06-19T17:27:06.593Z"
     }
   ],
   "LITE": [
@@ -1049,10 +1049,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 10,
-      "summary": "Alphabet reported Q1 2026 earnings with an EPS of $5.11, beating the estimated $2.67. The company's strong performance was driven by various factors, although the specific drivers are not mentioned in the provided text, which focuses on executive equity awards and other corporate matters. The stock moved up 10.0% on the earnings day, likely due to the significant beat in EPS, although the text does not provide explicit guidance or outlook from management.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000034/goog-20260407.htm",
-      "generatedAt": "2026-06-15T07:13:02.338Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:27:12.525Z"
     },
     {
       "ticker": "GOOGL",
@@ -1064,10 +1064,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 4,
-      "summary": "Alphabet reported Q4 2025 earnings with an EPS of $2.82, beating the estimated $2.64. The company's strong performance was driven by the CEO's leadership, with Sundar Pichai receiving a new triennial award consisting of performance-based and time-based equity. The stock moved 4.0% on earnings day, likely due to the positive earnings surprise and the company's outlook, although specific guidance is not provided in the text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000026/goog-20260304.htm",
-      "generatedAt": "2026-06-15T07:13:04.166Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:27:14.223Z"
     }
   ],
   "AMZN": [
@@ -1145,10 +1145,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": -8.6,
-      "summary": "Meta reported Q1 2026 earnings with an EPS of $10.44, beating the estimated $6.66, however, the stock moved -8.6% on earnings day. The main narrative driving the results is not explicitly stated in the provided text, but the company did issue a press release and will hold a conference call regarding its financial results for the quarter ended March 31, 2026. The guidance or outlook is not provided in the text, but the stock's movement may be attributed to various factors not disclosed in the given information.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-20260429.htm",
-      "generatedAt": "2026-06-15T07:19:31.034Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:27:18.837Z"
     },
     {
       "ticker": "META",
@@ -1160,10 +1160,10 @@
       "revActual": null,
       "revEstimate": null,
       "priceMoveDay": 10.4,
-      "summary": "Meta reported Q4 2025 earnings with an EPS of $8.88, beating the estimated $8.22, driven by strong performance across its platforms. The main narrative emphasized by management is not explicitly stated in the provided text, but the company's use of non-GAAP financial information and reconciliation suggests a focus on operational efficiency and growth. The stock moved 10.4% on earnings day, likely due to the positive earnings surprise and the company's overall financial performance, although specific guidance or outlook is not provided in the text.",
+      "summary": "",
       "keyQuote": null,
-      "transcriptUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003832/meta-20260128.htm",
-      "generatedAt": "2026-06-15T07:19:37.721Z"
+      "transcriptUrl": null,
+      "generatedAt": "2026-06-19T17:27:20.429Z"
     }
   ],
   "ORCL": [
@@ -1208,11 +1208,11 @@
       "surprisePct": -16.3,
       "revActual": null,
       "revEstimate": null,
-      "priceMoveDay": 14,
+      "priceMoveDay": -11.4,
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:52:30.652Z"
+      "generatedAt": "2026-06-19T17:27:23.264Z"
     },
     {
       "ticker": "CRWV",
@@ -1227,7 +1227,7 @@
       "summary": "",
       "keyQuote": null,
       "transcriptUrl": null,
-      "generatedAt": "2026-06-17T19:52:43.101Z"
+      "generatedAt": "2026-06-19T17:27:24.281Z"
     }
   ]
 }

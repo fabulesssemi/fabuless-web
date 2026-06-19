@@ -2,17 +2,17 @@
  * update-earnings-summaries.ts
  *
  * For each company in COMPANY_UNIVERSE:
- *   1. Fetch last 3 reported quarters from Yahoo Finance (EPS data + dates)
- *   2. Find the earnings press release on SEC EDGAR (8-K filing, always free/reliable)
- *   3. Fallback: try Motley Fool transcript for full Q&A color
- *   4. Call Groq (free) to generate a 3-sentence summary + key quote
- *   5. Compute stock price move on earnings day
+ *   1. Fetch last 2 reported quarters from Yahoo Finance (EPS + quarter dates)
+ *   2. Fetch earnings press release from SEC EDGAR (smarter filename matching)
+ *   3. Fetch revenue actuals from FMP income statement (stable endpoint)
+ *   4. Use Groq (llama-3.3-70b) to generate an investor-grade summary
+ *   5. Compute stock price move on earnings day via Yahoo
  *   6. Write to data/earnings-summaries.json
  *
  * Run:
- *   GROQ_API_KEY=gsk_... npx tsx scripts/update-earnings-summaries.ts
- *   GROQ_API_KEY=gsk_... npx tsx scripts/update-earnings-summaries.ts --ticker=NVDA
- *   GROQ_API_KEY=gsk_... npx tsx scripts/update-earnings-summaries.ts --force
+ *   GROQ_API_KEY=gsk_... FMP_API_KEY=... npx tsx scripts/update-earnings-summaries.ts
+ *   GROQ_API_KEY=gsk_... FMP_API_KEY=... npx tsx scripts/update-earnings-summaries.ts --ticker=NVDA
+ *   GROQ_API_KEY=gsk_... FMP_API_KEY=... npx tsx scripts/update-earnings-summaries.ts --force
  */
 
 import fs from "fs";
@@ -22,24 +22,36 @@ import YahooFinance from "yahoo-finance2";
 import { COMPANY_UNIVERSE } from "../lib/companies";
 import type { EarningsSummary, EarningsSummariesStore } from "../lib/earnings/summaries";
 
+// ── env ───────────────────────────────────────────────────────────────────────
+try {
+  const lines = fs.readFileSync(path.resolve(process.cwd(), ".env.local"), "utf-8").split("\n");
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t || t.startsWith("#")) continue;
+    const eq = t.indexOf("=");
+    if (eq === -1) continue;
+    const k = t.slice(0, eq).trim();
+    const v = t.slice(eq + 1).trim().replace(/^['"]|['"]$/g, "");
+    if (!(k in process.env)) process.env[k] = v;
+  }
+} catch { /* CI injects env */ }
+
 const yf = new YahooFinance({ suppressNotices: ["yahooSurvey", "ripHistorical"] });
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const DATA_PATH = path.resolve(__dirname, "../data/earnings-summaries.json");
-const FOOL_BASE = "https://www.fool.com/earnings/call-transcripts";
-// EDGAR requires a User-Agent with contact info
+const FMP_BASE = "https://financialmodelingprep.com/stable";
 const EDGAR_UA = "Fabuless aharrick05@gmail.com";
 
-// ── CIK map — SEC Central Index Key for each ticker ──────────────────────────
-// Look up at: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=nvidia&CIK=&type=8-K
+// ── CIK map ───────────────────────────────────────────────────────────────────
 const TICKER_CIK: Record<string, string> = {
   NVDA:  "0001045810",
   AMD:   "0000002488",
   AVGO:  "0001730168",
   MRVL:  "0001835632",
-  TSM:   "0001046179",  // FPI → files 6-K
-  ASML:  "0000937966",  // FPI → files 6-K (was wrong)
-  ARM:   "0001973239",  // FPI → files 6-K
+  TSM:   "0001046179",
+  ASML:  "0000937966",
+  ARM:   "0001973239",
   MU:    "0000723125",
   INTC:  "0000050863",
   QCOM:  "0000804328",
@@ -48,16 +60,16 @@ const TICKER_CIK: Record<string, string> = {
   KLAC:  "0000319201",
   SNPS:  "0000883241",
   CDNS:  "0000813672",
-  GFS:   "0001709048",  // FPI → files 6-K (was wrong)
-  ASX:   "0001122411",  // FPI → files 6-K (was wrong)
+  GFS:   "0001709048",
+  ASX:   "0001122411",
   AMKR:  "0001090425",
-  ALAB:  "0001736297",  // was wrong
-  SMCI:  "0001375365",  // was wrong
+  ALAB:  "0001736297",
+  SMCI:  "0001375365",
   DELL:  "0001571123",
-  ANET:  "0001596532",  // was wrong
+  ANET:  "0001596532",
   COHR:  "0000021175",
-  LITE:  "0001633978",  // was wrong
-  FN:    "0001408710",  // was wrong
+  LITE:  "0001633978",
+  FN:    "0001408710",
   AAPL:  "0000320193",
   GOOGL: "0001652044",
   AMZN:  "0001018724",
@@ -67,44 +79,7 @@ const TICKER_CIK: Record<string, string> = {
   CRWV:  "0002053914",
 };
 
-// Tickers that are foreign private issuers — file 6-K instead of 8-K
 const SIX_K_FILERS = new Set(["TSM", "ASML", "ARM", "GFS", "ASX"]);
-
-// Motley Fool company slug map (fallback)
-const FOOL_COMPANY_SLUG: Record<string, string> = {
-  NVDA:  "nvidia-nvda",
-  AMD:   "advanced-micro-devices-amd",
-  AVGO:  "broadcom-avgo",
-  MRVL:  "marvell-technology-mrvl",
-  TSM:   "taiwan-semiconductor-manufacturing-tsm",
-  ASML:  "asml-asml",
-  ARM:   "arm-holdings-arm",
-  MU:    "micron-technology-mu",
-  INTC:  "intel-intc",
-  QCOM:  "qualcomm-qcom",
-  AMAT:  "applied-materials-amat",
-  LRCX:  "lam-research-lrcx",
-  KLAC:  "kla-klac",
-  SNPS:  "synopsys-snps",
-  CDNS:  "cadence-design-systems-cdns",
-  GFS:   "globalfoundries-gfs",
-  ASX:   "ase-technology-holding-asx",
-  AMKR:  "amkor-technology-amkr",
-  ALAB:  "astera-labs-alab",
-  SMCI:  "super-micro-computer-smci",
-  DELL:  "dell-technologies-dell",
-  ANET:  "arista-networks-anet",
-  COHR:  "coherent-cohr",
-  LITE:  "lumentum-holdings-lite",
-  FN:    "fabrinet-fn",
-  AAPL:  "apple-aapl",
-  GOOGL: "alphabet-googl",
-  AMZN:  "amazon-amzn",
-  MSFT:  "microsoft-msft",
-  META:  "meta-platforms-meta",
-  ORCL:  "oracle-orcl",
-  CRWV:  "coreweave-crwv",
-};
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -122,7 +97,7 @@ function stripHtml(html: string): string {
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;/g, '"')
-    .replace(/&#8212;|&mdash;/g, "—")
+    .replace(/&#8212;|&#8213;|&mdash;/g, "—")
     .replace(/&#58;/g, ":")
     .replace(/&#8226;/g, "•")
     .replace(/<[^>]+>/g, " ")
@@ -130,50 +105,63 @@ function stripHtml(html: string): string {
     .trim();
 }
 
-// ── EDGAR 8-K fetcher (PRIMARY) ───────────────────────────────────────────────
+function fmtRev(millions: number | null): string {
+  if (millions == null) return "N/A";
+  if (millions >= 1000) return `$${(millions / 1000).toFixed(2)}B`;
+  return `$${millions.toFixed(0)}M`;
+}
 
-/**
- * Uses EDGAR submissions API to find earnings 8-K filings in a date window,
- * then fetches the press release exhibit (EX-99.1).
- */
-async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ text: string; url: string } | null> {
+// ── EDGAR press release fetcher ───────────────────────────────────────────────
+
+// Filename patterns that indicate an earnings press release
+const PR_PATTERNS = [
+  /pr\.htm/i, /pressrelease/i, /press.?rel/i,
+  /earnings/i, /results/i, /financial.?results/i,
+  /quarterly/i, /ex.?99/i,
+];
+
+// Filename patterns that indicate administrative filings (skip these)
+const SKIP_PATTERNS = [
+  /compensation/i, /director/i, /amendment/i, /bylaws/i,
+  /governance/i, /cfocommentary/i, /supplement/i,
+];
+
+function isPressRelease(filename: string): boolean {
+  const lower = filename.toLowerCase();
+  if (SKIP_PATTERNS.some((p) => p.test(lower))) return false;
+  return PR_PATTERNS.some((p) => p.test(lower));
+}
+
+async function fetchEdgarPressRelease(ticker: string, quarterEndDate: string): Promise<{ text: string; url: string } | null> {
   const cik = TICKER_CIK[ticker];
   if (!cik) return null;
 
   const targetForm = SIX_K_FILERS.has(ticker) ? "6-K" : "8-K";
   const cikDecimal = cik.replace(/^0+/, "");
-  const windowStart = quarterEndDate; // quarter end
+
+  // Earnings calls happen 14-45 days after quarter end (most within 35)
+  const windowStart = quarterEndDate;
   const windowEnd = new Date(quarterEndDate + "T00:00:00Z");
-  windowEnd.setDate(windowEnd.getDate() + 65);
+  windowEnd.setDate(windowEnd.getDate() + 50);
   const windowEndStr = windowEnd.toISOString().slice(0, 10);
 
   try {
-    // 1. Fetch submission history
     const subUrl = `https://data.sec.gov/submissions/CIK${cik}.json`;
     const subR = await fetch(subUrl, { headers: { "User-Agent": EDGAR_UA } });
     if (!subR.ok) return null;
 
     const sub = await subR.json() as {
-      filings: {
-        recent: {
-          form: string[];
-          filingDate: string[];
-          accessionNumber: string[];
-          primaryDocument: string[];
-        };
-      };
+      filings: { recent: { form: string[]; filingDate: string[]; accessionNumber: string[]; primaryDocument: string[] } };
     };
 
     const { form, filingDate, accessionNumber, primaryDocument } = sub.filings.recent;
 
-    // 2. Find filings in the earnings window
     const candidates = form
       .map((f, i) => ({ form: f, date: filingDate[i], acc: accessionNumber[i], doc: primaryDocument[i] }))
       .filter((f) => f.form === targetForm && f.date >= windowStart && f.date <= windowEndStr);
 
     if (candidates.length === 0) return null;
 
-    // 3. For each candidate 8-K, use the JSON index API to find EX-99 exhibit by TYPE
     for (const filing of candidates) {
       const accClean = filing.acc.replace(/-/g, "");
       const indexJsonUrl = `https://www.sec.gov/Archives/edgar/data/${cikDecimal}/${accClean}/index.json`;
@@ -181,18 +169,14 @@ async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ t
       const idxR = await fetch(indexJsonUrl, { headers: { "User-Agent": EDGAR_UA } });
       if (!idxR.ok) continue;
 
-      const idx = await idxR.json() as {
-        directory?: { item?: { name: string; type: string }[] };
-      };
-
+      const idx = await idxR.json() as { directory?: { item?: { name: string; type: string }[] } };
       const items = idx.directory?.item ?? [];
 
-      // Find EX-99.1 (press release) — by exhibit TYPE, not filename
-      const exhibit = items.find((it) =>
-        it.type === "EX-99.1" || it.type === "EX-99" || it.type === "EX-99.2"
-      ) ?? items.find((it) => it.name.toLowerCase().includes("ex99"));
-
-      const toTry = exhibit ? [exhibit.name] : [filing.doc];
+      // Prefer files that match press release patterns, skip admin filings
+      const prFiles = items.filter((it) => isPressRelease(it.name));
+      const toTry = prFiles.length > 0
+        ? prFiles.map((it) => it.name)
+        : [filing.doc];
 
       for (const file of toTry) {
         const fileUrl = `https://www.sec.gov/Archives/edgar/data/${cikDecimal}/${accClean}/${file}`;
@@ -202,11 +186,13 @@ async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ t
         const html = await fileR.text();
         const text = stripHtml(html);
 
-        if (text.length < 1000) continue;
+        if (text.length < 800) continue;
         const lower = text.toLowerCase();
-        if (!lower.includes("revenue") && !lower.includes("earnings") && !lower.includes("quarter")) continue;
+        // Must look like an earnings release
+        if (!lower.includes("revenue") || !lower.includes("quarter")) continue;
+        if (lower.includes("board of directors") && lower.includes("compensation") && !lower.includes("earnings per")) continue;
 
-        return { text: text.slice(0, 8000), url: fileUrl };
+        return { text: text.slice(0, 9000), url: fileUrl };
       }
 
       await sleep(200);
@@ -216,99 +202,70 @@ async function fetchEdgar8K(ticker: string, quarterEndDate: string): Promise<{ t
   } catch { return null; }
 }
 
-// ── Motley Fool fallback ──────────────────────────────────────────────────────
+// ── FMP: Revenue actuals from income statement ────────────────────────────────
 
-async function headOk(url: string): Promise<boolean> {
+async function fetchFmpRevenue(symbol: string): Promise<Map<string, number>> {
+  const apiKey = process.env.FMP_API_KEY;
+  if (!apiKey) return new Map();
+
   try {
-    const r = await fetch(url, { method: "HEAD", redirect: "follow",
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; Fabuless/1.0)" } });
-    return r.ok;
-  } catch { return false; }
-}
+    const url = `${FMP_BASE}/income-statement?symbol=${symbol}&period=quarter&limit=8&apikey=${apiKey}`;
+    const r = await fetch(url);
+    if (!r.ok) return new Map();
 
-/** Try to find a Motley Fool transcript by searching their site for the company + quarter year. */
-async function findMotleyFoolTranscript(ticker: string, quarterEndDate: string): Promise<{ text: string; url: string } | null> {
-  const slug = FOOL_COMPANY_SLUG[ticker];
-  if (!slug) return null;
+    const data = await r.json() as Array<{ date: string; revenue: number }>;
+    if (!Array.isArray(data)) return new Map();
 
-  const d = new Date(quarterEndDate + "T12:00:00Z");
-  const year = d.getFullYear();
-  const q = Math.ceil((d.getMonth() + 1) / 3);
-
-  // Build candidate URL slugs — try calendar year AND fiscal year labels, with/without "call"
-  const labels = [
-    `q${q}-${year}`, `q${q}-${year + 1}`, `q${q}-${year - 1}`,
-  ];
-  const suffixes = ["earnings-call-transcript", "earnings-transcript"];
-
-  // Try dates from quarterEnd to quarterEnd + 60 days in 1-week jumps (less requests)
-  const dates: string[] = [];
-  for (let offset = 0; offset <= 60; offset += 7) {
-    const trial = new Date(d);
-    trial.setDate(trial.getDate() + offset);
-    dates.push(`${trial.getFullYear()}/${String(trial.getMonth() + 1).padStart(2, "0")}/${String(trial.getDate()).padStart(2, "0")}`);
-  }
-
-  for (const datePath of dates) {
-    for (const label of labels) {
-      for (const suffix of suffixes) {
-        const url = `${FOOL_BASE}/${datePath}/${slug}-${label}-${suffix}/`;
-        if (await headOk(url)) {
-          const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; Fabuless/1.0)" } });
-          if (!r.ok) continue;
-          const html = await r.text();
-          const text = stripHtml(html).slice(0, 8000);
-          if (text.length > 500) return { text, url };
-        }
-        await sleep(150);
+    const map = new Map<string, number>();
+    for (const row of data) {
+      if (row.date && row.revenue) {
+        map.set(row.date.slice(0, 10), row.revenue / 1_000_000); // → millions
       }
     }
-  }
-  return null;
+    return map;
+  } catch { return new Map(); }
 }
 
 // ── Groq summarizer ───────────────────────────────────────────────────────────
 
 async function summarize(
   ticker: string, company: string, quarter: string,
-  sourceText: string, sourceType: "EDGAR" | "MotleyFool",
+  sourceText: string,
   epsActual: number | null, epsEstimate: number | null,
+  revActual: number | null,
   priceMoveDay: number | null,
 ): Promise<{ summary: string; keyQuote: string | null }> {
-  const context = [
-    epsActual != null && epsEstimate != null
-      ? `EPS: actual $${epsActual.toFixed(2)} vs estimate $${epsEstimate.toFixed(2)} (${epsActual >= epsEstimate ? "beat" : "miss"})`
-      : null,
-    priceMoveDay != null
-      ? `Stock moved ${priceMoveDay >= 0 ? "+" : ""}${priceMoveDay.toFixed(1)}% on earnings day`
-      : null,
-  ].filter(Boolean).join(". ");
+  const epsBeat = epsActual != null && epsEstimate != null
+    ? `EPS $${epsActual.toFixed(2)} actual vs $${epsEstimate.toFixed(2)} estimate (${epsActual >= epsEstimate ? "BEAT" : "MISS"} by ${Math.abs(((epsActual - epsEstimate) / epsEstimate) * 100).toFixed(1)}%)`
+    : null;
+  const revLine = revActual != null ? `Revenue ${fmtRev(revActual)} actual` : null;
+  const stockLine = priceMoveDay != null
+    ? `Stock moved ${priceMoveDay >= 0 ? "+" : ""}${priceMoveDay.toFixed(1)}% on earnings day`
+    : null;
 
-  const sourceNote = sourceType === "EDGAR"
-    ? "SEC 8-K earnings press release"
-    : "Motley Fool earnings call transcript";
+  const context = [epsBeat, revLine, stockLine].filter(Boolean).join(" | ");
 
-  const prompt = `You are summarizing ${company} (${ticker}) ${quarter} earnings for investors. Source: ${sourceNote}.
+  const prompt = `You are writing an earnings recap for ${company} (${ticker}) ${quarter} for a semiconductor equity investor.
 
-Financial context: ${context || "See source text."}
+Known data: ${context || "See source below."}
 
-Source text:
+Earnings press release:
 ${sourceText}
 
-Write a 3-sentence earnings summary:
-1. Headline results and how they compared to expectations (be specific with numbers from the text)
-2. Main narrative or theme management emphasized — what drove results
-3. Guidance or outlook, and why the stock moved the way it did
+Write a 3-sentence investor summary that gives REAL SIGNAL — no fluff:
+1. Headline results: EPS and revenue vs expectations, and which specific business SEGMENTS drove the beat or miss (e.g. data center, gaming, automotive, memory). Use the actual numbers.
+2. What drove performance: the specific product lines, customers, or macro trends management cited. What were investors most focused on going in, and did reality match?
+3. What drove the stock reaction: was it the headline beat, the forward guidance, a specific segment surprise, or something from management's commentary?
 
-Then extract the single best CEO/CFO quote from the text (verbatim if present, else null).
+Then extract the single best CEO or CFO quote from the text — one that explains drivers or outlook, not a platitude about "strong execution."
 
-JSON only, no markdown:
+Respond with JSON only, no markdown:
 {"summary": "...", "keyQuote": "..." or null}`;
 
   const msg = await groq.chat.completions.create({
     model: "llama-3.3-70b-versatile",
-    max_tokens: 500,
-    temperature: 0.2,
+    max_tokens: 600,
+    temperature: 0.1,
     messages: [{ role: "user", content: prompt }],
   });
 
@@ -329,7 +286,7 @@ async function getPriceMoveDay(symbol: string, quarterEndDate: string): Promise<
   try {
     const from = new Date(quarterEndDate + "T00:00:00Z");
     const to = new Date(quarterEndDate + "T00:00:00Z");
-    to.setDate(to.getDate() + 65);
+    to.setDate(to.getDate() + 55);
 
     const rows = await yf.chart(symbol, { period1: from, period2: to, interval: "1d" }) as unknown as {
       quotes?: { date: Date; close?: number | null }[];
@@ -342,7 +299,6 @@ async function getPriceMoveDay(symbol: string, quarterEndDate: string): Promise<
 
     if (closes.length < 2) return { pct: null, callDate: null };
 
-    // Find biggest single-day move in window — likely the earnings day
     let maxMove = 0, callDate = null, callPct = null;
     for (let i = 1; i < closes.length; i++) {
       const pct = Math.abs((closes[i].close - closes[i - 1].close) / closes[i - 1].close);
@@ -374,7 +330,7 @@ async function processCompany(
 ): Promise<EarningsSummary[]> {
   console.log(`\n▸ ${ticker} (${company})`);
 
-  // 1. Fetch earnings history from Yahoo
+  // 1. Yahoo: EPS history + quarter end dates
   let history: { date: string; epsActual: number | null; epsEstimate: number | null; surprisePct: number | null }[] = [];
   try {
     const s = await yf.quoteSummary(symbol, { modules: ["earningsHistory"] as never[] }, { validateResult: false }) as unknown as {
@@ -405,6 +361,10 @@ async function processCompany(
     return store[ticker] ?? [];
   }
 
+  // 2. FMP: revenue actuals for this company (one call covers all quarters)
+  const revenueMap = await fetchFmpRevenue(symbol);
+  await sleep(300);
+
   const existing = store[ticker] ?? [];
   const results: EarningsSummary[] = [...existing];
 
@@ -418,44 +378,41 @@ async function processCompany(
 
     console.log(`  → ${quarter} (quarter end: ${h.date})`);
 
-    // 2. Price move (also tells us when the call happened)
+    // 3. Price move
     const { pct: priceMoveDay, callDate } = await getPriceMoveDay(symbol, h.date);
-    if (callDate) console.log(`    ✓ Earnings call day: ${callDate} (${priceMoveDay != null ? `${priceMoveDay >= 0 ? "+" : ""}${priceMoveDay}%` : "?"})`);
+    if (callDate) console.log(`    ✓ Earnings day: ${callDate} (${priceMoveDay != null ? `${priceMoveDay >= 0 ? "+" : ""}${priceMoveDay}%` : "?"})`);
 
-    // 3. Fetch source text — EDGAR first, Motley Fool fallback
-    let source: { text: string; url: string; type: "EDGAR" | "MotleyFool" } | null = null;
-
-    console.log(`    → Trying EDGAR 8-K...`);
-    const edgar = await fetchEdgar8K(ticker, h.date);
-    if (edgar) {
-      source = { ...edgar, type: "EDGAR" };
-      console.log(`    ✓ EDGAR: ${edgar.url}`);
+    // 4. EDGAR press release
+    console.log(`    → Fetching EDGAR press release...`);
+    const source = await fetchEdgarPressRelease(ticker, h.date);
+    if (source) {
+      console.log(`    ✓ Found: ${source.url}`);
     } else {
-      console.log(`    ✗ EDGAR not found, trying Motley Fool...`);
-      const fool = await findMotleyFoolTranscript(ticker, h.date);
-      if (fool) {
-        source = { ...fool, type: "MotleyFool" };
-        console.log(`    ✓ Motley Fool: ${fool.url}`);
-      } else {
-        console.log(`    ✗ No source found — storing numbers only`);
-      }
+      console.log(`    ✗ No press release found`);
     }
 
-    // 4. Generate summary
+    // 5. Revenue from FMP income statement — match date within 45 days of quarter end
+    let revActual: number | null = null;
+    for (const [date, rev] of revenueMap) {
+      const diff = Math.abs(new Date(date).getTime() - new Date(h.date + "T00:00:00Z").getTime());
+      if (diff < 45 * 24 * 60 * 60 * 1000) { revActual = rev; break; }
+    }
+
+    // 6. Groq summary
     let summary = "";
     let keyQuote: string | null = null;
     if (source) {
-      console.log(`    → Summarizing with Groq...`);
-      const result = await summarize(ticker, company, quarter, source.text, source.type, h.epsActual, h.epsEstimate, priceMoveDay);
+      console.log(`    → Summarizing...`);
+      const result = await summarize(ticker, company, quarter, source.text, h.epsActual, h.epsEstimate, revActual, priceMoveDay);
       summary = result.summary;
       keyQuote = result.keyQuote;
-      console.log(`    ✓ Summary done`);
+      console.log(`    ✓ Done`);
     }
 
     const entry: EarningsSummary = {
       ticker, quarter, date: h.date,
       epsActual: h.epsActual, epsEstimate: h.epsEstimate, surprisePct: h.surprisePct,
-      revActual: null, revEstimate: null,
+      revActual, revEstimate: null,
       priceMoveDay,
       summary,
       keyQuote,
@@ -478,7 +435,11 @@ async function main() {
   const force = args.includes("--force");
 
   if (!process.env.GROQ_API_KEY) {
-    console.error("GROQ_API_KEY is required. Get a free key at console.groq.com");
+    console.error("GROQ_API_KEY required — get a free key at console.groq.com");
+    process.exit(1);
+  }
+  if (!process.env.FMP_API_KEY) {
+    console.error("FMP_API_KEY required — get a free key at site.financialmodelingprep.com");
     process.exit(1);
   }
 
@@ -501,7 +462,7 @@ async function main() {
       const summaries = await processCompany(company.ticker, company.yahooSymbol, company.name, store, force);
       if (summaries.length > 0) store[company.ticker] = summaries;
       fs.writeFileSync(DATA_PATH, JSON.stringify(store, null, 2));
-      await sleep(300);
+      await sleep(500);
     } catch (e) {
       console.error(`  ✗ ${company.ticker}: ${e}`);
     }

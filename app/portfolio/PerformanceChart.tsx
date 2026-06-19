@@ -93,24 +93,35 @@ function buildChartData(
   return rows;
 }
 
-// Pre-compute tick dates so each year/month appears exactly once
+// Pre-compute tick dates with appropriate density per period
 function computeTicks(data: Record<string, string | number>[], period: Period): string[] {
   const dates = data.map((r) => r.date as string);
   if (!dates.length) return [];
   const seen = new Set<string>();
   const ticks: string[] = [];
-  for (const date of dates) {
+
+  for (let i = 0; i < dates.length; i++) {
+    const date = dates[i];
     const d = new Date(date + "T00:00:00");
     let key: string;
     switch (period) {
       case "5D":
+        key = date; // every trading day
+        break;
       case "1M":
-        key = date;
+        // One tick per week (~every 5 trading days); use Mon as anchor
+        key = `week-${d.getFullYear()}-${Math.floor(d.getDate() / 7)}`;
         break;
       case "6M":
+        // Every 6 weeks (~bimonthly) to avoid crowding
+        key = `${d.getFullYear()}-${Math.floor(d.getMonth() / 2)}`;
+        break;
       case "YTD":
+        key = `${d.getFullYear()}-${d.getMonth()}`; // monthly
+        break;
       case "1Y":
-        key = `${d.getFullYear()}-${d.getMonth()}`;
+        // Every 2 months to avoid crowding
+        key = `${d.getFullYear()}-${Math.floor(d.getMonth() / 2)}`;
         break;
       case "5Y":
       case "All":
@@ -133,6 +144,7 @@ function fmtAxisDate(date: string, period: Period) {
     case "YTD":
       return d.toLocaleDateString("en-US", { month: "short" });
     case "1Y":
+      // Bold marker for year change is handled in CustomTick below
       return d.getMonth() === 0
         ? d.getFullYear().toString()
         : d.toLocaleDateString("en-US", { month: "short" });
@@ -140,6 +152,25 @@ function fmtAxisDate(date: string, period: Period) {
     case "All":
       return d.getFullYear().toString();
   }
+}
+
+// Custom tick: bolds year-change labels on 1Y chart
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function CustomXTick({ x, y, payload, period }: any) {
+  const label = fmtAxisDate(payload.value, period);
+  const d = new Date((payload.value as string) + "T00:00:00");
+  const isYearChange = period === "1Y" && d.getMonth() === 0;
+  return (
+    <text
+      x={x} y={y + 10}
+      textAnchor="middle"
+      fontSize={11}
+      fill={isYearChange ? "#374151" : "#9CA3AF"}
+      fontWeight={isYearChange ? 700 : 400}
+    >
+      {label}
+    </text>
+  );
 }
 
 function money(n: number): string {
@@ -386,8 +417,7 @@ export function PortfolioPerformance({
               <XAxis
                 dataKey="date"
                 ticks={computeTicks(data, period)}
-                tickFormatter={(d) => fmtAxisDate(d, period)}
-                tick={{ fontSize: 11, fill: "#9CA3AF" }}
+                tick={(props) => <CustomXTick {...props} period={period} />}
                 axisLine={false} tickLine={false}
                 interval={0}
               />

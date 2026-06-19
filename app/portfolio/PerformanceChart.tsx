@@ -11,19 +11,32 @@ import { buildColorMap, SPX_COLOR } from "./colors";
 type DayPrice = { date: string; close: number };
 type HistoryMap = Record<string, DayPrice[]>;
 
-function ninetyDaysAgo(): string {
+const PERIODS = ["5D", "1M", "6M", "YTD", "1Y", "All"] as const;
+type Period = typeof PERIODS[number];
+
+function oneYearAgo(): string {
   const d = new Date();
-  d.setDate(d.getDate() - 90);
+  d.setFullYear(d.getFullYear() - 1);
   return d.toISOString().slice(0, 10);
 }
 
-// Close price on or after a target date, from a daily series
+function periodStart(period: Period): string {
+  const now = new Date();
+  switch (period) {
+    case "5D":  { const d = new Date(now); d.setDate(d.getDate() - 8); return d.toISOString().slice(0, 10); }
+    case "1M":  { const d = new Date(now); d.setMonth(d.getMonth() - 1); return d.toISOString().slice(0, 10); }
+    case "6M":  { const d = new Date(now); d.setMonth(d.getMonth() - 6); return d.toISOString().slice(0, 10); }
+    case "YTD": return `${now.getFullYear()}-01-01`;
+    case "1Y":  { const d = new Date(now); d.setFullYear(d.getFullYear() - 1); return d.toISOString().slice(0, 10); }
+    case "All": return "";
+  }
+}
+
 function closeOnOrAfter(prices: DayPrice[], date: string): number | null {
   const hit = prices.find((p) => p.date >= date);
   return hit ? hit.close : null;
 }
 
-// Normalize a price series to % return vs. a fixed base price (cost basis)
 function normalizeToBase(prices: DayPrice[], startDate: string, base: number): { date: string; pct: number }[] {
   const startIdx = prices.findIndex((p) => p.date >= startDate);
   if (startIdx === -1 || !base) return [];
@@ -58,8 +71,10 @@ function buildChartData(
   return rows;
 }
 
-function fmtAxis(date: string) {
+function fmtAxisDate(date: string, period: Period) {
   const d = new Date(date + "T00:00:00");
+  if (period === "5D") return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  if (period === "1M") return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
 }
 
@@ -79,16 +94,18 @@ export function PortfolioPerformance({
   const [history, setHistory] = useState<HistoryMap | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [period, setPeriod] = useState<Period>("All");
+  const [hiddenTickers, setHiddenTickers] = useState<Set<string>>(new Set());
 
   const colorMap = buildColorMap(holdings.map((h) => h.ticker));
 
-  // Always chart all holdings — use cost basis where available, fallback to 90-day window otherwise
   const anchored = holdings.filter((h) => h.purchasePrice && h.purchaseDate);
   const usingFallback = anchored.length === 0;
-
   const charted = holdings;
-  const fromDates = charted.map((h) => h.purchaseDate ?? ninetyDaysAgo());
-  const earliest = fromDates.sort()[0] ?? ninetyDaysAgo();
+
+  // Always fetch at least 1 year back so all period buttons have data
+  const purchaseDates = charted.map((h) => h.purchaseDate ?? oneYearAgo());
+  const earliest = [oneYearAgo(), ...purchaseDates].sort()[0];
   const tickers = charted.map((h) => h.ticker);
   const cacheKey = charted.map((h) => h.ticker + (h.purchaseDate ?? "") + (h.purchasePrice ?? "")).join(",");
 
@@ -104,29 +121,48 @@ export function PortfolioPerformance({
 
   if (charted.length === 0) return null;
 
-  // ---- Build chart series ----
+  // ── Build chart series ────────────────────────────────────────────────────
   let data: Record<string, string | number>[] = [];
   if (history) {
     const seriesMap: Record<string, { date: string; pct: number }[]> = {};
-    for (const h of charted) {
-      const prices = history[h.ticker] ?? [];
-      const startDate = h.purchaseDate ?? earliest;
-      // anchor to cost basis if present, else to first close (fallback mode)
-      const base = h.purchasePrice ?? closeOnOrAfter(prices, startDate);
-      if (base) {
-        const series = normalizeToBase(prices, startDate, base);
-        if (series.length > 0) seriesMap[h.ticker] = series;
+
+    if (period === "All") {
+      // Anchor each holding to its cost basis / purchase date
+      const allFromDate = purchaseDates.sort()[0] ?? oneYearAgo();
+      for (const h of charted) {
+        const prices = history[h.ticker] ?? [];
+        const startDate = h.purchaseDate ?? allFromDate;
+        const base = h.purchasePrice ?? closeOnOrAfter(prices, startDate);
+        if (base) {
+          const series = normalizeToBase(prices, startDate, base);
+          if (series.length > 0) seriesMap[h.ticker] = series;
+        }
+      }
+      if (history.SPX) {
+        const spxBase = closeOnOrAfter(history.SPX, allFromDate);
+        if (spxBase) seriesMap["S&P 500"] = normalizeToBase(history.SPX, allFromDate, spxBase);
+      }
+    } else {
+      // Anchor all lines to 0% at the start of the selected window
+      const winStart = periodStart(period);
+      for (const h of charted) {
+        const prices = history[h.ticker] ?? [];
+        const base = closeOnOrAfter(prices, winStart);
+        if (base) {
+          const series = normalizeToBase(prices, winStart, base);
+          if (series.length > 0) seriesMap[h.ticker] = series;
+        }
+      }
+      if (history.SPX) {
+        const spxBase = closeOnOrAfter(history.SPX, winStart);
+        if (spxBase) seriesMap["S&P 500"] = normalizeToBase(history.SPX, winStart, spxBase);
       }
     }
-    // S&P backdrop — anchored to its close on the earliest start date
-    if (history.SPX) {
-      const spxBase = closeOnOrAfter(history.SPX, earliest);
-      if (spxBase) seriesMap["S&P 500"] = normalizeToBase(history.SPX, earliest, spxBase);
-    }
+
     data = buildChartData(seriesMap);
   }
 
-  // ---- Summary strip (needs price + date + shares for dollar figures) ----
+  // ── Summary strip (always cost-basis anchored, ignores period) ────────────
   const full = holdings.filter((h) => h.purchasePrice && h.purchaseDate && h.shares);
   let strip: null | {
     cost: number; curValue: number; pnl: number; pnlPct: number;
@@ -142,18 +178,13 @@ export function PortfolioPerformance({
       cost += hCost;
       curValue += h.shares! * (live ?? h.purchasePrice!);
       const spxAtBuy = history.SPX ? closeOnOrAfter(history.SPX, h.purchaseDate!) : null;
-      if (spxToday && spxAtBuy) {
-        spyValue += hCost * (spxToday / spxAtBuy);
-      } else {
-        spyValue += hCost; // no SPX data → treat as flat
-      }
+      if (spxToday && spxAtBuy) spyValue += hCost * (spxToday / spxAtBuy);
+      else spyValue += hCost;
     }
     const pnl = curValue - cost;
     const spyPnl = spyValue - cost;
     strip = {
-      cost,
-      curValue,
-      pnl,
+      cost, curValue, pnl,
       pnlPct: cost ? (pnl / cost) * 100 : 0,
       spyValue,
       spyPct: cost ? (spyPnl / cost) * 100 : 0,
@@ -164,40 +195,38 @@ export function PortfolioPerformance({
 
   const legendItems = charted.filter((h) => data.some((row) => h.ticker in row));
 
+  function toggleTicker(ticker: string) {
+    setHiddenTickers((prev) => {
+      const next = new Set(prev);
+      if (next.has(ticker)) next.delete(ticker); else next.add(ticker);
+      return next;
+    });
+  }
+
   return (
     <div className="mb-8">
       <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-700 mb-3">
         Performance vs. S&amp;P 500
       </h2>
 
-      {/* Summary block */}
+      {/* Summary strip */}
       {strip && (
         <div
-          className="mb-5 rounded-lg overflow-hidden"
+          className="mb-4 rounded-lg overflow-hidden"
           style={{ background: "rgba(16,185,129,0.04)", border: "1px solid rgba(16,185,129,0.12)" }}
         >
-          {/* Two-column row */}
           <div className="flex divide-x" style={{ borderColor: "#1F2937" }}>
-            {/* Left — your holdings */}
             <div className="flex-1 px-4 py-2.5">
               <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">Your Holdings</p>
               <div className="flex items-baseline gap-1.5">
-                <span
-                  className="text-[20px] font-bold tabular-nums leading-none"
-                  style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}
-                >
+                <span className="text-[20px] font-bold tabular-nums leading-none" style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}>
                   {money(strip.pnl)}
                 </span>
-                <span
-                  className="text-[13px] tabular-nums leading-none"
-                  style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}
-                >
+                <span className="text-[13px] tabular-nums leading-none" style={{ color: strip.pnl >= 0 ? "#10B981" : "#F43F5E" }}>
                   ({strip.pnlPct >= 0 ? "+" : ""}{strip.pnlPct.toFixed(1)}%)
                 </span>
               </div>
             </div>
-
-            {/* Right — S&P comparison */}
             <div className="flex-1 px-4 py-2.5" style={{ borderColor: "#1F2937" }}>
               <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">S&amp;P 500 (same money)</p>
               <div className="flex items-baseline gap-1.5">
@@ -207,16 +236,8 @@ export function PortfolioPerformance({
               </div>
             </div>
           </div>
-
-          {/* Full-width beat row */}
-          <div
-            className="px-4 py-1.5"
-            style={{ borderTop: "1px solid rgba(16,185,129,0.12)" }}
-          >
-            <span
-              className="text-[11px] tabular-nums"
-              style={{ color: strip.beatBy >= 0 ? "#10B981" : "#F43F5E" }}
-            >
+          <div className="px-4 py-1.5" style={{ borderTop: "1px solid rgba(16,185,129,0.12)" }}>
+            <span className="text-[11px] tabular-nums" style={{ color: strip.beatBy >= 0 ? "#10B981" : "#F43F5E" }}>
               {strip.beatBy >= 0 ? "↑ Beating the market by " : "↓ Trailing the market by "}
               {money(Math.abs(strip.beatBy)).replace(/^[+]/, "")} ({strip.beatByPct >= 0 ? "+" : ""}{strip.beatByPct.toFixed(1)}%)
             </span>
@@ -226,19 +247,46 @@ export function PortfolioPerformance({
 
       {usingFallback && (
         <p className="text-[11px] text-gray-400 mb-3">
-          Showing 90-day price change. Add your purchase price &amp; date (Edit holdings) to anchor the chart to your cost basis — 0% becomes your breakeven.
+          Add your purchase price &amp; date (Edit holdings) to anchor to your cost basis.
         </p>
       )}
 
-      {loading && <div className="h-[320px] flex items-center justify-center text-[12px] text-gray-400">Loading chart…</div>}
-      {error && <div className="h-[320px] flex items-center justify-center text-[12px] text-gray-400">Chart unavailable</div>}
+      {loading && <div className="h-[300px] flex items-center justify-center text-[12px] text-gray-400">Loading chart…</div>}
+      {error && <div className="h-[300px] flex items-center justify-center text-[12px] text-gray-400">Chart unavailable</div>}
 
       {!loading && !error && data.length > 0 && (
         <>
-          <ResponsiveContainer width="100%" height={320}>
+          {/* Period selector */}
+          <div className="flex gap-0.5 mb-3">
+            {PERIODS.map((p) => (
+              <button
+                key={p}
+                onClick={() => setPeriod(p)}
+                className="px-2.5 py-1 text-[11px] font-semibold rounded transition-colors"
+                style={{
+                  background: period === p ? "#1e40af" : "transparent",
+                  color: period === p ? "#fff" : "#6B7280",
+                }}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+
+          <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: 0 }}>
-              <XAxis dataKey="date" tickFormatter={fmtAxis} tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} interval="preserveStartEnd" />
-              <YAxis tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}%`} tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={52} />
+              <XAxis
+                dataKey="date"
+                tickFormatter={(d) => fmtAxisDate(d, period)}
+                tick={{ fontSize: 10, fill: "#9CA3AF" }}
+                axisLine={false} tickLine={false}
+                interval="preserveStartEnd"
+              />
+              <YAxis
+                tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}%`}
+                tick={{ fontSize: 10, fill: "#9CA3AF" }}
+                axisLine={false} tickLine={false} width={52}
+              />
               <Tooltip
                 contentStyle={{ fontSize: 11, border: "1px solid #E5E7EB", borderRadius: 8, background: "white", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                 formatter={(value, name) => [typeof value === "number" ? `${value > 0 ? "+" : ""}${value.toFixed(1)}%` : "—", String(name)]}
@@ -246,22 +294,47 @@ export function PortfolioPerformance({
                 cursor={{ stroke: "#E5E7EB", strokeWidth: 1 }}
                 itemSorter={(item) => -(item.value as number)}
               />
-              {/* breakeven baseline */}
               <ReferenceLine y={0} stroke="#9CA3AF" strokeWidth={1.5} />
               {legendItems.map((h) => (
-                <Line key={h.ticker} type="monotone" dataKey={h.ticker} stroke={colorMap[h.ticker]} strokeWidth={1.5} dot={false} connectNulls name={h.ticker} />
+                <Line
+                  key={h.ticker}
+                  type="monotone"
+                  dataKey={h.ticker}
+                  stroke={colorMap[h.ticker]}
+                  strokeWidth={hiddenTickers.has(h.ticker) ? 0 : 1.5}
+                  dot={false}
+                  connectNulls
+                  name={h.ticker}
+                  hide={hiddenTickers.has(h.ticker)}
+                />
               ))}
-              <Line type="monotone" dataKey="S&P 500" stroke={SPX_COLOR} strokeWidth={1.5} strokeDasharray="4 3" dot={false} connectNulls name="S&P 500" />
+              <Line
+                type="monotone"
+                dataKey="S&P 500"
+                stroke={SPX_COLOR}
+                strokeWidth={hiddenTickers.has("S&P 500") ? 0 : 1.5}
+                strokeDasharray="4 3"
+                dot={false}
+                connectNulls
+                name="S&P 500"
+                hide={hiddenTickers.has("S&P 500")}
+              />
             </LineChart>
           </ResponsiveContainer>
 
-          {/* Custom legend — scales cleanly, wraps, shows which color is which stock */}
+          {/* Legend — click to toggle */}
           <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3">
             {legendItems.map((h) => {
               const last = [...data].reverse().find((row) => h.ticker in row);
               const pct = last ? (last[h.ticker] as number) : null;
+              const hidden = hiddenTickers.has(h.ticker);
               return (
-                <div key={h.ticker} className="flex items-center gap-1.5">
+                <button
+                  key={h.ticker}
+                  onClick={() => toggleTicker(h.ticker)}
+                  className="flex items-center gap-1.5 transition-opacity"
+                  style={{ opacity: hidden ? 0.35 : 1 }}
+                >
                   <span className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: colorMap[h.ticker] }} />
                   <span className="text-[11px] font-bold text-gray-700">{h.ticker}</span>
                   {pct !== null && (
@@ -269,14 +342,19 @@ export function PortfolioPerformance({
                       {pct >= 0 ? "+" : ""}{pct.toFixed(1)}%
                     </span>
                   )}
-                </div>
+                </button>
               );
             })}
             {(() => {
               const last = [...data].reverse().find((row) => "S&P 500" in row);
               const pct = last ? (last["S&P 500"] as number) : null;
+              const hidden = hiddenTickers.has("S&P 500");
               return (
-                <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => toggleTicker("S&P 500")}
+                  className="flex items-center gap-1.5 transition-opacity"
+                  style={{ opacity: hidden ? 0.35 : 1 }}
+                >
                   <span className="w-2.5 h-0.5 rounded-sm" style={{ backgroundColor: SPX_COLOR }} />
                   <span className="text-[11px] font-semibold text-gray-400">S&amp;P 500</span>
                   {pct !== null && (
@@ -284,7 +362,7 @@ export function PortfolioPerformance({
                       {pct >= 0 ? "+" : ""}{pct.toFixed(1)}%
                     </span>
                   )}
-                </div>
+                </button>
               );
             })()}
           </div>

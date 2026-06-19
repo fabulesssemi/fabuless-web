@@ -60,6 +60,128 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 9,
+    date: "June 19, 2026",
+    slug: "issue-9",
+    title: "ASML Denies China Shipment. SK Hynix Eyes HBM. Apple-Intel Alliance Forms.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Snapdragon 8 Elite Gen 6 Pro Will Only Have Two Versions, With Block Diagrams Serving As Concrete Evidence",
+            url: "https://wccftech.com/snapdragon-8-elite-gen-6-pro-block-diagrams-show-evidence-of-only-two-versions/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Qualcomm's 2nm Snapdragon 8 Elite Gen 6 Pro narrows to two SKUs; binning strategy clarified.",
+          },
+          {
+            headline: "A startup claims it broke through a bottleneck that's holding back LLMs",
+            url: "https://www.technologyreview.com/2026/06/19/1139313/a-startup-claims-it-broke-through-a-bottleneck-thats-holding-back-llms/",
+            source: "MIT Tech Review",
+            image: null,
+            oneliner: "Subquadratic claims LLM compute bottleneck breakthrough; implications for accelerator demand unclear.",
+          },
+          {
+            headline: "Fabrix.ai demonstrates production-grade agentic operations at Cisco Live",
+            url: "https://siliconangle.com/2026/06/19/fabrix-ai-demonstrates-production-grade-agentic-operations-cisco-live/",
+            source: "SiliconAngle",
+            image: null,
+            oneliner: "Fabrix.ai production agentic ops signal shift from AI curiosity to enterprise deployment; capex urgency.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK Hynix reportedly held U.S. talks on HBM supply and local investment plans",
+            url: "https://www.digitimes.com/news/a20260618PD233/sk-hynix-hbm-investment-shipments-supply-chain.html",
+            source: "Digitimes",
+            image: null,
+            oneliner: "SK Hynix negotiates HBM supply deals and US capex expansion with State Department.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "US energy regulator to order grid operators to expedite AI data center applications",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/us-energy-regulator-to-order-grid-operators-to-expedite-ai-data-center-applications-says-projects-should-bring-their-own-power-or-cut-usage-during-high-demand",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "FERC mandates 90-day fast-track for AI datacenters with on-site power or demand response.",
+          },
+          {
+            headline: "German electricity grid equipment maker SGB-SMIT in early IPO talks",
+            url: "https://www.ft.com/content/660b1366-acbb-4f9b-910a-6f1062653bff",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SGB-SMIT IPO at €4bn+ valuation; AI/datacenter grid equipment capex boom drives exit.",
+          },
+          {
+            headline: "The tech giant mining Wall Street for AI cash",
+            url: "https://www.ft.com/content/6db5b580-58ac-4c7e-83ca-7c9fb11a347e",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Meta's Dina Powell seeks Wall Street financing for AI capex surge; capital intensity accelerates.",
+          },
+          {
+            headline: "Why the Fed's hawkish stance signals a step-change in U.S. dollar sentiment",
+            url: "https://www.marketwatch.com/story/why-the-feds-hawkish-stance-signals-a-step-change-in-u-s-dollar-sentiment-and-a-new-direction-742f1fff?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Fed hawkishness strengthens dollar; higher cost of capital pressures semiconductor M&A/capex cycles.",
+          },
+          {
+            headline: "Warsh's task forces give the Fed wiggle room to put off changing rates until December",
+            url: "https://www.marketwatch.com/story/warshs-task-forces-give-the-fed-wiggle-room-to-put-off-changing-rates-until-december-364fc1fc?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Fed delays rate decisions via task forces; elevated cost of capital extends through 2026.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "ASML May Have Shipped Banned Machine To China Says US Government – Firm Denies Claim",
+            url: "https://wccftech.com/asml-has-shipped-banned-machines-to-china-says-us-government-firm-denies-claim/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "US Commerce alleges ASML EUV shipments to China; export controls enforcement tightens.",
+          },
+          {
+            headline: "SK Telecom named as the Korean carrier at the center of Anthropic's Mythos export controls controversy",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/sk-telecom-named-as-the-korean-carrier-at-the-center-of-anthropics-mythos-export-controls",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "SK Telecom's Claude Mythos access revoked; US frontier model export controls bite allies.",
+          },
+          {
+            headline: "All Semiconductor Roads Lead to Taiwan",
+            url: "https://www.eetimes.com/all-semiconductor-roads-lead-to-taiwan/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Taiwan's outsized linchpin role in global chip supply underscores geopolitical concentration risk.",
+          },
+          {
+            headline: "Geopolitical jitters push Europe's internet registry away from cloud-first strategy",
+            url: "https://www.theregister.com/networks/2026/06/19/geopolitical-jitters-push-europes-internet-registry-away-from-cloud-first-strategy/5258704",
+            source: "The Register",
+            image: null,
+            oneliner: "RIPE jettisons cloud-first strategy over geopolitical risk; EU infrastructure sovereignty reshapes capex.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 8,
     date: "June 18, 2026",
     slug: "issue-8",

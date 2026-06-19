@@ -23,11 +23,9 @@ function CategoryLabel({ category }: { category: string }) {
 }
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
-  const DAY_MS = 24 * 60 * 60 * 1000;
-  const now = Date.now();
-  // Top stories must be from today AND have an image
+  // Top stories: whatever update-quantum-articles.ts marked as topStory (clears old flags each run)
   const topStories = articles
-    .filter((a) => a.topStory && a.image && now - new Date(a.publishedAt).getTime() < DAY_MS)
+    .filter((a) => a.topStory && a.image)
     .slice(0, 3);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id));

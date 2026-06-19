@@ -8,7 +8,7 @@ export type PricePoint = { date: string; close: number };
 async function fetchPriceHistory(symbol: string): Promise<PricePoint[]> {
   try {
     const start = new Date();
-    start.setFullYear(start.getFullYear() - 1);
+    start.setFullYear(start.getFullYear() - 5);
 
     const result = await yf.chart(symbol, {
       period1: start.toISOString().slice(0, 10),

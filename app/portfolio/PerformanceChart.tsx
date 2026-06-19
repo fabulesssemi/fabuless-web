@@ -95,8 +95,23 @@ function buildChartData(
 
 function fmtAxisDate(date: string, period: Period) {
   const d = new Date(date + "T00:00:00");
-  if (period === "5D" || period === "1M") return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+  switch (period) {
+    case "5D":
+    case "1M":
+      return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    case "6M":
+      return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+    case "YTD":
+      return d.toLocaleDateString("en-US", { month: "short" });
+    case "1Y":
+      // Show full year when crossing into January, otherwise just the month
+      return d.getMonth() === 0
+        ? d.getFullYear().toString()
+        : d.toLocaleDateString("en-US", { month: "short" });
+    case "5Y":
+    case "All":
+      return d.getFullYear().toString();
+  }
 }
 
 function money(n: number): string {

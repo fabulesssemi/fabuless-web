@@ -55,35 +55,27 @@ function xLabelForPeriod(date: string, period: Period): string {
   }
 }
 
-// One label per month (6M/YTD/1Y) or per year (5Y/All) or per day (5D/1M)
+// Pick N evenly-spaced tick positions for guaranteed even spacing
 function computeXLabels(
   data: { date: string }[],
   period: Period,
 ): { idx: number; label: string }[] {
-  const seen = new Set<string>();
-  const labels: { idx: number; label: string }[] = [];
-  for (let i = 0; i < data.length; i++) {
-    const d = new Date(data[i].date + "T00:00:00");
-    let key: string;
-    switch (period) {
-      case "5D":
-      case "1M":  key = data[i].date; break;
-      case "6M":
-      case "YTD":
-      case "1Y":  key = `${d.getFullYear()}-${d.getMonth()}`; break;
-      case "5Y":
-      case "All": key = `${d.getFullYear()}`; break;
-      default:    key = data[i].date;
-    }
-    if (!seen.has(key)) {
-      seen.add(key);
-      labels.push({ idx: i, label: xLabelForPeriod(data[i].date, period) });
-    }
+  const n = data.length;
+  if (!n) return [];
+
+  const targets: Record<Period, number> = {
+    "1D": 5, "5D": Math.min(n, 5), "1M": 5,
+    "6M": 6, "YTD": 6, "1Y": 6, "5Y": 6, "All": 6,
+  };
+  const count = targets[period];
+  if (n <= count) {
+    return data.map((d, i) => ({ idx: i, label: xLabelForPeriod(d.date, period) }));
   }
-  // For dense periods limit to ~6 labels
-  if (["5D", "1M"].includes(period) && labels.length > 8) {
-    const step = Math.ceil(labels.length / 6);
-    return labels.filter((_, i) => i % step === 0);
+
+  const labels: { idx: number; label: string }[] = [];
+  for (let i = 0; i < count; i++) {
+    const idx = Math.round((i / (count - 1)) * (n - 1));
+    labels.push({ idx, label: xLabelForPeriod(data[idx].date, period) });
   }
   return labels;
 }

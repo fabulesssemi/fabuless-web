@@ -20,12 +20,6 @@ function fiveYearsAgo(): string {
   return d.toISOString().slice(0, 10);
 }
 
-function oneYearAgo(): string {
-  const d = new Date();
-  d.setFullYear(d.getFullYear() - 1);
-  return d.toISOString().slice(0, 10);
-}
-
 function periodStart(period: Period): string {
   const now = new Date();
   switch (period) {
@@ -34,8 +28,8 @@ function periodStart(period: Period): string {
     case "6M":  { const d = new Date(now); d.setMonth(d.getMonth() - 6); return d.toISOString().slice(0, 10); }
     case "YTD": return `${now.getFullYear()}-01-01`;
     case "1Y":  { const d = new Date(now); d.setFullYear(d.getFullYear() - 1); return d.toISOString().slice(0, 10); }
-    case "5Y":  { const d = new Date(now); d.setFullYear(d.getFullYear() - 5); return d.toISOString().slice(0, 10); }
-    case "All": return "";
+    case "5Y":  return fiveYearsAgo();
+    case "All": return fiveYearsAgo();
   }
 }
 
@@ -44,13 +38,34 @@ function closeOnOrAfter(prices: DayPrice[], date: string): number | null {
   return hit ? hit.close : null;
 }
 
-function normalizeToBase(prices: DayPrice[], startDate: string, base: number): { date: string; pct: number }[] {
-  const startIdx = prices.findIndex((p) => p.date >= startDate);
-  if (startIdx === -1 || !base) return [];
-  return prices.slice(startIdx).map((p) => ({
-    date: p.date,
-    pct: Math.round(((p.close - base) / base) * 1000) / 10,
-  }));
+// Builds pre/post series for a ticker. pre = before purchaseDate (dashed), post = from purchaseDate (solid).
+// If no purchaseDate, all data goes into "post" (solid throughout).
+function buildSplitSeries(
+  prices: DayPrice[],
+  winStart: string,
+  base: number,
+  purchaseDate: string | null | undefined,
+): {
+  pre: { date: string; pct: number }[];
+  post: { date: string; pct: number }[];
+} {
+  const startIdx = prices.findIndex((p) => p.date >= winStart);
+  if (startIdx === -1 || !base) return { pre: [], post: [] };
+
+  const sliced = prices.slice(startIdx);
+  const toPct = (p: DayPrice) => ({ date: p.date, pct: Math.round(((p.close - base) / base) * 1000) / 10 });
+
+  if (!purchaseDate) return { pre: [], post: sliced.map(toPct) };
+
+  const pre = sliced.filter((p) => p.date < purchaseDate).map(toPct);
+  const post = sliced.filter((p) => p.date >= purchaseDate).map(toPct);
+
+  // Stitch: include the last pre point in post so the lines connect visually
+  if (pre.length > 0 && post.length > 0) {
+    post.unshift(pre[pre.length - 1]);
+  }
+
+  return { pre, post };
 }
 
 function buildChartData(
@@ -80,8 +95,7 @@ function buildChartData(
 
 function fmtAxisDate(date: string, period: Period) {
   const d = new Date(date + "T00:00:00");
-  if (period === "5D") return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  if (period === "1M") return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  if (period === "5D" || period === "1M") return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
 }
 
@@ -89,6 +103,47 @@ function money(n: number): string {
   const abs = Math.abs(n);
   const s = abs >= 1000 ? `$${(abs / 1000).toFixed(1)}k` : `$${abs.toFixed(0)}`;
   return n < 0 ? `-${s}` : `+${s}`;
+}
+
+// Custom tooltip — hides _pre keys, strips _post suffix from display names
+function ChartTooltip({
+  active, payload, label, colorMap,
+}: {
+  active?: boolean;
+  payload?: { dataKey?: string | number; value?: number; color?: string }[];
+  label?: string;
+  colorMap: Record<string, string>;
+}) {
+  if (!active || !payload?.length) return null;
+
+  // Filter out _pre series; deduplicate (post wins over bare)
+  const seen = new Set<string>();
+  const items: { ticker: string; value: number; color: string }[] = [];
+  for (const entry of [...payload].sort((a, b) => (b.value ?? 0) - (a.value ?? 0))) {
+    const key = String(entry.dataKey ?? "");
+    if (key.endsWith("_pre")) continue;
+    const ticker = key.replace(/_post$/, "");
+    if (seen.has(ticker)) continue;
+    seen.add(ticker);
+    if (typeof entry.value === "number") {
+      items.push({ ticker, value: entry.value, color: colorMap[ticker] ?? entry.color ?? "#888" });
+    }
+  }
+
+  const date = new Date(String(label) + "T00:00:00").toLocaleDateString("en-US", {
+    month: "long", day: "numeric", year: "numeric",
+  });
+
+  return (
+    <div style={{ fontSize: 11, border: "1px solid #E5E7EB", borderRadius: 8, background: "white", boxShadow: "0 4px 12px rgba(0,0,0,0.08)", padding: "8px 12px", minWidth: 140 }}>
+      <p style={{ fontWeight: 700, color: "#111827", marginBottom: 6 }}>{date}</p>
+      {items.map(({ ticker, value, color }) => (
+        <p key={ticker} style={{ color, margin: "2px 0", fontWeight: 600 }}>
+          {ticker} : {value >= 0 ? "+" : ""}{value.toFixed(1)}%
+        </p>
+      ))}
+    </div>
+  );
 }
 
 export function PortfolioPerformance({
@@ -105,14 +160,10 @@ export function PortfolioPerformance({
   const [hiddenTickers, setHiddenTickers] = useState<Set<string>>(new Set());
 
   const colorMap = buildColorMap(holdings.map((h) => h.ticker));
-
-  const anchored = holdings.filter((h) => h.purchasePrice && h.purchaseDate);
-  const usingFallback = anchored.length === 0;
   const charted = holdings;
 
-  // Always fetch at least 5 years back so all period buttons have data
-  const purchaseDates = charted.map((h) => h.purchaseDate ?? fiveYearsAgo());
-  const earliest = [fiveYearsAgo(), ...purchaseDates].sort()[0];
+  // Always fetch 5 years back so every period button has data
+  const earliest = fiveYearsAgo();
   const tickers = charted.map((h) => h.ticker);
   const cacheKey = charted.map((h) => h.ticker + (h.purchaseDate ?? "") + (h.purchasePrice ?? "")).join(",");
 
@@ -129,47 +180,34 @@ export function PortfolioPerformance({
   if (charted.length === 0) return null;
 
   // ── Build chart series ────────────────────────────────────────────────────
-  let data: Record<string, string | number>[] = [];
-  if (history) {
-    const seriesMap: Record<string, { date: string; pct: number }[]> = {};
+  // All periods anchor to window start. Each ticker gets _pre (dashed) + _post (solid) series.
+  const seriesMap: Record<string, { date: string; pct: number }[]> = {};
 
-    if (period === "All") {
-      // Anchor each holding to its cost basis / purchase date
-      const allFromDate = purchaseDates.sort()[0] ?? oneYearAgo();
-      for (const h of charted) {
-        const prices = history[h.ticker] ?? [];
-        const startDate = h.purchaseDate ?? allFromDate;
-        const base = h.purchasePrice ?? closeOnOrAfter(prices, startDate);
-        if (base) {
-          const series = normalizeToBase(prices, startDate, base);
-          if (series.length > 0) seriesMap[h.ticker] = series;
-        }
-      }
-      if (history.SPX) {
-        const spxBase = closeOnOrAfter(history.SPX, allFromDate);
-        if (spxBase) seriesMap["S&P 500"] = normalizeToBase(history.SPX, allFromDate, spxBase);
-      }
-    } else {
-      // Anchor all lines to 0% at the start of the selected window
-      const winStart = periodStart(period);
-      for (const h of charted) {
-        const prices = history[h.ticker] ?? [];
-        const base = closeOnOrAfter(prices, winStart);
-        if (base) {
-          const series = normalizeToBase(prices, winStart, base);
-          if (series.length > 0) seriesMap[h.ticker] = series;
-        }
-      }
-      if (history.SPX) {
-        const spxBase = closeOnOrAfter(history.SPX, winStart);
-        if (spxBase) seriesMap["S&P 500"] = normalizeToBase(history.SPX, winStart, spxBase);
-      }
+  if (history) {
+    const winStart = periodStart(period);
+
+    for (const h of charted) {
+      const prices = history[h.ticker] ?? [];
+      const base = closeOnOrAfter(prices, winStart);
+      if (!base) continue;
+
+      const { pre, post } = buildSplitSeries(prices, winStart, base, h.purchaseDate);
+      if (pre.length > 0) seriesMap[`${h.ticker}_pre`] = pre;
+      if (post.length > 0) seriesMap[`${h.ticker}_post`] = post;
     }
 
-    data = buildChartData(seriesMap);
+    if (history.SPX) {
+      const spxBase = closeOnOrAfter(history.SPX, winStart);
+      if (spxBase) {
+        const { post } = buildSplitSeries(history.SPX, winStart, spxBase, null);
+        if (post.length > 0) seriesMap["S&P 500"] = post;
+      }
+    }
   }
 
-  // ── Summary strip (always cost-basis anchored, ignores period) ────────────
+  const data = history ? buildChartData(seriesMap) : [];
+
+  // ── Summary strip (always cost-basis anchored) ────────────────────────────
   const full = holdings.filter((h) => h.purchasePrice && h.purchaseDate && h.shares);
   let strip: null | {
     cost: number; curValue: number; pnl: number; pnlPct: number;
@@ -200,7 +238,9 @@ export function PortfolioPerformance({
     };
   }
 
-  const legendItems = charted.filter((h) => data.some((row) => h.ticker in row));
+  const legendItems = charted.filter((h) =>
+    data.some((row) => `${h.ticker}_post` in row || h.ticker in row)
+  );
 
   function toggleTicker(ticker: string) {
     setHiddenTickers((prev) => {
@@ -208,6 +248,14 @@ export function PortfolioPerformance({
       if (next.has(ticker)) next.delete(ticker); else next.add(ticker);
       return next;
     });
+  }
+
+  // % return at end of period for legend (use _post series)
+  function lastPct(ticker: string): number | null {
+    const postKey = `${ticker}_post`;
+    const key = data.some((r) => postKey in r) ? postKey : ticker;
+    const last = [...data].reverse().find((row) => key in row);
+    return last ? (last[key] as number) : null;
   }
 
   return (
@@ -252,12 +300,6 @@ export function PortfolioPerformance({
         </div>
       )}
 
-      {usingFallback && (
-        <p className="text-[11px] text-gray-400 mb-3">
-          Add your purchase price &amp; date (Edit holdings) to anchor to your cost basis.
-        </p>
-      )}
-
       {loading && <div className="h-[300px] flex items-center justify-center text-[12px] text-gray-400">Loading chart…</div>}
       {error && <div className="h-[300px] flex items-center justify-center text-[12px] text-gray-400">Chart unavailable</div>}
 
@@ -295,36 +337,61 @@ export function PortfolioPerformance({
                 axisLine={false} tickLine={false} width={52}
               />
               <Tooltip
-                contentStyle={{ fontSize: 11, border: "1px solid #E5E7EB", borderRadius: 8, background: "white", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
-                formatter={(value, name) => [typeof value === "number" ? `${value > 0 ? "+" : ""}${value.toFixed(1)}%` : "—", String(name)]}
-                labelFormatter={(label) => new Date(label + "T00:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                content={(props: any) => <ChartTooltip {...props} colorMap={{ ...colorMap, "S&P 500": SPX_COLOR }} />}
                 cursor={{ stroke: "#E5E7EB", strokeWidth: 1 }}
-                itemSorter={(item) => -(item.value as number)}
               />
               <ReferenceLine y={0} stroke="#9CA3AF" strokeWidth={1.5} />
-              {legendItems.map((h) => (
-                <Line
-                  key={h.ticker}
-                  type="monotone"
-                  dataKey={h.ticker}
-                  stroke={colorMap[h.ticker]}
-                  strokeWidth={hiddenTickers.has(h.ticker) ? 0 : 1.5}
-                  dot={false}
-                  connectNulls
-                  name={h.ticker}
-                  hide={hiddenTickers.has(h.ticker)}
-                />
-              ))}
+
+              {/* Per-ticker: _pre (dashed+faded) then _post (solid) */}
+              {legendItems.flatMap((h) => {
+                const color = colorMap[h.ticker];
+                const hidden = hiddenTickers.has(h.ticker);
+                const hasPre = data.some((r) => `${h.ticker}_pre` in r);
+                return [
+                  hasPre && (
+                    <Line
+                      key={`${h.ticker}_pre`}
+                      type="monotone"
+                      dataKey={`${h.ticker}_pre`}
+                      stroke={color}
+                      strokeWidth={1.5}
+                      strokeDasharray="4 3"
+                      strokeOpacity={0.35}
+                      dot={false}
+                      connectNulls
+                      legendType="none"
+                      hide={hidden}
+                      name={`${h.ticker}_pre`}
+                    />
+                  ),
+                  <Line
+                    key={`${h.ticker}_post`}
+                    type="monotone"
+                    dataKey={`${h.ticker}_post`}
+                    stroke={color}
+                    strokeWidth={1.5}
+                    dot={false}
+                    connectNulls
+                    legendType="none"
+                    hide={hidden}
+                    name={`${h.ticker}_post`}
+                  />,
+                ].filter(Boolean);
+              })}
+
+              {/* S&P 500 — dashed black */}
               <Line
                 type="monotone"
                 dataKey="S&P 500"
                 stroke={SPX_COLOR}
-                strokeWidth={hiddenTickers.has("S&P 500") ? 0 : 1.5}
+                strokeWidth={1.5}
                 strokeDasharray="4 3"
                 dot={false}
                 connectNulls
-                name="S&P 500"
+                legendType="none"
                 hide={hiddenTickers.has("S&P 500")}
+                name="S&P 500"
               />
             </LineChart>
           </ResponsiveContainer>
@@ -332,8 +399,7 @@ export function PortfolioPerformance({
           {/* Legend — click to toggle */}
           <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3">
             {legendItems.map((h) => {
-              const last = [...data].reverse().find((row) => h.ticker in row);
-              const pct = last ? (last[h.ticker] as number) : null;
+              const pct = lastPct(h.ticker);
               const hidden = hiddenTickers.has(h.ticker);
               return (
                 <button
@@ -373,6 +439,11 @@ export function PortfolioPerformance({
               );
             })()}
           </div>
+
+          {/* Legend hint */}
+          <p className="text-[10px] text-gray-400 mt-2">
+            Dashed = before your purchase date &nbsp;·&nbsp; Solid = while you held it
+          </p>
         </>
       )}
     </div>

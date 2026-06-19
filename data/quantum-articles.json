@@ -1,5 +1,44 @@
 [
   {
+    "id": "epb-announces-robert-long-as-president-of-strategic-initiati",
+    "title": "EPB Announces Robert Long as President of Strategic Initiatives",
+    "summary": "Quantum company EPB hires strategic leader to commercialize quantum tech and create local jobs in Tennessee.",
+    "source": "The Quantum Daily",
+    "sourceUrl": "https://thequantuminsider.com/2026/06/19/epb-announces-robert-long-as-president-of-strategic-initiatives/",
+    "publishedAt": "2026-06-19T13:01:30.000Z",
+    "category": "market",
+    "companies": [],
+    "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/2026-06-19_18-00.png",
+    "topStory": true,
+    "generatedAt": "2026-06-19T16:59:03.151Z"
+  },
+  {
+    "id": "quantum-complexity-of-matrix-functions-probed-with-four-func",
+    "title": "Quantum Complexity of Matrix Functions Probed with Four Functions",
+    "summary": "Researchers found shortcuts to solve certain math problems on quantum computers—potentially speeding up real-world applications.",
+    "source": "Quantum Zeitgeist",
+    "sourceUrl": "https://quantumzeitgeist.com/aps-quantum-complexity-matrix-functions-probed/",
+    "publishedAt": "2026-06-19T12:00:31.000Z",
+    "category": "research",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-19T16:59:04.566Z"
+  },
+  {
+    "id": "bipartisan-coalition-introduces-legislation-to-establish-nat",
+    "title": "Bipartisan Coalition Introduces Legislation to Establish National Security Commission on Quantum Computing",
+    "summary": "U.S. government forming commission to track quantum threats and opportunities—signals serious investment race heating up.",
+    "source": "Quantum Computing Report",
+    "sourceUrl": "https://quantumcomputingreport.com/bipartisan-coalition-introduces-legislation-to-establish-national-security-commission-on-quantum-computing/",
+    "publishedAt": "2026-06-19T00:49:29.000Z",
+    "category": "policy",
+    "companies": [],
+    "image": null,
+    "topStory": false,
+    "generatedAt": "2026-06-19T16:59:06.415Z"
+  },
+  {
     "id": "complex-equations-lack-simple-solutions-physicists-now-confi",
     "title": "Complex Equations Lack Simple Solutions, Physicists Now Confirm",
     "summary": "Quantum computers will need smarter problem-solving shortcuts—old math tricks just won't cut it.",
@@ -113,7 +152,7 @@
     "category": "market",
     "companies": [],
     "image": "https://thequantuminsider.com/wp-content/uploads/2026/06/ZuriQ-pic.png",
-    "topStory": true,
+    "topStory": false,
     "generatedAt": "2026-06-16T22:02:44.642Z"
   },
   {

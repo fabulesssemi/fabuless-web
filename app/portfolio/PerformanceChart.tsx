@@ -305,21 +305,37 @@ export function PortfolioPerformance({
 
       {!loading && !error && data.length > 0 && (
         <>
-          {/* Period selector */}
-          <div className="flex gap-0.5 mb-3">
-            {PERIODS.map((p) => (
-              <button
-                key={p}
-                onClick={() => setPeriod(p)}
-                className="px-2.5 py-1 text-[11px] font-semibold rounded transition-colors"
-                style={{
-                  background: period === p ? "#1e40af" : "transparent",
-                  color: period === p ? "#fff" : "#6B7280",
-                }}
-              >
-                {p}
-              </button>
-            ))}
+          {/* Period selector + legend hint */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex gap-0.5">
+              {PERIODS.map((p) => (
+                <button
+                  key={p}
+                  onClick={() => setPeriod(p)}
+                  className="px-2.5 py-1 text-[11px] font-semibold rounded transition-colors"
+                  style={{
+                    background: period === p ? "#1e40af" : "transparent",
+                    color: period === p ? "#fff" : "#6B7280",
+                  }}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1.5">
+                <svg width="24" height="8" viewBox="0 0 24 8">
+                  <line x1="0" y1="4" x2="24" y2="4" stroke="#9CA3AF" strokeWidth="1.5" strokeDasharray="4 3" />
+                </svg>
+                <span className="text-[10px] text-gray-400">before you bought</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <svg width="24" height="8" viewBox="0 0 24 8">
+                  <line x1="0" y1="4" x2="24" y2="4" stroke="#9CA3AF" strokeWidth="1.5" />
+                </svg>
+                <span className="text-[10px] text-gray-400">while you held it</span>
+              </span>
+            </div>
           </div>
 
           <ResponsiveContainer width="100%" height={300}>
@@ -440,10 +456,6 @@ export function PortfolioPerformance({
             })()}
           </div>
 
-          {/* Legend hint */}
-          <p className="text-[10px] text-gray-400 mt-2">
-            Dashed = before your purchase date &nbsp;·&nbsp; Solid = while you held it
-          </p>
         </>
       )}
     </div>

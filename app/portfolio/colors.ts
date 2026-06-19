@@ -100,4 +100,4 @@ export function colorForIndex(i: number): string {
 }
 
 export const LINE_COLORS = Object.values(BRAND_COLORS);
-export const SPX_COLOR = "#111827";
+export const SPX_COLOR = "#4B5563";

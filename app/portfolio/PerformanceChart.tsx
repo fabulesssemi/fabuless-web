@@ -93,6 +93,35 @@ function buildChartData(
   return rows;
 }
 
+// Pre-compute tick dates so each year/month appears exactly once
+function computeTicks(data: Record<string, string | number>[], period: Period): string[] {
+  const dates = data.map((r) => r.date as string);
+  if (!dates.length) return [];
+  const seen = new Set<string>();
+  const ticks: string[] = [];
+  for (const date of dates) {
+    const d = new Date(date + "T00:00:00");
+    let key: string;
+    switch (period) {
+      case "5D":
+      case "1M":
+        key = date;
+        break;
+      case "6M":
+      case "YTD":
+      case "1Y":
+        key = `${d.getFullYear()}-${d.getMonth()}`;
+        break;
+      case "5Y":
+      case "All":
+        key = `${d.getFullYear()}`;
+        break;
+    }
+    if (!seen.has(key)) { seen.add(key); ticks.push(date); }
+  }
+  return ticks;
+}
+
 function fmtAxisDate(date: string, period: Period) {
   const d = new Date(date + "T00:00:00");
   switch (period) {
@@ -104,7 +133,6 @@ function fmtAxisDate(date: string, period: Period) {
     case "YTD":
       return d.toLocaleDateString("en-US", { month: "short" });
     case "1Y":
-      // Show full year when crossing into January, otherwise just the month
       return d.getMonth() === 0
         ? d.getFullYear().toString()
         : d.toLocaleDateString("en-US", { month: "short" });
@@ -357,14 +385,15 @@ export function PortfolioPerformance({
             <LineChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: 0 }}>
               <XAxis
                 dataKey="date"
+                ticks={computeTicks(data, period)}
                 tickFormatter={(d) => fmtAxisDate(d, period)}
-                tick={{ fontSize: 10, fill: "#9CA3AF" }}
+                tick={{ fontSize: 11, fill: "#9CA3AF" }}
                 axisLine={false} tickLine={false}
-                interval="preserveStartEnd"
+                interval={0}
               />
               <YAxis
                 tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}%`}
-                tick={{ fontSize: 10, fill: "#9CA3AF" }}
+                tick={{ fontSize: 11, fill: "#9CA3AF" }}
                 axisLine={false} tickLine={false} width={52}
               />
               <Tooltip

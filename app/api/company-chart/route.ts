@@ -13,15 +13,21 @@ async function fetchIntraday(symbol: string): Promise<{ time: string; close: num
       period1: start.toISOString().slice(0, 10),
       interval: "5m",
     });
-    const today = new Date().toISOString().slice(0, 10);
-    return (result.quotes ?? [])
-      .filter((r) => r.close != null && (r.date as Date).toISOString().slice(0, 10) === today)
+    const allPoints = (result.quotes ?? [])
+      .filter((r) => r.close != null)
       .map((r) => ({
+        date: (r.date as Date).toISOString().slice(0, 10),
         time: (r.date as Date).toLocaleTimeString("en-US", {
           hour: "numeric", minute: "2-digit", hour12: true, timeZone: "America/New_York",
         }),
         close: r.close!,
       }));
+    // Use today's session if available, otherwise fall back to last trading session
+    const today = new Date().toISOString().slice(0, 10);
+    const todayPoints = allPoints.filter((r) => r.date === today);
+    const lastDate = allPoints.length ? allPoints[allPoints.length - 1].date : "";
+    const session = todayPoints.length ? todayPoints : allPoints.filter((r) => r.date === lastDate);
+    return session.map(({ time, close }) => ({ time, close }));
   } catch {
     return [];
   }

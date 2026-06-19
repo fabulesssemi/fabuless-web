@@ -93,44 +93,31 @@ function buildChartData(
   return rows;
 }
 
-// Pre-compute tick dates with appropriate density per period
+// Pick N evenly-spaced ticks across the data for guaranteed even spacing
 function computeTicks(data: Record<string, string | number>[], period: Period): string[] {
   const dates = data.map((r) => r.date as string);
   if (!dates.length) return [];
-  const seen = new Set<string>();
-  const ticks: string[] = [];
+  const n = dates.length;
 
-  for (let i = 0; i < dates.length; i++) {
-    const date = dates[i];
-    const d = new Date(date + "T00:00:00");
-    let key: string;
-    switch (period) {
-      case "5D":
-        key = date; // every trading day
-        break;
-      case "1M":
-        // One tick per week (~every 5 trading days); use Mon as anchor
-        key = `week-${d.getFullYear()}-${Math.floor(d.getDate() / 7)}`;
-        break;
-      case "6M":
-        // Every 6 weeks (~bimonthly) to avoid crowding
-        key = `${d.getFullYear()}-${Math.floor(d.getMonth() / 2)}`;
-        break;
-      case "YTD":
-        key = `${d.getFullYear()}-${d.getMonth()}`; // monthly
-        break;
-      case "1Y":
-        // Every 2 months to avoid crowding
-        key = `${d.getFullYear()}-${Math.floor(d.getMonth() / 2)}`;
-        break;
-      case "5Y":
-      case "All":
-        key = `${d.getFullYear()}`;
-        break;
-    }
-    if (!seen.has(key)) { seen.add(key); ticks.push(date); }
+  // Target tick count per period
+  const targets: Record<Period, number> = {
+    "5D": Math.min(n, 5),
+    "1M": 5,
+    "6M": 6,
+    "YTD": 6,
+    "1Y": 6,
+    "5Y": 6,
+    "All": 6,
+  };
+  const count = targets[period];
+  if (n <= count) return dates;
+
+  const result: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const idx = Math.round((i / (count - 1)) * (n - 1));
+    result.push(dates[idx]);
   }
-  return ticks;
+  return result;
 }
 
 function fmtAxisDate(date: string, period: Period) {

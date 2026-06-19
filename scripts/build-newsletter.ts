@@ -50,6 +50,7 @@ type CuratedStory = {
   source: string;
   oneliner: string;
   category: IssueSection["category"];
+  image?: string | null;
 };
 
 type ClaudeResponse = {
@@ -71,6 +72,20 @@ function getCurrentIssueNumber(): number {
 
 function formatDate(d = new Date()): string {
   return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+}
+
+// ── Image lookup: match curated story URLs against homepage_articles ──────────
+async function fetchImageMap(urls: string[]): Promise<Map<string, string>> {
+  if (!urls.length) return new Map();
+  const { data } = await supabase
+    .from("homepage_articles")
+    .select("url, image")
+    .in("url", urls);
+  const map = new Map<string, string>();
+  for (const row of data ?? []) {
+    if (row.image) map.set(row.url as string, row.image as string);
+  }
+  return map;
 }
 
 // ── Step 1: fetch semi articles from Supabase ─────────────────────────────────
@@ -179,7 +194,7 @@ function buildIssueTs(issueNum: number, dateStr: string, curated: ClaudeResponse
             headline: ${jsStr(s.headline)},
             url: ${jsStr(s.url)},
             source: ${jsStr(s.source)},
-            image: null,
+            image: ${jsStr(s.image ?? null)},
             oneliner: ${jsStr(s.oneliner)},
           },`).join("\n");
     sectionsTs += `      {
@@ -276,6 +291,17 @@ async function main() {
 
   console.log(`  → ${curated.stories.length} stories after source caps (target 13–16)`);
   console.log(`  → Title: "${curated.title}"`);
+
+  // Attach images from homepage_articles where available
+  const imageMap = await fetchImageMap(curated.stories.map((s) => s.url));
+  let imagesFound = 0;
+  for (const s of curated.stories) {
+    const img = imageMap.get(s.url) ?? null;
+    s.image = img;
+    if (img) imagesFound++;
+  }
+  console.log(`  → ${imagesFound}/${curated.stories.length} stories have images`);
+
   curated.stories.forEach((s) => console.log(`     · [${s.category}] ${s.headline.slice(0, 60)}`));
 
   console.log("\n[3/4] Building Issue...");

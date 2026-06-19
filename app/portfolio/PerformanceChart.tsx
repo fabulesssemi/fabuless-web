@@ -11,8 +11,14 @@ import { buildColorMap, SPX_COLOR } from "./colors";
 type DayPrice = { date: string; close: number };
 type HistoryMap = Record<string, DayPrice[]>;
 
-const PERIODS = ["5D", "1M", "6M", "YTD", "1Y", "All"] as const;
+const PERIODS = ["5D", "1M", "6M", "YTD", "1Y", "5Y", "All"] as const;
 type Period = typeof PERIODS[number];
+
+function fiveYearsAgo(): string {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() - 5);
+  return d.toISOString().slice(0, 10);
+}
 
 function oneYearAgo(): string {
   const d = new Date();
@@ -28,6 +34,7 @@ function periodStart(period: Period): string {
     case "6M":  { const d = new Date(now); d.setMonth(d.getMonth() - 6); return d.toISOString().slice(0, 10); }
     case "YTD": return `${now.getFullYear()}-01-01`;
     case "1Y":  { const d = new Date(now); d.setFullYear(d.getFullYear() - 1); return d.toISOString().slice(0, 10); }
+    case "5Y":  { const d = new Date(now); d.setFullYear(d.getFullYear() - 5); return d.toISOString().slice(0, 10); }
     case "All": return "";
   }
 }
@@ -103,9 +110,9 @@ export function PortfolioPerformance({
   const usingFallback = anchored.length === 0;
   const charted = holdings;
 
-  // Always fetch at least 1 year back so all period buttons have data
-  const purchaseDates = charted.map((h) => h.purchaseDate ?? oneYearAgo());
-  const earliest = [oneYearAgo(), ...purchaseDates].sort()[0];
+  // Always fetch at least 5 years back so all period buttons have data
+  const purchaseDates = charted.map((h) => h.purchaseDate ?? fiveYearsAgo());
+  const earliest = [fiveYearsAgo(), ...purchaseDates].sort()[0];
   const tickers = charted.map((h) => h.ticker);
   const cacheKey = charted.map((h) => h.ticker + (h.purchaseDate ?? "") + (h.purchasePrice ?? "")).join(",");
 

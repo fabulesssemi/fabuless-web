@@ -1,6 +1,68 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
+
+// Render a text chunk with **bold** support
+function renderInline(text: string): React.ReactNode {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith("**") && part.endsWith("**")
+      ? <strong key={i}>{part.slice(2, -2)}</strong>
+      : <Fragment key={i}>{part}</Fragment>
+  );
+}
+
+// Convert markdown text to JSX (bullets, numbered lists, paragraphs)
+function MarkdownMessage({ text }: { text: string }) {
+  const lines = text.split("\n");
+  const nodes: React.ReactNode[] = [];
+  let bulletBuf: string[] = [];
+  let numBuf: string[] = [];
+
+  function flushBullets() {
+    if (!bulletBuf.length) return;
+    nodes.push(
+      <ul key={nodes.length} className="list-disc pl-4 space-y-0.5 my-1">
+        {bulletBuf.map((l, i) => <li key={i}>{renderInline(l)}</li>)}
+      </ul>
+    );
+    bulletBuf = [];
+  }
+  function flushNums() {
+    if (!numBuf.length) return;
+    nodes.push(
+      <ol key={nodes.length} className="list-decimal pl-4 space-y-0.5 my-1">
+        {numBuf.map((l, i) => <li key={i}>{renderInline(l)}</li>)}
+      </ol>
+    );
+    numBuf = [];
+  }
+
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    const bulletMatch = line.match(/^[-*]\s+(.*)/);
+    const numMatch = line.match(/^\d+\.\s+(.*)/);
+
+    if (bulletMatch) {
+      flushNums();
+      bulletBuf.push(bulletMatch[1]);
+    } else if (numMatch) {
+      flushBullets();
+      numBuf.push(numMatch[1]);
+    } else if (line.trim() === "") {
+      flushBullets();
+      flushNums();
+    } else {
+      flushBullets();
+      flushNums();
+      nodes.push(<p key={nodes.length} className="mb-1 last:mb-0">{renderInline(line)}</p>);
+    }
+  }
+  flushBullets();
+  flushNums();
+
+  return <div className="space-y-0.5">{nodes}</div>;
+}
 
 interface Message {
   id: string;
@@ -144,11 +206,15 @@ export function FloatingChat() {
                     className={
                       msg.role === "user"
                         ? "max-w-[85%] rounded-lg px-3 py-2 text-[13px] text-white"
-                        : "max-w-[92%] rounded-lg px-3 py-2 text-[13px] text-[#18181B] bg-white border border-gray-200 leading-relaxed whitespace-pre-wrap"
+                        : "max-w-[92%] rounded-lg px-3 py-2 text-[13px] text-[#18181B] bg-white border border-gray-200 leading-relaxed"
                     }
                     style={msg.role === "user" ? { backgroundColor: ACCENT } : undefined}
                   >
-                    {msg.content || (loading ? <span className="text-gray-400">Thinking…</span> : "")}
+                    {msg.role === "assistant"
+                      ? (msg.content
+                          ? <MarkdownMessage text={msg.content} />
+                          : (loading ? <span className="text-gray-400">Thinking…</span> : ""))
+                      : msg.content}
                   </div>
                 </div>
               ))

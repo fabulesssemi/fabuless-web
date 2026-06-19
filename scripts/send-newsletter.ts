@@ -37,16 +37,6 @@ const PODCAST_FEEDS = [
   { show: "Invest Like the Best", url: "https://feeds.megaphone.fm/investlikethebest" },
 ];
 
-async function generateSemiLede(issue: Issue): Promise<string> {
-  const headlines = issue.sections.flatMap((s) => s.stories.map((st) => `[${s.category}] ${st.headline}`)).join("\n");
-  const msg = await ai.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 150,
-    messages: [{ role: "user", content: `You are the editor of Fabuless Semi, a daily semiconductor briefing for professional investors.\n\nToday's stories:\n${headlines}\n\nWrite a 2-3 sentence editor's lede — what's actually happening right now in semis. Write like a Bloomberg Markets wrap: specific company names, specific themes, forward-looking. No "today we cover" or "in this issue". Pure signal.\n\nRespond with ONLY the lede, nothing else.` }],
-  });
-  return msg.content[0].type === "text" ? msg.content[0].text.trim() : "";
-}
-
 async function generateMetric(issue: Issue): Promise<{ value: string; label: string } | null> {
   const headlines = issue.sections.flatMap((s) => s.stories.map((st) => st.headline)).join("\n");
   const msg = await ai.messages.create({
@@ -218,7 +208,7 @@ function quotesBlock(quotes: Quote[]): string {
 }
 
 
-function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], lede = "", metric: { value: string; label: string } | null = null): string {
+function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], metric: { value: string; label: string } | null = null): string {
   const CAT_ORDER = ["Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other"];
 
   // Build stories HTML grouped by category
@@ -284,9 +274,6 @@ function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], lede = "", m
           </td>
         </tr>
 
-        <!-- Editor's lede -->
-        ${lede ? `<tr><td style="padding:14px 32px 4px;"><p style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:#374151;line-height:1.75;margin:0;border-left:3px solid #B45309;padding-left:14px;">${esc(lede)}</p></td></tr>` : ""}
-
         <!-- One Number callout -->
         ${metric ? `<tr><td style="padding:10px 32px 20px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#fffbeb;border:1px solid #fcd34d;border-radius:3px;"><tr><td style="padding:14px 20px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:#92400e;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 4px 0;">One Number</p><p style="font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#1e1b4b;margin:0 0 2px 0;line-height:1;">${esc(metric.value)}</p><p style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;color:#374151;margin:0;">${esc(metric.label)}</p></td></tr></table></td></tr>` : ""}
 
@@ -346,13 +333,12 @@ async function main() {
   const livePodcasts = await fetchLivePodcasts();
   const issue = issues[0];
 
-  console.log("Generating lede + metric...");
-  const [lede, metric] = await Promise.all([generateSemiLede(issue), generateMetric(issue)]);
-  console.log(`  Lede: ${lede.slice(0, 80)}...`);
+  console.log("Generating metric...");
+  const metric = await generateMetric(issue);
   console.log(`  Metric: ${metric ? `${metric.value} — ${metric.label}` : "none"}`);
 
   if (previewMode) {
-    const html = buildEmailHtml(issue, livePodcasts, lede, metric);
+    const html = buildEmailHtml(issue, livePodcasts, metric);
     const outPath = resolve(process.cwd(), "newsletter-preview.html");
     writeFileSync(outPath, html);
     console.log(`\n✅ Preview saved → ${outPath}`);
@@ -363,7 +349,7 @@ async function main() {
   const testMode = process.argv.includes("--test");
   if (testMode) {
     const resend = new Resend(process.env.RESEND_API_KEY!);
-    const html = buildEmailHtml(issue, livePodcasts, lede, metric);
+    const html = buildEmailHtml(issue, livePodcasts, metric);
     const { error } = await resend.emails.send({
       from: "Fabuless <newsletter@fabuless.ai>",
       to: "harrica@bc.edu",
@@ -424,7 +410,7 @@ async function main() {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY!);
-  const html = buildEmailHtml(issue, livePodcasts, lede, metric);
+  const html = buildEmailHtml(issue, livePodcasts, metric);
   const subject = `Fabuless Semi | ${issue.title}`;
   let sent = 0, failed = 0;
 

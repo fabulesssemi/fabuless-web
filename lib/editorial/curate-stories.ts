@@ -10,6 +10,40 @@ import type { AutoStory, AutoPodcast, HomepageContent } from "@/lib/homepage";
 
 const CATEGORIES = ["Compute", "Capital Flows", "Geopolitics & Policy", "Memory & Networking", "Other"] as const;
 
+// Probe an image URL to detect portrait orientation without downloading the full image.
+// Reads just enough bytes to parse width/height from PNG/JPEG/WebP/GIF headers.
+async function probeImageAspect(url: string): Promise<{ width: number; height: number } | null> {
+  try {
+    const res = await fetch(url, { headers: { Range: "bytes=0-32767" }, signal: AbortSignal.timeout(3000) });
+    if (!res.ok) return null;
+    const buf = Buffer.from(await res.arrayBuffer());
+
+    // PNG: signature 8 bytes, then IHDR chunk: 4 len + 4 "IHDR" + 4 width + 4 height
+    if (buf[0] === 0x89 && buf[1] === 0x50) {
+      const w = buf.readUInt32BE(16);
+      const h = buf.readUInt32BE(20);
+      return { width: w, height: h };
+    }
+    // JPEG: scan for SOF0/SOF2 marker (0xFF 0xC0 or 0xFF 0xC2)
+    for (let i = 0; i < buf.length - 9; i++) {
+      if (buf[i] === 0xff && (buf[i + 1] === 0xc0 || buf[i + 1] === 0xc2)) {
+        const h = buf.readUInt16BE(i + 5);
+        const w = buf.readUInt16BE(i + 7);
+        return { width: w, height: h };
+      }
+    }
+    // WebP: RIFF....WEBPVP8 header, width at offset 26 (10-bit), height at 28 (10-bit)
+    if (buf.slice(0, 4).toString("ascii") === "RIFF" && buf.slice(8, 12).toString("ascii") === "WEBP") {
+      const w = (buf[26] | ((buf[27] & 0x3f) << 8)) + 1;
+      const h = (buf[28] | ((buf[29] & 0x3f) << 8)) + 1;
+      return { width: w, height: h };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 const STORY_SCHEMA = `{
   "issueTitle": "a punchy 8-14 word editorial headline covering the 2-3 biggest themes from your picks — written like a newspaper front page. Example: 'Nvidia's China Risk, TSMC's Arizona Push, and Samsung's Memory Pivot'",
   "stories": [
@@ -197,7 +231,29 @@ ${STORY_SCHEMA}`;
     withRanks.sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
 
     // Hard-enforce source diversity: target 15, max 2 per source
-    const topStories = diversify(withRanks, 15, 2);
+    const diversified = diversify(withRanks, 15, 2);
+
+    // Null out portrait images — they crop badly in the landscape Top Stories grid.
+    // We probe image dimensions via HEAD + Content-Length isn't reliable, so we
+    // fetch a tiny chunk and parse width/height from the image header bytes.
+    // Simpler: reject images where the URL path suggests a portrait (face photo).
+    // Also reject if the image response indicates portrait via og/social image patterns.
+    // Most reliable without a full decode: fetch the image and check its natural dims
+    // using a lightweight URL heuristic + aspect check via fetch of first bytes.
+    const topStories = await Promise.all(
+      diversified.map(async (s) => {
+        if (!s.image) return s;
+        try {
+          const dims = await probeImageAspect(s.image);
+          // Reject portrait (height > width) — keep landscape and square
+          if (dims && dims.height > dims.width * 1.1) {
+            console.log(`[img-filter] portrait image nulled for: ${s.headline.slice(0, 60)}`);
+            return { ...s, image: null };
+          }
+        } catch { /* leave image as-is if probe fails */ }
+        return s;
+      })
+    );
 
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {

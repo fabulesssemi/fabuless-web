@@ -268,7 +268,10 @@ export function PortfolioPerformance({
 
   const data = history ? buildChartData(seriesMap) : [];
 
-  // ── Summary strip (always cost-basis anchored) ────────────────────────────
+  // ── Summary strip — period-aware ─────────────────────────────────────────
+  // For each holding, the "from" date is max(purchaseDate, periodWindowStart).
+  // We use the stock price and SPX price at that from-date as the baseline,
+  // so the strip always reflects performance over the visible window.
   const full = holdings.filter((h) => h.purchasePrice && h.purchaseDate && h.shares);
   let strip: null | {
     cost: number; curValue: number; pnl: number; pnlPct: number;
@@ -276,17 +279,31 @@ export function PortfolioPerformance({
   } = null;
 
   if (full.length > 0 && history) {
-    let cost = 0, curValue = 0, spyValue = 0;
+    const winStart = periodStart(period);
     const spxToday = history.SPX?.length ? history.SPX[history.SPX.length - 1].close : null;
+    let cost = 0, curValue = 0, spyValue = 0;
+
     for (const h of full) {
-      const hCost = h.shares! * h.purchasePrice!;
       const live = livePrices[h.ticker];
-      cost += hCost;
-      curValue += h.shares! * (live ?? h.purchasePrice!);
-      const spxAtBuy = history.SPX ? closeOnOrAfter(history.SPX, h.purchaseDate!) : null;
-      if (spxToday && spxAtBuy) spyValue += hCost * (spxToday / spxAtBuy);
-      else spyValue += hCost;
+      const prices = history[h.ticker];
+      if (!prices) continue;
+
+      // Effective start of this holding in the current window
+      const fromDate = winStart && h.purchaseDate! < winStart ? winStart : h.purchaseDate!;
+
+      // Price at window start (or purchase if later)
+      const priceAtFrom = closeOnOrAfter(prices, fromDate) ?? h.purchasePrice!;
+      const spxAtFrom = history.SPX ? closeOnOrAfter(history.SPX, fromDate) : null;
+
+      // Notional: how much of this holding "started" at fromDate
+      const notional = h.shares! * priceAtFrom;
+      const livePrice = live ?? priceAtFrom;
+      cost += notional;
+      curValue += h.shares! * livePrice;
+      if (spxToday && spxAtFrom) spyValue += notional * (spxToday / spxAtFrom);
+      else spyValue += notional;
     }
+
     const pnl = curValue - cost;
     const spyPnl = spyValue - cost;
     strip = {

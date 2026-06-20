@@ -233,24 +233,55 @@ ${STORY_SCHEMA}`;
     // Hard-enforce source diversity: target 15, max 2 per source
     const diversified = diversify(withRanks, 15, 2);
 
-    // Null out portrait images — they crop badly in the landscape Top Stories grid.
-    // We probe image dimensions via HEAD + Content-Length isn't reliable, so we
-    // fetch a tiny chunk and parse width/height from the image header bytes.
-    // Simpler: reject images where the URL path suggests a portrait (face photo).
-    // Also reject if the image response indicates portrait via og/social image patterns.
-    // Most reliable without a full decode: fetch the image and check its natural dims
-    // using a lightweight URL heuristic + aspect check via fetch of first bytes.
+    // Demote Digitimes: never allow it in the first 4 slots (top story grid).
+    // Move any Digitimes entries to the back of the list.
+    const nonDigitimes = diversified.filter((s) => s.source.toLowerCase() !== "digitimes");
+    const digitimesStories = diversified.filter((s) => s.source.toLowerCase() === "digitimes");
+    const reordered = [...nonDigitimes, ...digitimesStories];
+
+    // Filter images: null out portraits, headshots, and broken images.
+    // Rules applied in order:
+    //  1. URL pattern heuristics — reject known headshot/avatar/author URL patterns
+    //  2. Aspect ratio — reject if height > width * 1.1 (portrait orientation)
+    //  3. Broken fetch — null if the image can't be loaded at all
+    const HEADSHOT_PATTERNS = [
+      /\/author[s]?\//i, /\/byline\//i, /\/staff\//i, /\/people\//i,
+      /\/person\//i, /\/contributor\//i, /\/headshot/i, /\/avatar/i,
+      /\/profile[-_]?pic/i, /\/mugshot/i,
+    ];
+
     const topStories = await Promise.all(
-      diversified.map(async (s) => {
+      reordered.map(async (s) => {
         if (!s.image) return s;
+
+        // URL heuristic — reject obvious headshot paths before fetching
+        if (HEADSHOT_PATTERNS.some((p) => p.test(s.image!))) {
+          console.log(`[img-filter] headshot URL pattern nulled for: ${s.headline.slice(0, 60)}`);
+          return { ...s, image: null };
+        }
+
         try {
           const dims = await probeImageAspect(s.image);
-          // Reject portrait (height > width) — keep landscape and square
-          if (dims && dims.height > dims.width * 1.1) {
+          // Broken image — probe returned null (fetch failed / unrecognized format)
+          if (!dims) {
+            console.log(`[img-filter] unloadable image nulled for: ${s.headline.slice(0, 60)}`);
+            return { ...s, image: null };
+          }
+          // Portrait orientation
+          if (dims.height > dims.width * 1.1) {
             console.log(`[img-filter] portrait image nulled for: ${s.headline.slice(0, 60)}`);
             return { ...s, image: null };
           }
-        } catch { /* leave image as-is if probe fails */ }
+          // Very square and small — likely an icon or avatar, not an article photo
+          if (dims.width < 200 && dims.height < 200) {
+            console.log(`[img-filter] tiny image nulled for: ${s.headline.slice(0, 60)}`);
+            return { ...s, image: null };
+          }
+        } catch {
+          // Fetch threw — treat as broken
+          console.log(`[img-filter] fetch error, image nulled for: ${s.headline.slice(0, 60)}`);
+          return { ...s, image: null };
+        }
         return s;
       })
     );

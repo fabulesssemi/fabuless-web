@@ -89,33 +89,64 @@ type CardData = {
 
 export function CompaniesFilter({ cards }: { cards: CardData[] }) {
   const [active, setActive] = useState("all");
+  const [query, setQuery] = useState("");
 
-  const filtered = active === "all"
-    ? cards
-    : cards.filter((c) => (SLUG_CATEGORY[c.slug] ?? "infra") === active);
+  const filtered = cards
+    .filter((c) => active === "all" || (SLUG_CATEGORY[c.slug] ?? "infra") === active)
+    .filter((c) => {
+      if (!query) return true;
+      const q = query.toLowerCase();
+      return c.ticker.toLowerCase().includes(q) || c.name.toLowerCase().includes(q);
+    });
 
   return (
     <div>
-      {/* Category tabs */}
-      <div className="flex items-center gap-1.5 flex-wrap mb-8">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.key}
-            onClick={() => setActive(cat.key)}
-            className={`px-3.5 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
-              active === cat.key
-                ? "bg-[#111827] text-white border border-[#111827]"
-                : "bg-transparent border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-700"
-            }`}
-          >
-            {cat.label}
-            {active === cat.key && cat.key !== "all" && (
-              <span className="ml-1.5 text-[10px] font-semibold opacity-60 tabular-nums">
-                {filtered.length}
-              </span>
-            )}
-          </button>
-        ))}
+      {/* Category tabs + search */}
+      <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.key}
+              onClick={() => setActive(cat.key)}
+              className={`px-3.5 py-1.5 rounded-full text-[12px] font-bold transition-all duration-150 select-none ${
+                active === cat.key
+                  ? "bg-[#111827] text-white border border-[#111827]"
+                  : "bg-transparent border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-700"
+              }`}
+            >
+              {cat.label}
+              {active === cat.key && cat.key !== "all" && (
+                <span className="ml-1.5 text-[10px] font-semibold opacity-60 tabular-nums">
+                  {filtered.length}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Ticker / name search */}
+        <div className="relative shrink-0">
+          <svg className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search ticker or name…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="pl-8 pr-3 py-1.5 rounded-full border border-gray-200 bg-white text-[12px] font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:border-gray-400 transition-colors w-48"
+          />
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Cards grid */}

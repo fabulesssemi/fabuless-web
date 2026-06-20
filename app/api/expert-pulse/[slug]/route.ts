@@ -79,21 +79,26 @@ async function extractBestQuotes(
     max_tokens: 400,
     messages: [{
       role: "user",
-      content: `You are finding the best verbatim quotes about ${companyName} from these source excerpts.
+      content: `You are a senior equity research editor. Find the 1-2 best verbatim quotes about ${companyName} from these source excerpts that would genuinely inform an investor's view.
 
 ${chunks.map((c, i) => `[${i}] ${c.text}`).join("\n\n---\n\n")}
 
-Rules:
-- Pick 1-2 sentences that appear verbatim in the excerpts above — copy them exactly, word for word
-- Each must be a specific, substantive claim about ${companyName} — its business, competitive position, technology, or investment case
-- Reject anything generic, vague, conversational filler, or that doesn't specifically discuss ${companyName}
-- Reject incomplete thoughts or sentences that need context to make sense
-- Each quote must stand alone and be immediately useful to an investor
-- The two quotes must come from DIFFERENT chunks and say different things — no redundancy
+A GOOD quote makes a specific, non-obvious claim about ${companyName}'s business model, competitive moat, technology position, pricing power, supply chain role, earnings dynamics, or risk. It should teach an investor something they couldn't get from a headline.
 
-Respond with JSON array: [{"index": <chunk number>, "quote": "<exact verbatim sentence>"}, ...]
-Return 1 item if only one good quote exists, 2 if two strong distinct quotes exist.
-If no excerpt contains a genuinely useful specific quote, respond with: []`,
+REJECT a quote if it:
+- Just mentions ${companyName} by name without saying anything substantive ("${companyName} is a great company", "I own ${companyName}", "we talked about ${companyName} earlier")
+- States something obvious or already priced in ("${companyName} makes chips", "${companyName} has been doing well")
+- Is conversational filler or a transition ("yeah so ${companyName}...", "I mean look at ${companyName}")
+- Needs surrounding context to make sense as a standalone quote
+- Is vague praise or criticism without specifics
+
+Rules:
+- Copy sentences EXACTLY verbatim from the excerpts — no paraphrasing
+- The two quotes must come from DIFFERENT chunks and cover different angles
+- If only one genuinely good quote exists, return just that one
+- If no quote clears the bar, return []
+
+Respond with JSON array only: [{"index": <chunk number>, "quote": "<exact verbatim sentence>"}, ...]`,
     }],
   });
 
@@ -101,7 +106,7 @@ If no excerpt contains a genuinely useful specific quote, respond with: []`,
   try {
     const parsed = JSON.parse(text.replace(/```json\n?|\n?```/g, "").trim());
     if (!Array.isArray(parsed)) return [];
-    return parsed.filter((p) => p.index !== -1 && p.quote && p.quote.length >= 20);
+    return parsed.filter((p) => p.index !== -1 && p.quote && p.quote.length >= 60);
   } catch {
     return [];
   }

@@ -2,57 +2,57 @@
   {
     "slug": "nvda",
     "type": "youtube",
-    "show": "Acquired",
-    "title": "NVIDIA: The GPU Company (Part 1)",
+    "show": "Only In America",
+    "title": "Jensen Huang on Vision, Risk, and the GPU",
     "url": "https://www.youtube.com/watch?v=ZEL0EAVtCTY"
   },
   {
     "slug": "nvda",
     "type": "youtube",
-    "show": "Acquired",
-    "title": "NVIDIA: The GPU Company (Part 3)",
+    "show": "BG2",
+    "title": "NVIDIA: OpenAI, Future of Compute, and the American Dream",
     "url": "https://www.youtube.com/watch?v=pE6sw_E9Gh0&t=1203s"
   },
   {
     "slug": "amd",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "AMD Deep Dive",
+    "show": "Possible",
+    "title": "AMD's Comeback and Vision for Chipmaking w/ CEO Lisa Su",
     "url": "https://www.youtube.com/watch?v=Mhlrxp8nXDc"
   },
   {
     "slug": "amd",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "AMD: The Comeback Story",
+    "show": "The AI Hardware Podcast",
+    "title": "Intel, AMD, Arm, RISC-V",
     "url": "https://www.youtube.com/watch?v=7Jx2eMOekOU"
   },
   {
     "slug": "amd",
     "type": "youtube",
     "show": "YouTube",
-    "title": "AMD vs NVIDIA",
+    "title": "How AMD Won the CPU Crown",
     "url": "https://www.youtube.com/watch?v=1kl0RBARJYQ"
   },
   {
     "slug": "avgo",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Broadcom Deep Dive",
+    "title": "Broadcom CEO on the Biggest AI Chip Bets",
     "url": "https://www.youtube.com/watch?v=CaK1eNKF9nY"
   },
   {
     "slug": "avgo",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Broadcom: The Custom Silicon Play",
+    "title": "Broadcom's Pete Del Vecchio on Tomahawk 6, AI Clusters, and Data Center Evolution",
     "url": "https://www.youtube.com/watch?v=4zgNqaPvvBY"
   },
   {
     "slug": "avgo",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Broadcom Business Breakdown",
+    "title": "Broadcom's Ram Velaga on Tomahawk 6, Ethernet, and the Future of AI/ML Data Centers",
     "url": "https://www.youtube.com/watch?v=uIx00_TpihM"
   },
   {
@@ -66,14 +66,14 @@
     "slug": "arm",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Arm: The Architecture of Everything",
+    "title": "Arm CEO Rene Haas on AI: Nvidia Lessons, Intel's Decline and the US-China Chip War",
     "url": "https://www.youtube.com/watch?v=JKUFTJJX19w"
   },
   {
     "slug": "arm",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Arm Holdings Deep Dive",
+    "title": "The Hidden Force Behind the AI Revolution: Arm CEO Rene Haas",
     "url": "https://www.youtube.com/watch?v=ZnSCQkOmYyM&t=270s"
   },
   {
@@ -87,14 +87,14 @@
     "slug": "synopsys",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Synopsys: The EDA Monopoly",
+    "title": "Synopsys SVP on the Future of Agentic Engineering",
     "url": "https://www.youtube.com/watch?v=2cknMToFC4w"
   },
   {
     "slug": "synopsys",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Synopsys Deep Dive",
+    "title": "Synopsys CEO: We're Using AI Everywhere in Our Products",
     "url": "https://www.youtube.com/watch?v=3CsD432lUhA"
   },
   {
@@ -108,91 +108,91 @@
     "slug": "intc",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Intel: The Fallen Giant",
+    "title": "Re-engineering the Semiconductor Supply Chain with Intel CEO Lip-Bu Tan",
     "url": "https://www.youtube.com/watch?v=asCgCv2XB4s&t=84s"
   },
   {
     "slug": "intc",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Intel Deep Dive",
+    "show": "The Real Eisman Playbook",
+    "title": "Inside the AI Chip War: From Nvidia's Dominance to Intel's Turmoil",
     "url": "https://www.youtube.com/watch?v=fphcOSPgHtM&t=2747s"
   },
   {
     "slug": "amat",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Applied Materials Deep Dive",
+    "title": "Deep Dive: Why Applied Materials Is the Safest Bet in the AI Supply Chain",
     "url": "https://www.youtube.com/watch?v=QFtMxi5LFFE"
   },
   {
     "slug": "amat",
     "type": "youtube",
-    "show": "Business Breakdowns",
-    "title": "Applied Materials (Ep. 118)",
+    "show": "YouTube",
+    "title": "What Happened to Applied Materials? AMAT Stock Analysis",
     "url": "https://www.youtube.com/watch?v=0bPDY0oyB5I"
   },
   {
     "slug": "mrvl",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Marvell: The Custom Silicon Bet",
+    "title": "The Endurance Mindset: Matt Murphy on Leading Marvell and the AI Infrastructure Race",
     "url": "https://www.youtube.com/watch?v=gYJIZdmLMUI"
   },
   {
     "slug": "mrvl",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Marvell Technology Deep Dive",
+    "show": "Mad Money",
+    "title": "Jim Cramer's Full Interview with Marvell Technology CEO Matt Murphy",
     "url": "https://www.youtube.com/watch?v=vVoKPvJkV6g"
   },
   {
     "slug": "mrvl",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Marvell Analysis",
+    "title": "Marvell Technology: The Silent Giant Powering the 2026 Optical Interconnect Explosion",
     "url": "https://www.youtube.com/watch?v=AeOl-7SKRZs"
   },
   {
     "slug": "tsm",
     "type": "youtube",
-    "show": "Acquired",
-    "title": "TSMC (Acquired Episode)",
+    "show": "Lex Fridman",
+    "title": "Analysis of TSMC: The Most Important Company in the World",
     "url": "https://www.youtube.com/watch?v=vOS_8QwlmIw"
   },
   {
     "slug": "tsm",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "TSMC: The World's Most Important Company",
+    "show": "CONNECTED Podcast",
+    "title": "Asianometry Breaks Down Taiwan and TSMC's Semiconductor Journey",
     "url": "https://www.youtube.com/watch?v=Xnk0emwuO7c"
   },
   {
     "slug": "asml",
     "type": "youtube",
-    "show": "Business Breakdowns",
-    "title": "ASML (Ep. 117)",
+    "show": "Four Decades of ASML",
+    "title": "ASML's History Explained: The Early Years",
     "url": "https://www.youtube.com/watch?v=C73nznpybqw&t=136s"
   },
   {
     "slug": "asml",
     "type": "youtube",
     "show": "YouTube",
-    "title": "ASML: The Chip Monopoly",
+    "title": "ASML CEO on AI Demand, Data Centers in Space and Musk's Terafab",
     "url": "https://www.youtube.com/watch?v=ktEsOBgToWY"
   },
   {
     "slug": "mu",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Micron Technology Deep Dive",
+    "title": "Breaking the Memory Wall: Micron's Strategy for the AI Era",
     "url": "https://www.youtube.com/watch?v=IRhuHt51AXg"
   },
   {
     "slug": "mu",
     "type": "podcast",
     "show": "A Bit Personal",
-    "title": "The Memory Episode — Sanjay Mehrotra",
+    "title": "Where Is AI Going Next? — Sanjay Mehrotra",
     "url": "https://www.youtube.com/watch?v=_6O19bEZgMc"
   },
   {
@@ -205,232 +205,232 @@
   {
     "slug": "qcom",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Qualcomm Deep Dive",
+    "show": "Titans and Disruptors",
+    "title": "The 6G Era: Qualcomm's CEO on the Biggest Transition in Wireless",
     "url": "https://www.youtube.com/watch?v=acuSJeDRpIc"
   },
   {
     "slug": "skhynix",
     "type": "youtube",
     "show": "YouTube",
-    "title": "SK Hynix: The HBM Play",
+    "title": "How SK Hynix Became the King of Memory",
     "url": "https://www.youtube.com/watch?v=ry4PiNVTIv8"
   },
   {
     "slug": "skhynix",
     "type": "youtube",
     "show": "YouTube",
-    "title": "SK Hynix Deep Dive",
+    "title": "New Era for Memory Chips — What You Need to Know About SK Hynix Stock",
     "url": "https://www.youtube.com/watch?v=uWTD2q5Fn80"
   },
   {
     "slug": "skhynix",
     "type": "youtube",
     "show": "YouTube",
-    "title": "SK Hynix Analysis",
+    "title": "If You Missed SanDisk, These AI Memory Stocks Are Next",
     "url": "https://www.youtube.com/watch?v=UzpLbVHE6uY"
   },
   {
     "slug": "samsung",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Samsung: The Chip Giant",
+    "title": "AI Has a Memory Problem. But 3 Companies Can Solve It (And Profit)",
     "url": "https://www.youtube.com/watch?v=51RbL5Bl2IA"
   },
   {
     "slug": "samsung",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Samsung Deep Dive",
+    "title": "The Best Memory Stocks for 2026: How to Play the Memory Shortage",
     "url": "https://www.youtube.com/watch?v=JxpoNjBCmDk&t=473s"
   },
   {
     "slug": "samsung",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Samsung Analysis",
+    "title": "Samsung Electronics CEO Wants to Build an 'AI-Driven Company'",
     "url": "https://www.youtube.com/watch?v=kG0JdmWAplY"
   },
   {
     "slug": "shin-etsu",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Shin-Etsu Chemical Deep Dive",
+    "show": "Japan ESG Matters",
+    "title": "Can Shin-Etsu Chemical Ride the AI Boom—or Is It Falling Behind?",
     "url": "https://www.youtube.com/watch?v=Y3M1igzV2oE"
   },
   {
     "slug": "shin-etsu",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Shin-Etsu: The Silicon Wafer Monopoly",
+    "title": "Shin-Etsu Chemical: The Silent Powerhouse of Semiconductors",
     "url": "https://www.youtube.com/watch?v=4xyvg1Kvf3E"
   },
   {
     "slug": "shin-etsu",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Shin-Etsu Analysis",
+    "title": "How Japan's Chemical Empire Controls Korea and Taiwan",
     "url": "https://www.youtube.com/watch?v=59KPQWgzTaA"
   },
   {
     "slug": "sumco",
     "type": "youtube",
     "show": "YouTube",
-    "title": "SUMCO: Silicon Wafer Supply Chain",
+    "title": "SUMCO: Silicon Wafer Future, AI Demand and Capital Investment",
     "url": "https://www.youtube.com/watch?v=G7hIv82fvcg"
   },
   {
     "slug": "lrcx",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Lam Research Deep Dive",
+    "title": "The Memory Shortage Is Now Fueling Lam Research's Best Quarter Ever",
     "url": "https://www.youtube.com/watch?v=FxMHbAaluJU"
   },
   {
     "slug": "lrcx",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Lam Research: The Etch & Deposition Play",
+    "show": "Quick Chip Series",
+    "title": "LAM Research Revealed: Secrets of the Silicon Sorcerers",
     "url": "https://www.youtube.com/watch?v=M2GO7V0_6m8"
   },
   {
     "slug": "lrcx",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Lam Research Analysis",
+    "title": "Could Lam Research Be the Best Way to Play AI Chips?",
     "url": "https://www.youtube.com/watch?v=KPauZIeCDuA"
   },
   {
     "slug": "klac",
     "type": "youtube",
     "show": "YouTube",
-    "title": "KLA Corporation Deep Dive",
+    "title": "Where Will KLA Stock Be in 5 Years?",
     "url": "https://www.youtube.com/watch?v=TyGnNFmvVGY"
   },
   {
     "slug": "klac",
     "type": "youtube",
     "show": "YouTube",
-    "title": "KLA: Process Control Monopoly",
+    "title": "Inside KLA: Uncovering the Tech Behind Every Chip",
     "url": "https://www.youtube.com/watch?v=e_iFKJ2uVSc"
   },
   {
     "slug": "klac",
     "type": "youtube",
     "show": "YouTube",
-    "title": "KLA Analysis",
+    "title": "Will Kerwin on KLA Corp (KLAC)",
     "url": "https://www.youtube.com/watch?v=otcePFqdxAc"
   },
   {
     "slug": "tokyo-electron",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Tokyo Electron Deep Dive",
+    "title": "Tokyo Electron: The World's Third-Largest Semiconductor Equipment Company",
     "url": "https://www.youtube.com/watch?v=ZqPqzumaIiw"
   },
   {
     "slug": "tokyo-electron",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Tokyo Electron: Japan's Chip Equipment Giant",
+    "title": "How Japan Is Buying Back Its Semiconductor Industry",
     "url": "https://www.youtube.com/watch?v=9t9D0gVfPX4"
   },
   {
     "slug": "tokyo-electron",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Tokyo Electron Analysis",
+    "title": "Tokyo Electron: Japan's Biggest Semiconductor Equipment Maker",
     "url": "https://www.youtube.com/watch?v=8FK_wV3x9WY"
   },
   {
     "slug": "besi",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "BE Semiconductor Deep Dive",
+    "show": "Bloomberg Primer",
+    "title": "How AI Is Pushing the Semiconductor Supply Chain to the Limit",
     "url": "https://www.youtube.com/watch?v=VdcD6qX8Xrc"
   },
   {
     "slug": "besi",
     "type": "youtube",
     "show": "YouTube",
-    "title": "BESI: The Advanced Packaging Play",
+    "title": "CEO Talk: Richard Blickman (BESI)",
     "url": "https://www.youtube.com/watch?v=tr7Bmvhd_14"
   },
   {
     "slug": "besi",
     "type": "youtube",
     "show": "YouTube",
-    "title": "BE Semiconductor Analysis",
+    "title": "Why Japan Is Still a Major Semiconductor Manufacturing Country",
     "url": "https://www.youtube.com/watch?v=1Q_naYMHGP8"
   },
   {
     "slug": "cadence",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Cadence Design Systems Deep Dive",
+    "title": "Cadence Design Systems: Anirudh Devgan",
     "url": "https://www.youtube.com/watch?v=UTPyXBATsuQ"
   },
   {
     "slug": "cadence",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Cadence: The EDA Duopoly",
+    "title": "The Semiconductor Design Software Duopoly: Cadence & Synopsys",
     "url": "https://www.youtube.com/watch?v=AUm08ZUD63Q"
   },
   {
     "slug": "cadence",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Cadence Analysis",
+    "show": "CadenceLIVE 2026",
+    "title": "Jensen Huang & Anirudh Devgan on Design for AI and AI for Design",
     "url": "https://www.youtube.com/watch?v=Ec6kkQH0Fzo"
   },
   {
     "slug": "globalfoundries",
     "type": "youtube",
     "show": "YouTube",
-    "title": "GlobalFoundries Deep Dive",
+    "title": "How GlobalFoundries Competes in a High-Stakes Chip Industry",
     "url": "https://www.youtube.com/watch?v=0Q_n1yZxnHs"
   },
   {
     "slug": "globalfoundries",
     "type": "youtube",
     "show": "YouTube",
-    "title": "GlobalFoundries: The Specialty Foundry",
+    "title": "GlobalFoundries CEO on the State of Semiconductors and CHIPS Act",
     "url": "https://www.youtube.com/watch?v=vb7oHj4ZrAk"
   },
   {
     "slug": "globalfoundries",
     "type": "youtube",
     "show": "YouTube",
-    "title": "GlobalFoundries Analysis",
+    "title": "Why GlobalFoundries Couldn't Give Abu Dhabi a Semiconductor Fab",
     "url": "https://www.youtube.com/watch?v=d7USgBB7sAQ"
   },
   {
     "slug": "ase",
     "type": "youtube",
     "show": "YouTube",
-    "title": "ASE Technology Deep Dive",
+    "title": "The 'Invisible' AI Trade — Why I'm Watching These 2 Stocks Now",
     "url": "https://www.youtube.com/watch?v=_L5MIVkZn0U"
   },
   {
     "slug": "amkor",
     "type": "youtube",
-    "show": "YouTube",
-    "title": "Amkor Technology Deep Dive",
+    "show": "TaiwanPlus News",
+    "title": "TSMC and Amkor Announce 10-Year Packaging Deal in Arizona",
     "url": "https://www.youtube.com/watch?v=38daKHNW2Qc"
   },
   {
     "slug": "amkor",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Amkor: Advanced Packaging Leader",
+    "title": "TSMC vs. Amkor vs. Aehr: Which Chip Stock Is the Best Buy for 2026?",
     "url": "https://www.youtube.com/watch?v=N28rwr7AxTU"
   },
   {
     "slug": "amkor",
     "type": "youtube",
     "show": "YouTube",
-    "title": "Amkor Analysis",
+    "title": "America's Semiconductor Boom Is Real",
     "url": "https://www.youtube.com/watch?v=T-jt3qBzJ4A"
   }
 ]

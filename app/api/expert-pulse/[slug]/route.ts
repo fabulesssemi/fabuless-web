@@ -3,6 +3,10 @@ import { createClient } from "@supabase/supabase-js";
 import Anthropic from "@anthropic-ai/sdk";
 import { getCompanyMeta } from "@/lib/companies";
 
+// Cache for 1 hour — expert quotes don't change minute-to-minute and the
+// live generation (embed + RAG + Claude) takes ~4-5s on a cold hit.
+export const revalidate = 3600;
+
 function getSupabase() {
   return createClient(
     process.env.SUPABASE_URL!,
@@ -62,42 +66,44 @@ async function getTopChunks(
   return rows;
 }
 
-// Extract the single best verbatim sentence from the chunks — not synthesis, just selection.
-async function extractBestQuote(
+// Extract up to 2 best verbatim sentences from the chunks — not synthesis, just selection.
+async function extractBestQuotes(
   anthropic: Anthropic,
   companyName: string,
   chunks: ChunkRow[]
-): Promise<{ quote: string; chunkIndex: number } | null> {
-  if (chunks.length === 0) return null;
+): Promise<{ quote: string; chunkIndex: number }[]> {
+  if (chunks.length === 0) return [];
 
   const resp = await anthropic.messages.create({
     model: "claude-haiku-4-5-20251001",
-    max_tokens: 200,
+    max_tokens: 400,
     messages: [{
       role: "user",
-      content: `You are finding the single best verbatim quote about ${companyName} from these source excerpts.
+      content: `You are finding the best verbatim quotes about ${companyName} from these source excerpts.
 
 ${chunks.map((c, i) => `[${i}] ${c.text}`).join("\n\n---\n\n")}
 
 Rules:
-- Pick ONE sentence that appears verbatim in the excerpts above — copy it exactly, word for word
-- It must be a specific, substantive claim about ${companyName} — its business, competitive position, technology, or investment case
+- Pick 1-2 sentences that appear verbatim in the excerpts above — copy them exactly, word for word
+- Each must be a specific, substantive claim about ${companyName} — its business, competitive position, technology, or investment case
 - Reject anything generic, vague, conversational filler, or that doesn't specifically discuss ${companyName}
 - Reject incomplete thoughts or sentences that need context to make sense
-- The quote must stand alone and be immediately useful to an investor
+- Each quote must stand alone and be immediately useful to an investor
+- The two quotes must come from DIFFERENT chunks and say different things — no redundancy
 
-Respond with JSON: {"index": <chunk number 0-7>, "quote": "<exact verbatim sentence>"}
-If no excerpt contains a genuinely useful, specific quote about ${companyName}, respond with: {"index": -1, "quote": ""}`,
+Respond with JSON array: [{"index": <chunk number>, "quote": "<exact verbatim sentence>"}, ...]
+Return 1 item if only one good quote exists, 2 if two strong distinct quotes exist.
+If no excerpt contains a genuinely useful specific quote, respond with: []`,
     }],
   });
 
   const text = resp.content[0].type === "text" ? resp.content[0].text.trim() : "";
   try {
     const parsed = JSON.parse(text.replace(/```json\n?|\n?```/g, "").trim());
-    if (parsed.index === -1 || !parsed.quote || parsed.quote.length < 20) return null;
-    return { quote: parsed.quote, chunkIndex: parsed.index };
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter((p) => p.index !== -1 && p.quote && p.quote.length >= 20);
   } catch {
-    return null;
+    return [];
   }
 }
 
@@ -125,30 +131,31 @@ export async function GET(
     getTopChunks("circuit", embedding, meta.name),
   ]);
 
-  const [bakerResult, dylanResult, circuitResult] = await Promise.all([
-    extractBestQuote(anthropic, meta.name, bakerChunks),
-    extractBestQuote(anthropic, meta.name, dylanChunks),
-    extractBestQuote(anthropic, meta.name, circuitChunks),
+  const [bakerResults, dylanResults, circuitResults] = await Promise.all([
+    extractBestQuotes(anthropic, meta.name, bakerChunks),
+    extractBestQuotes(anthropic, meta.name, dylanChunks),
+    extractBestQuotes(anthropic, meta.name, circuitChunks),
   ]);
 
-  function buildEntry(corpus: "baker" | "dylan" | "circuit", result: { quote: string; chunkIndex: number } | null, chunks: ChunkRow[]) {
-    if (!result) return null;
-    const chunk = chunks[result.chunkIndex];
-    return {
-      corpus,
-      ...EXPERT_LABELS[corpus],
-      quote: result.quote,
-      source: chunk?.source,
-      date: chunk?.date,
-      url: chunk?.url,
-    };
+  function buildEntries(corpus: "baker" | "dylan" | "circuit", results: { quote: string; chunkIndex: number }[], chunks: ChunkRow[]) {
+    return results.map((result) => {
+      const chunk = chunks[result.chunkIndex];
+      return {
+        corpus,
+        ...EXPERT_LABELS[corpus],
+        quote: result.quote,
+        source: chunk?.source,
+        date: chunk?.date,
+        url: chunk?.url,
+      };
+    });
   }
 
   const results = [
-    buildEntry("baker",   bakerResult,   bakerChunks),
-    buildEntry("dylan",   dylanResult,   dylanChunks),
-    buildEntry("circuit", circuitResult, circuitChunks),
-  ].filter(Boolean);
+    ...buildEntries("baker",   bakerResults,   bakerChunks),
+    ...buildEntries("dylan",   dylanResults,   dylanChunks),
+    ...buildEntries("circuit", circuitResults, circuitChunks),
+  ];
 
   return NextResponse.json({ slug, company: meta.name, experts: results });
 }

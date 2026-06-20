@@ -47,12 +47,14 @@ export function ExpertPulse({ slug }: { slug: string }) {
 
   if (!data || data.experts.length === 0) return null;
 
+  const cols = data.experts.length > 3 ? "sm:grid-cols-2" : "sm:grid-cols-3";
+
   return (
     <div className="border-t border-gray-200 pt-4 mb-4">
       <div className="text-[10px] uppercase tracking-wider text-gray-400 mb-3">What the experts are saying</div>
-      <div className="grid sm:grid-cols-3 gap-3">
-        {data.experts.map((e) => (
-          <div key={e.corpus} className="rounded border border-gray-100 p-3 flex flex-col gap-2">
+      <div className={`grid ${cols} gap-3`}>
+        {data.experts.map((e, i) => (
+          <div key={`${e.corpus}-${i}`} className="rounded border border-gray-100 p-3 flex flex-col gap-2">
             <div className="flex items-center gap-1.5">
               <span className="inline-block w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: e.accent }} />
               <span className="text-[11px] font-semibold text-gray-800">{e.name}</span>

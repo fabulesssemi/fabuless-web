@@ -138,9 +138,9 @@ export function CompanyDashboard({
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-xl bg-gradient-to-br from-[#1C1917] to-[#0f172a] hover:from-[#292524] hover:to-[#1e293b] border border-[#292524] hover:border-[#B45309]/40 transition-all duration-200 flex flex-col gap-2.5 py-4 px-4 group shadow-sm hover:shadow-md"
+                  className="rounded-xl bg-gradient-to-br from-[#F8F7F4] to-[#EEECEA] hover:from-white hover:to-[#F0EDE9] border border-[#DDDBD2] hover:border-[#B45309]/40 transition-all duration-200 flex flex-col gap-2.5 py-4 px-4 group shadow-sm hover:shadow-md"
                 >
-                  <span className="text-[#B45309]/70 group-hover:text-[#B45309] transition-colors">
+                  <span className="text-[#B45309] transition-colors">
                     {item.type === "youtube" ? (
                       <svg width="20" height="14" viewBox="0 0 28 20" fill="currentColor">
                         <path d="M27.4 3.1a3.5 3.5 0 0 0-2.5-2.5C22.8 0 14 0 14 0S5.2 0 3.1.6A3.5 3.5 0 0 0 .6 3.1C0 5.2 0 10 0 10s0 4.8.6 6.9a3.5 3.5 0 0 0 2.5 2.5C5.2 20 14 20 14 20s8.8 0 10.9-.6a3.5 3.5 0 0 0 2.5-2.5C28 14.8 28 10 28 10s0-4.8-.6-6.9zM11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>
@@ -152,7 +152,7 @@ export function CompanyDashboard({
                     )}
                   </span>
                   <span className="text-[9px] font-bold uppercase tracking-widest text-[#B45309]">{item.show === "YouTube" ? "Video" : item.show}</span>
-                  <span className="text-[12px] font-semibold text-gray-200 leading-snug group-hover:text-white transition-colors line-clamp-2">{item.title}</span>
+                  <span className="text-[12px] font-semibold text-gray-800 leading-snug group-hover:text-[#111827] transition-colors line-clamp-2">{item.title}</span>
                 </a>
               ))}
             </div>

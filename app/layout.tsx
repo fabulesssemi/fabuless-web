@@ -51,8 +51,7 @@ export default function RootLayout({
                 className="flex items-center gap-2.5 font-sans text-[1.6rem] font-extrabold text-white tracking-tight"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.svg" alt="" width={32} height={32} className="rounded-[5px]" />
-                Fabuless
+                <img src="/logo.svg" alt="Fabuless" width={36} height={36} className="rounded-[6px]" />
               </Link>
 
               {/* Desktop nav */}

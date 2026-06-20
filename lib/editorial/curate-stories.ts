@@ -286,13 +286,19 @@ ${STORY_SCHEMA}`;
       })
     );
 
+    // Push imageless stories to the back so the top 4 slots always have photos.
+    const withImagesFirst = [
+      ...topStories.filter((s) => s.image),
+      ...topStories.filter((s) => !s.image),
+    ];
+
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {
       month: "long", day: "numeric", year: "numeric",
     });
 
     return {
-      topStories,
+      topStories: withImagesFirst,
       podcasts: [], // filled in separately by generatePodcastPicks
       issueTitle: generatedTitle || `Week of ${weekOf}`,
       generatedAt: new Date().toISOString(),

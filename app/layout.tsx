@@ -15,7 +15,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fabuless.ai"),
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: {
+    icon: [{ url: "/favicon.svg?v=2", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg?v=2",
+  },
   title: "Fabuless — Semiconductor Intelligence",
   description:
     "A weekly briefing on the fabless semiconductor industry — for investors who track chips seriously.",

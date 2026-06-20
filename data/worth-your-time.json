@@ -1,0 +1,254 @@
+[
+  {
+    "slug": "nvda",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "NVIDIA: The GPU Company (Part 1)",
+    "url": "https://www.youtube.com/watch?v=ZEL0EAVtCTY"
+  },
+  {
+    "slug": "nvda",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "NVIDIA: The GPU Company (Part 3)",
+    "url": "https://www.youtube.com/watch?v=pE6sw_E9Gh0&t=1203s"
+  },
+  {
+    "slug": "amd",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "AMD Deep Dive",
+    "url": "https://www.youtube.com/watch?v=Mhlrxp8nXDc"
+  },
+  {
+    "slug": "amd",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "AMD: The Comeback Story",
+    "url": "https://www.youtube.com/watch?v=7Jx2eMOekOU"
+  },
+  {
+    "slug": "amd",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "AMD vs NVIDIA",
+    "url": "https://www.youtube.com/watch?v=1kl0RBARJYQ"
+  },
+  {
+    "slug": "avgo",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Broadcom Deep Dive",
+    "url": "https://www.youtube.com/watch?v=CaK1eNKF9nY"
+  },
+  {
+    "slug": "avgo",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Broadcom: The Custom Silicon Play",
+    "url": "https://www.youtube.com/watch?v=4zgNqaPvvBY"
+  },
+  {
+    "slug": "avgo",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Broadcom Business Breakdown",
+    "url": "https://www.youtube.com/watch?v=uIx00_TpihM"
+  },
+  {
+    "slug": "arm",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "Arm Holdings (December 2024)",
+    "url": "https://www.acquired.fm"
+  },
+  {
+    "slug": "arm",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Arm: The Architecture of Everything",
+    "url": "https://www.youtube.com/watch?v=JKUFTJJX19w"
+  },
+  {
+    "slug": "arm",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Arm Holdings Deep Dive",
+    "url": "https://www.youtube.com/watch?v=ZnSCQkOmYyM&t=270s"
+  },
+  {
+    "slug": "synopsys",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "Synopsys (May 2024)",
+    "url": "https://www.acquired.fm"
+  },
+  {
+    "slug": "synopsys",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Synopsys: The EDA Monopoly",
+    "url": "https://www.youtube.com/watch?v=2cknMToFC4w"
+  },
+  {
+    "slug": "synopsys",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Synopsys Deep Dive",
+    "url": "https://www.youtube.com/watch?v=3CsD432lUhA"
+  },
+  {
+    "slug": "intc",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "Intel (Acquired Episode)",
+    "url": "https://www.acquired.fm"
+  },
+  {
+    "slug": "intc",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Intel: The Fallen Giant",
+    "url": "https://www.youtube.com/watch?v=asCgCv2XB4s&t=84s"
+  },
+  {
+    "slug": "intc",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Intel Deep Dive",
+    "url": "https://www.youtube.com/watch?v=fphcOSPgHtM&t=2747s"
+  },
+  {
+    "slug": "amat",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Applied Materials Deep Dive",
+    "url": "https://www.youtube.com/watch?v=QFtMxi5LFFE"
+  },
+  {
+    "slug": "amat",
+    "type": "youtube",
+    "show": "Business Breakdowns",
+    "title": "Applied Materials (Ep. 118)",
+    "url": "https://www.youtube.com/watch?v=0bPDY0oyB5I"
+  },
+  {
+    "slug": "mrvl",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Marvell: The Custom Silicon Bet",
+    "url": "https://www.youtube.com/watch?v=gYJIZdmLMUI"
+  },
+  {
+    "slug": "mrvl",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Marvell Technology Deep Dive",
+    "url": "https://www.youtube.com/watch?v=vVoKPvJkV6g"
+  },
+  {
+    "slug": "mrvl",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Marvell Analysis",
+    "url": "https://www.youtube.com/watch?v=AeOl-7SKRZs"
+  },
+  {
+    "slug": "tsm",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "TSMC (Acquired Episode)",
+    "url": "https://www.youtube.com/watch?v=vOS_8QwlmIw"
+  },
+  {
+    "slug": "tsm",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "TSMC: The World's Most Important Company",
+    "url": "https://www.youtube.com/watch?v=Xnk0emwuO7c"
+  },
+  {
+    "slug": "asml",
+    "type": "youtube",
+    "show": "Business Breakdowns",
+    "title": "ASML (Ep. 117)",
+    "url": "https://www.youtube.com/watch?v=C73nznpybqw&t=136s"
+  },
+  {
+    "slug": "asml",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "ASML: The Chip Monopoly",
+    "url": "https://www.youtube.com/watch?v=ktEsOBgToWY"
+  },
+  {
+    "slug": "mu",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Micron Technology Deep Dive",
+    "url": "https://www.youtube.com/watch?v=IRhuHt51AXg"
+  },
+  {
+    "slug": "mu",
+    "type": "podcast",
+    "show": "A Bit Personal",
+    "title": "The Memory Episode — Sanjay Mehrotra",
+    "url": "https://www.youtube.com/watch?v=_6O19bEZgMc"
+  },
+  {
+    "slug": "qcom",
+    "type": "youtube",
+    "show": "Acquired",
+    "title": "Qualcomm (Acquired Episode)",
+    "url": "https://www.youtube.com/watch?v=nkGGDp9mZww&t=175s"
+  },
+  {
+    "slug": "qcom",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Qualcomm Deep Dive",
+    "url": "https://www.youtube.com/watch?v=acuSJeDRpIc"
+  },
+  {
+    "slug": "skhynix",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "SK Hynix: The HBM Play",
+    "url": "https://www.youtube.com/watch?v=ry4PiNVTIv8"
+  },
+  {
+    "slug": "skhynix",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "SK Hynix Deep Dive",
+    "url": "https://www.youtube.com/watch?v=uWTD2q5Fn80"
+  },
+  {
+    "slug": "skhynix",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "SK Hynix Analysis",
+    "url": "https://www.youtube.com/watch?v=UzpLbVHE6uY"
+  },
+  {
+    "slug": "samsung",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Samsung: The Chip Giant",
+    "url": "https://www.youtube.com/watch?v=51RbL5Bl2IA"
+  },
+  {
+    "slug": "samsung",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Samsung Deep Dive",
+    "url": "https://www.youtube.com/watch?v=JxpoNjBCmDk&t=473s"
+  },
+  {
+    "slug": "samsung",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Samsung Analysis",
+    "url": "https://www.youtube.com/watch?v=kG0JdmWAplY"
+  }
+]

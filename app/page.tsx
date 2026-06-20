@@ -62,11 +62,6 @@ export default async function Home() {
       <section className="pt-10 pb-5">
         <div className="flex items-start justify-between gap-8 mb-4">
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.svg" alt="Fabuless" width={44} height={44} className="rounded-[7px]" />
-              <span className="font-sans text-[1.5rem] font-extrabold text-[#111827] tracking-tight">Fabuless</span>
-            </div>
             <h1 className="font-sans text-[1.85rem] font-bold text-[#111827] leading-tight tracking-tight mb-2">
               Semiconductor intelligence for the curious investor.
             </h1>

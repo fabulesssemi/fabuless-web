@@ -250,5 +250,187 @@
     "show": "YouTube",
     "title": "Samsung Analysis",
     "url": "https://www.youtube.com/watch?v=kG0JdmWAplY"
+  },
+  {
+    "slug": "shin-etsu",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Shin-Etsu Chemical Deep Dive",
+    "url": "https://www.youtube.com/watch?v=Y3M1igzV2oE"
+  },
+  {
+    "slug": "shin-etsu",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Shin-Etsu: The Silicon Wafer Monopoly",
+    "url": "https://www.youtube.com/watch?v=4xyvg1Kvf3E"
+  },
+  {
+    "slug": "shin-etsu",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Shin-Etsu Analysis",
+    "url": "https://www.youtube.com/watch?v=59KPQWgzTaA"
+  },
+  {
+    "slug": "sumco",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "SUMCO: Silicon Wafer Supply Chain",
+    "url": "https://www.youtube.com/watch?v=G7hIv82fvcg"
+  },
+  {
+    "slug": "lrcx",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Lam Research Deep Dive",
+    "url": "https://www.youtube.com/watch?v=FxMHbAaluJU"
+  },
+  {
+    "slug": "lrcx",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Lam Research: The Etch & Deposition Play",
+    "url": "https://www.youtube.com/watch?v=M2GO7V0_6m8"
+  },
+  {
+    "slug": "lrcx",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Lam Research Analysis",
+    "url": "https://www.youtube.com/watch?v=KPauZIeCDuA"
+  },
+  {
+    "slug": "klac",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "KLA Corporation Deep Dive",
+    "url": "https://www.youtube.com/watch?v=TyGnNFmvVGY"
+  },
+  {
+    "slug": "klac",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "KLA: Process Control Monopoly",
+    "url": "https://www.youtube.com/watch?v=e_iFKJ2uVSc"
+  },
+  {
+    "slug": "klac",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "KLA Analysis",
+    "url": "https://www.youtube.com/watch?v=otcePFqdxAc"
+  },
+  {
+    "slug": "tokyo-electron",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Tokyo Electron Deep Dive",
+    "url": "https://www.youtube.com/watch?v=ZqPqzumaIiw"
+  },
+  {
+    "slug": "tokyo-electron",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Tokyo Electron: Japan's Chip Equipment Giant",
+    "url": "https://www.youtube.com/watch?v=9t9D0gVfPX4"
+  },
+  {
+    "slug": "tokyo-electron",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Tokyo Electron Analysis",
+    "url": "https://www.youtube.com/watch?v=8FK_wV3x9WY"
+  },
+  {
+    "slug": "besi",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "BE Semiconductor Deep Dive",
+    "url": "https://www.youtube.com/watch?v=VdcD6qX8Xrc"
+  },
+  {
+    "slug": "besi",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "BESI: The Advanced Packaging Play",
+    "url": "https://www.youtube.com/watch?v=tr7Bmvhd_14"
+  },
+  {
+    "slug": "besi",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "BE Semiconductor Analysis",
+    "url": "https://www.youtube.com/watch?v=1Q_naYMHGP8"
+  },
+  {
+    "slug": "cadence",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Cadence Design Systems Deep Dive",
+    "url": "https://www.youtube.com/watch?v=UTPyXBATsuQ"
+  },
+  {
+    "slug": "cadence",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Cadence: The EDA Duopoly",
+    "url": "https://www.youtube.com/watch?v=AUm08ZUD63Q"
+  },
+  {
+    "slug": "cadence",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Cadence Analysis",
+    "url": "https://www.youtube.com/watch?v=Ec6kkQH0Fzo"
+  },
+  {
+    "slug": "globalfoundries",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "GlobalFoundries Deep Dive",
+    "url": "https://www.youtube.com/watch?v=0Q_n1yZxnHs"
+  },
+  {
+    "slug": "globalfoundries",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "GlobalFoundries: The Specialty Foundry",
+    "url": "https://www.youtube.com/watch?v=vb7oHj4ZrAk"
+  },
+  {
+    "slug": "globalfoundries",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "GlobalFoundries Analysis",
+    "url": "https://www.youtube.com/watch?v=d7USgBB7sAQ"
+  },
+  {
+    "slug": "ase",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "ASE Technology Deep Dive",
+    "url": "https://www.youtube.com/watch?v=_L5MIVkZn0U"
+  },
+  {
+    "slug": "amkor",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Amkor Technology Deep Dive",
+    "url": "https://www.youtube.com/watch?v=38daKHNW2Qc"
+  },
+  {
+    "slug": "amkor",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Amkor: Advanced Packaging Leader",
+    "url": "https://www.youtube.com/watch?v=N28rwr7AxTU"
+  },
+  {
+    "slug": "amkor",
+    "type": "youtube",
+    "show": "YouTube",
+    "title": "Amkor Analysis",
+    "url": "https://www.youtube.com/watch?v=T-jt3qBzJ4A"
   }
 ]

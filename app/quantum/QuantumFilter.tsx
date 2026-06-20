@@ -33,7 +33,11 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
   const hero = topStories[0] ?? null;
   const mid = topStories.slice(1, 3);
   const rail = rest.slice(0, 6);
-  const below = rest.slice(6, 12);
+  // Always show at least 2 below — if rail took fewer than 6 (not enough rest),
+  // below still grabs from position 6 onward; if total articles are tight,
+  // allow below to borrow from earlier positions so it's never empty.
+  const belowRaw = rest.slice(6, 18);
+  const below = belowRaw.length >= 2 ? belowRaw : rest.slice(Math.max(0, rest.length - 2));
 
   if (articles.length === 0) {
     return (

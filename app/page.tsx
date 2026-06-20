@@ -74,7 +74,11 @@ export default async function Home() {
             <SubscribeForm compact />
           </div>
         </div>
-
+        {/* Mobile-only signup — hidden on sm+ where the top-right form shows */}
+        <div className="sm:hidden mt-3 pb-1">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">Free · Every weekday</p>
+          <SubscribeForm />
+        </div>
       </section>
 
       {/* Latest issue header + Top Stories */}
@@ -227,6 +231,22 @@ export default async function Home() {
           </div>
         </section>
       )}
+      {/* Bottom CTA */}
+      <section className="py-10 mt-4 border-t border-gray-200">
+        <div className="max-w-xl mx-auto text-center">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[#B45309] mb-2">Free · Every weekday</p>
+          <h2 className="font-sans text-[1.4rem] font-bold text-[#111827] leading-tight tracking-tight mb-2">
+            The next Nvidia is already in motion.
+          </h2>
+          <p className="font-serif text-sm text-[#4a4a4a] mb-5 leading-relaxed">
+            Earnings previews, analyst moves, insider activity, and expert track records — distilled into a daily brief for semiconductor investors.
+          </p>
+          <div className="flex justify-center">
+            <SubscribeForm />
+          </div>
+          <p className="text-[11px] text-gray-400 mt-3">No spam. Unsubscribe anytime.</p>
+        </div>
+      </section>
     </div>
   );
 }

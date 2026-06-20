@@ -123,6 +123,37 @@ export function CompanyDashboard({
         </div>
       )}
 
+      {/* ── WORTH YOUR TIME ── */}
+      <div className="mb-6">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">Worth Your Time</p>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { type: "podcast" as const, label: "PODCAST" },
+            { type: "youtube" as const, label: "YOUTUBE" },
+            { type: "podcast" as const, label: "PODCAST" },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="rounded-lg border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-2 py-6 px-4"
+            >
+              <span className="text-gray-300">
+                {item.type === "youtube" ? (
+                  <svg width="28" height="20" viewBox="0 0 28 20" fill="currentColor">
+                    <path d="M27.4 3.1a3.5 3.5 0 0 0-2.5-2.5C22.8 0 14 0 14 0S5.2 0 3.1.6A3.5 3.5 0 0 0 .6 3.1C0 5.2 0 10 0 10s0 4.8.6 6.9a3.5 3.5 0 0 0 2.5 2.5C5.2 20 14 20 14 20s8.8 0 10.9-.6a3.5 3.5 0 0 0 2.5-2.5C28 14.8 28 10 28 10s0-4.8-.6-6.9zM11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>
+                  </svg>
+                ) : (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                    <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
+                  </svg>
+                )}
+              </span>
+              <span className="text-[9px] font-bold uppercase tracking-widest text-gray-300">{item.label}</span>
+              <span className="text-[11px] text-gray-300 text-center">Coming soon</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── ROW 1: EDITORIAL + BULL CASE LEFT · ANALYST DATA RIGHT ── */}
       <div className="grid sm:grid-cols-2 items-start sm:divide-x divide-gray-200 border-t border-gray-200 mb-4">
 

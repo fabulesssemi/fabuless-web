@@ -152,7 +152,7 @@ export function CompanyDashboard({
                     )}
                   </span>
                   <span className="text-[9px] font-bold uppercase tracking-widest text-[#B45309]">{item.show === "YouTube" ? "Video" : item.show}</span>
-                  <span className="text-[12px] font-semibold text-gray-800 leading-snug group-hover:text-[#111827] transition-colors line-clamp-2">{item.title}</span>
+                  <span className="text-[12px] font-semibold text-[#111827] leading-snug line-clamp-2">{item.title}</span>
                 </a>
               ))}
             </div>

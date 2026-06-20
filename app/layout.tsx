@@ -15,6 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fabuless.ai"),
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
   title: "Fabuless — Semiconductor Intelligence",
   description:
     "A weekly briefing on the fabless semiconductor industry — for investors who track chips seriously.",
@@ -47,8 +48,10 @@ export default function RootLayout({
             <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
               <Link
                 href="/"
-                className="font-sans text-[1.6rem] font-extrabold text-white tracking-tight"
+                className="flex items-center gap-2.5 font-sans text-[1.6rem] font-extrabold text-white tracking-tight"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.svg" alt="" width={32} height={32} className="rounded-[5px]" />
                 Fabuless
               </Link>
 

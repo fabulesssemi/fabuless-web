@@ -352,10 +352,15 @@ export function PortfolioPerformance({
               </div>
             </div>
           </div>
-          <div className="px-4 py-1.5" style={{ borderTop: "1px solid rgba(16,185,129,0.12)" }}>
-            <span className="text-[11px] tabular-nums" style={{ color: strip.beatBy >= 0 ? "#10B981" : "#F43F5E" }}>
-              {strip.beatBy >= 0 ? "↑ Beating the market by " : "↓ Trailing the market by "}
-              {money(Math.abs(strip.beatBy)).replace(/^[+]/, "")} ({strip.beatByPct >= 0 ? "+" : ""}{strip.beatByPct.toFixed(1)}%)
+          <div className="px-4 py-2 flex items-center gap-2.5" style={{ borderTop: "1px solid rgba(16,185,129,0.12)" }}>
+            <span className="text-[11px] font-medium text-gray-400">
+              {strip.beatBy >= 0 ? "↑ Beating the market" : "↓ Trailing the market"}
+            </span>
+            <span className="text-[15px] font-bold tabular-nums leading-none" style={{ color: strip.beatBy >= 0 ? "#10B981" : "#F43F5E" }}>
+              {strip.beatByPct >= 0 ? "+" : ""}{strip.beatByPct.toFixed(1)}%
+            </span>
+            <span className="text-[11px] tabular-nums text-gray-400">
+              ({money(Math.abs(strip.beatBy)).replace(/^[+]/, "")})
             </span>
           </div>
         </div>

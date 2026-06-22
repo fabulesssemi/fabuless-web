@@ -105,7 +105,7 @@ export function buildSemiEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], m
     const section = issue.sections.find((s) => s.category === cat);
     if (!section || !section.stories.length) continue;
     storiesHtml += categoryHeader(cat);
-    storiesHtml += section.stories.map((s) => { const i = storyIndex++; return storyRow(s, i === 0 || i === 6, i === 0); }).join("");
+    storiesHtml += section.stories.map((s, si) => { const i = storyIndex++; return storyRow(s, (si === 0 && !!s.image), i === 0); }).join("");
   }
   const pods = livePodcasts.length ? livePodcasts : issue.podcasts;
   const podcastsHtml = pods.map(podcastRow).join("");

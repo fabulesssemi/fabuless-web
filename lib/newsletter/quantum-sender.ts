@@ -90,7 +90,7 @@ export async function sendQuantumNewsletter(): Promise<{ sent: number; failed: n
     .limit(1);
   if (sentToday && sentToday.length > 0) return { sent: 0, failed: 0, skipped: true };
 
-  const articles = await loadQuantumArticlesFromDB({ cutoffHours: 72, limit: 16 });
+  const articles = await loadQuantumArticlesFromDB({ cutoffHours: 168, limit: 16 });
   if (!articles.length) throw new Error("No quantum articles in DB. Run quantum refresh first.");
 
   const dateStr = formatDate();

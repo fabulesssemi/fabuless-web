@@ -18,7 +18,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 const CATEGORY_ORDER = ["hardware", "software", "market", "research", "policy", "consciousness"];
 
 export default async function QuantumPage() {
-  const articles = await getLatestArticlesAsync(24);
+  const articles = await getLatestArticlesAsync(32);
 
   const purePlay = QUANTUM_COMPANIES.filter((c) => c.category === "pure-play");
   const bigTech  = QUANTUM_COMPANIES.filter((c) => c.category === "big-tech");

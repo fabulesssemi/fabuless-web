@@ -4,8 +4,8 @@ import { QUANTUM_KEYWORDS, QUANTUM_COMPANIES } from "./companies";
 import { saveQuantumArticles, loadQuantumArticlesFromDB } from "./db";
 import type { QuantumArticle } from "./articles";
 
-const TARGET_ARTICLES = 16;
-const MAX_CANDIDATES = 40;
+const TARGET_ARTICLES = 24;
+const MAX_CANDIDATES = 60;
 
 function sleep(ms: number) { return new Promise((r) => setTimeout(r, ms)); }
 

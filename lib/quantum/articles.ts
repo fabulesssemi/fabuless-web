@@ -68,5 +68,5 @@ export async function getAllArticlesAsync(): Promise<QuantumArticle[]> {
 }
 
 export async function getLatestArticlesAsync(limit = 48): Promise<QuantumArticle[]> {
-  try { return await loadQuantumArticlesFromDB({ cutoffHours: 72, limit }); } catch { return getLatestArticles(limit); }
+  try { return await loadQuantumArticlesFromDB({ limit }); } catch { return getLatestArticles(limit); }
 }

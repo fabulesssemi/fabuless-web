@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getLatestArticles } from "@/lib/quantum/articles";
+import { getLatestArticlesAsync } from "@/lib/quantum/articles";
 import { QUANTUM_COMPANIES } from "@/lib/quantum/companies";
 import { QuantumFilter } from "./QuantumFilter";
 
@@ -18,7 +18,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 const CATEGORY_ORDER = ["hardware", "software", "market", "research", "policy", "consciousness"];
 
 export default async function QuantumPage() {
-  const articles = getLatestArticles(24);
+  const articles = await getLatestArticlesAsync(24);
 
   const purePlay = QUANTUM_COMPANIES.filter((c) => c.category === "pure-play");
   const bigTech  = QUANTUM_COMPANIES.filter((c) => c.category === "big-tech");

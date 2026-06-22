@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllArticles } from "@/lib/quantum/articles";
+import { getAllArticlesAsync } from "@/lib/quantum/articles";
 import { QUANTUM_COMPANIES } from "@/lib/quantum/companies";
 
 export const revalidate = 3600;
@@ -16,12 +16,12 @@ const CATEGORY_META: Record<string, { label: string; color: string }> = {
 };
 
 export async function generateStaticParams() {
-  return getAllArticles().map((a) => ({ id: a.id }));
+  return (await getAllArticlesAsync()).map((a) => ({ id: a.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const article = getAllArticles().find((a) => a.id === id);
+  const article = (await getAllArticlesAsync()).find((a) => a.id === id);
   if (!article) return { title: "Article Not Found — Fabuless Quantum" };
   return {
     title: `${article.title} — Fabuless Quantum`,
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function QuantumArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const all = getAllArticles();
+  const all = await getAllArticlesAsync();
   const article = all.find((a) => a.id === id);
   if (!article) notFound();
 

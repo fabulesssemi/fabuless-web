@@ -32,7 +32,6 @@ export function getAllArticles(): QuantumArticle[] {
     const raw = fs.readFileSync(DATA_PATH, "utf8");
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
-    // backfill topStory for articles written before this field existed
     return parsed.map((a) => ({ topStory: false, ...a }));
   } catch { return []; }
 }
@@ -58,4 +57,16 @@ export function getLatestArticles(limit = 48): QuantumArticle[] {
     .filter((a) => a.publishedAt >= cutoff)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, limit);
+}
+
+// ── Async versions (read from Supabase in production) ────────────────────────
+
+import { loadQuantumArticlesFromDB } from "./db";
+
+export async function getAllArticlesAsync(): Promise<QuantumArticle[]> {
+  try { return await loadQuantumArticlesFromDB({ limit: 200 }); } catch { return getAllArticles(); }
+}
+
+export async function getLatestArticlesAsync(limit = 48): Promise<QuantumArticle[]> {
+  try { return await loadQuantumArticlesFromDB({ cutoffHours: 72, limit }); } catch { return getLatestArticles(limit); }
 }

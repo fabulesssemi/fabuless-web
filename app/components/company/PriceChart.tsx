@@ -87,12 +87,14 @@ function SVGChart({
   symbol,
   lineColor,
 }: {
-  points: { close: number }[];
+  points: { close: number; date?: string }[];
   xLabels: { idx: number; label: string }[];
   currency: string;
   symbol: string;
   lineColor: string;
 }) {
+  const [hover, setHover] = useState<{ idx: number } | null>(null);
+
   if (points.length < 2) return (
     <div className="h-[160px] flex items-center justify-center text-[12px] text-gray-400">
       Not enough data
@@ -124,8 +126,43 @@ function SVGChart({
     value: min + t * totalRange,
   }));
 
+  // Crosshair state
+  const hIdx = hover?.idx ?? null;
+  const hX = hIdx !== null ? toX(hIdx) : null;
+  const hY = hIdx !== null ? toY(closes[hIdx]) : null;
+  const hPrice = hIdx !== null ? closes[hIdx] : null;
+  const hDate = hIdx !== null ? (points[hIdx] as { date?: string }).date : null;
+
+  // Tooltip label: price + date
+  const tooltipLabel = hPrice !== null
+    ? `${fmtY(hPrice!, currency)}${hDate ? "  " + new Date(hDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : ""}`
+    : "";
+  const tooltipW = Math.min(tooltipLabel.length * 7 + 16, 200);
+  // Keep tooltip inside chart
+  const tooltipX = hX !== null
+    ? Math.min(Math.max(hX! - tooltipW / 2, PAD_L), W - PAD_R - tooltipW)
+    : 0;
+
+  function handleMouseMove(e: React.MouseEvent<SVGSVGElement>) {
+    const svg = e.currentTarget;
+    const rect = svg.getBoundingClientRect();
+    const scaleX = W / rect.width;
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const chartX = mouseX - PAD_L;
+    const ratio = chartX / PW;
+    const idx = Math.round(ratio * (points.length - 1));
+    const clamped = Math.max(0, Math.min(points.length - 1, idx));
+    setHover({ idx: clamped });
+  }
+
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" preserveAspectRatio="xMidYMid meet">
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      className="w-full cursor-crosshair"
+      preserveAspectRatio="xMidYMid meet"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setHover(null)}
+    >
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={lineColor} stopOpacity="0.15" />
@@ -139,8 +176,29 @@ function SVGChart({
       <path d={areaPath} fill={`url(#${gradientId})`} />
       <path d={linePath} fill="none" stroke={lineColor} strokeWidth="1.5"
         strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={toX(points.length - 1).toFixed(1)} cy={toY(closes[closes.length - 1]).toFixed(1)}
-        r="3" fill={lineColor} />
+
+      {/* Default end dot — hide when hovering */}
+      {hIdx === null && (
+        <circle cx={toX(points.length - 1).toFixed(1)} cy={toY(closes[closes.length - 1]).toFixed(1)}
+          r="3" fill={lineColor} />
+      )}
+
+      {/* Crosshair */}
+      {hX !== null && hY !== null && (
+        <>
+          <line x1={hX.toFixed(1)} y1={PAD_T} x2={hX.toFixed(1)} y2={PAD_T + PH}
+            stroke="rgba(107,114,128,0.35)" strokeWidth="1" strokeDasharray="3 3" />
+          <circle cx={hX.toFixed(1)} cy={hY!.toFixed(1)} r="4" fill={lineColor} />
+          {/* Tooltip bubble */}
+          <rect x={tooltipX.toFixed(1)} y="2" width={tooltipW} height="18" rx="3"
+            fill="#1f2937" opacity="0.88" />
+          <text x={(tooltipX + tooltipW / 2).toFixed(1)} y="14.5"
+            textAnchor="middle" fontSize="11" fill="white" fontWeight="500">
+            {tooltipLabel}
+          </text>
+        </>
+      )}
+
       {yLevels.map((l, i) => (
         <text key={i} x={PAD_L - 6} y={(l.y + 4).toFixed(1)}
           textAnchor="end" fontSize="11" fill="rgba(107,114,128,0.7)">

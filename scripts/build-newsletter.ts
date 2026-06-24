@@ -75,6 +75,17 @@ function formatDate(d = new Date()): string {
 }
 
 // ── Image lookup: match curated story URLs against homepage_articles ──────────
+async function fetchOgImage(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(5000), headers: { "User-Agent": "Mozilla/5.0" } });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const match = html.match(/<meta[^>]+(?:property="og:image"|name="og:image")[^>]+content="([^"]+)"/i)
+      ?? html.match(/<meta[^>]+content="([^"]+)"[^>]+(?:property="og:image"|name="og:image")/i);
+    return match?.[1] ?? null;
+  } catch { return null; }
+}
+
 async function fetchImageMap(urls: string[]): Promise<Map<string, string>> {
   if (!urls.length) return new Map();
   const { data } = await supabase
@@ -85,6 +96,12 @@ async function fetchImageMap(urls: string[]): Promise<Map<string, string>> {
   for (const row of data ?? []) {
     if (row.image) map.set(row.url as string, row.image as string);
   }
+  // For URLs still missing images, scrape OG image from the article page
+  const missing = urls.filter((u) => !map.has(u));
+  await Promise.all(missing.map(async (u) => {
+    const img = await fetchOgImage(u);
+    if (img) map.set(u, img);
+  }));
   return map;
 }
 

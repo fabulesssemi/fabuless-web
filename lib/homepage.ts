@@ -151,6 +151,18 @@ export async function getHomepageArticles(): Promise<{
       }
     }
 
+    // Guarantee at least 12 list stories by padding from remaining alive articles
+    if (cappedList.length < 12) {
+      const usedAllUrls = new Set([...cappedTop, ...cappedList].map((s) => s.url));
+      const remaining = alive
+        .filter((r) => !usedAllUrls.has(r.url as string))
+        .sort((a, b) => new Date(b.first_seen_at as string).getTime() - new Date(a.first_seen_at as string).getTime());
+      for (const r of remaining) {
+        if (cappedList.length >= 12) break;
+        cappedList.push(rowToStory(r));
+      }
+    }
+
     return { topStories: cappedTop, listStories: cappedList };
   } catch {
     return { topStories: [], listStories: [] };

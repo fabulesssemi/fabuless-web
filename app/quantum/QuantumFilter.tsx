@@ -1,6 +1,7 @@
 "use client";
 
 import type { QuantumArticle } from "@/lib/quantum/articles";
+import { decodeHtml } from "@/lib/decode";
 
 const CATEGORY_LABELS: Record<string, string> = {
   hardware: "Hardware", software: "Software", market: "Market",
@@ -57,10 +58,11 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={hero.image!}
-                  alt={hero.title}
+                  alt={decodeHtml(hero.title)}
                   className="w-full object-cover"
                   style={{ maxHeight: "320px" }}
                   referrerPolicy="no-referrer"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
                 />
               </a>
               <TopLabel />
@@ -70,7 +72,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 rel="noopener noreferrer"
                 className="block mt-2 font-serif text-[1.55rem] font-normal text-[#111827] leading-tight hover:text-[#312E81] transition-colors"
               >
-                {hero.title}
+                {decodeHtml(hero.title)}
               </a>
               <p className="mt-3 font-serif text-[14px] text-[#4a4a4a] leading-relaxed line-clamp-3">
                 {hero.summary}
@@ -89,10 +91,11 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={article.image!}
-                      alt={article.title}
+                      alt={decodeHtml(article.title)}
                       className="w-full object-cover"
                       style={{ maxHeight: "160px" }}
                       referrerPolicy="no-referrer"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
                     />
                   </a>
                   <TopLabel />
@@ -102,7 +105,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     rel="noopener noreferrer"
                     className="block mt-1.5 font-serif text-[1.35rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
-                    {article.title}
+                    {decodeHtml(article.title)}
                   </a>
                   <p className="mt-1 text-[11px] text-gray-400">{article.source}</p>
                 </div>
@@ -131,7 +134,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                     rel="noopener noreferrer"
                     className="block font-serif text-[1.05rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
                   >
-                    {article.title}
+                    {decodeHtml(article.title)}
                   </a>
                   <p className="mt-0.5 text-[10px] text-gray-400">{article.source}</p>
                 </div>
@@ -154,7 +157,7 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                   rel="noopener noreferrer"
                   className="block font-serif text-[1.15rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors mb-1.5"
                 >
-                  {article.title}
+                  {decodeHtml(article.title)}
                 </a>
                 <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug line-clamp-2">{article.summary}</p>
                 <p className="mt-1.5 text-[10px] text-gray-400">{article.source}</p>

@@ -9,6 +9,7 @@ import { fetchLatestEpisodePerShow } from "@/lib/editorial/sources";
 import { SubscribeForm } from "@/app/components/SubscribeForm";
 import { XQuotesCard } from "@/app/components/XQuotesCard";
 import { StoryImage } from "@/app/components/StoryImage";
+import { decodeHtml } from "@/lib/decode";
 
 // Opt out of the Next.js fetch cache so revalidatePath("/") from the pipeline
 // always serves fresh Supabase data on the next request.
@@ -219,7 +220,7 @@ export default async function Home() {
                       rel="noopener noreferrer"
                       className="font-sans text-[0.95rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
                     >
-                      {p.title}
+                      {decodeHtml(p.title)}
                     </a>
                     {p.oneliner && (
                       <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug mt-1">{p.oneliner}</p>

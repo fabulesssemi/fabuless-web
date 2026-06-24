@@ -1,4 +1,5 @@
 import type { Issue } from "@/lib/issues";
+import { decodeHtml } from "@/lib/decode";
 
 export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEarnings?: boolean }) {
   const hasSidebar = showEarnings && issue.earnings.length > 0;
@@ -107,7 +108,7 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                       rel="noopener noreferrer"
                       className="font-sans text-[0.95rem] font-semibold leading-snug text-[#111827] hover:text-[#B45309] transition-colors"
                     >
-                      {p.title}
+                      {decodeHtml(p.title)}
                     </a>
                     {p.oneliner && (
                       <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug mt-1">{p.oneliner}</p>

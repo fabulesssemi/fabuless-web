@@ -24,10 +24,11 @@ function CategoryLabel({ category }: { category: string }) {
 }
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
-  // Top stories: whatever update-quantum-articles.ts marked as topStory (clears old flags each run)
-  const topStories = articles
-    .filter((a) => a.topStory && a.image)
-    .slice(0, 3);
+  // Top stories: prefer topStory-flagged articles with images; fill remaining slots from any image article
+  const flagged = articles.filter((a) => a.topStory && a.image).slice(0, 3);
+  const flaggedIds = new Set(flagged.map((a) => a.id));
+  const fallback = articles.filter((a) => a.image && !flaggedIds.has(a.id));
+  const topStories = [...flagged, ...fallback].slice(0, 3);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id));
 

@@ -112,8 +112,9 @@ export async function getHomepageArticles(): Promise<{
       return age >= 2 * DAY_MS && age < 3 * DAY_MS;
     });
 
-    // Top Stories: best 4 from today (rank asc = most important first)
-    const topStories = today.slice(0, 4).map(rowToStory);
+    // Top Stories: best 4 from today; fall back to most recent alive articles if today is empty
+    const topSource = today.length >= 4 ? today : alive.sort((a, b) => new Date(b.first_seen_at as string).getTime() - new Date(a.first_seen_at as string).getTime());
+    const topStories = topSource.slice(0, 4).map(rowToStory);
     const topUrls = new Set(topStories.map((s) => s.url));
 
     // List: fill to guarantee minimums — 8 today, 4 yesterday, 4 day-before

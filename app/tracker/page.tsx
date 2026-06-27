@@ -161,7 +161,7 @@ export default function TrackerPage() {
 
         {/* Prediction feed */}
         <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-sm p-6">
-          <Suspense fallback={null}>
+          <Suspense fallback={<div className="h-32 flex items-center justify-center text-[12px] text-gray-400">Loading predictions…</div>}>
             <PredictionTable rows={predictions} />
           </Suspense>
         </div>

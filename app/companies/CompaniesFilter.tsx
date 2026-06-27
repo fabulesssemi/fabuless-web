@@ -151,6 +151,11 @@ export function CompaniesFilter({ cards }: { cards: CardData[] }) {
 
       {/* Cards grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filtered.length === 0 && (
+          <div className="col-span-3 py-16 text-center text-[13px] text-gray-400">
+            No companies match your search.
+          </div>
+        )}
         {filtered.map((c) => (
           <Link
             key={c.slug}

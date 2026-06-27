@@ -26,7 +26,7 @@
     },
     {
       "path": "/api/newsletter/send-quantum",
-      "schedule": "0 16 * * 1-5"
+      "schedule": "5 16 * * 1-5"
     }
   ]
 }

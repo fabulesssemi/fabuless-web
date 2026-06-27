@@ -63,7 +63,7 @@ export function GrossMarginChart({
   const gap = totalGap / (barCount + 1);
 
   const toBarX = (i: number) => PAD_L + gap + i * (barW + gap);
-  const toBarH = (gm: number) => ((gm - yMin) / yRange) * PH;
+  const toBarH = (gm: number) => Math.max(2, ((gm - yMin) / yRange) * PH);
   const toBarY = (gm: number) => PAD_T + PH - toBarH(gm);
 
   const first = values[0];

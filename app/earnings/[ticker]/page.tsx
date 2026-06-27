@@ -16,7 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ ticker: string }> }): Promise<Metadata> {
   const { ticker } = await params;
   const preview = getPreview(ticker.toUpperCase());
-  if (!preview) return {};
+  if (!preview) return { title: "Earnings Preview Not Found — Fabuless", robots: { index: false } };
   return {
     title: `${preview.company} (${preview.ticker}) Earnings Preview — ${preview.fiscalQuarter} | Fabuless`,
     description: preview.centralQuestion,

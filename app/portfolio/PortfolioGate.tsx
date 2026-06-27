@@ -13,10 +13,11 @@ function blankPending(ticker: string): PendingHolding {
 
 export function PortfolioGate() {
   const router = useRouter();
-  const { load, save } = usePortfolioSync();
+  const { load, save, signedIn } = usePortfolioSync();
   const [checked, setChecked] = useState(false);
   const [tickerInput, setTickerInput] = useState("");
   const [pending, setPending] = useState<PendingHolding[]>([]);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     load().then((holdings) => {
@@ -26,7 +27,7 @@ export function PortfolioGate() {
         setChecked(true);
       }
     });
-  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [router, signedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function addTickers() {
     const tickers = parseTickersToHoldings(tickerInput).filter(
@@ -37,19 +38,24 @@ export function PortfolioGate() {
     setTickerInput("");
   }
 
-  function handleSave() {
-    if (pending.length === 0) return;
+  async function handleSave() {
+    if (pending.length === 0 || saving) return;
+    setSaving(true);
     const holdings: Holding[] = pending.map((p) => ({
       ticker: p.ticker,
       purchasePrice: p.purchasePrice ? parseFloat(p.purchasePrice) : null,
       purchaseDate: p.purchaseDate || null,
       shares: p.shares ? parseFloat(p.shares) : null,
     }));
-    save(holdings);
+    await save(holdings);
     router.push(`/portfolio?h=${encodeHoldings(holdings)}`);
   }
 
-  if (!checked) return null;
+  if (!checked) return (
+    <div className="max-w-xl mx-auto px-6 pt-28 pb-16 flex items-center justify-center">
+      <span className="text-[13px] text-gray-400">Loading your portfolio…</span>
+    </div>
+  );
 
   return (
     <div className="max-w-xl mx-auto px-6 pt-28 pb-16">
@@ -137,9 +143,10 @@ export function PortfolioGate() {
       {pending.length > 0 && (
         <button
           onClick={handleSave}
-          className="w-full rounded-lg bg-[#111827] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1f2937] transition-colors"
+          disabled={saving}
+          className="w-full rounded-lg bg-[#111827] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1f2937] transition-colors disabled:opacity-60"
         >
-          Save portfolio
+          {saving ? "Saving…" : "Save portfolio"}
         </button>
       )}
       <p className="mt-3 text-[11px] text-gray-400">Purchase details are optional. Sign in to sync across devices.</p>

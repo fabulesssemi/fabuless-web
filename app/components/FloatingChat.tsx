@@ -86,6 +86,8 @@ export function FloatingChat() {
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const messagesRef = useRef(messages);
+  useEffect(() => { messagesRef.current = messages; }, [messages]);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -107,7 +109,7 @@ export function FloatingChat() {
 
     // Build history from prior completed turns (pairs).
     const history: { question: string; answer: string }[] = [];
-    const prior = messages;
+    const prior = messagesRef.current;
     for (let i = 0; i < prior.length - 1; i++) {
       if (prior[i].role === "user" && prior[i + 1]?.role === "assistant") {
         history.push({ question: prior[i].content, answer: prior[i + 1].content });
@@ -121,6 +123,13 @@ export function FloatingChat() {
         body: JSON.stringify({ question, conversationHistory: history }),
       });
 
+      if (!res.ok) {
+        const errMsg = res.status === 429
+          ? "You've reached today's limit (10 questions). Come back tomorrow."
+          : "Something went wrong. Please try again.";
+        setMessages((m) => m.map((m2) => m2.id === assistantId ? { ...m2, content: errMsg } : m2));
+        return;
+      }
       if (!res.body) throw new Error("no stream");
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -249,7 +258,7 @@ export function FloatingChat() {
               </button>
             </div>
             <p className="text-[10px] text-gray-400 mt-2 leading-tight">
-              General information, not investment advice. 5 questions per day.
+              General information, not investment advice. 10 questions per day.
             </p>
           </div>
         </div>

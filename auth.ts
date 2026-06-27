@@ -18,19 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token.sub) session.user.id = token.sub;
       return session;
     },
-    async signIn({ user }) {
-      if (user.email) {
-        try {
-          const { createClient } = await import("@supabase/supabase-js");
-          const supabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.SUPABASE_SERVICE_KEY!
-          );
-          await supabase
-            .from("subscribers")
-            .upsert({ email: user.email }, { onConflict: "email", ignoreDuplicates: true });
-        } catch { /* non-fatal */ }
-      }
+    async signIn() {
       return true;
     },
   },

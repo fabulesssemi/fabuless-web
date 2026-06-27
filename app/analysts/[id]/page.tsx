@@ -11,7 +11,7 @@ const slugByTicker = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c.slug]));
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const analyst = WALL_STREET_ANALYSTS.find((a) => a.id === id);
-  if (!analyst) return {};
+  if (!analyst) return { title: "Analyst Not Found — Fabuless", robots: { index: false } };
   return {
     title: `${analyst.name} — ${analyst.firmDisplay} | Fabuless`,
     description: `${analyst.name}'s current semiconductor price targets and ratings.`,

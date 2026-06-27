@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { RemoveTicker } from "./PortfolioRowActions";
 import { MiniHoldingChart } from "./MiniHoldingChart";
@@ -58,6 +58,7 @@ export function HoldingRow({
   compact?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const up = (r.changePercent ?? 0) > 0;
   const down = (r.changePercent ?? 0) < 0;
@@ -84,21 +85,19 @@ export function HoldingRow({
           )}
           {/* Company logo with color-tinted bg, falls back to color dot */}
           <div className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden" style={{ background: `${color}40` }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`https://assets.parqet.com/logos/symbol/${r.ticker}?format=png`}
-              alt={r.ticker}
-              width={20}
-              height={20}
-              className="object-contain"
-              onError={(e) => {
-                const el = e.currentTarget;
-                el.style.display = "none";
-                const dot = document.createElement("span");
-                dot.style.cssText = `width:8px;height:8px;border-radius:2px;background:${color};display:block`;
-                el.parentElement?.appendChild(dot);
-              }}
-            />
+            {!logoError ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={`https://assets.parqet.com/logos/symbol/${r.ticker}?format=png`}
+                alt={r.ticker}
+                width={20}
+                height={20}
+                className="object-contain"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <span style={{ width: 8, height: 8, borderRadius: 2, background: color, display: "block" }} />
+            )}
           </div>
           <span className="font-sans text-[14px] font-bold text-gray-900 tabular-nums pointer-events-none">{r.ticker}</span>
           <span className="text-[12px] text-gray-400 truncate pointer-events-none">{r.name}</span>

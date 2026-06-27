@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { revalidatePath } from "next/cache";
 import { fetchQuantumNewsItems } from "./sources";
 import { QUANTUM_KEYWORDS, QUANTUM_COMPANIES } from "./companies";
 import { saveQuantumArticles, loadQuantumArticlesFromDB } from "./db";
@@ -254,5 +255,7 @@ export async function runQuantumUpdate(force = false): Promise<{ added: number; 
     .slice(0, 200);
 
   await saveQuantumArticles(merged);
+  revalidatePath("/quantum");
+  revalidatePath("/");
   return { added: newArticles.length, total: merged.length };
 }

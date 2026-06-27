@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { encodeHoldings, type Holding } from "./storage";
 import { usePortfolioSync } from "./usePortfolioSync";
@@ -22,11 +22,13 @@ export function EditHoldings({ holdings }: { holdings: Holding[] }) {
   const [editing, setEditing] = useState(false);
   const [pending, setPending] = useState<PendingHolding[]>([]);
 
+  const synced = useRef(false);
   useEffect(() => {
-    if (holdings.length > 0) {
+    if (!synced.current && holdings.length > 0) {
+      synced.current = true;
       syncSave(holdings);
     }
-  }, [holdings]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function openEdit() {
     setPending(holdings.map(holdingToPending));
@@ -74,7 +76,7 @@ export function EditHoldings({ holdings }: { holdings: Holding[] }) {
         </div>
         {pending.map((p, i) => (
           <div
-            key={p.ticker}
+            key={i}
             className="grid grid-cols-[80px_100px_140px_80px_24px] gap-3 items-center px-4 py-2.5"
             style={{ borderTop: i > 0 ? "1px solid #F1F5F9" : undefined }}
           >

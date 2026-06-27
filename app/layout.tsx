@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fabuless — Semiconductor Intelligence",
     description: "The semiconductor briefing for serious investors. Every weekday.",
+    images: ["/opengraph-image"],
   },
 };
 

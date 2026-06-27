@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: "My Portfolio — Fabuless",
   description:
     "Your holdings, in context. Live prices, analyst consensus, open expert predictions, and upcoming earnings — filtered to the stocks you follow.",
+  robots: { index: false, follow: false },
 };
 
 const METABYTICKER = new Map(COMPANY_UNIVERSE.map((c) => [c.ticker, c]));

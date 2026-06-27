@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer,
 } from "recharts";
@@ -45,7 +45,7 @@ export function MiniHoldingChart({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const from = purchaseDate ?? ninetyDaysAgo();
+  const from = useMemo(() => purchaseDate ?? ninetyDaysAgo(), [purchaseDate]);
 
   useEffect(() => {
     setLoading(true);

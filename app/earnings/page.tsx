@@ -105,7 +105,7 @@ export default async function Earnings() {
                     )}
                   </td>
                   <td className="px-4 py-3 text-[13px] text-gray-700">{row.eps}</td>
-                  <td className={`px-4 py-3 text-[13px] font-semibold ${row.avgMove.startsWith("+") ? "text-emerald-600" : "text-rose-500"}`}>
+                  <td className={`px-4 py-3 text-[13px] font-semibold ${!row.avgMove || row.avgMove === "—" || row.avgMove === "N/A" ? "text-gray-400" : row.avgMove.startsWith("+") ? "text-emerald-600" : "text-rose-500"}`}>
                     {row.avgMove}
                   </td>
                   <td className="px-4 py-3 text-[13px] text-gray-700">{row.beatRate}</td>

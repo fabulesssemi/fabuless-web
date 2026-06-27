@@ -99,6 +99,9 @@ export default async function AnalystsIndex() {
 
 
       <div className="flex flex-col gap-2">
+        {analysts.length === 0 && (
+          <p className="text-[13px] text-gray-400 py-8 text-center">Analyst data temporarily unavailable. Check back shortly.</p>
+        )}
         {analysts.map((analyst) => {
           const { bull, bear, neutral } = bullBearSummary(analyst.coverage);
           const upside = avgUpside(analyst.coverage);

@@ -27,7 +27,6 @@ const RSS_FEEDS: { url: string; source: string }[] = [
   { url: "https://www.tomshardware.com/feeds/all",                                                        source: "Tom's Hardware" },
   { url: "https://feeds.feedburner.com/typepad/siliconleverage",                                         source: "Silicon Leverage" },
   { url: "https://wccftech.com/feed/",                                                                    source: "WCCFtech" },
-  { url: "https://www.digitimes.com/rss/daily.xml",                                                      source: "Digitimes" },
   { url: "https://www.semianalysis.com/feed",                                                            source: "SemiAnalysis" },
   { url: "https://www.fabricatedknowledge.com/feed",                                                     source: "Fabricated Knowledge" },
   { url: "https://thechipletter.substack.com/feed",                                                      source: "The Chip Letter" },
@@ -35,6 +34,7 @@ const RSS_FEEDS: { url: string; source: string }[] = [
   { url: "https://siliconangle.com/feed/",                                                               source: "SiliconAngle" },
   { url: "https://www.semiconductor-digest.com/feed/",                                                   source: "Semiconductor Digest" },
   { url: "https://spectrum.ieee.org/feeds/topic/semiconductors.rss",                                     source: "IEEE Spectrum" },
+  { url: "https://research.ibm.com/rss",                                                                 source: "IBM Research" },
   // Finance / markets
   { url: "https://www.benzinga.com/feeds/analyst-ratings/rss",                                           source: "Benzinga" },
   { url: "https://feeds.marketwatch.com/marketwatch/topstories/",                                        source: "MarketWatch" },

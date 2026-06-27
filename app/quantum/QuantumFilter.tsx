@@ -25,14 +25,15 @@ function CategoryLabel({ category }: { category: string }) {
 
 export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
   // Top stories: prefer topStory-flagged articles with images; fill remaining slots from any image article
-  const flagged = articles.filter((a) => a.topStory && a.image).slice(0, 3);
+  const flagged = articles.filter((a) => a.topStory && a.image).slice(0, 4);
   const flaggedIds = new Set(flagged.map((a) => a.id));
   const fallback = articles.filter((a) => a.image && !flaggedIds.has(a.id));
-  const topStories = [...flagged, ...fallback].slice(0, 3);
+  const topStories = [...flagged, ...fallback].slice(0, 4);
   const topIds = new Set(topStories.map((a) => a.id));
   const rest = articles.filter((a) => !topIds.has(a.id));
 
   const hero = topStories[0] ?? null;
+  const subHero = topStories[3] ?? null;
   const mid = topStories.slice(1, 3);
   const rail = rest.slice(0, 6);
   const below = rest.slice(6, 22);
@@ -79,6 +80,25 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
                 {hero.summary}
               </p>
               <p className="mt-2 text-[11px] text-gray-400">{hero.source}</p>
+
+              {/* Sub-hero — 4th top story, smaller than mid stories */}
+              {subHero && (
+                <div className="mt-6 pt-5 border-t border-gray-200">
+                  <TopLabel />
+                  <a
+                    href={subHero.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mt-1.5 font-serif text-[1.1rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                  >
+                    {decodeHtml(subHero.title)}
+                  </a>
+                  <p className="mt-1.5 font-serif text-[12px] text-[#4a4a4a] leading-snug line-clamp-2">
+                    {subHero.summary}
+                  </p>
+                  <p className="mt-1 text-[11px] text-gray-400">{subHero.source}</p>
+                </div>
+              )}
             </div>
           )}
 

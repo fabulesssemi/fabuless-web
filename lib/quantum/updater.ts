@@ -131,7 +131,7 @@ async function pickTopStories(articles: QuantumArticle[], forceConsciousness = f
 
   const prompt = `You are the editor-in-chief at Fabuless Quantum. Your readers are curious non-experts — retail investors, tech enthusiasts, and people fascinated by big ideas. They are NOT physicists or researchers.
 
-Pick the 3 most compelling articles from the list below.
+Pick the 4 most compelling articles from the list below.
 
 HARD RULES — automatically disqualify any article that:
 - Mentions qubits, error rates, gate fidelity, decoherence, algorithms, or circuit depth in a technical way
@@ -149,7 +149,7 @@ ${forceConsciousness ? "- MUST include exactly 1 consciousness/worldview/quantum
 Articles:
 ${list}
 
-Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7]). No other text.`;
+Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7, 12]). No other text.`;
 
   const msg = await anthropic.messages.create({
     model: "claude-haiku-4-5-20251001",
@@ -162,7 +162,7 @@ Respond with ONLY a JSON array of the article numbers you chose (e.g., [1, 3, 7]
   if (!nums) return new Set();
   try {
     const picks: number[] = JSON.parse(nums);
-    return new Set(picks.filter((n) => n >= 1 && n <= articles.length).slice(0, 3).map((n) => articles[n - 1].id));
+    return new Set(picks.filter((n) => n >= 1 && n <= articles.length).slice(0, 4).map((n) => articles[n - 1].id));
   } catch { return new Set(); }
 }
 

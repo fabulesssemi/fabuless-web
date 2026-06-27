@@ -82,23 +82,34 @@ export function QuantumFilter({ articles }: { articles: QuantumArticle[] }) {
               <p className="mt-2 text-[11px] text-gray-400">{hero.source}</p>
 
               {/* Sub-hero — 4th top story, smaller than mid stories */}
-              {subHero && (
-                <div className="mt-6 pt-5 border-t border-gray-200">
-                  <TopLabel />
-                  <a
-                    href={subHero.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block mt-1.5 font-serif text-[1.1rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
-                  >
-                    {decodeHtml(subHero.title)}
-                  </a>
-                  <p className="mt-1.5 font-serif text-[12px] text-[#4a4a4a] leading-snug line-clamp-2">
-                    {subHero.summary}
-                  </p>
-                  <p className="mt-1 text-[11px] text-gray-400">{subHero.source}</p>
-                </div>
-              )}
+              <div className="mt-6 pt-5 border-t border-gray-200">
+                {subHero ? (
+                  <>
+                    <TopLabel />
+                    <a
+                      href={subHero.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-1.5 font-serif text-[1.1rem] font-normal text-[#111827] leading-snug hover:text-[#312E81] transition-colors"
+                    >
+                      {decodeHtml(subHero.title)}
+                    </a>
+                    <p className="mt-1.5 font-serif text-[12px] text-[#4a4a4a] leading-snug line-clamp-2">
+                      {subHero.summary}
+                    </p>
+                    <p className="mt-1 text-[11px] text-gray-400">{subHero.source}</p>
+                  </>
+                ) : (
+                  <>
+                    <div className="h-2.5 w-20 bg-indigo-100 rounded animate-pulse mb-2" />
+                    <div className="h-4 bg-gray-200 rounded animate-pulse mb-1.5" />
+                    <div className="h-4 w-4/5 bg-gray-200 rounded animate-pulse mb-1.5" />
+                    <div className="h-3 bg-gray-100 rounded animate-pulse mb-1.5 w-3/4" />
+                    <div className="h-3 w-2/4 bg-gray-100 rounded animate-pulse mb-2" />
+                    <div className="h-2.5 w-24 bg-gray-100 rounded animate-pulse" />
+                  </>
+                )}
+              </div>
             </div>
           )}
 

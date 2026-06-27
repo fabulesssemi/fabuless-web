@@ -31,7 +31,12 @@ function cachedHistory(symbol: string, from: string) {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const tickers = (searchParams.get("tickers") ?? "").split(",").filter(Boolean);
+  const TICKER_RE = /^[\^A-Z.]{1,12}$/;
+  const tickers = (searchParams.get("tickers") ?? "")
+    .split(",")
+    .map((t) => t.trim().toUpperCase())
+    .filter((t) => TICKER_RE.test(t))
+    .slice(0, 25);
   const from = searchParams.get("from") ?? "";
 
   if (!from || tickers.length === 0) {

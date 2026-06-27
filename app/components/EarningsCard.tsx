@@ -46,7 +46,7 @@ export function EarningsCard() {
               <div className="text-[10px] text-gray-400">{e.date} · {e.ticker}</div>
             </div>
             <div className="w-14 text-right text-[11px] text-gray-600 font-mono">{e.eps}</div>
-            <div className={`w-[4.5rem] text-right text-[11px] font-mono font-medium ${e.avgMove.startsWith("-") ? "text-red-600" : "text-emerald-700"}`}>
+            <div className={`w-[4.5rem] text-right text-[11px] font-mono font-medium ${e.avgMove === "—" ? "text-gray-400" : (e.avgMove ?? "").startsWith("-") ? "text-red-600" : "text-emerald-700"}`}>
               {e.avgMove}
             </div>
             <div className="w-12 text-right text-[11px] text-gray-600 font-mono">{e.beatRate}</div>

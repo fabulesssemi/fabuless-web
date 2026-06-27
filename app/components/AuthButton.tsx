@@ -15,7 +15,7 @@ export function AuthButton() {
             <Image src={session.user.image} alt="avatar" width={28} height={28} className="rounded-full" />
           ) : (
             <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center text-xs font-bold text-white">
-              {session.user.name?.[0] ?? "U"}
+              {(session.user.name?.[0] || session.user.email?.[0] || "U").toUpperCase()}
             </div>
           )}
         </button>

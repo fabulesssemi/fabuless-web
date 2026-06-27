@@ -16,6 +16,7 @@ export type PortfolioStore = {
 };
 
 export function readPortfolio(): PortfolioStore {
+  if (typeof window === "undefined") return { holdings: [] };
   // Migrate from v1
   const legacy = localStorage.getItem(LEGACY_KEY);
   if (legacy && !localStorage.getItem(STORAGE_KEY)) {
@@ -38,6 +39,7 @@ export function readPortfolio(): PortfolioStore {
 }
 
 export function writePortfolio(store: PortfolioStore) {
+  if (typeof window === "undefined") return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
 }
 

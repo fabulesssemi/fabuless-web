@@ -1,5 +1,11 @@
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@supabase/supabase-js";
 import type { AnalystDelta, AnalystSnapshot } from "./types";
+
+function getSupabase() {
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!key) throw new Error("SUPABASE_SERVICE_KEY is not set");
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key);
+}
 
 // ---------------------------------------------------------------------------
 // Daily snapshot persistence (Supabase). Powers true day-over-day deltas:

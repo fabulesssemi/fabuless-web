@@ -6,7 +6,9 @@ import { supabase } from "@/lib/supabase";
 import { getWeeklySnapshotDeltas, type WeeklyDelta } from "./snapshots";
 import { COMPANY_UNIVERSE } from "@/lib/companies";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getClient() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 const nameByTicker = Object.fromEntries(COMPANY_UNIVERSE.map((c) => [c.ticker, c.name]));
 
@@ -45,7 +47,7 @@ ${top.map(fmtDelta).join("\n")}
 Output only the paragraph — no headers, no bullets, no intro phrase like "This week...".`;
 
   try {
-    const message = await client.messages.create({
+    const message = await getClient().messages.create({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 80,
       messages: [{ role: "user", content: prompt }],

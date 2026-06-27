@@ -72,8 +72,8 @@ export async function rateLimit(ip: string): Promise<RateLimitResult> {
       .eq("ip", ip);
 
     return { allowed: true, remaining: MAX_REQUESTS - (data.count + 1), resetAt };
-  } catch {
-    // If Supabase is unreachable, fail open so users aren't blocked
-    return { allowed: true, remaining: MAX_REQUESTS, resetAt: now + WINDOW_MS };
+  } catch (err) {
+    console.error("[rate-limit] Supabase error — failing closed:", err);
+    return { allowed: false, remaining: 0, resetAt: now + WINDOW_MS };
   }
 }

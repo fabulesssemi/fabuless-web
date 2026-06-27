@@ -110,6 +110,7 @@ function computeTicks(data: Record<string, string | number>[], period: Period): 
     "All": 6,
   };
   const count = targets[period];
+  if (count <= 1) return dates.length ? [dates[0]] : [];
   if (n <= count) return dates;
 
   const result: string[] = [];

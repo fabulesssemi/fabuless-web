@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { fetchAnalystCoverage } from "@/lib/analyst/analysts";
 import { decodeHoldings } from "@/app/portfolio/storage";
 import { PortfolioTabs } from "@/app/portfolio/PortfolioTabs";
@@ -67,7 +68,7 @@ export default async function PortfolioAnalystsPage({
 
   return (
     <div className="max-w-6xl mx-auto pl-4 pr-6 py-10">
-      <PortfolioTabs earnings={[]} />
+      <Suspense fallback={null}><PortfolioTabs earnings={[]} /></Suspense>
       <AnalystsFilter entries={entries} tickers={tickers} colorMap={colorMap} />
     </div>
   );

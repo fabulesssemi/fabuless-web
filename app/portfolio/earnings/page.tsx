@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getSummaries } from "@/lib/earnings/summaries";
 import { getPreview } from "@/lib/earnings/previews";
 import { decodeHoldings } from "@/app/portfolio/storage";
@@ -80,13 +81,13 @@ export default async function PortfolioEarningsPage({
 
   return (
     <div className="max-w-6xl mx-auto pl-4 pr-6 py-10">
-      <PortfolioTabs earnings={upcoming.map((u) => ({
+      <Suspense fallback={null}><PortfolioTabs earnings={upcoming.map((u) => ({
         ticker: u.ticker,
         companyName: u.name,
         label: u.label,
         daysUntil: u.daysAway,
         earningsSlug: u.hasPreview ? u.ticker.toLowerCase() : null,
-      }))} />
+      }))} /></Suspense>
       <EarningsFilter
         tickers={tickers}
         colorMap={colorMap}

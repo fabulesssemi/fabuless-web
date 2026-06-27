@@ -164,7 +164,7 @@ export default async function Home() {
         {/* List stories — rolling pool (up to 8, older high-rank articles) */}
         {(autoListStories ?? (autoStories && autoStories.length > 4 ? autoStories.slice(4) : null))?.length ? (
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border-t border-gray-200 pt-4">
-            {(autoListStories ?? autoStories!.slice(4)).map((story) => (
+            {(autoListStories ?? (autoStories ?? []).slice(4)).map((story) => (
               <div key={story.url} className="py-4 first:pt-0 sm:first:pt-4 odd:sm:pr-8 even:sm:pl-8">
                 <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1">{story.category}</div>
                 <a href={story.url} target="_blank" rel="noopener noreferrer"

@@ -8,17 +8,14 @@ import { fetchAllNewsItems, fetchPodcastEpisodes, fetchAllPodcastFeeds } from "@
 import { generateTopStories, generatePodcastPicks } from "@/lib/editorial/curate-stories";
 import { saveHomepageContent, saveAndExpireArticles, saveRssArticles } from "@/lib/homepage";
 
+import { requireCronAuth } from "@/lib/cron-auth";
+
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 export async function GET(request: Request) {
-  const secret = process.env.CRON_SECRET;
-  if (secret) {
-    const auth = request.headers.get("authorization");
-    if (auth !== `Bearer ${secret}`) {
-      return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-    }
-  }
+  const authErr = requireCronAuth(request);
+  if (authErr) return authErr;
 
   // Fetch all RSS data + podcast feeds + analyst views in parallel.
   const [allNewsItems, podcastEpisodes, podcastFeeds, ...analystViews] = await Promise.all([

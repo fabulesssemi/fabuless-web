@@ -23,10 +23,26 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { question, conversationHistory = [] } = body as {
+  let { question, conversationHistory = [] } = body as {
     question: string;
     conversationHistory: ChatTurn[];
   };
+
+  if (typeof question !== "string" || question.length > 2000) {
+    const stream = new ReadableStream({
+      start(controller) {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Question must be under 2000 characters." })}\n\n`));
+        controller.close();
+      },
+    });
+    return new Response(stream, { status: 400, headers: { "Content-Type": "text/event-stream" } });
+  }
+
+  if (!Array.isArray(conversationHistory)) conversationHistory = [];
+  conversationHistory = conversationHistory.slice(-10).map((t: ChatTurn) => ({
+    question: String(t.question ?? "").slice(0, 2000),
+    answer: String(t.answer ?? "").slice(0, 2000),
+  }));
 
   if (!question?.trim()) {
     const stream = new ReadableStream({

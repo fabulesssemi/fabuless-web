@@ -157,14 +157,16 @@ export default async function PortfolioPage({
   return (
     <div className="max-w-6xl mx-auto pl-4 pr-6 py-10">
       {/* Header with tabs top-right */}
-      <PortfolioTabs
-        earnings={earningsRows}
-        calls={recentCalls}
-        experts={expertsMap}
-        analystRows={analystRows}
-        tickers={tickers}
-        pastSummaries={pastSummaries}
-      />
+      <Suspense fallback={null}>
+        <PortfolioTabs
+          earnings={earningsRows}
+          calls={recentCalls}
+          experts={expertsMap}
+          analystRows={analystRows}
+          tickers={tickers}
+          pastSummaries={pastSummaries}
+        />
+      </Suspense>
 
       {/* Main two-column: holdings left, chart right */}
       <div className="flex gap-6 mb-8 items-start">

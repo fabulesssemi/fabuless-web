@@ -4,10 +4,9 @@ import type { QuantumArticle } from "./articles";
 const TABLE = "quantum_articles";
 
 function getClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!key) throw new Error("SUPABASE_SERVICE_KEY is not set");
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key);
 }
 
 export async function saveQuantumArticles(articles: QuantumArticle[]): Promise<void> {
@@ -34,11 +33,13 @@ export async function saveQuantumArticles(articles: QuantumArticle[]): Promise<v
     if (error) throw new Error(`quantum_articles upsert failed: ${error.message}`);
   }
 
-  // Clear top_story on all articles not in this set, then set it on the ones that are
+  // Reset all top_story flags, then mark only the current picks
   const topIds = articles.filter((a) => a.topStory).map((a) => a.id);
-  await supabase.from(TABLE).update({ top_story: false }).neq("id", "never-matches");
+  const { error: clearErr } = await supabase.from(TABLE).update({ top_story: false }).not("id", "is", null);
+  if (clearErr) throw new Error(`quantum top_story clear failed: ${clearErr.message}`);
   if (topIds.length > 0) {
-    await supabase.from(TABLE).update({ top_story: true }).in("id", topIds);
+    const { error: setErr } = await supabase.from(TABLE).update({ top_story: true }).in("id", topIds);
+    if (setErr) throw new Error(`quantum top_story set failed: ${setErr.message}`);
   }
 }
 

@@ -14,12 +14,15 @@ function parts(targetMs: number) {
 export function Countdown({ iso }: { iso: string }) {
   // Treat the report time as ~4pm ET (after market close) on the given date.
   const target = new Date(iso + "T20:00:00Z").getTime();
-  const [t, setT] = useState(() => parts(target));
+  const [t, setT] = useState<ReturnType<typeof parts> | null>(null);
 
   useEffect(() => {
+    setT(parts(target));
     const id = setInterval(() => setT(parts(target)), 1000);
     return () => clearInterval(id);
   }, [target]);
+
+  if (!t) return null;
 
   if (t.done) {
     return (

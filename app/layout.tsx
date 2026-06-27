@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="h-screen flex flex-col text-[#18181B] font-sans overflow-hidden">
+      <body className="h-screen flex flex-col text-[#18181B] font-sans">
         <SessionProviderWrapper>
         <header className="relative z-40">
           <div className="h-[3px] bg-[#B45309]" />
@@ -92,7 +92,7 @@ export default function RootLayout({
           </NavWrapper>
         </header>
 
-        <main className="flex-1 overflow-y-auto min-h-0">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-0">
           {children}
         </main>
 

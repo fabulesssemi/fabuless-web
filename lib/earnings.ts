@@ -72,7 +72,7 @@ async function _fetchUpcomingEarnings(): Promise<LiveEarningsRow[]> {
 
   const settled = await Promise.allSettled(
     tickers.map(async (ticker) => {
-      const quote = await yf.quoteSummary(ticker, { modules: ["calendarEvents"] });
+      const quote = await yf.quoteSummary(ticker, { modules: ["calendarEvents"] }, { validateResult: false });
       const earningsDates = quote.calendarEvents?.earnings?.earningsDate ?? [];
       const epsAvg = quote.calendarEvents?.earnings?.earningsAverage;
       const nextDate = earningsDates.find((d) => d >= now && d <= twoWeeksOut);

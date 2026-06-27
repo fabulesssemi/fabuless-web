@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { predictions } from "@/lib/tracker/predictions";
 import { EXPERTS } from "@/lib/tracker/experts";
 import { decodeHoldings } from "@/app/portfolio/storage";
@@ -68,7 +69,7 @@ export default async function ExpertCallsPage({
 
   return (
     <div className="max-w-6xl mx-auto pl-4 pr-6 py-10">
-      <PortfolioTabs earnings={[]} />
+      <Suspense fallback={null}><PortfolioTabs earnings={[]} /></Suspense>
       <ExpertCallsFilter calls={deduped} tickers={tickers} colorMap={colorMap} />
     </div>
   );

@@ -79,7 +79,7 @@ export default async function QuantumArticlePage({ params }: { params: Promise<{
 
           <div className="flex items-center gap-4 text-[12px] text-gray-400">
             <span className="font-semibold text-indigo-500">{article.source}</span>
-            <span>{new Date(article.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+            <span>{(() => { const d = article.publishedAt ? new Date(article.publishedAt) : null; return d && !isNaN(d.getTime()) ? d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "—"; })()}</span>
           </div>
         </div>
 

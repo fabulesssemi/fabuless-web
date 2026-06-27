@@ -11,7 +11,7 @@ function getSupabase() {
 
 export async function GET() {
   const session = await auth();
-  if (!session?.user?.id) return NextResponse.json({ holdings: [] });
+  if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const supabase = getSupabase();
   const { data } = await supabase
@@ -27,12 +27,32 @@ export async function POST(req: Request) {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { holdings } = await req.json();
-  const supabase = getSupabase();
+  let body: { holdings?: unknown };
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
 
-  await supabase
+  const { holdings } = body;
+  if (!Array.isArray(holdings) || holdings.length > 200) {
+    return NextResponse.json({ error: "Invalid holdings" }, { status: 400 });
+  }
+  for (const h of holdings) {
+    if (!h || typeof h.ticker !== "string" || h.ticker.length > 12) {
+      return NextResponse.json({ error: "Invalid holding entry" }, { status: 400 });
+    }
+  }
+
+  const supabase = getSupabase();
+  const { error } = await supabase
     .from("user_portfolios")
     .upsert({ user_id: session.user.id, holdings, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
+
+  if (error) {
+    console.error("[portfolio] upsert failed:", error.message);
+    return NextResponse.json({ error: "Failed to save" }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true });
 }

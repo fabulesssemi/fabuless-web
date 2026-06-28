@@ -9,6 +9,7 @@ import { fetchLatestEpisodePerShow } from "@/lib/editorial/sources";
 import { SubscribeForm } from "@/app/components/SubscribeForm";
 import { XQuotesCard } from "@/app/components/XQuotesCard";
 import { StoryImage } from "@/app/components/StoryImage";
+import { SourceFavicon } from "@/app/components/SourceFavicon";
 import { decodeHtml } from "@/lib/decode";
 
 // Opt out of the Next.js fetch cache so revalidatePath("/") from the pipeline
@@ -116,7 +117,7 @@ export default async function Home() {
                       {story.oneliner}
                     </p>
                     <div className="mt-auto pt-2.5 flex items-center justify-between">
-                      <span className="text-[10px] text-gray-400">{story.source} · 2 min</span>
+                      <span className="text-[10px] text-gray-400 flex items-center gap-1"><SourceFavicon source={story.source} />{story.source} · 2 min</span>
                       <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(story.headline + " — via fabuless.ai")}`}
                         target="_blank" rel="noopener noreferrer"
@@ -146,7 +147,7 @@ export default async function Home() {
                       {story.oneliner}
                     </p>
                     <div className="mt-auto pt-2.5 flex items-center justify-between">
-                      <span className="text-[10px] text-gray-400">{story.source} · 2 min</span>
+                      <span className="text-[10px] text-gray-400 flex items-center gap-1"><SourceFavicon source={story.source} />{story.source} · 2 min</span>
                       <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(story.headline + " — via fabuless.ai")}`}
                         target="_blank" rel="noopener noreferrer"
@@ -172,7 +173,7 @@ export default async function Home() {
                   {story.headline}
                 </a>
                 <p className="font-serif text-[12px] text-[#4a4a4a] leading-snug">{story.oneliner}</p>
-                <div className="text-[10px] text-gray-400 mt-1">{story.source}</div>
+                <div className="text-[10px] text-gray-400 mt-1 flex items-center gap-1"><SourceFavicon source={story.source} />{story.source}</div>
               </div>
             ))}
           </div>

@@ -8,6 +8,7 @@ import type { CompanyMarketData } from "@/lib/providers/types";
 import type { AnalystView } from "@/lib/analyst/types";
 import { DistributionBar } from "@/app/components/analyst/AnalystConsensusPanel";
 import { ShowMore } from "./ShowMore";
+import { SourceFavicon } from "@/app/components/SourceFavicon";
 import { SegmentChart } from "./SegmentChart";
 import { ExpertPulse } from "./ExpertPulse";
 import worthData from "@/data/worth-your-time.json";
@@ -312,7 +313,7 @@ export function CompanyDashboard({
                       </span>
                     </a>
                     <div className="mt-0.5 flex items-center gap-2 text-[11px] text-gray-400">
-                      {n.source && <span className="text-gray-500">{n.source}</span>}
+                      {n.source && <span className="text-gray-500 flex items-center gap-1"><SourceFavicon source={n.source} />{n.source}</span>}
                       {n.source && n.publishedAt && <span>·</span>}
                       {n.publishedAt && <span>{timeAgo(n.publishedAt)}</span>}
                     </div>

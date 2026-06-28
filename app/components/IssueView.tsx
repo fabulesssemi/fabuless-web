@@ -1,5 +1,6 @@
 import type { Issue } from "@/lib/issues";
 import { decodeHtml } from "@/lib/decode";
+import { SourceFavicon } from "@/app/components/SourceFavicon";
 
 export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEarnings?: boolean }) {
   const hasSidebar = showEarnings && issue.earnings.length > 0;
@@ -47,8 +48,8 @@ export function IssueView({ issue, showEarnings = true }: { issue: Issue; showEa
                 >
                   <div className="flex gap-4 items-start">
                     <div className="flex-1 min-w-0">
-                      <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5">
-                        {story.source}
+                      <div className="text-[11px] font-bold text-[#B45309] uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                        <SourceFavicon source={story.source} />{story.source}
                       </div>
                       <a
                         href={story.url}

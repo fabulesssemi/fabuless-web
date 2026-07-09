@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 10,
+    date: "July 9, 2026",
+    slug: "issue-10",
+    title: "Apple-Broadcom $30B. SambaNova $11B. Memory Surges 50%.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "SambaNova Raises $1B, Signs JPMorganChase as a Customer",
+            url: "https://www.eetimes.com/sambanova-raises-1-billion-signs-jpmorganchase-as-a-customer/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Enterprise AI chip startups gain traction as JPMorganChase validates alternative to NVIDIA.",
+          },
+          {
+            headline: "Nvidia touts Vera CPU's single-threaded performance as its agentic AI advantage",
+            url: "https://www.tomshardware.com/pc-components/cpus/nvidia-touts-vera-cpus-single-threaded-performance-as-its-agentic-ai-advantage-frames-chip-as-a-max-single-threaded-cpu-at-scale-not-a-parallel-monster",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/JUMzzHeBHtq9q5mBczXBWb-1280-80.jpg",
+            oneliner: "NVIDIA Vera CPU claims 1.8x single-thread lead over x86 for agentic workloads; Perplexity endorses.",
+          },
+          {
+            headline: "Perplexity Bets on NVIDIA's Vera CPU, Calling The Max Single-Threaded Chip a \"Dead-On\" Fit",
+            url: "https://wccftech.com/perplexity-bets-on-nvidia-vera-cpu-calling-max-single-threaded-chip-a-dead-on-fit/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/04/NVIDIA-Vera-CPU-1920x1080.webp",
+            oneliner: "Perplexity adopts NVIDIA Vera for inference; 1.5x speedup validates CPU-agnostic AI architecture shift.",
+          },
+          {
+            headline: "AI is becoming a bargain hunter's market, with a few luxury models on top",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/08/ai-is-becoming-a-bargain-hunters-market-with-a-few-luxury-models-on-top/5268050",
+            source: "The Register",
+            image: "https://image.theregister.com/5268091.jpg?imageId=5268091&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Inference commoditizes; frontier models command premiums while edge/mobile accelerators fragment supply chain demand.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Memory Shortages Drive DDR4 Prices Over 50% In Q3 2026, DDR3 Also Impacted By Higher Costs",
+            url: "https://wccftech.com/memory-shortages-drive-ddr4-prices-over-50-in-q3-2026-ddr3-also-impacted-by-higher-costs/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2021/10/DSC_0625-Custom-1920x1280.jpg",
+            oneliner: "DRAM shortage cascades across legacy nodes; DDR4 prices spike 50%, pressuring OEM margins.",
+          },
+          {
+            headline: "Stacking Chips Sideways Gives AI More Memory",
+            url: "https://spectrum.ieee.org/stacking-chips-sideways",
+            source: "IEEE Spectrum",
+            image: "https://spectrum.ieee.org/media-library/a-prototype-memory-chip-consisting-of-a-silver-cube-with-orange-strips-on-two-sides-and-large-grey-blobs-on-the-other-sides.jpg?id=67103305&width=1200&height=600&coordinates=0%2C646%2C0%2C604",
+            oneliner: "Chipmakers pivot to sideways HBM stacking to bypass thermal limits; cooling innovation critical for scaling.",
+          },
+          {
+            headline: "AI's biggest challenge is not compute - it's data storage",
+            url: "https://www.theregister.com/storage/2026/07/08/ais-biggest-challenge-is-not-compute-its-data-storage/5267453",
+            source: "The Register",
+            image: "https://image.theregister.com/4093614.jpg?imageId=4093614&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AI bottleneck shifts to storage/data pipeline; SSD, interconnect, and memory architecture innovation accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Apple commits $30 billion to Broadcom for U.S. chipmaking push",
+            url: "https://www.cnbc.com/2026/07/08/apple-commits-30-billion-to-broadcom-for-us-chipmaking-push.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108318340-17809408152026-06-08t174532z_2056210661_rc2tplaw4p32_rtrmadp_0_apple-wwdc.jpeg?v=1780940834&amp;w=1920&amp;h=1080",
+            oneliner: "Apple's largest U.S. chipmaking commitment redirects supply chain away from Taiwan.",
+          },
+          {
+            headline: "SambaNova hits $11 billion valuation as investors back Nvidia chip challengers",
+            url: "https://www.cnbc.com/2026/07/08/sambanova-ai-chip-funding-valuation.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108331345-1783423707790-gettyimages-2275500664-SH1_2370.jpeg?v=1783423770&amp;w=1920&amp;h=1080",
+            oneliner: "SambaNova reaches $11B valuation with JPMorganChase anchor customer, accelerating NVIDIA competition.",
+          },
+          {
+            headline: "South Korea falls into bear market as traders fret over AI chipmakers' prospects",
+            url: "https://www.ft.com/content/2cb790fc-016b-4b15-a9d8-5b6057592e1a",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Kospi enters bear market amid Samsung, SK Hynix AI revenue fears; memory oversupply threatens pricing power.",
+          },
+          {
+            headline: "It was the world's hottest stock market. Now South Korea has entered bear territory.",
+            url: "https://www.marketwatch.com/story/it-was-the-worlds-hottest-stock-market-now-south-koreas-stock-market-index-has-entered-bear-market-territory-95d70e3d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Korean memory duopoly (Samsung, SK Hynix) faces margin compression; capital reallocation ripples across supply chain.",
+          },
+          {
+            headline: "Alibaba just had its best day in 10 months. Is it time for China techs to catch up?",
+            url: "https://www.marketwatch.com/story/alibaba-just-had-its-best-day-in-10-months-is-it-time-for-china-techs-to-catch-up-8ccc3f7c?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Alibaba rally signals China tech rebound; domestic chip spending may accelerate amid U.S. export controls.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Apple to buy $30bn of US-made chips from Broadcom",
+            url: "https://www.ft.com/content/1bc10dd1-2aac-472d-b3d8-b76a83fb4abf",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Broadcom secures massive Apple contract as Trump administration courts domestic chip manufacturing.",
+          },
+          {
+            headline: "Space Force gets first mobile high-powered electromagnetic beam weapon to cripple enemy satellites",
+            url: "https://www.tomshardware.com/tech-industry/space/space-force-gets-first-mobile-high-powered-electromagnetic-beam-weapon-to-cripple-enemy-satellites-plans-to-deploy-32-meadowlands-units-to-detect-deny-disrupt-and-degrade-hostile-space-assets",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/vnM65gNvXEVetqkUnwnkV-1920-80.jpg",
+            oneliner: "U.S. Space Force deploys Meadowlands EW system; satellite resilience drives demand for hardened semiconductor packaging.",
+          },
+          {
+            headline: "What Happens if China Hacks the US Water Supply? I Went to a Secret War Game to Find Out",
+            url: "https://www.wired.com/story/what-happens-if-china-hacks-the-us-water-supply-war-game-volt-typhoon/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a4d67b2cd42662145e222f2/191:100/w_1280,c_limit/WARGAME-TopArt-v4.jpg",
+            oneliner: "U.S. critical infrastructure vulnerability exposed; Volt Typhoon scenario drives military/industrial semiconductor hardening investment.",
+          },
+          {
+            headline: "Verity Harding: This Former DeepMind Exec Thinks the AI Arms Race Could End in Disaster",
+            url: "https://www.wired.com/story/verity-harding-ai-arms-race-dangers-anthology/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a4be55744dc79c43267387c/191:100/w_1280,c_limit/DeepMind-Alum-QandA-Verity-Harding-Business.jpg",
+            oneliner: "Former DeepMind exec warns AI arms race risks; U.S. chip export controls and foundry restrictions likely intensify.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 9,
     date: "June 19, 2026",
     slug: "issue-9",

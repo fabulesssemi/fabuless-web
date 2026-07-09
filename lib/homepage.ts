@@ -206,8 +206,13 @@ export async function saveAndExpireArticles(
 
     if (upsertError) return { ok: false, error: upsertError.message };
 
-    // Expire articles older than 3 days — all tiers same shelf life.
-    // Articles re-picked in this run are never expired (kept their first_seen).
+    // Delete rows after 30 days — well past the 3-day "alive" display window
+    // (enforced separately in getHomepageArticles). Rows are kept around this
+    // long specifically so first_seen_at survives: if a still-circulating
+    // article gets re-picked by Claude days after it aged out of view, the
+    // upsert above finds the existing row and preserves its ORIGINAL
+    // first_seen_at, keeping it correctly excluded from "alive" instead of
+    // resetting to now() and resurfacing as a "new" Top Story.
     const keep = new Set(urls);
     const DAY = 24 * 60 * 60 * 1000;
     const nowMs = Date.now();
@@ -220,7 +225,7 @@ export async function saveAndExpireArticles(
       .filter((r) => {
         if (keep.has(r.url as string)) return false;
         const age = nowMs - new Date(r.first_seen_at as string).getTime();
-        return age >= 3 * DAY;
+        return age >= 30 * DAY;
       })
       .map((r) => r.url as string);
 

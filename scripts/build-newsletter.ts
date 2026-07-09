@@ -76,14 +76,17 @@ function formatDate(d = new Date()): string {
 
 // ── Image lookup: match curated story URLs against homepage_articles ──────────
 async function fetchOgImage(url: string): Promise<string | null> {
-  try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(5000), headers: { "User-Agent": "Mozilla/5.0" } });
-    if (!res.ok) return null;
-    const html = await res.text();
-    const match = html.match(/<meta[^>]+(?:property="og:image"|name="og:image")[^>]+content="([^"]+)"/i)
-      ?? html.match(/<meta[^>]+content="([^"]+)"[^>]+(?:property="og:image"|name="og:image")/i);
-    return match?.[1] ?? null;
-  } catch { return null; }
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(10000), headers: { "User-Agent": "Mozilla/5.0" } });
+      if (!res.ok) continue;
+      const html = await res.text();
+      const match = html.match(/<meta[^>]+(?:property="og:image"|name="og:image")[^>]+content="([^"]+)"/i)
+        ?? html.match(/<meta[^>]+content="([^"]+)"[^>]+(?:property="og:image"|name="og:image")/i);
+      if (match?.[1]) return match[1];
+    } catch { /* retry once */ }
+  }
+  return null;
 }
 
 async function fetchImageMap(urls: string[]): Promise<Map<string, string>> {

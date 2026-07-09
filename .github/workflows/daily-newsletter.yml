@@ -2,6 +2,11 @@ name: Daily Newsletter
 
 on:
   workflow_dispatch: {}
+  schedule:
+    # 13:00 UTC weekdays — after /api/editorial/refresh (11:00 UTC) populates
+    # rss_articles + homepage_articles with images, before the Vercel send-semi
+    # cron (16:00 UTC) fires. Keeps content generation from going stale silently.
+    - cron: "0 13 * * 1-5"
 
 jobs:
   publish:

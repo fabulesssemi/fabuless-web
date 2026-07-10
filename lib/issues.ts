@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 11,
+    date: "July 10, 2026",
+    slug: "issue-11",
+    title: "SK Hynix Nasdaq Debut. Micron Commits $250B. Memory Cycle Peaks.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "The Energy Barrier Reshaping AI Hardware",
+            url: "https://www.eetimes.com/ai-energy-barrier-forces-system-technology-co-optimization/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Energy efficiency becomes AI hardware's binding constraint; power delivery now defines compute ceiling.",
+          },
+          {
+            headline: "Can an AI 'superforecaster' beat the market?",
+            url: "https://www.ft.com/content/1c991bec-ede2-42ba-b6f5-334fd474f94a",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI forecasting underperforms human judgment on Fed decisions; limits near-term AI infrastructure ROI claims.",
+          },
+          {
+            headline: "Token per watt becomes the defining metric as storage moves to AI's critical path",
+            url: "https://siliconangle.com/2026/07/09/token-per-watt-metrics-optimize-ai-data-center-efficiency-raisesummit/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/IMG_8688.jpg",
+            oneliner: "Token-per-watt efficiency replaces raw compute; storage hardware becomes AI data center bottleneck.",
+          },
+          {
+            headline: "Fast token generation emerges as the key differentiator as heterogeneous inference takes hold",
+            url: "https://siliconangle.com/2026/07/09/fast-token-generation-accelerates-enterprise-ai-inference-raisesummit/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/IMG_8443.jpg",
+            oneliner: "Token generation speed drives inference hardware redesign; GPU-only architectures obsolete for agentic AI.",
+          },
+          {
+            headline: "Consolidation and Competition: Who is Winning the $4.5 Billion Interface IP Race?",
+            url: "https://semiwiki.com/ip/370809-consolidation-and-competition-who-is-winning-the-4-5-billion-interface-ip-race/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/06/2025-TSMC-Revenue-by-Platform.png",
+            oneliner: "$4.5B interface IP market consolidates around HPC/AI; TSMC's data-centric shift drives topology wars.",
+          },
+          {
+            headline: "Meta's stock rebounds as agentic AI coding and custom chips ease spending fears",
+            url: "https://www.marketwatch.com/story/metas-stock-rebounds-as-agentic-ai-coding-and-custom-chips-ease-spending-fears-16d1cb24?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Meta's custom AI chip progress calms capex concerns; validates in-house silicon strategy.",
+          },
+          {
+            headline: "Palo Alto CEO Arora says AI pricing needs to fall 90% as token costs skyrocket",
+            url: "https://www.cnbc.com/2026/07/09/palo-alto-ceo-arora-ai-pricing.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108137406-17458547422025-03-25t214442z_1404614266_rc2jkda1kvqf_rtrmadp_0_paloalto-stocks.jpeg?v=1753825094&amp;w=1920&amp;h=1080",
+            oneliner: "Token costs must drop 90% for enterprise AI adoption; signals inference infrastructure margin pressure.",
+          },
+          {
+            headline: "Anthropic found a hidden space where Claude puzzles over concepts",
+            url: "https://www.technologyreview.com/2026/07/09/1140293/anthropic-found-a-hidden-space-where-claude-puzzles-over-concepts/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/07/llm-crystal-globe_1.jpg?resize=1200,600",
+            oneliner: "Anthropic maps internal LLM reasoning via mechanistic interpretability; opens debugging tools for inference optimization.",
+          },
+          {
+            headline: "AI slop writing has taken over the internet, particularly LinkedIn and X",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/09/ai-slop-writing-has-taken-over-the-internet-particularly-linkedin-and-x/5269525",
+            source: "The Register",
+            image: "https://image.theregister.com/5269572.jpg?imageId=5269572&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "25% of long-form social posts AI-generated; signals inference cost collapse driving content commoditization.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "MRDIMM's Allow DDR5 Memory To Keep Up With Next-Gen Servers, Achieving DDR6-Class Bandwidth & No Pin-Change",
+            url: "https://wccftech.com/mrdimm-ddr5-memory-keep-up-with-next-gen-servers-achieving-ddr6-class-bandwidth/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/DDR5-MRDIMM-F-1920x926.jpg",
+            oneliner: "DDR5 MRDIMMs reach DDR6 bandwidth without socket redesign; extends server memory upgrade cycle.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "SK Hynix raises $26.5 billion in U.S. offering. What to know about the stock.",
+            url: "https://www.marketwatch.com/story/sk-hynix-is-about-to-hit-the-u-s-market-heres-what-to-know-about-the-deal-1c873fa4?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "SK Hynix $26.5B US listing largest foreign IPO; signals memory chip supply consolidation.",
+          },
+          {
+            headline: "Micron to Pour $250 Billion in Manufacturing on US Soil As It Starts Construction of New York's DRAM Megafab",
+            url: "https://wccftech.com/micron-to-pour-250-billion-in-manufacturing-in-us-starts-construction-of-new-york-s-dram-megafab/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Micron commits $250B US capex through 2035, grounds first New York DRAM megafab.",
+          },
+          {
+            headline: "Micron Announces Up to $3 Billion Strategic Investment",
+            url: "https://www.semiconductor-digest.com/micron-announces-up-to-3-billion-strategic-investment/?utm_source=rss&utm_medium=rss&utm_campaign=micron-announces-up-to-3-billion-strategic-investment",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Micron invests $3B in GlobalWafers US expansion; secures wafer supply independence for memory production.",
+          },
+          {
+            headline: "Where Jim Cramer stands on SK Hynix's massive offering",
+            url: "https://www.cnbc.com/2026/07/09/jim-cramer-sk-hynix.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108326518-1782348833270-GettyImages-1230847768.jpg?v=1782348905&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix appears cheap but carries cycle risk; AI memory boom durability questioned by strategists.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "OpenAI and Google sell AI models to blacklisted China groups",
+            url: "https://www.ft.com/content/5d6aafa1-5d47-4585-aa95-6ec06a6cd20f",
+            source: "Financial Times",
+            image: null,
+            oneliner: "OpenAI, Google supplied AI services to Alibaba, Baidu, Tencent via Singapore proxies; sanctions evasion risk.",
+          },
+          {
+            headline: "Microsoft warns customers AI will mean busier Patch Tuesdays",
+            url: "https://www.theregister.com/security/2026/07/10/microsoft-warns-customers-ai-will-mean-busier-patch-tuesdays/5269618",
+            source: "The Register",
+            image: "https://image.theregister.com/248668.jpg?imageId=248668&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AI-driven attack surface expansion increases patch velocity; security supply chain becomes infrastructure bottleneck.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 10,
     date: "July 9, 2026",
     slug: "issue-10",

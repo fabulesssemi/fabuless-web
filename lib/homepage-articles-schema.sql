@@ -24,3 +24,8 @@ create table if not exists homepage_articles (
 );
 
 alter table homepage_articles disable row level security;
+
+-- Disabling RLS alone does NOT grant table privileges — these are separate
+-- in Postgres. This is the statement that actually fixes the
+-- "permission denied for table homepage_articles" error.
+grant select, insert, update, delete on public.homepage_articles to anon;

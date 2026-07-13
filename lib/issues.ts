@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 12,
+    date: "July 13, 2026",
+    slug: "issue-12",
+    title: "TSMC Surges 68%, SK Hynix Warns 2027 Crunch, CoWoS Bottleneck Spreads",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "TSMC, the world's largest contract chipmaker, reports 68% surge in June revenue",
+            url: "https://www.cnbc.com/2026/07/13/tsmc-june-revenue-rises-percent-ahead-second-quarter.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108292490-1776347906856-gettyimages-2253792580-US_STOCKS.jpeg?v=1777030120&amp;w=1920&amp;h=1080",
+            oneliner: "TSMC dominates AI chip demand; June revenue jumps 68% ahead of Q2 earnings.",
+          },
+          {
+            headline: "CEO Interview with Dr. Albert Liu of Kneron",
+            url: "https://semiwiki.com/ceo-interviews/369987-ceo-interview-with-dr-albert-liu-of-kneron/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/06/7375e8e18faa662c-2.jpg",
+            oneliner: "Kneron NPU architecture pioneer pivots edge AI infrastructure; on-device processing accelerates vs. cloud dependency.",
+          },
+          {
+            headline: "MSI Leverages R&D and Manufacturing Strengths for AI Growth",
+            url: "https://www.eetimes.com/msi-leverages-rd-and-manufacturing-strengths-for-ai-growth/",
+            source: "EE Times",
+            image: null,
+            oneliner: "MSI scales AI PC, on-premises, hybrid cloud infrastructure; ODM/ODH suppliers capture AI edge expansion.",
+          },
+          {
+            headline: "India's Tata Consultancy Services plans up to 8,900 AI deployment engineers, seeks AI acquisitions",
+            url: "https://finance.yahoo.com/technology/ai/articles/indias-tata-consultancy-services-plans-083649889.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "TCS targets 8,900 AI engineers; Indian AI services sector scales; heterogeneous compute demand accelerates globally.",
+          },
+          {
+            headline: "Lenovo's Legion 7a gaming laptop now comes with an RTX 5070 12GB GPU option",
+            url: "https://www.tomshardware.com/laptops/lenovos-legion-7a-gaming-laptop-now-comes-with-an-rtx-5070-12gb-gpu-option-but-it-costs-usd3-375-paired-with-a-ryzen-ai-9-cpu-sku-was-previously-limited-to-rtx-5060",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/GiadzK9VgVUydhdk6UQPki-1920-80.png",
+            oneliner: "Lenovo expands RTX 5070 12GB availability; Ryzen AI 9 pairing signals Nvidia-AMD competitive GPU memory wars.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK Hynix CEO Warns 2027 Will Be Memory's \"Worst Year\" Ever, With Shortages Set To Outlast The Decade",
+            url: "https://wccftech.com/sk-hynix-ceo-warns-2027-memory-worst-year-ever-shortages-set-to-outlast-the-decade/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Photo-5.jpg",
+            oneliner: "SK Hynix CEO warns 2027 memory shortage will be worst on record; supply crisis extends past 2030.",
+          },
+          {
+            headline: "TSMC Can't Keep Up With CoWoS Demand, Sending Advanced Packaging Orders Spilling Over To Intel & Rival Taiwanese Fabs",
+            url: "https://wccftech.com/tsmc-cant-keep-up-with-cowos-demand-advanced-packaging-orders-spilling-over-to-intel-rival-fabs/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/12/TSMC.jpg",
+            oneliner: "TSMC CoWoS bottleneck redirects AI packaging orders to Intel and rival fabs; supply chain stress spreads.",
+          },
+          {
+            headline: "Memory makers are slaves to the boom-bust rollercoaster, and the AI boom is the wildest ride of all",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/12/memory-makers-are-slaves-to-the-boom-bust-rollercoaster-and-the-ai-boom-is-the-wildest-ride-of-all/5269549",
+            source: "The Register",
+            image: "https://image.theregister.com/5269616.jpg?imageId=5269616&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AI-driven demand volatility creates extreme boom-bust cycle for DRAM/NAND makers; supply-demand mismatch widening.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Global stocks fall as Asian memory chipmakers hammered",
+            url: "https://www.ft.com/content/54be872f-c0a2-46dd-9337-5cad9124e734",
+            source: "Financial Times",
+            image: null,
+            oneliner: "TSMC, SK Hynix, Samsung equity losses spike as geopolitical risk-off mode grips Asian chip stocks.",
+          },
+          {
+            headline: "Traders braced for won volatility after blockbuster SK Hynix listing",
+            url: "https://www.ft.com/content/b433644d-caba-4962-8d60-f46fcd9716f9",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SK Hynix Nasdaq debut triggers $26bn repatriation; South Korean currency volatility expected mid-term.",
+          },
+          {
+            headline: "The stock-market rally now hinges more on AI than oil",
+            url: "https://www.marketwatch.com/story/the-stock-market-rally-now-hinges-more-on-ai-than-oil-1292260a?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "AI capex replaces energy as primary equity driver; earnings season highlights semiconductor-led growth narrative.",
+          },
+          {
+            headline: "Ireland's data centers consumed nearly as much electricity as every home in the country combined in 2025",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/irelands-data-centers-consumed-nearly-as-much-electricity-as-every-home-in-the-country-combined-in-2025-server-farms-gulped-23-percent-of-national-power-despite-years-of-grid-restrictions",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/Y3oTnzWpqVWpTpwua8KH7Q-1920-80.jpg",
+            oneliner: "Ireland data centers consume 23% national grid (2025); AI/HPC infrastructure strains power supply chains globally.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Lenovo denies using banned Chinese SSDs where they're not allowed",
+            url: "https://www.theregister.com/personal-tech/2026/07/13/lenovo-denies-using-banned-chinese-ssds-where-theyre-not-allowed/5270212",
+            source: "The Register",
+            image: "https://image.theregister.com/225936.jpg?imageId=225936&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Lenovo disputes allegations of banned Chinese SSD usage; supply chain compliance scrutiny intensifies.",
+          },
+          {
+            headline: "Elon Musk and Sam Altman spar on X after Apple files OpenAI lawsuit",
+            url: "https://www.cnbc.com/2026/07/12/elon-musk-and-sam-altman-spar-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108333755-1783868174451-gettyimages-2273245639-2026_apr_30_muskvsaltman_0352.jpeg?v=1783868241&amp;w=1920&amp;h=1080",
+            oneliner: "Musk-Altman public feud escalates over Apple IP lawsuit; AI industry talent wars intensify.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "AI Driven Semiconductor Systems",
+            url: "https://semiwiki.com/semiconductor-services/netapp/370833-ai-driven-semiconductor-systems/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/AI-Driven-Semiconductor-Systems-NetApp.jpg",
+            oneliner: "AI automation transforms chip design and manufacturing workflows; complexity forces human-AI hybrid models.",
+          },
+          {
+            headline: "ITF World 2026: The Semiconductor Industry Enters a New Systems Era",
+            url: "https://www.eetimes.com/itf-world-2026-the-semiconductor-industry-enters-a-new-systems-era/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Chiplets, heterogeneous integration, silicon photonics converge; systems-level design dominates next SoC generation.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 11,
     date: "July 10, 2026",
     slug: "issue-11",

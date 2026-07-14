@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 13,
+    date: "July 14, 2026",
+    slug: "issue-13",
+    title: "UMC Expands. SK hynix Stalls. NVIDIA Tightens China.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Zuck's AI ambitions put Meta on course to become America's next big cloud provider",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/14/zucks-ai-ambitions-put-meta-on-course-to-become-americas-next-big-cloud-provider/5270758",
+            source: "The Register",
+            image: "https://image.theregister.com/256736.jpg?imageId=256736&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Meta's internal AI infrastructure pivot signals shift from NVIDIA buyer to compute lessor.",
+          },
+          {
+            headline: "Tesla's AI5 with 2nm-class node tapes out at Samsung Foundry",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/teslas-ai5-with-2nm-class-node-tapes-out-at-samsung-foundry-production-starts-soon-months-after-tsmc-tape-out",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/voDLanHmcp7is6VSiU2Qea-1920-80.png",
+            oneliner: "Tesla AI5 tapes out Samsung 2nm after TSMC; foundry diversification limits TSMC node monopoly.",
+          },
+          {
+            headline: "Siri AI Is Becoming Apple's Everything Tool",
+            url: "https://www.wired.com/story/siri-ai-is-now-apple-everything-tool/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a55464e20012bbe11800495/191:100/w_1280,c_limit/Siri-Apple-Everything-Tool-Gear-2260718787.jpg",
+            oneliner: "Apple's Siri AI backbone drives on-device silicon demands; A-series processor requirements shift.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Taiwan's second-largest chipmaker starts mass production in Singapore; Citi sees improving outlook",
+            url: "https://www.cnbc.com/2026/07/14/umc-starts-mass-production-in-singapore-citi-sees-improving-outlook.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108333841-1783922224186-gettyimages-2259167476-SINGAPORE_ECONOMY.jpeg?v=1783922244&amp;w=1920&amp;h=1080",
+            oneliner: "UMC ramps silicon photonics in Singapore as supply chain diversifies away from Taiwan.",
+          },
+          {
+            headline: "SK hynix May Add Just One-Sixth Of Its Planned New Memory Capacity By 2028",
+            url: "https://wccftech.com/sk-hynix-may-add-just-one-sixth-of-its-planned-new-memory-capacity-by-2028-handing-ammunition-to-the-dram-price-fixing-lawsuit/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/11/SK-hynix-NAND-flash-memory.jpg",
+            oneliner: "SK hynix delays 5/6 of planned DRAM capacity; memory supply crisis extends, pricing power intact.",
+          },
+          {
+            headline: "The Cutthroat Smartphone Industry And DRAM Crisis Force A Player Out Of The U.S. Market",
+            url: "https://wccftech.com/one-smartphone-player-to-bow-out-of-us-market-letting-apple-and-samsung-grow/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/One-smartphone-maker-bows-out-of-the-U.S.-smartphone-market.jpg",
+            oneliner: "DRAM shortage forces smartphone OEM exit; Apple and Samsung gain pricing power.",
+          },
+          {
+            headline: "Wi-Fi 8 Explained: Features, Release Date, and More",
+            url: "https://www.wired.com/story/what-is-wi-fi-8/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a5120f01264e7ba7d8cf820/191:100/w_1280,c_limit/What-is-Wi-Fi-8--Here%E2%80%99s-Everything-You-Need-to-Know.jpg",
+            oneliner: "Wi-Fi 8 standard drives next-gen silicon roadmaps for router and chipset makers.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Meta boosts investment in Hyperion data center campus to $50B+",
+            url: "https://siliconangle.com/2026/07/13/meta-boosts-investment-hyperion-data-center-campus-50b/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Meta-3.png",
+            oneliner: "Meta raises Louisiana Hyperion to $50B+ for 5GW AI supercluster; NVIDIA/chip demand accelerates.",
+          },
+          {
+            headline: "Meta's Louisiana data center investment to reach $50 billion, aided by generous tax incentives",
+            url: "https://www.cnbc.com/2026/07/13/meta-louisiana-data-center-investment-reaches-50-billion-amid-ai-push.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108163748-1750853113167-meta.jpeg?v=1750853491&amp;w=1920&amp;h=1080",
+            oneliner: "Meta commits $50B Louisiana 5GW facility with tax subsidies; reshapes AI chip procurement landscape.",
+          },
+          {
+            headline: "India's tech services giant HCL is getting into the AI datacenter business",
+            url: "https://www.theregister.com/off-prem/2026/07/14/indias-tech-services-giant-hcl-is-getting-into-the-ai-datacenter-business/5270827",
+            source: "The Register",
+            image: "https://image.theregister.com/228571.jpg?imageId=228571&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "HCL enters AI datacenters with $37M, 50MW; signals emerging-market hyperscaler buildout.",
+          },
+          {
+            headline: "Defense technology startup Helsing raises $1.8B at $18B valuation",
+            url: "https://siliconangle.com/2026/07/13/defense-technology-startup-helsing-raises-1-8b-18b-valuation/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Helsing.jpg",
+            oneliner: "German defense AI startup Helsing reaches $18B valuation; signals geopolitical AI silicon demand.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Nvidia halves Asia buyer list in China chip crackdown",
+            url: "https://www.ft.com/content/7c146c56-cc7a-40ec-93cb-58106a012421",
+            source: "Financial Times",
+            image: null,
+            oneliner: "NVIDIA cuts Singapore, Malaysia, Japan distributors to block China gray-market AI chip flows.",
+          },
+          {
+            headline: "Silicon shadows: inside the black market for AI chips",
+            url: "https://www.ft.com/content/ce906dad-6b72-4add-ac5c-0fbebeeb7e82",
+            source: "Financial Times",
+            image: null,
+            oneliner: "U.S. export controls spawn $billions black market routing advanced chips to China via intermediaries.",
+          },
+          {
+            headline: "Spain Semiconductor Industry Convenes to Forge Domestic Alliances",
+            url: "https://www.eetimes.com/spain-semiconductor-industry-convenes-to-forge-domestic-alliances/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AESEMI MatchMaking Day signals European chipmakers consolidating domestic supply chains.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Tomocube Launches HT-T1 Desktop for 3D Glass Substrate Defect Analysis in Advanced Packaging",
+            url: "https://www.semiconductor-digest.com/tomocube-launches-ht-t1-desktop-for-3d-glass-substrate-defect-analysis-in-advanced-packaging/?utm_source=rss&utm_medium=rss&utm_campaign=tomocube-launches-ht-t1-desktop-for-3d-glass-substrate-defect-analysis-in-advanced-packaging",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Tomocube launches 3D holotomography for glass substrate defects; enables chiplet packaging scaling.",
+          },
+          {
+            headline: "ESD Alliance Reports Electronic System Design Industry Posts $5.7 Billion in Revenue in Q1 2026",
+            url: "https://www.semiconductor-digest.com/esd-alliance-reports-electronic-system-design-industry-posts-5-7-billion-in-revenue-in-q1-2026/?utm_source=rss&utm_medium=rss&utm_campaign=esd-alliance-reports-electronic-system-design-industry-posts-5-7-billion-in-revenue-in-q1-2026",
+            source: "Semiconductor Digest",
+            image: "https://www.semiconductor-digest.com/wp-content/uploads/2026/07/screenshot-2026-07-13-at-72315am.png",
+            oneliner: "ESD revenue up 12.7% YoY to $5.7B in Q1; AI-driven design tool spending accelerates.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 12,
     date: "July 13, 2026",
     slug: "issue-12",

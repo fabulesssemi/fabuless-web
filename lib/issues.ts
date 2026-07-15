@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 14,
+    date: "July 15, 2026",
+    slug: "issue-14",
+    title: "ASML Doubles Down. Intel's 18A Ships. IBM Stumbles.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "IBM shares plunge 25% as customers shift spending to AI",
+            url: "https://www.ft.com/content/da478c37-7a32-415d-9f30-3b2981149f95",
+            source: "Financial Times",
+            image: null,
+            oneliner: "IBM crashes 25%; enterprise spending shifts from software to AI infrastructure hardware.",
+          },
+          {
+            headline: "Cybersecurity stocks rally on AI spending change comments from IBM's Krishna",
+            url: "https://www.cnbc.com/2026/07/14/cybersecurity-stocks-ai-spending-mythos.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108334858-1784049472784-Okta_Crowdstrike.jpg?v=1784049568&amp;w=1920&amp;h=1080",
+            oneliner: "IBM CEO: enterprise deal delays as businesses rethink AI vs. legacy IT allocation.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "What IBM's profit warning means: Hardware is 'eating everyone's lunch'",
+            url: "https://www.marketwatch.com/story/what-ibms-profit-warning-means-hardware-is-eating-everyones-lunch-c6878824?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "IBM miss: clients front-loaded memory purchases ahead of price increases.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Intel Leverages ASML's High NA EUV Technology To Produce 18A Panther Lake Chips",
+            url: "https://wccftech.com/intel-leverages-asml-high-na-euv-technology-to-produce-18a-panther-lake-chips/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Intel-ASML-High-NA-EUV-1920x1280.jpg",
+            oneliner: "ASML High NA EUV enters volume production; Intel 18A Panther Lake chips shipping.",
+          },
+          {
+            headline: "ASML raises forecasts as AI boom drives chipmaking demand",
+            url: "https://www.ft.com/content/731ec5ef-e9e1-40f5-b0bd-09e71787a938",
+            source: "Financial Times",
+            image: null,
+            oneliner: "ASML raises guidance twice; AI chip demand sustains capital equipment cycle momentum.",
+          },
+          {
+            headline: "ASML rises 5% after hiking sales forecast for second time this year on strong AI chip demand",
+            url: "https://www.cnbc.com/2026/07/15/asml-2q-earnings-ai-chips-orders.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108019821-1723561950847-gettyimages-1900810562-raa-asmlhold240104_npWrR.jpeg?v=1775551832&amp;w=1920&amp;h=1080",
+            oneliner: "ASML stock surges on raised guidance; AI lithography demand outpaces supply.",
+          },
+          {
+            headline: "Global Semiconductor Equipment Sales Forecast to Reach a Record $229 Billion in 2028, SEMI Reports",
+            url: "https://www.semiconductor-digest.com/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-in-2028-semi-reports/?utm_source=rss&utm_medium=rss&utm_campaign=global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-in-2028-semi-reports",
+            source: "Semiconductor Digest",
+            image: "https://www.semiconductor-digest.com/wp-content/uploads/2026/07/l5txg8y4mizuialnaupwk.png",
+            oneliner: "SEMI: equipment capex hits record $165.9B in 2026, up 23.2% YoY on AI scaling.",
+          },
+          {
+            headline: "Presidio Investors Announces Sale of ElevATE Semiconductor to Diodes Incorporated",
+            url: "https://www.semiconductor-digest.com/presidio-investors-announces-sale-of-elevate-semiconductor-to-diodes-incorporated/?utm_source=rss&utm_medium=rss&utm_campaign=presidio-investors-announces-sale-of-elevate-semiconductor-to-diodes-incorporated",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Diodes acquires ElevATE; consolidation in analog/mixed-signal semiconductor IP.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "US gov't allows Chinese telecom giant ZTE to purchase Nvidia H200 AI chips",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/us-govt-allows-chinese-telecom-giant-zte-to-purchase-nvidia-h200-ai-chips-firm-joins-alibaba-tencent-and-bytedance-in-access-to-hopper-tech",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/4tsCCBgB9mYcXBed7UdUSS-2048-80.jpg",
+            oneliner: "US licenses ZTE for Nvidia H200; Chinese AI capex gains selective access to Hopper GPUs.",
+          },
+          {
+            headline: "South Korea to launch universal basic AI chatbot",
+            url: "https://www.theregister.com/public-sector/2026/07/15/south-korea-to-launch-universal-basic-ai-chatbot/5271566",
+            source: "The Register",
+            image: "https://image.theregister.com/260291.jpg?imageId=260291&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "South Korea funds national AI chatbot; GPU procurement initiative boosts domestic semiconductor demand.",
+          },
+          {
+            headline: "Australia demands AI companies must produce more energy than they consume, stop 'theft' of content",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/15/australia-demands-ai-companies-must-produce-more-energy-than-they-consume-stop-theft-of-content/5271535",
+            source: "The Register",
+            image: null,
+            oneliner: "Australia mandates net-positive energy for AI ops; policy pressures data center chip efficiency.",
+          },
+          {
+            headline: "New York becomes first US state to impose a data center moratorium",
+            url: "https://siliconangle.com/2026/07/14/new-york-becomes-first-us-state-impose-data-center-moratorium/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/nydatacenterban.png",
+            oneliner: "NY moratorium stalls $130B hyperscale projects; GPU/chip procurement delayed nationwide.",
+          },
+          {
+            headline: "Hochul's Data Center Moratorium Lands as $130 Billion in Projects Stalled Nationwide in a Single Quarter",
+            url: "https://wccftech.com/hochuls-data-center-moratorium-lands-as-130-billion-in-projects-stalled-nationwide-in-a-single-quarter/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2023/10/Data-Centers-1024x576-1-1920x1079.jpeg",
+            oneliner: "NY data center freeze halts $130B capex; semiconductor demand deflation looms.",
+          },
+          {
+            headline: "Singularity lands $80M at $400M valuation to build cheap drone interceptors",
+            url: "https://siliconangle.com/2026/07/14/singularity-lands-80m-400m-valuation-build-cheap-drone-interceptors/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/singularityus.png",
+            oneliner: "Singularity Defense funds cheap air-defense drones; defense-grade semiconductor demand rises.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "DAC 2026: Certus Semiconductor Brings Two New I/O Libraries to GlobalFoundries 12nm",
+            url: "https://semiwiki.com/ip/certus-semiconductor/370883-certus-semiconductor-brings-two-new-i-o-libraries-to-globalfoundries-12nm-certus-sem/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/certus_dac63_technical.png",
+            oneliner: "Certus releases I/O libraries for GF 12LP/12LP+; mature node packaging accelerates.",
+          },
+          {
+            headline: "Probabilistic Computing Is Already Here; Here Is How It Works",
+            url: "https://www.eetimes.com/probabilistic-computing-is-already-here-here-is-how-it-works/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Probabilistic hardware deployed at Boeing/CERN; specialized compute accelerators address Monte Carlo bottlenecks.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 13,
     date: "July 14, 2026",
     slug: "issue-13",

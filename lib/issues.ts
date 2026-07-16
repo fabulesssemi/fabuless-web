@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 15,
+    date: "July 16, 2026",
+    slug: "issue-15",
+    title: "TSMC Commits $265B, Intel Uses High-NA EUV, Hydrofluoric Acid Soars",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Samsung Reportedly Outsources Google's TPU I/O Late-Stage Design, Says Report",
+            url: "https://wccftech.com/samsung-reportedly-outsources-googles-tpu-i-o-late-stage-design-says-report/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/11/google-tpu-engines-Ironwood-board-with-rack-scaled-1-1920x1280.jpg",
+            oneliner: "Samsung outsources Google TPU I/O design as custom AI chip supply chains fragment under demand.",
+          },
+          {
+            headline: "Former OpenAI CTO does what Altman won't: releases a frontier AI model that's actually open",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/16/former-openai-cto-does-what-altman-wont-releases-a-frontier-ai-model-thats-actually-open/5272177",
+            source: "The Register",
+            image: "https://image.theregister.com/5272215.jpg?imageId=5272215&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Thinking Machines launches open-weights frontier model; open-source inference ecosystem fragments further.",
+          },
+          {
+            headline: "Mira Murati's Thinking Machines draws from Chinese rivals in debut AI model",
+            url: "https://www.ft.com/content/ef486929-d2c2-480b-8b00-9cb98bda6acf",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Thinking Machines' Inkling borrows from Chinese LLM architecture; open-source model design diversity grows.",
+          },
+          {
+            headline: "Nvidia's Huang vows to deliver 'giant amounts' of Vera Rubin — company says that 'our roadmap is intact'",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidias-huang-vows-to-deliver-giant-amounts-of-vera-rubin-company-says-that-our-roadmap-is-intact",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/rsyZScrnGySN3xEMD8VwAR-1280-80.jpg",
+            oneliner: "NVIDIA confirms Vera Rubin GPU roadmap; Kyber NVL144 delays rumored but company denies disruption.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Hydrofluoric Acid Prices Climb as AI Chip Demand Outpaces a Strained Semiconductor Materials Supply",
+            url: "https://wccftech.com/hydrofluoric-acid-prices-climb-as-ai-chip-demand-outpaces-a-strained-semiconductor-materials-supply/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/05/TSMC-2nm-wafer.jpg",
+            oneliner: "Hydrofluoric acid shortage signals supply-chain bottleneck as AI fab demand outpaces chemical feedstock.",
+          },
+          {
+            headline: "Large-area OLED Shipments to Increase 18.8% YoY in 2026 Despite Economic Uncertainty and Component Price Hike",
+            url: "https://www.semiconductor-digest.com/large-area-oled-shipments-to-increase-18-8-yoy-in-2026-despite-economic-uncertainty-and-component-price-hike/",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Large-area OLED shipments forecast +18.8% YoY; display capex remains resilient despite cost inflation.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "TSMC to invest additional $100 billion in Arizona after second-quarter profit soars 77%",
+            url: "https://www.cnbc.com/2026/07/16/tsmc-second-quarter-profit-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/107402218-1713316368478-gettyimages-1558946698-AFP_33Q43U9.jpeg?v=1760595833&amp;w=1920&amp;h=1080",
+            oneliner: "TSMC raises US capex commitment to $265B as foundry demand surges amid AI chip race.",
+          },
+          {
+            headline: "Chipmaker TSMC to invest another $100bn in US production",
+            url: "https://www.ft.com/content/491927e1-1532-486d-94ec-8d6ee2de7bcd",
+            source: "Financial Times",
+            image: null,
+            oneliner: "TSMC doubles down on US manufacturing as world's leading foundry confirms 77% profit surge.",
+          },
+          {
+            headline: "Intel starts using ASML's High NA EUV technology to produce chips",
+            url: "https://siliconangle.com/2026/07/15/intel-starts-using-asmls-high-na-euv-technology-produce-chips/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/ASML.png",
+            oneliner: "Intel deploys ASML's High-NA EUV in production; capital equipment milestone accelerates next-gen node.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "India Adds Pieces to Strengthen Its Electronics Supply Chain Puzzle",
+            url: "https://www.eetimes.com/india-adds-pieces-to-strengthen-its-electronics-supply-chain-puzzle/",
+            source: "EE Times",
+            image: null,
+            oneliner: "India builds OSAT, PCB capacity to reduce import dependency as geopolitical diversification accelerates.",
+          },
+          {
+            headline: "Trump blasts New York AI data center moratorium, says state should change policy 'immediately'",
+            url: "https://www.cnbc.com/2026/07/15/trump-blasts-new-york-gov-hochul-over-ai-data-center-moratorium.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108335504-1784135985308-Hocul_Trump.jpg?v=1784145618&amp;w=1920&amp;h=1080",
+            oneliner: "Trump opposes NY AI data center ban; political clash over power infrastructure policy widens.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Cadence extends its AI agents beyond chips with AuraStack for circuit boards and packaging",
+            url: "https://siliconangle.com/2026/07/15/cadence-extends-ai-agents-beyond-chips-aurastack-circuit-boards-packaging/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2025/04/A-circuit-board-with-an-AI-model-looking-down-on-it-touching-it-with-a-glowing-hand-abstract-art-mut.jpeg",
+            oneliner: "Cadence AI agent expands to PCB/packaging design; EDA toolchain consolidation accelerates post-silicon.",
+          },
+          {
+            headline: "Cadence's AuraStack agent melds AI with HPC to speed PCB, advanced packaging design",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/15/cadences-aurastack-agent-melds-ai-with-hpc-to-speed-pcb-advanced-packaging-design/5271465",
+            source: "The Register",
+            image: "https://image.theregister.com/5262971.jpg?imageId=5262971&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Cadence marries AI agents with HPC simulation for advanced packaging; design cycle compression gains traction.",
+          },
+          {
+            headline: "TYLsemi De-Risks Chiplets With New Business Model",
+            url: "https://www.eetimes.com/tyl-semi-de-risks-chiplets-with-new-business-model/",
+            source: "EE Times",
+            image: null,
+            oneliner: "TYLsemi assumes chiplet design risk for AI customers; modular chip architecture business model emerges.",
+          },
+          {
+            headline: "ChipAgents Helps Whalechip Cut Semiconductor Root Cause Analysis from Days to Minutes",
+            url: "https://www.semiconductor-digest.com/chipagents-helps-whalechip-cut-semiconductor-root-cause-analysis-from-days-to-minutes/",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "AI-powered chip debug slashes RCA cycle; design automation integration accelerates SoC time-to-market.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 14,
     date: "July 15, 2026",
     slug: "issue-14",

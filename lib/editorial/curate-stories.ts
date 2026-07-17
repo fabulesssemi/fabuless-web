@@ -287,10 +287,13 @@ ${STORY_SCHEMA}`;
     );
 
     // Push imageless stories to the back so the top 4 slots always have photos.
+    // Re-number rank to match the new order — downstream (getHomepageArticles)
+    // re-sorts by the persisted rank field, so leaving stale ranks here would
+    // silently undo this reordering once written to Supabase.
     const withImagesFirst = [
       ...topStories.filter((s) => s.image),
       ...topStories.filter((s) => !s.image),
-    ];
+    ].map((s, i) => ({ ...s, rank: i + 1 }));
 
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {

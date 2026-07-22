@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
-import Anthropic from "@anthropic-ai/sdk";
 import { issues, type Issue, type Story, type Podcast, type Quote, type StoryQuote } from "@/lib/issues";
 import { getSubscribers } from "./subscribers";
 
@@ -17,23 +16,6 @@ function getSupabase() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
-}
-
-export async function generateMetric(issue: Issue): Promise<{ value: string; label: string } | null> {
-  const ai = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const headlines = issue.sections.flatMap((s) => s.stories.map((st) => st.headline)).join("\n");
-  const msg = await ai.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 80,
-    messages: [{ role: "user", content: `From these semiconductor headlines, extract the single most significant specific number for equity investors — a capex figure, revenue guidance, supply cut %, timeline, market share shift.\n\nHeadlines:\n${headlines}\n\nIf there's a clear standout metric: {"value":"$32B","label":"MSFT Q4 capex — 40% above Street"}\nIf no specific number is worth highlighting: {"value":null}\n\nRespond ONLY with JSON.` }],
-  });
-  if (msg.content[0].type !== "text") return null;
-  try {
-    const m = msg.content[0].text.match(/\{[\s\S]*\}/);
-    if (!m) return null;
-    const p = JSON.parse(m[0]);
-    return p.value ? { value: p.value, label: p.label ?? "" } : null;
-  } catch { return null; }
 }
 
 export async function fetchLivePodcasts(): Promise<Podcast[]> {
@@ -97,7 +79,7 @@ function quotesBlock(quotes: Quote[]): string {
   return `<tr><td style="padding:20px 32px 4px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#18181B;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">𝕏 &nbsp;From Chip Twitter</p><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr><tr><td style="padding:12px 32px 16px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:3px;"><tr><td style="padding:4px 16px 6px;"><table width="100%" cellpadding="0" cellspacing="0" border="0">${items}</table></td></tr></table></td></tr>`;
 }
 
-export function buildSemiEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], metric: { value: string; label: string } | null = null): string {
+export function buildSemiEmailHtml(issue: Issue, livePodcasts: Podcast[] = []): string {
   const CAT_ORDER = ["Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other"];
   let storiesHtml = "";
   let storyIndex = 0;
@@ -112,7 +94,7 @@ export function buildSemiEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], m
   const quotesHtml = quotesBlock(issue.quotes ?? []);
   const totalStories = issue.sections.reduce((n, s) => n + s.stories.length, 0);
 
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fabuless Semi — Issue #${issue.number}</title></head><body style="margin:0;padding:0;background:#f5f5f4;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f5f4;"><tr><td align="center" style="padding:28px 16px 40px;"><table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid #e5e7eb;"><tr><td style="height:4px;background:#B45309;font-size:0;line-height:0;">&nbsp;</td></tr><tr><td style="background:#111827;padding:18px 32px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td><span style="font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">Fabuless</span><span style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#6b7280;letter-spacing:0.12em;text-transform:uppercase;margin-left:10px;">SEMI</span></td><td align="right"><span style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#6b7280;">Issue #${issue.number} &middot; ${esc(issue.date)}</span></td></tr></table></td></tr><tr><td style="padding:22px 32px 6px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#B45309;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">THIS WEEK IN CHIPS &middot; ${totalStories} STORIES</p><h1 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:#18181B;line-height:1.3;margin:0;">${esc(issue.title)}</h1></td></tr>${metric ? `<tr><td style="padding:10px 32px 20px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#fffbeb;border:1px solid #fcd34d;border-radius:3px;"><tr><td style="padding:14px 20px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:#92400e;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 4px 0;">One Number</p><p style="font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#1e1b4b;margin:0 0 2px 0;line-height:1;">${esc(metric.value)}</p><p style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;color:#374151;margin:0;">${esc(metric.label)}</p></td></tr></table></td></tr>` : ""}${storiesHtml}${podcastsHtml ? `<tr><td style="padding:22px 32px 6px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#0E7490;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">From the Pods</p><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr>${podcastsHtml}` : ""}${quotesHtml}<tr><td align="center" style="padding:24px 32px 28px;"><a href="https://fabuless.ai/archive/${issue.slug}" style="display:inline-block;background:#B45309;color:#ffffff;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:11px 28px;border-radius:2px;">Read Full Issue on Fabuless.ai &rarr;</a></td></tr><tr><td style="padding:14px 32px 18px;border-top:1px solid #f3f4f6;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#9ca3af;margin:0;text-align:center;line-height:1.6;">You're receiving this because you subscribed at <a href="https://fabuless.ai" style="color:#B45309;text-decoration:none;">fabuless.ai</a></p></td></tr><tr><td style="height:4px;background:#B45309;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr></table></body></html>`;
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fabuless Semi — Issue #${issue.number}</title></head><body style="margin:0;padding:0;background:#f5f5f4;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f5f4;"><tr><td align="center" style="padding:28px 16px 40px;"><table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid #e5e7eb;"><tr><td style="height:4px;background:#B45309;font-size:0;line-height:0;">&nbsp;</td></tr><tr><td style="background:#111827;padding:18px 32px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td><span style="font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">Fabuless</span><span style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#6b7280;letter-spacing:0.12em;text-transform:uppercase;margin-left:10px;">SEMI</span></td><td align="right"><span style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#6b7280;">Issue #${issue.number} &middot; ${esc(issue.date)}</span></td></tr></table></td></tr><tr><td style="padding:22px 32px 6px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#B45309;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">THIS WEEK IN CHIPS &middot; ${totalStories} STORIES</p><h1 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:#18181B;line-height:1.3;margin:0;">${esc(issue.title)}</h1></td></tr>${storiesHtml}${podcastsHtml ? `<tr><td style="padding:22px 32px 6px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;color:#0E7490;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px 0;">From the Pods</p><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr>${podcastsHtml}` : ""}${quotesHtml}<tr><td align="center" style="padding:24px 32px 28px;"><a href="https://fabuless.ai/archive/${issue.slug}" style="display:inline-block;background:#B45309;color:#ffffff;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:11px 28px;border-radius:2px;">Read Full Issue on Fabuless.ai &rarr;</a></td></tr><tr><td style="padding:14px 32px 18px;border-top:1px solid #f3f4f6;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:#9ca3af;margin:0;text-align:center;line-height:1.6;">You're receiving this because you subscribed at <a href="https://fabuless.ai" style="color:#B45309;text-decoration:none;">fabuless.ai</a></p></td></tr><tr><td style="height:4px;background:#B45309;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr></table></body></html>`;
 }
 
 export async function sendSemiNewsletter(): Promise<{ sent: number; failed: number; skipped?: true }> {
@@ -129,13 +111,12 @@ export async function sendSemiNewsletter(): Promise<{ sent: number; failed: numb
   if (sentToday && sentToday.length > 0) return { sent: 0, failed: 0, skipped: true };
 
   const issue = issues[0];
-  const [livePodcasts, metric, subscribers] = await Promise.all([
+  const [livePodcasts, subscribers] = await Promise.all([
     fetchLivePodcasts(),
-    generateMetric(issue),
     getSubscribers(),
   ]);
 
-  const html = buildSemiEmailHtml(issue, livePodcasts, metric);
+  const html = buildSemiEmailHtml(issue, livePodcasts);
   const subject = `Fabuless Semi | ${issue.title}`;
   let sent = 0, failed = 0;
 

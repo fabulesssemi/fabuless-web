@@ -25,33 +25,14 @@ try {
 
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
-import Anthropic from "@anthropic-ai/sdk";
 import * as readline from "readline";
 import { issues, type Issue, type Story, type Podcast, type Quote, type StoryQuote } from "../lib/issues";
-
-const ai = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const PODCAST_FEEDS = [
   { show: "The Circuit",          url: "https://feeds.transistor.fm/the-circuit" },
   { show: "Chip Stock Investor",  url: "https://anchor.fm/s/e2cacf78/podcast/rss" },
   { show: "Invest Like the Best", url: "https://feeds.megaphone.fm/investlikethebest" },
 ];
-
-async function generateMetric(issue: Issue): Promise<{ value: string; label: string } | null> {
-  const headlines = issue.sections.flatMap((s) => s.stories.map((st) => st.headline)).join("\n");
-  const msg = await ai.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 80,
-    messages: [{ role: "user", content: `From these semiconductor headlines, extract the single most significant specific number for equity investors — a capex figure, revenue guidance, supply cut %, timeline, market share shift.\n\nHeadlines:\n${headlines}\n\nIf there's a clear standout metric: {"value":"$32B","label":"MSFT Q4 capex — 40% above Street"}\nIf no specific number is worth highlighting: {"value":null}\n\nRespond ONLY with JSON.` }],
-  });
-  if (msg.content[0].type !== "text") return null;
-  try {
-    const m = msg.content[0].text.match(/\{[\s\S]*\}/);
-    if (!m) return null;
-    const p = JSON.parse(m[0]);
-    return p.value ? { value: p.value, label: p.label ?? "" } : null;
-  } catch { return null; }
-}
 
 async function fetchLivePodcasts(): Promise<Podcast[]> {
   const results = await Promise.all(
@@ -208,7 +189,7 @@ function quotesBlock(quotes: Quote[]): string {
 }
 
 
-function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], metric: { value: string; label: string } | null = null): string {
+function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = []): string {
   const CAT_ORDER = ["Compute", "Memory & Networking", "Capital Flows", "Geopolitics & Policy", "Other"];
 
   // Build stories HTML grouped by category
@@ -274,9 +255,6 @@ function buildEmailHtml(issue: Issue, livePodcasts: Podcast[] = [], metric: { va
           </td>
         </tr>
 
-        <!-- One Number callout -->
-        ${metric ? `<tr><td style="padding:10px 32px 20px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#fffbeb;border:1px solid #fcd34d;border-radius:3px;"><tr><td style="padding:14px 20px;"><p style="font-family:system-ui,-apple-system,sans-serif;font-size:9px;font-weight:800;color:#92400e;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 4px 0;">One Number</p><p style="font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#1e1b4b;margin:0 0 2px 0;line-height:1;">${esc(metric.value)}</p><p style="font-family:system-ui,-apple-system,sans-serif;font-size:12px;color:#374151;margin:0;">${esc(metric.label)}</p></td></tr></table></td></tr>` : ""}
-
         <!-- Stories by category -->
         ${storiesHtml}
 
@@ -333,12 +311,8 @@ async function main() {
   const livePodcasts = await fetchLivePodcasts();
   const issue = issues[0];
 
-  console.log("Generating metric...");
-  const metric = await generateMetric(issue);
-  console.log(`  Metric: ${metric ? `${metric.value} — ${metric.label}` : "none"}`);
-
   if (previewMode) {
-    const html = buildEmailHtml(issue, livePodcasts, metric);
+    const html = buildEmailHtml(issue, livePodcasts);
     const outPath = resolve(process.cwd(), "newsletter-preview.html");
     writeFileSync(outPath, html);
     console.log(`\n✅ Preview saved → ${outPath}`);
@@ -349,7 +323,7 @@ async function main() {
   const testMode = process.argv.includes("--test");
   if (testMode) {
     const resend = new Resend(process.env.RESEND_API_KEY!);
-    const html = buildEmailHtml(issue, livePodcasts, metric);
+    const html = buildEmailHtml(issue, livePodcasts);
     const { error } = await resend.emails.send({
       from: "Fabuless <newsletter@fabuless.ai>",
       to: "harrica@bc.edu",
@@ -410,7 +384,7 @@ async function main() {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY!);
-  const html = buildEmailHtml(issue, livePodcasts, metric);
+  const html = buildEmailHtml(issue, livePodcasts);
   const subject = `Fabuless Semi | ${issue.title}`;
   let sent = 0, failed = 0;
 

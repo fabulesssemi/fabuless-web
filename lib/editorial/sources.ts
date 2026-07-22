@@ -29,12 +29,15 @@ const RSS_FEEDS: { url: string; source: string }[] = [
   { url: "https://wccftech.com/feed/",                                                                    source: "WCCFtech" },
   { url: "https://www.semianalysis.com/feed",                                                            source: "SemiAnalysis" },
   { url: "https://www.fabricatedknowledge.com/feed",                                                     source: "Fabricated Knowledge" },
+  { url: "https://io-fund.com/rss.xml",                                                                  source: "IO Fund" },
   { url: "https://thechipletter.substack.com/feed",                                                      source: "The Chip Letter" },
   { url: "https://digitstodollars.com/feed/",                                                            source: "Digits to Dollars" },
   { url: "https://siliconangle.com/feed/",                                                               source: "SiliconAngle" },
   { url: "https://www.semiconductor-digest.com/feed/",                                                   source: "Semiconductor Digest" },
   { url: "https://spectrum.ieee.org/feeds/topic/semiconductors.rss",                                     source: "IEEE Spectrum" },
   { url: "https://research.ibm.com/rss",                                                                 source: "IBM Research" },
+  // Company press releases (official IR feeds — low volume, high signal)
+  { url: "https://ir.amd.com/news-events/press-releases/rss",                                            source: "AMD" },
   // Finance / markets
   { url: "https://www.benzinga.com/feeds/analyst-ratings/rss",                                           source: "Benzinga" },
   { url: "https://feeds.marketwatch.com/marketwatch/topstories/",                                        source: "MarketWatch" },
@@ -157,6 +160,29 @@ export function filterByKeywords(items: RssItem[], keywords: string[]): RssItem[
   });
 }
 
+// Per-source noise patterns — recurring non-article posts (e.g. weekly webinar
+// announcements) that a feed publishes alongside real articles. Filtered by
+// title regex so they never reach curation, rather than relying on Claude to
+// recognize every source's filler format on every run.
+const NOISE_TITLE_PATTERNS: Record<string, RegExp[]> = {
+  "IO Fund": [/webinar replay/i, /^no webinar/i],
+};
+
+// Per-source paywall exclusion — drop URLs under these path prefixes so
+// subscribers never click into a login wall. IO Fund publishes free
+// (/ai-stocks/, /broad-market/) and paywalled (/premium/) posts in the same
+// feed; only the free posts should reach the newsletter/chatbot.
+const PAYWALLED_URL_PATTERNS: Record<string, RegExp[]> = {
+  "IO Fund": [/io-fund\.com\/premium\//i],
+};
+
+function isNoise(item: { title: string; link: string }, source: string): boolean {
+  const titlePatterns = NOISE_TITLE_PATTERNS[source] ?? [];
+  if (titlePatterns.some((p) => p.test(item.title))) return true;
+  const urlPatterns = PAYWALLED_URL_PATTERNS[source] ?? [];
+  return urlPatterns.some((p) => p.test(item.link));
+}
+
 // Drop stale articles. Some feeds (e.g. Chipstrat) carry weeks of back-catalog,
 // and Claude would otherwise surface a month-old post as "news". Articles with
 // a missing/unparseable pubDate are KEPT (don't over-filter feeds with odd dates).
@@ -176,7 +202,7 @@ export async function fetchAllNewsItems(): Promise<RssItem[]> {
       const xml = await fetchText(url);
       if (!xml) return [];
       return parseRss(xml)
-        .filter((item) => isRecent(item.pubDate))
+        .filter((item) => isRecent(item.pubDate) && !isNoise(item, source))
         .map((item) => ({ ...item, source }));
     }),
   );

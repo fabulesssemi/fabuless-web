@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 16,
+    date: "July 24, 2026",
+    slug: "issue-16",
+    title: "Intel Surges 25%. AMD-Cerebras Counter Groq. Memory Chips Heat Up.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel posts fastest growth in 15 years as AI data centres demand fuels sales",
+            url: "https://www.ft.com/content/48f0a410-daae-420b-93fc-216c3a2f1184?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Intel Q2 revenue jumped 25% on data center AI demand; strongest growth since 2011.",
+          },
+          {
+            headline: "Intel knows it needs to 'leapfrog' ARM and AMD, says CEO Lip-Bu Tan",
+            url: "https://www.theregister.com/systems/2026/07/24/intel-knows-it-needs-to-leapfrog-arm-and-amd-says-ceo-lip-bu-tan/5277968",
+            source: "The Register",
+            image: "https://image.theregister.com/5218918.jpg?imageId=5218918&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Intel CEO signals aggressive roadmap; edge/robotics positioned as growth drivers vs. ARM, AMD.",
+          },
+          {
+            headline: "AMD Fires Back At NVIDIA's Groq Bet, Fuses The Cerebras Wafer-Scale Engine With Helios For 5x Higher Tokens Per Second Per Watt",
+            url: "https://wccftech.com/amd-fires-back-at-nvidias-groq-bet-fuses-the-cerebras-wafer-scale-engine-with-helios-for-5x-higher-tokens-per-second-per-watt/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/2026-07-24_3-44-12-1920x1112.jpg",
+            oneliner: "AMD-Cerebras integration claims 5x efficiency vs. NVIDIA's Groq LPU; AI inference arms race escalates.",
+          },
+          {
+            headline: "AMD and Cerebras join forces against Nvidia's Groq LPUs",
+            url: "https://www.theregister.com/systems/2026/07/23/amd-and-cerebras-join-forces-against-nvidias-groq-lpus/5277817",
+            source: "The Register",
+            image: "https://image.theregister.com/250546.jpg?imageId=250546&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AMD partners Cerebras to compete directly with NVIDIA's Groq inference acceleration platform.",
+          },
+          {
+            headline: "Intel Foundry Securing Packaging & Wafer Deal With NVIDIA To Make Next-Gen Feynman GPUs Could Be Its Biggest Customer Win Yet",
+            url: "https://wccftech.com/intel-foundry-nvidia-feynman-gpu-wafer-packaging-deal/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Intel-NVIDIA-Feynman-GPUs.jpg",
+            oneliner: "Intel Foundry poised for NVIDIA Feynman GPU deal; packaging + wafers supply partnership.",
+          },
+          {
+            headline: "AI chip startup Etched more than doubles valuation to $10.3B in new $300M round",
+            url: "https://siliconangle.com/2026/07/23/ai-chip-startup-etched-doubles-valuation-10-3b-new-300m-round/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Etched.png",
+            oneliner: "Etched raises $300M at $10.3B valuation; SK Hynix backs AI inference chip maker.",
+          },
+          {
+            headline: "Microsoft and AMD target silicon diversity to power Azure's AI infrastructure buildout",
+            url: "https://siliconangle.com/2026/07/23/silicon-diversity-powers-azure-ai-infrastructure-amdadvancingai/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/IMG_9924.jpg",
+            oneliner: "Microsoft, AMD diversify Azure silicon; multi-GPU architecture hedges NVIDIA dependency.",
+          },
+          {
+            headline: "AMD's rivalry with Nvidia is increasingly moving into a new realm",
+            url: "https://www.marketwatch.com/story/amds-rivalry-with-nvidia-is-increasingly-moving-into-a-new-realm-ac63eceb?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "AMD escalates server CPU competition vs. NVIDIA; GPU duopoly shifting to multi-architecture contest.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "China's largest memory chipmaker sparks fears of a cash drain as it readies for public debut",
+            url: "https://www.cnbc.com/2026/07/24/cxmt-china-ipo-listing-chip-memory.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108312364-1779878364667-gettyimages-2277415878-TFSPI_23052026-5551.jpeg?v=1779878377&amp;w=1920&amp;h=1080",
+            oneliner: "CXMT IPO looms; Chinese memory chip capex competition feared to drain domestic liquidity.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Meta faces higher borrowing costs in latest $12bn data centre financing",
+            url: "https://www.ft.com/content/822628c5-4f9c-47db-bd27-f3ad7f841700?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Meta's $12B data center bond faces investor anxiety over AI capex exposure; rates spike.",
+          },
+          {
+            headline: "Google Cloud CEO Kurian says customers are spending 50% more as segment blows away expectations",
+            url: "https://www.cnbc.com/2026/07/23/google-cloud-kurian-revenue-earnings.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/106120359-1568071954183gettyimages-1135936634.jpeg?v=1651801580&amp;w=1920&amp;h=1080",
+            oneliner: "Google Cloud customers increasing spend 50%; AI capex surge accelerates hyperscaler revenue.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "U.S. Starts Genesis Mission with $5B for First Projects",
+            url: "https://www.eetimes.com/u-s-starts-genesis-mission-with-5b-for-first-projects/",
+            source: "EE Times",
+            image: null,
+            oneliner: "US deploys $5B Genesis Mission AI funding; China readies $295B; geopolitical semiconductor race.",
+          },
+          {
+            headline: "Trump rolls out a new wave of global tariffs. Here are the latest rates.",
+            url: "https://www.marketwatch.com/story/trump-rolls-out-a-new-wave-of-tariffs-here-are-the-latest-rates-449af1d3?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Trump tariff escalation impacts semiconductor supply chains; manufacturing cost pressures intensify.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Agentrys Designs a Real Chip with its Multi-Agent Workforce",
+            url: "https://semiwiki.com/eda/agentrys/371377-agentrys-designs-a-real-chip-with-its-multi-agent-workforce/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/Agentrys-Designs-a-Real-Chip-with-its-Multi-Agent-Workforce.png",
+            oneliner: "Agentrys AI agents tape out real silicon; EDA industry undergoes agent-driven transformation.",
+          },
+          {
+            headline: "The Story Behind Fuse EDA AI system",
+            url: "https://www.eetimes.com/the-story-behind-fuse-eda-ai-system/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Fuse agentic EDA system enables AI-driven design verification; trusted AI frameworks emerge.",
+          },
+          {
+            headline: "PCs & Smartphones Supply Constrained",
+            url: "https://semiwiki.com/semiconductor-services/semiconductor-intelligence/371662-pcs-smartphones-supply-constrained/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/Semiconductor-Intelligence-July-2026-1.png",
+            oneliner: "PC, smartphone unit shipments down 4.9% and 6.7% YoY; demand cliff signals market correction.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 15,
     date: "July 16, 2026",
     slug: "issue-15",

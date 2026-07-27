@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 17,
+    date: "July 27, 2026",
+    slug: "issue-17",
+    title: "CXMT Soars 466%. Intel Premiums Rise. TSMC 2nm Scales.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel Bets on Premium Chips, and the Gamble Pays Off With Server Prices Jumping 48% in Q2",
+            url: "https://wccftech.com/intel-bets-on-premium-chips-and-the-gamble-pays-off-with-server-prices-jumping-48-in-q2/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Intel-18A.jpg",
+            oneliner: "Intel server CPU ASPs surge 48% on premium mix; Xeon strategy gains traction.",
+          },
+          {
+            headline: "TSMC's 2nm Production Is In Full Swing, One Plant Has Already Reached 20,000 Monthly Wafers, As Demand Surge Could Eclipse 3nm Requirements Soon",
+            url: "https://wccftech.com/tsmc-2nm-production-demand-surge/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/TSMC-2nm-wafer-2.jpg",
+            oneliner: "TSMC 2nm hits 20k wafers/month; demand may exceed 3nm capacity.",
+          },
+          {
+            headline: "Nvidia is putting its Vera CPUs to work alongside AI agents to speed up chip design",
+            url: "https://siliconangle.com/2026/07/26/nvidia-putting-vera-cpus-work-alongside-ai-agents-speed-chip-design/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Screenshot-from-2026-07-27-10-19-06.png",
+            oneliner: "NVIDIA Vera CPUs automate EDA workflows with Cadence, Synopsys integration.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Chinese CXMT DRAM doesn't look like the budget savior many were expecting — new modules enter the market, but prices still track the big three",
+            url: "https://www.tomshardware.com/pc-components/dram/chinese-cxmt-dram-doesnt-look-like-the-budget-savior-many-were-expecting-new-modules-enter-the-market-but-prices-still-track-the-big-three",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/Y6RXNGdt5atPtqKHjD7EUW-1280-80.jpg",
+            oneliner: "CXMT retail pricing matches SK Hynix/Micron; no margin compression yet.",
+          },
+          {
+            headline: "Five Myths about the Current Memory Boom",
+            url: "https://semiwiki.com/semiconductor-manufacturers/371531-five-myths-about-the-current-memory-boom/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/Five-Myths-about-the-Current-Memory-Boom-1200x658.jpg",
+            oneliner: "HBM demand drives memory shortage; capacity allocation, not fab deficit.",
+          },
+          {
+            headline: "Vultr targets open composable stacks and AMD partnership to lead cloud AI infrastructure",
+            url: "https://siliconangle.com/2026/07/27/vultr-bets-amd-open-stacks-win-cloud-ai-infrastructure-amdadvancingai/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Kevin.jpg",
+            oneliner: "Vultr leverages AMD, open stacks for sovereign AI cloud positioning.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Chipmaker CXMT's 466% market debut surge makes it the most valuable China-listed company",
+            url: "https://www.cnbc.com/2026/07/27/cxmt-china-market-debut-chipmaker-ipo.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108339018-1784788545432-gettyimages-2285591332-tang-cxmthead260715_npU3p.jpeg?v=1784788559&amp;w=1920&amp;h=1080",
+            oneliner: "CXMT $85bn IPO signals China DRAM push; challenges SK Hynix, Micron duopoly.",
+          },
+          {
+            headline: "Chinese chip champion CXMT soars 466% in market debut",
+            url: "https://www.ft.com/content/8e82e939-908b-42bf-a314-0bb02a3f1b07?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "CXMT becomes China's largest IPO since 2010; reshapes global DRAM competition.",
+          },
+          {
+            headline: "Zeiss expands German site that caps ASML's EUV scanner output — first new building opens four years after Oberkochen site groundbreaking",
+            url: "https://www.tomshardware.com/tech-industry/zeiss-expands-german-site-that-caps-asmls-euv-scanner-output",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/XVwQGuRMm2gVLvNC4rHrW8-1920-80.jpg",
+            oneliner: "Zeiss adds 25k sqm Oberkochen capacity; ASML optics bottleneck easing.",
+          },
+          {
+            headline: "CXMT IPO: Where China's Largest DRAM Maker Stands?",
+            url: "https://www.eetimes.com/cxmt-ipo-where-chinas-largest-dram-maker-stand/",
+            source: "EE Times",
+            image: null,
+            oneliner: "CXMT IPO analysis; China DRAM capacity target post-supply shortage.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "AI companies spend record sums on Washington lobbying",
+            url: "https://www.ft.com/content/d8a5f95e-3b6d-463a-a848-c9ef8e2394db?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "OpenAI, Anthropic, Google, Microsoft escalate DC lobbying; policy risk rises.",
+          },
+          {
+            headline: "Nvidia, SpaceX, Microsoft launch AI safety initiative as OpenAI cyber attack fallout continues",
+            url: "https://www.cnbc.com/2026/07/27/nvidia-ai-initiative-openai-cyber-attack.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108317416-1780669969197-gettyimages-2279256400-jung-nvidiace260605_nprgq.jpeg?v=1780670112&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA, SpaceX, Microsoft form Open Secure AI Alliance; supply chain security focus.",
+          },
+          {
+            headline: "Digital sovereignty is real in Europe. The UK? Not so much",
+            url: "https://www.theregister.com/columnists/2026/07/27/digital-sovereignty-is-real-in-europe-the-uk-not-so-much/5276852",
+            source: "The Register",
+            image: "https://image.theregister.com/5276896.jpg?imageId=5276896&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Europe mandates open-source; UK remains US tech-dependent amid Trump uncertainty.",
+          },
+          {
+            headline: "This Is Donald Trump's AI Brain Trust",
+            url: "https://www.wired.com/story/this-is-donald-trumps-ai-brain-trust/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a63ddfc7b2f84e64f1f3fcf/191:100/w_1280,c_limit/Donald-Trump-AI-Brain-Trust-Politics.jpg",
+            oneliner: "Trump AI policy fragmented across 10 factions; chip export rules at risk.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Exotic Quasiparticles Promise Next-Gen Interconnects",
+            url: "https://spectrum.ieee.org/topological-material-nanowire-interconnect",
+            source: "IEEE Spectrum",
+            image: "https://spectrum.ieee.org/media-library/image.jpg?id=67534512&width=1200&height=600&coordinates=0%2C125%2C0%2C125",
+            oneliner: "Topological materials replace copper interconnects below 3nm nodes.",
+          },
+          {
+            headline: "Foxconn drops VMware, adopts hyperconverged upstart Arcrfra for workloads including AI",
+            url: "https://www.theregister.com/virtualization/2026/07/27/foxconn-drops-vmware-adopts-hyperconverged-upstart-arcrfra-for-workloads-including-ai/5278684",
+            source: "The Register",
+            image: "https://image.theregister.com/253902.jpg?imageId=253902&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Foxconn abandons VMware for Arcrfra; AI workload infrastructure shift.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 16,
     date: "July 24, 2026",
     slug: "issue-16",

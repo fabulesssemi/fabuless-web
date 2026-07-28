@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 18,
+    date: "July 28, 2026",
+    slug: "issue-18",
+    title: "Google Burns $44.9B in One Quarter. China DUV. Memory War Intensifies.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Qualcomm's Snapdragon 8 Elite Gen 6 Pro Pricing To Alienate Customers To The Ultra-Premium Segment; MediaTek's 2nm SoC Can Capitalize With A 28% Cheaper Alternative",
+            url: "https://wccftech.com/mediatek-dimensity-9600-pro-cheaper-than-snapdragon-8-elite-gen-6-pro/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Snapdragon-8-Elite-Gen-6-Pro-and-Dimensity-9600-Pro.jpg",
+            oneliner: "MediaTek 2nm Dimensity 9600 Pro undercuts Snapdragon by 28%; N2P demand bifurcates.",
+          },
+          {
+            headline: "Leaked Radeon RX 9050 hints at the return of 4GB VRAM GPUs in 2026 — new budget RDNA 4 card also spotted in 8GB config with half the power of an RX 9060",
+            url: "https://www.tomshardware.com/pc-components/gpus/leaked-radeon-rx-9050-hints-at-the-return-of-4gb-vram-gpus-in-2026-new-budget-rdna-4-card-also-spotted-in-8gb-config-with-half-the-power-of-an-rx-9060",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/e3aZ4gaUfwqRCa2fRXdMEC-1920-80.png",
+            oneliner: "AMD RX 9050 4GB RDNA 4 targets budget segment; memory efficiency beats raw power.",
+          },
+          {
+            headline: "Ilya Sutskever's Safe Superintelligence gets access to Nvidia's Vera Rubin platform",
+            url: "https://siliconangle.com/2026/07/27/ilya-sutskevers-safe-superintelligence-gets-access-nvidias-vera-rubin-platform/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Photo-1.png",
+            oneliner: "SSI secures NVIDIA Vera Rubin compute access; frontier lab GPU allocation signals strategic alignment.",
+          },
+          {
+            headline: "AI Hosts And Sandboxes Save Intel's Datacenter CPU Cookies",
+            url: "https://www.nextplatform.com/compute/2026/07/28/ai-hosts-and-sandboxes-save-intels-datacenter-cpu-cookies/5279338",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5218918.jpg?imageId=5218918&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Intel sandboxed AI inference preserves Xeon attach in GPU-centric data centers.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung's chip workers are jumping ship to rival SK Hynix",
+            url: "https://www.technologyreview.com/2026/07/28/1140853/samsung-chip-workers-exodus-sk-hynix/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/07/chip-money.jpg?resize=1200,600",
+            oneliner: "Samsung engineers defecting to SK Hynix signals aggressive talent war in memory leadership.",
+          },
+          {
+            headline: "SK hynix Plans To Diminish CXMT's Golden Period With The Only Way It Knows; Technological Superiority, As It Wins Over Chinese Customers With LPDDR6 RAM",
+            url: "https://wccftech.com/sk-hynix-lpddr6-ram-cxmt-competition/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/SK-hynix-LPDDR6.jpg",
+            oneliner: "SK Hynix LPDDR6 ramp targets CXMT market share; China memory competition intensifies.",
+          },
+          {
+            headline: "Chinese memory maker CXMT jumps 460%+ in first day of trading",
+            url: "https://siliconangle.com/2026/07/27/chinese-memory-maker-cxmt-jumps-460-first-day-trading/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/chip-2.png",
+            oneliner: "CXMT IPO surges 466% on Shanghai exchange; China memory self-sufficiency accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Google goes cash flow negative for the first time as AI data center buildout increases capex to a staggering $44.9 billion in a single quarter — CFO warns that capex will increase in 2027 as company banks big on TPUs",
+            url: "https://www.tomshardware.com/tech-industry/big-tech/alphabet-goes-cash-flow-negative-for-the-first-time-as-ai-capex-doubles-to-44-9-billion-in-a-single-quarter",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/SJwcUNbmofFcDsiP5VBd6Y-1920-80.png",
+            oneliner: "Google's $44.9B quarterly capex spike signals sustained AI infrastructure arms race; TPU demand pressure on NVIDIA.",
+          },
+          {
+            headline: "Nvidia behind $50bn lease on Texas data centre that will use its chips",
+            url: "https://www.ft.com/content/685014e7-47dd-471b-a585-1b9b73ce5d6f?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "NVIDIA finances $50B Texas data center lease, anchoring H100/H200 demand through 2030s.",
+          },
+          {
+            headline: "Nvidia's potential new deal with OpenAI would revive a spooky tech-bubble habit, analyst warns",
+            url: "https://www.marketwatch.com/story/nvidias-potential-new-deal-with-openai-would-revive-a-spooky-tech-bubble-habit-analyst-warns-ae34ed64?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "NVIDIA-backed OpenAI data center financing echoes dot-com circular leverage concerns.",
+          },
+          {
+            headline: "Jim Cramer warns AI's circular financing frenzy echoes the dot-com bubble",
+            url: "https://www.cnbc.com/2026/07/27/jim-cramer-warns-ai-circular-financing-echoes-dot-com-bubble.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108202841-1758643560411-gettyimages-2236938634-vcg111592748341.jpeg?v=1758647792&amp;w=1920&amp;h=1080",
+            oneliner: "Analyst warns NVIDIA's capex backstopping mirors pre-2000 bubble leverage mechanics.",
+          },
+          {
+            headline: "AI stock sell-off deepens as investors dump chipmakers",
+            url: "https://www.ft.com/content/f8c03b5b-e194-4236-82c3-389b6f5dd7ae?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Kospi-led chipmaker rout; SK Hynix, Samsung memory valuations under pressure.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "'Picks and shovels' trade comes unstuck as AI hardware stocks plunge on competitive threat from China",
+            url: "https://www.marketwatch.com/story/picks-and-shovels-trade-comes-unstuck-as-ai-hardware-stocks-plunge-on-competitive-threat-from-china-41a0c2b4?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "China's DUV lithography claims trigger ASML, semiconductor capex equipment sell-off across Asia.",
+          },
+          {
+            headline: "China's reported chip breakthrough comes with some big caveats",
+            url: "https://www.cnbc.com/2026/07/28/china-chipmaking-duv-tool-asml-explained.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108291539-1776230666701-gettyimages-2267755525-SEMICON_China_2026_in_Shanghai.jpeg?v=1776230676&amp;w=1920&amp;h=1080",
+            oneliner: "China claims DUV production; ASML dominance threatened but technical hurdles remain steep.",
+          },
+          {
+            headline: "China fights back in AI spat with claim US AI companies distil Chinese models",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/28/china-fights-back-in-ai-spat-with-claim-us-ai-companies-distil-chinese-models/5279315",
+            source: "The Register",
+            image: "https://image.theregister.com/230490.jpg?imageId=230490&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "China threatens retaliation on US AI model distillation; IP/export tensions escalate.",
+          },
+          {
+            headline: "Will Purging Chinese Tech Cost Europe Its Digital Future?",
+            url: "https://www.eetimes.com/will-purging-chinese-tech-cost-europe-its-digital-future/",
+            source: "EE Times",
+            image: null,
+            oneliner: "EU Chinese telecom equipment replacement costs €46B; supply chain decoupling threatens capex.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 17,
     date: "July 27, 2026",
     slug: "issue-17",

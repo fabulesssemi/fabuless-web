@@ -60,6 +60,140 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 19,
+    date: "July 29, 2026",
+    slug: "issue-19",
+    title: "SK Hynix Crashes. Memory Glut Looms. Intel Closes RAMP-C.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Chip stocks shed more than $1 trillion as selloff hits companies powering AI boom",
+            url: "https://www.cnbc.com/2026/07/29/chip-selloff-sk-hynix-samsung-softbank.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108335411-1784129151298-Traders-Photo-20260715-KK-PRESS-013.jpg?v=1784129393&amp;w=1920&amp;h=1080",
+            oneliner: "Nvidia, SK Hynix, Samsung lead $1T chip sector selloff on AI demand uncertainty.",
+          },
+          {
+            headline: "Mac Mini Availability: Long Waits and Higher Prices",
+            url: "https://www.wired.com/story/mac-mini-availability/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a6912ed459e7618649764bc/191:100/w_1280,c_limit/Months-Later,-the-Mac-Mini-Remains-in-Desperately-Short-Supply.jpg",
+            oneliner: "Mac Mini supply crunch driven by AI chip demand and memory shortage; consumer pricing inflated.",
+          },
+          {
+            headline: "From Pilots to AI Factories: How Enterprises Are Really Scaling Agentic AI and Agent Gateways",
+            url: "https://intelligence.theregister.com/paper/view/20412",
+            source: "NextPlatform",
+            image: null,
+            oneliner: "Enterprise AI bottleneck shifts from model availability to infrastructure complexity; capex acceleration expected.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK Hynix shares tank as exponential earnings growth fails to satisfy AI-charged expectations",
+            url: "https://www.cnbc.com/2026/07/29/sk-hynix-earnings-profit-revenue-hbm-memory.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108312250-1779842485652-gettyimages-2271903082-AFP_A8KT99F.jpeg?v=1783682507&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix earnings miss triggers $1T chip selloff; HBM demand forecasts now under question.",
+          },
+          {
+            headline: "Tech rout roils markets after SK Hynix profits disappoint",
+            url: "https://www.ft.com/content/e8e3a60a-059c-45b5-bbe3-49add14fd343?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SK Hynix insists memory oversupply risk 'limited' amid market rout and margin compression.",
+          },
+          {
+            headline: "DRAM chip supply to module makers could drop by more than 70% year-on-year in 2027, says Apacer CEO",
+            url: "https://www.tomshardware.com/pc-components/ram/dram-chip-supply-to-module-makers-could-drop-by-more-than-70-percent-year-on-year-in-2027-says-apacer-ceo-demand-for-hbm-and-server-ram-continues-to-devour-manufacturing-capacity",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/82L7i84TosbQSQDKVLcj2G-1920-80.jpg",
+            oneliner: "HBM and server RAM consumption starves DIY DRAM allocations; module makers face 70% supply cut.",
+          },
+          {
+            headline: "Big Tech demanding deals that smooth out memory prices, says SK Hynix",
+            url: "https://www.theregister.com/systems/2026/07/29/big-tech-demanding-deals-that-smooth-out-memory-prices-says-sk-hynix/5280182",
+            source: "The Register",
+            image: "https://image.theregister.com/5215958.jpg?imageId=5215958&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Major cloud providers negotiate long-term memory pricing locks; SK Hynix sees sustained margins.",
+          },
+          {
+            headline: "State of play: SSD pricing one year into the AI component crisis",
+            url: "https://www.tomshardware.com/pc-components/ssds/state-of-play-ssd-pricing-one-year-into-the-ai-component-crisis-220-percent-price-increases-are-crippling-the-diy-market",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/LXmYjZpd2fneL9ZcTW3hx9-2560-80.jpg",
+            oneliner: "SSD prices up 220% YoY as NAND supply diverted to AI datacenter; DIY market crippled.",
+          },
+          {
+            headline: "From Co-Packaged Optics to Nanolasers: Photonics Moves Inward",
+            url: "https://www.eetimes.com/from-co-packaged-optics-to-nanolasers-photonics-moves-inward/",
+            source: "EE Times",
+            image: null,
+            oneliner: "CEA-Leti, Scintil Photonics advance co-packaged optics and chiplet-level optical interconnects.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Rheinmetall Q2 profit beats forecasts as revenue jumps nearly 70%",
+            url: "https://finance.yahoo.com/markets/stocks/articles/rheinmetall-posts-record-q2-revenue-104959546.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "Rheinmetall Q2 revenue +70% YoY; defense semiconductor and advanced packaging demand surge.",
+          },
+          {
+            headline: "Dow Jones Futures Fall, Oil Jumps On Iran News; Seagate, SK Hynix, KLA, Bloom Energy Are AI Earnings Movers",
+            url: "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-seagate-sk-hynix-kla-bloom-energy-earnings-fed-meeting/?src=A00220&yptr=yahoo",
+            source: "Yahoo Finance",
+            image: "https://www.investors.com/wp-content/uploads/2026/04/stock-ai-chip-adobe.jpg",
+            oneliner: "Seagate, SK Hynix, KLA earnings; geopolitical volatility pressures chip capex outlook.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "America bans imported robots due to supply chain and security risks",
+            url: "https://www.theregister.com/security/2026/07/29/america-bans-imported-robots-due-to-supply-chain-and-security-risks/5280145",
+            source: "The Register",
+            image: "https://image.theregister.com/5280168.jpg?imageId=5280168&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "FCC blacklists Chinese robots including Unitree; NVIDIA partner supply chain disrupted.",
+          },
+          {
+            headline: "US FCC Blacklists Foreign Robots on Huawei List as Surveillance Fears Grow",
+            url: "https://wccftech.com/fcc-blacklists-foreign-robots-on-huawei-list-as-surveillance-fears-grow-striking-nvidia-partner-unitree-as-well",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/05/NVIDIA-AI-Robotics-Humans-1920x1103.jpg",
+            oneliner: "FCC adds foreign robots to Huawei blacklist; NVIDIA-linked Unitree import ban tightens U.S. controls.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "PwC published reports on AI marred by AI hallucinations",
+            url: "https://www.ft.com/content/7e149ac8-2ce2-4266-8940-192f9821b33c?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "PwC's AI consulting reports contain LLM hallucinations; enterprise AI deployment quality concerns rise.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 18,
     date: "July 28, 2026",
     slug: "issue-18",

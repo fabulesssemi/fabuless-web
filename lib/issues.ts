@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 20,
+    date: "July 30, 2026",
+    slug: "issue-20",
+    title: "Samsung Soars. Meta Tanks. Microsoft Powers Through.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Microsoft jumps 9% as the AI trade splits Big Tech",
+            url: "https://www.cnbc.com/2026/07/30/microsoft-msft-meta-stock-today-earnings.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108258968-1769702404587-Untitled-2.jpg?v=1777052317&amp;w=1920&amp;h=1080",
+            oneliner: "Microsoft's strong Azure and Copilot growth diverges sharply from Meta's revenue miss and free cash flow collapse.",
+          },
+          {
+            headline: "Meta shares tumble as Zuckerberg tries to sell his vision for AI 'agents'",
+            url: "https://www.ft.com/content/06d941ed-8136-46a4-a2ec-44bea1b35c3b?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Meta's AI capex ramp and agent strategy fail to offset revenue guidance miss and investor cost concerns.",
+          },
+          {
+            headline: "Qualcomm won't be a big datacenter player anytime soon",
+            url: "https://www.theregister.com/systems/2026/07/30/qualcomm-wont-be-a-big-datacenter-player-anytime-soon/5280839",
+            source: "The Register",
+            image: "https://image.theregister.com/5249938.jpg?imageId=5249938&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Qualcomm pivots to datacenter after Apple modem business collapse, but lacks infrastructure for rapid scale.",
+          },
+          {
+            headline: "Qualcomm Isn't Worried About Losing Apple's Modem Business; CEO Proudly Claims The Company Has \"Kind Of Replaced\" The iPhone Maker With The Data Center",
+            url: "https://wccftech.com/qualcomm-replaces-apple-modem-data-center/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Qualcomm-Snapdragon-5G-modem-on-the-new-iPhone-14-Pro-and-iPhone-14-Pro-Max-2.jpg",
+            oneliner: "Qualcomm CEO signals datacenter revenue now offsets steep iPhone modem revenue cliff from Apple's in-house shift.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung delivers record-setting profits, but the shares still can't catch a break from investors.",
+            url: "https://www.marketwatch.com/story/samsung-delivers-record-setting-profits-but-the-shares-still-cant-catch-a-break-from-investors-daefa19a?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Samsung's 19x profit jump on AI memory demand masks investor skepticism over China chip threat and capex sustainability.",
+          },
+          {
+            headline: "Qualcomm and Arm see momentum in AI, but smartphone weakness weighs on both stocks",
+            url: "https://siliconangle.com/2026/07/29/qualcomm-arm-see-momentum-ai-smartphone-weakness-weighs-stocks/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Screenshot-from-2025-05-01-08-41-13.png",
+            oneliner: "Qualcomm, Arm warn of smartphone component cost inflation; memory chip prices squeeze handset supply chain.",
+          },
+          {
+            headline: "Samsung's stock rises on explosive operating profit growth",
+            url: "https://siliconangle.com/2026/07/29/samsungs-stock-rises-explosive-operating-profit-growth/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Screenshot-from-2026-01-08-09-07-08-1.png",
+            oneliner: "Samsung's 19-fold operating profit surge driven by AI-driven memory demand, signals sustained capex tailwind.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Microsoft jumps 8% as it boosts capital spending plans, citing demand",
+            url: "https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108341300-1785264972840-gettyimages-2262968972-20090101260225-99-646958.jpeg?v=1785265047&amp;w=1920&amp;h=1080",
+            oneliner: "Microsoft raises capex guidance, signals positive FCF despite AI datacenter build-out acceleration.",
+          },
+          {
+            headline: "TSMC's AI Implementation Helps 1.4nm Progress By Reducing Construction Risk And High Temperature Hazards, As Company Sets Ambitious Production Target Of Mid-2028",
+            url: "https://wccftech.com/tsmc-1-4nm-ai-construction-risk-temperature-hazards-2028-target/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/TSMC-1.4nm-2.jpg",
+            oneliner: "TSMC leverages AI to de-risk 1.4nm process node ramp, targeting 2028 production launch ahead of Samsung, Intel.",
+          },
+          {
+            headline: "Amazon finds cases of AI causing runaway spending on tech projects",
+            url: "https://www.ft.com/content/77baac40-d803-4084-94f3-a133653072cf?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Amazon discovers AI-driven budget overruns on infrastructure projects, raises capex governance risks across tech.",
+          },
+          {
+            headline: "The majority of corporate IT is now off premises for the first time",
+            url: "https://www.theregister.com/off-prem/2026/07/30/the-majority-of-corporate-it-is-now-off-premises-for-the-first-time/5280554",
+            source: "The Register",
+            image: "https://image.theregister.com/259417.jpg?imageId=259417&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Cloud migration milestone: off-premises workloads exceed on-premise for first time, accelerates datacenter chip demand.",
+          },
+          {
+            headline: "30 Georgia homes are being acquired via sale or eminent domain to expand power grid — one affected family member says it's 'for the data centers'",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/30-georgia-homes-are-being-reclaimed-via-sale-or-eminent-domain-to-expand-power-grid-one-affected-family-member-says-its-for-the-data-centers",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/KHUetaXQbsmm6z9m5g5Pne-2560-80.jpg",
+            oneliner: "Georgia power grid expansion via eminent domain targets datacenter buildout; infrastructure bottleneck drives land conflicts.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Pennsylvania town lists 43 specific demands to approve new AI data center project — developer calls local demands 'too difficult' as council slams response as 'approval by tantrum'",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/pennsylvania-town-lists-43-specific-demands-to-approve-new-ai-data-center-project-developer-calls-local-demands-too-difficult-as-council-slams-response-as-approval-by-tantrum",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "Pennsylvania datacenter approval deadlock signals regulatory friction escalating across US infrastructure expansion.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "A fundamental flaw leaves LLMs strikingly vulnerable to attack",
+            url: "https://www.technologyreview.com/2026/07/30/1140927/a-fundamental-flaw-leaves-llms-vulnerable-to-attack/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/07/chain-link.jpg?resize=1200,600",
+            oneliner: "Researchers prove LLMs structurally vulnerable to hacks; raises security compliance burden for AI chip deployments.",
+          },
+          {
+            headline: "Indian Startup Vimag Labs Develops Wirelessly Excited Motor Without Rare-Earth Magnets",
+            url: "https://www.eetimes.com/indian-startup-vimag-labs-develops-wirelessly-excited-motor-without-rare-earth-magnets/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Vimag Labs eliminates rare-earth magnets from EV motors; reshapes semiconductor supply chain for automotive chips.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 19,
     date: "July 29, 2026",
     slug: "issue-19",

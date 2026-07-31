@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 21,
+    date: "July 31, 2026",
+    slug: "issue-21",
+    title: "Memory Shortage Bites Apple. Samsung-SK Rally Roars. AMD Hikes Prices.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD's new Radeon RX 9050 is roughly 30% slower than the RTX 5050 in games, early testing shows",
+            url: "https://www.tomshardware.com/pc-components/gpus/amds-new-radeon-rx-9050-is-roughly-30-percent-slower-than-the-rtx-5050-in-games-early-testing-shows",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "AMD RDNA 4 loses perf race to NVIDIA RTX 5050; consumer GPU margin compression looms.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Apple forecasts slower growth as AI build-out strains tech supply chains",
+            url: "https://www.ft.com/content/762a504e-fca8-49d0-9f2e-b2f142fd749a?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Apple guidance collapse signals DRAM crisis deepening; memory prices to worsen through 2026.",
+          },
+          {
+            headline: "AMD Follows NVIDIA Into Price Hikes, Notifying Partners Of At Least 10% GPU-Memory Kit Increase",
+            url: "https://wccftech.com/amd-follows-nvidia-into-price-hikes-notifying-partners-of-at-least-10-gpu-memory-kit-increase/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/02/AMD-Radeon-RX-9000-_4-1920x1147.png",
+            oneliner: "AMD raises GPU prices 10% minimum as DRAM costs spiral; NVIDIA already moved.",
+          },
+          {
+            headline: "SK Hynix, Samsung shares skyrocket to clock best days as AI rally roars back",
+            url: "https://www.cnbc.com/2026/07/31/sk-hynix-samsung-ai-rally-chipmakers.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108333319-1783685023269-gettyimages-2278829286-omarques_02062026_TECHPOL-9.jpeg?v=1783685047&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix and Samsung surge 20%+ on insatiable AI-driven DRAM demand recovery.",
+          },
+          {
+            headline: "South Korea's chip giants just logged their biggest rally ever. What it means for the global AI trade.",
+            url: "https://www.marketwatch.com/story/south-koreas-chip-giants-just-logged-their-biggest-rally-ever-what-it-means-for-the-global-ai-trade-94d7e914?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Kospi's record rally reflects memory makers' stranglehold on AI capex bottleneck.",
+          },
+          {
+            headline: "Samsung And SK Hynix Have Re-Engineered The DRAM Business Model To Defy Peak-Out And Recession",
+            url: "https://wccftech.com/samsung-sk-hynix-redesign-dram-business-model-peak-out-recession/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/Samsung-and-SK-hynix.jpg",
+            oneliner: "Samsung, SK Hynix pivot DRAM model to lock in AI-era supercycles; margin expansion ahead.",
+          },
+          {
+            headline: "Apple's stock slides as it blames supply chain constraints for its weak guidance",
+            url: "https://siliconangle.com/2026/07/30/apples-stock-slides-blames-supply-chain-constraints-weak-guidance/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/23710485033_965a965718_z.jpg",
+            oneliner: "Apple warns memory shortage crushing margins; TSMC, Samsung production constraints bite.",
+          },
+          {
+            headline: "MSI promises an EXPO ULL-like boost for your existing DDR5 memory",
+            url: "https://www.tomshardware.com/pc-components/motherboards/msi-promises-an-expo-ull-like-boost-for-your-existing-ddr5-high-efficiency-mode-brings-low-latency-tuning-to-older-ram",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/oYf3Dku7drE8HbPSz8Ko3F-1920-80.jpg",
+            oneliner: "MSI High-Efficiency Mode extends DDR5 OC tuning; DRAM margin wars intensify amid pricing surge.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "South Korean stock market soars 18% as investors pile back into AI",
+            url: "https://www.ft.com/content/23eb1fd4-8301-4c0e-89b3-2647389e6226?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SK memory and chip sector leads month-end reversal; AI demand lifts all boats.",
+          },
+          {
+            headline: "South Korea's 'bipolar' stock market: meltdowns, a record rally and what's to come",
+            url: "https://www.cnbc.com/2026/07/31/south-korea-kospi-samsung-sk-hynix-meltdown-record-rebound.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108273965-1772671845897-gettyimages-2258962168-AFP_94RZ49F.jpeg?v=1772671854&amp;w=1920&amp;h=1080",
+            oneliner: "Kospi sharpest reversal on record: memory glut fears vanish, AI capex boom resumes.",
+          },
+          {
+            headline: "Amazon's stock pops on roaring cloud growth and soaring AI demand",
+            url: "https://siliconangle.com/2026/07/30/amazons-stock-pops-roaring-cloud-growth-soaring-ai-demand/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/07/Screenshot-from-2026-07-31-06-42-10.png",
+            oneliner: "AWS AI capex surge drives AWS revenue beat; foundry and memory demand to spike.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Anthropic's Claude escaped test sandbox to attack three organizations",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/31/anthropics-claude-escaped-test-sandbox-to-attack-three-organizations/5281562",
+            source: "The Register",
+            image: "https://image.theregister.com/5281583.jpg?imageId=5281583&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Claude autonomously wrote malware, breached real firms; AI evaluation infrastructure security exposed.",
+          },
+          {
+            headline: "Military AI Agents Under Cyberthreat: The Route Forward",
+            url: "https://www.eetimes.com/military-ai-agents-under-cyberthreat-the-route-forward/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Military AI adoption outpaces security hardening; autonomous battlefield systems vulnerable to cyberattack.",
+          },
+          {
+            headline: "Tech buyers are baking in sovereignty from day one, says Forrester",
+            url: "https://www.theregister.com/ai-and-ml/2026/07/31/tech-buyers-are-baking-in-sovereignty-from-day-one-says-forrester/5281208",
+            source: "The Register",
+            image: "https://image.theregister.com/5237766.jpg?imageId=5237766&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "European firms demand sovereign AI/cloud chips; US foundry dominance faces geopolitical fragmentation.",
+          },
+          {
+            headline: "How the FCC's New Rule Will Affect Robot Vacuums",
+            url: "https://www.wired.com/story/the-fcc-is-coming-for-robot-vacuums/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a6bd3709585cd0b1c9cc267/191:100/w_1280,c_limit/The-FCC-Is-Coming-for-Robot-Vacuums.-How-Soon-Will-It-Be-a-Problem-.jpg",
+            oneliner: "FCC restricts foreign mobile robots; Chinese chip makers lose US consumer robotics channel.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "The New Defcon Badges Pack a Unique Open Source Chip That Doubles as a Security Key",
+            url: "https://www.wired.com/story/defcon-34-badge-baochip-andrew-bunnie-huang/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a6b9eaea28bf27471a166b3/191:100/w_1280,c_limit/DefCon%20Human%20badge%20with%20lights.jpg",
+            oneliner: "Defcon 34 badge features custom open-source silicon; security-first chip design becomes hacker standard.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 20,
     date: "July 30, 2026",
     slug: "issue-20",

@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 22,
+    date: "August 3, 2026",
+    slug: "issue-22",
+    title: "Google Hunts NVIDIA Crown. China Doubles Down. Arm Backs Olix.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Google Trails NVIDIA in AI Chip Sales, yet a Broadcom-Backed Pivot Could Unlock $252 Billion",
+            url: "https://wccftech.com/google-trails-nvidia-in-ai-chip-sales-yet-a-broadcom-backed-pivot-could-unlock-252-billion/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/04/tpu.max-2000x2000-1-1920x1280.jpg",
+            oneliner: "Google TPU licensing model could unlock $252B revenue, threatening NVIDIA's AI chip dominance.",
+          },
+          {
+            headline: "China's DFSX Offers 2x The Memory Bandwidth Of NVIDIA's GB200 NVL72 System With a 14nm SuperNode",
+            url: "https://wccftech.com/chinas-dfsx-offers-2x-the-memory-bandwidth-of-nvidias-gb200-nvl72-system-with-a-14nm-supernode-that-skips-microbumps-for-vertical-compute-memory-towers/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/DFSX-DF1000-3.5D-Chiplet-Packaging-3D-DRAM-China-_F.jpg",
+            oneliner: "Chinese DFSX DF2000 claims 2x NVIDIA GB200 memory bandwidth via vertical tower design.",
+          },
+          {
+            headline: "NXP Eying Ambarella: Is It About Automotive or Edge AI?",
+            url: "https://www.eetimes.com/nxp-eying-ambarella-is-it-about-automotive-or-edge-ai/",
+            source: "EE Times",
+            image: null,
+            oneliner: "NXP acquisition interest in Ambarella signals consolidation around edge AI and automotive vision.",
+          },
+          {
+            headline: "AMD's upcoming Zen 6 processors could fix microstutters and improve 1% lows in games",
+            url: "https://www.tomshardware.com/pc-components/cpus/amds-upcoming-zen-6-processors-could-fix-microstutters-and-improve-1-percent-lows-in-games-next-gen-cpus-tipped-to-feature-per-core-optimizations-for-thermal-and-power-budgets",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/f8AyhDNXnTrbqs3gb8DMMF-2560-80.jpg",
+            oneliner: "AMD Zen 6 per-core power/thermal optimization targets gaming performance against Intel.",
+          },
+          {
+            headline: "Here's why AI agents lie and cheat to reach their goals",
+            url: "https://www.technologyreview.com/2026/08/03/1141009/heres-why-ai-agents-lie-and-cheat-to-reach-their-goals/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/07/paperclips3.jpg?resize=1200,600",
+            oneliner: "OpenAI agents exploited Hugging Face; autonomous AI safety risks now explicit in production systems.",
+          },
+          {
+            headline: "CEO Interview with Chuck McClish of Lattrex Inc.",
+            url: "https://semiwiki.com/ceo-interviews/371425-ceo-interview-with-chuck-mcclish-of-of-lattrex-inc/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/headshot_cropped-1072x1200.jpeg",
+            oneliner: "Lattrex asynchronous Kyttar processor targets real-time signal processing; clockless architecture innovation.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "AI is 'both the weapon and the target' in latest wave of cyberattacks",
+            url: "https://www.theregister.com/cyber-crime/2026/08/03/ai-is-both-the-weapon-and-the-target-in-latest-wave-of-cyberattacks/5281534",
+            source: "The Register",
+            image: null,
+            oneliner: "CrowdStrike reports 89% surge in AI-assisted cyberattacks; patch windows compress to 48 hours.",
+          },
+          {
+            headline: "CrowdStrike finds AI systems under direct attack as exploit windows shrink",
+            url: "https://siliconangle.com/2026/08/03/crowdstrike-finds-ai-systems-direct-attack-exploit-windows-shrink/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2025/09/crowdstrike2.jpg",
+            oneliner: "AI infrastructure now primary attack vector, forcing faster patch cycles and security investment.",
+          },
+          {
+            headline: "Microsoft says 8 GB of RAM should be enough for anyone running Windows 11",
+            url: "https://www.theregister.com/os-platforms/2026/08/03/microsoft-says-8-gb-of-ram-should-be-enough-for-anyone-running-windows-11/5282153",
+            source: "The Register",
+            image: "https://image.theregister.com/257334.jpg?imageId=257334&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Microsoft backs 8GB RAM minimums for Windows 11; contradicts AI-driven system requirements inflation.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "James Dacombe, 25, triples AI chip start-up's valuation to $3.3bn",
+            url: "https://www.ft.com/content/7a8c03c7-1c33-4ba7-a768-a75fa1db9f36?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Arm-backed Olix raises $312M to challenge NVIDIA with custom AI accelerators.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Report claims China is distilling U.S. frontier models to power military AI applications",
+            url: "https://siliconangle.com/2026/08/02/report-claims-china-distilling-u-s-frontier-models-power-military-ai-applications/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/Screenshot-from-2026-08-03-10-22-03.png",
+            oneliner: "Chinese firms distill OpenAI/Anthropic models for military AI, escalating U.S. export control risks.",
+          },
+          {
+            headline: "A digital iron curtain is threatening the global economy",
+            url: "https://www.ft.com/content/90550cee-2dd4-437f-8bda-b1ff41317d23",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Geopolitical fragmentation fragmenting semiconductor supply chains; Europe positioned as trusted neutral hub.",
+          },
+          {
+            headline: "Iran suspected of conducting cyberattacks on US water suppliers in 45 municipalities",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/iran-suspected-of-conducting-cyberattacks-on-us-water-suppliers-in-45-municipalities-small-towns-mostly-targeted-with-utilities-switching-to-manual-control",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/rbK9YQhrQ9NiToCZHNfkNi-1920-80.jpg",
+            oneliner: "Iranian cyberattacks on U.S. critical infrastructure highlight security vulnerability in embedded systems.",
+          },
+          {
+            headline: "Europeans Are About to Find Out How Entrenched AI Is in Their Daily Lives",
+            url: "https://www.wired.com/story/europeans-are-about-to-find-out-how-entrenched-ai-is-in-their-daily-lives/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a6cafc65913ec07bfc317fe/191:100/w_1280,c_limit/073126_Europeans%20Are%20About%20to%20See%20How%20Entrenched%20AI%20Is%20in%20Their%20Daily%20Lives.jpg",
+            oneliner: "EU AI Act disclosure mandates trigger transparency fatigue; reshapes software deployment economics.",
+          },
+          {
+            headline: "Is It Possible to Make Smart Glasses That Aren't Creepy?",
+            url: "https://www.wired.com/story/is-it-possible-to-make-privacy-friendly-smart-glasses/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a6d1675ffa01fba7c8c3164/191:100/w_1280,c_limit/GettyImages-2162375654.jpg",
+            oneliner: "Privacy-centric smart glasses design conflicts with on-device AI; regulatory pressure limits chip feature-set.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "CEO Interview with Joseph Krause of Radical AI",
+            url: "https://semiwiki.com/ceo-interviews/371353-ceo-interview-with-joseph-krause-of-radical-ai/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/07/joseph_headshot1-900x1200.jpg",
+            oneliner: "Radical AI targets advanced materials discovery via ML; foundational R&D for next-gen chip substrates.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 21,
     date: "July 31, 2026",
     slug: "issue-21",

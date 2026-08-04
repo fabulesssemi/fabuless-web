@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 23,
+    date: "August 4, 2026",
+    slug: "issue-23",
+    title: "Palantir Surges. China Challenges. Memory Shifts.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Palantir soars 12% on blowout quarter, with U.S. commercial revenue soaring nearly 150%",
+            url: "https://www.cnbc.com/2026/08/03/palantir-pltr-earnings-q2-2026.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108344214-1785797157779-gettyimages-2287893299-_jjj6934_o2k2jvxn.jpeg?v=1785797252&amp;w=1920&amp;h=1080",
+            oneliner: "Palantir AI software demand accelerates; US commercial revenue surges 150% YoY.",
+          },
+          {
+            headline: "Palantir forecasts greater demand from US groups for its AI software",
+            url: "https://www.ft.com/content/3240e7c4-ba29-4ff3-83e5-cf2b3a5ff0ca?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Palantir US sales climb 23%; raised guidance signals sustained AI infrastructure demand.",
+          },
+          {
+            headline: "Palantir jumps 16% on 'otherworldly' commercial revenue — here's what's driving the demand",
+            url: "https://www.cnbc.com/2026/08/04/palantir-2q-earnings-ai-sovereign-tools.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108344215-1785797158413-gettyimages-2287893327-_jjj6729_opvcsegx.jpeg?v=1785797252&amp;w=1920&amp;h=1080",
+            oneliner: "Karp's 'sovereign AI' thesis displaces cloud vendors; customers reject AI lab dependency.",
+          },
+          {
+            headline: "Why Shouldn't Amazon Spinoff AWS And Annapurna Labs?",
+            url: "https://www.nextplatform.com/cloud/2026/08/04/why-shouldnt-amazon-spinoff-aws-and-annapurna-labs/5282586",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/158969.jpg?imageId=158969&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AWS Annapurna Labs chip strategy questions; structural separation debate reignites.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Three major PC makers now using Chinese memory to fight 'unprecedented memory shortage,' report claims",
+            url: "https://www.tomshardware.com/tech-industry/three-major-pc-makers-now-using-chinese-memory-to-fight-unprecedented-memory-shortage-report-claims-hp-asus-and-acer-using-small-amounts-of-cxmt-chips-in-limited-number-of-notebooks-for-non-us-market",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/2eA5L64mkxS8pA9DVYgMcD-2000-80.jpg",
+            oneliner: "HP, Asus, Acer adopt CXMT Chinese memory; supply chain diversifies away from Taiwan.",
+          },
+          {
+            headline: "Renesas Tackles Memory Bottleneck with MRDIMM Update",
+            url: "https://www.eetimes.com/renesas-tackles-memory-bottleneck-with-mrdimm-update/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Renesas Gen 3 DDR5 MRDIMM reaches 16,000 MT/s; eases AI memory bandwidth chokepoint.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Inside Google's $200bn Wall Street finance machine for Anthropic",
+            url: "https://www.ft.com/content/549f2e23-5aa2-49c7-9ea6-a9784ab7087c?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Google funds Anthropic via private credit, chip leases, datacenter guarantees; restructures AI capex.",
+          },
+          {
+            headline: "Netflix co-founder backs $312M round for optical inference appliance maker Olix",
+            url: "https://siliconangle.com/2026/08/03/netflix-co-founder-backs-312m-round-optical-inference-appliance-maker-olix/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/unsplash1.png",
+            oneliner: "Olix optical inference funding led by Reed Hastings, Arm; challenges GPU inference market.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "China turns up the heat with open model blitz as US model makers panic",
+            url: "https://www.theregister.com/ai-and-ml/2026/08/03/china-turns-up-the-heat-with-open-model-blitz-as-us-model-makers-panic/5282526",
+            source: "The Register",
+            image: "https://image.theregister.com/249692.jpg?imageId=249692&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Alibaba Qwen Max open release; DeepSeek V4-Flash undercuts US models on cost, capability.",
+          },
+          {
+            headline: "Alibaba debuts Qwen3.8-Max model with 2.4T parameters",
+            url: "https://siliconangle.com/2026/08/03/alibaba-debuts-qwen3-8-max-model-2-4t-parameters/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/Image.png",
+            oneliner: "Alibaba Qwen3.8-Max reaches 2.4T parameters; challenges frontier US models on open market.",
+          },
+          {
+            headline: "China claims global chip leadership thanks to new legal definition of 'integrated circuits'",
+            url: "https://www.theregister.com/legal/2026/08/04/china-claims-global-chip-leadership-thanks-to-new-legal-definition-of-integrated-circuits/5282563",
+            source: "The Register",
+            image: "https://image.theregister.com/239455.jpg?imageId=239455&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "China redefines IC rules to protect domestic designs; tightens penalties for copycat infringement.",
+          },
+          {
+            headline: "China cracks down on copycat chip designs with new regulations and penalties",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/china-cracks-down-on-copycat-chip-designs-with-new-regulations-and-penalties-new-guidelines-enforce-originality-and-independent-development",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/vYZ7Ecame3RzGytFMYbDAP-1920-80.jpg",
+            oneliner: "China enforces originality in chip layouts; strengthens IP protections for domestic fabs.",
+          },
+          {
+            headline: "Protecting Military AI Agents From Cyberthreats",
+            url: "https://www.eetimes.com/protecting-military-ai-agents-from-cyberthreats/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Military AI security requires zero-trust architecture; govtech supply chain hardens.",
+          },
+          {
+            headline: "Trump's AI protectionism has come for robotics",
+            url: "https://www.technologyreview.com/2026/08/03/1141056/trumps-ai-protectionism-has-come-for-robotics/",
+            source: "MIT Technology Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/08/AP26206077599738.jpg?resize=1200,600",
+            oneliner: "Trump tariffs target robotics AI; domestic chip content mandates reshape supply.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Executive Interview with James Huang of AlChip",
+            url: "https://semiwiki.com/semiconductor-services/alchip/371680-executive-interview-with-james-huang-of-alchip/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/08/James-Huang-900x1200.jpg",
+            oneliner: "AlChip multi-die packaging advances for AI ASIC; chiplet strategy accelerates.",
+          },
+          {
+            headline: "Brewer Science Acquires Heraeus Epurio's Semiconductor Chemicals Business",
+            url: "https://www.semiconductor-digest.com/brewer-science-acquires-heraeus-epurios-semiconductor-chemicals-business/?utm_source=rss&utm_medium=rss&utm_campaign=brewer-science-acquires-heraeus-epurios-semiconductor-chemicals-business",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Brewer Science acquires Heraeus Epurio chemicals; vertical integration strengthens purity control.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 22,
     date: "August 3, 2026",
     slug: "issue-22",

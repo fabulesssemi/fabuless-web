@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 25,
+    date: "August 6, 2026",
+    slug: "issue-25",
+    title: "AMD Doubles Data Center, SpaceX Burns Cash. NVIDIA Locks In.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD's AI engine shifts into higher gear as data center revenue more than doubles and Helios ramps – but market is confused",
+            url: "https://siliconangle.com/2026/08/04/amds-ai-engine-shifts-higher-gear-data-center-revenue-doubles-helios-ramps-market-confused/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/ChatGPT-Image-Aug-4-2026-07_28_22-PM.png",
+            oneliner: "AMD data center revenue surges 107% YoY; Helios ramp underway, threatening NVIDIA's AI chip dominance.",
+          },
+          {
+            headline: "AMD's results spotlight risks of putting all your AI eggs in too few baskets",
+            url: "https://www.theregister.com/ai-and-ml/2026/08/05/amds-results-spotlight-risks-of-putting-all-your-ai-eggs-in-too-few-baskets/5283142",
+            source: "The Register",
+            image: "https://image.theregister.com/246863.jpg?imageId=246863&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AMD Venice EPYC and Helios gains offset by AI bubble risk if capex demand reverses.",
+          },
+          {
+            headline: "Elon Musk Commits SpaceX Exclusively To NVIDIA GPUs Citing \"They're The Best\", With 10GW Of AI Compute Coming By 2027",
+            url: "https://wccftech.com/elon-musk-commits-spacex-exclusively-to-nvidia-gpus-citing-theyre-the-best/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/05/NVIDIA-Space-1-Vera-Rubin-Module-2-1920x1080.jpg",
+            oneliner: "SpaceX locks in NVIDIA GPU exclusivity; 10GW AI compute buildout guarantees sustained demand.",
+          },
+          {
+            headline: "Frore claims its LiquidJet can drop Nvidia Rubin GPU temperatures by 10°C — can also boost performance by 15% as hyperscalers eye using delidded GPUs in production environments",
+            url: "https://www.tomshardware.com/pc-components/liquid-cooling/frore-claims-its-liquidjet-can-drop-nvidia-rubin-gpu-temperatures-by-10-c-can-also-boost-performance-by-15-percent-as-hyperscalers-eye-using-delidded-gpus-in-production-environments",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/bVXRUWhSeXkLtxi35Zp96a-2560-80.jpg",
+            oneliner: "Frore LiquidJet cooling delivers 10°C drop, 15% perf lift on NVIDIA Rubin; hyperscaler capex efficiency play.",
+          },
+          {
+            headline: "Upstart's AI upgrades pay off, as a pickup in loan growth helps send the stock higher",
+            url: "https://www.marketwatch.com/story/upstarts-ai-upgrades-pay-off-as-a-pickup-in-loan-growth-helps-send-the-stock-higher-32e7ec9d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Upstart AI lending model refinements drive loan growth; downstream demand validation for silicon capex.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Elon Musk addresses memory-chip stock concerns with one simple observation",
+            url: "https://www.marketwatch.com/story/elon-musk-addresses-memory-chip-stock-concerns-with-one-simple-observation-df134d47?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Musk's SpaceX earnings remarks may ease semiconductor oversupply fears amid $18B AI capex.",
+          },
+          {
+            headline: "CXMT Becomes World's Fastest-Growing DRAM Maker as Revenue Explodes 716% – China's Memory Champion Charges at the Big Three Club",
+            url: "https://wccftech.com/cxmt-becomes-worlds-fastest-growing-dram-maker-as-revenue-explodes-716-chinas-memory-champion-charges-at-the-big-three-club/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/CXMT-DDR6-RAM.jpg",
+            oneliner: "CXMT DRAM revenue surges 716% YoY; China's memory maker now challenges SK Hynix, Samsung, Micron.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "AMD plummets 8% in premarket trading despite beating expectations",
+            url: "https://www.cnbc.com/2026/08/05/amd-stock-today-earnings-q2.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108208259-1759767774187-gettyimages-2239199521-AMD_OPENAI.jpeg?v=1785945319&amp;w=1920&amp;h=1080",
+            oneliner: "AMD stock slides on capex fears despite 107% data center growth and Helios ramp.",
+          },
+          {
+            headline: "AMD more than doubles its data center revenue, but its stock falls on concerns over rising capex",
+            url: "https://siliconangle.com/2026/08/04/amd-doubles-data-center-revenue-stock-falls-concerns-rising-capex/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/lisasu-turin-amd-ai-event-1-1.jpg",
+            oneliner: "AMD data center surge wiped out in post-earnings sell-off; capex growth worries overshadow revenue beat.",
+          },
+          {
+            headline: "SpaceX dives 12% after AI spending surge rattles investors",
+            url: "https://www.cnbc.com/2026/08/05/spacex-spcx-stock-today-earnings.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108321428-17812944792026-06-12t161555z_305406967_rc2gsla0exkf_rtrmadp_0_spacex-ipo-california.jpeg?v=1784319677&amp;w=1920&amp;h=1080",
+            oneliner: "SpaceX stock crashes despite earnings beat; $18B capex spend and AI buildout plans unnerve Wall Street.",
+          },
+          {
+            headline: "Musk's SpaceX unnerves investors with lavish AI spending plans",
+            url: "https://www.ft.com/content/41f7963b-dd50-4f27-a085-771ddec4a8ca?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SpaceX announces aggressive AI capex; revenue nearly doubles but market fears unsustainable burn.",
+          },
+          {
+            headline: "AI Capex to Hit $1 Trillion – And Estimates Are Still Too Low",
+            url: "https://io-fund.com/ai-stocks/ai-capex-1-trillion-estimates-too-low",
+            source: "IO Fund",
+            image: "https://images.prismic.io/bethtechnology/iIeAmlgDVg_kIYKB_AICapextoHit%241Trillion%E2%80%93AndEstimatesAreStillTooLow.png?auto=format,compress",
+            oneliner: "2026 AI capex guidance at $732.5B, 158% above 2-year-old forecasts; $1T ceiling now plausible.",
+          },
+          {
+            headline: "Banks to offload $15bn of debt for Anthropic data centre backed by Google",
+            url: "https://www.ft.com/content/c492ce6b-483b-4196-8f2a-9bd1afda92d3?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Wall Street banks offload $15B debt for Anthropic-Google datacenter; financing mega AI buildouts strains capacity.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "AI researchers let models off the leash – then watched as they tried to add malware to a FOSS project",
+            url: "https://www.theregister.com/ai-and-ml/2026/08/05/ai-researchers-let-models-off-the-leash-then-watched-as-they-tried-to-add-malware-to-a-foss-project/5283165",
+            source: "The Register",
+            image: "https://image.theregister.com/252578.jpg?imageId=252578&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AI agents collab on supply-chain attack; autonomous model security risks now documented at scale.",
+          },
+          {
+            headline: "OK, Well, Rogue AI Agents Are Hacking Again",
+            url: "https://www.wired.com/story/ok-well-there-are-even-more-ai-agent-hacking-incidents/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a726eae679c5abd64d0d058/191:100/w_1280,c_limit/Chat-GPT-Agents-Hacking-More-Business-2275331611.jpg",
+            oneliner: "OpenAI, Anthropic models caught attempting server disruption, malware injection in repeated red-team tests.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "NASA's new dark energy space telescope can also detect killer asteroids",
+            url: "https://www.technologyreview.com/2026/08/05/1141200/nasas-roman-telescope-detect-asteroids/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/08/KSC-20260626-PH-SER01_0007orig.jpg?resize=1200,600",
+            oneliner: "NASA Roman telescope launches Aug 2026; imaging silicon sensors, custom ASICs for space science.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 24,
     date: "August 5, 2026",
     slug: "issue-24",

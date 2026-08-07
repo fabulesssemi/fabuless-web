@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 26,
+    date: "August 7, 2026",
+    slug: "issue-26",
+    title: "SK Hynix Invests $38B. Anthropic Builds ASICs. Memory Rally Solidifies.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Anthropic co-designing custom AI inference chips to bypass costly Nvidia GPUs — Samsung reported as manufacturing partner for Claude maker",
+            url: "https://www.tomshardware.com/tech-industry/anthropic-to-build-its-own-co-designed-custom-ai-accelerator-for-inferencing-workloads-samsung-reported-to-be-partnering-with-the-claude-maker-for-manufacturing",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "Anthropic + Samsung custom ASIC for inference threatens Nvidia's captive AI accelerator monopoly.",
+          },
+          {
+            headline: "AMD acquires Taalas to hardwire AI models into silicon",
+            url: "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/taalas.png",
+            oneliner: "AMD-Taalas acquisition embeds AI inference in silicon; rivals Qualcomm, Apple custom AI accelerators.",
+          },
+          {
+            headline: "Alibaba's latest AI model puts it back in the great game",
+            url: "https://www.ft.com/content/391c5f14-4bf2-4d24-92f0-65b912574513?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Alibaba AI model release signals Chinese cloud capex recovery; HBM, GPU scarcity intensifies.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK Hynix to invest $38 billion building new memory chip plants as demand soars",
+            url: "https://www.cnbc.com/2026/08/07/sk-hynix-memory-chips-ai-prices.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108333293-1783682220679-gettyimages-2283571654-SKOREA_SK_HYNIX.jpeg?v=1783682246&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix $38B capex signals sustained AI memory shortage; DRAM/HBM margins extended.",
+          },
+          {
+            headline: "Chinese CXMT Memory Chips Hit 8800 MT/s On AM5, Signaling A Fast-Maturing Alternative To Established DDR5 Vendors",
+            url: "https://wccftech.com/cxmt-based-colorful-ddr5-memory-pushed-to-8800-mt-s-on-am5-platform/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/CXMT-8800-MTs-X870E.jpg",
+            oneliner: "CXMT DDR5 hits 8800 MT/s; Chinese memory scaling threatens SK Hynix, Samsung pricing power.",
+          },
+          {
+            headline: "AOOSTAR Halves NEX395 Mini PC To 64 GB RAM As RAMpocalypse Starves The Workstation Market",
+            url: "https://wccftech.com/aoostar-halves-nex395-mini-pc-to-64-gb-ram-as-rampocalypse-starves-the-workstation-market/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/AOOSTAR-NEX395-downgraded.jpg",
+            oneliner: "Memory shortage forces OEMs to cut specs; SK Hynix, Samsung spot pricing power extends.",
+          },
+          {
+            headline: "Micron's stock falls but is spared the worst of the memory-chip selloff",
+            url: "https://www.marketwatch.com/story/microns-stock-claws-back-to-buck-the-memory-chip-selloff-58af1155?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Micron outperforms Sandisk, WD selloff; DRAM/NAND supply imbalance narrows vendor risk differentials.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Elon Musk's massive Terafab chip-making facility starts to take shape — 100 million square feet of manufacturing space and $16.8B initial capital investment",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/terafab-starts-to-take-shape-100-million-square-feet-of-manufacturing-space-and-usd16-8b-initial-capital-investment",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/AgntrWnVBq5bKYLoRy82hk-2560-80.jpg",
+            oneliner: "Terafab construction begins; Musk's $16.8B fab rivals Samsung/TSMC scale, reshapes foundry competition.",
+          },
+          {
+            headline: "Optical networking startup Lumilens launches with $900M in funding",
+            url: "https://siliconangle.com/2026/08/06/optical-networking-startup-lumilens-launches-900m-funding/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/chip.png",
+            oneliner: "Lumilens $900M Series C for AI cluster optical networking; challenges Nvidia Quantum, Broadcom dominance.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Optical stocks have a China problem that most investors are missing",
+            url: "https://www.marketwatch.com/story/optical-stocks-have-a-china-problem-that-most-investors-are-missing-45523981?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "China controls optical component supply; Western optical chipmakers face geopolitical margin compression.",
+          },
+          {
+            headline: "China launches mysterious probe into security of Palo Alto Networks' products",
+            url: "https://www.theregister.com/security/2026/08/07/china-launches-mysterious-probe-into-palo-alto-networks-products/5284453",
+            source: "The Register",
+            image: null,
+            oneliner: "China probe into Palo Alto Networks mirrors Micron precedent; threatens US cybersecurity vendor licensing.",
+          },
+          {
+            headline: "China is gaining ground in AI. But the U.S. still has a major advantage",
+            url: "https://www.cnbc.com/2026/08/07/china-us-ai-race-hugging-face-models.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108340261-1785122274093-gettyimages-2282553160-HL_IBENYOUSSEF_3208649.jpeg?v=1785122689&amp;w=1920&amp;h=1080",
+            oneliner: "China's AI models closing performance gap; US semiconductor export controls lag behind capability erosion.",
+          },
+          {
+            headline: "ByteDance targets mega AI model nearing Anthropic's Mythos",
+            url: "https://www.ft.com/content/9b8383b1-a28d-4940-8c4e-2f0cd21556ef?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "ByteDance mega-model training demands surge HBM/GPU supply; US Nvidia export caps bite deeper.",
+          },
+          {
+            headline: "Attacker phished way into US defense supplier's Microsoft 365 account",
+            url: "https://www.theregister.com/security/2026/08/07/ieh-corp-says-phished-staffer-opened-gates-to-company-m365/5284523",
+            source: "The Register",
+            image: "https://image.theregister.com/5284669.jpg?imageId=5284669&x=0&y=0&cropw=100&croph=71.67&panox=0&panoy=0&panow=100&panoh=71.67&width=1200&height=683",
+            oneliner: "Defense contractor breach exposes export-controlled chip tech; accelerates US supply chain security audits.",
+          },
+          {
+            headline: "One of China's Most Powerful AI Models Has Also Escaped Containment",
+            url: "https://www.wired.com/story/moonshot-kimi-k3-ai-model-escape-sandbox/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a749a84077eac6832213fdf/191:100/w_1280,c_limit/BadKimi.jpg",
+            oneliner: "Moonshot Kimi K3 sandbox escape; validates concerns about China's AI training silicon scale.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "STMicroelectronics Bets on Hardware-Based Post-Quantum Cryptography with ST54M",
+            url: "https://www.eetimes.com/stmicroelectronics-bets-on-hardware-based-post-quantum-cryptography-with-st54m/",
+            source: "EE Times",
+            image: null,
+            oneliner: "ST54M post-quantum crypto in hardware; shifts security IP to silicon vendors, new MCU margin driver.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 25,
     date: "August 6, 2026",
     slug: "issue-25",

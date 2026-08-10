@@ -60,6 +60,121 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 27,
+    date: "August 10, 2026",
+    slug: "issue-27",
+    title: "TSMC Surges 45%. Apple Struggles for DRAM. AI Capex Roars.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "World's biggest chipmaker TSMC's sales surge 45% amid buoyant AI demand",
+            url: "https://www.cnbc.com/2026/08/10/tsmc-revenue-surge-ai-chip-big-tech.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108292490-1776347906856-gettyimages-2253792580-US_STOCKS.jpeg?v=1777030120&amp;w=1920&amp;h=1080",
+            oneliner: "TSMC revenue jumps 45% YoY; confirms sustained AI foundry demand from NVIDIA, Google.",
+          },
+          {
+            headline: "TSMC July 2026 revenue jumps 44.7% on AI chip demand",
+            url: "https://finance.yahoo.com/technology/ai/articles/tsmc-july-2026-revenue-jumps-110802277.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "TSMC July revenue +44.7% YoY; backlog strength signals sustained AI accelerator orders.",
+          },
+          {
+            headline: "Mark Zuckerberg attacks 'closed' AI rivals as Meta returns to open models",
+            url: "https://www.ft.com/content/4e3957f8-ea7c-4c46-a3de-cdce8e526878?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Zuckerberg pivots Meta to open-source AI; competitive pressure on OpenAI/Anthropic chip demand.",
+          },
+          {
+            headline: "Mark Zuckerberg takes on the AI doomers in 6,500-word essay",
+            url: "https://www.marketwatch.com/story/mark-zuckerberg-takes-on-the-ai-doomers-in-6-500-word-essay-fd581f3b?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Meta CEO defends AI optimism; signals continued foundry demand from hyperscalers despite skepticism.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "CXMT's Capacity Woes Likely Mean Its Partnership With Apple Won't Blossom To The Same Heights As Korean Rivals; DRAM May Be Limited To Product Testing Only",
+            url: "https://wccftech.com/cxmt-apple-dram-capacity-testing-limits/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/CXMT-facility.jpg",
+            oneliner: "CXMT capacity constraints limit Apple DRAM to testing only; Samsung, SK Hynix prioritize AI.",
+          },
+          {
+            headline: "Apple's iPhone 18 Pro Margins To Suffer Tremendously As DRAM Estimated To Make Up 42% Of BOM In H1 2027; SoC And OLED Cost Pennies In Comparison",
+            url: "https://wccftech.com/iphone-18-pro-bom-dram-cost-margins/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/iPhone-18-Pro-logic-board.jpg",
+            oneliner: "iPhone 18 Pro DRAM cost surge to 42% BOM H1 2027; margin compression vs. AI capex winners.",
+          },
+          {
+            headline: "Why Micron Stock Plummeted 28.7% in July But Is Rebounding in August",
+            url: "https://finance.yahoo.com/markets/stocks/articles/why-micron-stock-plummeted-28-112000538.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "Micron volatility signals DRAM supply cycle transition; AI demand competing with consumer weakness.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "London still dominates Britain's datacenter map, but the regions are powering up",
+            url: "https://www.theregister.com/systems/2026/08/10/london-still-dominates-britains-datacenter-map-but-the-regions-are-powering-up/5284693",
+            source: "The Register",
+            image: "https://image.theregister.com/5229859.jpg?imageId=5229859&x=0&y=0&cropw=100&croph=66.84&panox=0&panoy=0&panow=100&panoh=66.84&width=1200&height=683",
+            oneliner: "UK regional data center buildout accelerates; London dominates but megawatt projects spread beyond M25.",
+          },
+          {
+            headline: "These analysts say Elon Musk's ambitious AI plans for SpaceX should be taken seriously, thanks to Microsoft",
+            url: "https://www.marketwatch.com/story/these-analysts-say-elon-musks-ambitious-ai-plans-for-spacex-should-be-taken-seriously-thanks-to-microsoft-2c9aa472?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "SpaceX-Microsoft AI compute partnership; satellite network compute infrastructure emerging mega-trend.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Australian rare earth miner surges after U.S. Department of Defense investment",
+            url: "https://www.cnbc.com/2026/08/10/rare-earths-sunrise-energy-metals-trump-cina.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108347104-1786340855855-gettyimages-2059263918-AUSTRALIA_LITHIUM.jpeg?v=1786340889&amp;w=1920&amp;h=1080",
+            oneliner: "Trump admin backs Australian scandium mine; chips supply chain diversification from China.",
+          },
+          {
+            headline: "UK's Royal Navy sea drones contain component that secretly sent data to China, report claims",
+            url: "https://www.tomshardware.com/tech-industry/drones/uks-royal-navy-sea-drones-contain-component-that-secretly-sent-data-to-china-report-claims-government-cuts-camera-connectivity-and-insists-data-wasnt-sensitive-only-heartbeat-communications",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/zr86Z34DjpqPtAx9Lpy8tf-1920-80.jpg",
+            oneliner: "UK Navy K3 Scout drones leak data via Chinese components; defense supply chain vulnerability exposed.",
+          },
+          {
+            headline: "Over 70% of Americans oppose AI data centers; US protests intensify as more arrests are being made",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/over-70-percent-of-americans-oppose-ai-data-centers-us-protests-intensify-as-more-arrests-are-being-made-almost-40-arrested-this-year-in-backlash-to-ai-factory-buildout",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/SN2jKEsMGBRYWHAepcoQE7-1600-80.jpg",
+            oneliner: "70%+ Americans oppose AI data centers; 40+ arrests in 2026 slow capex buildout velocity.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 26,
     date: "August 7, 2026",
     slug: "issue-26",

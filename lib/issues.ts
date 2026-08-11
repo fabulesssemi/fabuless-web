@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 28,
+    date: "August 11, 2026",
+    slug: "issue-28",
+    title: "Intel Upsizes to $20B. NVIDIA Funds AI. Memory Tightens.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AI Hardware's Next Frontier Is Integration",
+            url: "https://www.eetimes.com/ai-hardwares-next-frontier-is-integration/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI progress now demands system-level advances in memory, packaging, photonics, and power integration.",
+          },
+          {
+            headline: "Intel investors are banking on a comeback — and then some",
+            url: "https://www.ft.com/content/97812a6a-b8ae-4b53-9b67-397250bc5c80?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI-driven demand and pricing tailwinds fuel Intel stock recovery; foundry expansion thesis strengthens.",
+          },
+          {
+            headline: "Oblivion Remastered on Switch 2 Outshines Xbox Series S, as NVIDIA DLSS Becomes The System's Secret Weapon Again",
+            url: "https://wccftech.com/oblivion-remastered-switch-2-outshines-xbox-series-s-as-nvidia-dlss-secret-weapon/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/Oblivion-Remastered-Switch-2-Beats-Xbox-Series-S-1920x1080.jpg",
+            oneliner: "NVIDIA DLSS critical to Switch 2 UE5 feasibility; portable gaming SoC architecture diverges from console.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "As Lumentum gears up for earnings, here's a sign the optical trade is clawing back",
+            url: "https://www.marketwatch.com/story/as-lumentum-gears-up-for-earnings-heres-a-sign-the-optical-trade-is-clawing-back-de284355?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Photonics-themed ETF outpaces memory ETF adoption; optical interconnect demand accelerates with AI.",
+          },
+          {
+            headline: "OVH Cloud warns of 87% price hikes to help it cover RAMpocalypse costs",
+            url: "https://www.theregister.com/off-prem/2026/08/11/ovh-cloud-warns-of-87-percent-price-hikes-to-help-it-cover-rampocalypse-costs/5285867",
+            source: "The Register",
+            image: "https://image.theregister.com/260550.jpg?imageId=260550&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "OVH Cloud hikes prices 87% due to DRAM surge; inflationary pressure spreads to cloud operators.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Intel upsizes stock offering to $20 billion at $95 per share as AI demand accelerates",
+            url: "https://www.cnbc.com/2026/08/10/intel-intc-stock-offering-ai.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108339566-1784842863353-gettyimages-2287372564-_88a2490_fizf2jun.jpeg?v=1784842934&amp;w=1920&amp;h=1080",
+            oneliner: "Intel doubles equity raise to $20B as AI capex race intensifies, signals foundry recovery.",
+          },
+          {
+            headline: "Nvidia teams up with financial giants to create $500 billion AI infrastructure funds",
+            url: "https://www.tom-shardware.com/tech-industry/artificial-intelligence/nvidia-teams-up-with-financial-giants-to-create-usd500-billion-ai-infrastructure-funds-six-investment-firms-to-enable-access-to-long-term-funding-at-attractive-rates",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "NVIDIA unlocks $500B financing facility with Wall Street to fund customer GPU capex buildout.",
+          },
+          {
+            headline: "Wall Street just endorsed Jensen Huang's 'big concept' for AI. What now?",
+            url: "https://www.cnbc.com/2026/08/11/wall-street-endorsed-jensen-huangs-big-concept-for-ai-what-now.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108341092-1785248242541-gettyimages-2285710732-JAPAN_NVIDIA.jpeg?v=1785248266&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA-led financing model replaces equity-debt binge with long-term infrastructure subscription model.",
+          },
+          {
+            headline: "Anthropic signs $9.1 billion data center deal with Riot Platforms",
+            url: "https://finance.yahoo.com/technology/ai/articles/anthropic-signs-9-1-billion-113731732.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "Anthropic locks $9.1B GPU capex via Riot; confirms sustained AI inference infrastructure demand.",
+          },
+          {
+            headline: "Chinese robot maker's IPO 5,500 times oversubscribed by retail investors",
+            url: "https://www.ft.com/content/99824437-8173-4320-b84b-242c726ab437?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Unitree $900M IPO massively oversubscribed; signals Chinese robotics-AI hardware appetite.",
+          },
+          {
+            headline: "Investors Hated Intel's $15 Billion Stock Sale, but Wall Street Wanted $100 Billion Worth",
+            url: "https://finance.yahoo.com/markets/stocks/articles/investors-hated-intel-15-billion-113624842.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "Intel's equity appetite signals massive foundry capex needs; market skepticism reflects execution risk.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Building up the US power grid won't be wasted, even if the AI bubble bursts",
+            url: "https://www.theregister.com/on-prem/2026/08/11/building-up-the-us-power-grid-wont-be-wasted-even-if-the-ai-bubble-bursts/5285563",
+            source: "The Register",
+            image: "https://image.theregister.com/5285618.jpg?imageId=5285618&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "McKinsey warns underinvestment in power infrastructure poses bigger risk than AI overbuilding.",
+          },
+          {
+            headline: "US lawmaker wants gov't to enforce regulation to ensure 'chipmakers conduct adequate due diligence on their customers'",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/u-s-lawmaker-wants-govt-to-enforce-regulation-to-ensure-chipmakers-conduct-adequate-due-diligence-on-their-customers-house-member-calls-for-biden-era-export-control-to-be-enforced",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/8zgJA77uoh59Cxe4w8tjBD-2000-80.jpg",
+            oneliner: "Rep. Moolenaar demands Commerce enforce Foundry Due Diligence Rule; tightens China access controls.",
+          },
+          {
+            headline: "A New Trick Reveals AI Models' Inner Thoughts",
+            url: "https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a7a6916b0493fdce2877f53/191:100/w_1280,c_limit/Distilling-AI-More-Complicated-Than-You-Think-Business.jpg",
+            oneliner: "Researchers extract reasoning traces from Claude, GPT, Gemini; find evidence of Chinese model training on US LLMs.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Why copper — 'the commodity for all seasons' — is more precious than gold nowadays",
+            url: "https://www.marketwatch.com/story/why-copper-the-commodity-for-all-seasons-is-more-precious-than-gold-nowadays-4aa3f686?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Copper demand surge driven by AI infrastructure electrification; supply constraints tighten.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 27,
     date: "August 10, 2026",
     slug: "issue-27",

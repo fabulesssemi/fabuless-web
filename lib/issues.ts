@@ -60,6 +60,140 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 29,
+    date: "August 12, 2026",
+    slug: "issue-29",
+    title: "Samsung Delays 1.4nm, CoreWeave Surges, Memory Crisis Deepens",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Samsung Foundry updates process roadmap to move 1.4nm node to 2029 — high-NA EUV will enable 1nm-class and smaller nodes in 2030 and beyond",
+            url: "https://www.tomshardware.com/tech-industry/samsung-foundry-updates-process-roadmap-to-move-1-4nm-node-to-2029-high-na-euv-will-enable-1nm-class-and-smaller-nodes-in-2030-and-beyond",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/4AwuaQsSRccnfs9YmA2RVT-1920-80.jpg",
+            oneliner: "Samsung pushes 1.4nm to 2029, ceding process leadership to TSMC through decade's mid-point.",
+          },
+          {
+            headline: "Sony-TSMC $4.7B Deal Helps Thwart Samsung, Analysts Say",
+            url: "https://www.eetimes.com/sony-tsmc-4-7b-deal-helps-thwart-samsung-analysts-say/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Sony-TSMC $4.7B partnership secures smartphone image sensor capacity; directly targets Samsung's Apple supply.",
+          },
+          {
+            headline: "Big Cloud is poised to corner the market for enterprise hardware",
+            url: "https://www.theregister.com/systems/2026/08/12/big-cloud-is-poised-to-corner-the-market-for-enterprise-hardware/5286621",
+            source: "The Register",
+            image: "https://image.theregister.com/5286669.jpg?imageId=5286669&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Hyperscalers' hardware allocation dominance forces enterprise customers into cloud rental; disintermediates traditional ODMs.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "NVIDIA's Fastest Blackwell GPU, the 96 GB RTX PRO 6000, Now Costs $16,000, Almost Double Its Original Price",
+            url: "https://wccftech.com/nvidia-96-gb-rtx-pro-6000-blackwell-now-costs-16000-usd-double-its-original-price/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/03/NVIDIA-RTX-PRO-6000-Blackwell-1-1920x1108.jpg",
+            oneliner: "NVIDIA Blackwell PRO pricing doubles to $16K amid DRAM shortage, squeezing enterprise AI adoption.",
+          },
+          {
+            headline: "AMD Radeon RX 9000 GPUs Sees Official Price Increase of Up To 20%, As The Radeon RX 9070 XT Now Costs Over $1000",
+            url: "https://wccftech.com/amd-radeon-rx-9000-gpus-official-price-increase-up-to-20-percent-9070-xt-over-1000-usd/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/Radeon-RX-9000-AMD-GPU-Prices.jpg",
+            oneliner: "AMD raises Radeon RX 9000 MSRP up 20%; memory shortage forces pricing floor at $1000+ for flagship.",
+          },
+          {
+            headline: "Intel CEO hints at return to the memory business — says market is ripe for innovation, hints at stacking memory and CPU",
+            url: "https://www.tomshardware.com/pc-components/dram/intel-ceo-hints-at-return-to-the-memory-business-says-market-is-ripe-for-innovation-hints-at-stacking-memory-and-cpu",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/abXSyyoAoRCzbFq88WEY43-2000-80.jpg",
+            oneliner: "Intel CEO signals DRAM re-entry with integrated CPU-memory stacking; competes with HBM, threatens HBM suppliers.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "CoreWeave surges 18% in premarket after a 'cleaner quarter.' Here's what's happening",
+            url: "https://www.cnbc.com/2026/08/12/coreweave-q2-earnings-ai-demand.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108271054-17722088882026-02-27t161124z_343131313_rc2dujajql90_rtrmadp_0_usa-stocks.jpeg?v=1772209043&amp;w=1920&amp;h=1080",
+            oneliner: "CoreWeave Q2 revenue doubles on hyperscaler AI demand; GPU infrastructure provider consolidates market position.",
+          },
+          {
+            headline: "Super Micro stock is rallying after results. Here's what Wall Street is saying.",
+            url: "https://www.marketwatch.com/story/super-micro-stock-is-rallying-after-results-heres-what-wall-street-is-saying-631e9253?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Super Micro beats earnings; data center ODM beneficiary of sustained hyperscaler capex momentum.",
+          },
+          {
+            headline: "AI capex could hit $1.6 trillion next year, says fund manager who sees more echoes of 1998 than the dot-com bust",
+            url: "https://www.marketwatch.com/story/ai-capex-could-hit-1-6-trillion-next-year-says-fund-manager-who-sees-more-echoes-of-1998-than-the-dot-com-bust-0576b598?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "$1.6T global AI capex forecast drives persistent GPU, memory, and packaging demand through 2027.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "AI's costly buildout complicates the Fed's inflation fight",
+            url: "https://www.cnbc.com/2026/08/12/ais-costly-buildout-complicates-the-feds-inflation-fight.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108246661-17671042772025-02-03t064652z_1577749545_rc2umcauaumr_rtrmadp_0_softbank-openai.jpeg?v=1767104415&amp;w=1920&amp;h=1080",
+            oneliner: "Data center capex inflation pressures persist despite AI ROI promises; Fed policy headwind for chip suppliers.",
+          },
+          {
+            headline: "'The Worst I've Ever Seen': Cargo Thefts Have Turned Violent in Pursuit of AI Hardware",
+            url: "https://www.wired.com/story/the-worst-ive-ever-seen-cargo-thieves-are-turning-violent-in-pursuit-of-ai-hardware/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a74f168f6175aa74afc9ba2/191:100/w_1280,c_limit/Cargo-Thieves-Business.jpg",
+            oneliner: "AI GPU cargo theft escalates to armed violence in California; supply chain security risk materializes.",
+          },
+          {
+            headline: "UK puts £14B cloud framework in place with SMEs promised a bigger slice",
+            url: "https://www.theregister.com/public-sector/2026/08/12/uk-puts-14b-cloud-framework-in-place-with-smes-promised-a-bigger-slice/5286204",
+            source: "The Register",
+            image: "https://image.theregister.com/5265166.jpg?imageId=5265166&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "UK £14B cloud procurement framework favors local SMEs; hyperscale dominance faces regulatory headwind.",
+          },
+          {
+            headline: "US unveils $2bn boost for domestic mining initiatives",
+            url: "https://finance.yahoo.com/economy/policy/articles/us-unveils-2bn-boost-domestic-123915963.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "U.S. $2B mining investment targets domestic rare earth, lithium supply chains; reduces China semiconductor input exposure.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Oh Lord, AI Reporters Are Actually Breaking Big News",
+            url: "https://www.wired.com/story/ai-newsrooms-are-breaking-news-now-haha-im-in-danger/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a7ba72882c71ca2ec1d3267/191:100/w_1280,c_limit/AI-Breaking-News-Business.jpg",
+            oneliner: "AI newsrooms beat mainstream media to OpenAI security stories; compute-driven news production reshapes information markets.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 28,
     date: "August 11, 2026",
     slug: "issue-28",

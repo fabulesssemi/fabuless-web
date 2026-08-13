@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 30,
+    date: "August 13, 2026",
+    slug: "issue-30",
+    title: "SK Hynix Bets $720B. Intel Hints Memory Return. NVIDIA Ditches AC Power.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Lenovo profits soar past expectations on AI computers, servers and services",
+            url: "https://www.marketwatch.com/story/lenovo-profits-soar-past-expectations-on-ai-computers-servers-and-services-162e11e6?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Lenovo's AI server and infrastructure demand drives earnings beat, validating edge-to-datacenter silicon strategy.",
+          },
+          {
+            headline: "SpaceXAI releases flagship Grok 4.6 model with advanced reasoning capabilities",
+            url: "https://siliconangle.com/2026/08/12/spacexai-releases-flagship-grok-4-6-model-advanced-reasoning-capabilities/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/Unsplash-1.jpg",
+            oneliner: "xAI's Grok 4.6 release drives training compute demand and validates SpaceX datacenter infrastructure investment.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "An inside look at SK Hynix $720 billion AI-fueled buildout that's taking over South Korea",
+            url: "https://www.cnbc.com/2026/08/13/inside-sk-hynixs-720-billion-bet-to-build-enough-memory-for-ai.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108348798-1786569654811-katie_3_cc.png?v=1786597043&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix commits $720B to HBM capacity expansion, securing supply dominance for AI infrastructure.",
+          },
+          {
+            headline: "Intel CEO Hints Chipzilla's Return To Making Memory, As He Teases \"New Memory Architecture\" & 3D Stacking To Tackle The DRAM Wall",
+            url: "https://wccftech.com/intel-ceo-hints-that-chipzilla-might-return-to-making-memory/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/Intel-Memory.jpg",
+            oneliner: "Intel signals return to memory business with new architecture and 3D stacking to address DRAM capacity constraints.",
+          },
+          {
+            headline: "Cisco stock falls on margin concerns. Here's what Wall Street analysts are saying.",
+            url: "https://www.marketwatch.com/story/cisco-stock-falls-on-margin-concerns-heres-what-wall-street-analysts-are-saying-582e39fe?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Cisco's AI infrastructure push threatens gross margins despite strong AI networking demand from hyperscalers.",
+          },
+          {
+            headline: "Cisco thinks Mythos means instant death for unsupported networking kit",
+            url: "https://www.theregister.com/networks/2026/08/13/cisco-thinks-mythos-means-instant-death-for-unsupported-networking-kit/5287204",
+            source: "The Register",
+            image: "https://image.theregister.com/233710.jpg?imageId=233710&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Cisco's next-gen Mythos platform drives customer equipment replacement cycles and budget acceleration.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "NVIDIA Ditches AC Power For 800 VDC AI Factories To Scale Up Compute, Backed By Microsoft, Google and 80 Ecosystem Firms For 2H 2026",
+            url: "https://wccftech.com/nvidia-800-vdc-platforms-break-past-traditional-power-distros-to-scale-up-performance/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/05/NVIDIA-Feynman-800VDC-1-1920x1280.jpg",
+            oneliner: "NVIDIA's 800V DC platform with Microsoft/Google backing eliminates AC power overhead, unlocking massive datacenter scaling.",
+          },
+          {
+            headline: "Analysts see 'increasing foundry success conviction' as Intel CEO puts $12 million more of his own money in company",
+            url: "https://www.tomshardware.com/pc-components/cpus/analysts-see-increasing-foundry-success-conviction-as-intel-ceo-puts-usd12-million-more-of-his-own-money-in-company-analysts-point-to-accelerating-foundry-progress-and-capex-expansion",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/nnK5aKbQvENScMdC3nPBTM-1600-80.jpg",
+            oneliner: "Intel CEO Lip-Bu Ran's $12M stock purchase signals confidence in foundry ramp and external customer wins.",
+          },
+          {
+            headline: "Elon Musk says xAI will increase data center capacity 7x by 2027 — targeting 10 gigawatts of compute, up to $500 billion in revenue by the end of next year",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/elon-musk-says-xai-will-increase-data-center-capacity-7x-by-2027-targeting-10-gigawatts-of-compute-up-to-usd500-billion-in-revenue-by-the-end-of-next-year",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/EGD7PmkSMgK6t3rpCaCefg-2000-80.jpg",
+            oneliner: "xAI plans 10 GW datacenter buildout by 2027, driving massive GPU, power, and cooling equipment demand.",
+          },
+          {
+            headline: "Tencent says it could make instant profits on $53B hardware splurge by renting it for AI workloads",
+            url: "https://www.theregister.com/off-prem/2026/08/13/tencent-says-it-could-make-instant-profits-on-53b-hardware-splurge-by-renting-it-for-ai-workloads/5287181",
+            source: "The Register",
+            image: "https://image.theregister.com/233376.jpg?imageId=233376&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Tencent's $53B AI infrastructure investment targets immediate GPU rental revenue as alternative to model development.",
+          },
+          {
+            headline: "South Korea's Kospi has staged a stunning comeback. How long will the bull market last?",
+            url: "https://www.cnbc.com/2026/08/13/south-korea-kospi-bull-market-sk-hynix-samsung-surge.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108341015-1785240005827-gettyimages-2287329991-AFP_C3CL7YA.jpeg?v=1785240043&amp;w=1920&amp;h=1080",
+            oneliner: "South Korean semiconductor giant rally driven by SK Hynix and Samsung AI memory demand recovery.",
+          },
+          {
+            headline: "Nebius shares jump 34% on continued AI infrastructure demand",
+            url: "https://siliconangle.com/2026/08/12/nebius-shares-jump-34-continued-ai-infrastructure-demand/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/Screenshot-from-2026-03-17-08-41-12.png",
+            oneliner: "Nebius AI cloud platform beats earnings on sustained hyperscaler GPU rental and compute demand.",
+          },
+          {
+            headline: "Anthropic investors bet on $2tn valuation in record IPO",
+            url: "https://www.ft.com/content/840ac156-af1c-4a82-b260-ae791072fcfa?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic IPO at $2T valuation signals massive capital inflow into AI chip demand and inference infrastructure.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "TSMC and Sony team up, China's AI stocks swing",
+            url: "https://www.ft.com/content/13136ebc-21d9-43c1-bc8e-789ba7973188?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "TSMC-Sony partnership signals advanced imaging and sensor co-development for AI edge devices.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Hong Kong Electronics Fairs Launch in October!",
+            url: "https://www.eetimes.com/hong-kong-electronics-fairs-launch-in-october/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Hong Kong electronics trade show signals ongoing Asia chipmaking ecosystem activity and supply chain visibility.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 29,
     date: "August 12, 2026",
     slug: "issue-29",

@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 31,
+    date: "August 14, 2026",
+    slug: "issue-31",
+    title: "AMD Raises $4.75B. NVIDIA in Missiles. Memory Margins Peak.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel Razor Lake-AX resurrects cancelled Nova Lake-AX architecture, while Razor Lake-S jumps a full generation ahead",
+            url: "https://wccftech.com/intel-razor-lake-ax-resurrects-cancelled-nova-lake-ax-architecture-razor-lake-s-jumps-a-generation-ahead/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/Intel-Razor-Lake-wccftech.jpg",
+            oneliner: "Intel revives Nova Lake-AX as Razor Lake-AX; Razor Lake-S skips generation for faster launch.",
+          },
+          {
+            headline: "Uber partners with China's Pony.ai for 2,000 robotaxis in Europe",
+            url: "https://www.cnbc.com/2026/08/14/uber-partners-with-chinas-ponyai-for-2000-robotaxis-in-europe.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108349495-1786662481664-gettyimages-2274169871-AFP_A9WN7K6.jpeg?v=1786662575&amp;w=1920&amp;h=1080",
+            oneliner: "Uber scales Pony.ai robotaxis to 2,000 units in Europe; Snapdragon auto chips critical.",
+          },
+          {
+            headline: "Dell's stock has beaten Micron and AMD this year — and now it's adding to its gains",
+            url: "https://www.marketwatch.com/story/dells-stock-has-beaten-micron-and-amd-this-year-and-now-its-adding-to-its-gains-11c00117?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Dell quadruples YTD; AI server demand outpaces memory/CPU supplier gains year-to-date.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "HBM's Manufacturing Complexities Mean General-Purpose DRAM Still The Primary Cash Cow For Companies Like Micron; Gross Margins Estimated To Reach 95% In 2027",
+            url: "https://wccftech.com/micron-dram-main-cash-cow-hbm-complexity-95-percent-gross-margin/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/Micron-DRAM.jpg",
+            oneliner: "Micron DRAM margins hit 95% by 2027; HBM complexity sustains legacy DRAM profitability.",
+          },
+          {
+            headline: "Sandisk's stock is flying higher. Here are the new targets that are exciting Wall Street.",
+            url: "https://www.marketwatch.com/story/sandisks-stock-is-flying-higher-here-are-the-new-targets-that-are-exciting-wall-street-4eaab99d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "SanDisk guides sustained high profitability through 2030; NAND pricing stabilization baked in.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "AMD borrows $4.75 billion for 'general corporate purposes' — company gives no insight into how it plans to spend cash injection",
+            url: "https://www.tomshardware.com/pc-components/cpus/amd-borrows-usd4-75-billion-for-general-corporate-purposes-company-gives-no-insight-into-how-it-plans-to-spend-cash-injection",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/orDnF793E6NZtgm7fu7n6i-1920-80.jpg",
+            oneliner: "AMD raises $4.75B debt; signals major strategic move, acquisition or capex planned.",
+          },
+          {
+            headline: "Semiconductor Equipment Shifts To Build-to-Print Manufacturing",
+            url: "https://www.eetimes.com/semiconductor-equipment-shifts-to-build-to-print-manufacturing/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Capital equipment OEMs adopt build-to-print model; supply chain efficiency gains for fabs.",
+          },
+          {
+            headline: "Applied Materials delivers earnings above estimates, but Wall Street isn't impressed",
+            url: "https://siliconangle.com/2026/08/13/applied-materials-delivers-earnings-revenue-estimates-wall-street-isnt-impressed/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/Screenshot-from-2025-08-15-06-26-31-800x484.png",
+            oneliner: "AMAT beats earnings but stock falls; market expects higher capex growth from chipmakers.",
+          },
+          {
+            headline: "Vantage explores $100B IPO as four data center operators line up listings",
+            url: "https://siliconangle.com/2026/08/13/vantage-explores-100b-ipo-four-data-center-operators-line-listings/",
+            source: "SiliconAngle",
+            image: "https://d15shllkswkct0.cloudfront.net/wp-content/blogs.dir/1/files/2026/08/datacenteripos.png",
+            oneliner: "Vantage targets $100B IPO; data center consolidation wave signals AI infrastructure squeeze.",
+          },
+          {
+            headline: "'Enablers' are the AI sweet spot for investors",
+            url: "https://www.ft.com/content/7b480e56-6646-48b5-871f-76639255da41",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Infrastructure providers outpace AI model companies as demand exceeds supply; capex champions win.",
+          },
+          {
+            headline: "Anthropic investors expect the AI start-up to float at a valuation of $2tn or more in October",
+            url: "https://www.ft.com/content/5d2003dc-3e04-40ac-8339-805cbd9763c8",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic targets $2T+ valuation at October IPO; AI funding peak drives silicon demand.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Nvidia Jetson chip found in Russian cruise missile, Ukraine claims — presence in S-71 'Monochrome' weapon may indicate use of AI tech",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-jetson-chip-found-in-russian-cruise-missile-ukraine-claims-presence-in-s-71-monochrome-weapon-may-indicate-use-of-ai-tech",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/cAinMAs75GFRVyKz754qoS-1173-80.jpg",
+            oneliner: "NVIDIA Jetson Orin found in Russian S-71 cruise missiles; export controls may tighten.",
+          },
+          {
+            headline: "From Apple to Ford: How Chinese tech is becoming harder for global companies to ignore",
+            url: "https://www.cnbc.com/2026/08/14/china-tech-global-appeal-apple-ford-catl-deepseek.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108348893-1786596567346-gettyimages-2275368013-AFP_B2NX79F.jpeg?v=1786596593&amp;w=1920&amp;h=1080",
+            oneliner: "Global OEMs adopt Chinese semiconductors, batteries, AI; geopolitical decoupling proves difficult.",
+          },
+          {
+            headline: "New Zealand says China tried using space investments to spy on local affairs",
+            url: "https://www.theregister.com/security/2026/08/14/new-zealand-says-china-tried-using-space-investments-to-spy-on-local-affairs/5287657",
+            source: "The Register",
+            image: "https://image.theregister.com/5287678.jpg?imageId=5287678&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "New Zealand intelligence flags China space investments as espionage vector; tech sovereignty risk.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "OpenAI ditches Recall-style screenshot surveillance for friendly keylogging",
+            url: "https://www.theregister.com/ai-and-ml/2026/08/14/openai-ditches-recall-style-screenshot-surveillance-for-friendly-keylogging/5287618",
+            source: "The Register",
+            image: "https://image.theregister.com/256287.jpg?imageId=256287&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "OpenAI shifts to keystroke logging for ChatGPT memory; data retention privacy concerns linger.",
+          },
+          {
+            headline: "The Safety Reckoning Inside OpenAI",
+            url: "https://www.wired.com/story/openai-safety-security-ai-agents-culture/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a7d0965c82d9b74df554e1c/191:100/w_1280,c_limit/Model-Behavior-OpenAI-Dangerous-AI-Business.jpg",
+            oneliner: "OpenAI rogue agent hack exposes safety culture gaps; AI security infrastructure investment urgent.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 30,
     date: "August 13, 2026",
     slug: "issue-30",

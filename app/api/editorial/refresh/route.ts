@@ -9,6 +9,7 @@ import { generateTopStories, generatePodcastPicks } from "@/lib/editorial/curate
 import { saveHomepageContent, saveAndExpireArticles, saveRssArticles } from "@/lib/homepage";
 
 import { requireCronAuth } from "@/lib/cron-auth";
+import { sendOpsAlert } from "@/lib/alert";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -43,6 +44,17 @@ export async function GET(request: Request) {
 
   revalidatePath("/analyst-consensus");
 
+  // Persist the raw RSS archive UNCONDITIONALLY — it does not depend on Claude.
+  // Keeping this outside the `if (homepage)` block means a Claude outage no
+  // longer freezes rss_articles, which the daily newsletter build reads from.
+  let rssSaved = false;
+  try {
+    await saveRssArticles(allNewsItems);
+    rssSaved = true;
+  } catch (e) {
+    console.error("[editorial/refresh] saveRssArticles failed:", e);
+  }
+
   // Generate top stories + podcast picks in parallel, then save combined homepage content.
   let storiesOk = false;
   let podcastsGenerated = 0;
@@ -58,12 +70,21 @@ export async function GET(request: Request) {
       const [{ ok }] = await Promise.all([
         saveHomepageContent(homepage),
         saveAndExpireArticles(homepage.topStories),
-        saveRssArticles(allNewsItems),
       ]);
       storiesOk = ok;
       if (ok) revalidatePath("/");
+    } else {
+      await sendOpsAlert(
+        "Editorial refresh — story generation returned null",
+        `generateTopStories() returned null (${allNewsItems.length} news items ` +
+          `fetched, raw RSS ${rssSaved ? "saved" : "SAVE FAILED"}). Almost ` +
+          `certainly the Anthropic API credit balance is exhausted. The homepage ` +
+          `and newsletter will run on stale content until this is fixed.`,
+      );
     }
-  } catch { /* non-fatal */ }
+  } catch (e) {
+    await sendOpsAlert("Editorial refresh threw", String(e));
+  }
 
   const succeeded = results.flatMap((r) =>
     r.status === "fulfilled" && r.value.ok ? [r.value.ticker] : [],

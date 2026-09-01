@@ -2,6 +2,12 @@ import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { issues, type Issue, type Story, type Podcast, type Quote, type StoryQuote } from "@/lib/issues";
 import { getSubscribers } from "./subscribers";
+import { sendOpsAlert } from "@/lib/alert";
+
+// If the newsletter build pipeline stalls (e.g. Anthropic credits run out),
+// issues[0] stops advancing and this weekday cron would otherwise re-mail the
+// same issue every day. Refuse to send anything older than this.
+const MAX_ISSUE_AGE_DAYS = 2;
 
 const PODCAST_FEEDS = [
   { show: "The Circuit",          url: "https://feeds.transistor.fm/the-circuit" },
@@ -111,6 +117,20 @@ export async function sendSemiNewsletter(): Promise<{ sent: number; failed: numb
   if (sentToday && sentToday.length > 0) return { sent: 0, failed: 0, skipped: true };
 
   const issue = issues[0];
+
+  // Freshness guard — never re-send a stale issue.
+  const ageDays = (Date.now() - new Date(issue.date).getTime()) / 86_400_000;
+  if (!Number.isFinite(ageDays) || ageDays > MAX_ISSUE_AGE_DAYS) {
+    const age = Number.isFinite(ageDays) ? `~${ageDays.toFixed(1)} days old` : `unparseable date "${issue.date}"`;
+    await sendOpsAlert(
+      "Semi newsletter send SKIPPED — stale issue",
+      `sendSemiNewsletter refused to send: newest issue is #${issue.number} ` +
+        `"${issue.title}" (${age}). The daily-newsletter build has not produced a ` +
+        `fresh issue. Check the Anthropic credit balance and the ` +
+        `daily-newsletter GitHub Action.`,
+    );
+    return { sent: 0, failed: 0, skipped: true };
+  }
   const [livePodcasts, subscribers] = await Promise.all([
     fetchLivePodcasts(),
     getSubscribers(),

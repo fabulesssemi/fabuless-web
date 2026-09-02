@@ -60,6 +60,135 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 32,
+    date: "September 2, 2026",
+    slug: "issue-32",
+    title: "Dell Crushes on AI Servers. SB Energy Eyes IPO. China's EUV Lags 22 Years.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Dell's AI servers drive a stellar earnings performance, and a raised outlook",
+            url: "https://www.marketwatch.com/story/dells-ai-servers-drive-a-stellar-earnings-performance-and-a-raised-outlook-86476ace?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Dell's $95B backlog on AI server demand signals sustained NVIDIA GPU consumption through 2027.",
+          },
+          {
+            headline: "AIR Security launches with $50M to build a firewall for AI agents",
+            url: "https://siliconangle.com/2026/09/01/air-security-launches-with-50m-to-build-a-firewall-for-ai-agents/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/airsecurity.png",
+            oneliner: "Inline AI agent firewalls create new compute appliance category; drives DPU and SmartNIC demand.",
+          },
+          {
+            headline: "Indian Startup HrdWyr Builds AI-Native SoCs for the Physical World",
+            url: "https://www.eetimes.com/indian-startup-hrdwyr-builds-ai-native-socs-for-the-physical-world/",
+            source: "EE Times",
+            image: null,
+            oneliner: "India's AI-native SoC play for edge IoT mirrors TSMC outsourcing model; threatens analog/MCU incumbents.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "SoftBank's SB Energy AI infrastructure unit files to go public",
+            url: "https://siliconangle.com/2026/09/01/softbanks-sb-energy-ai-infrastructure-unit-files-to-go-public/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/SB-Energy.png",
+            oneliner: "SB Energy's $5B+ IPO signals data center capex acceleration; power infrastructure becomes capex bottleneck.",
+          },
+          {
+            headline: "AI data center investment projected to hit $32 trillion by 2050",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/ai-data-center-investment-projected-to-hit-usd32-trillion-by-2050-infrastructure-spending-estimated-to-exceed-capital-requirements-for-railways-electrification-or-the-internet",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/SnihTFB2iy2sVR4QF2ETM8-1920-80.png",
+            oneliner: "4-6 year GPU/infrastructure refresh cycles guarantee sustained demand for TSMC, NVIDIA, Broadcom chips.",
+          },
+          {
+            headline: "National data centre projects are consolidating America's AI lead",
+            url: "https://www.ft.com/content/732c05fe-ca63-4048-8784-aebe80b8b1f4",
+            source: "Financial Times",
+            image: null,
+            oneliner: "US federal data center consolidation under AWS/Microsoft suppliers entrenches NVIDIA/TSMC control.",
+          },
+          {
+            headline: "AI capital expenditure forecast to exceed the cost of building railways in both the U.S. and the U.K.",
+            url: "https://www.marketwatch.com/story/ai-capital-expenditure-forecasted-to-exceed-the-cost-of-building-railways-in-both-the-u-s-and-the-u-k-with-the-internet-added-on-top-765b927f?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "PwC's AI capex forecast dwarfs historical infrastructure; guarantees 10+ year TSMC/Samsung wafer tightness.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "China's EUV technology 'at a similar stage to ASML in 2004,' analyst claims",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/chinas-euv-technology-at-a-similar-stage-to-asml-in-2004-analyst-claims-beijings-semiconductor-industry-remains-well-behind-western-rivals",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/pzamkiuguieyRnBYqYYHkW-1920-80.jpg",
+            oneliner: "China's EUV gap vs. ASML perpetuates TSMC/Samsung duopoly on sub-3nm for minimum 10 years.",
+          },
+          {
+            headline: "G20 live updates: Canada blew up trade deal for political reasons, Lutnick tells CNBC",
+            url: "https://www.cnbc.com/2026/09/02/g20-innovation-ministerial-live-updates.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108357782-1788360644011-gettyimages-2280182593-CANADA_CALGARY.jpeg?v=1788360664&amp;w=1920&amp;h=1080",
+            oneliner: "Trade tensions at G20 risk fragmentation of AI chip supply chains; reshoring narratives accelerate.",
+          },
+          {
+            headline: "UK goes shopping for homegrown AI with £100M procurement scheme",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/02/uk-goes-shopping-for-homegrown-ai-with-100m-procurement-scheme/5293680",
+            source: "The Register",
+            image: "https://image.theregister.com/232880.jpg?imageId=232880&x=0&y=0&cropw=100&croph=71.67&panox=0&panoy=0&panow=100&panoh=71.67&width=1200&height=683",
+            oneliner: "UK's £100M AI procurement locks in domestic vendors; signals EU/NATO fragmentation of compute supplies.",
+          },
+          {
+            headline: "UK cyber bill targets AI users, not the vendors building it",
+            url: "https://www.theregister.com/security/2026/09/02/uk-cyber-bill-targets-ai-users-not-the-vendors-building-it/5293738",
+            source: "The Register",
+            image: "https://image.theregister.com/248400.jpg?imageId=248400&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "UK regulatory gap on AI vendors vs. users threatens liability shift to chip makers via OSS frameworks.",
+          },
+          {
+            headline: "Palantir CEO Alex Karp backs ousted Ukraine defense minister's new defense tech startup",
+            url: "https://www.cnbc.com/2026/09/02/palantir-alex-karp-ukraine-federov-defense-startup.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108138891-1746035605330-gettyimages-2212777144-_d1_0120_k3jqvm0p.jpeg?v=1762266256&amp;w=1920&amp;h=1080",
+            oneliner: "Palantir's Ukraine defense tech play locks in NATO compute demand; FPGA and edge AI chips critical.",
+          },
+          {
+            headline: "The race to stop AI from designing bioweapons",
+            url: "https://www.ft.com/content/22bfa989-7477-434a-aa53-6fbfe6cd0335?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Biosecurity concerns over LLMs accelerate corporate safety chip/inference isolation mandates globally.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Best Sony Headphone Deals: WH-1000XM5 and More (2026)",
+            url: "https://www.wired.com/story/sony-headphone-deals-september-2026/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a9722800b666cfc32288461/191:100/w_1280,c_limit/Our-Favorite-Sony-Headphones-Are-50-Percent-Off.jpg",
+            oneliner: "EXCLUDED: Pure consumer product promotion unrelated to semiconductor supply chain.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 31,
     date: "August 14, 2026",
     slug: "issue-31",

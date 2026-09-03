@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 33,
+    date: "September 3, 2026",
+    slug: "issue-33",
+    title: "TSMC CapEx Surge Strains Tools. Cloud Math Breaks. Data Center Backlash Rises.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Broadcom delivers strong earnings view as CEO touts growth with AI labs",
+            url: "https://www.cnbc.com/2026/09/02/broadcom-avgo-q3-earnings-report-2026.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108272992-1788384129788-Digital_X_Special_Opens_In_Cologne-1243214774-Getty.jpg?v=1788384186&amp;w=1920&amp;h=1080",
+            oneliner: "Broadcom FY2028 guidance strong; AI lab customer concentration remains key growth lever.",
+          },
+          {
+            headline: "Broadcom's stock falls despite upbeat earnings, extending a frustrating stretch for investors",
+            url: "https://www.marketwatch.com/story/broadcoms-stock-falls-despite-upbeat-earnings-extending-a-frustrating-stretch-for-investors-81de3f53?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Broadcom earnings beat but stock sinks—margins or capex guidance concerns overshadow AI upside.",
+          },
+          {
+            headline: "Snowflake knocks it out the park with a stellar earnings and revenue beat",
+            url: "https://siliconangle.com/2026/09/02/snowflake-knocks-it-out-the-park-with-a-stellar-earnings-and-revenue-beat",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/SridharRamaswamy-snowflakesummit2026-1-scaled.jpg",
+            oneliner: "Snowflake crushes earnings on AI data platform demand; FY guidance raised.",
+          },
+          {
+            headline: "Meta says it has caught up with Anthropic and OpenAI with Muse Spark 1.3, its most powerful AI model yet",
+            url: "https://siliconangle.com/2026/09/02/meta-says-it-has-caught-up-with-anthropic-and-openai-after-releasing-muse-spark-1-3-its-most-powerful-llm-so-far/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Screenshot-from-2026-09-03-09-36-07.png",
+            oneliner: "Meta's Muse Spark 1.3 claims frontier parity—paid developer API now live.",
+          },
+          {
+            headline: "Acer's Predator Atlas 7 Shrinks To A 7-Inch 120Hz Screen But Keeps The Same Intel Arc G3 Extreme Silicon",
+            url: "https://wccftech.com/acer-launches-predator-atlas-7-gaming-handheld/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/Acer-Predator-Atlas-7-featured.jpg",
+            oneliner: "Acer Predator Atlas 7 brings Intel Arc G3 Extreme to 7-inch handheld gaming.",
+          },
+          {
+            headline: "ACEMAGIC's F9A Ryzen AI MAX+ 495 Mini Workstation Delivers Up To 60% Better AI Model Support Over 395, As it Packs 192 GB Memory",
+            url: "https://wccftech.com/acemagic-f9a-ryzen-ai-max-495-mini-workstation-192-gb-memory/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/F9A.jpg",
+            oneliner: "ACEMAGIC F9A packs AMD Ryzen AI MAX+ 495 with 192GB—local AI inference mini-PC boom.",
+          },
+          {
+            headline: "Meta Pushes Its New AI Agent on Employees—but Eases Off on Tokenmaxxing",
+            url: "https://www.wired.com/story/meta-pushes-its-new-ai-agent-on-employees-but-eases-off-on-tokenmaxxing/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a98bc1a652ea8849cb4e3a3/191:100/w_1280,c_limit/Meta-Stops-Forcing-Employees-To-Use-AI-Business-1461790372.jpg",
+            oneliner: "Meta deploys Hatch agentic AI to workforce; internal adoption signals enterprise readiness.",
+          },
+          {
+            headline: "Scaling agentic AI pilots across the enterprise",
+            url: "https://www.technologyreview.com/2026/09/03/1142868/scaling-agentic-ai-pilots-across-the-enterprise/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/08/MITTRI-NiCE-social-card.png?resize=1200,600",
+            oneliner: "80% of Fortune 500 adopting agentic AI pilots; enterprise integration challenges emerge.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "TSMC fab equipment demand nearly doubles in six months — AI surge pushes 2026 CapEx toward $64B amid tool shortages",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/tsmc-fab-equipment-demand-nearly-doubles-in-six-months-ai-surge-pushes-2026-capex-toward-usd64b-amid-tool-shortages",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/dqa9GQXHrqhhgMVZAPVBNi-1280-80.png",
+            oneliner: "TSMC equipment demand doubles but CapEx rises only 15%—severe tool bottleneck ahead for foundry.",
+          },
+          {
+            headline: "The AI cloud math is broken, and it's creating a power shift within Big Tech",
+            url: "https://www.marketwatch.com/story/the-ai-cloud-math-is-broken-and-its-creating-a-power-shift-within-big-tech-5652da0f?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Capex-to-cloud shift accelerates as self-owned AI hardware becomes cheaper than cloud rental.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Hidden China risks are emerging in America's multibillion-dollar AI data center boom",
+            url: "https://www.cnbc.com/2026/09/03/us-ai-data-centers-china-supply-chain.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108356755-17882160262026-08-31t223924z_2092497127_rc2t9na38zuv_rtrmadp_0_usa-datacenters.jpeg?v=1788216056&amp;w=1920&amp;h=1080",
+            oneliner: "US AI data centers depend on China-sourced transformers, batteries, optical gear as export controls tighten.",
+          },
+          {
+            headline: "America's data centre backlash hits battleground Pennsylvania",
+            url: "https://www.ft.com/content/8252d574-ae2a-4403-9cf9-031295ba67f5?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Political opposition to data center expansion in swing states threatens US AI infrastructure plans.",
+          },
+          {
+            headline: "Chinese supercomputer manufacturer reveals the 'world's first' 64-thread mobile workstation for AI — domestic CPU paired with mystery GPU with 16GB of VRAM promises cloud-level performance",
+            url: "https://www.tomshardware.com/laptops/chinese-supercomputer-manufacturer-reveals-the-worlds-first-64-thread-mobile-workstation-for-ai-domestic-cpu-paired-with-mystery-gpu-with-16gb-of-vram-promises-cloud-level-performance",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/tACxSXFWuTcX5MjMqU2CLH-2560-80.jpg",
+            oneliner: "Sugon 64-thread mobile AI workstation with domestic CPU/GPU challenges US edge AI dominance.",
+          },
+          {
+            headline: "Uber and Big Taxi unite in battle against Waymo",
+            url: "https://www.ft.com/content/84171f91-5f39-4878-bbc5-e4e6262c4321?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Taxi/Uber coalition opposes Waymo expansion; regulatory friction threatens roboatxi silicon TAM.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Spurs boots VMware, cites 85% licensing saving",
+            url: "https://www.theregister.com/on-prem/2026/09/03/spurs-boots-vmware-cites-85-licensing-saving/5294139",
+            source: "The Register",
+            image: "https://image.theregister.com/255440.jpg?imageId=255440&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Enterprise virtualization migration away from VMware accelerates; Broadcom licensing costs still prohibitive.",
+          },
+          {
+            headline: "To keep the AI hacking genie bottled up, try one-way networks",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/03/to-keep-the-ai-hacking-genie-bottled-up-try-one-way-networks/5294121",
+            source: "The Register",
+            image: "https://image.theregister.com/234105.jpg?imageId=234105&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Data diodes emerge as sandbox alternative for frontier AI model containment.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 32,
     date: "September 2, 2026",
     slug: "issue-32",

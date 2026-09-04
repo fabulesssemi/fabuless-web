@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 34,
+    date: "September 4, 2026",
+    slug: "issue-34",
+    title: "NVIDIA Buys Hugging Face. CXMT Stole DRAM. Memory Boom Holds.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "OpenAI starts rolling out its next-generation GPT-6 Astra model",
+            url: "https://siliconangle.com/2026/09/03/openai-starts-rolling-out-its-next-generation-gpt-6-astra-model/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/52660764045_a9fd79f194_c-1-1.jpg",
+            oneliner: "GPT-6 Astra rollout begins; advances in coding, browsing, and computer-use drive next-tier inference demand.",
+          },
+          {
+            headline: "OpenAI throws Astra into the top-tier model ring",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/03/openai-throws-astra-into-the-top-tier-model-ring/5294378",
+            source: "The Register",
+            image: "https://image.theregister.com/5294386.jpg?imageId=5294386&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "GPT-6 Astra staged rollout via Trusted Access Program signals major compute demand wave incoming.",
+          },
+          {
+            headline: "Snowflake has a secret weapon that's powering its stock toward a huge gain",
+            url: "https://www.marketwatch.com/story/shares-in-snowflake-are-surging-heres-what-wall-street-analysts-are-saying-0b6343c0?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Snowflake's AI-powered coding assistant drives major sales momentum and valuation expansion.",
+          },
+          {
+            headline: "Nvidia PAIR makes it easy to create a household data center for running agentic AI tasks",
+            url: "https://siliconangle.com/2026/09/03/nvidia-pair-makes-it-easy-to-create-a-household-data-center-for-running-agentic-ai-tasks/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Screenshot-from-2026-09-04-08-34-37.png",
+            oneliner: "NVIDIA Personal AI Router enables edge inference via idle consumer GPUs; distributed compute market expands.",
+          },
+          {
+            headline: "Adobe just announced its next CEO. Here's why its stock is dropping.",
+            url: "https://www.marketwatch.com/story/adobe-just-announced-its-next-ceo-heres-why-its-stock-is-dropping-bad9ed8a?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Adobe CEO transition signals leadership uncertainty; AI-driven content tools face competitive pressure.",
+          },
+          {
+            headline: "NVIDIA Confirms DLSS 5 Support Extends To RTX 40 GPUs",
+            url: "https://wccftech.com/nvidia-dlss-5-rtx-40-gpus-support-confirmed/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/NVIDIA-DLSS-5-RTX-40-GPUs.jpg",
+            oneliner: "DLSS 5 on RTX 40 GPUs extends upgrade cycle; AI rendering drives GPU silicon refresh demand.",
+          },
+          {
+            headline: "Tesla's Make-or-Break Cybercab Had a Quiet Debut",
+            url: "https://www.wired.com/story/tesla-cybercab-had-a-quiet-debut/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6a985f4fb0ecbdbb43db44df/191:100/w_1280,c_limit/Tesla-CyberCab-Event-Gear-2270749481.jpg",
+            oneliner: "Cybercab launch managed expectations; Tesla AV silicon and sensor roadmaps remain underdisclosed.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Memory chip mania isn't going away, with Dan Kim",
+            url: "https://www.ft.com/content/d4164a3c-3ae1-46ba-912a-d6fccbc619d7?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI-driven DRAM and HBM squeeze persists; memory economics reshape chip supply chains through 2026.",
+          },
+          {
+            headline: "Lexar announces 'world's thinnest portable SSD' with proprietary pogo-pin cable and magnetic sleeve",
+            url: "https://www.tomshardware.com/pc-components/external-ssds/lexar-announces-worlds-thinnest-portable-ssd-in-celebration-of-the-brands-30th-anniversary-lexar-muse-drive-achieves-0-15-inch-thickness-with-proprietary-pogo-pin-cable-magnetic-sleeve-for-phone-mounting",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/aVZx5jBmD6jyCGxJN9EdAo-2560-80.jpg",
+            oneliner: "Lexar Muse ultra-thin SSD locks iPhone ecosystem via proprietary connector; storage supply chain fragment accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia acquires Hugging Face for $12.9 billion in massive bet on open AI models",
+            url: "https://www.cnbc.com/2026/09/04/nvidia-hugging-face-deal-chips.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108353940-1787671145319-gettyimages-2285783827-JAPAN_NVIDIA.jpeg?v=1787671381&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA expands beyond chips into AI software, tightening ecosystem lock-in across model and inference.",
+          },
+          {
+            headline: "Nvidia's investments grow to $99 billion as chip giant becomes major backer of AI companies",
+            url: "https://www.cnbc.com/2026/09/04/nvidia-ai-investments-99-billion.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108353993-1787677585886-108353993-1787675816989-gettyimages-2266718431-NVIDIA_GTC.jpg?v=1787832050&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA's $99B equity portfolio in AI labs, cloud, and infra creates vertical integration from silicon to software.",
+          },
+          {
+            headline: "Anthropic's $2tn IPO puts powerful external trustees in spotlight",
+            url: "https://www.ft.com/content/9536c7b9-c600-48ec-8fe2-453b0ca187e9?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic's $2T IPO valuation and external trustee structure reshape AI company governance and capital markets.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Hugging Face is too important to fall into Nvidia's hands",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/03/hugging-face-is-too-important-to-fall-into-nvidias-hands/5294363",
+            source: "The Register",
+            image: "https://image.theregister.com/5294373.jpg?imageId=5294373&x=0&y=11.61&cropw=100&croph=76.79&panox=0&panoy=11.61&panow=100&panoh=76.79&width=1200&height=683",
+            oneliner: "NVIDIA-Hugging Face merger threatens open-model competition; regulators face pressure on AI consolidation.",
+          },
+          {
+            headline: "Chinese chipmaker CXMT allegedly used a written roadmap to steal Samsung DRAM tech",
+            url: "https://www.tomshardware.com/pc-components/dram/chinas-cmxt-had-an-actual-roadmap-for-its-alleged-industrial-espionage-from-samsung-south-korean-court-says-project-hefei-was-responsible-for-cxmts-current-position-as-major-dram-maker",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/kZ6DksKsTnL5JWKit4UwyV-1920-80.jpg",
+            oneliner: "South Korean court rules CXMT stole Samsung 620-step DRAM recipe via Project Hefei; competitor now controls 10% global market.",
+          },
+          {
+            headline: "Data from drones in Ukraine is fueling a new Wild West marketplace",
+            url: "https://www.technologyreview.com/2026/09/04/1143452/drone-data-wild-west/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/09/drone-data.jpg?resize=1200,600",
+            oneliner: "Ukraine drone data creates new defense semiconductor demand; edge AI, sensors, compute architectures expand.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "When the Package Becomes an Electrical Design Variable",
+            url: "https://www.eetimes.com/when-the-package-becomes-an-electrical-design-variable/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI power integrity shifts inside package; PDN design must now treat chip, package, board as unified system.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 33,
     date: "September 3, 2026",
     slug: "issue-33",

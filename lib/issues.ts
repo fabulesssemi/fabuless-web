@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 35,
+    date: "September 8, 2026",
+    slug: "issue-35",
+    title: "Intel Hits High-NA Milestone. TSMC Adopts ASML. China Stockpiles Tools.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel Expected To Raise Its CPU Prices By Up To 10% In Early October, Prioritizing Profitability",
+            url: "https://wccftech.com/intel-expected-to-raise-its-cpu-prices-by-up-to-10-in-early-october/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/06/Intel-Core-Ultra-desktop-processors.jpg",
+            oneliner: "Intel raises CPU prices 10%; exits low-margin segments, margins expand but volume at risk.",
+          },
+          {
+            headline: "Arm pushes agentic AI and desktop-quality graphics in next-gen phone platform",
+            url: "https://www.theregister.com/systems/2026/09/08/arm-pushes-agentic-ai-and-desktop-quality-graphics-in-next-gen-phone-platform/5294867",
+            source: "The Register",
+            image: "https://image.theregister.com/5294871.jpg?imageId=5294871&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Arm next-gen CPU/GPU targets 1W power budget for on-device agentic AI; OEM differentiation key.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Intel surpasses one million High-NA EUV wafers processed, outpaces the rest of the industry combined — company also trailblazing giant 6×12 photomasks to speed production and lower costs",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/intel-surpasses-one-million-high-na-euv-wafers-processed-outpaces-the-rest-of-the-industry-combined-company-also-trailblazing-giant-6-12-photomasks-to-speed-production-and-lower-costs1",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/VeUsd9vM4WBszDumWSs7gJ-1280-80.jpg",
+            oneliner: "Intel leads High-NA production maturity, accelerates cost reduction via 6×12 photomask standardization.",
+          },
+          {
+            headline: "TSMC, Samsung commit to ASML's newest chipmaking tools as AI drives demand",
+            url: "https://www.cnbc.com/2026/09/08/tsmc-samsung-asml-high-na-euv-machine-ai-chips.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108149105-1747878898420-Thumbnail_5.jpg?v=1747881259&amp;w=1920&amp;h=1080",
+            oneliner: "TSMC, Samsung adopt High-NA EUV; ASML secures foundry capex lock-in through 2027+.",
+          },
+          {
+            headline: "High-NA EUV Moves From Experiment to Manufacturing",
+            url: "https://semiwiki.com/semiconductor-manufacturers/intel/373350-high-na-euv-moves-from-experiment-to-manufacturing/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/HNA-EUV-Moves-into-Manufacturing-1200x675.jpg",
+            oneliner: "Intel Foundry reports High-NA EUV production-ready; capital intensity shifts to yield recovery.",
+          },
+          {
+            headline: "ASML and TSMC's 12-Inch Photomask Initiative: Technical Significance",
+            url: "https://semiwiki.com/semiconductor-manufacturers/tsmc/373405-asml-and-tsmcs-12-inch-photomask-initiative-technical-significance/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/ASML-and-TSMCs-12-Inch-Photomask-Initiative-1200x675.jpg",
+            oneliner: "6×12 photomask standardization cuts lithography cycle time; enables sub-N2 volume ramps.",
+          },
+          {
+            headline: "Mistral bags $24 billion valuation as Samsung leads funding for Europe's AI champion",
+            url: "https://www.cnbc.com/2026/09/08/mistral-ai-funding-valuation-samsung.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108266601-1771392963474-gettyimages-2219062309-FRANCE_VIVATECH.jpeg?v=1771393101&amp;w=1920&amp;h=1080",
+            oneliner: "Samsung invests in Mistral; secures open-weight model access, hedges vs. US AI platform dependency.",
+          },
+          {
+            headline: "Mistral raises record €3bn as Europe strains to keep pace in AI race",
+            url: "https://www.ft.com/content/adbf5262-c4d5-4312-a9b8-4d3cf30c9e00?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Mistral €3B funding round positions European AI lab; reduces OpenAI/Anthropic monopoly risk.",
+          },
+          {
+            headline: "Dell Says AI Will Drive 75 Percent Of Datacenter Demand By 2030",
+            url: "https://www.nextplatform.com/compute/2026/09/07/dell-says-ai-will-drive-75-percent-of-datacenter-demand-by-2030/5294882",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5249714.jpg?imageId=5249714&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Dell forecasts AI capex 75% of DC revenue by 2030; validates multi-year compute infrastructure boom.",
+          },
+          {
+            headline: "Hyperspectral satellite startup Pixxel nabs $100M investment",
+            url: "https://siliconangle.com/2026/09/07/hyperspectral-satellite-startup-pixxel-nabs-100m-investment/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Pixxel.png",
+            oneliner: "Pixxel Series C $100M; Earth observation chipsets (imaging sensors, processing) scale addressable market.",
+          },
+          {
+            headline: "Chip stock investors beware — these charts could warn of further weakness ahead",
+            url: "https://www.marketwatch.com/story/chip-stock-investors-beware-these-charts-could-warn-of-further-weakness-ahead-1bd890cc?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Currency market signals suggest chip stock capital outflows ahead; valuation multiple contraction risk rising.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Report: CXMT and YMTC Stockpile Three Years of ASML DUV Machines as China Races to Beat Export Limits",
+            url: "https://wccftech.com/report-cxmt-and-ymtc-stockpile-three-years-of-asml-duv-machines-as-china-races-to-beat-export-limits/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/SMICs-DUV-equipment.jpg",
+            oneliner: "CXMT, YMTC hoard DUV capacity ahead of tighter US export controls; China side-steps future embargoes.",
+          },
+          {
+            headline: "Can Huawei build China's answer to ASML?",
+            url: "https://www.ft.com/content/36333a53-4063-4aad-8df9-8d2f9d0048a3?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huawei assembles DUV supply chain in-house; China pursues domestic litho autonomy from ASML.",
+          },
+          {
+            headline: "Huawei proudly shows off an entirely un-American chip",
+            url: "https://www.theregister.com/systems/2026/09/08/huawei-proudly-shows-off-an-entirely-un-american-chip/5294900",
+            source: "The Register",
+            image: "https://image.theregister.com/5294906.jpg?imageId=5294906&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Huawei demonstrates vendor-diversified SoC; reduces US IP footprint to evade sanctions.",
+          },
+          {
+            headline: "Belgian-Chinese semiconductor researcher arrested over alleged GaN trade-secret theft — prosecutors suspect BelGaN insiders transferred chip IP to China before the company collapsed",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/belgian-chinese-semiconductor-researcher-arrested-over-alleged-gan-trade-secret-theft-prosecutors-suspect-belgan-insiders-transferred-chip-ip-to-china-before-the-company-collapsed",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/3FNNihwAzJsSj7NpGfTeuY-2000-80.jpg",
+            oneliner: "BelGaN GaN IP allegedly transferred to China; EU tightens IP export controls on power semiconductors.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "This founder is teaching chips how to recycle (their energy)",
+            url: "https://www.technologyreview.com/2026/09/08/1142079/hannah-earley-computer-chips-recycle-energy/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/08/Hannah-0G6A8202-2.jpg?resize=1200,600",
+            oneliner: "Vaire Computing recycles heat via thermioelectric recovery; chip power efficiency delta vs. competitors.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 34,
     date: "September 4, 2026",
     slug: "issue-34",

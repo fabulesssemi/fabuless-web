@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 36,
+    date: "September 9, 2026",
+    slug: "issue-36",
+    title: "Memory Crunch Hits. Google Bets Finland. TSMC Gears High-NA.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Amazon CEO Andy Jassy Explained Why Semiconductor Sales Could Keep Climbing for Years to Come. Here's My Favorite AI Chipmaker Right Now.",
+            url: "https://finance.yahoo.com/technology/ai/articles/amazon-ceo-andy-jassy-explained-105400261.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "Jassy signals multi-year AI chip demand growth; AWS capex pressure validates foundry utilization forecasts.",
+          },
+          {
+            headline: "OpenAI claims to have solved the 90-year-old Navier-Stokes math problem in 88 hours",
+            url: "https://www.cnbc.com/2026/09/09/openai-navier-stokes-math-problem-solved.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108360206-1788935108315-gettyimages-2271060387-boivin-notitle260416_npYv5.jpeg?v=1788935125&amp;w=1920&amp;h=1080",
+            oneliner: "OpenAI agent swarms solve Navier-Stokes; validates multi-node training efficiency, supports AI chip demand.",
+          },
+          {
+            headline: "Another Microsoft team admits it's struggling to handle flood of AI-generated code",
+            url: "https://www.theregister.com/software/2026/09/09/another-microsoft-team-admits-its-struggling-to-handle-flood-of-ai-generated-code/5295185",
+            source: "The Register",
+            image: "https://image.theregister.com/5271891.jpg?imageId=5271891&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Microsoft Edge team automates QA for AI-generated extensions; signals tooling gap in LLM-scale workflows.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung and SK hynix Memory Inventories Crash Below 10 Days as AI Demand Triggers Historic Shortage, Says Report",
+            url: "https://wccftech.com/samsung-and-sk-hynix-memory-inventories-crash-below-10-days-as-ai-demand-triggers-historic-shortage-says-report/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/04/Samsung-SK-hynix-DRAM-1920x1161.jpg",
+            oneliner: "Samsung, SK hynix inventories plunge below 10 days; AI datacenter demand triggers supply crisis.",
+          },
+          {
+            headline: "CXMT Faces HBM Memory Chip Shock As Yields Sink To 25% With Close To 80 Out Of 100 HBM3 Chips Failing Final Tests, Says Report",
+            url: "https://wccftech.com/cxmt-faces-hbm-memory-chip-shock-as-yields-sink-to-25-with-close-to-80-out-of-100-hbm3-chips-failing-final-tests-says-report/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/CXMT-LPDDR6-RAM.jpg",
+            oneliner: "CXMT HBM3 yields crash to 25%; Chinese chipmaker struggles with complex stacking—benefits competitors.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "TSMC's High-NA Plan Gives ASML a Catalyst, but Investors Face Two Different Timelines",
+            url: "https://finance.yahoo.com/markets/stocks/articles/tsmc-high-na-plan-gives-101831920.html",
+            source: "Yahoo Finance",
+            image: null,
+            oneliner: "TSMC high-NA roadmap accelerates ASML EUV demand; multi-year production ramp creates staggered capex cycle.",
+          },
+          {
+            headline: "Google to invest record $15 billion in AI infrastructure in the 'Texas of Europe'",
+            url: "https://www.cnbc.com/2026/09/09/google-finland-ai-infrastructure-investment.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108338204-1784672317305-gettyimages-2286485984-ALPHABET_EARNS.jpeg?v=1788361563&amp;w=1920&amp;h=1080",
+            oneliner: "Google commits $15.1B to Finland AI datacenters; largest Europe bet signals chip-infrastructure capex surge.",
+          },
+          {
+            headline: "Big Tech eyes glacier-strewn Patagonia for building mega AI data centers — region offers 17,300 glaciers, coldness, and cheap energy, but fiber lines are scarce",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/glacier-strewn-patagonia-pitches-for-mega-data-center-business-coldness-and-energy-resources-a-plus-but-poor-connectivity-issues-need-to-be-resolved",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/nUpyNwzPkHqN2qGA9RkcwR-2000-80.jpg",
+            oneliner: "Big Tech explores Patagonia datacenters; geography limits fiber connectivity, raises infrastructure capex costs.",
+          },
+          {
+            headline: "Silver Lake to merge French software groups in €10bn deal",
+            url: "https://www.ft.com/content/2cc88608-04b2-4dcb-8c89-698f251de170?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Silver Lake merges French software firms; AI-driven valuation repricing affects buyout-financed supply chains.",
+          },
+          {
+            headline: "The ECB is virtually certain to hike rates Thursday. Here is why Wall Street is bracing for what comes next.",
+            url: "https://www.marketwatch.com/story/the-ecb-is-virtually-certain-to-hike-rates-thursday-here-is-why-wall-street-is-bracing-for-what-comes-next-7ec46af0?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "ECB rate hike looms; European datacenter capex timelines face margin pressure from debt costs.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Anthropic researcher quits over AI labs 'gambling with our lives'",
+            url: "https://www.ft.com/content/20c07191-8da6-440f-b04b-8ea0ebdd9153?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic safety researcher departs; signals internal concern over unchecked AI scaling without risk controls.",
+          },
+          {
+            headline: "More than 10% chance AI 'could kill all humans' in the next 10 years, Anthropic safety researcher says — departing employee says AI companies are 'gambling with our lives'",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/more-than-10-percent-chance-ai-could-kill-all-humans-in-the-next-10-years-anthropic-safety-researcher-says-departing-employee-says-ai-companies-are-gambling-with-our-lives",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/qopvBjyJRmLK2srEuafedE-2000-80.jpg",
+            oneliner: "Anthropic researcher quantifies existential AI risk; regulatory pressure may constrain chip-capex timelines.",
+          },
+          {
+            headline: "Switzerland tests a FOSS escape route from Microsoft 365",
+            url: "https://www.theregister.com/os-platforms/2026/09/09/switzerland-tests-a-foss-escape-route-from-microsoft-365/5294878",
+            source: "The Register",
+            image: "https://image.theregister.com/236158.jpg?imageId=236158&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Switzerland pilots open-source cloud; geopolitical edge cases may splinter enterprise software supply chains.",
+          },
+          {
+            headline: "Brent crude passes $100 threshold as war in Iran intensifies",
+            url: "https://www.marketwatch.com/story/brent-crude-reaches-100-as-war-in-iran-intensifies-b73832e2?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Brent oil surpasses $100/bbl; energy cost inflation pressures datacenter and fab operating margins.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Batteries just broke another record in the US",
+            url: "https://www.technologyreview.com/2026/09/09/1143680/batteries-us-record/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/09/GettyImages-1926227948.jpg?resize=1200,600",
+            oneliner: "US battery deployments hit 20.2 GWh record; grid storage demand sustains semiconductor supply chain.",
+          },
+          {
+            headline: "Understanding the thermal ceiling in portable power",
+            url: "https://www.technologyreview.com/2026/09/09/1143279/understanding-the-thermal-ceiling-in-portable-power/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/09/Anker_US_DTC_no-copy_683x382px-1.jpg?resize=1200,600",
+            oneliner: "Smartphone thermal throttling limits charging rates; power management ICs face competing thermal/performance specs.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 35,
     date: "September 8, 2026",
     slug: "issue-35",

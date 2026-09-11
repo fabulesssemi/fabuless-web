@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 38,
+    date: "September 11, 2026",
+    slug: "issue-38",
+    title: "TSMC Accelerates 1.4nm, DeepSeek Proves Efficiency, Oracle Rides AI Cloud",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "DeepSeek releases V4.1-Flash, says it outperforms flagship V4-Pro",
+            url: "https://siliconangle.com/2026/09/10/deepseek-releases-v4-1-flash-says-it-outperforms-flagship-v4-pro/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/deepseek-scaled.png",
+            oneliner: "DeepSeek V4.1-Flash proves smaller models outperform larger ones; GPU demand pressure mounts.",
+          },
+          {
+            headline: "DeepSeek's new model sets a template for powerful LLMs that run lean",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/11/deepseeks-new-model-sets-a-template-for-powerful-llms-that-run-lean/5295715",
+            source: "The Register",
+            image: "https://image.theregister.com/262727.jpg?imageId=262727&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "DeepSeek Flash model runs efficiently on fewer GPUs; threatens hyperscaler capex projections.",
+          },
+          {
+            headline: "Oracle says AI will save it from the SaaSpocalypse, not bring it on",
+            url: "https://www.theregister.com/software/2026/09/11/oracle-says-ai-will-save-it-from-the-saaspocalypse-not-bring-it-on/5295736",
+            source: "The Register",
+            image: "https://image.theregister.com/5295741.jpg?imageId=5295741&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Oracle pivots to AI infrastructure services; SaaS disruption threat now opportunity.",
+          },
+          {
+            headline: "Broadcom Rides Rocketing Trend For Custom AI Accelerators",
+            url: "https://www.nextplatform.com/connect/2026/09/10/broadcom-rides-rocketing-trend-for-custom-ai-accelerators/5295681",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/1684467.jpg?imageId=1684467&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Broadcom secures custom AI accelerator deals; hyperscaler silicon diversification reduces NVIDIA dependency.",
+          },
+          {
+            headline: "Indian Researchers Look Beyond GPUs to Neuromorphic AI Hardware",
+            url: "https://www.eetimes.com/indian-researchers-look-beyond-gpus-to-neuromorphic-ai-hardware/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Neuromorphic alternatives to GPU inference emerging; power efficiency drives alternative silicon adoption.",
+          },
+          {
+            headline: "A20 Pro's Dual 16-Core Neural Engine Has A Peak Compute Throughput Higher Than Its 7-Core GPU, But Only When It Comes To Specialized Workloads",
+            url: "https://wccftech.com/a20-pro-dual-16-core-neural-engine-peak-compute-throughput-higher-than-7-core-gpu-specialized-workloads/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/A20-Pro-2.jpg",
+            oneliner: "A20 Pro NPU outperforms GPU on inference; mobile AI specialization trend accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung Electro-Mechanics Showcases Next-Generation Semiconductor Package Substrate Technologies for AI and Servers at 'KPCA Show 2026'",
+            url: "https://www.semiconductor-digest.com/samsung-electro-mechanics-showcases-next-generation-semiconductor-package-substrate-technologies-for-ai-and-servers-at-kpca-show-2026/?utm_source=rss&utm_medium=rss&utm_campaign=samsung-electro-mechanics-showcases-next-generation-semiconductor-package-substrate-technologies-for-ai-and-servers-at-kpca-show-2026",
+            source: "Semiconductor Digest",
+            image: "https://www.semiconductor-digest.com/wp-content/uploads/2026/09/imageView.jpeg",
+            oneliner: "Samsung advances AI server substrate tech; packaging becomes critical AI compute bottleneck.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "TSMC Reportedly Accelerates 1.4nm Production to April 2027, Pulling its Most Advanced Chips a Full Year Ahead of Schedule",
+            url: "https://wccftech.com/tsmc-reportedly-accelerates-1-4nm-production-to-april-2027-pulling-its-most-advanced-chips-a-full-year-ahead-of-schedule/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/07/TSMC-1.4nm-2.jpg",
+            oneliner: "TSMC pulls 1.4nm to April 2027; AI chip supply race accelerates one year early.",
+          },
+          {
+            headline: "Oracle's stock edges up on earnings beat as cloud infrastructure revenue more than doubles",
+            url: "https://www.cnbc.com/2026/09/10/oracle-orcl-q1-earnings-report-2027.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108361331-1789060014865-gettyimages-1689129855-20090101230925-99-327233.jpeg?v=1789060080&amp;w=1920&amp;h=1080",
+            oneliner: "Oracle cloud infrastructure revenue doubles; AI infrastructure strategy pays off immediately.",
+          },
+          {
+            headline: "Oracle's data centre revenue surges as AI strategy accelerates",
+            url: "https://www.ft.com/content/9df99d0b-6ef6-4530-8771-8b220f740e74?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Oracle datacentre revenue surge signals enterprise AI infrastructure shift away from hyperscalers.",
+          },
+          {
+            headline: "Analog Devices to Acquire Alif Semiconductor",
+            url: "https://www.semiconductor-digest.com/analog-devices-to-acquire-alif-semiconductor/?utm_source=rss&utm_medium=rss&utm_campaign=analog-devices-to-acquire-alif-semiconductor",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "ADI acquires Alif for $1.35B; consolidates edge AI and IoT semiconductor capabilities.",
+          },
+          {
+            headline: "Ayar Labs bags $150M in additional late-stage funding to help make bigger AI chip clusters",
+            url: "https://siliconangle.com/2026/09/10/ayar-labs-bags-150m-in-additional-series-e-funding-to-help-make-bigger-ai-chip-clusters/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Screenshot-from-2026-09-11-09-33-27.png",
+            oneliner: "Ayar Labs raises $650M total; optical chiplet interconnect critical for AI cluster scaling.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Chinese AI labs secretly used millions of Claude exchanges to train their models, Anthropic says",
+            url: "https://www.cnbc.com/2026/09/11/chinese-ai-labs-moonshot-deepseek-alibaba-anthropic.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108291329-1776192386700-gettyimages-2270583563-raa-anthropi260412_npZvE.jpeg?v=1776192426&amp;w=1920&amp;h=1080",
+            oneliner: "Alibaba, Moonshot AI distilled Anthropic models; model-stealing threat reshapes IP strategy.",
+          },
+          {
+            headline: "Anthropic says it stopped scientists potentially developing bioweapons with AI",
+            url: "https://www.ft.com/content/845cf3bf-59c5-4e53-a45e-e11d2339df9d",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic blocks bioweapon research; AI model access controls reshape enterprise computing policy.",
+          },
+          {
+            headline: "OpenAI wants to know if an AI industry slowdown would even be legal",
+            url: "https://www.wired.com/story/openai-wants-to-know-if-an-ai-industry-slowdown-would-even-be-legal/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6aa304df834bd0176b553b6c/191:100/w_1280,c_limit/Model-Behavior-OpenAI-Anthropic-AI-Slowdown-Business.jpg",
+            oneliner: "OpenAI queries antitrust limits on capex coordination; semiconductor supply agreements face legal scrutiny.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "From AI-Assisted EDA to AI-Mediated Engineering",
+            url: "https://www.eetimes.com/from-ai-assisted-eda-to-ai-mediated-engineering/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI agents now run design workflows autonomously; EDA software demand shifts from tooling to platforms.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 37,
     date: "September 10, 2026",
     slug: "issue-37",

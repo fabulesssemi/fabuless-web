@@ -356,13 +356,15 @@ Schema:
 
     text = message.content[0].text.strip()
 
-    # Strip markdown fences if model adds them
-    if text.startswith("```"):
-        text = "\n".join(text.split("\n")[1:])
-    if text.endswith("```"):
-        text = "\n".join(text.split("\n")[:-1])
-
-    return json.loads(text.strip())
+    # Claude sometimes wraps the JSON in a fence and/or adds prose before or
+    # after it despite the "no markdown fences, no extra text" instruction.
+    # Find the first '{' and parse just the JSON value from there, ignoring
+    # anything trailing it (a closing fence, a follow-up note, etc.) instead
+    # of requiring the whole response to be exactly one JSON document.
+    start = text.find("{")
+    if start == -1:
+        raise ValueError(f"No JSON object found in Claude response: {text[:200]}")
+    return json.JSONDecoder().raw_decode(text[start:])[0]
 
 
 # ── TypeScript writer ─────────────────────────────────────────────────────────

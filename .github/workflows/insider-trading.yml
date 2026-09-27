@@ -1,7 +1,12 @@
 name: Weekly Insider Trading Update
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
+  schedule:
+    # 22:00 UTC Mondays — matches the cadence this ran on before the June 18
+    # 2026 mass schedule removal. Never restored after that, so the page sat
+    # on the June 15 data for 100+ days; restoring it here.
+    - cron: "0 22 * * 1"
 
 permissions:
   contents: write

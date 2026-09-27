@@ -1,12 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
 import type { AnalystDelta, AnalystSnapshot } from "./types";
 
-function getSupabase() {
-  const key = process.env.SUPABASE_SERVICE_KEY;
-  if (!key) throw new Error("SUPABASE_SERVICE_KEY is not set");
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key);
-}
-
+// analyst_snapshots' RLS policies (lib/analyst/schema.sql) only grant the
+// anon role, so this must use the shared anon client, not a service-role one.
 // ---------------------------------------------------------------------------
 // Daily snapshot persistence (Supabase). Powers true day-over-day deltas:
 // "PT raised this week", "sentiment moved since the last snapshot".
@@ -87,7 +83,7 @@ export async function saveSnapshot(
     downgrades_30d: snap.downgrades30d ?? null,
   };
   try {
-    const { error } = await getSupabase()
+    const { error } = await supabase
       .from("analyst_snapshots")
       .upsert(row, { onConflict: "snapshot_date,ticker" });
     return { ok: !error };
@@ -101,7 +97,7 @@ export async function getPriorSnapshot(
   ticker: string,
 ): Promise<SnapshotRow | null> {
   try {
-    const { data, error } = await getSupabase()
+    const { data, error } = await supabase
       .from("analyst_snapshots")
       .select("*")
       .eq("ticker", ticker)
@@ -118,7 +114,7 @@ export async function getPriorSnapshot(
 /** Latest prior snapshot for every ticker, keyed by ticker (for the dashboard). */
 export async function getPriorSnapshotMap(): Promise<Record<string, SnapshotRow>> {
   try {
-    const { data, error } = await getSupabase()
+    const { data, error } = await supabase
       .from("analyst_snapshots")
       .select("*")
       .lt("snapshot_date", todayUTC())
@@ -140,7 +136,7 @@ export async function getPTHistory(
   limit = 30,
 ): Promise<Array<{ date: string; pt: number; price: number | null }>> {
   try {
-    const { data, error } = await getSupabase()
+    const { data, error } = await supabase
       .from("analyst_snapshots")
       .select("snapshot_date, avg_price_target, current_price")
       .eq("ticker", ticker)
@@ -175,7 +171,7 @@ export async function getWeeklySnapshotDeltas(
   try {
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - 14);
-    const { data, error } = await getSupabase()
+    const { data, error } = await supabase
       .from("analyst_snapshots")
       .select("*")
       .gte("snapshot_date", cutoff.toISOString().slice(0, 10))

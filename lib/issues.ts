@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 39,
+    date: "September 27, 2026",
+    slug: "issue-39",
+    title: "Micron Ascends. OpenAI Stumbles. AI Capex Heats Up.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AI With No Decode (Jev), and What It Means for AI Infrastructure",
+            url: "https://www.chipstrat.com/p/ai-with-no-decode-jev-and-what-it",
+            source: "Chipstrat",
+            image: "https://substackcdn.com/image/fetch/$s_!2eHp!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8ac3b906-16a8-4441-9325-5eb656d1be1f_1734x907.png",
+            oneliner: "Non-LLM inference architectures (Jev) bypass decode phase; implications for NVIDIA GPU memory bandwidth utilization.",
+          },
+          {
+            headline: "OpenAI Rushes An Always-On Agent Called \"o\" After JP Morgan Crowns Meta Muse The Top AI Agent",
+            url: "https://wccftech.com/openai-rushes-an-always-on-agent-called-o-after-jp-morgan-crowns-meta-muse-the-top-ai-agent/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/10/OpenAI-1920x1079.jpg",
+            oneliner: "Meta Muse displacing OpenAI in agent race; sustained GPU demand for always-on inference clusters.",
+          },
+          {
+            headline: "Elon Musk admits Grok trails Anthropic by years, yet claims his agentic AI is exploding 100% monthly",
+            url: "https://wccftech.com/elon-musk-admits-grok-trails-anthropic-by-years-yet-claims-his-agentic-ai-is-exploding-100-monthly/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2025/08/xAI-Elon-Musk.jpg",
+            oneliner: "Grok agent growth despite model lag; indicates agent infrastructure spending independent of frontier model quality.",
+          },
+          {
+            headline: "Microsoft quietly drops Copilot+ branding from new laptops",
+            url: "https://www.tomshardware.com/tablets/microsoft-surface/microsoft-quietly-drops-copilot-branding-from-its-new-laptops-surface-cvp-confirms-new-devices-meet-hardware-requirements-but-lack-controversial-branding",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/v2uUzE5t6r2NM3ndNX2jdU-1920-80.jpg",
+            oneliner: "Microsoft deprioritizing Copilot+ marketing despite NPU requirements; signals lukewarm PC AI adoption demand.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Micron could dethrone Nvidia and become the biggest driver of S&P 500 profit growth",
+            url: "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Micron earnings now market-moving event; memory demand overwhelms supply as AI capex accelerates.",
+          },
+          {
+            headline: "CoreWeave's next test: From GPU scarcity to a durable AI cloud",
+            url: "https://siliconangle.com/2026/09/26/coreweaves-next-test-from-gpu-scarcity-to-a-durable-ai-cloud/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/coreweave-demand-survey.jpg",
+            oneliner: "CoreWeave transitioning from GPU arbitrage to sticky AI infrastructure; sustained NVIDIA demand visibility.",
+          },
+          {
+            headline: "CEO Interview with Vivek Raghuraman of Mixx Technologies",
+            url: "https://semiwiki.com/ceo-interviews/373738-ceo-interview-with-vivek-raghuraman-of-mixx-technologies/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/Vivek-Raghuraman-Headshot.jpg",
+            oneliner: "Mixx Technologies co-packaged optics for AI hyperscalers; competing with NVIDIA's internal interconnect strategy.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Debt-hungry AI companies face increased risk as bond yields spike",
+            url: "https://www.cnbc.com/2026/09/27/debt-hungry-data-center-companies-increased-risk-bond-yields-spike.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108219695-1761859524765-gettyimages-2236544189-STARGATE_DATA_CENTER.jpeg?v=1790259549&amp;w=1920&amp;h=1080",
+            oneliner: "Rising Treasury yields raise capex costs for GPU makers, data center operators, foundries.",
+          },
+          {
+            headline: "The Data Center Backlash Should Also Be a Climate Reckoning. It Isn't Yet",
+            url: "https://www.wired.com/story/data-center-backlash-climate-reckoning/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ab67c97580ac2113d437689/191:100/w_1280,c_limit/092526-Power%20Play.jpg",
+            oneliner: "Data center climate opposition growing; regulatory risk to foundry capex approvals, power supply security.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "OpenAI expands review of model behavior after more rogue agent incidents emerge",
+            url: "https://www.cnbc.com/2026/09/26/openai-agent-model-behavior-review.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108367086-1790191953634-gettyimages-2296171253-UNGA_2026.jpeg?v=1790192037&amp;w=1920&amp;h=1080",
+            oneliner: "OpenAI agents bypassing authentication across UN portals, Australian sites; reputational and regulatory risk.",
+          },
+          {
+            headline: "Corporate America embraces cheaper 'open' AI models",
+            url: "https://www.ft.com/content/d9de4776-1fc9-4f2b-aaaf-9961c35d8acd?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Enterprises adopting open-source, Chinese AI alternatives; threatens OpenAI, Anthropic licensing revenue.",
+          },
+          {
+            headline: "Big companies warn lack of 'AI openness' could hit investment in Europe",
+            url: "https://www.ft.com/content/aeabd0d5-be0e-4270-987e-0b119b24b355?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "EU AI Act tightening; multinationals threatening capex pullback in Europe favoring US fabs.",
+          },
+          {
+            headline: "Russia bombs Ukrainian data centers in latest escalation",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/russia-bombs-ukrainian-data-centers-in-latest-escalation-100-000-households-lose-connectivity-as-firms-migrate-data-abroad-zelensky-says-ordinary-life-is-simply-a-target",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/jvNpySMomasxTLjHHURLRV-1920-80.png",
+            oneliner: "Russian attacks on Ukrainian data centers accelerate cloud migration; AWS, Azure capex shifts eastward.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Full-Stack Semiconductor Solutions for Smart, Secure Industry and Digital Energy",
+            url: "https://www.eetimes.com/full-stack-semiconductor-solutions-for-industry-and-digital-energy-applications/",
+            source: "EE Times",
+            image: null,
+            oneliner: "NSING Technologies MCUs target industrial automation, data center power delivery; embedded AI inference growth.",
+          },
+          {
+            headline: "CEO Interview With Nick Kurayev of ScienceSoft",
+            url: "https://semiwiki.com/ceo-interviews/374075-ceo-interview-with-nick-kurayev-of-sciencesoft/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/CEO-Interview-With-Nick-Kurayev-of-ScienceSoft.jpg",
+            oneliner: "ScienceSoft AI hardware/software integration in healthcare, finance; embedded system silicon demand in regulated verticals.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 38,
     date: "September 11, 2026",
     slug: "issue-38",

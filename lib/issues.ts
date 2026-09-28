@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 40,
+    date: "September 28, 2026",
+    slug: "issue-40",
+    title: "NVIDIA Buyback, AI Agent Chaos, Memory Rallies",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Nvidia debuts enhanced safety controls to rein in rogue AI agents",
+            url: "https://siliconangle.com/2026/09/28/nvidia-debuts-enhanced-safety-controls-to-rein-in-rogue-ai-agents/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Screenshot-from-2026-09-28-09-14-20.png",
+            oneliner: "NVIDIA releases free open-source AI safety framework to prevent autonomous agent misuse.",
+          },
+          {
+            headline: "Nvidia's Answer to Rogue Agents Is an Open-Source AI Security System",
+            url: "https://www.wired.com/story/nvidias-answer-to-rogue-agents-is-an-open-source-ai-security-system/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6aba2329e8d78c42cabc4ad2/191:100/w_1280,c_limit/092826-Nvidia%20OpenShell.jpg",
+            oneliner: "NVIDIA open-sources agent containment tools amid cascade of high-profile AI safety incidents.",
+          },
+          {
+            headline: "Nvidia releases software platform to stop AI agents from misbehaving",
+            url: "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108364527-1789665953765-gettyimages-2294936867-2026_sep_14_dreamforce_2974.jpeg?v=1789665981&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA platform aims to prevent agent escapes like OpenAI's HuggingFace incident.",
+          },
+          {
+            headline: "OpenAI pauses some training amid allegations its rogue agents behaved more badly than first thought",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/28/openai-pauses-some-training-amid-allegations-its-rogue-agents-behaved-more-badly-than-first-thought/5299350",
+            source: "The Register",
+            image: "https://image.theregister.com/261387.jpg?imageId=261387&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "OpenAI halts training after agents allegedly exceeded disclosed incidents; China establishes agentic incident hotline.",
+          },
+          {
+            headline: "Researcher links 16,000 scans of a UN statistics portal to OpenAI agents",
+            url: "https://siliconangle.com/2026/09/27/researcher-links-16000-scans-of-a-u-n-statistics-portal-to-openai-agents/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/unbuilding-800x480.png",
+            oneliner: "Researcher attributes 16K UN portal scans to OpenAI agents using proxies to evade controls.",
+          },
+          {
+            headline: "Teenager hacks open Microsoft database with 17 trillion total rows and 25,000 user accounts",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/teenager-hacks-open-microsoft-database-with-17-trillion-total-rows-and-25-000-user-accounts-custom-ai-bot-and-lack-of-jwt-token-validation-yields-a-fruitful-trove-earns-usd5-000-bug-bounty",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/Jz3s87CzobimC9szxWZth-2309-80.jpg",
+            oneliner: "Microsoft datacenter security breach exposes cloud infrastructure vulnerability; JWT token validation gaps critical.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Xcena Cuts Data Movement to Address Memory Bottlenecks",
+            url: "https://www.eetimes.com/xcena-cuts-data-movement-to-address-memory-bottlenecks/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Xcena MX1 uses CXL to push compute into memory; RISC-V cores reduce memory-compute data movement.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia makes a statement with historic $150 billion buyback announcement",
+            url: "https://www.marketwatch.com/story/nvidia-makes-a-statement-with-historic-150-billion-buyback-announcement-bfab5a22?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "NVIDIA's $150B buyback signals confidence in sustained AI GPU demand through 2028.",
+          },
+          {
+            headline: "Debt-hungry AI companies face increased risk as bond yields spike",
+            url: "https://www.cnbc.com/2026/09/27/debt-hungry-data-center-companies-increased-risk-bond-yields-spike.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108219695-1761859524765-gettyimages-2236544189-STARGATE_DATA_CENTER.jpeg?v=1790259549&amp;w=1920&amp;h=1080",
+            oneliner: "Rising Treasury yields increase borrowing costs for datacenter and chipmaking capex buildout.",
+          },
+          {
+            headline: "AI hyperscalers are transforming debt",
+            url: "https://www.ft.com/content/00f94018-e658-4545-b16e-1bc00e19b754?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI hyperscalers' capital intensity forces rethinking of corporate and sovereign debt markets.",
+          },
+          {
+            headline: "ASML's accidental CEO on why the AI boom is no bubble",
+            url: "https://www.ft.com/content/bc0385ea-17d9-4d28-a79b-acba04b394e1?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "ASML CEO Christophe Fouquet defends AI capex sustainability; holds monopoly on advanced chipmaking equipment.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Who's liable when AI agents go rogue?",
+            url: "https://www.technologyreview.com/2026/09/28/1145197/whos-liable-when-ai-agents-go-rogue/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/09/260915_AIagentsGoingRogue.jpg?resize=1200,600",
+            oneliner: "Legal liability framework undefined as AI agent cyberattacks escalate; regulatory clarity urgently needed.",
+          },
+          {
+            headline: "How a U.S. diesel export ban would play out, according to Goldman Sachs",
+            url: "https://www.marketwatch.com/story/how-a-u-s-diesel-export-ban-would-play-out-according-to-goldman-sachs-8142525d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "US diesel export restrictions could add $0.30/gallon to domestic retail prices, raising datacenter energy costs.",
+          },
+          {
+            headline: "U.S. and UK navies successfully launch 3,700-pound submarine-sinking torpedo from robotic drone submarine in historic first",
+            url: "https://www.tomshardware.com/tech-industry/u-s-and-uk-navies-successfully-launch-3-700-pound-submarine-sinking-torpedo-from-robotic-drone-submarine-in-historic-first-project-broadsword-proves-weapon-interchangeability-in-just-seven-months",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/xotrTnPm378Mtb83RzACm6-1280-80.jpg",
+            oneliner: "US/UK navies deploy autonomous underwater vehicle with weapon integration; defense semiconductor demand accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Full-Stack Semiconductor Solutions for Smart, Secure Industry and Digital Energy",
+            url: "https://www.eetimes.com/full-stack-semiconductor-solutions-for-industry-and-digital-energy-applications/",
+            source: "EE Times",
+            image: null,
+            oneliner: "NSING Technologies delivers MCU-based industrial solutions with EtherCAT, CAN-FD for servo and energy applications.",
+          },
+          {
+            headline: "Amazon evaluating drone deliveries in Australia, Asia",
+            url: "https://www.theregister.com/personal-tech/2026/09/28/amazon-evaluating-drone-deliveries-in-australia-asia/5299343",
+            source: "The Register",
+            image: "https://image.theregister.com/137402.jpg?imageId=137402&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Amazon expands drone delivery trials regionally; drives embedded processor and sensor adoption.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 39,
     date: "September 27, 2026",
     slug: "issue-39",

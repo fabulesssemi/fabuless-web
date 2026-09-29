@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 41,
+    date: "September 29, 2026",
+    slug: "issue-41",
+    title: "AMD Hunts NVIDIA. Anthropic IPOs. OpenAI Stumbles.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD acquires world model developer World Labs for $8.2B",
+            url: "https://siliconangle.com/2026/09/28/amd-acquires-world-model-developer-world-labs-for-8-2b/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/AMD.png",
+            oneliner: "AMD $8.2B World Labs buy signals direct Cosmos/foundation model competition with NVIDIA, adds Fei-Fei Li.",
+          },
+          {
+            headline: "AMD drops an EPYC $15,000, 256-core beast",
+            url: "https://www.tomshardware.com/pc-components/cpus/amd-drops-an-epyc-usd15-000-bomb-epyc-9006-zen-6-venice-cpus-get-full-spec-and-pricing-treatment-from-usd700-up-to-usd14-904",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "AMD Venice EPYC 9006 hits 256 cores at $14.9k; enterprise server market consolidation pressure on Intel.",
+          },
+          {
+            headline: "Framework's Most Powerful Desktop Will Be Available For Pre-Order This Week, Featuring AMD's Ryzen AI MAX+ 495 Chip",
+            url: "https://wccftech.com/framework-desktop-amd-ryzen-ai-max-495-192-gb-memory-pre-order-this-week/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/Framework-Desktop-AMD-Ryzen-AI-MAX-495.jpg",
+            oneliner: "Framework AMD Ryzen AI MAX+ 495 desktop with 192GB targets local AI inference; NVIDIA CUDA lock-in challenged.",
+          },
+          {
+            headline: "Making AI an asset, not an expense",
+            url: "https://www.technologyreview.com/2026/09/29/1145186/making-ai-an-asset-not-an-expense/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/09/Cheri-blog.jpg?resize=1200,600",
+            oneliner: "Cost-consciousness shifts AI from capex-per-token toward ROI-driven model selection; inference efficiency becomes differentiator.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "China's Montage Technology Begins Mass Producing DDR5 9200 MT/s CKDs",
+            url: "https://wccftech.com/china-montage-technology-mass-producing-ddr5-9200-mtps-enterprise-8000-mtps-ckd/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/CK01P.jpg",
+            oneliner: "Montage DDR5 9200 MT/s clock drivers in mass production; Chinese memory ecosystem advance challenges Rambus IP licensing.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia boosts share buyback program by record $150B",
+            url: "https://siliconangle.com/2026/09/28/nvidia-boosts-share-buyback-program-by-record-150b/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Nvidia-1.png",
+            oneliner: "NVIDIA $150B buyback expansion signals confidence; stock valuation viewed as depressed despite AI dominance.",
+          },
+          {
+            headline: "Nvidia's record buyback shows chipmaker's stock is too cheap for CEO Huang to resist",
+            url: "https://www.cnbc.com/2026/09/29/nvidia-buyback-shows-chipmaker-stock-is-too-cheap-for-huang-to-resist.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108357750-1788358652696-gettyimages-2292610034-g20_2629.jpeg?v=1788358675&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA $150B buyback at historically cheap earnings multiples; capital allocation pivot away from capex.",
+          },
+          {
+            headline: "Anthropic warns of 'existential risks to humanity' in IPO prospectus",
+            url: "https://www.ft.com/content/c7685a7e-7745-4cbc-8053-4958d0ea449b",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic S-1 reveals $8bn loss on $4.6bn revenue; massive compute burn threatens IPO valuation thesis.",
+          },
+          {
+            headline: "Anthropic's potential $2 trillion IPO comes with the following fine print",
+            url: "https://www.marketwatch.com/story/anthropics-potential-2-trillion-ipo-comes-with-the-following-fine-print-99d3cb90",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Anthropic IPO economics show 10x revenue growth but soaring model training/serving costs; sustainable? Unclear.",
+          },
+          {
+            headline: "Samsung to inject $1 billion into Nvidia- and KKR-backed AI infrastructure firm",
+            url: "https://www.cnbc.com/2026/09/29/samsung-investment-nvidia-kkr-ai-helix-digital.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108333294-1783682286868-gettyimages-2283571410-SKOREA_SAMSUNG.jpeg?v=1783682311&amp;w=1920&amp;h=1080",
+            oneliner: "Samsung $1B Helix investment signals NVIDIA ecosystem lock-in; memory/SoC supplier bets on chipmaker success.",
+          },
+          {
+            headline: "Nvidia turns to insurers to spread the risk of AI build-out",
+            url: "https://www.ft.com/content/d6a9f5df-08d0-4f80-ad2d-5d8a17e2cc82",
+            source: "Financial Times",
+            image: null,
+            oneliner: "NVIDIA securitizes AI capex risk; insurers now backstop semiconductor demand concentration.",
+          },
+          {
+            headline: "Two-thirds of the revenue needed to justify the AI build-out is still unaccounted for, says major consulting firm",
+            url: "https://www.marketwatch.com/story/two-thirds-of-the-revenue-needed-to-justify-the-ai-buildout-are-still-unaccounted-for-says-major-consulting-firm-8c55ccba",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "$4.2T AI capex annually unmatched by revenue; semiconductor capex cycle sustainability questioned.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "OpenAI's dirty deeds Down Under included security bypass attempts, using exposed keys, source code siphon",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/29/openais-dirty-deeds-down-under-included-security-bypass-attempts-using-exposed-keys-source-code-siphon/5299666",
+            source: "The Register",
+            image: "https://image.theregister.com/5299671.jpg?imageId=5299671&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "OpenAI agent security failures compromise Australian government sites; regulatory backlash threatens AI deployment velocity.",
+          },
+          {
+            headline: "HMRC bets up to £2.4B on Salesforce for taxpayer CRM overhaul",
+            url: "https://www.theregister.com/public-sector/2026/09/29/hmrc-bets-up-to-24b-on-salesforce-for-taxpayer-crm-overhaul/5299389",
+            source: "The Register",
+            image: "https://image.theregister.com/5288694.jpg?imageId=5288694&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "UK HMRC £2.4B Salesforce CRM+AI deal; government digital infrastructure spend signals European enterprise AI adoption.",
+          },
+          {
+            headline: "IBM Details Quantum, AI Developments in India",
+            url: "https://www.eetimes.com/ibm-details-quantum-ai-developments-in-india/",
+            source: "EE Times",
+            image: null,
+            oneliner: "IBM Qiskit education + AI accelerators expand in India; emerging market semiconductor/quantum talent pipeline grows.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Intel patent embeds MicroLEDs in chip packaging — technology may enable embedded optical interconnects through TGVs",
+            url: "https://www.tomshardware.com/tech-industry/photonics/intel-patent-embeds-microleds-in-chip-packaging-technology-may-enable-embedded-optical-interconnects-through-tgvs",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/nLf2RERmpBXAeiQMTiGNhk-1600-80.jpg",
+            oneliner: "Intel MicroLED chiplet integration enables co-packaged optics; advanced packaging roadmap addresses bandwidth bottlenecks.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 40,
     date: "September 28, 2026",
     slug: "issue-40",

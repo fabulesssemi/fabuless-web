@@ -162,19 +162,19 @@ export const insiderTradingData: InsiderTradingData = {
     {
       ticker: "AVGO",
       company: "Broadcom Inc.",
-      severity: "CAUTION",
+      severity: "CAUTIOUS",
       signal: "Founder Henry Samueli liquidated ~687k shares on Sep 23 @ $354\u2013$361 aggregate value ~$242M). While scale suggests diversification rebalancing rather than fundamental distress, this represents one of the largest insider sale events in the 6-month window. Monitor for additional officer exits or guidance reductions.",
     },
     {
       ticker: "AMD",
       company: "Advanced Micro Devices Inc.",
-      severity: "CAUTION",
+      severity: "CAUTIOUS",
       signal: "CEO Lisa Su executed coordinated liquidation of ~72k shares on Sep 10 across 22 separate sales (~$36.6M aggregate), consistent with 10b5-1 pre-planned program. Prices ($503\u2013$515) imply significant run-up from earlier in cycle. No panic signal, but insider confidence appears neutral-to-cautious at current levels.",
     },
     {
       ticker: "NVDA",
       company: "NVIDIA Corporation",
-      severity: "MONITOR",
+      severity: "CAUTIOUS",
       signal: "Director Mark Stevens sold 1.366M shares on Sep 18 @ $219\u2013$220 (~$300M aggregate), reducing stake from ~980.5M to ~970.5M shares. While Stevens likely under 10b5-1, scale is notable. CEO Huang and CFO Kress also trimmed holdings modestly in Sep. No fundamental red flag, but suggests insiders comfortable taking profits at current valuations.",
     },
   ],

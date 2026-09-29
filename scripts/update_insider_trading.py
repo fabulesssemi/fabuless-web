@@ -333,6 +333,9 @@ Even if there is no actionable signal, include the name with conviction = "MODER
 
 ## Stars: 5=VERY HIGH, 4=HIGH, 3=MOD-HIGH, 2=MODERATE, 1=AVOID/CAUTIOUS
 
+## Red flag severity — use exactly one of these three strings, verbatim:
+STRONG AVOID, AVOID, CAUTIOUS
+
 ## Rules:
 - Watchlist: exactly 10 items (first 10 from Fabuless 12, ranked by signal strength)
 - RedFlags: only names with genuinely alarming patterns (cluster S-sells, full liquidations by C-suite)
@@ -365,6 +368,46 @@ Schema:
     if start == -1:
         raise ValueError(f"No JSON object found in Claude response: {text[:200]}")
     return json.JSONDecoder().raw_decode(text[start:])[0]
+
+
+# ── Schema validation ──────────────────────────────────────────────────────────
+# lib/insider-trading.ts types these fields as string literal unions, so any
+# value Claude returns outside the allowed set fails the Next.js/Vercel build,
+# not just this script. Normalize obvious near-misses and hard-fail on
+# anything else so a bad Claude response blocks this GH Action instead of
+# silently pushing a commit that breaks production.
+
+VALID_CONVICTIONS = {"VERY HIGH", "HIGH", "MOD-HIGH", "MODERATE", "AVOID", "CAUTIOUS"}
+VALID_SEVERITIES = {"STRONG AVOID", "AVOID", "CAUTIOUS"}
+
+CONVICTION_ALIASES = {"LOW": "MODERATE", "MOD": "MOD-HIGH", "MODERATE-HIGH": "MOD-HIGH"}
+SEVERITY_ALIASES = {"CAUTION": "CAUTIOUS", "MONITOR": "CAUTIOUS", "WATCH": "CAUTIOUS"}
+
+
+def _normalize_field(value: str, valid: set, aliases: dict, field: str, ticker: str) -> str:
+    if value in valid:
+        return value
+    normalized = aliases.get(value.upper())
+    if normalized:
+        print(f"⚠️  Normalized {field} {value!r} → {normalized!r} for {ticker}")
+        return normalized
+    raise ValueError(
+        f"Claude returned an invalid {field} {value!r} for {ticker}. "
+        f"Expected one of {sorted(valid)}. Refusing to write a value that "
+        f"would break the TypeScript build."
+    )
+
+
+def validate_and_normalize(data: dict) -> dict:
+    for item in data.get("watchlist", []):
+        item["conviction"] = _normalize_field(
+            item["conviction"], VALID_CONVICTIONS, CONVICTION_ALIASES, "conviction", item.get("ticker", "?")
+        )
+    for flag in data.get("redFlags", []):
+        flag["severity"] = _normalize_field(
+            flag["severity"], VALID_SEVERITIES, SEVERITY_ALIASES, "severity", flag.get("ticker", "?")
+        )
+    return data
 
 
 # ── TypeScript writer ─────────────────────────────────────────────────────────
@@ -472,6 +515,7 @@ def main():
     print(f"\n📊 Collected {len(raw_data):,} chars of EDGAR data")
 
     structured = analyze_with_claude(raw_data)
+    structured = validate_and_normalize(structured)
     structured["generatedDate"] = TODAY_ISO
 
     script_dir = os.path.dirname(os.path.abspath(__file__))

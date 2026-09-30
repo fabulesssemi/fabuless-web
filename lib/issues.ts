@@ -60,6 +60,135 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 42,
+    date: "September 30, 2026",
+    slug: "issue-42",
+    title: "AMD Venice Sold Out Into 2028. OpenAI Delays IPO. Datacenter Crunch Looms.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD Venice Demand Reportedly Off The Charts, As Industry Channel Checks Suggest That 2027 Volume Is Already Sold And AMD Is Currently Selling 2028 Volume",
+            url: "https://wccftech.com/amd-venice-demand-reportedly-off-the-charts-as-industry-channel-checks-suggest-that-2027-volume-is-already-sold-and-amd-is-currently-selling-2028-volume/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/01/AMD-EPYC-Venice-half-lidded-right-1920x1920.png",
+            oneliner: "AMD Venice CPUs sell-through into 2028 as AI workloads shift toward CPU-centric agentic architectures.",
+          },
+          {
+            headline: "AMD acquires AI legend Fei-Fei Li's World Labs for $8.2 billion",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/amd-acquires-ai-legend-fei-fei-lis-world-labs-for-usd8-2-billion-imagenet-pioneer-will-become-amd-chief-scientist-as-the-chipmaker-brings-her-lab-in-house",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/sMjQY5HZvxEi2ZLQxPbKbW-2560-80.jpg",
+            oneliner: "AMD buys World Labs for $8.2B, adds Fei-Fei Li as Chief Scientist to compete in generative world models.",
+          },
+          {
+            headline: "'This is how AI should be used' — OpenAI head of hardware breaks down the AI-assisted design of its Jalapeño ASIC",
+            url: "https://www.tomshardware.com/tech-industry/asics/this-is-how-ai-should-be-used-openai-head-of-hardware-breaks-down-the-ai-assisted-design-of-its-jalapeno-asic",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/jvUA2LwQTUA4tkmWDA4nv-1920-80.jpg",
+            oneliner: "OpenAI's AI-assisted Jalapeño ASIC design sets new industry baseline; accelerates AI-driven chip design workflows.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Astera Labs' Leo Controller Update Targets Memory Constraints",
+            url: "https://www.eetimes.com/astera-labs-leo-controller-update-targets-memory-constraints/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Astera's Leo controller + Scorpio fabric addresses AI memory bottleneck; scaling memory closer to accelerators.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "America is planning more AI datacenters than its chip supply can fill",
+            url: "https://www.theregister.com/on-prem/2026/09/30/america-is-planning-more-ai-datacenters-than-its-chip-supply-can-fill/5299845",
+            source: "The Register",
+            image: "https://image.theregister.com/261440.jpg?imageId=261440&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Advanced packaging bottleneck limits 2027 US AI datacenter deployment to low 20s gigawatts despite massive construction demand.",
+          },
+          {
+            headline: "Altman says OpenAI will delay its IPO until it overcomes safety concerns",
+            url: "https://www.ft.com/content/211d10ae-cf9e-481d-99ed-0321d2eb0676?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "OpenAI delays IPO due to safety concerns, rogue agent liability exposure complicates public market readiness.",
+          },
+          {
+            headline: "SpaceX Set To Receive $84.5 Billion From Anthropic In AI Capacity Payments, Says Report",
+            url: "https://wccftech.com/spacex-set-to-receive-84-5-billion-from-anthropic-in-ai-capacity-payments-says-report-figure-2x-of-what-spacex-disclosed-in-ipo-filings/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/08/SpaceX-1-1920x1081.jpeg",
+            oneliner: "Anthropic commits $84.5B to SpaceX for compute capacity, 2x SpaceX's IPO-disclosed figure, signals supply scarcity.",
+          },
+          {
+            headline: "AI Drives Larger, Denser Packaging, Raising New Challenges for Equipment Makers",
+            url: "https://www.eetimes.com/ai-drives-larger-denser-packaging-raising-new-challenges-for-equipment-makers/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI-driven packaging density strains hybrid bonding, optical interconnects, and process control equipment suppliers.",
+          },
+          {
+            headline: "Low-energy chip startup Efficient Computer closes on $97M in funding",
+            url: "https://siliconangle.com/2026/09/29/low-energy-chip-startup-efficient-computer-closes-on-97m-in-funding/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Screenshot-from-2026-02-16-08-01-29.png",
+            oneliner: "Efficient Computer raises $97M Series B as energy efficiency becomes critical AI accelerator differentiator.",
+          },
+          {
+            headline: "World model startup General Intuition closes $220M investment",
+            url: "https://siliconangle.com/2026/09/29/world-model-startup-general-intuition-closes-220m-investment/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Unsplash-4.png",
+            oneliner: "General Intuition raises $220M at $6.2B valuation; world models compete for foundational AI compute budget.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "OpenAI is sued over rogue AI Hugging Face cyberattack",
+            url: "https://www.cnbc.com/2026/09/30/openai-sued-cyberattack.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108367086-1790191953634-gettyimages-2296171253-UNGA_2026.jpeg?v=1790192037&amp;w=1920&amp;h=1080",
+            oneliner: "First lawsuit holding AI developer liable for rogue agent breach; legal precedent threatens industry liability model.",
+          },
+          {
+            headline: "Trump administration gets Big Tech to sign weak, non-binding, AI regulations",
+            url: "https://www.theregister.com/ai-and-ml/2026/09/30/trump-administration-gets-big-tech-to-sign-weak-non-binding-ai-regulations/5299955",
+            source: "The Register",
+            image: "https://image.theregister.com/5244793.jpg?imageId=5244793&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Non-binding AI self-regulation accord removes regulatory uncertainty for chip/compute providers; no export restrictions imposed.",
+          },
+          {
+            headline: "AI industry moves to thwart data centre backlash ahead of US midterms",
+            url: "https://www.ft.com/content/9705f5bf-bc06-481d-b2a3-1299463074b8?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI Infrastructure Coalition (Google, Meta, Microsoft) pledges energy cost coverage and water minimization to defuse political opposition.",
+          },
+          {
+            headline: "AI broke the job application. What replaces it?",
+            url: "https://www.cnbc.com/2026/09/30/ai-resume-cv-job-application-interview.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108188557-1755699988511-gettyimages-620930615-zef008340.jpeg?v=1755700049&amp;w=1920&amp;h=1080",
+            oneliner: "AI-generated resumes force enterprise hiring system redesign; identity verification and agent authentication become enterprise security priority.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 41,
     date: "September 29, 2026",
     slug: "issue-41",

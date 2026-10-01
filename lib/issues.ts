@@ -60,6 +60,133 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 43,
+    date: "October 1, 2026",
+    slug: "issue-43",
+    title: "Micron Surges on AI Boom. Synopsys Codes Chips. DeepSeek Challenges NVIDIA.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Qualcomm Doubles Down on Agentic AI at Snapdragon Summit 2026",
+            url: "https://www.eetimes.com/qualcomm-doubles-down-on-agentic-ai-at-snapdragon-summit-2026/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Qualcomm Snapdragon 8 Elite Gen 6 dual-SKU strategy extends agentic AI to mobile/wearable/PC markets.",
+          },
+          {
+            headline: "Nvidia ties AI factory economics to tokens and power efficiency",
+            url: "https://siliconangle.com/2026/10/01/nvidia-links-ai-factory-economics-inference-efficiency-fullyconnected/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/Ian-Buck-vice-president-and-general-manager-hyperscale-and-HPC-at-Nvidia-Corp-scaled.jpg",
+            oneliner: "NVIDIA shifts AI economics focus from GPU throughput to system-wide token efficiency and power per inference.",
+          },
+          {
+            headline: "SpaceX set to launch Google AI chips into orbit in push toward space-based data centers",
+            url: "https://www.cnbc.com/2026/10/01/spacex-to-launch-google-ai-chips-to-orbit-with-planet-labs-satellites.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108338210-1784673643083-gettyimages-2286491276-AFP_C2TQ4WF.jpeg?v=1784673712&amp;w=1920&amp;h=1080",
+            oneliner: "SpaceX launches Google TPUs on Planet Labs satellites; first orbital AI data center infrastructure push.",
+          },
+          {
+            headline: "AWS offers local, open source leash for agent harnesses",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/01/aws-offers-local-open-source-leash-for-agent-harnesses/5300578",
+            source: "The Register",
+            image: "https://image.theregister.com/237975.jpg?imageId=237975&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AWS Dogwood Local Engine sandboxes AI agents with temporal rules; reduces inference escape risk.",
+          },
+          {
+            headline: "AMD Ryzen Z3 Reportedly Shrinks Onto A 25mm FF6 Package Smaller Than Strix Point, Squeezing Zen 6 Into Tiny Handhelds",
+            url: "https://wccftech.com/amd-next-gen-handheld-z3-and-z3-extreme-socs-make-an-appearance-online/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/AMD-Ryzen-Z3.jpg",
+            oneliner: "AMD Ryzen Z3 uses compact FF6 package with Zen 6 cores for next-gen handheld gaming.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Micron beats on earnings and issues strong guidance as data center revenue jumps 11-fold",
+            url: "https://www.cnbc.com/2026/09/30/micron-mu-q4-earnings-report-2026.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108369539-1790699148394-gettyimages-2297196411-AFP_C9PF6K9.jpeg?v=1790862984&amp;w=1920&amp;h=1080",
+            oneliner: "Micron DRAM revenue surges 11x; supply tightness forecast through 2028 lifts margins.",
+          },
+          {
+            headline: "Micron projects tightening RAM shortages through 2028 as it generates record profit",
+            url: "https://www.tomshardware.com/pc-components/dram/micron-projects-tightening-ram-shortages-through-2028-as-it-generates-record-profit-record-86-25-percent-gross-margin-drives-over-usd53-billion-in-quarterly-profit",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/BYt67avi3sTtpfCohBmJhh-1920-80.jpg",
+            oneliner: "Micron forecasts DRAM/NAND shortage through 2028; 86% gross margin drives record $53B quarterly profit.",
+          },
+          {
+            headline: "Watch Out NVIDIA – Broadcom Reportedly Secures Samsung's Memory Price Favor & Ends NVIDIA's Volume-Discount Edge",
+            url: "https://wccftech.com/watch-out-nvidia-broadcom-reportedly-secures-samsungs-memory-price-favor-ends-nvidias-volume-discount-edge/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/09/OpenAI-GPT-6-Astra-NVIDIA-Jensen-Huang-1-1-1920x1275.jpg",
+            oneliner: "Broadcom negotiates parity Samsung memory pricing with NVIDIA; erodes NVIDIA's AI infrastructure cost advantage.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Flow Engineering raises $50M to bring the power of AI to hardware engineering",
+            url: "https://siliconangle.com/2026/10/01/flow-engineering-raises-50m-to-bring-the-power-of-ai-to-hardware-engineering/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/xresch-blueprint-6944719_1280.jpg",
+            oneliner: "Flow Engineering Series B $50M funds agentic AI platform for hardware design lifecycle automation.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "DeepSeek and Huawei release open-source Ascend AI programming tools to reduce reliance on Nvidia ecosystem",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/deepseek-and-huawei-release-open-source-ascend-ai-programming-tools-to-reduce-reliance-on-nvidia-ecosystem-tools-include-compute-and-communication-libraries-as-well-as-ascend-support-for-tilelang",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/XshNMmxdYaq78TYvcLQQRL-1920-80.jpg",
+            oneliner: "DeepSeek-Huawei open-source Ascend 950 tools undermine NVIDIA GPU lock-in; compete via software stack.",
+          },
+          {
+            headline: "Suspected Chinese spies spoofed an Anthropic exec, ex-White House official in AI phishing",
+            url: "https://www.theregister.com/security/2026/10/01/suspected-chinese-spies-spoofed-an-anthropic-exec-ex-white-house-official-in-ai-phishing/5300595",
+            source: "The Register",
+            image: "https://image.theregister.com/5300612.jpg?imageId=5300612&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Chinese APT targets Anthropic and White House officials via phishing; AI policy espionage escalates.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "OpenAI and Synopsys Announce GPT-Synopsys: Why AI-Powered Chip Design Matters",
+            url: "https://semiwiki.com/eda/synopsys/374301-openai-and-synopsys-announce-gpt-synopsys-why-ai-powered-chip-design-matters/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/Synopsys-OpenAI.jpg",
+            oneliner: "OpenAI-Synopsys multiyear partnership launches GPT-Synopsys for AI-driven semiconductor design automation.",
+          },
+          {
+            headline: "TSMC's AI Design Kit: Bringing Agentic AI Into Chip Design",
+            url: "https://semiwiki.com/semiconductor-manufacturers/tsmc/374098-tsmcs-ai-design-kit-bringing-agentic-ai-into-chip-design/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/TSMCs-AI-Design-Kit-Bringing-Agentic-AI-Into-Chip-Design-1200x675.jpg",
+            oneliner: "TSMC AI Design Kit enables agents to optimize chip performance/power using TSMC process knowledge.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 42,
     date: "September 30, 2026",
     slug: "issue-42",

@@ -20,7 +20,7 @@ export default function About() {
           It started as a weekly newsletter. That's still at the core: every weekday, a concise briefing on the most important semiconductor developments, written with a finance lens and no PhD required.
         </p>
         <p>
-          But it's become more than a newsletter. The platform now includes live analyst consensus data, insider trading signals, earnings tracking, and a set of AI tools called Lenses that let you go deep on specific companies and the thinking of the industry's most respected voices.
+          But it's become more than a newsletter. The platform now includes live analyst consensus data, insider trading signals, earnings tracking, and Ask Fabuless, a built-in AI assistant that answers questions about any company or story on the site.
         </p>
       </div>
 
@@ -55,7 +55,7 @@ export default function About() {
             ["Analyst Consensus", "Live price targets, ratings, and sentiment shifts across the top semiconductor names."],
             ["Insider Trading", "Form 4 signals sourced directly from SEC EDGAR. Who's buying, who's selling, and what the pattern looks like."],
             ["Earnings Tracker", "Key metrics and guidance from semiconductor earnings calls, updated each quarter."],
-            ["The Lenses", "AI tools built on the thinking of respected industry voices. Ask anything about a company or topic and get a grounded, sourced answer."],
+            ["Ask Fabuless", "A built-in AI assistant, grounded in the site's own news and data. Ask anything about a company or topic and get a sourced answer."],
           ].map(([title, desc]) => (
             <div key={title} className="flex gap-4 py-4 border-b border-gray-100 last:border-0">
               <div className="w-1.5 h-1.5 rounded-full bg-[#B45309] mt-[7px] shrink-0" />

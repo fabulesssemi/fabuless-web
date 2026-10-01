@@ -54,10 +54,13 @@ const STORY_SCHEMA = `{
       "source": "exact source name from the input",
       "category": "one of: Compute | Capital Flows | Geopolitics & Policy | Memory & Networking | Other",
       "oneliner": "one sharp analyst-style sentence — the investment implication, not a summary",
-      "image": "image url from the input if available, otherwise null"
+      "image": "image url from the input if available, otherwise null",
+      "topicKey": "a short 2-5 word label for the underlying news event (e.g. 'Micron memory pricing', 'AMD buys World Labs'). Two stories covering the same event, even from different sources with different headlines, MUST use the identical topicKey string so duplicates can be detected programmatically."
     }
   ]
 }`;
+
+type RankedStory = AutoStory & { topicKey?: string };
 
 // ---------------------------------------------------------------------------
 // Source name resolution — shared by input building and post-processing dedup.
@@ -92,10 +95,10 @@ function sourceNameFromUrl(url: string): string {
 // ---------------------------------------------------------------------------
 // Multi-pass diversity: prefer 1 per source, then 2, then 3.
 // Guarantees at most `maxPerSource` from any single domain.
-function diversify(stories: AutoStory[], target = 15, maxPerSource = 3): AutoStory[] {
+function diversify<T extends AutoStory>(stories: T[], target = 15, maxPerSource = 3): T[] {
   const sourceCounts = new Map<string, number>();
   const added = new Set<string>();
-  const result: AutoStory[] = [];
+  const result: T[] = [];
 
   for (let pass = 1; pass <= maxPerSource && result.length < target; pass++) {
     for (const s of stories) {
@@ -111,6 +114,28 @@ function diversify(stories: AutoStory[], target = 15, maxPerSource = 3): AutoSto
     }
   }
 
+  return result;
+}
+
+// Same-event duplicates across different sources (e.g. three outlets all
+// covering one Micron pricing update) pass diversify() fine since each is a
+// different source — diversify only caps per-source repeats, not per-topic
+// ones. Claude is asked to self-tag a "topicKey" per story and avoid picking
+// two with the same one, but per the lesson from the insider-trading
+// severity bug, an instruction alone isn't enforcement — so this is a hard
+// code-level backstop: keep only the highest-ranked story per topicKey.
+function dedupeByTopic(stories: RankedStory[]): RankedStory[] {
+  const seen = new Set<string>();
+  const result: RankedStory[] = [];
+  for (const s of stories) {
+    const key = s.topicKey?.trim().toLowerCase();
+    if (key && seen.has(key)) {
+      console.log(`[dedupe-topic] dropped duplicate "${s.topicKey}" for: ${s.headline.slice(0, 60)}`);
+      continue;
+    }
+    if (key) seen.add(key);
+    result.push(s);
+  }
   return result;
 }
 
@@ -179,6 +204,7 @@ RULES:
 - Prefer stories about SPECIFIC EVENTS: earnings reports, guidance changes, capex announcements, supply chain decisions, export control actions, M&A, major technology milestones, regulatory decisions.
 - NEVER pick: weekly recaps ("what you missed"), opinion columns, newsletters, roundups, "top stories" digest pieces, or any article that summarizes other news rather than breaking its own story. These add no value to investors.
 - NEVER pick articles with vague or clickbait headlines like "what you might have missed", "here's everything you need to know", "5 things to watch". Real news events have specific factual headlines.
+- NEVER pick more than one article about the same underlying news event, even if different sources wrote different headlines about it (e.g. three outlets all covering "Micron raises memory prices" is ONE story, not three). Pick the single best-written source for that event and use your other slots on genuinely different events. Use the "topicKey" field to self-check this: if two candidates would get the same topicKey, only one may be selected.
 - Return ONLY stories that appear in the input list — use the exact URL, headline, source, and image provided.
 - The "oneliner" must be one sharp sentence stating the specific investment implication. Example: "A $10B TSMC commitment deepens AMD's single-supplier risk at peak cross-strait tension."
 - Assign the most accurate category from: ${CATEGORIES.join(" | ")}.
@@ -202,11 +228,11 @@ ${STORY_SCHEMA}`;
 
     const raw = message.content.find((b) => b.type === "text")?.text ?? "";
     const jsonStr = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim();
-    const parsed: { issueTitle?: string; stories?: AutoStory[] } = JSON.parse(jsonStr);
+    const parsed: { issueTitle?: string; stories?: RankedStory[] } = JSON.parse(jsonStr);
 
     // Support both new object format and legacy array format
-    const storiesArr: AutoStory[] = Array.isArray(parsed)
-      ? (parsed as AutoStory[])
+    const storiesArr: RankedStory[] = Array.isArray(parsed)
+      ? (parsed as RankedStory[])
       : (parsed.stories ?? []);
     const generatedTitle: string = Array.isArray(parsed)
       ? ""
@@ -227,11 +253,15 @@ ${STORY_SCHEMA}`;
       rank: (s as AutoStory & { rank?: number }).rank ?? i + 1,
     }));
 
-    // Sort by rank ascending so diversify processes best stories first
+    // Sort by rank ascending so dedup/diversify process best stories first
     withRanks.sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
 
+    // Collapse same-event duplicates across sources before diversify runs,
+    // since diversify only prevents repeat sources, not repeat topics.
+    const topicDeduped = dedupeByTopic(withRanks);
+
     // Hard-enforce source diversity: target 15, max 2 per source
-    const diversified = diversify(withRanks, 15, 2);
+    const diversified = diversify(topicDeduped, 15, 2);
 
     // Demote Digitimes: never allow it in the first 4 slots (top story grid).
     // Move any Digitimes entries to the back of the list.
@@ -290,10 +320,12 @@ ${STORY_SCHEMA}`;
     // Re-number rank to match the new order — downstream (getHomepageArticles)
     // re-sorts by the persisted rank field, so leaving stale ranks here would
     // silently undo this reordering once written to Supabase.
-    const withImagesFirst = [
+    // Drop the transient topicKey field — it's only needed for in-pipeline
+    // dedup, not for the schema this gets persisted and served under.
+    const withImagesFirst: AutoStory[] = [
       ...topStories.filter((s) => s.image),
       ...topStories.filter((s) => !s.image),
-    ].map((s, i) => ({ ...s, rank: i + 1 }));
+    ].map(({ topicKey: _topicKey, ...s }, i) => ({ ...s, rank: i + 1 }));
 
     // Fallback title: week of today
     const weekOf = new Date().toLocaleDateString("en-US", {

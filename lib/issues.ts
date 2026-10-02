@@ -60,6 +60,142 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 44,
+    date: "October 2, 2026",
+    slug: "issue-44",
+    title: "Amazon Dumps Nvidia. Samsung Squeezes HBM. Intel Nova Leaks.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel Nova Lake Desktop CPU Lineup Leak Reveals 7 SKUs: Core Ultra 9 4970K 28-Core Flagship With 125W TDP & 144 MB of bLLC, Core Ultra 7 4870K With 24 Cores & Core Ultra 5 4650K With 22 Cores",
+            url: "https://wccftech.com/intel-nova-lake-desktop-cpu-lineup-leak-core-ultra-9-4970k-7-4870k-5-4650k/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/Intel-Nova-Lake-Core-Series-4-Desktop-CPUs.jpg",
+            oneliner: "Intel Nova Lake desktop lineup leaked; Core Ultra 9 4970K claims 28-core flagship with 125W TDP.",
+          },
+          {
+            headline: "SpaceX launches Google AI chips into orbit in push toward space-based data centers",
+            url: "https://www.cnbc.com/2026/10/01/spacex-to-launch-google-ai-chips-to-orbit-with-planet-labs-satellites.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108338210-1784673643083-gettyimages-2286491276-AFP_C2TQ4WF.jpeg?v=1784673712&amp;w=1920&amp;h=1080",
+            oneliner: "Google TPUs launched on Planet Labs satellites; space-based AI inference infrastructure emerges.",
+          },
+          {
+            headline: "Google launches first datacenter satellite and research that finds orbiting bit barns can work",
+            url: "https://www.theregister.com/systems/2026/10/02/google-launches-first-datacenter-satellite-and-research-that-finds-orbiting-bit-barns-can-work/5300721",
+            source: "The Register",
+            image: "https://image.theregister.com/5242044.jpg?imageId=5242044&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Google deploys orbital datacenters; validates satellite infrastructure for edge AI compute.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung Leveraging The Global DRAM Pricing Landscape With Its HBM4 Technology, Company Is Reportedly Squeezing Customers With A 3x Quote Compared To HBM3E",
+            url: "https://wccftech.com/samsung-hbm4-pricing-3x-hbm3e-dram-market/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/Samsung-HBM4.jpg",
+            oneliner: "Samsung charges 3x HBM3E prices for HBM4; memory bottleneck accelerates AI cost inflation.",
+          },
+          {
+            headline: "Micron's Numbers Show Why HBM4 Memory Is Worth 15X Its Weight In Gold",
+            url: "https://www.nextplatform.com/store/2026/10/02/microns-numbers-show-why-hbm4-memory-is-worth-15x-its-weight-in-gold/",
+            source: "NextPlatform",
+            image: null,
+            oneliner: "HBM4 economics justify premium pricing; Micron positions for margin expansion in AI boom.",
+          },
+          {
+            headline: "Component shortages drive Raspberry Pi prices up by up to 23%",
+            url: "https://www.tomshardware.com/raspberry-pi/component-shortages-drive-raspberry-pi-prices-up-by-up-to-23-percent-escalating-lpddr4-lpddr5-costs-trigger-the-third-price-hike-of-the-year",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/Cjk4FGGZWXicyvaeTkXtid-1920-80.jpg",
+            oneliner: "Raspberry Pi raises prices 23% on LPDDR4/5 supply constraints; third hike in 2026.",
+          },
+          {
+            headline: "Enterprise storage becomes AI memory as privately run models close in on the frontier",
+            url: "https://siliconangle.com/2026/10/02/open-weight-models-power-private-ai-netapp-iterate-netappinsight/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Ashish-Dhawan-Brian-Sathianathan-Jon-Nordmarkv-CLEAN-Thumb.jpg",
+            oneliner: "Open-weight models enable enterprise on-prem AI; NetApp storage repositioned as AI memory layer.",
+          },
+          {
+            headline: "Decades of DIY best-of-breed give way to pretested stacks as AI raises integration risk",
+            url: "https://siliconangle.com/2026/10/02/flexpod-brings-validated-ai-infrastructure-enterprises-netappinsight/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/James-Cole-Alvaro-Celis-CLEAN-Thumb.jpg",
+            oneliner: "FlexPod (NetApp/Cisco) repositioned as pretested AI stack; integration complexity drives bundling.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Amazon seeks to offload $8bn of Nvidia chips to investors",
+            url: "https://www.ft.com/content/97d8d346-519e-48fb-8df8-66cf5f12ef62",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Amazon off-balance-sheets $8B Nvidia inventory; signals AI capex financing stress.",
+          },
+          {
+            headline: "Amazon is hiking chip-rental prices and reportedly moving Nvidia processors off the balance sheet",
+            url: "https://www.marketwatch.com/story/amazon-is-hiking-chip-rental-prices-and-reportedly-moving-nvidia-processors-off-the-balance-sheet-b205a0b0",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Amazon raises GPU rental rates amid balance-sheet restructuring for Nvidia GPUs.",
+          },
+          {
+            headline: "AI got smarter. The bills got harder to control",
+            url: "https://ig.ft.com/ai-tokens/",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI inference costs soaring faster than pricing cuts; token economics under pressure.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Micro Center requires photo ID and signed no-export pledge to buy RTX 5090 gaming GPU",
+            url: "https://www.tomshardware.com/pc-components/gpus/micro-center-requires-photo-id-and-signed-no-export-pledge-to-buy-rtx-5090-gaming-gpu-buyer-forced-to-sign-declaration-disclosing-install-location-and-promise-gpu-will-remain-in-the-us",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/RH2UfQ4PEty8QdC39Tkoom-1920-80.jpg",
+            oneliner: "RTX 5090 purchases now require ID, no-export pledge, install-location disclosure to Micro Center.",
+          },
+          {
+            headline: "AI is making cyberattacks faster and harder to detect, Interpol warns. Here's what companies should watch",
+            url: "https://www.cnbc.com/2026/10/02/interpol-cyberattack-cyberthreat-agentic-ai.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/107022116-1646063793505-gettyimages-1236749239-AFP_9T87YP.jpeg?v=1646063868&amp;w=1920&amp;h=1080",
+            oneliner: "Interpol warns agentic AI accelerates cyber-attacks; enterprise security posture obsolete.",
+          },
+          {
+            headline: "AI agents hacked the hackers, stealing email addresses from security research org",
+            url: "https://www.theregister.com/security/2026/10/01/ai-agents-hacked-the-hackers-stealing-email-addresses-from-security-research-org/5300652",
+            source: "The Register",
+            image: "https://image.theregister.com/5300669.jpg?imageId=5300669&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AI agents autonomously exploited Zammad zero-days; agentic AI weaponization proven in wild.",
+          },
+          {
+            headline: "A Flaw in ChatGPT's Mac App Could Have Let Hackers Grab Sensitive Data",
+            url: "https://www.wired.com/story/a-flaw-in-chatgpts-mac-app-could-have-let-hackers-grab-sensitive-data/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6abc2c32f3865c0127252ad0/191:100/w_1280,c_limit/GettyImages-2278945913.jpg",
+            oneliner: "ChatGPT macOS vulnerability patches; AI software supply-chain security remains fragile.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 43,
     date: "October 1, 2026",
     slug: "issue-43",

@@ -112,9 +112,36 @@ export async function getHomepageArticles(): Promise<{
       return age >= 2 * DAY_MS && age < 3 * DAY_MS;
     });
 
-    // Top Stories: best 4 from today; fall back to most recent alive articles if today is empty
-    const topSource = today.length >= 4 ? today : alive.sort((a, b) => new Date(b.first_seen_at as string).getTime() - new Date(a.first_seen_at as string).getTime());
-    const topStories = topSource.slice(0, 4).map(rowToStory);
+    // Top Stories: the 4 best image-bearing articles. The grid renders a big
+    // photo per card, so an imageless story (which curation pushes to the back
+    // of the ranking) must never take a top slot. The rolling pool means
+    // "today" can hold fewer than 4 image-bearing rows (stories already seen
+    // yesterday keep their old first_seen_at), so rank within today first,
+    // then backfill from yesterday/day-before. Digitimes is never a top story
+    // and no source gets more than 2 slots.
+    const ageTier = (r: Record<string, unknown>) =>
+      Math.floor((now - new Date(r.first_seen_at as string).getTime()) / DAY_MS);
+    const topCandidates = [...alive]
+      .filter((r) => r.image && (r.source as string).toLowerCase().trim() !== "digitimes")
+      .sort((a, b) => ageTier(a) - ageTier(b) || ((a.rank as number) ?? 99) - ((b.rank as number) ?? 99));
+    const topRows: Record<string, unknown>[] = [];
+    const topSourceCounts = new Map<string, number>();
+    for (const r of topCandidates) {
+      if (topRows.length >= 4) break;
+      const src = (r.source as string).toLowerCase().trim();
+      if ((topSourceCounts.get(src) ?? 0) >= 2) continue;
+      topSourceCounts.set(src, (topSourceCounts.get(src) ?? 0) + 1);
+      topRows.push(r);
+    }
+    // Last resort so the grid is never short: pad with newest remaining rows.
+    if (topRows.length < 4) {
+      const taken = new Set(topRows.map((r) => r.url as string));
+      const pad = [...alive]
+        .filter((r) => !taken.has(r.url as string))
+        .sort((a, b) => new Date(b.first_seen_at as string).getTime() - new Date(a.first_seen_at as string).getTime());
+      topRows.push(...pad.slice(0, 4 - topRows.length));
+    }
+    const topStories = topRows.map(rowToStory);
     const topUrls = new Set(topStories.map((s) => s.url));
 
     // List: fill to guarantee minimums — 8 today, 4 yesterday, 4 day-before

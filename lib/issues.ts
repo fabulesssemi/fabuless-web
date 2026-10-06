@@ -60,6 +60,133 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 45,
+    date: "October 6, 2026",
+    slug: "issue-45",
+    title: "OpenAI-Synopsys EDA Deal. AMD Surges on Agents. Data Center Backlash Spreads.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Meta Muse gives AMD a boost as AI momentum shifts to personal agents",
+            url: "https://www.cnbc.com/2026/10/06/meta-muse-gives-amd-a-boost-as-ai-momentum-shifts-to-personal-agents-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108345361-1785944333010-108345361-1785944232801-gettyimages-2276989758-AFP_B3NR8XA.jpeg?v=1785944350&amp;w=1920&amp;h=1080",
+            oneliner: "AMD outperforms peers on personal agent AI wave; compute demand shifts from data centers to edge.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "CXL-Connected MRAM Address AI Storage Latency",
+            url: "https://www.eetimes.com/cxl-connected-mram-address-ai-storage-latency/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Everspin MRAM + CXL bridge DRAM-NAND gap; new storage tier for AI workload acceleration.",
+          },
+          {
+            headline: "Samsung 9100 Pro SSDs slashed up to 41% while supplies last — huge price cuts hit all capacities from 1TB to 8TB",
+            url: "https://www.tomshardware.com/pc-components/samsung-9100-pro-ssds-slashed-up-to-41-percent-while-supplies-last-huge-price-cuts-hit-all-capacities-from-1tb-to-8tb",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/sZDdoG9fLgUgowg6bfPM7W-1920-80.jpg",
+            oneliner: "Samsung PCIe 5.0 NAND pricing collapses 41%; supply glut pressures memory margin recovery.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Hadrian raises $40M for AI agents that find the weaknesses attackers can exploit",
+            url: "https://siliconangle.com/2026/10/06/hadrian-raises-40m-for-ai-agents-that-find-the-weaknesses-attackers-can-exploit/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/hadrian.png",
+            oneliner: "Hadrian's $40M funding fuels AI-powered offensive security; raises silicon demand for inference.",
+          },
+          {
+            headline: "Palmer Luckey's Erebor surges to more than $7bn in deposits since launch",
+            url: "https://www.ft.com/content/42b6fa88-f730-4f8a-a194-8f53d0759aaf?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Erebor tech bank reaches $7B deposits; consolidates fintech banking capital amid SVB void.",
+          },
+          {
+            headline: "Atos lands £350M beat keeping Met Police applications running",
+            url: "https://www.theregister.com/public-sector/2026/10/06/atos-lands-350m-beat-keeping-met-police-applications-running/5301310",
+            source: "The Register",
+            image: "https://image.theregister.com/236993.jpg?imageId=236993&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Atos UK public sector win; infrastructure modernization contract signals government compute spending.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "America's data center fight is a preview of what's to come for the rest of the world",
+            url: "https://www.cnbc.com/2026/10/03/data-center-backlash-europe-asia-africa.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108370042-1790751830198-gettyimages-2294231098-AFP_C8339AY.jpeg?v=1790751844&amp;w=1920&amp;h=1080",
+            oneliner: "Global data center backlash over power, cost, cooling threatens AI infrastructure capex expansion.",
+          },
+          {
+            headline: "AI models used in bank cyber attacks, warns South Korea's president",
+            url: "https://www.ft.com/content/fb32e9f8-4bf7-44ad-983d-1a03f50f66f5",
+            source: "Financial Times",
+            image: null,
+            oneliner: "South Korea flags AI-powered financial cyber attacks; chips, security infrastructure demand surges.",
+          },
+          {
+            headline: "OpenAI rolls out weak sauce watermarking for AI text",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/06/openai-rolls-out-weak-sauce-watermarking-for-ai-text/5301257",
+            source: "The Register",
+            image: "https://image.theregister.com/260353.jpg?imageId=260353&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "OpenAI watermarking move signals early AI regulation compliance; shapes inference workload authentication.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "OpenAI and Synopsys partner to build \"GPT-Synopsys\" for autonomous chip design",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/openai-and-synopsys-partner-to-build-gpt-synopsys-for-autonomous-chip-design-specialized-ai-model-will-operate-eda-tools-allowing-engineers-to-deliver-more-sophisticated-chips-faster",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/L5bu9i78ZpqMnudoVp2DSk-1200-80.jpg",
+            oneliner: "OpenAI-Synopsys autonomous design AI accelerates chip development, reshapes EDA tools market.",
+          },
+          {
+            headline: "Hack The Box's AI Range Enterprise Edition tests whether AI agents can do their jobs",
+            url: "https://siliconangle.com/2026/10/06/hack-the-boxs-ai-range-enterprise-edition-tests-whether-ai-agents-can-do-their-jobs/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/hackthebox.png",
+            oneliner: "Hack The Box AI validation platform expands security infrastructure demand; enterprise AI adoption accelerates.",
+          },
+          {
+            headline: "WeLion New Energy and its semi-solid-state batteries",
+            url: "https://www.technologyreview.com/2026/10/06/1144987/2026-climate-tech-companies-to-watch-welion-semi-solid-state-batteries/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/10/AP26190018414663.jpg?resize=1200,600",
+            oneliner: "WeLion semi-solid batteries boost EV density; increases semiconductor power management IC demand.",
+          },
+          {
+            headline: "Form Energy and its iron batteries",
+            url: "https://www.technologyreview.com/2026/10/06/1145020/2026-climate-tech-companies-to-watch-form-energy-iron-batteries/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/10/Form-Energy-iron-air-battery-pack-leaving-Form-Factory-1.jpg?resize=1200,600",
+            oneliner: "Form Energy iron batteries enable grid storage; drives semiconductor power conversion chip adoption.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 44,
     date: "October 2, 2026",
     slug: "issue-44",

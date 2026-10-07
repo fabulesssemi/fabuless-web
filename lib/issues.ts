@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 46,
+    date: "October 7, 2026",
+    slug: "issue-46",
+    title: "SpaceX Bids $40B for Chips. Samsung HBM4E Cleared. Intel Shores Up Terafab.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Caterpillar and CoreWeave shorten the learning loop for physical AI",
+            url: "https://siliconangle.com/2026/10/06/caterpillar-coreweave-shorten-learning-loop-physical-ai-fullyconnected/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/IMG_1013-scaled.jpg",
+            oneliner: "CoreWeave-Caterpillar AI robotics drive new compute & sensor demand; hardware acceleration play.",
+          },
+          {
+            headline: "Microsoft's RTX Spark-Powered Surface Laptop Ultra Price For The Base Configuration Featuring An 18-Core CPU & 24GB Unified RAM Won't Be For The Faint-Hearted",
+            url: "https://wccftech.com/microsoft-surface-laptop-ultra-rtx-spark-base-price/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Microsoft Surface Laptop Ultra with NVIDIA RTX Spark validates premium AI PC segment.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung's 12-Hi HBM4E Reportedly Passes NVIDIA Qualification, Paving Way For Next-Gen AI GPU Supply",
+            url: "https://wccftech.com/samsungs-12-hi-hbm4e-reportedly-passes-nvidia-qualification-paving-way-for-next-gen-ai-gpu-supply/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Samsung HBM4E clears NVIDIA qual; diversifies GPU memory supply away from SK Hynix monopoly.",
+          },
+          {
+            headline: "Samsung 9100 Pro SSD gets another price cut, up to 51% off",
+            url: "https://www.tomshardware.com/pc-components/samsung-9100-pro-ssd-gets-another-price-cut-up-to-51-percent-off-1tb-falls-below-usd200-4tb-below-usd750",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/sZDdoG9fLgUgowg6bfPM7W-1920-80.jpg",
+            oneliner: "Samsung PCIe Gen5 SSD price collapse signals memory NAND oversupply; margin pressure at Samsung.",
+          },
+          {
+            headline: "Corsair has slashed $103 off this 32GB Vengeance RAM — the cheapest kit on the market at this speed",
+            url: "https://www.tomshardware.com/pc-components/ddr5/corsair-has-slashed-usd103-off-this-32gb-vengeance-ram-the-cheapest-kit-on-the-market-at-this-speed",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/9Y5FPoHbujE9wMmjfypv9g-1920-80.jpg",
+            oneliner: "Corsair DDR5 RAM aggressive pricing; signals DRAM spot glut pressuring SK Hynix, Micron.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "SpaceX looks to raise $40bn to buy Nvidia chips",
+            url: "https://www.ft.com/content/d3f5928d-f38c-4666-8f7a-8737f9c45f51?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SpaceX debt raise signals $40B NVIDIA GPU capex wave, stretching foundry & HBM supply chains.",
+          },
+          {
+            headline: "AMD's chief executive is planning to invest 'tens of billions' as Asian tour addresses supply-chain chokepoints",
+            url: "https://www.marketwatch.com/story/amds-chief-executive-is-planning-to-invest-tens-of-billions-as-asian-tour-addresses-supply-chain-chokepoints-c6485919?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "AMD signals multi-billion capex in Taiwan, Korea; tackles HBM, interposer, packaging bottlenecks.",
+          },
+          {
+            headline: "Google goes nuclear to power its AI data centers, committing to buy 890 megawatts of energy from Constellation",
+            url: "https://siliconangle.com/2026/10/06/google-goes-nuclear-to-power-its-ai-data-centers-committing-to-purchase-890-megawatts-of-energy-from-constellation/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-07-09-02-04.png",
+            oneliner: "Google 20-year nuclear deal locks 890MW for AI datacenters; validates power constraint on NVIDIA GPU demand.",
+          },
+          {
+            headline: "Google teams with nuclear power giant to give reactors a tune-up",
+            url: "https://www.theregister.com/systems/2026/10/07/google-teams-with-nuclear-power-giant-to-give-reactors-a-tune-tune-up-5301498",
+            source: "The Register",
+            image: "https://image.theregister.com/258297.jpg?imageId=258297&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Google-Constellation upgrade targets 890MW new capacity for AI infrastructure; power remains bottleneck.",
+          },
+          {
+            headline: "Robust AI spending sets investors up for another bumper US earnings season",
+            url: "https://www.ft.com/content/7c38e8e3-8035-4036-8bc0-5fba2fbf77cb?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "S&P 500 earnings +27% on AI capex; NVIDIA, TSMC, foundry peers benefit disproportionately.",
+          },
+          {
+            headline: "Singapore's Temasek warns of the 'biggest risk' facing markets right now",
+            url: "https://www.cnbc.com/2026/10/07/singapore-temasek-warns-of-the-biggest-risk-facing-markets.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108331908-1783498813895-gettyimages-1522314618-SINGAPORE_TEMASEK.jpeg?v=1783498872&amp;w=1920&amp;h=1080",
+            oneliner: "Temasek flags AI infrastructure unwind as systemic risk; threatens NVIDIA/foundry valuations.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Elon Musk and Intel CEO shore up chipmaker's role in Terafab project — and here's what the news is doing to the stock.",
+            url: "https://www.marketwatch.com/story/elon-musk-and-intel-ceo-shore-up-chipmakers-role-in-terafab-project-and-heres-what-the-news-is-doing-to-the-stock-315d0974?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Intel secured in Terafab partnership; validates U.S. fab policy bet under Musk influence.",
+          },
+          {
+            headline: "Google ordered to halt work on two data centers in 'Texas of Europe'",
+            url: "https://www.cnbc.com/2026/10/07/google-finland-data-center-halt.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108373796-1791360823662-gettyimages-2297901439-AFP_C9W887L.jpeg?v=1791360836&amp;w=1920&amp;h=1080",
+            oneliner: "Finland halts Google datacenters; European regulatory headwind for AI capex expansion.",
+          },
+          {
+            headline: "South Korean president calls for creation of tools that stop all cyber-attacks",
+            url: "https://www.theregister.com/public-sector/2026/10/07/south-korean-president-calls-for-creation-of-tools-that-stop-all-cyber-attacks/5301533",
+            source: "The Register",
+            image: "https://image.theregister.com/260291.jpg?imageId=260291&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "South Korea AI security push signals new Silicon Valley-to-Seoul talent & tooling flows.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "The AI Boom Has a Gigawatt Accounting Problem",
+            url: "https://www.eetimes.com/the-ai-boom-has-a-gigawatt-accounting-problem/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI datacenters face memory, networking, cooling, power delays—reveals hidden capex & component bottlenecks.",
+          },
+          {
+            headline: "Silicon Labs Adds IoT Developer Platform Tools",
+            url: "https://www.eetimes.com/silicon-labs-adds-iot-developer-platform-tools/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Silicon Labs AI dev tools expand edge AI TAM; supports broader IoT-to-cloud inference.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 45,
     date: "October 6, 2026",
     slug: "issue-45",

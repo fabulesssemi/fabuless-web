@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 47,
+    date: "October 8, 2026",
+    slug: "issue-47",
+    title: "Samsung Smashes Records. TSMC Surges. SpaceX Bids $40B on Nvidia.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "TSMC's September sales surge year-over-year as AI drives chip demand",
+            url: "https://www.cnbc.com/2026/10/08/tsmc-september-sales-hit-another-record-as-ai-boom-rolls-on.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108373707-1791333068896-gettyimages-2296986094-logos.jpeg?v=1791333111&amp;w=1920&amp;h=1080",
+            oneliner: "TSMC September revenue hits record; foundry capacity constraints tightening amid AI demand surge.",
+          },
+          {
+            headline: "RTX Spark Laptops Pave The Way To Running 284B AI Models Locally That Outperform GPT-5 In Coding And Reasoning Benchmarks, According To Microsoft Executive",
+            url: "https://wccftech.com/rtx-spark-laptops-284b-ai-models-local-gpt-5/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Nvidia RTX Spark laptops run 284B parameter models locally; shifts AI inference to edge devices.",
+          },
+          {
+            headline: "HPE Unveils The First Of The Next Generation of ProLiants for the AI Era",
+            url: "https://www.nextplatform.com/compute/2026/10/08/hpe-unveils-the-first-of-the-next-generation-of-proliants-for-the-ai-era/5301808",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5301836.jpg?imageId=5301836&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "HPE launches next-gen ProLiant servers optimized for AI workloads; enterprise infrastructure refresh cycle accelerating.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung profit surges ninefold to $80bn on AI chip demand",
+            url: "https://www.ft.com/content/8943785b-0919-4a49-8ab5-48e4a35a6e00?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Samsung sets industry record $80B quarterly profit; memory glut ending, AI capex accelerating.",
+          },
+          {
+            headline: "Samsung's Smartphone Business Yielding No Profits For Company Due To Rising Memory Costs, New Rumor Claims A 30% Production Is In Tow To Reduce Further Losses",
+            url: "https://wccftech.com/samsung-smartphone-business-no-profit-memory-costs-30-percent-production-cut/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Samsung handset profits collapse from rising memory costs; 30% production cut signals margin pressure on ODMs.",
+          },
+          {
+            headline: "Memory Is The Lynchpin Of The IT Industry, And Doubly So For AI",
+            url: "https://www.nextplatform.com/store/2026/10/08/memory-is-the-lynchpin-of-the-it-industry-and-doubly-so-for-ai/5301841",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/4093660.jpg?imageId=4093660&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Memory supply constraints now critical bottleneck for AI infrastructure deployment; HBM and GDDR demand unlimited.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "SpaceX reportedly seeking $40 billion debt package for Nvidia AI hardware",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/spacex-reportedly-seeking-usd40-billion-debt-package-for-nvidia-ai-hardware-massive-raise-could-fund-roughly-360-000-vera-rubin-gpus-across-5-000-nvl72-racks",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/iaLn9eep6ryDrWj6V9zkb9-2560-80.jpg",
+            oneliner: "SpaceX targets $40B debt for 360K Nvidia Rubin GPUs; signals massive private AI infrastructure build.",
+          },
+          {
+            headline: "Nvidia, Samsung back $90M round for AI agent startup Nous Research",
+            url: "https://siliconangle.com/2026/10/07/nvidia-samsung-back-90m-round-for-ai-agent-startup-nous-research/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Hermes.png",
+            oneliner: "Nvidia and Samsung co-invest $90M in Nous Research; chipmakers fund downstream AI software layer.",
+          },
+          {
+            headline: "US venture deal value reaches record $515.8B as exits fail to keep pace",
+            url: "https://siliconangle.com/2026/10/08/us-venture-deal-value-reaches-record-515-8b-as-exits-fail-to-keep-pace/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2018/04/sandhillroad.jpg",
+            oneliner: "VC funding hits $515.8B with AI rounds inflating value; exit drought risks capital return crisis.",
+          },
+          {
+            headline: "A true 'nuclear renaissance' is taking shape, and these stocks could be big winners",
+            url: "https://www.marketwatch.com/story/a-true-nuclear-renaissance-is-taking-shape-and-these-stocks-could-be-big-winners-e04f7364?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Nuclear energy demand surging from AI data center power requirements; energy infrastructure capex accelerating.",
+          },
+          {
+            headline: "Rising yields are quietly crashing the stock market's earlier winners of 2026",
+            url: "https://www.marketwatch.com/story/rising-yields-are-quietly-crashing-the-stock-markets-earlier-winners-of-2026-a29f2863?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Treasury yield surge pressuring growth tech valuations; AI capex multiples at risk if rates stay elevated.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Taiwan indicts 10 for smuggling US military-grade chips to China, parts routed to missile and radar programs using forged Taiwan defense institute orders",
+            url: "https://www.tomshardware.com/tech-industry/taiwan-indicts-10-for-smuggling-us-military-grade-chips-to-china-parts-routed-to-missile-and-radar-programs-using-forged-taiwan-defense-institute-orders-texas-instruments-and-analog-devices-hardware-passed-off-as-made-in-taiwan",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/goUyTkyxEwRoTKN4fjq8B4-1920-80.jpg",
+            oneliner: "Taiwan prosecutes chip smuggling ring; TI and ADI parts diverted to China military via forged orders.",
+          },
+          {
+            headline: "China races to build data centres in bid for AI supremacy",
+            url: "https://www.ft.com/content/e1dd8bff-b06d-4a40-bbb7-c0a6a36f1c8e?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "China accelerating data center buildout in Inner Mongolia; geopolitical race for AI infrastructure dominance.",
+          },
+          {
+            headline: "Huawei doubles down on smartphones as EV sales slow",
+            url: "https://www.cnbc.com/2026/10/08/huawei-china-smartphone-ev-slow.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108373724-1791337280533-gettyimages-2298063603-Huawei_Mate_90_Smartphone.jpeg?v=1791337305&amp;w=1920&amp;h=1080",
+            oneliner: "Huawei pivots back to smartphones after sanctions halved consumer revenue; chip self-sufficiency critical.",
+          },
+          {
+            headline: "Singapore's central bank wants all FinTech AI use cases subject to independent review",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/08/singapores-central-bank-wants-all-fintech-ai-use-cases-subject-to-independent-review/5301798",
+            source: "The Register",
+            image: "https://image.theregister.com/5301805.jpg?imageId=5301805&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Singapore MAS mandates independent review of all FinTech AI; regulatory overhead on semiconductor-dependent services.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Rohm Semiconductor Expands Back-End Chip Manufacturing Outsourcing",
+            url: "https://www.eetimes.com/rohm-semiconductor-expands-back-end-chip-manufacturing-outsourcing/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Rohm expands assembly/test operations in India; geographic diversification away from concentrated nodes.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 46,
     date: "October 7, 2026",
     slug: "issue-46",

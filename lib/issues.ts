@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 48,
+    date: "October 9, 2026",
+    slug: "issue-48",
+    title: "PC Demand Craters. TSMC Watches. Memory Glut Deepens.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Is iPhone 18 demand cooling off? Here's how deep Apple reportedly is cutting component orders",
+            url: "https://www.marketwatch.com/story/is-iphone-18-demand-cooling-off-heres-how-deep-apple-reportedly-is-cutting-component-orders-a44244ee?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Apple cuts iPhone 18 Pro component orders 15% in October; demand signals weaken.",
+          },
+          {
+            headline: "CoreWeave targets AI inference bottlenecks with full-stack optimization",
+            url: "https://siliconangle.com/2026/10/08/ai-inference-gets-full-stack-coreweave-launches-forge-fullyconnected/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Urvashi-Chowdhary-vice-president-of-product-and-AI-services-at-CoreWeave-Inc.-Fully-Connected-2026-scaled.jpg",
+            oneliner: "CoreWeave optimizes AI inference stack—storage, networking, software; inference economics shift.",
+          },
+          {
+            headline: "Physical AI Needs a Neuromorphic Path from Sensor to Silicon",
+            url: "https://www.eetimes.com/physical-ai-needs-a-neuromorphic-path-from-sensor-to-silicon/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Neuromorphic architectures critical for physical AI; sensor-to-silicon integration imperative.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "PC shipments tumble over 20% in 3Q26 as chip shortages bite",
+            url: "https://www.tomshardware.com/tech-industry/pc-shipments-tumble-over-20-percent-in-3q26-as-chip-shortages-bite-top-three-pc-vendors-ship-11-6-million-fewer-units-year-over-year",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/D7aZSgz5tphrHEQWcDEtPf-2240-80.jpg",
+            oneliner: "PC shipments drop 15.8M units YoY; Lenovo, HP, Dell hit hard until 2028-29.",
+          },
+          {
+            headline: "iPhone 18 Pro's Plethora Of Upgrades Can't Dampen The Effect Of Rising Memory Costs, As Apple Reportedly Asks Suppliers To Cut Production By Up To 20%",
+            url: "https://wccftech.com/iphone-18-pro-memory-costs-apple-production-cut/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Apple demands 20% production cuts from suppliers; soaring DRAM costs crush margins.",
+          },
+          {
+            headline: "Kioxia unveils E1.L SSDs for hyperscalers with up to 122.88TB capacity",
+            url: "https://www.tomshardware.com/pc-components/ssds/kioxia-unveils-e1-l-ssds-for-hyperscalers-with-up-to-122-88tb-capacity-extreme-density-meets-compact-form-factor",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/J4VT2HA9wocD5mhG8opKjU-1920-80.jpg",
+            oneliner: "Kioxia launches 122.88TB E1.L SSDs for hyperscale data centers; density play intensifies.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "TSMC's Upcoming Earnings Might Provide Major Clues For AI & Overall Chip Price Hikes, Believes Analyst — Elon Musk's Terafab Might Surface As Well",
+            url: "https://wccftech.com/tsmcs-upcoming-earnings-might-provide-major-clues-for-ai-overall-chip-price-hikes-believes-analyst-elon-musks-terafab-might-surface-as-well/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "TSMC earnings (Oct 15) may reveal Terafab partnership details; Musk's foundry play emerges.",
+          },
+          {
+            headline: "Nvidia-backed Aussie AI firm Firmus withdraws historic IPO, citing market volatility",
+            url: "https://www.cnbc.com/2026/10/09/nvidia-ai-firmus-ipo-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108378997-1791505127429-gettyimages-2269840286-TFSPI_08042026-5142.jpeg?v=1791505141&amp;w=1920&amp;h=1080",
+            oneliner: "Firmus pulls $5B Sydney IPO; NVIDIA-backed data center operator signals capex caution.",
+          },
+          {
+            headline: "Nvidia-backed data centre operator pulls $5bn IPO",
+            url: "https://www.ft.com/content/205ef7a5-321f-46e3-8097-d055bf1f6b3b?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Firmus IPO withdrawal signals AI capex pullback; market volatility stalls funding.",
+          },
+          {
+            headline: "AI stocks crumble on report that OpenAI's annualized revenue is much lower than believed",
+            url: "https://siliconangle.com/2026/10/08/ai-stocks-crumble-on-report-that-openais-annualized-revenue-is-much-lower-than-previously-believed/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Image.png",
+            oneliner: "OpenAI annualized revenue $20B below expectations; AI stock selloff accelerates.",
+          },
+          {
+            headline: "SoftBank seeks $100bn from Gulf investors to expand AI bet",
+            url: "https://www.ft.com/content/3bc0eaa5-a8d4-47e8-903c-7dd762d947dd?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SoftBank seeks $100B from UAE for AI expansion; sovereign capex shifts geopolitics.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "India's tech giants shrug off changes to USA's skilled visa program",
+            url: "https://www.theregister.com/legal/2026/10/09/indias-tech-giants-shrug-off-changes-to-usas-skilled-visa-program/5302154",
+            source: "The Register",
+            image: "https://image.theregister.com/255530.jpg?imageId=255530&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "India's tech giants dismiss H-1B restrictions; Microsoft denies fraud allegations.",
+          },
+          {
+            headline: "'Real boss of India?': Elon Musk takes aim at Indian billionaire Ambani as Starlink launch stalls",
+            url: "https://www.cnbc.com/2026/10/09/musk-starlink-ambani-india-us.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108379398-1791512718423-gettyimages-2198822267-AA_14022025_2081398.jpeg?v=1791512757&amp;w=1920&amp;h=1080",
+            oneliner: "Musk blames Ambani, regulators for Starlink delays in India after five-year compliance.",
+          },
+          {
+            headline: "Ukrainian drone attack takes out Russian datacenter",
+            url: "https://www.theregister.com/off-prem/2026/10/09/ukrainian-drone-attack-takes-out-russian-datacenter/5302137",
+            source: "The Register",
+            image: "https://image.theregister.com/261294.jpg?imageId=261294&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Ukrainian drone destroys Russian data center; Yandex recovery uncertain.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "SpaceX's Starlink Mobile plans are pressuring AT&T and Verizon shares",
+            url: "https://www.marketwatch.com/story/spacexs-starlink-mobile-plans-are-pressuring-at-t-and-verizon-shares-7cb56764?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Starlink acquires 800 MHz spectrum from Grain Management; telecom incumbents pressured.",
+          },
+          {
+            headline: "Best Battery-Powered Leaf Blowers (2026): Tested for Power, Battery Life, and Noise",
+            url: "https://www.wired.com/story/best-battery-powered-leaf-blowers/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ac69bd0cff4fa83959f96ee/191:100/w_1280,c_limit/The%20Best%20Battery-Powered%20Leaf%20Blowers%20for%20Taking%20Back%20Your%20Weekend%20102026%20top%20art%20SOURCE%20Amazon.jpg",
+            oneliner: "Battery-powered tools gain traction; lithium-ion demand drives consumer semiconductor growth.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 47,
     date: "October 8, 2026",
     slug: "issue-47",

@@ -60,6 +60,142 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 49,
+    date: "October 12, 2026",
+    slug: "issue-49",
+    title: "Intel, AMD Raise CPU Prices; Qualcomm Follows. Capital Crunch Looms for AI.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Multiple Intel CPU Families Witness 15-20% Price Hike While AMD Is Also Expected To Raise CPU Prices Soon",
+            url: "https://wccftech.com/multiple-intel-cpu-families-witness-15-20-price-hike-while-amd-is-also-expected-to-raise-cpu-prices-soon/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2024/05/AMD-Ryzen-Intel-Core-CPUs-1920x1058.jpg",
+            oneliner: "Intel raises Panther Lake, Arrow Lake, Meteor Lake prices 15-20%; AMD expected to follow within weeks.",
+          },
+          {
+            headline: "Qualcomm's Over-Reliance On Advanced Wafer Nodes Eroded Its Cost & Efficiency Strengths Over x86, Company Reportedly Raising Snapdragon X Prices By 10%",
+            url: "https://wccftech.com/qualcomm-snapdragon-x-price-hike-advanced-wafer-nodes-x86-cost-efficiency/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/Snapdragon-X2-Elite.jpg",
+            oneliner: "Qualcomm raising Snapdragon X prices 10% as advanced nodes erode cost advantage versus x86.",
+          },
+          {
+            headline: "Console market craters as Xbox sales crash 33% to the lowest since launch 25 years ago, PS5 sales drop 25%",
+            url: "https://www.tomshardware.com/video-games/console-gaming/console-market-craters-as-xbox-sales-crash-33-percent-to-the-lowest-since-launch-25-years-ago-ps5-sales-drop-25-percent-steep-price-hikes-push-series-x-to-usd800-and-ps5-pro-to-usd900",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/aG7yU8AZk2PDc4L8cPh9wY-1920-80.jpg",
+            oneliner: "Xbox, PS5 sales plummet 33%, 25% YTD as $800+ price points trigger demand collapse.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Intel, Broadcom CEOs warn capital crunch could become AI's biggest bottleneck",
+            url: "https://www.cnbc.com/2026/10/12/intel-broadcom-ceos-warn-capital-crunch-could-become-ai-bottleneck.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108315138-17804039612026-06-02t070118z_913331550_rc2jllarvolb_rtrmadp_0_computex-intel.jpeg?v=1780403995&amp;w=1920&amp;h=1080",
+            oneliner: "Intel and Broadcom CEOs warn limited access to capital threatens AI semiconductor expansion capacity.",
+          },
+          {
+            headline: "The huge lurking leverage of AI hyperscalers",
+            url: "https://www.ft.com/content/17a207f4-1563-48af-91e3-14bac89ab4b8?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "AI hyperscaler debt leverage and data center lease liabilities threaten credit stability; equity rally masks risks.",
+          },
+          {
+            headline: "Report: Amazon in talks with AI startup Decart over possible $7B acquisition",
+            url: "https://siliconangle.com/2026/10/11/report-amazon-in-talks-with-ai-startup-decart-over-possible-7b-acquisition/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-12-07-31-02.png",
+            oneliner: "Amazon pursuing $7B Decart.ai acquisition to simplify AI model deployment across heterogeneous processors.",
+          },
+          {
+            headline: "Nvidia reportedly in early talks to buy, acquihire or invest more in Reflection AI",
+            url: "https://siliconangle.com/2026/10/11/nvidia-reportedly-in-early-talks-to-buy-acqui-hire-or-invest-more-in-reflection-ai/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Reflection-AI.png",
+            oneliner: "NVIDIA in talks to acquire or invest in Reflection AI; deal could close within weeks.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Security Becomes a Sign-off Item",
+            url: "https://www.eetimes.com/security-becomes-a-sign-off-item/",
+            source: "EE Times",
+            image: null,
+            oneliner: "EU CRA mandates chip security sign-off by 2027; silicon teams must prove resilience before tapeout.",
+          },
+          {
+            headline: "UK ministers explore compulsory AI safety reporting",
+            url: "https://www.ft.com/content/ba28b7cd-293e-4eee-a073-ad81aaefced3?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "UK mandates AI safety reporting; foundries and chip designers face new autonomous systems compliance burden.",
+          },
+          {
+            headline: "AI's quiet safety gatekeepers are stepping into the spotlight",
+            url: "https://www.cnbc.com/2026/10/11/ais-quiet-safety-gatekeepers-are-stepping-into-the-spotlight.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108369821-1790713166683-gettyimages-2297246422-AFP_C9Q98QH.jpeg?v=1790713236&amp;w=1920&amp;h=1080",
+            oneliner: "Third-party AI safety evaluators gain regulatory authority; new compliance layer for chip design and inference.",
+          },
+          {
+            headline: "Russia's Yandex bot traffic nearly eliminated overnight after Ukraine drone strikes cripple multiple of 'Russia's Google' data centers",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/russian-disinformation-bot-traffic-nearly-eliminated-overnight-after-ukraine-drone-strikes-cripple-multiple-of-russias-google-data-centers-ukraine-intensifies-bombing-of-yandex-data-centers-in-response-to-moscows-strikes-on-kyiv-data-centers",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/wmDc2qYAL4pCfWnSCMvJnd-1920-80.jpg",
+            oneliner: "Ukrainian strikes disable Yandex data centers; demonstrates data center infrastructure vulnerability in conflict.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Rapidus Launches CORE Ecosystem to Support 2nm Chip Development and Manufacturing",
+            url: "https://www.semiconductor-digest.com/rapidus-launches-core-ecosystem-to-support-2nm-chip-development-and-manufacturing/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=rapidus-launches-core-ecosystem-to-support-2nm-chip-development-and-manufacturing",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Rapidus launches Design Solution Associates to accelerate 2nm foundry customer ramp before 2027 production.",
+          },
+          {
+            headline: "Infineon Unveils 27 kW Power Supply for Next-Generation AI Servers",
+            url: "https://www.semiconductor-digest.com/infineon-unveils-27-kw-power-supply-for-next-generation-ai-servers/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=infineon-unveils-27-kw-power-supply-for-next-generation-ai-servers",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Infineon 27kW power supply enables next-gen AI accelerator thermal and power density targets.",
+          },
+          {
+            headline: "DAC 2027 Opens Call for Contributions as AI Reshapes Chip Design",
+            url: "https://semiwiki.com/events/374512-dac-2027-opens-call-for-contributions-as-ai-reshapes-chip-design/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/DAC-2027-AI-reshapes-chip-design.jpg",
+            oneliner: "DAC 2027 emphasizes AI-driven semiconductor design automation; submissions focus on LLM-accelerated workflows.",
+          },
+          {
+            headline: "From 25 Million Pixels to a Six-Ounce Product: Engineering Visor for Manufacturing",
+            url: "https://semiwiki.com/semiconductor-manufacturers/374425-from-25-million-pixels-to-a-six-ounce-product-engineering-visor-for-manufacturing/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/From_25_million_Pixels_to_six_Ounce_product_Visors_semiwiki_sept30.jpg",
+            oneliner: "Wearable AR visor for fab workers integrates 25M pixels, custom optics, compute in 6oz form factor.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 48,
     date: "October 9, 2026",
     slug: "issue-48",

@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 50,
+    date: "October 13, 2026",
+    slug: "issue-50",
+    title: "Broadcom Sparks Rout. Yields Spike. China Hunts Gaming GPUs.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Chip stocks slide in wake of 'casino' comment by Broadcom boss",
+            url: "https://www.ft.com/content/e16f0422-cf75-4cc9-962d-4605e421dc63?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Broadcom CEO skepticism on AI spending triggers Samsung, SK Hynix selloff across Asia.",
+          },
+          {
+            headline: "AMD Shows Next-Gen EPYC Verano CPU, Featuring LPDDR5X Memory & Up To 192 Cores To Accelerate Agentic AI Workloads",
+            url: "https://wccftech.com/amd-next-gen-epyc-verano-cpu-lpddr5x-memory-up-to-192-cores/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/AMD-EPYC-Verano.jpg",
+            oneliner: "AMD Verano EPYC with 192 cores and LPDDR5X targets agentic AI data center workloads.",
+          },
+          {
+            headline: "Intel's Open Software Blueprint: Why Production AI Needs More Than GPUs",
+            url: "https://semiwiki.com/semiconductor-manufacturers/intel/374536-intels-open-software-blueprint-why-production-ai-needs-more-than-gpus/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/Open-software-unites-chips-and-AI.jpg",
+            oneliner: "Intel positions open software stack as differentiator against GPU-centric AI architectures.",
+          },
+          {
+            headline: "Axera Claims AX8860 AI Chip Can Beat the DGX Spark in AI LLMs by 25%, Offering 273 GB/s Bandwidth, 128 GB LP5X Memory, All at 40W While A 4-Module PCIe Card Pumps Out Over 1000 TOPs",
+            url: "https://wccftech.com/axera-ax8860-ai-chip-beat-dgx-spark-ai-llms-128-gb-memory-40w-less-cost/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/Axera-AX8860-AI-Chip-1920x1657.jpg",
+            oneliner: "Axera AX8860 claims 25% DGX Spark speed gain at half power, challenging NVIDIA dominance.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "CXMT president says company's first 4F² DRAM will be a server DDR5 RDIMM due by year-end",
+            url: "https://www.tomshardware.com/pc-components/dram/cxmt-president-says-companys-first-4f2-dram-will-be-a-server-ddr5-rdimm-due-by-year-end-vertical-transistors-cut-each-memory-cells-footprint-by-a-third-on-paper-but-no-speeds-or-capacities-yet",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/mmbCfdW6LwANCbRCbop4hU-2225-80.jpg",
+            oneliner: "CXMT 4F² DDR5 RDIMM ready year-end, threatens Samsung/SK Hynix server memory pricing.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Was Broadcom CEO bullish or bearish on AI? 'Gamblers' comment creates storm",
+            url: "https://www.marketwatch.com/story/was-broadcom-ceo-bullish-or-bearish-on-ai-gamblers-comment-creates-storm-33f11787?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Broadcom CEO 'gamblers' remark drives two-day microchip stock rout globally.",
+          },
+          {
+            headline: "Micron, SoftBank and ASML slide as Wall Street chip rout spreads",
+            url: "https://www.cnbc.com/2026/10/13/sk-hynix-softbank-samsung-electronics-shares-tech-stocks-fall.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108326697-1782389225408-gettyimages-2277830126-boivin-notitle260527_npNF9.jpeg?v=1782389330&amp;w=1920&amp;h=1080",
+            oneliner: "Semiconductor sell-off ripples across Micron, ASML, SoftBank equity valuations.",
+          },
+          {
+            headline: "The Korean stock market's in freefall, and these are the reasons why",
+            url: "https://www.marketwatch.com/story/the-korean-stock-markets-in-freefall-and-these-are-the-reasons-why-9615ac8d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Korean KOSPI tumbles on semiconductor profitability doubts amid AI capex skepticism.",
+          },
+          {
+            headline: "Applied Materials opens new $5B chip research facility to accelerate collaborative semiconductor innovation",
+            url: "https://siliconangle.com/2026/10/12/applied-materials-opens-new-5b-chip-research-facility-to-accelerate-collaborative-semiconductor-innovation/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-13-08-05-44.png",
+            oneliner: "Applied Materials' $5B EPIC Center opens; signals $4B+ capex commitment to process innovation.",
+          },
+          {
+            headline: "U.S. Chip Firms Bet Big on R&D",
+            url: "https://spectrum.ieee.org/semiconductor-research",
+            source: "IEEE Spectrum",
+            image: "https://spectrum.ieee.org/media-library/a-worker-in-a-clean-suit-using-a-front-opening-unified-pod-for-semiconductor-wafers.jpg?id=68417267&width=1200&height=600&coordinates=0%2C326%2C0%2C299",
+            oneliner: "Applied Materials' $4B EPIC facility underscores U.S. semiconductor R&D race acceleration.",
+          },
+          {
+            headline: "Intel, Broadcom CEOs flag AI industry challenges at financial event",
+            url: "https://siliconangle.com/2026/10/12/intel-broadcom-ceos-flag-ai-industry-challenges-trends-at-financial-event/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Intel.jpg",
+            oneliner: "Intel, Broadcom CEOs warn capital access constraints threaten AI infrastructure scaling.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "China resorts to Nvidia gaming chips in search for AI firepower",
+            url: "https://www.ft.com/content/9dbd99db-6b0c-43bd-b7be-849f129df098?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "China buying NVIDIA gaming GPUs as AI export controls force workaround procurement.",
+          },
+          {
+            headline: "European datacenter boom threatens higher energy bills unless governments intervene",
+            url: "https://www.theregister.com/on-prem/2026/10/13/european-datacenter-boom-threatens-higher-energy-bills-unless-governments-intervene/5302583",
+            source: "The Register",
+            image: "https://image.theregister.com/259070.jpg?imageId=259070&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Moody's: datacenters could consume 17% Dutch, 30% Irish electricity by 2035; policy risk.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Store-bought hardware crypto wallets had secret chips installed that enabled stealing crypto recovery phrases",
+            url: "https://www.tomshardware.com/tech-industry/cryptocurrency/store-bought-hardware-crypto-wallets-had-secret-chips-installed-that-enabled-stealing-crypto-recovery-phrases-usd93-million-and-counting-stolen-thanks-to-implanted-esim-and-lte-modules-in-ledger-wallets",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/ahdW2YPo7PuwXntkDBzHcf-2000-80.jpg",
+            oneliner: "Ledger supply chain attack: eSIM/LTE chips implanted in wallets, $71M+ stolen to date.",
+          },
+          {
+            headline: "Europe's Advanced Packaging Gap: Fraunhofer, Swissbit Target the Missing Middle",
+            url: "https://www.eetimes.com/europe-advanced-packaging-gap-fraunhofer-swissbit-target-the-missing-middle/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Fraunhofer, Swissbit address Europe's low-volume advanced packaging manufacturing gap.",
+          },
+          {
+            headline: "Anthropic warns AI models could soon copy themselves across home devices",
+            url: "https://www.cnbc.com/2026/10/13/anthropic-ai-models-self-replication-smart-devices.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108368277-1790360556847-108368277-17903603812026-09-25t180005z_1304128046_rc29lnaagwzx_rtrmadp_0_usa-pentagon-anthropic-lawsuit.jpg?v=1790360568&amp;w=1920&amp;h=1080",
+            oneliner: "Anthropic flags self-replication risk across home IoT; safety concerns escalate.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 49,
     date: "October 12, 2026",
     slug: "issue-49",

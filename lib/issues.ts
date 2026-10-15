@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 52,
+    date: "October 15, 2026",
+    slug: "issue-52",
+    title: "TSMC Surges. Memory Bottleneck Looms. AI Trade Fractures.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "TSMC posts record profit for a sixth straight quarter, beating estimates on AI boom",
+            url: "https://www.cnbc.com/2026/10/15/tsmc-third-quarter-profit-global-ai-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108131996-17447197412025-04-15t062815z_1969410792_rc25ydai7qeg_rtrmadp_0_usa-trump-tariffs-taiwan.jpeg?v=1744719807&amp;w=1920&amp;h=1080",
+            oneliner: "TSMC sixth consecutive record profit confirms sustained AI demand, validates foundry capacity strategy.",
+          },
+          {
+            headline: "Chipmaker TSMC profits surge amid relentless AI demand",
+            url: "https://www.ft.com/content/bf6808c6-ce2d-444f-86c9-a9b557b36a47",
+            source: "Financial Times",
+            image: null,
+            oneliner: "TSMC Q3 earnings of $23.6bn exceed estimates; AI edge computing demand remains structural.",
+          },
+          {
+            headline: "TSMC's CEO sees no sign of a slowdown as chip foundry reports record profit",
+            url: "https://www.marketwatch.com/story/tsmc-ceo-sees-no-sign-of-a-slowdown-as-chip-foundry-reports-record-profit-17a065d3",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "TSMC CEO signals sustained momentum; record 763.34 TWD quarterly profit contradicts AI slowdown thesis.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "NVIDIA Rubin GPUs Expected To Stick With 12-Hi HBM4 Despite Reports Of An 8-Hi Shift, As HBM Prices Could Surge 121% In 2027",
+            url: "https://wccftech.com/nvidia-rubin-gpus-expected-to-stick-with-12-hi-hbm4-despite-reports-of-an-8-hi-shift-as-hbm-prices-could-surge-121-in-2027/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/Rubin.webp",
+            oneliner: "NVIDIA Rubin sticks with 12-Hi HBM4; memory shortage could push HBM costs up 121% in 2027.",
+          },
+          {
+            headline: "Elon Musk calls out memory makers over 'extortionate' chip pricing, says Micron is playing smart for long-term loyalty",
+            url: "https://www.tomshardware.com/pc-components/dram/elon-musk-accuses-samsung-sk-hynix-of-unreasonable-memory-pricing",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/9o8QuQPFBFKJfLnpN89LcH-1920-80.jpg",
+            oneliner: "Musk criticizes Samsung, SK Hynix memory pricing; Micron praised for loyalty strategy amid shortage.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Ahead of IPO, Anthropic reveals its revenue grew 45% sequentially to $16.8B in Q3",
+            url: "https://siliconangle.com/2026/10/14/ahead-of-anthropic-reveals-its-revenue-grow-45-sequentially-to-16-8b-in-q3/",
+            source: "SiliconAngle",
+            image: null,
+            oneliner: "Anthropic hits $16.8B Q3 revenue at 45% sequential growth; first adjusted profitability ahead of IPO.",
+          },
+          {
+            headline: "Anthropic tells investors its quarterly revenue jumped 50%",
+            url: "https://www.ft.com/content/11632d03-358c-454b-af95-d06d4072932b",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic Q3 revenue surge signals sustained LLM demand; valuation pressures soften market sentiment.",
+          },
+          {
+            headline: "Anthropic's slowing growth could be the AI trade's latest red flag",
+            url: "https://www.marketwatch.com/story/anthropics-slowing-growth-could-be-the-ai-trades-latest-red-flag-292d0169",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Anthropic growth deceleration stokes AI trade concerns; sequential momentum softens before IPO.",
+          },
+          {
+            headline: "Shares of Oracle, neoclouds drop on CoreWeave debt concerns",
+            url: "https://siliconangle.com/2026/10/14/shares-of-oracle-neoclouds-drop-on-coreweave-debt-concerns/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/CoreWeave.png",
+            oneliner: "CoreWeave financial stress spills to Oracle, DigitalOcean; AI cloud infrastructure vendor contagion.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "The AI Boom Grants SK hynix Newfound Negotiating Power As Memory Giant Wants Its Chipmaking Equipment In China In Exchange For A Salivating Offer With The U.S.",
+            url: "https://wccftech.com/sk-hynix-ai-boom-negotiating-power-china-chipmaking-equipment-us-offer/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/SK-hynix-2.jpg",
+            oneliner: "SK Hynix leverages AI boom to negotiate US approval for China equipment exports; geopolitical supply-chain shift.",
+          },
+          {
+            headline: "TSMC confirms it is considering Terafab chipmaking expansion with Elon Musk",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/tsmc-confirms-it-is-considering-terafab-chipmaking-expansion-with-elon-musk-ceo-insists-tsmc-would-have-to-run-the-texas-based-project",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "TSMC considers Terafab Texas fab but demands full operational control; US manufacturing consolidation.",
+          },
+          {
+            headline: "Nvidia must work with Chinese AI companies on safety, Jensen Huang tells CNBC",
+            url: "https://www.cnbc.com/2026/10/15/jensen-huang-nvidia-china-ai.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108364527-1789665953765-gettyimages-2294936867-2026_sep_14_dreamforce_2974.jpeg?v=1789665981&amp;w=1920&amp;h=1080",
+            oneliner: "Huang signals ongoing China AI engagement despite export controls; supply-chain dialogue continues.",
+          },
+          {
+            headline: "Grid Modernization's Hidden Cost: A Growing Attack Surface Few Are Watching",
+            url: "https://www.eetimes.com/grid-modernization-hidden-cost-a-growing-attack-surface-few-are-watching/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Power grid digitalization expands cyber attack surface; OT-IT convergence creates semiconductor supply risks.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Small Volumes, Big Impact: Europe's Hidden Role in Advanced Chipmaking",
+            url: "https://www.eetimes.com/small-volumes-big-impact-europes-hidden-role-in-advanced-chipmaking/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Fraunhofer-IMS nanofab partnership shows Europe's critical low-volume specialty semiconductor role.",
+          },
+          {
+            headline: "How much more can nuclear power plants give?",
+            url: "https://www.technologyreview.com/2026/10/15/1146577/nuclear-power-upgrade/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/10/AP25176793857040.jpg?resize=1200,600",
+            oneliner: "Nuclear power uprates ease AI data center electricity constraints; Constellation leads capacity expansion.",
+          },
+          {
+            headline: "Japanese consortium bets on building bobbing bit barns",
+            url: "https://www.theregister.com/on-prem/2026/10/15/japanese-consortium-bets-on-building-bobbing-bit-barns/5303191",
+            source: "The Register",
+            image: "https://image.theregister.com/5303195.jpg?imageId=5303195&x=0&y=14&cropw=100&croph=86&panox=0&panoy=14&panow=100&panoh=86&width=1200&height=683",
+            oneliner: "Japanese firms pursue barge-mounted data centers in ports; novel AI infrastructure cooling strategy.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 51,
     date: "October 14, 2026",
     slug: "issue-51",

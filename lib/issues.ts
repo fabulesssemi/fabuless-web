@@ -60,6 +60,137 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 53,
+    date: "October 16, 2026",
+    slug: "issue-53",
+    title: "AI Capex Craters. CoreWeave Distressed. Memory, Packaging Surge.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "IBM Opens Its 0.7nm Nanostack Process To Chip Designers In Q1 2027, Shipping Design Kits For Tech That Could Be The Next Breakthrough For Reducing AI Chip Size",
+            url: "https://wccftech.com/ibm-opens-its-0-7nm-nanostack-process-to-chip-designers-in-q1-2027-shipping-design-kits-for-tech-that-could-be-the-next-breakthrough-for-reducing-ai-chip-size/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/06/ibm-tech.jpg",
+            oneliner: "IBM 0.7nm Nanostack reaches design kit phase Q1 2027; advances beyond TSMC/Samsung.",
+          },
+          {
+            headline: "Intel Squeezes Two Crescent Island GPUs Onto One Liquid-Cooled OAM Card, And First Xe3P Die Shots Show A Chip Smaller Than Big Battlemage",
+            url: "https://wccftech.com/intel-two-crescent-island-gpus-one-liquid-cooled-oam-card-first-xe3p-die-shots/",
+            source: "WCCFtech",
+            image: "https://cdn.wccftech.com/wp-content/uploads/2026/10/Intel-D-Series-GPU-Crescent-Island-Dual-F.jpg",
+            oneliner: "Intel dual Crescent Island OAM, Xe3P smaller than Battlemage; datacenter GPU competition intensifies.",
+          },
+          {
+            headline: "Meta releases 816B-parameter Muse Spark Open for coding and agent work",
+            url: "https://siliconangle.com/2026/10/15/meta-releases-816b-parameter-muse-spark-open-for-coding-and-agent-work/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/musesparkopen.png",
+            oneliner: "Meta open-sources 816B Muse Spark; shifts AI capex burden to third-party inference.",
+          },
+          {
+            headline: "Linus Torvalds posts his first AI-assisted patch to the Linux kernel, synthetic test clocks 23x performance leap",
+            url: "https://www.tomshardware.com/software/linux/linus-torvalds-posts-his-first-llm-assisted-patch-to-the-linux-kernel-after-issuing-clear-pro-ai-directives-the-bossman-makes-use-of-ai-tooling-himself",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/8ukjVdLc3rtpkr4AXLkY9j-2041-80.jpg",
+            oneliner: "Torvalds deploys LLM-assisted kernel patches; AI tooling adoption reaches core OS infrastructure.",
+          },
+          {
+            headline: "Jailbroken PS5s can now run local AI models at over 100+ tokens per second",
+            url: "https://www.tomshardware.com/video-games/playstation/jailbroken-ps5s-can-now-run-local-ai-models-at-over-100-tokens-per-second-fork-of-ps5lm-goes-native-and-accesses-gpu-and-more-ram",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/p6RKS3uArE9EvG6rNBgPYb-970-80.jpg",
+            oneliner: "PS5 native AI inference at 100+ tokens/sec; console compute escapes walled garden.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "CoreWeave credit default swaps hit distress levels as investors sour on AI debt",
+            url: "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108414312-1792071462734-gettyimages-2245498612-raa-coreweav251110_npSDI.jpeg?v=1792071500&amp;w=1920&amp;h=1080",
+            oneliner: "AI infrastructure debt unravels; CoreWeave CDS spike signals capex financing collapse.",
+          },
+          {
+            headline: "The data centre IPO debacle that sparked a market meltdown",
+            url: "https://www.ft.com/content/537c9a68-7b6f-41a7-80ff-acac5c52e80d?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Firmus, AirTrunk IPO cancellations expose AI datacenter financing bubble bursting.",
+          },
+          {
+            headline: "Wall Street's AI wobbles",
+            url: "https://www.ft.com/content/6a1ecb1a-a998-4cbb-be54-22df550a66ee?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Datacenter bond dumps and abandoned listings signal investor pullback on AI infrastructure.",
+          },
+          {
+            headline: "Nvidia and other chip stocks face renewed pressure as AI fears swell",
+            url: "https://www.marketwatch.com/story/micron-nvidia-and-other-chip-stocks-face-renewed-pressure-as-ai-fears-swell-4e0dc989?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Anthropic financials trigger NVIDIA, Micron selloff; AI ROI narrative cracks.",
+          },
+          {
+            headline: "Mueon nabs $65M in funding to develop 3D computing modules",
+            url: "https://siliconangle.com/2026/10/15/mueon-nabs-65m-in-funding-to-develop-3d-computing-modules/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/unsplash-1-1.png",
+            oneliner: "Mueon raises $65M Series A for 3D compute modules; Intel VC backs alternative chip packaging.",
+          },
+          {
+            headline: "Don't ditch tech stocks just yet. Make these moves to take advantage of the latest AI reset.",
+            url: "https://www.marketwatch.com/story/dont-ditch-tech-stocks-just-yet-make-these-moves-to-take-advantage-of-the-latest-ai-reset-cb70c7b2?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Market rotation from AI hyperscalers to cloud ops; chip demand fragmentation ongoing.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Taiwan's AI Ambitions Run into Talent Gap",
+            url: "https://www.eetimes.com/taiwans-ai-ambitions-run-into-talent-gap/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AMD's David Wang: Taiwan's AI scaling blocked by engineering talent shortage, not capacity.",
+          },
+          {
+            headline: "AI Moves to System-Level Co-Design: How Can Taiwan Capture More Value",
+            url: "https://www.eetimes.com/ai-moves-to-system-level-co-design-how-can-taiwan-capture-more-value/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Taiwan shifts from wafer supply to system design, packaging; higher-margin AI integration.",
+          },
+          {
+            headline: "Nvidia CEO Jensen Huang urges U.S.-China dialogue on 'potentially dangerous' AI",
+            url: "https://www.cnbc.com/2026/10/15/jensen-huang-nvidia-china-ai.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108364527-1789665953765-gettyimages-2294936867-2026_sep_14_dreamforce_2974.jpeg?v=1789665981&amp;w=1920&amp;h=1080",
+            oneliner: "Huang calls for US-China AI dialogue; NVIDIA signals supply chain normalization needed.",
+          },
+          {
+            headline: "Open source sovereignty gets down to the boring business of making it work",
+            url: "https://www.theregister.com/software/2026/10/16/open-source-sovereignty-gets-down-to-the-boring-business-of-making-it-work/5303206",
+            source: "The Register",
+            image: "https://image.theregister.com/5234572.jpg?imageId=5234572&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "European open-source sovereignty mandates; chip/software stack localization accelerates.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 52,
     date: "October 15, 2026",
     slug: "issue-52",

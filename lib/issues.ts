@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 54,
+    date: "October 19, 2026",
+    slug: "issue-54",
+    title: "Arm Challenges AMD. Intel Warns on China. AI Inference Bottlenecks.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Arm says its AGI CPU delivers nearly 2X the performance per rack of AMD EPYC 9755 in new agentic AI CPU tests",
+            url: "https://www.tomshardware.com/pc-components/cpus/arm-claims-agi-cpu-delivers-double-the-performance-per-rack-of-amd-epyc-9755-in-independent-analysis-new-cpu-evaluation-methodology-developed-by-arm-evaluates-agentic-ai-performance-across-seven-workloads",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/htMg5RSRkejYdBsWznwHFE-1920-80.jpg",
+            oneliner: "Arm AGI CPU claims 2x performance edge over AMD EPYC 9755 in agentic AI workloads; threatens datacenter CPU share.",
+          },
+          {
+            headline: "Exclusive: NVIDIA's Vera Team Says Chiplet Designs Sacrificed Single-Threaded Performance For Core Counts, And Agentic AI Is Now Forcing A Reversal",
+            url: "https://www.wccftech.com/exclusive-nvidia-vera-team-says-chiplet-designs-sacrificed-single-threaded-performance-for-core-counts-and-agentic-ai-is-now-forcing-a-reversal",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "NVIDIA Vera CPU redesigns for single-threaded agentic AI; chiplet era paradigm shift reshaping CPU architecture strategy.",
+          },
+          {
+            headline: "DeepSeek releases updated V4.1-Flash model it says completes tasks faster",
+            url: "https://siliconangle.com/2026/10/18/deepseek-releases-updated-v4-1-flash-model-it-says-completes-tasks-faster/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/09/deepseek-scaled.png",
+            oneliner: "DeepSeek V4.1-Flash-1017 update shows Chinese AI inference optimization; competitive inference cost pressure on US vendors.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "AI inference is running into a memory bottleneck. Huawei wants to tackle it with OceanStor M900",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/19/sponsored-ai-inference-is-running-into-a-memory-bottleneck-huawei-wants-to-tackle-it-with-oceanstor-m900/5303543",
+            source: "The Register",
+            image: "https://image.theregister.com/5303545.jpg?imageId=5303545&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Huawei OceanStor M900 targets AI inference memory bottleneck; storage vendors repositioning for inference-heavy workloads.",
+          },
+          {
+            headline: "China's CXMT shares fall nearly 8% as investors look past chipmaker's profit turnaround",
+            url: "https://www.cnbc.com/2026/10/19/china-cxmt-profit-outlook-shares.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108430238-1792369350714-gettyimages-2293594732-vcg111664074027.jpeg?v=1792369398&amp;w=1920&amp;h=1080",
+            oneliner: "CXMT shares tumble despite profit recovery; Chinese memory chipmaker facing investor skepticism on capacity oversupply.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Microsoft pulls plug on Nscale data centre deal",
+            url: "https://www.ft.com/content/35cc5cc6-f9b6-49cc-8fc2-bd61e09c8c40?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Microsoft cancels Nscale UK datacenter deal, jeopardizing neocloud IPO; hyperscaler capex priorities shifting away.",
+          },
+          {
+            headline: "Neocloud operator Nscale's IPO plans could be at risk after Microsoft cancels UK data center project",
+            url: "https://siliconangle.com/2026/10/18/neocloud-operator-nscales-ipo-plans-could-be-at-risk-after-microsoft-pulls-the-plug-on-u-k-data-center-project/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-19-07-57-01.png",
+            oneliner: "Nscale's $500M+ IPO at risk after Microsoft terminates primary customer datacenter agreement.",
+          },
+          {
+            headline: "JPMorgan Chase's first $5 billion of defense investments",
+            url: "https://www.cnbc.com/2026/10/19/jpmorgan-security-defense-investments.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/106310265-1577120438176gettyimages-488164285.jpeg?v=1792414277&amp;w=1920&amp;h=1080",
+            oneliner: "JPMorgan deploys $5B into defense tech, hardware, and supply chains; defense semiconductor capex accelerating via finance.",
+          },
+          {
+            headline: "CEO Interview with Dr. Raj Talluri of Kulicke & Soffa",
+            url: "https://semiwiki.com/ceo-interviews/373948-ceo-interview-with-dr-raj-talluri-of-kulicke-soffa/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/Connecting-the-Future-of-Chips.jpg",
+            oneliner: "K&S appoints new CEO from Enovix; advanced packaging and assembly capex leadership transition signals growth.",
+          },
+          {
+            headline: "Disney Asked Character.AI to Go Bankrupt for a Get-Out-of-Lawsuits Card",
+            url: "https://www.wired.com/story/disney-asked-characterai-to-go-bankrupt-for-a-get-out-of-lawsuits-card/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6acfe36ba2733753393886b8/191:100/w_1280,c_limit/Disney-Asked-Character.AI-to-Go-Bankrupt-Business-1530260396.jpg",
+            oneliner: "Disney seeks Character.AI bankruptcy to acquire safety tech; AI safety IP consolidation via distressed M&A accelerating.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Intel CEO Lip-Bu Tan Says China Is \"Not That Far Behind\" In Chip Manufacturing, Despite US Sanctions Blocking Its Access To EUV Machines",
+            url: "https://www.wccftech.com/intel-ceo-lip-bu-tan-says-china-is-not-that-far-behind-in-chip-manufacturing-despite-us-sanctions-blocking-its-access-to-euv-machines",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Intel CEO warns China chip gap narrowing despite EUV sanctions; geopolitical tech race accelerating despite export controls.",
+          },
+          {
+            headline: "Russian military satellite closes from 200 miles to 3 miles of US radar craft aiding Ukraine",
+            url: "https://www.tomshardware.com/tech-industry/space/russian-military-satellite-closes-from-200-miles-to-3-miles-of-us-radar-satellite-aiding-ukraine-astronomer-says-it-may-be-the-first-unapproved-rendezvous-in-low-earth-orbit",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/hDYHoCwU9K6yfsUBaurBzf-2560-80.jpg",
+            oneliner: "Russia's Cosmos 2612 approaches US ICEYE radar sat; space-based supply chain security for Ukraine aid under threat.",
+          },
+          {
+            headline: "US threatens European companies over Starlink restrictions",
+            url: "https://www.ft.com/content/d1e28d93-8574-4a46-946a-b261c401d6fa?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "US Ambassador threatens retaliation if EU limits Starlink spectrum access; satellite comms supply chain geopolitics escalate.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Linux KVM guest-host escape rated critical, may represent a new way to attack penguin-powered networking",
+            url: "https://www.theregister.com/virtualization/2026/10/19/linux-kvm-guest-host-escape-rated-critical-may-represent-a-new-way-to-attack-penguin-powered-networking/5303744",
+            source: "The Register",
+            image: "https://image.theregister.com/5265166.jpg?imageId=5265166&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "CVE-2026-99999 KVM 9.3-critical escape threatens hyperscaler cloud infrastructure; Linux virtualization security audit required.",
+          },
+          {
+            headline: "Maskless EUV Lithography: An Alternative to E-Beam",
+            url: "https://semiwiki.com/lithography/373583-maskless-euv-lithography-an-alternative-to-e-beam/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/09/Maskless-EUV-Lithography-An-Alternative-to-E-Beam.jpg",
+            oneliner: "Maskless EUV lithography emerging as e-beam alternative; advanced patterning tech could reduce photomask dependency.",
+          },
+          {
+            headline: "How the Xbox's Disc-to-Digital Program Works",
+            url: "https://www.wired.com/story/xbox-disc-to-digital/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ac9144496a91d67fca310c1/191:100/w_1280,c_limit/Xbox%20Disc.jpg",
+            oneliner: "Microsoft disc-to-digital licensing infrastructure enables console media transition; licensing tech for future chip platforms.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 53,
     date: "October 16, 2026",
     slug: "issue-53",

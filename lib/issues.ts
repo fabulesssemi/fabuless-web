@@ -60,6 +60,140 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 55,
+    date: "October 21, 2026",
+    slug: "issue-55",
+    title: "SpaceX Crushes Earnings. TSMC Grieves. Memory Heats Up.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Chinese Technology Giants Reject Huawei's Inferior AI Accelerators As They Show Affinity Towards RTX PRO 5500, Despite NVIDIA's Uncertainty In Fulfilling Orders",
+            url: "https://wccftech.com/chinese-tech-giants-reject-huawei-ai-accelerators-favor-nvidia-rtx-pro-5500/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "ByteDance, Alibaba, Tencent prefer NVIDIA over Huawei despite supply constraints.",
+          },
+          {
+            headline: "Google unveils TorchTPU in a push to break Nvidia's stranglehold on AI compute",
+            url: "https://siliconangle.com/2026/10/20/google-unveils-torchtpu-in-a-push-to-break-nvidias-stranglehold-on-ai-compute/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-21-08-24-03.png",
+            oneliner: "Google TorchTPU aims to reduce NVIDIA dependency; TPU adoption acceleration critical.",
+          },
+          {
+            headline: "Edge AI MCU Features Multimodal Compute, Tiered Memory",
+            url: "https://www.eetimes.com/edge-ai-mcu-features-multimodal-compute-tiered-memory/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Edge AI MCU with HBM integration; signals distributed inference architecture shift.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK hynix Starts Discussing Mass Production Plans For iHBM Memory Chips That Aim To Improve Heat Resistance By 30%, Says Report",
+            url: "https://wccftech.com/sk-hynix-starts-discussing-mass-production-plans-for-ihbm-memory-chips-that-aim-to-improve-heat-resistance-by-30-says-report/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "SK hynix next-gen iHBM cuts thermal load 30%, reshaping AI accelerator design.",
+          },
+          {
+            headline: "Micron's Taiwan union will launch a one-day strike this week, threatening memory production",
+            url: "https://www.tomshardware.com/pc-components/dram/microns-taiwan-union-will-launch-a-one-day-strike-this-week-threatening-round-the-clock-fab-operations-workers-demand-concrete-terms-for-2026-bonus-and-clearer-profit-sharing-arrangements",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/vnqdtRupVqWHAik43ZWctH-1920-80.jpg",
+            oneliner: "Micron Taiwan DRAM fab strike halts 24/7 operations; supply risk for H1 2026.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "SpaceX up over 8% in premarket after earnings beat and Musk hints at Tesla tie-up",
+            url: "https://www.cnbc.com/2026/10/21/spacex-spcx-stock-musk-merger-tesla.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108321535-1792583496611-108321535-1781310783695-gettyimages-2280560635-SPACEX_IPO.jpg?v=1792583505&amp;w=1920&amp;h=1080",
+            oneliner: "SpaceX Q3 beat; AI compute demand 'off charts'; Tesla merger talks heat capex.",
+          },
+          {
+            headline: "Rockets, robots and risk: Musk's $3.6tn gamble to merge Tesla and SpaceX",
+            url: "https://www.ft.com/content/e598bbc7-8211-436f-a57e-46c3ae21ac0f?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "$3.6tn Tesla-SpaceX merger could consolidate AI, power, and compute strategy.",
+          },
+          {
+            headline: "AI infrastructure management software startup ASI hits $3B valuation after raising $325M in funding",
+            url: "https://siliconangle.com/2026/10/20/ai-infrastructure-management-software-startup-asi-hits-3b-valuation-after-raising-325m-in-funding/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-21-09-09-18.png",
+            oneliner: "ASI $3B valuation reflects infrastructure software TAM; enables cluster optimization.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "In the battle for AI supremacy, China is only six months behind the U.S — but that means it's winning, says former Google CEO",
+            url: "https://www.marketwatch.com/story/in-the-battle-for-ai-supremacy-china-is-only-six-months-behind-the-u-s-but-that-means-theyre-winning-says-former-google-ceo-82d71e7a?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "China narrows AI chip gap to 6 months; NVIDIA export restrictions proving insufficient.",
+          },
+          {
+            headline: "Opposition to data centers will drive up inflation, says BlackRock's Larry Fink",
+            url: "https://www.marketwatch.com/story/opposition-to-data-centers-will-drive-up-inflation-says-blackrocks-larry-fink-831c25b9?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "BlackRock CEO warns anti-datacenter regulations risk AI capex bottleneck.",
+          },
+          {
+            headline: "'MAKE DEALS': Trump says data centers should pay communities a 'dividend' to win support",
+            url: "https://www.cnbc.com/2026/10/21/trump-data-centers-community-dividend.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108374283-17913956922026-10-07t174636z_1565939135_rc2hynao0axo_rtrmadp_0_usa-trump.jpeg?v=1791395737&amp;w=1920&amp;h=1080",
+            oneliner: "Trump proposes community dividend model for datacenter permitting; capex economics shift.",
+          },
+          {
+            headline: "Musk's SpaceX ambitions may be 'dangerous' for Europe, warns EU lawmaker",
+            url: "https://www.ft.com/content/f9e4ddf8-5fd4-43e6-bca2-62d1067c4c48?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "EU fears SpaceX dominance threatens European satellite and telecom infrastructure.",
+          },
+          {
+            headline: "Europe Wants Data Centers. Its Climate Goals Are Getting in The Way",
+            url: "https://www.wired.com/story/europe-data-centers-climate-change/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ad7d5f6ceee34bd819fdbeb/191:100/w_1280,c_limit/Business_Can%20Europe%20Build%20Data%20Centers%20Without%20Giving%20Up%20Its%20Climate%20Goals_v2.jpg",
+            oneliner: "EU datacenter heat recovery failures; climate regs threaten AI capex localization.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Three workers killed, one in intensive care after fall at TSMC's 2nm fab construction site",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/three-workers-killed-one-in-intensive-care-after-fall-at-tsmcs-2nm-fab-construction-site-in-kaohsiung-broken-bolt-on-a-steel-connection-plate-suspected-as-cause-behind-tragic-accident",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/4iVV4sy3QUFn3RrMcaCsPg-1280-80.jpg",
+            oneliner: "TSMC Fab 22 fatal accident may delay 2nm ramp, adding schedule risk.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 54,
     date: "October 19, 2026",
     slug: "issue-54",

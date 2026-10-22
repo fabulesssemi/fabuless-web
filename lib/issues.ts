@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 56,
+    date: "October 22, 2026",
+    slug: "issue-56",
+    title: "TPU Wars Heat Up. PHP Internet Melts. Samsung Bets 2nm.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Google's TPUs for AI workloads now run in Meta's data centers",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/googles-tpus-for-ai-workloads-now-run-in-at-metas-data-centers-tpus-sold-to-external-customers-for-the-first-time-threaten-nvidias-market-dominance",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/sBHypQ7oxsz8MjtC3KWH4o-1365-80.jpg",
+            oneliner: "Google TPUs now power Meta AI inference; first external customer threatens NVIDIA's accelerator monopoly.",
+          },
+          {
+            headline: "Nvidia debuts new AI reference architectures, development tools",
+            url: "https://siliconangle.com/2026/10/21/nvidia-debuts-new-ai-reference-architectures-development-tools/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/GTCBerlin-huang1.png",
+            oneliner: "NVIDIA releases turnkey AI data center and robotics blueprints to lower customer engineering friction.",
+          },
+          {
+            headline: "OpenAI says ChatGPT Sol helped uncover critical PHP flaws that could affect 70% of websites",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/openai-says-gpt-5-6-sol-helped-uncover-critical-php-flaws-that-could-affect-70-percent-of-websites-ai-assisted-researchers-turned-a-two-year-old-bug-that-stumped-human-developers-into-working-exploits-in-two-weeks",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "GPT-5.6 Sol discovered two critical PHP vulnerabilities in 14 days; AI security tooling now production-grade.",
+          },
+          {
+            headline: "IBM CEO says open weight models are now irresistibly good and cheap on-prem",
+            url: "https://www.theregister.com/systems/2026/10/22/ibm-ceo-says-open-weight-models-are-now-irresistibly-good-and-cheap-on-prem/5304640",
+            source: "The Register",
+            image: "https://image.theregister.com/4091853.jpg?imageId=4091853&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "IBM CEO: open models deliver 90% performance at 10% cost in two-three racks; on-prem AI shifts.",
+          },
+          {
+            headline: "IBM tops expectations as it struggles to bounce back from Q2 mainframe slump",
+            url: "https://siliconangle.com/2026/10/21/ibm-beats-expectations-as-it-struggles-to-bounce-back-from-q2-mainframe-slump/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/IBM-CEO-Arvind-Krishna-Think-2026-4-e1784763608286-scaled.jpg",
+            oneliner: "IBM beats Q3 on AI momentum but mainframe revenue still pressured; hybrid cloud infrastructure gains.",
+          },
+          {
+            headline: "Barclays to cut 5,000 jobs as bank steps up AI adoption",
+            url: "https://www.ft.com/content/e83591cd-13d4-4358-aee9-c500930bfd36?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Barclays cuts 5% workforce via AI-driven back-office automation; banking sector chip demand follows.",
+          },
+          {
+            headline: "Why a global bank is slashing thousands of jobs — and what the Fed says about AI replacing workers",
+            url: "https://www.marketwatch.com/story/why-a-global-bank-is-slashing-thousands-of-jobs-and-what-the-fed-says-about-ai-replacing-workers-9529b6ca?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Enterprise AI labor displacement accelerates; NVIDIA inference chip demand rises from automation wave.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung's HBM Base Die Development Is Benefitting Its 2nm 5G Modem Advancements",
+            url: "https://wccftech.com/samsung-hbm-base-die-2nm-5g-modem-qualcomm-tsmc-alternative/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Samsung advances 2nm modem using HBM base die learnings; Qualcomm seeks TSMC alternative foundry path.",
+          },
+          {
+            headline: "Everspin Expands MRAM Push into AI Servers, Data Centers, Satellite Systems",
+            url: "https://www.eetimes.com/everspin-expands-mram-push-into-ai-servers-data-centers-satellite-systems/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Everspin MRAM targets AI inference and aerospace; NOR flash supply crisis opens alternative memory window.",
+          },
+          {
+            headline: "While Micron Calls The 4F² Memory Cell Architecture A 'Myth,' YMTC Has Followed CXMT In Lining Up A Prototype",
+            url: "https://wccftech.com/while-micron-calls-the-4f%c2%b2-memory-cell-architecture-a-myth-ymtc-has-followed-cxmt-in-lining-up-a-prototype-that-operates-at-9600-mt-s/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "YMTC pursues 4F² DRAM without EUV; Micron disputes scaling claims; China memory roadmap diverges sharply.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia CEO Jensen Huang says neocloud demand is 'off the charts' but capital is scarce",
+            url: "https://www.cnbc.com/2026/10/22/nvidia-jensen-huang-neocloud-demand-capital.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108441789-1792586470134-gettyimages-2300709025-AFP_D3XH836.jpeg?v=1792586515&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA demand soars for AI startups but funding gaps limit hyperscaler deployments and chip absorption.",
+          },
+          {
+            headline: "To help world gorge on GPUs, Nvidia brings cash bucket to fatten wafer-thin supply chain",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/22/to-help-world-gorge-on-gpus-nvidia-brings-cash-bucket-to-fatten-wafer-thin-supply-chain/5304623",
+            source: "The Register",
+            image: "https://image.theregister.com/5304630.jpg?imageId=5304630&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "NVIDIA funds Samsung substrate manufacturing to break GPU supply bottleneck; capital injection extends supply chain.",
+          },
+          {
+            headline: "Mark Zuckerberg Agrees to Stay in California Despite Billionaires' Tax Ballot Measure",
+            url: "https://www.wired.com/story/mark-zuckerberg-agrees-to-stay-in-california-despite-billionaires-tax-ballot-measure/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ad9408768bf72427a051c89/191:100/w_1280,c_limit/WIRED_Business_Mark-Z_CA.jpg",
+            oneliner: "Meta board locks Zuckerberg to California with nonvoting equity; AI ambitions require stable founder control.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Amazon warns new cyber flaws detected using AI are being 'broadly exploited'",
+            url: "https://www.ft.com/content/245778d9-597b-492d-b5b6-a2967c77e853?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Critical PHP zero-days found by AI now actively exploited across 70% of websites; immediate patching mandatory.",
+          },
+          {
+            headline: "Hackers Exploited the PHP Vulnerabilities Days Before They Were Patched",
+            url: "https://www.wired.com/story/hackers-exploited-the-php-vulnerabilities-days-before-they-were-patched/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ad9723edb7d4e16032f01fc/191:100/w_1280,c_limit/Security_HackersExploitingPHPBugsinAmazon.jpg",
+            oneliner: "PHP2Shell bugs exploited in wild four days before patch; AWS detected active probing; race against time lost.",
+          },
+          {
+            headline: "Critical web security flaws spark global alarm as Google, OpenAI and Amazon respond",
+            url: "https://www.cnbc.com/2026/10/22/php-google-openai-and-amazon-cyber.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108446574-1792673070828-gettyimages-2300859757-86268675.jpeg?v=1792673098&amp;w=1920&amp;h=1080",
+            oneliner: "Google, OpenAI, Amazon mobilize response to PHP catastrophe; internet infrastructure patch race underway.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 55,
     date: "October 21, 2026",
     slug: "issue-55",

@@ -96,7 +96,27 @@ export async function getHomepageArticles(): Promise<{
 
     // All articles live for 3 days regardless of rank —
     // so at any time the pool has today's + yesterday's + day-before-yesterday's.
-    const alive = data.filter((r) => {
+    // The pool is keyed on URL, but feeds sometimes re-publish one article
+    // under a slightly different URL (e.g. a malformed slug later corrected),
+    // which would show it twice. Collapse rows with the same headline, keeping
+    // the one with a well-formed URL, then the earliest seen.
+    const headlineKey = (r: Record<string, unknown>) =>
+      (r.headline as string).toLowerCase().replace(/\s+/g, " ").trim();
+    const validUrl = (r: Record<string, unknown>) => !/\s/.test(r.url as string);
+    const byHeadline = new Map<string, Record<string, unknown>>();
+    for (const r of data) {
+      const key = headlineKey(r);
+      const cur = byHeadline.get(key);
+      const better =
+        !cur ||
+        (validUrl(r) && !validUrl(cur)) ||
+        (validUrl(r) === validUrl(cur) &&
+          new Date(r.first_seen_at as string) < new Date(cur.first_seen_at as string));
+      if (better) byHeadline.set(key, r);
+    }
+    const unique = data.filter((r) => byHeadline.get(headlineKey(r)) === r);
+
+    const alive = unique.filter((r) => {
       const age = now - new Date(r.first_seen_at as string).getTime();
       return age < 3 * DAY_MS;
     });

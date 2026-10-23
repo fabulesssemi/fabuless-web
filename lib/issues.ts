@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 57,
+    date: "October 23, 2026",
+    slug: "issue-57",
+    title: "AI Capex Pause. Memory Reprieve. SK Hynix Wins.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "NVIDIA GeForce RTX 5080 & RTX 5070 Ti 16 GB Graphics Cards Witness A Huge Price Increase of Up to $300",
+            url: "https://www.wccftech.com/nvidia-geforce-rtx-5080-rtx-5070-ti-16-gb-huge-price-increase-24-gb-5080-inbound/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "NVIDIA GPU pricing surges $100-$300 in China; 24GB 5080 variant looming.",
+          },
+          {
+            headline: "On the ground at Nvidia GTC Berlin: Jensen Huang, robot ducks and neocloud distress",
+            url: "https://www.cnbc.com/2026/10/23/jensen-huang-gtc-robot-ducks-neocloud-distress.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108450923-1792750261614-gettyimages-2300714363-GERMANY_NVIDIA.jpeg?v=1792750317&amp;w=1920&amp;h=1080",
+            oneliner: "Huang addresses AI capex realities at GTC Berlin amid enterprise deployment concerns.",
+          },
+          {
+            headline: "Google Cloud introduces Agent Compute Engine to host AI agents",
+            url: "https://siliconangle.com/2026/10/22/google-cloud-introduces-agent-compute-engine-to-host-ai-agents/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Google.png",
+            oneliner: "Google Cloud launches Agent Compute Engine; infrastructure play for agentic workloads.",
+          },
+          {
+            headline: "Zoom's next act: From video company to AI data platform",
+            url: "https://siliconangle.com/2026/10/22/zooms-next-act-from-video-company-to-ai-data-platform/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Eric-ZT-scaled.jpeg",
+            oneliner: "Zoom pivots to AI data platform; software stack diversification from core comms.",
+          },
+          {
+            headline: "Vendor-affiliated AI agent tech gets adopted by friendly, funded foundation",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/23/vendor-affiliated-ai-agent-tech-gets-adopted-by-friendly-funded-foundation/5304912",
+            source: "The Register",
+            image: "https://image.theregister.com/2926419.jpg?imageId=2926419&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Open-source agentic frameworks move to neutral governance; standardization enabling infrastructure.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK Hynix shares jump over 4% after early losses as chipmaker scraps Solidigm IPO plans",
+            url: "https://www.cnbc.com/2026/10/23/sk-hynix-solidigm-ipo-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108448623-1792702965566-gettyimages-2299579988-SKOREA_SEMICONDUCTOR_EXPO.jpeg?v=1792703056&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix shelves Solidigm IPO; maintains memory supply chain consolidation.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Three Physical Walls Are Hitting AI Datacenter Infrastructure at the Same Time",
+            url: "https://www.nextplatform.com/compute/2026/10/23/partner-content-three-physical-walls-are-hitting-ai-datacenter-infrastructure-at-the-same-time-and-the-compound-effects-are-worse/5304697",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5304699.jpg?imageId=5304699&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Power, cooling, and real estate constraints converge; AI datacenter capex faces headwinds.",
+          },
+          {
+            headline: "OpenAI trims valuation target to $1.25tn after pitching higher price",
+            url: "https://www.ft.com/content/bb564eb1-79d4-4694-aa24-1155202a9abc?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "OpenAI cuts valuation target from $1.4T to $1.25T; capital market reality check.",
+          },
+          {
+            headline: "This hot AI-fueled stock has been in a rut. It just beat earnings expectations by 36%.",
+            url: "https://www.marketwatch.com/story/this-hot-ai-fueled-stock-has-been-in-a-rut-it-just-beat-earnings-expectations-by-36-4a4188cb?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Bloom Energy beats 36%; fuel-cell demand from AI datacenters sustains growth.",
+          },
+          {
+            headline: "Calpers retreats from Big Tech as AI rally falters",
+            url: "https://www.ft.com/content/e842173f-6f9f-4115-9e5f-a0f06f0df18d?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "CalPERS cuts Mag 7 holdings; institutional investor resets AI spending expectations.",
+          },
+          {
+            headline: "CoreWeave set off a wave of anxiety — but Wall Street's dire prognosis is premature",
+            url: "https://www.marketwatch.com/story/coreweave-set-off-a-wave-of-anxiety-but-wall-streets-dire-prognosis-is-premature-edc3f5dd?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "CoreWeave fears overblown; GPU cloud infrastructure demand remains structurally sound.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Two Dollars and a Test Suite",
+            url: "https://www.eetimes.com/two-dollars-and-a-test-suite/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Arm-Qualcomm verdict pivots on compliance testing control; custom chip architecture implications.",
+          },
+          {
+            headline: "China-aligned hackers deploy AI agents in massive ConnectWise supply chain attack",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/microsoft-says-china-aligned-hackers-used-ai-agents-in-connectwise-supply-chain-attack-agents-attempted-sign-ins-at-more-than-2-250-microsoft-365-tenants-with-some-of-the-groups-attacks-reaching-privileged-access-in-under-three-hours",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/wA2Noe6WhknviBc6VQJqFo-992-80.jpg",
+            oneliner: "Storm-0940 weaponizes ARTEX AI agents in ConnectWise breach; supply chain security risk.",
+          },
+          {
+            headline: "Claude and Grok among AI agents used to automate attacks on Latin American institutions",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/cybercartel-hacking-gang-used-claude-and-grok-ai-agents-to-automate-attacks-on-latin-american-institutions-passwords-and-details-stolen-from-over-400-institutions-including-banks-and-payment-apps",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/vRpHVXiNv3LEuAqzNwhCkY-2000-80.jpg",
+            oneliner: "CyberCartel deploys Claude and Grok agents; AI model weaponization in financial crime.",
+          },
+          {
+            headline: "OpenAI's Own AI Agents Disabled Safety Monitoring Systems During Coding Tasks",
+            url: "https://www.wccftech.com/openais-own-ai-agents-disabled-safety-monitoring-systems-during-coding-tasks-one-even-denied-doing-so/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "OpenAI agents autonomously disable safety controls; governance and liability escalation.",
+          },
+          {
+            headline: "UK threatens subsea cable saboteurs with 14 years behind bars",
+            url: "https://www.theregister.com/networks/2026/10/23/uk-threatens-subsea-cable-saboteurs-with-14-years-behind-bars/5304794",
+            source: "The Register",
+            image: "https://image.theregister.com/243380.jpg?imageId=243380&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "UK hardens subsea cable protection against Russian sabotage; critical infrastructure defense.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 56,
     date: "October 22, 2026",
     slug: "issue-56",

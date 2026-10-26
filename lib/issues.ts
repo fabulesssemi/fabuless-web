@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 58,
+    date: "October 26, 2026",
+    slug: "issue-58",
+    title: "SpaceX Raises $40B for GPUs. Neoclouds Face Reckoning. Samsung Preps HBM4.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Nvidia RTX 20, 30, and 40-series GPUs hacked to remove a half-speed AI throttle",
+            url: "https://www.tomshardware.com/pc-components/gpus/nvidia-rtx-20-30-and-40-series-gpus-hacked-to-remove-a-half-speed-ai-throttle-firmware-exploit-doubles-rtx-4090s-peak-tensor-rate-lifts-rtx-3090-ti-matrix-math-up-to-80-percent",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/4Yvp7ck4v6d8JPBoNXVPfe-2560-80.jpg",
+            oneliner: "Linux kernel modules unlock AI tensor performance on GeForce RTX cards; bypasses NVIDIA limits.",
+          },
+          {
+            headline: "In Orbit, Useful Life Becomes a Performance Metric",
+            url: "https://www.eetimes.com/in-orbit-useful-life-becomes-a-performance-metric/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Google Project Suncatcher tests AI hardware in space; radiation, cooling shape chip economics.",
+          },
+          {
+            headline: "Tesla's AI ambitions take flight as rivals race to keep up",
+            url: "https://www.ft.com/content/c8db9b39-1922-41f3-b8e9-4488d16f8a2c?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Tesla-SpaceX merger could accelerate autonomous driving; custom silicon competition intensifies.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung & SK hynix Reportedly Set To Ramp 8-Layer HBM4 Shipments For NVIDIA's Rubin Ultra In Q2 2027",
+            url: "https://wccftech.com/samsung-sk-hynix-downgraded-hbm4-q2-2027-nvidia-rubin-ultra/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "NVIDIA downgrades Rubin HBM to 8-layer stacks; yield issues delay 12-layer ramp.",
+          },
+          {
+            headline: "Data Center Customers Are Reportedly Footing A Bigger Bill For A Superior HBM Supply Chain, Where Samsung Has An Edge",
+            url: "https://wccftech.com/samsung-hbm-pricing-premium-data-center-supply-chain/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Samsung charges 25% HBM premium over competitors; supply reliability drives pricing power.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "SpaceX closes $40 billion debt deal for AI chips, Elon Musk says",
+            url: "https://www.cnbc.com/2026/10/26/spacex-closes-40-billion-debt-deal-for-ai-chips-elon-musk-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108433898-1792439982335-gettyimages-2299248528-wm020115_ej7axcme.jpeg?v=1792440027&amp;w=1920&amp;h=1080",
+            oneliner: "SpaceX raises $40B for GPUs, signals neocloud shakeout as debt dries up.",
+          },
+          {
+            headline: "Neocloud stocks fall as Elon Musk says more than 200 of them face 'guppy-level death'",
+            url: "https://www.cnbc.com/2026/10/26/neocloud-stocks-today-coreweave-nebius-iren-elon-musk.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108437814-1792509978035-gettyimages-2297775036-1r5_3021_gdulgt9a.jpeg?v=1792537393&amp;w=1920&amp;h=1080",
+            oneliner: "Musk predicts mass failure of debt-heavy GPU-as-a-service startups amid capital crunch.",
+          },
+          {
+            headline: "Nvidia discusses $2,000-per-GPU annual fee for software that 'runs agents on AI factories'",
+            url: "https://www.tomshardware.com/pc-components/gpus/nvidia-discusses-usd2-000-per-gpu-annual-software-fee-for-running-agents-on-ai-infrastructure-firm-already-charges-more-than-twice-that-amount-for-its-ai-enterprise-software-platform",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/TwfFbH55Mt433hRvkWbSD5-1280-80.jpg",
+            oneliner: "NVIDIA eyes $2K/GPU/year software licensing; could yield $10B from five million licenses.",
+          },
+          {
+            headline: "The Kospi index is the leading indicator for the global AI trade — and Goldman just slashed its forecast by 25%",
+            url: "https://www.marketwatch.com/story/the-kospi-index-is-the-leading-indicator-for-the-global-ai-trade-and-goldman-just-slashed-its-kospi-forecast-by-25-ccfe2690?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Goldman cuts Korea Kospi forecast 25%; AI valuation multiples compress amid volatility.",
+          },
+          {
+            headline: "Support for semiconductor stocks could be as much as 15% lower than current levels, says Morgan Stanley",
+            url: "https://www.marketwatch.com/story/support-for-semiconductor-stocks-could-be-as-much-as-15-lower-than-current-levels-says-morgan-stanley-1f387f16?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Morgan Stanley warns chip stock support 15% below current levels; S&P 500 target 8,000.",
+          },
+          {
+            headline: "Apollo analysis shows no one besides the biggest tech giants is seeing benefits from AI",
+            url: "https://siliconangle.com/2026/10/25/apollo-analysis-shows-that-no-one-apart-from-the-biggest-tech-giants-is-seeing-any-real-benefits-from-ai/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-26-08-34-51.png",
+            oneliner: "Outside Mag 7, corporate America sees zero AI financial payoff despite billions invested.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "After threatening AI export bans, China allows DeepSeek to keep selling",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/26/after-threatening-ai-export-bans-china-allows-deepseek-to-keep-selling/5305267",
+            source: "The Register",
+            image: "https://image.theregister.com/260439.jpg?imageId=260439&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "China permits DeepSeek exports despite AI restrictions; signals selective policy on home AI.",
+          },
+          {
+            headline: "Chinese wind turbine maker builds European firewall from Beijing",
+            url: "https://www.ft.com/content/fa2bdd53-29dc-4e3f-bbd2-5510da3cd88c?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Ming Yang establishes EU legal entities to block China data access; geopolitical supply chain split.",
+          },
+          {
+            headline: "Work to protect DNS from quantum decryption attacks is speeding up",
+            url: "https://www.theregister.com/networks/2026/10/26/work-to-protect-dns-from-quantum-decryption-attacks-is-speeding-up/5305274",
+            source: "The Register",
+            image: "https://image.theregister.com/238312.jpg?imageId=238312&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Post-quantum DNS encryption roadmap accelerates; cryptographic chip redesign imminent.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "CEO Interview with Eric Tsai of Mivium",
+            url: "https://semiwiki.com/ceo-interviews/374522-ceo-interview-with-eric-tsai-of-mivium/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/Eric-Tsai-on-the-GaN-starting-material.jpg",
+            oneliner: "Mivium scales submicron GaN powder; wide-bandgap materials enabler for power/RF chips.",
+          },
+          {
+            headline: "Executive Interview with Victor Lopez of RaiderChip",
+            url: "https://semiwiki.com/ceo-interviews/374846-executive-interview-with-victor-lopez-of-raiderchip/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/Generative-AI-at-the-Edge.jpg",
+            oneliner: "RaiderChip licenses FPGA/ASIC IP; defense and aerospace custom silicon consolidator.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 57,
     date: "October 23, 2026",
     slug: "issue-57",

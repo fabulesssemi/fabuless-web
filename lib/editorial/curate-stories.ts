@@ -7,6 +7,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { RssItem, PodcastFeed } from "./sources";
 import type { AutoStory, AutoPodcast, HomepageContent } from "@/lib/homepage";
+import { supabase } from "@/lib/supabase";
 
 const CATEGORIES = ["Compute", "Capital Flows", "Geopolitics & Policy", "Memory & Networking", "Other"] as const;
 
@@ -139,6 +140,27 @@ function dedupeByTopic(stories: RankedStory[]): RankedStory[] {
   return result;
 }
 
+// The homepage pool accumulates across several refresh runs per day, but each
+// run only sees its own RSS batch. Without this, a later run happily picks a
+// second outlet's take on a story an earlier run already put on the page (two
+// Musk/SpaceX-debt stories in Top Stories on Oct 26). Feed the headlines
+// already in the 3-day pool back into the prompt so Claude can skip them.
+// Never throws: on any failure the run just proceeds without the context.
+async function getRecentPoolHeadlines(): Promise<string[]> {
+  try {
+    const since = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
+    const { data } = await supabase
+      .from("homepage_articles")
+      .select("headline")
+      .gte("first_seen_at", since)
+      .order("first_seen_at", { ascending: false })
+      .limit(60);
+    return (data ?? []).map((r) => r.headline as string).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
 /**
  * Ask Claude to pick the top semiconductor investment stories from the full RSS
  * corpus. Returns a ready-to-save HomepageContent object.
@@ -195,6 +217,11 @@ export async function generateTopStories(
     })
     .join("\n");
 
+  const recentHeadlines = await getRecentPoolHeadlines();
+  const alreadyShown = recentHeadlines.length
+    ? `\nALREADY ON THE PAGE (headlines published in the last 3 days). Do NOT select any article covering the same underlying news event as one of these, even from a different outlet, unless it reports a materially new development:\n${recentHeadlines.map((h) => `- ${h}`).join("\n")}\n`
+    : "";
+
   const today = new Date().toISOString().slice(0, 10);
   const prompt = `You are a senior semiconductor investment editor at Fabuless, a briefing read by professional investors.
 
@@ -210,6 +237,7 @@ RULES:
 - Assign the most accurate category from: ${CATEGORIES.join(" | ")}.
 - After selecting stories, craft the "issueTitle": 8-14 words covering the 2-3 biggest themes, written as a punchy newspaper front-page headline with specific company names and events.
 
+${alreadyShown}
 Input articles (all have images, interleaved across sources for balance):
 ${storyLinesWithSource}
 

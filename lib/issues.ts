@@ -60,6 +60,137 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 59,
+    date: "October 27, 2026",
+    slug: "issue-59",
+    title: "Anthropic IPO Ignites AI Trade. NVIDIA Reserves Supply. TSMC Hikes CoWoS.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "OpenAI launches GPT-6.1 Terra for faster, better-performing AI agents at half the price",
+            url: "https://siliconangle.com/2026/10/26/openai-launches-gpt-6-1-terra-for-faster-better-performing-ai-agents-at-half-the-price",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-27-07-32-52.png",
+            oneliner: "OpenAI GPT-6.1 Terra launches at 50% lower cost; shifts inference economics favor mid-tier compute.",
+          },
+          {
+            headline: "OpenAI rolls out budget-priced mid-tier GPT-6.1 Terra",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/26/openai-rolls-out-budget-priced-mid-tier-gpt-61-terra/5305574",
+            source: "The Register",
+            image: "https://image.theregister.com/5305594.jpg?imageId=5305594&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "GPT-6.1 Terra priced at tenth of Astra API cost; pressures high-end model demand.",
+          },
+          {
+            headline: "Intel buys quantum software pioneer Classiq for $2.2B",
+            url: "https://siliconangle.com/2026/10/26/intel-buys-quantum-software-pioneer-classiq-for-2-2b/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-27-08-39-41.png",
+            oneliner: "Intel acquires Classiq for $2.2B; positions quantum software stack for future compute transition.",
+          },
+          {
+            headline: "IBM admits mainframes need to be modernized and will use AI to do the job",
+            url: "https://www.theregister.com/systems/2026/10/27/ibm-admits-mainframes-need-to-be-modernized-and-will-use-ai-to-do-the-job/5305618",
+            source: "The Register",
+            image: "https://image.theregister.com/142108.jpg?imageId=142108&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "IBM Z Atlas AI tool modernizes legacy mainframe workloads; enterprise stack refresh via agents.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Anthropic prepares for potential $2 trillion IPO valuation after reporting billions in revenue",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-prepares-for-potential-usd2-trillion-ipo-valuation-after-reporting-billions-in-revenue-company-warns-ai-could-pose-catastrophic-existential-risks-to-humanity",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/XL3SdCXJKQ5duBipYp56rG-1744-80.jpg",
+            oneliner: "Anthropic IPO signals AI market validation; $16.3B H1 revenue justifies trillion-dollar enterprise capex.",
+          },
+          {
+            headline: "Anthropic's IPO is risky business",
+            url: "https://www.cnbc.com/2026/10/27/anthropic-five-surprising-risks-s1.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108463862-1793017402792-gettyimages-2297777280-kbd25007_3xi96vkq.jpeg?v=1793017658&amp;w=1920&amp;h=1080",
+            oneliner: "Anthropic IPO filing reveals AI safety, competitive, and financial sustainability risks for investors.",
+          },
+          {
+            headline: "Anthropic's big financial reveal",
+            url: "https://www.ft.com/content/d1dca5d1-467f-4311-a004-82bb1ef761e0?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic S-1 filing shows 900% revenue retention and $80B first-half losses on capital intensity.",
+          },
+          {
+            headline: "Nvidia is bankrolling AI accelerator supply chain buildout to reserve production capacity",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/nvidia-is-bankrolling-ai-accelerator-supply-chain-buildout-to-reserve-production-capacity-announces-billion-dollar-deals-with-six-major-suppliers-across-substrates-advanced-packaging-semiconductor-testing-and-optical-engines",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/uunPmURoRmgUsfvoDKUPAc-1600-80.jpg",
+            oneliner: "NVIDIA commits billions to secure substrates, CoWoS packaging, testing capacity through 2028 supply squeeze.",
+          },
+          {
+            headline: "Demand & Complexities Of AI GPUs And Custom ASICs Have Stressed TSMC's CoWoS Supply, Reportedly Sparking The Possibility Of A 20% Price Hike",
+            url: "https://www.wccftech.com/tsmc-cowos-price-hike-20-percent-ai-gpu-asic-demand/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "TSMC CoWoS advanced packaging may see 20% price increase as AI GPU/ASIC demand overwhelms capacity.",
+          },
+          {
+            headline: "Nvidia to invest $3 billion in Meta as tech giants deepen AI partnership",
+            url: "https://www.cnbc.com/2026/10/27/nvidia-invest-meta.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108443817-1792619674080-gettyimages-2296215637-META_CONNECT.jpeg?v=1792795588&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA $3B Meta investment signals deepening foundry partnership; Meta raises $95B total AI infrastructure capex.",
+          },
+          {
+            headline: "Elon Musk Wanted 30,000 Of NVIDIA's Bleeding Edge AI GPU Systems But Is Getting Just 20,000, Still Enough To Be 2027's Biggest Buyer, Says Analyst Jeff Pu",
+            url: "https://www.wccftech.com/elon-musk-wanted-30000-of-nvidias-bleeding-edge-ai-gpu-systems-but-is-getting-just-20000-still-enough-to-be-2027s-biggest-buyer-says-analyst-jeff-pu/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "SpaceX secures 20,000 VR200 GPUs for 2027, one-third of total demand; NVIDIA allocation constrained.",
+          },
+          {
+            headline: "Tech stocks rally as AI trade revives",
+            url: "https://www.ft.com/content/a4f9f81e-df30-4669-9eca-865d9d14e441?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic IPO filing revives stalled AI equity rally; Asia follows Wall Street higher.",
+          },
+          {
+            headline: "AI debt trouble could help Fed's Warsh get his way with fewer rate hikes",
+            url: "https://www.marketwatch.com/story/ai-debt-trouble-could-help-feds-warsh-get-his-way-with-fewer-rate-hikes-b3dc4525?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "AI financing stress weakens capex demand; rate environment pressure softens chip equipment orders.",
+          },
+          {
+            headline: "AI stocks haven't played by the normal valuation rules. Now that rates are higher, they may have to, says UBS",
+            url: "https://www.marketwatch.com/story/ai-stocks-havent-played-by-the-normal-valuation-rules-now-that-rates-are-higher-they-may-have-to-says-ubs-f8c78948?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Higher rates pressure AI chip valuations; NVIDIA, semiconductors face multiple compression risk.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "How solid-state transformers could help power the AI boom",
+            url: "https://www.technologyreview.com/2026/10/27/1147684/solid-state-transformers/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/10/261016_digitaltransformers.jpg?resize=1200,600",
+            oneliner: "Solid-state transformer supply shortage critical bottleneck for AI datacenter power infrastructure scaling.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 58,
     date: "October 26, 2026",
     slug: "issue-58",

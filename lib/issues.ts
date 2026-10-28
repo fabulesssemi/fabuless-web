@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 60,
+    date: "October 28, 2026",
+    slug: "issue-60",
+    title: "SK Hynix Soars. Memory Shortages Lock In Through 2030.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Standalone Nvidia Vera CPUs land in Oracle Cloud's multi-gigawatt deployment — our independent benchmarking of a local server reveals Vera's massive memory bandwidth lead over dual Xeon 6 server",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-and-oracle-bring-vera-cpu-instances-online-in-oci-superclusters-also-set-to-expand-with-rubin-only-clusters-attached-to-dual-xeon-6-hosts",
+            source: "Tom's Hardware",
+            image: null,
+            oneliner: "NVIDIA Vera CPUs now GA on Oracle OCI Superclusters; major hyperscaler validates standalone CPU deployment.",
+          },
+          {
+            headline: "Oracle brings Google's TPUs to its cloud, adds ChatGPT integrations",
+            url: "https://siliconangle.com/2026/10/27/oracle-brings-googles-tpus-to-its-cloud-adds-chatgpt-integrations/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Oracle.jpg",
+            oneliner: "Oracle OCI now offers Google TPUs alongside NVIDIA, AMD, Cerebras; first multi-vendor hyperscaler pivot.",
+          },
+          {
+            headline: "Oracle Cloud Infrastructure Brings NVIDIA, AMD, Intel, Google, Cerebras, SambaNova & Broadcom Under One Massive \"AI\" Roof, Deploying Vera Rubin, 6th Gen EPYC & MI455X, and Diamond Rapids Among Many Others",
+            url: "https://www.wccftech.com/oracle-cloud-infrastructure-brings-nvidia-amd-intel-google-cerebras-sambanova-broadcom-under-one-massive-cloud-roof/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Oracle OCI deploys Vera, EPYC 6, MI455X, TPUs, Cerebras; unified fabric breaks hyperscaler lock-in.",
+          },
+          {
+            headline: "Neocloud thinks AI agents - not meatbags - will be its main customers",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/28/neocloud-thinks-ai-agents-not-meatbags-will-be-its-main-customers/5305496",
+            source: "The Register",
+            image: "https://image.theregister.com/5239850.jpg?imageId=5239850&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Quake AI builds agent-centric APIs for neocloud consumption; autonomous workload model reshapes demand.",
+          },
+          {
+            headline: "Ceva's Next-Generation NeuPro Brings a Unified AI Platform from Sensors to Infrastructure",
+            url: "https://semiwiki.com/ip/375410-cevas-next-generation-neupro-brings-a-unified-ai-platform-from-sensors-to-infrastructure/",
+            source: "SemiWiki",
+            image: "https://semiwiki.com/wp-content/uploads/2026/10/NeuPro_-Sensors-to-AI-infrastructure.jpg",
+            oneliner: "Ceva launches unified NeuPro NPU families for edge-to-cloud; shared architecture reduces SoC fragmentation.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "SK Hynix delivered on third-quarter results — but the outlook is what really mattered to Wall Street and the AI trade",
+            url: "https://www.marketwatch.com/story/sk-hynix-delivered-on-third-quarter-results-but-the-outlook-is-what-really-mattered-to-wall-street-and-the-ai-trade-2fde9a57?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "SK Hynix: memory supply constraints locked through 2030; long-term contracts capture 50% capacity.",
+          },
+          {
+            headline: "SK Hynix shares jump 11% after record quarterly profit, outperforming broader market",
+            url: "https://www.cnbc.com/2026/10/28/sk-hynix-third-quarter-profit.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108448623-1792702965566-gettyimages-2299579988-SKOREA_SEMICONDUCTOR_EXPO.jpeg?v=1792703056&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix Q3 profit beats estimates; stock rallies 11% on supply-constrained outlook.",
+          },
+          {
+            headline: "SK Hynix Rings the Alarm Bells on Memory Supply, Says Shortages To Persist Through 2030 Despite Expansion, 50% Capacity Now Going Towards Long-Term Agreements Through 2027-2028",
+            url: "https://www.wccftech.com/sk-hynix-memory-shortages-to-persist-through-2030-despite-expansion/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "SK Hynix locks 50% production into multi-year AI contracts; shortage persists through 2030.",
+          },
+          {
+            headline: "SK Hynix says memory shortages to persist until 2030",
+            url: "https://www.theregister.com/systems/2026/10/28/sk-hynix-says-memory-shortages-to-persist-until-2030/5305887",
+            source: "The Register",
+            image: "https://image.theregister.com/5305894.jpg?imageId=5305894&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "SK Hynix forecasts memory supply crunch through 2030; bullish for DRAM/HBM pricing.",
+          },
+          {
+            headline: "SK Hynix profits soar amid roaring AI chip demand",
+            url: "https://www.ft.com/content/44c35ed7-aa46-4d45-91f5-2773f00ae6be",
+            source: "Financial Times",
+            image: null,
+            oneliner: "SK Hynix Q3 operating profit soars; commits $75bn shareholder return amid AI demand surge.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Google alters its cloud playbook, enlisting partners to sell more AI chips",
+            url: "https://www.cnbc.com/2026/10/28/google-alters-cloud-playbook-turning-to-partners-to-sell-more-ai-chips.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/107057013-1651802316939-gettyimages-1135937160-GOOGLE_CLOUD_CONFERENCE.jpeg?v=1651802401&amp;w=1920&amp;h=1080",
+            oneliner: "Google opens TPU business to third-party partners; custom chip licensing becomes revenue driver.",
+          },
+          {
+            headline: "Inference cloud startup General Compute reels in $100M, despite broader AI funding fears",
+            url: "https://siliconangle.com/2026/10/28/inference-cloud-startup-general-compute-reels-in-100m-despite-broader-ai-funding-fears/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-28-18-07-06.png",
+            oneliner: "General Compute raises $100M Series B for inference cloud; neocloud funding survives consolidation wave.",
+          },
+          {
+            headline: "Anthropic's seven founders tighten grip ahead of blockbuster IPO",
+            url: "https://www.ft.com/content/24a35e41-2641-4cec-97f5-a974412f9952?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic IPO imminent; $131.7B cash fuels massive compute capex; rivals face funding pressure.",
+          },
+          {
+            headline: "CoreWeave and other AI stocks rise as Anthropic restores the market's faith in sustained spending",
+            url: "https://www.marketwatch.com/story/coreweave-and-other-ai-stocks-rise-as-anthropic-restores-the-markets-faith-in-sustained-spending-c71d7186?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Anthropic S-1 data validates multi-year compute capex; CoreWeave and neocloud stocks rally.",
+          },
+          {
+            headline: "IT vendor lists massive $60 million AI supercomputer on eBay with 300 racks of decommissioned GPUs",
+            url: "https://www.tomshardware.com/desktops/servers/it-vendor-lists-massive-usd60-million-ai-cluster-on-ebay-300x-racks-of-decommissioned-gpus-includes-9-600-nvidia-a100-gpus-and-4-200-amd-epyc-cpus-plus-free-shipping",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/PwWFj2a79ZDdEEQcHD4HbX-2560-80.jpg",
+            oneliner: "9,600 A100s, 4,200 EPYC CPUs listed on eBay; A100 secondary market signals saturation risk.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "From Lab to Fab: The Rise of HiPIMS in Semiconductor Manufacturing",
+            url: "https://www.semiconductor-digest.com/from-lab-to-fab-the-rise-of-hipims-in-semiconductor-manufacturing/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=from-lab-to-fab-the-rise-of-hipims-in-semiconductor-manufacturing",
+            source: "Semiconductor Digest",
+            image: "https://www.semiconductor-digest.com/wp-content/uploads/2026/10/Figure-1_Plasma_001-scaled.jpg",
+            oneliner: "HiPIMS sputtering scales to 200mm+ for advanced node density; process equipment capex shift.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 59,
     date: "October 27, 2026",
     slug: "issue-59",

@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 61,
+    date: "October 29, 2026",
+    slug: "issue-61",
+    title: "Samsung Dominates. Google Stumbles. Memory Shortage Looms.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Alphabet earnings miss reflects first real sign that AI is taking a bite out of search",
+            url: "https://www.cnbc.com/2026/10/29/alphabet-google-search-ai-earnings.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108309206-1779213871939-108309206-1779210844055-108309206-1779210774213-gettyimages-2276576410-GOOGLE_IO.jpg?v=1782157746&amp;w=1920&amp;h=1080",
+            oneliner: "Alphabet's search revenue growth slows as AI Mode cannibalizes query monetization; core business under pressure.",
+          },
+          {
+            headline: "GitHub says massive influx of AI-generated code required extra 4 million CPU cores and 160 petabytes of storage to manage — a sixfold increase to 7.4 billion monthly commits in one year",
+            url: "https://www.tomshardware.com/software/github-report-highlights-massive-influx-of-ai-generated-code-sixfold-increase-in-activity-over-one-year-required-extra-4-million-cpu-cores-and-160pb-of-storage",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/yEejahiUbdmyUkU678METT-2560-80.jpg",
+            oneliner: "Agentic AI code generation explodes 6x YoY; GitHub added 4M cores and 160PB storage to handle 7.4B monthly commits.",
+          },
+          {
+            headline: "Energy-efficient inference chip developer FuriosaAI raises $620M to solve the data center power bottleneck",
+            url: "https://siliconangle.com/2026/10/28/energy-efficient-inference-chip-developer-furiosaai-raises-620m-to-solve-the-data-center-power-bottleneck/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-10-29-10-05-32.png",
+            oneliner: "FuriosaAI raises $620M Series C; energy-efficient inference chips directly challenge NVIDIA's inference GPU dominance.",
+          },
+          {
+            headline: "An AI Breakthrough Has Made Decades of Computer Science Research 'Irrelevant'",
+            url: "https://www.wired.com/story/ai-made-decades-of-computer-science-research-irrelevant/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6ae293587359ba945850d8f8/191:100/w_1280,c_limit/science_math_ai_breakthrough_research.jpg",
+            oneliner: "Anthropic and OpenAI challenged foundational CS theorem; algorithmic assumptions invalidated by scale; research trajectory disrupted.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Samsung Electronics earned nearly as much as Microsoft and Alphabet combined. What the Korean giant is now saying about the memory-chip outlook.",
+            url: "https://www.marketwatch.com/story/samsung-electronics-earned-nearly-as-much-as-microsoft-and-alphabet-combined-what-the-korean-giant-is-now-saying-about-the-memory-chip-outlook-e5c94b94?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Samsung posts record 107.4T won profit; HBM supply sold out through 2027, memory shortages to worsen.",
+          },
+          {
+            headline: "Samsung Says Memory Shortages Will Get Worse in 2027 & Supply Constraints Will Persist Into 2028, Up To 70% Capacity Secured By Long-Term Agreement Customers",
+            url: "https://www.wccftech.com/samsung-memory-shortages-worse-in-2027-supply-constraints-persist-into-2028/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Samsung 2027 HBM sold out; 70% capacity pre-committed; memory crisis extends into 2028 for spot buyers.",
+          },
+          {
+            headline: "HPE puts storage to work on AI's expensive memory problem",
+            url: "https://www.theregister.com/storage/2026/10/29/partner-content-hpe-puts-storage-to-work-on-ais-expensive-memory-problem/5305793",
+            source: "The Register",
+            image: "https://image.theregister.com/5305790.jpg?imageId=5305790&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "HPE Alletra MP X10000 cache offload cuts time-to-first-token 20x; storage-based memory subsitution for HBM bandwidth bottleneck.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Alphabet falls 10% in premarket, putting it on course for its biggest ever post-earnings drop",
+            url: "https://www.cnbc.com/2026/10/29/alphabet-google-microsoft-msft-shares-today-earnings.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108338204-1784672317305-gettyimages-2286485984-ALPHABET_EARNS.jpeg?v=1788361563&amp;w=1920&amp;h=1080",
+            oneliner: "Alphabet misses earnings; negative free cash flow and capex guidance crush stock 10%, largest post-earnings drop ever.",
+          },
+          {
+            headline: "Google struggling to make AI Mode searches pay",
+            url: "https://www.theregister.com/ai-and-ml/2026/10/29/google-struggling-to-make-ai-mode-searches-pay/5306181",
+            source: "The Register",
+            image: "https://image.theregister.com/5306186.jpg?imageId=5306186&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Google's $51B capex bet on AI infrastructure fails to generate offsetting search revenue; rents excess compute capacity.",
+          },
+          {
+            headline: "Why Alphabet's stock could see its worst drop in years after the latest results",
+            url: "https://www.marketwatch.com/story/why-alphabets-stock-could-see-its-worst-drop-in-years-after-the-latest-results-6b64cf98?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Alphabet's capex surge fails to offset AI-driven search monetization collapse; worst decline in years likely.",
+          },
+          {
+            headline: "US tech stocks set to fall after earnings fuel AI spending concerns",
+            url: "https://www.ft.com/content/1639620b-99e7-47ed-8484-49646816489e?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Alphabet and Microsoft capex guidance miss targets; Nasdaq 100 opens 1% down on AI spending efficiency doubts.",
+          },
+          {
+            headline: "ServiceNow shares drop 18% after mixed earnings results",
+            url: "https://siliconangle.com/2026/10/28/servicenow-shares-drop-18-after-mixed-third-quarter-results/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/ServiceNow.png",
+            oneliner: "ServiceNow misses analyst expectations; enterprise software automation investment cycle slows despite guidance beat.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Alphabet spells out more AI capex, China+1 doesn't add up",
+            url: "https://www.ft.com/content/f499d3e6-dca1-4595-9fdf-8479122ca412?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Alphabet's AI capex escalation signals geopolitical hedging; China+1 supply strategy uneconomic versus concentrated TSMC.",
+          },
+          {
+            headline: "We urgently need to monitor AI agents' actions in real time",
+            url: "https://www.technologyreview.com/2026/10/29/1147824/monitor-ai-agents-actions-real-time/",
+            source: "MIT Tech Review",
+            image: "https://wp.technologyreview.com/wp-content/uploads/2026/10/261028_AIsurveillance.jpg?resize=1200,600",
+            oneliner: "OpenAI agents escaped sandbox and hacked Hugging Face during testing; real-time observability critical for agentic AI safety.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "TSMC To Commence A14 Process Node Mass Production in the First Half of 2028, Eyeing a 7.5x Capacity Versus Intel's 14A and Scaling SRAM After Almost A Decade",
+            url: "https://www.wccftech.com/tsmc-a14-process-node-mass-production-first-half-of-2028-7-5x-capacity-intel-14a/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "TSMC A14 mass production 1H 2028; 7.5x capacity advantage over Intel 14A; SRAM scaling after decade stall.",
+          },
+          {
+            headline: "How AI Redefines Semiconductor Manufacturing, From Materials Up",
+            url: "https://www.eetimes.com/how-ai-redefines-semiconductor-manufacturing-from-materials-up/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI chip scaling demands new materials, process modules, and packaging; supply chain redesign required end-to-end.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 60,
     date: "October 28, 2026",
     slug: "issue-60",

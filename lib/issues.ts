@@ -60,6 +60,142 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 62,
+    date: "October 30, 2026",
+    slug: "issue-62",
+    title: "Intel Crashes 22%. Big Tech Bleeds $900B. Foxconn Eyes AI Dominance.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Why Intel's stock is sinking toward its worst day in two years — and a $128 billion wipeout",
+            url: "https://www.marketwatch.com/story/why-intels-stock-is-sinking-toward-its-worst-drop-in-two-years-492d71a7?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Intel PC chip collapse crushes confidence in turnaround; memory oversupply kills demand.",
+          },
+          {
+            headline: "Benchmarking Nvidia's Vera CPU for the data center — standalone Vera tested against Granite Rapids-AP and EPYC Turin",
+            url: "https://www.tomshardware.com/pc-components/cpus/benchmarking-nvidias-vera-cpu-for-the-data-center-standalone-vera-tested-against-granite-rapids-ap-and-epyc-turin",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/FmGUof6VmKb5HC58NTycvf-1999-80.jpg",
+            oneliner: "Nvidia Vera CPU enters server race against Intel Granite Rapids-AP, AMD EPYC Turin.",
+          },
+          {
+            headline: "Deadly Intel Fab 28 explosion causes two-week shutdown, to cost $600 million and severely disrupt server chip manufacturing for six months",
+            url: "https://www.tomshardware.com/pc-components/cpus/deadly-intel-fab-28-explosion-causes-two-week-shutdown-to-cost-usd600-million-and-severely-disrupt-server-chip-manufacturing-for-six-months-10nm-xeon-shipments-stall-during-largest-shortage-in-memory",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/LfAMGfgQdrVVWjdQnwewpP-2560-80.jpg",
+            oneliner: "Intel Fab 28 Israel explosion halts 10nm Xeon production for six months; $600M loss.",
+          },
+          {
+            headline: "Intel CEO Lip-Bu Tan Says Nova Lake Will Fill The High-End Client CPU Gap, Coral Rapids \"14A\" To Be Competitive Against AMD & Next-Gen To Take The Lead Over EPYC",
+            url: "https://www.wccftech.com/intel-lip-bu-tan-nova-lake-fill-high-end-client-cpu-gap-coral-rapids-14a-competitive-against-amd/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Intel Nova Lake targets client market gap lost to AMD; Coral Rapids 14A competes EPYC.",
+          },
+          {
+            headline: "Intel stock plunges 21% as chipmaker blames PC slowdown for weak guidance",
+            url: "https://www.cnbc.com/2026/10/29/intel-intc-q3-earnings-report-2026-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108477591-1793228651801-gettyimages-2278665792-AFP_B4P96JT.jpeg?v=1793228835&amp;w=1920&amp;h=1080",
+            oneliner: "Intel guidance miss signals PC market collapse; weak demand erodes chipmaker confidence.",
+          },
+          {
+            headline: "PC chip plunge wipes out a quarter of Intel's value",
+            url: "https://www.theregister.com/systems/2026/10/30/pc-chip-plunge-wipes-out-a-quarter-of-intels-value/5306531",
+            source: "The Register",
+            image: "https://image.theregister.com/134970.jpg?imageId=134970&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Intel market cap drops 25% as PC chip demand evaporates; datacenter hope fades.",
+          },
+          {
+            headline: "Intel shares fall 22% as weak sales outlook dents turnaround",
+            url: "https://www.ft.com/content/d7540e89-08db-43d3-92e0-3c15dd3a60cb?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Intel forecasts falling PC sales, margin compression; turnaround narrative collapses.",
+          },
+          {
+            headline: "NVIDIA's RTX 5080 24 GB Could Arrive As Early As December With 50% More VRAM, As 16 GB Models Already Sell For Over $2,000",
+            url: "https://www.wccftech.com/nvidia-geforce-rtx-5080-24-gb-available-next-few-months-replaces-16-gb-5080/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Nvidia RTX 5080 24GB launches December with 50% VRAM boost; 16GB models exceed $2K.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Amazon falls 7%, Intel plunges 25% in premarket trading, as pressure mounts after earnings",
+            url: "https://www.cnbc.com/2026/10/30/amazon-intel-earnings-big-tech-ai-spending-concerns.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108477592-1793377481413-108477592-1793228653912-gettyimages-2278669397-AFP_B4P96JN.jpg?v=1793377502&amp;w=1920&amp;h=1080",
+            oneliner: "Amazon, Intel crater on AI spend doubts; hyperscaler capex ROI questioned by Wall Street.",
+          },
+          {
+            headline: "Big Tech sheds nearly $900bn in rout over soaring AI spending",
+            url: "https://www.ft.com/content/c695558e-11e6-494c-aeee-0f9fb5c75afc?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Google, Amazon, Meta burn $900B market cap as AI capex cash burn accelerates.",
+          },
+          {
+            headline: "Despite cloud boom, Amazon's stock falls on disappointing earnings and revenue miss",
+            url: "https://siliconangle.com/2026/10/29/despite-cloud-boom-amazons-stock-falls-disappointing-earnings-and-revenue-miss/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Screenshot-from-2026-07-31-06-42-10.png",
+            oneliner: "Amazon misses Q3 revenue, earnings; negative FCF soars from AWS infrastructure spending surge.",
+          },
+          {
+            headline: "Amazon's stock drops — even in the face of a bold new cloud forecast",
+            url: "https://www.marketwatch.com/story/amazons-bold-cloud-forecast-isnt-enough-to-stave-off-a-stock-drop-ee23c1bb?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "AWS modest results, weak ad growth; Amazon's cloud forecast fails to reassure investors.",
+          },
+          {
+            headline: "AWS installs an AI accelerator every 14 seconds and eyes $1 trillion annual revenue",
+            url: "https://www.theregister.com/off-prem/2026/10/30/aws-installs-an-ai-accelerator-every-14-seconds-and-eyes-1-trillion-annual-revenue/5306547",
+            source: "The Register",
+            image: "https://image.theregister.com/5306552.jpg?imageId=5306552&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AWS deploys AI accelerators at massive scale; $1T revenue target signals capex intensity.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Report: Nvidia CEO Jensen Huang was targeted by a Chinese spy",
+            url: "https://siliconangle.com/2026/10/29/report-nvidia-ceo-jensen-huang-was-targeted-by-a-chinese-spy/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Jensen-Huang.png",
+            oneliner: "Chinese espionage operation targeted Nvidia CEO via Megaspeed Singapore data center operator.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Why Shrinking Component Geometries Force a Rethink of BGA Rework Heating Methods",
+            url: "https://www.eetimes.com/why-shrinking-component-geometries-force-a-rethink-of-bga-rework-heating-methods/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Sub-01005 BGA rework demands thermal precision; packaging process control becomes critical.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 61,
     date: "October 29, 2026",
     slug: "issue-61",

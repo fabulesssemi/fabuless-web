@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 63,
+    date: "November 2, 2026",
+    slug: "issue-63",
+    title: "Altman Secures Samsung Memory. SK Targets AI Leadership. Shortages Persist.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Amazon Is Allegedly Canceling GPU Orders And, In Rare Cases, Closing Accounts For Purchasing Compute Hardware",
+            url: "https://wccftech.com/amazon-allegedly-canceling-gpu-orders-closing-accounts-compute-hardware-tim-sweeney/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Amazon cancels GPU orders, closes accounts; GPU scarcity drives retail gatekeeping behavior.",
+          },
+          {
+            headline: "NVIDIA Is Reportedly Eyeing Teflon, The Non-Stick Cookware Material, To Fix AI Server Signal Loss In Next-Gen NVLink Switch Boards",
+            url: "https://wccftech.com/nvidia-eyeing-teflon-ptfe-ai-server-signal-loss-nvlink-switch-boards/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "NVIDIA uses Teflon for NVLink signal integrity; materials innovation drives 200Gbps+ interconnect reliability.",
+          },
+          {
+            headline: "Project-by-project security reviews can't keep pace with enterprise AI agents",
+            url: "https://siliconangle.com/2026/11/01/tokenization-helps-enterprises-move-ai-agents-production-evolve26/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/IMG_6247.jpg",
+            oneliner: "Tokenization and data protection methods become deployment bottlenecks for enterprise AI agents.",
+          },
+          {
+            headline: "Open-source USB tool unlocks Nvidia's half-speed GPU AI limiter on Windows",
+            url: "https://www.tomshardware.com/pc-components/gpus/open-source-usb-tool-unlocks-nvidias-half-speed-gpu-ai-limiter-on-windows-lifts-gpus-fp16-math-performance-up-to-65-percent-uefi-unlocker-covers-rtx-20-30-and-40-series-desktops-and-laptops",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/u2vby2U8BuWxjdFzkUxZg9-1282-80.jpg",
+            oneliner: "nv-uefi-unlocker circumvents NVIDIA tensor rate caps; RTX 20/30/40-series AI performance unlocked.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Sam Altman meets with Samsung leadership to secure more RAM for data centers amid crushing shortages",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/sam-altman-travels-to-south-korea-to-meet-samsung-leadership-to-secure-more-ram-for-data-centers-amid-crushing-shortages-openai-ceo-meets-samsung-leadership-to-discuss-future-ai-data-centers",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/rw7Lei27qRFKGy9CThFftZ-2000-80.jpg",
+            oneliner: "OpenAI secures Samsung DRAM commitment; AI infrastructure memory constraints tighten supply.",
+          },
+          {
+            headline: "AI Reshapes Memory Architecture as Macronix Expands Flash Portfolio",
+            url: "https://www.eetimes.com/ai-reshapes-memory-architecture-as-macronix-expands-flash-portfolio/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI workloads reshape flash demand; Macronix expands portfolio for high-bandwidth memory needs.",
+          },
+          {
+            headline: "Agent demand can't be forecasted, meaning the database has to be ready for anything",
+            url: "https://siliconangle.com/2026/11/01/agentic-ai-architecture-demands-real-time-databases-evolve26/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Screenshot-2026-11-01-at-16.13.53-scaled.png",
+            oneliner: "AI agents demand real-time databases; CelerData raises $80M for agentic workload infrastructure.",
+          },
+          {
+            headline: "Apple's new earnings era begins at a critical time for Big Tech",
+            url: "https://www.marketwatch.com/story/apples-new-earnings-era-begins-at-a-critical-time-for-big-tech-2236a44e?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Apple navigates inflated memory prices and consumer spending slowdown; supply-chain pressure compounds.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Sam Altman makes surprise South Korea visit as OpenAI builds on chip partnerships",
+            url: "https://www.cnbc.com/2026/11/02/openai-sam-altman-samsung-sk-south-korea.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108369615-1790702844864-Sam2.jpg?v=1790702914&amp;w=1920&amp;h=1080",
+            oneliner: "Altman meets Samsung and SK Group; signals supply-chain diversification for AI chip access.",
+          },
+          {
+            headline: "What data centre construction delays mean for debt holders",
+            url: "https://www.ft.com/content/824fcec4-bded-44f3-9e42-565ba0d2cfa8",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Data center build delays impact debt servicing; AI infrastructure capex timelines slip across regions.",
+          },
+          {
+            headline: "This is the biggest threat to the AI-powered bull market",
+            url: "https://www.marketwatch.com/story/this-is-the-biggest-threat-to-the-ai-powered-bull-market-e757ca37?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "2027 earnings growth deceleration threatens AI capex cycle; semiconductor valuations face profit-taking pressure.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "South Korea targets 'world's highest performance' sovereign AI model in record new budget",
+            url: "https://www.cnbc.com/2026/11/02/south-korea-ai-spending-budget.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108366594-1790123780346-gettyimages-2296079881-AA_22092026_2963049.jpeg?v=1790123812&amp;w=1920&amp;h=1080",
+            oneliner: "SK invests 21.3 trillion won in semiconductors and AI; competes directly with U.S., China supply chains.",
+          },
+          {
+            headline: "India floats AI plan under which 'The model travels to the data, rather than the data travelling to the model'",
+            url: "https://www.theregister.com/public-sector/2026/11/02/india-floats-ai-plan-under-which-the-model-travels-to-the-data-rather-than-the-data-travelling-to-the-model/5306872",
+            source: "The Register",
+            image: "https://image.theregister.com/259659.jpg?imageId=259659&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "India proposes on-device AI model deployment to protect data sovereignty; blocks U.S. Big Tech access.",
+          },
+          {
+            headline: "'Control and sovereignty' to shape UK approach to AI",
+            url: "https://www.ft.com/content/6ebe232f-9dbe-4d02-b01e-47deefe7602d?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "UK prioritizes sovereign AI control; mirrors India's on-device model strategy, restricts foreign chip dependency.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Linus Torvalds says Linux kernel is out of 'stabilization phase' and using 'much healthier model' for AI contributions",
+            url: "https://www.theregister.com/os-platforms/2026/11/01/linus-torvalds-says-linux-kernel-is-out-of-stabilization-phase-and-using-much-healthier-model-for-ai-contributions/5306852",
+            source: "The Register",
+            image: "https://image.theregister.com/5306857.jpg?imageId=5306857&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Linux kernel embraces AI-generated patches; open-source infrastructure accelerates AI software stack maturity.",
+          },
+          {
+            headline: "Designing for the Long Haul: Building Obsolescence-Resilient Product Lifecycles",
+            url: "https://www.eetimes.com/designing-for-the-long-haul-building-obsolescence-resilient-product-lifecycles/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Semiconductor obsolescence planning extends critical-system lifecycles; defense and aerospace drive supply resilience.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 62,
     date: "October 30, 2026",
     slug: "issue-62",

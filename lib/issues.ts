@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 64,
+    date: "November 3, 2026",
+    slug: "issue-64",
+    title: "Apple Faces Memory Crunch. Marvell-Lumentum Closes AI Gap. Intel Foundry Stakes High.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Marvell to buy data centre component maker Lumentum in $115bn AI bet",
+            url: "https://www.ft.com/content/92322fad-f293-48b8-a14b-00506d78eb3b?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Marvell-Lumentum $115B merger consolidates AI connectivity supply chain.",
+          },
+          {
+            headline: "Intel foundry push faces critical test after stock's 45% plunge in October",
+            url: "https://www.cnbc.com/2026/11/02/intel-foundry-faces-critical-test-after-stocks-45percent-plunge-in-october.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108477596-1793228649614-gettyimages-2298424248-JAPAN_INTEL.jpeg?v=1793654144&amp;w=1920&amp;h=1080",
+            oneliner: "Intel foundry strategy at inflection point; needs customer wins to justify capex.",
+          },
+          {
+            headline: "Qualcomm Takes On The AI Inference Memory Bottleneck With Working HBC Silicon, And Its First Data Center Product Is Already Taped Out",
+            url: "https://wccftech.com/qualcomm-hbc-silicon-ai-inference-memory-bottleneck-data-center-product-taped-out/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Qualcomm's HBC silicon addresses AI inference memory wall; challenges NVIDIA dominance.",
+          },
+          {
+            headline: "Toyota shows off SoC that stores model weights and its OS on integrated memory",
+            url: "https://www.theregister.com/systems/2026/11/03/toyota-shows-off-soc-that-stores-model-weights-and-its-os-on-integrated-memory/5307117",
+            source: "The Register",
+            image: "https://image.theregister.com/238536.jpg?imageId=238536&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Toyota's on-die AI SoC bypasses external memory bottleneck; automotive edge compute shift.",
+          },
+          {
+            headline: "Rack-scale AI: How Dell and AMD are building infrastructure",
+            url: "https://siliconangle.com/2026/11/02/rack-scale-ai-platforms-amd-dell-dellaidataplatform/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/AI-Platform-at-Full-Speed.jpg",
+            oneliner: "Dell-AMD rack-scale systems challenge NVIDIA's integrated datacenter dominance.",
+          },
+          {
+            headline: "Enterprise architecture: Dell and Microsoft integrate hybrid AI",
+            url: "https://siliconangle.com/2026/11/02/enterprise-architecture-dell-microsoft-ai-thecube-dellaidataplatform/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/10/Microsoft-to-Dell-AI-Factory-Pipeline.jpg",
+            oneliner: "Dell-Microsoft hybrid AI integration targets enterprise on-prem plus cloud.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Apple warns 'unprecedented' memory chip costs will hit margins",
+            url: "https://www.ft.com/content/f6ad8c32-cacb-48ad-ad85-a9a7edac3f16?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Memory price surge constrains Apple margins despite strong iPhone demand.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Anthropic's compute tab could top $1T as Q3 revenue nears $17B",
+            url: "https://www.theregister.com/ai-and-ml/2026/11/02/anthropics-compute-tab-could-top-1t-as-q3-revenue-nears-17b/5307089",
+            source: "The Register",
+            image: "https://image.theregister.com/5307099.jpg?imageId=5307099&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Anthropic's $1T compute spend signals unsustainable unit economics for AI.",
+          },
+          {
+            headline: "Blackstone president calls for more equity to fund AI buildout as debt risks mount",
+            url: "https://www.cnbc.com/2026/11/03/equity-ai-debt-blackstone-pimco-financing.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108508380-1793682175370-gettyimages-2302813920-HK_INVESTMENT_SUMMIT.jpeg?v=1793682188&amp;w=1920&amp;h=1080",
+            oneliner: "Blackstone warns AI infrastructure debt concentrating risk; equity funding critical.",
+          },
+          {
+            headline: "Marvell and Lumentum shareholders unite in panning merger deal: 'It's a trash offer'",
+            url: "https://www.marketwatch.com/story/marvell-and-lumentum-shareholders-unite-in-panning-merger-deal-its-a-trash-offer-53a9f307?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Marvell-Lumentum deal faces shareholder revolt over valuation; AI consolidation questioned.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Smugglers Reportedly Pair Top-Tier HBM With Throwaway Server Chips To Dodge U.S. Export Controls, Then Melt Them Apart In China",
+            url: "https://wccftech.com/smugglers-hbm-throwaway-server-chips-us-export-controls-loophole-china-south-korea/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "HBM smuggling exploit reveals U.S. export controls loophole; China gains advanced memory.",
+          },
+          {
+            headline: "OpenAI considers rebranding data centers to 'AI compute campuses' as data center backlash intensifies",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/openai-considers-rebranding-data-centers-to-ai-compute-campuses-as-data-center-backlash-intensifies-company-reportedly-sees-2028-presidential-election-becoming-an-ai-issue",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/bqKbbbB3ZdRgDH7Pz95FKT-1920-80.jpg",
+            oneliner: "OpenAI rebrands data centers amid political pushback; 2028 AI regulation expected.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Macronix Builds Hardware Security into NOR Flash Ahead of EU Cyber Resilience Act",
+            url: "https://www.eetimes.com/macronix-builds-hardware-security-into-nor-flash-ahead-of-eu-cyber-resilience-act/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Macronix embeds security in NOR flash for EU CRA compliance; hardware shift.",
+          },
+          {
+            headline: "Tachyum, developer of heavily-delayed universal Prodigy processor, voluntarily files for bankruptcy",
+            url: "https://www.tomshardware.com/pc-components/cpus/tachyum-developer-of-heavily-delayed-universal-prodigy-processor-voluntarily-files-for-bankruptcy-future-of-prodigy-ip-unknown-as-company-begins-bankruptcy-proceedings",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/TEL2Ff3vNLxwnB8DXnCW5F-1920-80.png",
+            oneliner: "Tachyum bankruptcy ends universal processor dream; Prodigy IP fate uncertain.",
+          },
+          {
+            headline: "TechInsights Identifies Five Trends Reshaping the Semiconductor Market",
+            url: "https://www.semiconductor-digest.com/techinsights-identifies-five-trends-reshaping-the-semiconductor-market/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=techinsights-identifies-five-trends-reshaping-the-semiconductor-market",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "TechInsights: AI demand reshaping supply, investment, sustainability, consumer products.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 63,
     date: "November 2, 2026",
     slug: "issue-63",

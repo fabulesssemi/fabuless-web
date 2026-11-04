@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 65,
+    date: "November 4, 2026",
+    slug: "issue-65",
+    title: "AMD Overtakes Intel. Supermicro Surges. AI Capex Unstoppable.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD expects to outsell Intel in Q4 for the first time in history",
+            url: "https://www.tomshardware.com/pc-components/cpus/amd-expects-to-outsell-intel-in-q4-for-the-first-time-in-history-usd17b-guidance-would-exceed-intels-projections",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/9RbcgLQz2F5o3E3DkoVzeG-1920-80.jpg",
+            oneliner: "AMD to surpass Intel in Q4 revenue as Epyc datacenter and Instinct AI processors dominate.",
+          },
+          {
+            headline: "AMD Reports Third Quarter 2026 Financial Results",
+            url: "https://ir.amd.com/news-events/press-releases/detail/1303/amd-reports-third-quarter-2026-financial-results",
+            source: "AMD",
+            image: "https://d1io3yog0oux5.cloudfront.net/_3a73972be8820c74e502547dbb24c407/amd/db/834/7308/social_image_resized.jpg",
+            oneliner: "AMD datacenter revenue nearly doubles YoY; agentic AI drives sustained demand for Epyc and Instinct.",
+          },
+          {
+            headline: "Supermicro and Arista Networks crush expectations as AI infrastructure wins again",
+            url: "https://siliconangle.com/2026/11/03/supermicro-and-arista-networks-crush-wall-streets-expectations-as-ai-infrastructure-wins-again/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Screenshot-from-2025-08-06-08-23-13-768x511-1.png",
+            oneliner: "Supermicro beats earnings on booming AI server demand; supply chain confidence returns.",
+          },
+          {
+            headline: "Super Micro's stock pops as earnings show booming demand for AI servers",
+            url: "https://www.marketwatch.com/story/super-micros-stock-pops-as-earnings-show-booming-demand-for-ai-servers-2d179658?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Supermicro CFO confirms high-quality customer base driving sustained AI infrastructure revenue growth.",
+          },
+          {
+            headline: "AMD stock jumps 8% on earnings as data center revenue nearly doubles",
+            url: "https://www.cnbc.com/2026/11/03/amd-amd-q3-earnings-report-2026-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108475788-1793209689654-gettyimages-2298419364-SKOREA_AMD.jpeg?v=1793209712&amp;w=1920&amp;h=1080",
+            oneliner: "AMD Q3 crush beats expectations; data center revenue surge confirms AI chip demand persistence.",
+          },
+          {
+            headline: "Here's why AMD's stock is rising — and sending a confident message about the AI trade",
+            url: "https://www.marketwatch.com/story/heres-why-amds-stock-is-rising-and-sending-a-confident-message-about-the-ai-trade-11cb4d8a?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "AMD shows real AI revenue, shrugging off sustainability concerns; raises outlook confidently.",
+          },
+          {
+            headline: "Marvell Cuts To The Front Of The Datacenter Optics Line With Lumentum Deal",
+            url: "https://www.nextplatform.com/connect/2026/11/03/marvell-cuts-to-the-front-of-the-datacenter-optics-line-with-lumentum-deal/5307392",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/4093105.jpg?imageId=4093105&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Marvell gains datacentre optical edge via Lumentum deal; AI cluster interconnect competition intensifies.",
+          },
+          {
+            headline: "Apple warns of risks related to AI agents behaving in 'unintended or unpredictable' ways",
+            url: "https://www.cnbc.com/2026/11/03/apple-warns-of-ai-agents-behave-in-unintended-or-unpredictable-ways.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108476032-1793212556121-gettyimages-2301906289-APPLE_EVENT.jpeg?v=1793212650&amp;w=1920&amp;h=1080",
+            oneliner: "Apple warns of AI agent autonomy risks in SEC filing; silicon validation/safety becomes design bottleneck.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Microsoft improves Windows 11 performance on 8 GB PCs as RAM prices keep climbing",
+            url: "https://www.theregister.com/software/2026/11/03/microsoft-improves-windows-11-performance-on-8-gb-pcs-as-ram-prices-keep-climbing/5307382",
+            source: "The Register",
+            image: "https://image.theregister.com/1684318.jpg?imageId=1684318&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Microsoft optimises Windows 11 for 8GB as memory costs surge; DRAM pricing pressure visible.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "AI cloud startup Applied Compute raises $350M after reaching key revenue milestone",
+            url: "https://siliconangle.com/2026/11/03/ai-cloud-startup-applied-compute-raises-350m-after-reaching-key-revenue-milestone/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Applied-Compute.png",
+            oneliner: "Applied Compute reaches $3.25B valuation; NVIDIA participates, signaling chipmaker bet on AI infra startups.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Oracle cancels $7bn Tencent AI deal under Trump pressure",
+            url: "https://www.ft.com/content/c5a6a738-cd78-4a8e-a814-57a7473ebb9c?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Oracle scraps $7B Tencent AI infrastructure deal amid US-China chip/AI geopolitical tensions.",
+          },
+          {
+            headline: "North Korean fake job interview led to $6.3B Binance heist",
+            url: "https://www.theregister.com/security/2026/11/03/north-korean-fake-job-interview-led-to-63b-binance-heist/5307398",
+            source: "The Register",
+            image: "https://image.theregister.com/254036.jpg?imageId=254036&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "North Korea executes $6.3B Binance hack via fake recruiter; infrastructure/custody risks reshape crypto compute.",
+          },
+          {
+            headline: "AI cyber breach of a bank is a matter of when, not if",
+            url: "https://www.ft.com/content/41f0e298-42f9-4bb5-8a48-090db4d493ef",
+            source: "Financial Times",
+            image: null,
+            oneliner: "FT warns AI-powered bank breaches inevitable; cybersecurity silicon/chip validation becomes systemic priority.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Tower Semiconductor and Innolight Advance High-Performance Near-Package Optics for AI Infrastructure",
+            url: "https://www.semiconductor-digest.com/tower-semiconductor-and-innolight-advance-high-performance-near-package-optics-for-ai-infrastructure/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=tower-semiconductor-and-innolight-advance-high-performance-near-package-optics-for-ai-infrastructure",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Tower + Innolight advance near-package optics on 200/300mm; silicon photonics becomes AI packaging standard.",
+          },
+          {
+            headline: "Entegris Enters Silicon Carbide and Diamond-Enabled Thermal Management Materials Market for AI Advanced Packaging",
+            url: "https://www.semiconductor-digest.com/entegris-enters-silicon-carbide-and-diamond-enabled-thermal-management-materials-market-for-ai-advanced-packaging/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=entegris-enters-silicon-carbide-and-diamond-enabled-thermal-management-materials-market-for-ai-advanced-packaging",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Entegris expands into SiC/diamond thermal materials for AI packaging; advanced cooling becomes supply bottleneck.",
+          },
+          {
+            headline: "Is There Room for Small-Scale OSATs in India's Chip Packaging Boom?",
+            url: "https://www.eetimes.com/is-there-room-for-small-scale-osats-in-india-chip-packaging-boom/",
+            source: "EE Times",
+            image: null,
+            oneliner: "India OSAT capacity ramp underway; small-scale players require $15-20M capex and anchor customers.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 64,
     date: "November 3, 2026",
     slug: "issue-64",

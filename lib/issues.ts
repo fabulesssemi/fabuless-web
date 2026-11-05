@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 66,
+    date: "November 5, 2026",
+    slug: "issue-66",
+    title: "Taiwan Shines, Qualcomm Sinks, Data Centers in Limbo",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Taiwan's chipmakers shine brightest in living memory",
+            url: "https://www.ft.com/content/55cfdc9f-e465-4969-b8a5-f0cc52f43550?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "TSMC and MediaTek surge as AI demand overwhelms supply constraints.",
+          },
+          {
+            headline: "Qualcomm stock drops 7% on weak earnings forecast as memory shortage weighs on smartphone sales",
+            url: "https://www.cnbc.com/2026/11/04/qualcomm-qcom-earnings-report-q4-2026.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108366464-1790106895627-gettyimages-2279393456-042a6837_z1kl6pep.jpeg?v=1790106926&amp;w=1920&amp;h=1080",
+            oneliner: "Memory glut and Apple loss force Qualcomm guidance down; foundry pressure mounts.",
+          },
+          {
+            headline: "Intel's Biggest Foundry Bet Is Still On The Cards With 14A PDK 0.9 Now Available To Customers",
+            url: "https://wccftech.com/intel-foundry-14a-pdk-0-9-available-pdk-1-0-q1-2027-high-volume-manufacturing/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Intel 14A PDK 0.9 rolls out; Q1 2027 HVM target keeps foundry hopes alive.",
+          },
+          {
+            headline: "Semiconductor Market Continues to Accelerate in Q3 2026",
+            url: "https://www.semiconductor-digest.com/semiconductor-market-continues-to-accelerate-in-q3-2026/?utm_source=rss&utm_medium=rss&utm_campaign=semiconductor-market-continues-to-accelerate-in-q3-2026",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Global chip sales hit $517.7B in Q3, up 146.8% YoY; AI demand sustains momentum.",
+          },
+          {
+            headline: "AMD Cannot Catch Nvidia, But It Sure Can Make Some Money",
+            url: "https://www.nextplatform.com/compute/2026/11/04/amd-cannot-catch-nvidia-but-it-sure-can-make-some-money/5307666",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5307668.jpg?imageId=5307668&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AMD's AI GPU margins hold despite Nvidia dominance; TSMC partnership solidifies.",
+          },
+          {
+            headline: "Chiplets: Meta-Scale Chiplet Velocity Accelerating AI SoC Development to Match the Rapid Evolution of AI Model",
+            url: "https://www.eetimes.com/chiplets-meta-scale-chiplet-velocity-accelerating-ai-soc-development-to-match-the-rapid-evolution-of-ai-model/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Meta accelerates chiplet-based SoC design; TSMC advanced node demand intensifies.",
+          },
+          {
+            headline: "Intel Nova Lake-S CPUs Expected To Limit Clocks To 5.1 GHz When Temperature Hits 90°C",
+            url: "https://wccftech.com/intel-nova-lake-s-cpus-expected-to-limit-clocks-to-5-1-ghz-when-temperature-hits-90c/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Intel Nova Lake thermal throttling at 90°C; cooling supplier capex accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Nintendo Switch 2 sales plunge 41% as price hikes and memory crunch bite",
+            url: "https://www.cnbc.com/2026/11/05/nintendo-earnings-switch-2-sales.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108160824-1750231226798-gettyimages-2218016424-JAPAN_NINTENDO_SWITCH_2.jpeg?v=1770172023&amp;w=1920&amp;h=1080",
+            oneliner: "Memory cost inflation crushes consumer electronics demand; foundry pricing power shifts.",
+          },
+          {
+            headline: "Arista's record quarter shows the network has become central to AI",
+            url: "https://siliconangle.com/2026/11/04/aristas-record-quarter-shows-the-network-has-become-central-to-ai/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2022/08/IMG_7962-800x534.jpg",
+            oneliner: "Arista beats on AI networking demand; Broadcom, Marvell supply chain accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Kyndryl shares surge 30% on hyperscaler-related revenue growth",
+            url: "https://siliconangle.com/2026/11/04/kyndryl-shares-surge-30-on-hyperscaler-related-revenue-growth/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Kyndryl.png",
+            oneliner: "Kyndryl infrastructure backlog swells; server OEM capex boom continues.",
+          },
+          {
+            headline: "As Vistra and other energy stocks slide, some analysts warn of an 'excessive knee-jerk' reaction",
+            url: "https://www.marketwatch.com/story/as-vistra-and-other-energy-stocks-slide-some-analysts-warn-of-an-excessive-knee-jerk-reaction-aece0737?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Energy stocks crater on data centre capex fears; power supply chain uncertainty.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Asian tech stocks slide on post-midterm AI fears",
+            url: "https://www.ft.com/content/21755495-c68a-45a9-90d8-64f698cd1952?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Democratic Congress threatens data centre build-out; TSMC, SK Hynix valuations under pressure.",
+          },
+          {
+            headline: "The Blue Wave Has Tech Bros Scrambling for Data Centers in Space",
+            url: "https://www.wired.com/story/the-blue-wave-has-tech-bros-scrambling-for-data-centers-in-space/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6aeb641153c0a015e33517d0/191:100/w_1280,c_limit/Business_TechBrosCrying_v1.jpg",
+            oneliner: "Democratic victory triggers terrestrial data centre retreat; space infrastructure interest peaks.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Worldwide Silicon Wafer Shipments Increase 13.4% Year-on-Year in Q3 2026, SEMI Reports",
+            url: "https://www.semiconductor-digest.com/worldwide-silicon-wafer-shipments-increase-13-4-year-on-year-in-q3-2026-semi-reports/?utm_source=rss&utm_medium=rss&utm_campaign=worldwide-silicon-wafer-shipments-increase-13-4-year-on-year-in-q3-2026-semi-reports",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Wafer shipments climb 13.4% YoY; foundry utilization peaks, capex constraints tighten.",
+          },
+          {
+            headline: "When datacenters lose power, generators should kick in. That didn't happen for Google in London",
+            url: "https://www.theregister.com/off-prem/2026/11/05/when-datacenters-lose-power-generators-should-kick-in-that-didnt-happen-for-google-in-london/5307739",
+            source: "The Register",
+            image: "https://image.theregister.com/5307745.jpg?imageId=5307745&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Google London outage exposes data centre resilience gap; infrastructure investment risk.",
+          },
+          {
+            headline: "Hey, Siri: Plug into my app like you said you'd do way back in 2024",
+            url: "https://www.theregister.com/ai-and-ml/2026/11/04/hey-siri-plug-into-my-app-like-you-said-youd-do-way-back-in-2024/5307659",
+            source: "The Register",
+            image: "https://image.theregister.com/5307663.jpg?imageId=5307663&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Apple delays Siri AI app integration; custom silicon inference offloading momentum slows.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 65,
     date: "November 4, 2026",
     slug: "issue-65",

@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 67,
+    date: "November 6, 2026",
+    slug: "issue-67",
+    title: "AI Bubble Deflates. Musk Loses $456B. Democrats Block Data Centers.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AI meltdown: Nvidia and Qualcomm drop more than 9%, pushing Nasdaq to worst day since April 2025",
+            url: "https://www.cnbc.com/2026/11/05/qualcomm-earnings-chip-stocks-election.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108447197-1792682617949-gettyimages-2301325199-3h4a6821_7uqxvgux.jpeg?v=1792682661&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA and Qualcomm plunge 9%+ as AI infrastructure demand questioned.",
+          },
+          {
+            headline: "Marvell and Lumentum Announce Combination",
+            url: "https://www.semiconductor-digest.com/marvell-and-lumentum-announce-combination/?utm_source=rss&utm_medium=rss&utm_campaign=marvell-and-lumentum-announce-combination",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Marvell acquires Lumentum in all-stock deal; consolidates optical networking.",
+          },
+          {
+            headline: "Cloudflare shares surge as revenue growth accelerates to 39% and outlook rises",
+            url: "https://siliconangle.com/2026/11/05/cloudflare-shares-surge-as-revenue-growth-accelerates-to-39-and-outlook-rises/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2024/02/cloudflareoffice.jpg",
+            oneliner: "Cloudflare beats on 39% revenue growth; AI protection demand strong.",
+          },
+          {
+            headline: "Cloudflare's stock mounts a big comeback after fastest sales surge in nearly 4 years",
+            url: "https://www.marketwatch.com/story/cloudflares-stock-mounts-a-big-comeback-after-fastest-sales-surge-in-nearly-4-years-d80d994d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Cloudflare 39% revenue surge driven by automated AI protection demand.",
+          },
+          {
+            headline: "Google Cloud storage moves to the front of the AI stack as enterprises hit the GPU utilization ceiling",
+            url: "https://siliconangle.com/2026/11/05/enterprise-ai-storage-bottleneck-google-cloud-thecuberesearch-appdevangle/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Google-Cloud-interview-2026.png",
+            oneliner: "GPU bottleneck forces enterprise AI focus from compute to storage.",
+          },
+          {
+            headline: "AWS Kiro aims to solve identity crisis by adding another identity: bot orchestrator",
+            url: "https://www.theregister.com/ai-and-ml/2026/11/05/aws-kiro-aims-to-solve-identity-crisis-by-adding-another-identity-bot-orchestrator/5307965",
+            source: "The Register",
+            image: "https://image.theregister.com/5307975.jpg?imageId=5307975&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AWS Kiro expands agentic tools for enterprise AI orchestration.",
+          },
+          {
+            headline: "AI agents are a 'bane' for some website operators, says Cloudflare",
+            url: "https://www.theregister.com/networks/2026/11/06/ai-agents-are-a-bane-for-some-website-operators-says-cloudflare/5308022",
+            source: "The Register",
+            image: "https://image.theregister.com/239494.jpg?imageId=239494&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Cloudflare CEO warns AI agents strain web infrastructure economics.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Nasdaq sell-off batters Asian chip stocks as SK Hynix, Samsung, Softbank, TSMC tumble",
+            url: "https://www.cnbc.com/2026/11/06/tech-stocks-sk-hynix-samsung-softbank.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108256608-1769204635647-gettyimages-1237668341-TAIWAN_TSMC.jpeg?v=1775649989&amp;w=1920&amp;h=1080",
+            oneliner: "SK Hynix, Samsung, TSMC crater as Nasdaq correction spreads Asia-wide.",
+          },
+          {
+            headline: "Gelsinger-backed Nagare Labs' Z2RAM promises SRAM speed at DRAM density",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/gelsinger-backed-nagare-labs-capacitorless-z2ram-promises-sram-speed-with-dram-density-latest-published-cell-retains-data-for-over-300-seconds-at-85-c-but-further-figures-are-projected",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/wBsiTVdEXUvLhGduqG9Q2d-1500-80.jpg",
+            oneliner: "Nagare Labs' Z2RAM offers SRAM-speed memory for AI accelerator stacking.",
+          },
+          {
+            headline: "Entegris Expands Partnership with Kioxia",
+            url: "https://www.semiconductor-digest.com/entegris-expands-partnership-with-kioxia/?utm_source=rss&utm_medium=rss&utm_campaign=entegris-expands-partnership-with-kioxia",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Entegris deepens Kioxia materials work on BiCS FLASH 3D memory.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Wall Street sheds $3.2tn as tech-heavy Nasdaq plunges",
+            url: "https://www.ft.com/content/3d079b3d-580d-400b-bf9c-56af6a08f60f?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Nasdaq 100 crashes 6.4% on post-midterm AI capex uncertainty.",
+          },
+          {
+            headline: "Data Centers Aren't Ready For The Next AI Bottleneck; Power Infrastructure, As NVIDIA's Kyber Racks Could Require Electricity Usage Equivalent To 500 Homes",
+            url: "https://wccftech.com/nvidia-kyber-rubin-ultra-nvl576-600kw-power-consumption-data-center-bottleneck/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "NVIDIA Kyber racks demand 600kW power; data center grid unready.",
+          },
+          {
+            headline: "Meta Exec Says A Recently Elected, Data Center-Skeptic Democratic Governor Now Wants To Meet After Inauguration",
+            url: "https://wccftech.com/meta-exec-says-a-recently-elected-data-center-skeptic-democratic-governor-now-wants-to-meet-after-inauguration-as-22-5-gw-of-capacity-is-still-slated-to-come-online-regardless-of-politics/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Meta maintains 22.5 GW data center plans despite Democratic opposition.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Will Democrats stall the AI boom?",
+            url: "https://www.ft.com/content/5dedb9bf-bd12-4956-b2b7-ce968e1e1371?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Democratic sweep threatens data center construction moratorium, AI investment.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Combined OpenSSH and musl-libc flaws let anyone into Alpine Linux and other distros by typing anything over 256 characters as a password",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/combined-flaws-let-anyone-into-alpine-linux-and-other-distros-by-typing-anything-over-256-characters-as-a-password-emergency-fixes-for-openssh-and-musl-libc-issued-for-millions-of-systems-patch-immediately",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/BptY8MpPGXGUqczAtupMHF-2048-80.jpg",
+            oneliner: "Critical OpenSSH+musl flaw enables root access; millions of systems at risk.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 66,
     date: "November 5, 2026",
     slug: "issue-66",

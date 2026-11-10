@@ -179,9 +179,8 @@ ${articleList}`;
   }
 
   const text = msg!.content[0].type === "text" ? msg!.content[0].text : "";
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error("Claude returned no JSON");
-  const raw = jsonMatch[0];
+  const raw = extractFirstJsonObject(text);
+  if (!raw) throw new Error("Claude returned no JSON");
   try {
     return JSON.parse(raw) as ClaudeResponse;
   } catch {
@@ -192,6 +191,31 @@ ${articleList}`;
       + "]}]}";                         // close stories array + root object
     return JSON.parse(repaired) as ClaudeResponse;
   }
+}
+
+// Returns the first balanced {...} object in the text. A greedy first-"{" to
+// last-"}" match breaks whenever Claude adds trailing prose containing a brace.
+// If the object never closes (truncated output), returns the rest of the text
+// so the caller's truncation repair can still run.
+function extractFirstJsonObject(text: string): string | null {
+  const start = text.indexOf("{");
+  if (start === -1) return null;
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === "\\") escaped = true;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') inString = true;
+    else if (ch === "{") depth++;
+    else if (ch === "}" && --depth === 0) return text.slice(start, i + 1);
+  }
+  return text.slice(start);
 }
 
 // ── Step 3: build the Issue TS string ────────────────────────────────────────

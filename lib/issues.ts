@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 69,
+    date: "November 10, 2026",
+    slug: "issue-69",
+    title: "AMD Venice Crushes Nvidia Turmoil. Huang Spy Scandal Roils Supply Chain.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD Zen 6 EPYC 'Venice' deep dive and benchmarking",
+            url: "https://www.tomshardware.com/pc-components/cpus/amd-zen-6-epyc-venice-deep-dive-and-benchmarking-dual-epyc-9996-with-1-024-threads-delivers-up-to-93-percent-performance-gain-gen-on-gen-9686f-outclasses-nvidias-vera",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/ZAgiNFCzjQaAkvL44NaxPC-1920-80.jpg",
+            oneliner: "AMD Venice delivers 93% perf uplift, directly challenges Nvidia's server CPU roadmap dominance.",
+          },
+          {
+            headline: "AMD winds up Zen 6 cores for faster clock speeds",
+            url: "https://www.theregister.com/systems/2026/11/10/amd-winds-up-zen-6-cores-for-faster-clock-speeds/5308603",
+            source: "The Register",
+            image: "https://image.theregister.com/5308611.jpg?imageId=5308611&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Zen 6 hits 5.3 GHz with 256 cores, 20-31% IPC gains; reshapes EPYC competitive positioning.",
+          },
+          {
+            headline: "AMD's Epyc X-chips are back after a three-year hiatus",
+            url: "https://www.theregister.com/systems/2026/11/10/amds-epyc-x-chips-are-back-after-a-three-year-hiatus/5308269",
+            source: "The Register",
+            image: "https://image.theregister.com/250546.jpg?imageId=250546&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Venice-X with 3D V-Cache, 1.2 GB L3, 5.3 GHz boosts EDA/HPC workload performance H2 2027.",
+          },
+          {
+            headline: "AMD brings Zen 6 architecture muscle to embedded systems with new EPYC 9006 series chips",
+            url: "https://siliconangle.com/2026/11/10/amd-brings-zen-6-architecture-muscle-to-embedded-systems-with-new-epyc-9006-series-chips/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Screenshot-from-2026-11-09-09-22-22.png",
+            oneliner: "EPYC Embedded 9006 delivers 1.8x perf uplift, 7-year longevity for semiconductor validation tools.",
+          },
+          {
+            headline: "AMD EPYC Embedded 9006 CPUs Bring Up To 256 \"Zen 6\" Cores & 7-Year Longevity To SP7 Platforms With Advanced Security Features",
+            url: "https://wccftech.com/amd-epyc-embedded-9006-cpus/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "EPYC Embedded 9006 secures extended design-in window for EDA simulator vendors competing with Cadence.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "AMD Unveils MEXT Memory Solution: Leverages Flash To Mitigate DRAM Costs While Expanding Capacities & Retaining Similar Performance Even With 50% Cut In DDR5",
+            url: "https://wccftech.com/amd-mext-memory-solution-flash-repaces-dram-same-performance/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "AMD MEXT uses Flash to cut DRAM 50%, alleviates memory supercycle pricing pressure for servers.",
+          },
+          {
+            headline: "Weebit Nano launches Matrix research program to test AI computing inside memory",
+            url: "https://semiwiki.com/ip/weebit-nano/375980-weebit-nano-launches-matrix-research-program-to-test-ai-computing-inside-memory/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "Weebit ReRAM in-memory compute research opens alternative to HBM for AI model inference.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia board member Stephen Neal could play big role in probe of CEO Jensen Huang",
+            url: "https://www.cnbc.com/2026/11/09/nvidia-jensen-huang-investigation.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108546671-1794248962955-gettyimages-2303898371-boivin-illustra261109_nprSQ.jpeg?v=1794249041&amp;w=1920&amp;h=1080",
+            oneliner: "Lead independent director Stephen Neal heads Nvidia board probe into Huang affair; governance risk material.",
+          },
+          {
+            headline: "The Nvidia investor's guide to (maybe) losing your CEO",
+            url: "https://www.ft.com/content/c31c88c5-935c-42fb-bad0-408325a1de0b?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huang departure would erode Nvidia's pricing power, market share in GPU monopoly; valuation risk.",
+          },
+          {
+            headline: "Even Wall Street's lone Nvidia bear says forcing out CEO Jensen Huang 'would be a mistake for everyone'",
+            url: "https://www.marketwatch.com/story/wall-streets-only-nvidia-bear-says-forcing-out-ceo-jensen-huang-would-be-a-mistake-for-everyone-78043738?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Nvidia bear Colette Kress stresses Huang indispensable; board governance probe creates removal risk.",
+          },
+          {
+            headline: "Anthropic officially sets the stage for an IPO valuing the company north of $1 trillion",
+            url: "https://www.marketwatch.com/story/anthropic-reportedly-retracts-ipo-terms-sent-to-banks-by-mistake-exposing-jitters-over-ai-investments-6116578d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Anthropic IPO Nov 19 at $70-78/share, $64B raise, $1.4T valuation; AI capex cycle peak signal.",
+          },
+          {
+            headline: "Goldman Sachs expects Anthropic revenue to exceed $600bn by 2030",
+            url: "https://www.ft.com/content/fd209548-d2df-470c-ab9a-caadbec08b58?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "GS projects Anthropic $600B revenue by 2030, 130x growth; validates sustained AI chip demand.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Alice Huang reportedly instrumental in securing over $7.5 billion of Nvidia AI GPU imports during three-year relationship with Jensen Huang",
+            url: "https://www.tomshardware.com/tech-industry/policy/alice-huang-reportedly-instrumental-in-securing-over-usd7-5-billion-of-nvidia-ai-gpu-imports-during-three-year-relationship-with-jensen-huang-helped-move-240-000-banned-chips-into-china-mostly-h100-and-h200",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/yNr9fLwtBNseuEVQcAQtgJ-1280-80.png",
+            oneliner: "$7.5B Nvidia GPU leak to China via alleged spy; DOJ/CFIUS probe threatens export control regime.",
+          },
+          {
+            headline: "China panel chair Moolenaar demands answers on Nvidia CEO's alleged affair with a Chinese spy",
+            url: "https://www.cnbc.com/2026/11/10/moolenaar-nvidia-jensen-huang-affair-chinese-spy.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108546365-1794257665106-108546365-17942336732026-10-19t181225z_1947160221_rc2h6oa4b07j_rtrmadp_0_germany-politics-merz-nvidia.jpeg?v=1794257684&amp;w=1920&amp;h=1080",
+            oneliner: "House Select China committee chair demands Huang testimony; escalates political risk to Nvidia GPU exports.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "CPO's Next Challenge: Turning Optical Performance into Manufacturable Systems",
+            url: "https://semiwiki.com/3dic/376055-cpos-next-challenge-turning-optical-performance-into-manufacturable-systems/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "Co-packaged optics yield and assembly scale challenges; critical for AI accelerator bandwidth roadmaps.",
+          },
+          {
+            headline: "Staera launches with $4.6M to develop an optical interconnect for chiplets",
+            url: "https://siliconangle.com/2026/11/10/staera-launches-with-4-6m-to-develop-an-optical-interconnect-for-chiplets/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Staera.png",
+            oneliner: "Staera chiplet optical interconnect startup funded; addresses AI chiplet bandwidth bottleneck gap.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 68,
     date: "November 10, 2026",
     slug: "issue-68",

@@ -60,6 +60,149 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 68,
+    date: "November 10, 2026",
+    slug: "issue-68",
+    title: "NVIDIA Implodes. AMD Venice Surges. Huang Under Fire.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "The Nvidia investor's guide to (maybe) losing your CEO",
+            url: "https://www.ft.com/content/c31c88c5-935c-42fb-bad0-408325a1de0b?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huang departure risks shedding NVIDIA's market share dominance and GPU pricing power.",
+          },
+          {
+            headline: "NVIDIA CEO Huang's Troubles Send Shockwaves Across AI Chip Supply Chains As Chatter Starts About Firm Losing Dominance To Custom ASIC AI Chips",
+            url: "https://www.wccftech.com/nvidia-ceo-huangs-troubles-send-shockwaves-across-ai-chip-supply-chains-as-chatter-starts-about-firm-losing-dominance-to-custom-asic-ai-chips/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Supply chain sources expect NVIDIA GPU order slowdown, custom ASIC proliferation accelerates.",
+          },
+          {
+            headline: "Even Wall Street's lone Nvidia bear says forcing out CEO Jensen Huang 'would be a mistake for everyone'",
+            url: "https://www.marketwatch.com/story/wall-streets-only-nvidia-bear-says-forcing-out-ceo-jensen-huang-would-be-a-mistake-for-everyone-78043738?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "NVIDIA's sole bear analyst warns CEO removal would damage competitive position irreparably.",
+          },
+          {
+            headline: "AMD Showcases 6th Gen AMD EPYC Processors to Lead Next Era of AI and Enterprise Computing",
+            url: "https://ir.amd.com/news-events/press-releases/detail/1305/amd-showcases-6th-gen-amd-epyc-processors-to-lead-next-era-of-ai-and-enterprise-computing",
+            source: "AMD",
+            image: "https://d1io3yog0oux5.cloudfront.net/_b8c216a2d162754b4a0e5dc5b97c9554/amd/db/834/7308/social_image_resized.jpg",
+            oneliner: "AMD Zen 6 EPYC Venice launches with 27% IPC gain, 256 cores, agentic AI optimization.",
+          },
+          {
+            headline: "AMD Zen 6 EPYC 'Venice' deep dive and benchmarking",
+            url: "https://www.tomshardware.com/pc-components/cpus/amd-zen-6-epyc-venice-deep-dive-and-benchmarking-dual-epyc-9996-with-1-024-threads-delivers-up-to-93-percent-performance-gain-gen-on-gen-9686f-outclasses-nvidias-vera",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/ZAgiNFCzjQaAkvL44NaxPC-1920-80.jpg",
+            oneliner: "Dual-socket Venice 9996 delivers 93% gen-on-gen gain, outpaces NVIDIA Vera in benchmarks.",
+          },
+          {
+            headline: "AMD winds up Zen 6 cores for faster clock speeds",
+            url: "https://www.theregister.com/systems/2026/11/10/amd-winds-up-zen-6-cores-for-faster-clock-speeds/5308603",
+            source: "The Register",
+            image: "https://image.theregister.com/5308611.jpg?imageId=5308611&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Zen 6 hits 5.3 GHz boost, 20-31% IPC gains across up to 256 cores on SP7/SP8.",
+          },
+          {
+            headline: "AMD's Epyc X-chips are back after a three-year hiatus",
+            url: "https://www.theregister.com/systems/2026/11/10/amds-epyc-x-chips-are-back-after-a-three-year-hiatus/5308269",
+            source: "The Register",
+            image: "https://image.theregister.com/250546.jpg?imageId=250546&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Venice-X with 3D V-Cache returns H2 2027; 96 cores, 1152 MB L3, 5.3 GHz for EDA/HPC.",
+          },
+          {
+            headline: "AMD brings Zen 6 architecture muscle to embedded systems with new EPYC 9006 series chips",
+            url: "https://siliconangle.com/2026/11/10/amd-brings-zen-6-architecture-muscle-to-embedded-systems-with-new-epyc-9006-series-chips/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Screenshot-from-2026-11-09-09-22-22.png",
+            oneliner: "EPYC Embedded 9006 delivers 1.8x uplift, 7-year longevity for semiconductor fab validation.",
+          },
+          {
+            headline: "AMD Tunes Up CPUs For Agentic AI With \"Venice\" Epyc Processors",
+            url: "https://www.nextplatform.com/compute/2026/11/10/amd-tunes-up-cpus-for-agentic-ai-with-venice-epyc-processors/5308850",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5308868.jpg?imageId=5308868&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Venice EPYC addresses agentic workload memory, IPC, frequency requirements end-to-end.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "AMD Unveils MEXT Memory Solution: Leverages Flash To Mitigate DRAM Costs While Expanding Capacities & Retaining Similar Performance Even With 50% Cut In DDR5",
+            url: "https://www.wccftech.com/amd-mext-memory-solution-flash-repaces-dram-same-performance/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "AMD MEXT flash-based memory cuts DRAM costs 50% while maintaining performance on EPYC.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "CPO's Next Challenge: Turning Optical Performance into Manufacturable Systems",
+            url: "https://semiwiki.com/3dic/376055-cpos-next-challenge-turning-optical-performance-into-manufacturable-systems/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "Co-packaged optics manufacturing, yield, assembly strategies critical for AI infrastructure scale.",
+          },
+          {
+            headline: "Staera launches with $4.6M to develop an optical interconnect for chiplets",
+            url: "https://siliconangle.com/2026/11/10/staera-launches-with-4-6m-to-develop-an-optical-interconnect-for-chiplets/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Staera.png",
+            oneliner: "Staera $4.6M pre-seed: optical chiplet interconnect startup enters crowded 3D packaging market.",
+          },
+          {
+            headline: "Anthropic officially sets the stage for an IPO valuing the company north of $1 trillion",
+            url: "https://www.marketwatch.com/story/anthropic-reportedly-retracts-ipo-terms-sent-to-banks-by-mistake-exposing-jitters-over-ai-investments-6116578d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Anthropic $1T+ valuation IPO signals silicon demand surge for inference/training infrastructure.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Jensen Huang's affair with alleged Chinese spy further complicates Nvidia's China problem",
+            url: "https://www.cnbc.com/2026/11/10/jensen-huang-nvidia-china-ties.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108307554-1778848271041-gettyimages-2276128441-aw1a5603_jhud8umq.jpeg?v=1778848286&amp;w=1920&amp;h=1080",
+            oneliner: "NVIDIA CEO's alleged espionage ties expose $7.5B GPU export vulnerabilities to China.",
+          },
+          {
+            headline: "Alice Huang reportedly instrumental in securing over $7.5 billion of Nvidia AI GPU imports during three-year relationship with Jensen Huang",
+            url: "https://www.tomshardware.com/tech-industry/policy/alice-huang-reportedly-instrumental-in-securing-over-usd7-5-billion-of-nvidia-ai-gpu-imports-during-three-year-relationship-with-jensen-huang-helped-move-240-000-banned-chips-into-china-mostly-h100-and-h200",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/yNr9fLwtBNseuEVQcAQtgJ-1280-80.png",
+            oneliner: "Alleged Chinese spy facilitated diversion of 240,000 banned H100/H200 chips into China via NVIDIA.",
+          },
+          {
+            headline: "China panel chair Moolenaar demands answers on Nvidia CEO's alleged affair with a Chinese spy",
+            url: "https://www.cnbc.com/2026/11/10/moolenaar-nvidia-jensen-huang-affair-chinese-spy.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108546365-1794257665106-108546365-17942336732026-10-19t181225z_1947160221_rc2h6oa4b07j_rtrmadp_0_germany-politics-merz-nvidia.jpeg?v=1794257684&amp;w=1920&amp;h=1080",
+            oneliner: "Congressional Select Committee on China demands NVIDIA CEO testimony on espionage allegations.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 67,
     date: "November 6, 2026",
     slug: "issue-67",

@@ -36,6 +36,39 @@ const KEY = "top_stories";
 
 // The pipeline can emit the same article twice (e.g. picked under two
 // categories). The homepage keys stories by URL, so drop repeats here.
+// First company/person named in a headline, normalised to one key (Jensen and
+// Huang both mean Nvidia). Used only to keep the top 4 from repeating a company.
+const COMPANY_PATTERNS: [string, RegExp][] = [
+  ["nvidia", /\b(nvidia|jensen|huang|megaspeed)\b/i],
+  ["amd", /\b(amd|lisa su|epyc|ryzen|instinct)\b/i],
+  ["intel", /\bintel\b/i],
+  ["micron", /\bmicron\b/i],
+  ["tsmc", /\b(tsmc|taiwan semiconductor)\b/i],
+  ["samsung", /\bsamsung\b/i],
+  ["sk hynix", /\bsk\s?hynix\b/i],
+  ["broadcom", /\bbroadcom\b/i],
+  ["qualcomm", /\bqualcomm\b/i],
+  ["arm", /\barm\b/i],
+  ["asml", /\basml\b/i],
+  ["marvell", /\bmarvell\b/i],
+  ["openai", /\bopenai\b/i],
+  ["anthropic", /\banthropic\b/i],
+  ["google", /\b(google|alphabet|tpu)\b/i],
+  ["meta", /\bmeta\b/i],
+  ["microsoft", /\bmicrosoft\b/i],
+  ["apple", /\bapple\b/i],
+  ["musk", /\b(musk|spacex|tesla|xai)\b/i],
+];
+
+function primaryCompany(headline: string): string | null {
+  let best: { key: string; at: number } | null = null;
+  for (const [key, re] of COMPANY_PATTERNS) {
+    const m = re.exec(headline);
+    if (m && (best === null || m.index < best.at)) best = { key, at: m.index };
+  }
+  return best?.key ?? null;
+}
+
 function dedupeByUrl<T extends { url: string }>(items: T[]): T[] {
   const seen = new Set<string>();
   return items.filter((item) => !seen.has(item.url) && seen.add(item.url));
@@ -146,7 +179,27 @@ export async function getHomepageArticles(): Promise<{
       .sort((a, b) => ageTier(a) - ageTier(b) || ((a.rank as number) ?? 99) - ((b.rank as number) ?? 99));
     const topRows: Record<string, unknown>[] = [];
     const topSourceCounts = new Map<string, number>();
+    // Same-event stories from different outlets (or two angles on one company's
+    // news cycle) kept landing side by side in the top 4. Headline text is the
+    // only signal in the pool, so as a hard backstop to the curation prompt,
+    // the top 4 gets at most one story per named company. Candidates skipped
+    // here are reconsidered below if the grid can't otherwise be filled.
+    const topCompanies = new Set<string>();
+    const skippedForCompany: Record<string, unknown>[] = [];
     for (const r of topCandidates) {
+      if (topRows.length >= 4) break;
+      const src = (r.source as string).toLowerCase().trim();
+      if ((topSourceCounts.get(src) ?? 0) >= 2) continue;
+      const company = primaryCompany(r.headline as string);
+      if (company && topCompanies.has(company)) {
+        skippedForCompany.push(r);
+        continue;
+      }
+      if (company) topCompanies.add(company);
+      topSourceCounts.set(src, (topSourceCounts.get(src) ?? 0) + 1);
+      topRows.push(r);
+    }
+    for (const r of skippedForCompany) {
       if (topRows.length >= 4) break;
       const src = (r.source as string).toLowerCase().trim();
       if ((topSourceCounts.get(src) ?? 0) >= 2) continue;

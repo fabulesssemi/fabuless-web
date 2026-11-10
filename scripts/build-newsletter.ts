@@ -165,7 +165,8 @@ ${articleList}`;
     try {
       msg = await ai.messages.create({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 6000,
+        // 40-50 stories with one-liners needs ~7-8k tokens; 6000 truncated the JSON mid-object.
+        max_tokens: 16000,
         messages: [{ role: "user", content: prompt }],
       });
       break;
@@ -179,6 +180,7 @@ ${articleList}`;
   }
 
   const text = msg!.content[0].type === "text" ? msg!.content[0].text : "";
+  if (msg!.stop_reason === "max_tokens") console.warn("  ⚠ Claude hit max_tokens — response truncated, attempting repair");
   const raw = extractFirstJsonObject(text);
   if (!raw) throw new Error("Claude returned no JSON");
   try {

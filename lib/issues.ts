@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 70,
+    date: "November 11, 2026",
+    slug: "issue-70",
+    title: "NVIDIA Reels. AMD Epyc Rises. Anthropic IPO Soars.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD introduces Epyc 6 processors for AI agent workloads",
+            url: "https://siliconangle.com/2026/11/10/amd-introduces-epyc-6-processors-for-ai-agent-workloads/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/AMD.png",
+            oneliner: "AMD Venice Epyc 6 launch directly competes with NVIDIA GPU dominance in AI inference.",
+          },
+          {
+            headline: "How The \"Venice\" Epycs Measure Up Against Prior AMD Server CPUs",
+            url: "https://www.nextplatform.com/compute/2026/11/10/how-the-venice-epycs-measure-up-against-prior-amd-server-cpus/5308901",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/5308904.jpg?imageId=5308904&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Venice Epyc generational performance gains critical for AMD's AI infrastructure competitiveness.",
+          },
+          {
+            headline: "AMD's stock fades as investors weigh whether Nvidia's turmoil will mean lasting wins",
+            url: "https://www.marketwatch.com/story/amds-stock-fades-as-investors-weigh-whether-nvidias-turmoil-will-mean-lasting-wins-1ecfbc5e?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "NVIDIA scandal unlikely to shift enterprise GPU relationships absent sustained Epyc performance proof.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Ye olde server consolidation has made Cisco push top-of-rack switching to 100G",
+            url: "https://www.theregister.com/networks/2026/11/10/ye-olde-server-consolidation-has-made-cisco-push-top-of-rack-switching-to-100g/5308970",
+            source: "The Register",
+            image: "https://image.theregister.com/5308975.jpg?imageId=5308975&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AMD/NVIDIA multi-core consolidation forces network switches to 100G; Cisco gains NIC capex.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Anthropic bankers prepare to increase IPO valuation to $1.5tn or more",
+            url: "https://www.ft.com/content/68bcba57-0575-44ee-80f4-2e5ea23a431e?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic IPO valuation surge to $1.5T+ signals massive AI infrastructure capex expectations.",
+          },
+          {
+            headline: "Anthropic launches IPO roadshow with $64B fundraising goal",
+            url: "https://siliconangle.com/2026/11/10/anthropic-launches-ipo-roadshow-with-64b-fundraising-goal/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Anthropic.png",
+            oneliner: "Anthropic raises $64B at $70-78/share; validates $20B+ annual AI capex sustainability.",
+          },
+          {
+            headline: "Jim Cramer says Anthropic's explosive growth could justify a record-breaking IPO",
+            url: "https://www.cnbc.com/2026/11/10/anthropic-ipo-revenue-growth-cramer.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108469372-1793113061851-gettyimages-2301777451-boivin-photoill261027_npxLq.jpeg?v=1793113123&amp;w=1920&amp;h=1080",
+            oneliner: "Anthropic's growth rate justifies AI infrastructure valuation bubble continuing through 2027.",
+          },
+          {
+            headline: "CoreWeave plans multibillion-dollar chip-backed debt deal",
+            url: "https://www.ft.com/content/fa5c5bdc-c2b0-4fab-8951-0526a4608773",
+            source: "Financial Times",
+            image: null,
+            oneliner: "CoreWeave asset-backed securitization of GPU inventory signals new AI capex financing model.",
+          },
+          {
+            headline: "CoreWeave beats on revenue and lifts guidance, easing AI slowdown concerns",
+            url: "https://www.cnbc.com/2026/11/10/coreweave-crwv-q3-earnings-report-2026.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108521329-1793831093043-gettyimages-2256660712-DAVOS_WEF_2026.jpeg?v=1793831130&amp;w=1920&amp;h=1080",
+            oneliner: "CoreWeave Q3 beat validates sustained demand for NVIDIA H100/H200 GPU rental capacity.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Australia may make knowingly selling unsafe AI a crime",
+            url: "https://www.theregister.com/public-sector/2026/11/11/australia-may-make-knowingly-selling-unsafe-ai-a-crime/5308999",
+            source: "The Register",
+            image: "https://image.theregister.com/5293744.jpg?imageId=5293744&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Australia AI safety regulation signals global liability risk for semiconductor/compute vendors.",
+          },
+          {
+            headline: "Saskatchewan's Semiconductor Strength Is Connecting the Pieces",
+            url: "https://www.eetimes.com/saskatchewans-semiconductor-strength-is-connecting-the-pieces/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Saskatchewan quantum/AI/materials cluster attracts semiconductor R&D capex; geographic diversification.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "AI data center buildout triggers fiber optic cable shortage, squeezing Ukrainian drone operations",
+            url: "https://www.tomshardware.com/tech-industry/drones/data-center-demand-for-fiber-optics-squeezes-ukrainian-drone-operations-supply-crunch-has-incurred-6x-10x-cost-increase-for-critical-cabling",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/HsufzbCgC237BKecGthTMA-1920-80.png",
+            oneliner: "Data center fiber demand strains supply chains; 6-10x cost inflation for specialized cabling.",
+          },
+          {
+            headline: "Finetech Expands its Portfolio for Volume Production",
+            url: "https://www.semiconductor-digest.com/finetech-expands-its-portfolio-for-volume-production/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=finetech-expands-its-portfolio-for-volume-production",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Finetech die-bonding system expansion supports advanced packaging for AI chiplet integration.",
+          },
+          {
+            headline: "Hummink Unveils the BIRD Module at SEMICON Europa 2026",
+            url: "https://www.semiconductor-digest.com/hummink-unveils-the-bird-module-at-semicon-europa-2026/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=hummink-unveils-the-bird-module-at-semicon-europa-2026",
+            source: "Semiconductor Digest",
+            image: "https://www.semiconductor-digest.com/wp-content/uploads/2026/11/Repositionner-le-texte-sur-design-43-1.png.jpeg",
+            oneliner: "Hummink BIRD advanced packaging module addresses chiplet yield/precision for heterogeneous AI dies.",
+          },
+          {
+            headline: "Dukosi Samples Contactless Battery Communication System for EVs, Grid Storage",
+            url: "https://www.eetimes.com/dukosi-samples-contactless-battery-communication-system-for-evs-grid-storage/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Dukosi battery comms chip addresses EV/grid storage IoT sensor integration; niche power demand.",
+          },
+          {
+            headline: "CXO Interview with Solaiman Rahim of ChipAgents",
+            url: "https://semiwiki.com/eda/chipagents-ai/375937-cxo-interview-with-solaiman-rahim-of-chipagents/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "ChipAgents AI chip design automation accelerates semiconductor development cycle speed.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 69,
     date: "November 10, 2026",
     slug: "issue-69",

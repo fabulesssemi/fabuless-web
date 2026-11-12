@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 71,
+    date: "November 12, 2026",
+    slug: "issue-71",
+    title: "Huang's Fall Rattles AI. CoreWeave Steadies Sector. AMD Preps Venice-X.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AMD's Venice-X maxes out family at 5.3 GHz, returning 3D V-Cache to data center after four years",
+            url: "https://www.tomshardware.com/pc-components/cpus/amds-venice-x-maxes-out-family-at-5-3-ghz-returning-3d-v-cache-to-data-center-after-four-years-chips-target-hpc-workloads-with-pcie-6-0-and-1-6-tb-s-memory-bandwidth",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/aLSGanWgBzwJhr9LcYMiwb-2048-80.jpg",
+            oneliner: "AMD Venice-X returns 3D V-Cache to data center; targets HPC with PCIe 6.0, 1.6 TB/s bandwidth.",
+          },
+          {
+            headline: "British inference chip developer Fractile raises $720M in funding",
+            url: "https://siliconangle.com/2026/11/11/inference-chip-developer-fractile-raises-720m-in-funding/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Photo.png",
+            oneliner: "Fractile secures $720M Series C for inference chips; competes with Nvidia, Mobileye on edge inference.",
+          },
+          {
+            headline: "Google enters decision model market with Gemini Decisions API",
+            url: "https://siliconangle.com/2026/11/11/google-enters-the-decision-model-market-with-gemini-decisions-api/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Gemini-Decision-1.png",
+            oneliner: "Google's Gemini Decisions API targets cost-efficient inference; specialized models erode LLM moat.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Automotive Tech Forum: The Current State of Sic in EV Design and How It's Evolving",
+            url: "https://www.eetimes.com/automotive-tech-forum-the-current-state-of-sic-in-ev-design-and-how-its-evolving/",
+            source: "EE Times",
+            image: null,
+            oneliner: "800V SiC MOSFETs drive EV range and charging; next-gen designs unlock faster adoption.",
+          },
+          {
+            headline: "Automotive Tech Forum: GaN Building Blocks in EV's and Their Design Roadmap in 2026 and Beyond",
+            url: "https://www.eetimes.com/automotive-tech-forum-gan-building-blocks-in-evs-and-their-design-roadmap-in-2026-and-beyond/",
+            source: "EE Times",
+            image: null,
+            oneliner: "GaN efficiency and cost reduction make EV powertrains viable; 2026+ roadmap accelerates adoption.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia's board reportedly preparing to oust CEO Jensen Huang as second extra-marital affair emerges",
+            url: "https://www.tomshardware.com/pc-components/gpus/nvidias-board-reportedly-preparing-to-oust-ceo-jensen-huang-as-second-extra-marital-affair-emerges-stock-has-plunged-20-percent-since-scandals-began-huang-has-been-first-and-only-ceo-for-33-years",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/e4nHqRWu6AkHKhFz9QVnLZ-2560-80.jpg",
+            oneliner: "Nvidia CEO ouster threatens 33-year leadership, creates succession vacuum at chip kingmaker.",
+          },
+          {
+            headline: "Nvidia shares tumble in after-market trading",
+            url: "https://www.ft.com/content/a93307a7-e2cd-4abd-bd89-c38832d8c40e?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Nvidia stock sinks 9% after-hours as leadership crisis unfolds; AI sector exposed.",
+          },
+          {
+            headline: "Nasdaq futures fall as Nvidia sinks 8% after hours on report board may oust Huang",
+            url: "https://www.marketwatch.com/story/nasdaq-futures-fall-as-nvidia-sinks-8-after-hours-on-report-board-may-oust-huang-e99b898d?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Nvidia's 8% plunge drags Nasdaq futures lower; chip sector contagion risk rises.",
+          },
+          {
+            headline: "Jensen Huang built Nvidia into a behemoth. His scandal puts the entire AI boom in jeopardy.",
+            url: "https://www.marketwatch.com/story/jensen-huang-built-nvidia-into-a-behemoth-his-scandal-puts-the-entire-ai-boom-in-jeopardy-c374b079?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Huang's departure threatens AI capex ecosystem; chip financing deals and partnerships destabilized.",
+          },
+          {
+            headline: "CoreWeave Is Accelerating To Escape Velocity Thanks To GPU Shortages",
+            url: "https://www.nextplatform.com/cloud/2026/11/12/coreweave-is-accelerating-to-escape-velocity-thanks-to-gpu-shortages/5309222",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/4091849.jpg?imageId=4091849&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "GPU scarcity sustains CoreWeave's pricing power and revenue acceleration through 2027.",
+          },
+          {
+            headline: "Amazon's Computing Boss Says Space Data Centers Won't Be 'Feasible Or Practical' For A Decade Even As Musk Believes In 1,300W/m² Heat Dissipation For AI Satellites",
+            url: "https://www.wccftech.com/amazons-computing-boss-says-space-data-centers-wont-be-feasible-or-practical-for-a-decade-even-as-musk-believes-in-1300w-m%c2%b2-heat-dissipation-for-ai-satellites/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "AWS warns space datacenters impractical for 10 years; SpaceX's satellite AI compute delayed.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Jensen Huang's affair with alleged spy revives push to tighten China chip curbs ahead of Trump-Xi summit",
+            url: "https://www.cnbc.com/2026/11/12/nvidia-trump-jensen-chip-export-controls-china-xi-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108549555-1794440114147-gettyimages-2298602777-AFP_D2NK46B.jpeg?v=1794440206&amp;w=1920&amp;h=1080",
+            oneliner: "Huang scandal fuels congressional China hawks' push for tighter AI chip export controls.",
+          },
+          {
+            headline: "Jensen Huang affair in D.C.: Resignation calls and moves to tighten Nvidia China exports",
+            url: "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-congress-resign-ai-chips.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108548919-1794436123875-108548919-1794403650801-gettyimages-2280478637-csj17492_lh46rpzq.jpeg?v=1794436166&amp;w=1920&amp;h=1080",
+            oneliner: "Huang's China ties invigorate export hawks; Nvidia's lobbying leverage against restrictions crumbles.",
+          },
+          {
+            headline: "State dinners to scrutiny: Nvidia's Huang falls out of favour in Trump's Washington",
+            url: "https://www.ft.com/content/9ca8ba83-5a3c-409e-96d9-abee1323b688?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huang loses political capital in Trump administration; China export restrictions now vulnerable.",
+          },
+          {
+            headline: "Russian cloud Yandex says drone attacks on its datacenters caused data loss",
+            url: "https://www.theregister.com/off-prem/2026/11/12/russian-cloud-yandex-says-drone-attacks-on-its-datacenters-caused-data-loss/5309234",
+            source: "The Register",
+            image: "https://image.theregister.com/5309241.jpg?imageId=5309241&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Yandex datacenter attacks highlight geopolitical infrastructure risk; backup defaults now mandatory.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "AWS distills its cloud into a local emulator that runs on your PC",
+            url: "https://www.theregister.com/off-prem/2026/11/12/aws-distills-its-cloud-into-a-local-emulator-that-runs-on-your-pc/5309251",
+            source: "The Register",
+            image: "https://image.theregister.com/5309256.jpg?imageId=5309256&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "AWS local emulator enables edge testing; reduces cloud bandwidth costs and latency for developers.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 70,
     date: "November 11, 2026",
     slug: "issue-70",

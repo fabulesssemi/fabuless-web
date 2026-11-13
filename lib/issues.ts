@@ -60,6 +60,119 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 72,
+    date: "November 13, 2026",
+    slug: "issue-72",
+    title: "Huang Gone. Kress Leads. China Smuggling Widens.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Jensen Huang resigns as Nvidia chief executive",
+            url: "https://www.ft.com/content/b4a0f3d9-f075-47ea-9a85-77cdade9a06f?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Nvidia CFO Colette Kress assumes interim CEO role after Huang's sudden departure.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Cisco beats expectations, lifts guidance and forecasts AI infrastructure revenue to double in fiscal 2027",
+            url: "https://siliconangle.com/2026/11/12/cisco-beats-expectations-lifts-its-guidance-and-forecasts-ai-infrastructure-revenue-to-double-in-fiscal-2027/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/43530876870_b01dfa8e07_k.jpg",
+            oneliner: "Cisco raises FY2027 guidance; AI infrastructure revenue projected to double as data center buildout accelerates.",
+          },
+          {
+            headline: "Microsoft's massive M365 outage stretches past 12 hours as its fixes keep failing",
+            url: "https://www.theregister.com/saas/2026/11/13/microsofts-massive-m365-outage-stretches-past-12-hours-as-its-fixes-keep-failing/5309609",
+            source: "The Register",
+            image: "https://image.theregister.com/5309709.jpg?imageId=5309709&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "12+ hour Microsoft Exchange Online outage; M365 cloud infrastructure resilience questioned.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Applied Materials posts impressive 53% jump in revenue as it beats expectations again",
+            url: "https://siliconangle.com/2026/11/12/applied-materials-posts-an-impressive-53-jump-in-revenue-as-it-beats-expectations-again",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Screenshot-from-2025-08-15-06-26-31-800x484-1.png",
+            oneliner: "AMAT Q4 revenue surges 53% YoY; AI capex boom sustains equipment demand through 2027.",
+          },
+          {
+            headline: "ViTrox Reports Nearly 200 AI-Powered X-Ray Inspection Systems Deployed",
+            url: "https://www.semiconductor-digest.com/vitrox-reports-nearly-200-ai-powered-x-ray-inspection-systems-deployed/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=vitrox-reports-nearly-200-ai-powered-x-ray-inspection-systems-deployed",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "ViTrox AI inspection deployments exceed 200 systems; manufacturing defect detection modernizes.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Nvidia chief Jensen Huang toppled by revelations of extramarital affairs",
+            url: "https://www.ft.com/content/83474218-387c-4f93-a27b-ffdfee624029?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huang's 33-year tenure at Nvidia ends abruptly amid personal scandal and alleged China security breaches.",
+          },
+          {
+            headline: "Mass smuggling of Nvidia AI GPUs could be the underlying cause of Jensen Huang's departure, analysts claim",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/mass-smuggling-of-nvidia-ai-gpus-could-be-the-underlying-cause-of-jensen-huangs-departure-analysts-claim-more-than-1-5-gigawatts-of-banned-chips-tracked-to-china-despite-export-controls",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/HVkaHhmB8KxE77YzmL6FR9-2560-80.jpg",
+            oneliner: "SemiAnalysis tracks 1.5 GW banned Nvidia accelerators flowing to China despite U.S. export controls.",
+          },
+          {
+            headline: "Why Singapore keeps turning up in the fight over Nvidia chips and China",
+            url: "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-alice-spy-megaspeed-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108547468-1794318020652-gettyimages-2303986898-AFP_D6ZC9G6.jpeg?v=1794530723&amp;w=1920&amp;h=1080",
+            oneliner: "Singapore investigation reveals Alice Huang smuggling network; U.S. authorities provided limited support.",
+          },
+          {
+            headline: "Singapore says US authorities, and Supermicro, hardly helped investigation of Jensen Huang's Chinese friend",
+            url: "https://www.theregister.com/legal/2026/11/13/singapore-says-us-authorities-and-supermicro-hardly-helped-investigation-of-jensen-huangs-chinese-friend/5309579",
+            source: "The Register",
+            image: "https://image.theregister.com/236933.jpg?imageId=236933&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Supermicro implicated in Nvidia GPU smuggling probe; U.S. failed to cooperate with Singapore investigators.",
+          },
+          {
+            headline: "Alice Huang tied to Nvidia's biggest Chinese competitor",
+            url: "https://www.cnbc.com/2026/11/12/alice-huang-jensen-huang-nvidia-huawei.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108441789-1792586470134-gettyimages-2300709025-AFP_D3XH836.jpeg?v=1794505715&amp;w=1920&amp;h=1080",
+            oneliner: "Huang's associate held stakes in Huawei compute partners, creating direct Nvidia competitive threat.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Aeluma Orders AIXTRON MOCVD System to Expand Photonics Manufacturing",
+            url: "https://www.semiconductor-digest.com/aeluma-orders-aixtron-mocvd-system-to-expand-photonics-manufacturing/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=aeluma-orders-aixtron-mocvd-system-to-expand-photonics-manufacturing",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Aeluma orders AIXTRON MOCVD; photonics manufacturing scales beyond traditional semiconductors.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 71,
     date: "November 12, 2026",
     slug: "issue-71",

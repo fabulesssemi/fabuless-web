@@ -60,6 +60,147 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 73,
+    date: "November 16, 2026",
+    slug: "issue-73",
+    title: "Nvidia in Chaos. DRAM Collusion Exposed. Anthropic IPO Lands.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Jensen Huang discusses comeback as Nvidia CEO with allies",
+            url: "https://www.ft.com/content/45383d86-33c4-4d99-86e5-5e058d3567c1?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huang's allies lobby Nvidia board for reinstatement after spy scandal resignation.",
+          },
+          {
+            headline: "Nvidia is gearing up for one of Wall Street's most anticipated earnings calls in years",
+            url: "https://www.marketwatch.com/story/nvidia-is-gearing-up-for-one-of-wall-streets-most-anticipated-earnings-calls-in-years-91855b1e?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Nvidia earnings call becomes critical test amid leadership vacuum and board uncertainty.",
+          },
+          {
+            headline: "Intel Custom ASICs?",
+            url: "https://newsletter.chipstrat.com/p/intel-custom-asics",
+            source: "Chipstrat",
+            image: "https://substackcdn.com/image/fetch/$s_!DUpI!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5dbd763-e240-4434-bdcf-61de760b633b_2400x1260.png",
+            oneliner: "Intel exploring custom ASIC business expansion; considers Alphawave acquisition for IP.",
+          },
+          {
+            headline: "Intel CEO Lip-Bu Tan Named As Defendant In New Class-Action Lawsuit; Shareholders Take Chipmaker To Court Over Concealing A Prolonged PC Sales Slowdown",
+            url: "https://wccftech.com/intel-ceo-lip-bu-tan-named-defendant-class-action-lawsuit-pc-sales-slowdown/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Intel CEO Tan faces shareholder lawsuit for allegedly hiding PC sales collapse.",
+          },
+          {
+            headline: "After Jensen: A Window for Nvidia's Rivals, a Problem for Its Suppliers",
+            url: "https://semiwiki.com/semiconductor-manufacturers/376352-after-jensen-a-window-for-nvidias-rivals-a-problem-for-its-suppliers/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "Nvidia leadership vacuum opens competitive opportunity for AMD, Intel; supply chain at risk.",
+          },
+          {
+            headline: "IEDM 2026 Reveals New Paths to Faster, More Efficient AI",
+            url: "https://semiwiki.com/events/376230-iedm-2026-reveals-new-paths-to-faster-more-efficient-ai/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "2026 IEEE IEDM showcases next-gen AI chip architectures addressing power, speed bottlenecks.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Judge denies motion to dismiss DRAM price-fixing lawsuit against Micron, Samsung, and SK hynix, finds evidence of DRAM collusion plausible after 500% price surge",
+            url: "https://www.tomshardware.com/tech-industry/big-tech/judge-denies-motion-to-dismiss-dram-price-fixing-lawsuit-against-micron-samsung-and-sk-hynix-says-chipmakers-acted-like-hawks-flying-in-formation-finds-evidence-of-dram-collusion-plausible-after-500-percent-price-surge",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/vnqdtRupVqWHAik43ZWctH-1920-80.jpg",
+            oneliner: "Federal judge advances DRAM price-fixing case against Samsung, Micron, SK hynix after 500% surge.",
+          },
+          {
+            headline: "Federal Judge Rejects Memory Makers' Defense To Advance Class-Action Antitrust Lawsuit; Samsung, Micron & SK hynix Must Face The Music Over Artificial DRAM Shortage",
+            url: "https://wccftech.com/federal-judge-rejects-memory-makers-defense-samsung-micron-sk-hynix-dram-shortage-lawsuit/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Samsung, Micron, SK hynix lose motion to dismiss DRAM price-fixing case.",
+          },
+          {
+            headline: "Amazon loses first batch of broadband satellites launched on custom rocket",
+            url: "https://www.theregister.com/networks/2026/11/16/amazon-loses-first-batch-of-broadband-satellites-launched-on-custom-rocket/5310000",
+            source: "The Register",
+            image: "https://image.theregister.com/5310005.jpg?imageId=5310005&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Amazon's ULA Vulcan LEO fails; Kuiper broadband constellation deployment delayed.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia amassed $530 billion in financial guarantees to corner the AI market — supply commitments rose by nearly a quarter of a trillion dollars in a single quarter",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-amassed-usd530-billion-in-financial-guarantees-to-corner-the-ai-market-supply-commitments-rose-by-nearly-a-quarter-of-a-trillion-dollars-in-a-single-quarter",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/xvsSkBmSjmjPCPZkKa3aUi-2560-80.jpg",
+            oneliner: "Nvidia locks in $530B supply commitments before CEO scandal, cementing AI chip dominance.",
+          },
+          {
+            headline: "Anthropic's IPO is the next big test for AI",
+            url: "https://www.ft.com/content/bc8ac781-9837-46de-b7ed-958886ba43af?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic IPO marks frontier AI lab's submission to public market discipline and scrutiny.",
+          },
+          {
+            headline: "Anthropic's IPO lands as the embattled AI trade looks for a much-needed bright spot",
+            url: "https://www.cnbc.com/2026/11/15/anthropic-ipo-is-make-or-break-for-the-technology-industry.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108551525-1794626973698-gettyimages-2297195304-AFP_C9PF6JT.jpeg?v=1794627031&amp;w=1920&amp;h=1080",
+            oneliner: "Anthropic IPO becomes referendum on AI sector viability amid investor skepticism.",
+          },
+          {
+            headline: "Microsoft lifts Indian cloud prices by 15 percent, cuts costs in China",
+            url: "https://www.theregister.com/off-prem/2026/11/15/microsoft-lifts-indian-cloud-prices-by-15-percent-cuts-costs-in-china/5309993",
+            source: "The Register",
+            image: "https://image.theregister.com/252018.jpg?imageId=252018&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Microsoft raises Azure India pricing 15%; cuts China rates—geopolitical market segmentation.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Bessent calls for 'dramatic shakeup' at Nvidia, urges outside CEO",
+            url: "https://www.cnbc.com/2026/11/15/bessent-nvidia-ceo-lutnick-megaspeed.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108487950-1793387874122-gettyimages-2302201596-lnb02366.jpeg?v=1793387920&amp;w=1920&amp;h=1080",
+            oneliner: "Bessent criticizes Lutnick's Commerce Dept oversight of potential chip diversion to China.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "The Sound of Smarter Farming",
+            url: "https://www.eetimes.com/the-sound-of-smarter-farming/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Acoustic sensors and AI drive agricultural IoT adoption; edge chip demand grows.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 72,
     date: "November 13, 2026",
     slug: "issue-72",

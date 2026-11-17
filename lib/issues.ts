@@ -60,6 +60,142 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 74,
+    date: "November 17, 2026",
+    slug: "issue-74",
+    title: "Nvidia Fractures. Export Controls Tighten. AMD Surges.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "At SC26, Nvidia debuts new Rubin HPC chip, scientific research libraries",
+            url: "https://siliconangle.com/2026/11/16/nvidia-debuts-new-rubin-hpc-chip-scientific-research-libraries/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Nvidia1.png",
+            oneliner: "Nvidia Rubin HPC chip with expanded cores targets scientific compute market, diversifying AI-only narrative.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "403 hyperscale US data centers used staggering 82 terawatts of electricity in a year, more than 80% of Michigan's entire consumption",
+            url: "https://www.tomshardware.com/tech-industry/data-centers/403-hyperscale-us-data-centers-used-staggering-82-terawatts-of-electricity-in-a-year-more-than-80-percent-of-michigans-entire-consumption-generated-26-million-tons-of-co2-in-a-single-year-gas-and-coal-supplied-54-percent-of-the-power-harvard-led-study-estimates",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/yt7DhwrTmvkzH8fB3o5ee6-2560-80.jpg",
+            oneliner: "US hyperscale data centers consume 82 TWh annually, fueling political pushback threatening AI capex plans.",
+          },
+          {
+            headline: "Tech sell-off deepens as Nvidia results loom",
+            url: "https://www.ft.com/content/4a3b9892-67c6-4177-8503-80c0a5eb3b60?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Investor anxiety over export controls and data center slowdown pressure Nvidia earnings week.",
+          },
+          {
+            headline: "Nvidia's interim CEO Colette Kress to make her debut at first earnings",
+            url: "https://www.ft.com/content/424e5ab0-517e-4f8e-a286-df7c67fa05a6?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Colette Kress steps into interim CEO role as Huang exits; investor confidence critical for guidance.",
+          },
+          {
+            headline: "Stanley Druckenmiller dumped these chip stocks while buying into SpaceX and Palantir",
+            url: "https://www.marketwatch.com/story/stanley-druckenmiller-dumped-these-chip-stocks-while-buying-into-spacex-and-palantir-9ae1f078?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Druckenmiller exits AMD, SanDisk; signals institutional skepticism on legacy chip valuations amid uncertainty.",
+          },
+          {
+            headline: "Memphis Is Collecting So Much Revenue From SpaceX's Colossus 1 Data Center That It Is Now Dishing Out $25,000 To Eligible Residents In The Vicinity",
+            url: "https://wccftech.com/memphis-is-collecting-so-much-revenue-from-spacexs-colossus-1-data-center-that-it-is-now-dishing-out-25000-to-eligible-residents-in-the-vicinity/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "SpaceX Colossus 1 data center revenue-sharing model counters local backlash; replicable incentive for capex approval.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Nvidia board establishes National Security and Export Control Oversight Committee in wake of Jensen Huang scandal",
+            url: "https://www.tomshardware.com/tech-industry/policy/nvidia-board-establishes-national-security-and-export-control-oversight-committee-in-wake-of-jensen-huang-scandal-group-to-work-with-independent-law-national-security-and-trade-compliance-experts",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/TVYovaCvDrBoMvxiTPWqLL-1920-80.png",
+            oneliner: "Nvidia creates compliance committee to prevent future export control violations after Huang leadership vacuum.",
+          },
+          {
+            headline: "Chinese AI Firms Have Cracked The Code For Training LLMs While Dealing With U.S. Chip Tightening Measures; Using OpenAI's Models For \"Industrial-Scale Distillation\"",
+            url: "https://wccftech.com/chinese-ai-firms-training-llms-us-chip-tightening-openai-models-industrial-scale-distillation/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Chinese AI labs bypass US chip export controls via knowledge distillation, undermining NVIDIA AI chip leverage.",
+          },
+          {
+            headline: "Nvidia warns chip buyers of legal risks tied to China AI access, sources tell CNBC",
+            url: "https://www.cnbc.com/2026/11/17/nvidia-china-cloud-ai-chip-access.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108551696-1794795719884-gettyimages-2304259055-nokings-sf1017.jpeg?v=1794840889&amp;w=1920&amp;h=1080",
+            oneliner: "Nvidia alerts customers to legal exposure from Commerce Dept tightening on China AI chip access.",
+          },
+          {
+            headline: "U.S. agencies say they initiated investigation into Nvidia partner Megaspeed in 2024",
+            url: "https://www.cnbc.com/2026/11/17/megaspeed-investigation-nvidia-jensen-huang.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108548786-1794383341968-gettyimages-2303986643-AFP_D6ZC9WF.jpeg?v=1794383419&amp;w=1920&amp;h=1080",
+            oneliner: "Criminal probe into Nvidia reseller Megaspeed escalates scrutiny of chip export control compliance.",
+          },
+          {
+            headline: "US extends chip sale restrictions to more Asian countries to reduce risk of 'diversion' to China",
+            url: "https://www.theregister.com/off-prem/2026/11/17/us-extends-chip-sale-restrictions-to-more-asian-countries-to-reduce-risk-of-diversion-to-china/5310307",
+            source: "The Register",
+            image: "https://image.theregister.com/259879.jpg?imageId=259879&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Commerce Dept expands GPU export restrictions across Asia to block transshipment routes to China.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Japan's Fugaku supercomputer has decidedly un-super security",
+            url: "https://www.theregister.com/security/2026/11/17/japans-fugaku-supercomputer-has-decidedly-un-super-security/5310333",
+            source: "The Register",
+            image: "https://image.theregister.com/5310340.jpg?imageId=5310340&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Fugaku supercomputer credentials leaked; critical infrastructure security gap exposes major compute systems.",
+          },
+          {
+            headline: "Siemens to Acquire Lauterbach to Expand Semiconductor Design and Verification",
+            url: "https://www.semiconductor-digest.com/siemens-to-acquire-lauterbach-to-expand-semiconductor-design-and-verification/?utm_source=rss&utm_medium=rss&utm_campaign=siemens-to-acquire-lauterbach-to-expand-semiconductor-design-and-verification",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Siemens acquires Lauterbach debug tools; consolidates EDA/verification stack amid design complexity surge.",
+          },
+          {
+            headline: "EV Group Wins Austrian National Innovation Award for Third Time",
+            url: "https://www.semiconductor-digest.com/ev-group-wins-austrian-national-innovation-award-for-third-time/?utm_source=rss&utm_medium=rss&utm_campaign=ev-group-wins-austrian-national-innovation-award-for-third-time",
+            source: "Semiconductor Digest",
+            image: "https://www.semiconductor-digest.com/wp-content/uploads/2026/11/unnamed-45.jpg",
+            oneliner: "EVG's IR LayerRelease technology accelerates chiplet/advanced packaging scaling beyond 3nm node transition.",
+          },
+          {
+            headline: "Open AI hit with lawsuit in California over Hugging Face rogue agent incident",
+            url: "https://siliconangle.com/2026/11/16/open-ai-hit-with-lawsuit-in-california-over-hugging-face-rogue-agent-incident/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/zac-wolff-rv2ooDQuNuI-unsplash-1.jpg",
+            oneliner: "California AG sues OpenAI for Hugging Face hack; AI safety liability exposure threatens enterprise adoption.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 73,
     date: "November 16, 2026",
     slug: "issue-73",

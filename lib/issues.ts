@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 75,
+    date: "November 18, 2026",
+    slug: "issue-75",
+    title: "Huang Out. Kress Holds. China Threatens. Memory Soars.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Nvidia Breaks Revenue And Profit Records, And Will Keep Doing It",
+            url: "https://www.nextplatform.com/compute/2026/11/18/nvidia-breaks-revenue-and-profit-records-and-will-keep-doing-it/5310669",
+            source: "NextPlatform",
+            image: "https://image.nextplatform.com/4094023.jpg?imageId=4094023&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Nvidia's record Q3 earnings and $130B forward guidance validate sustained AI infrastructure demand.",
+          },
+          {
+            headline: "Nvidia insists Huang will not return as CEO as it reports strong sales",
+            url: "https://www.ft.com/content/3a8881b8-068c-4950-9238-4f8eb1efc870?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Board rejects Huang reinstatement; doubled revenue and raised 2027 forecasts signal organizational resilience.",
+          },
+          {
+            headline: "Nvidia's stock rises as blowout numbers help ease CEO transition fears",
+            url: "https://www.marketwatch.com/story/nvidias-stock-rises-as-blowout-numbers-help-ease-ceo-transition-fears-2f20d38a?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "$130B forward guidance reassures investors; Kress leadership transition survives market stress test.",
+          },
+          {
+            headline: "GPU giants throw HPC users some tasty crumbs",
+            url: "https://www.theregister.com/hpc/2026/11/17/gpu-giants-throw-hpc-users-some-tasty-crumbs/5310611",
+            source: "The Register",
+            image: "https://image.theregister.com/5310625.jpg?imageId=5310625&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Nvidia Rubin HPC GPU challenges AMD MI430X; high-performance computing market sees renewed competition.",
+          },
+          {
+            headline: "Edge AI Moves Agricultural Intelligence from the Cloud to the Field",
+            url: "https://www.eetimes.com/edge-ai-moves-agricultural-intelligence-from-the-cloud-to-the-field/",
+            source: "EE Times",
+            image: null,
+            oneliner: "NXP and Nvidia target autonomous farm equipment with edge AI; new vertical market opportunity emerges.",
+          },
+          {
+            headline: "Token sticker shock pushes enterprises from frontier labs toward open-weight AI factories",
+            url: "https://siliconangle.com/2026/11/17/gpus-alone-won-t-carry-enterprise-ai-pilots-production-dellatsc26/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/IMG_5140-scaled.jpg",
+            oneliner: "High inference token costs shift enterprise adoption from closed models toward open-source alternatives.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "NVIDIA GPU Rental Prices Have Doubled, Asserts Interim CEO Kress As She Reports A Whopping $309 Billion In Supply Commitments",
+            url: "https://wccftech.com/nvidia-gpu-rental-prices-have-doubled-asserts-interim-ceo-kress-as-she-reports-a-whopping-309-billion-in-supply-commitments-fueled-by-pricey-memory-chips/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "GPU rental cost inflation and $390B supply commitments reflect memory chip pricing pressure headwinds.",
+          },
+          {
+            headline: "Lambda Announces World's First Large-Scale CPO Deployment of NVIDIA Photonics Switches",
+            url: "https://www.semiconductor-digest.com/lambda-announces-worlds-first-large-scale-cpo-deployment-of-nvidia-photonics-switches/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=lambda-announces-worlds-first-large-scale-cpo-deployment-of-nvidia-photonics-switches",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Lambda deploys 10,000+ Blackwell GPUs with Nvidia photonics CPO; confirms interconnect scaling leadership.",
+          },
+          {
+            headline: "Dell bets liquid-cooled, software-defined storage can keep AI factories fed",
+            url: "https://siliconangle.com/2026/11/17/poweredge-nodes-turn-software-defined-storage-ai-dellatsc26/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/pooW6odsjbM-HD.jpg",
+            oneliner: "Dell PowerEdge storage optimization addresses AI bottleneck beyond compute; software-defined infrastructure trend accelerates.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "CoreWeave's stock pops — even as Nvidia talks up a 'disciplined' approach to financing",
+            url: "https://www.marketwatch.com/story/coreweaves-stock-pops-even-as-nvidia-talks-up-a-disciplined-approach-to-financing-e7f00876?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Nvidia signals tighter AI infrastructure lending discipline; CoreWeave valuation pressured by reduced subsidy.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "China threatens 'countermeasures' in the face of new AI GPU rental and export restrictions",
+            url: "https://www.tomshardware.com/pc-components/gpus/china-threatens-countermeasures-on-the-face-of-new-ai-gpu-rental-and-export-restrictions-beijing-threatens-retaliation-ahead-of-thursdays-xi-jinping-meeting-sino-american-trade-war-may-be-renewed-for-a-new-season",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/BELj7Bp6ghyH87vwNskeQA-2000-80.jpg",
+            oneliner: "U.S. Blackwell rental caps trigger Beijing retaliation threat; AI chip export controls escalate.",
+          },
+          {
+            headline: "Southeast Asia's data center boom leaned on Chinese demand. New U.S. rules put that pipeline at risk",
+            url: "https://www.cnbc.com/2026/11/18/nvidia-us-ai-chip-export-controls-data-centers-.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108554079-1795007365772-gettyimages-2301831897-MALAYSIA_DATA_CENTERS.jpeg?v=1795007394&amp;w=1920&amp;h=1080",
+            oneliner: "U.S. approval requirement for Southeast Asia AI chip purchases disrupts $multi-billion regional build-out.",
+          },
+          {
+            headline: "Nvidia warns chip buyers of legal risks tied to China AI access, sources tell CNBC",
+            url: "https://www.cnbc.com/2026/11/17/nvidia-china-cloud-ai-access.html",
+            source: "CNBC",
+            image: null,
+            oneliner: "Nvidia alerts customers on legal liability from tightened China export controls; compliance burden rises.",
+          },
+          {
+            headline: "Nvidia's big business in Singapore",
+            url: "https://www.ft.com/content/fd1e1939-8a5c-47ac-bb38-47d147f8bc7a?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "$104B Singapore revenue concentration exposes Nvidia to geopolitical supply chain risk.",
+          },
+          {
+            headline: "Marc Hijink on ASML's Culture, Supply Chain, and Geopolitics",
+            url: "https://www.eetimes.com/marc-hijink-on-asmls-culture-supply-chain-and-geopolitics/",
+            source: "EE Times",
+            image: null,
+            oneliner: "ASML geopolitics discussion underscores EUV supply chain concentration risk for future node competitiveness.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Oracle reveals fix-this-ASAP-grade Java4Shell bug that allows attacks on many third-party apps",
+            url: "https://www.theregister.com/security/2026/11/18/oracle-reveals-fix-this-asap-grade-java4shell-bug-that-allows-attacks-on-many-third-party-apps/5310661",
+            source: "The Register",
+            image: null,
+            oneliner: "Critical Java vulnerability forces enterprise data center remediation workloads; server processor demand rises.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 74,
     date: "November 17, 2026",
     slug: "issue-74",

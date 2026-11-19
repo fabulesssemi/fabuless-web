@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 76,
+    date: "November 19, 2026",
+    slug: "issue-76",
+    title: "Anthropic IPO Crushes Records. Intel Lands 18A. NVIDIA Faces Succession Test.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Intel signs first external customer for advanced 18A chips",
+            url: "https://www.cnbc.com/2026/11/18/intel-first-18a-foundry-customer.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108477593-1793228653611-gettyimages-2278669801-AFP_B4P96JJ.jpeg?v=1793228835&amp;w=1920&amp;h=1080",
+            oneliner: "Intel 18A foundry breaks isolation; first external customer signals viability.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "DDR6 RAM shrinks by 44% while delivering 4X DDR5's baseline bandwidth — JEDEC previews 12.8 GT/s modules with up to 1 terabyte of capacity per slot",
+            url: "https://www.tomshardware.com/pc-components/ram/ddr6-ram-shrinks-by-44-percent-while-delivering-4x-ddr5s-baseline-bandwidth-jedec-previews-12-8-gt-s-modules-with-up-to-1-terabyte-of-capacity-per-slot",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/3VoQDRuLUv63rpfjVnFPBg-2560-80.jpg",
+            oneliner: "DDR6 cuts module size 44%, triples bandwidth baseline; JEDEC spec enables AI server density.",
+          },
+          {
+            headline: "Three 'e-waste' Nvidia V100s hit 100 tokens per second on Qwen 3.6 35B in a $1,042 homelab rig",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/three-e-waste-nvidia-v100s-hit-100-tokens-per-second-on-qwen-3-6-35b-in-a-usd1-042-homelab-rig-decommissioned-gpus-outpace-a-usd5-399-m5-max-mac-studio-at-long-contexts",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/Mmy36NYLic3BaS5bAHCZZ7-2560-80.jpg",
+            oneliner: "Used V100s prove GPU surplus market; decommissioned chips undercut new H100/H200 demand.",
+          },
+          {
+            headline: "Everpure beats expectations as AI accelerates revenue growth for ninth straight quarter",
+            url: "https://siliconangle.com/2026/11/18/everpure-beats-expectations-as-ai-accelerates-revenue-growth-for-a-ninth-straight-quarter/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Charles-CEO-of-Pure-Storage-Inc.-AI-Infrastructure-Silicon-Valley-2024-scaled.jpg",
+            oneliner: "Everpure storage/data infrastructure beats; AI workloads drive sustained capex uplift.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Anthropic raises $81bn in record IPO",
+            url: "https://www.ft.com/content/62c0510b-ca65-441e-9baf-675b93903b9e?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic IPO at $83/share tops SpaceX, signals trillion-dollar AI lab valuation.",
+          },
+          {
+            headline: "Anthropic IPO raises over $81 billion in largest offering on record, topping SpaceX",
+            url: "https://www.cnbc.com/2026/11/18/anthropic-ipo-ai-offering-price.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108554572-1795033463943-108554572-1795033101955-gettyimages-2305196401-ANTHROPIC_IPO.jpg?v=1795033477&amp;w=1920&amp;h=1080",
+            oneliner: "Anthropic IPO $81B largest ever; starts trading ANT Thursday on Nasdaq.",
+          },
+          {
+            headline: "NVIDIA Expands Commitments With Supply Chain Partners to Support AI Infrastructure Buildout",
+            url: "https://www.semiconductor-digest.com/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout/?utm_source=rss&utm_medium=rss&utm_campaign=nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "NVIDIA secures long-term supply commitments; aligns manufacturing to meet AI demand surge.",
+          },
+          {
+            headline: "GlobalFoundries Breaks Ground on First New Semiconductor Fab Under Landmark U.S.-Japan Initiative",
+            url: "https://www.semiconductor-digest.com/globalfoundries-breaks-ground-on-first-new-semiconductor-fab-under-landmark-u-s-japan-initiative/?utm_source=rss&utm_medium=rss&utm_campaign=globalfoundries-breaks-ground-on-first-new-semiconductor-fab-under-landmark-u-s-japan-initiative",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "GlobalFoundries breaks ground Malta fab; U.S.-Japan partnership expands domestic capacity.",
+          },
+          {
+            headline: "Palo Alto Networks bets $4.5B on AI startup Applied Compute as earnings top forecasts",
+            url: "https://siliconangle.com/2026/11/18/palo-alto-networks-bets-4-5b-on-ai-startup-applied-compute-as-earnings-top-forecasts/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2024/05/paloaltonetworksboothlogo2.jpg",
+            oneliner: "Palo Alto's Applied Compute deal signals AI compute infrastructure M&A acceleration trend.",
+          },
+          {
+            headline: "Palo Alto Networks' stock gets a fresh AI-fueled boost from earnings",
+            url: "https://www.marketwatch.com/story/palo-alto-networks-stock-soars-as-earnings-show-ai-has-upped-the-stakes-for-cybersecurity-308e34b8?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Palo Alto raised outlook; AI threat environment driving cybersecurity capex acceleration.",
+          },
+          {
+            headline: "Semiconductor Market Doubling in 2026 – Last Issue",
+            url: "https://semiwiki.com/semiconductor-services/semiconductor-intelligence/376566-semiconductor-market-doubling-in-2026-last-issue/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "WSTS: Global semi market $481B Q3 2026, +129% YoY; highest WSTS growth on record.",
+          },
+          {
+            headline: "How copper's plunge could hurt the AI buildout",
+            url: "https://www.marketwatch.com/story/coppers-plunge-could-make-the-ai-data-center-buildout-more-painful-7057f41c?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Copper shortage threatens AI data center construction; supply-chain constraint limits capex velocity.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Chinese web giant Tencent says new US GPU ban 'sets everyone back in China'",
+            url: "https://www.theregister.com/systems/2026/11/19/chinese-web-giant-tencent-says-new-us-gpu-ban-sets-everyone-back-in-china/5310927",
+            source: "The Register",
+            image: "https://image.theregister.com/233376.jpg?imageId=233376&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Tencent warns US GPU export ban delays China's AI development; may accelerate domestic chip push.",
+          },
+          {
+            headline: "Even His Own Officials Don't Think Trump's China Trip Will Lead to Progress on AI",
+            url: "https://www.wired.com/story/administration-officials-dont-think-much-ai-progress-will-come-of-trumps-china-visit/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6afcfe9d821bf3ffcbf308a8/191:100/w_1280,c_limit/politics_trump_adventures_china.jpg",
+            oneliner: "Trump China visit unlikely to yield AI chip progress; Huang scandal derails negotiations.",
+          },
+          {
+            headline: "America's AI Chip War Is Heating Up in the Dumbest Possible Ways",
+            url: "https://www.wired.com/story/the-ai-chip-war-meets-the-jensen-huang-affair/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6afcdd342972080ddb9f0499/191:100/w_1280,c_limit/AI-Lab-US-Chip-War-Business.jpg",
+            oneliner: "Trump admin AI chip restrictions tied to Huang scandal; policy coherence risks exports.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "US tech outages blamed on rush to fix bugs found by AI",
+            url: "https://www.ft.com/content/96c565f1-f229-40b6-91e8-7a849ec4b208?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Microsoft, JPMorgan outages tied to accelerated AI bug patching; infrastructure reliability at risk.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 75,
     date: "November 18, 2026",
     slug: "issue-75",

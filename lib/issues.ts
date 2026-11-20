@@ -60,6 +60,154 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 77,
+    date: "November 20, 2026",
+    slug: "issue-77",
+    title: "Anthropic IPO Pops. NVIDIA Crashes. China Export Fight Heats.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "OpenAI helped AMD improve its upcoming flagship GPU design by 14% PPA — GPT models also helped Lisa Su's outfit boost its new CPUs",
+            url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/openai-helped-amd-improve-its-upcoming-flagship-gpu-design-by-14-percent-ppa-gpt-models-also-helping-lisa-sus-outfit-boost-its-new-cpus",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/yS3AgV3zrTm8EwpR26QH6k-1033-80.png",
+            oneliner: "OpenAI-optimized AMD GPU gains 14% performance, reshaping competitive GPU landscape.",
+          },
+          {
+            headline: "Nvidia's stock falls further. It has lost $669 billion in six trading days.",
+            url: "https://www.marketwatch.com/story/nvidias-stock-falls-further-it-has-lost-611-billion-in-six-trading-days-434af231?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "NVIDIA loses $669B market cap in six days; leadership crisis deepens.",
+          },
+          {
+            headline: "Enterprise AI is pushing cloud infrastructure beyond the GPU",
+            url: "https://siliconangle.com/2026/11/19/enterprise-ai-pushing-cloud-infrastructure-beyond-gpu-kubeconna/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Enterprise-AIs-Full-Stack-Cloud-Strategy.png",
+            oneliner: "Production AI workloads demand non-GPU accelerators; infrastructure vendors pivot.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Memory R&D Is a High-Stakes Game",
+            url: "https://www.eetimes.com/memory-rd-is-a-high-stakes-game/",
+            source: "EE Times",
+            image: null,
+            oneliner: "AI-driven memory R&D partnerships intensify; cost/risk sharing reshapes DRAM landscape.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Anthropic shares jump 17% after record Wall Street listing",
+            url: "https://www.ft.com/content/2b203097-7c61-464f-810f-962912a133dd?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Anthropic raises $81B in largest IPO on record; AI valuation fever continues.",
+          },
+          {
+            headline: "Ecolab Launches Liquid Cooling Ecosystem to Shape the Industry's Most Efficient AI Infrastructure",
+            url: "https://www.semiconductor-digest.com/ecolab-launches-liquid-cooling-ecosystem-to-shape-the-industrys-most-efficient-ai-infrastructure/?utm_source=rss&utm_medium=rss&utm_campaign=ecolab-launches-liquid-cooling-ecosystem-to-shape-the-industrys-most-efficient-ai-infrastructure",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Ecolab opens liquid cooling ecosystem; thermal management becomes capex bottleneck.",
+          },
+          {
+            headline: "A CoreWeave co-founder just made an unconventional $30 million wager on its battered bonds",
+            url: "https://www.marketwatch.com/story/a-coreweave-co-founder-just-made-an-unconventional-30-million-wager-on-its-battered-bonds-5586b0e9?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "CoreWeave bond purchase signals insider confidence; AI infrastructure debt distressed.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Over 30% Of Approved U.S. AI Chips, Including NVIDIA's H200, Went To Pentagon-Listed Chinese Military Companies, House Committee Data Reveals",
+            url: "https://wccftech.com/trump-administration-approved-nearly-900000-nvidia-amd-ai-chips-for-china/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "879,000 NVIDIA/AMD AI chips approved for Chinese military companies; export controls crisis.",
+          },
+          {
+            headline: "US approved sale of Nvidia and AMD chips to Chinese companies",
+            url: "https://www.ft.com/content/76342072-2781-4b16-ba3b-816a25214483?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Pentagon linked PLA military to approved chip exports; U.S. policy under fire.",
+          },
+          {
+            headline: "Commerce approved sales of more than 879,000 AI chips to Chinese companies, Rep. Mast says",
+            url: "https://www.cnbc.com/2026/11/19/nvidia-amd-china-chip-sales-congress.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108555825-1795118102467-gettyimages-2304282548-mast_360_111026.jpeg?v=1795118157&amp;w=1920&amp;h=1080",
+            oneliner: "Congress demands tighter export controls after 879K chip sales to China disclosed.",
+          },
+          {
+            headline: "AMD dives on short seller report of alleged China exposure",
+            url: "https://www.cnbc.com/2026/11/19/amd-falls-on-short-seller-report-of-alleged-china-exposure.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108475785-1793209626528-gettyimages-2298419069-SKOREA_AMD.jpeg?v=1793209658&amp;w=1920&amp;h=1080",
+            oneliner: "AMD stock drops 7% over firmware detected at blacklisted Chinese company.",
+          },
+          {
+            headline: "Lawmakers form bipartisan caucus to create meaningful AI safety legislation",
+            url: "https://siliconangle.com/2026/11/19/lawmakers-form-bipartisan-caucus-to-create-meaningful-ai-safety-legislation/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Screenshot-from-2026-11-20-08-48-18.png",
+            oneliner: "U.S. lawmakers launch AI Safety caucus; regulation likely impacts chip demand.",
+          },
+          {
+            headline: "New Windows 11 lock screen zero-day unlocks BitLocker-protected PCs with just a few keystrokes",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/new-windows-11-lock-screen-zero-day-unlocks-bitlocker-protected-pcs-with-just-a-few-keystrokes-win-u-keyboard-trick-lets-physical-attackers-run-usb-payloads-or-create-new-admin-accounts",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/sR3wn4pbkQv44DiMtCfRCY-2048-80.jpg",
+            oneliner: "Windows 11 BitLocker bypass zero-day; edge AI device security compromised.",
+          },
+          {
+            headline: "Chase, Visa, Mastercard confirm third-party cyberattacks that may have exposed customers' info",
+            url: "https://www.theregister.com/security/2026/11/19/chase-visa-mastercard-confirm-third-party-cyberattacks-that-may-have-exposed-customers-info/5311175",
+            source: "The Register",
+            image: "https://image.theregister.com/5311179.jpg?imageId=5311179&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Major payment networks breached via third-party; infrastructure security risks mount.",
+          },
+          {
+            headline: "Flaws in VMware and KVM need attention, if you have time while fixing Java, PHP, and everything else",
+            url: "https://www.theregister.com/security/2026/11/20/flaws-in-vmware-and-kvm-need-attention-if-you-have-time-while-fixing-java-php-and-everything-else/5311193",
+            source: "The Register",
+            image: "https://image.theregister.com/262623.jpg?imageId=262623&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Critical VMware/KVM virtualization flaws; data center hypervisor infrastructure at risk.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Boston Dynamics & GlobalFoundries Expand Robotics Collaboration",
+            url: "https://www.semiconductor-digest.com/boston-dynamics-globalfoundries-expand-robotics-collaboration/?utm_source=rss&utm_medium=rss&utm_campaign=boston-dynamics-globalfoundries-expand-robotics-collaboration",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "GF deploys Boston Dynamics Spot for autonomous fab asset management.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 76,
     date: "November 19, 2026",
     slug: "issue-76",

@@ -60,6 +60,140 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 78,
+    date: "November 24, 2026",
+    slug: "issue-78",
+    title: "TSMC Halts China Shipments. Nvidia Probe Widens. Memory Costs Squeeze Auto.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AI agents design an entirely new CPU architecture from scratch, startup claims",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/ai-agents-design-an-entirely-new-cpu-architecture-from-scratch-startup-claims-frostbite-posts-4-59x-the-performance-per-watt-of-an-in-order-core-in-pre-silicon-tests",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/E6ZGdHQ5GTZE5a3yPzPScR-2560-80.jpg",
+            oneliner: "Architect Labs AI agents design Frostbite CPU; claims 4.59x perf/watt breakthrough.",
+          },
+          {
+            headline: "Microsoft Unveils RDMA Over USB4 For Windows 11, Combining Multiple PCs To Run Massive AI Models With Up To 4X Lower Latency",
+            url: "https://www.wccftech.com/microsoft-unveils-rdma-over-usb4-for-windows-11-combining-multiple-pcs-to-run-massive-ai-models-with-up-to-4x-lower-latency/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Windows 11 RDMA-USB4 clusters multi-PC GPUs; edge/distributed AI inference cost reduction.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Elon Musk Blames Memory And Storage Price Hikes For Doubling Tesla's AI4 Computer Costs, Says It \"Costs Twice As Much\"",
+            url: "https://www.wccftech.com/elon-musk-says-teslas-ai4-computer-now-costs-twice-as-much-due-to-memory-and-storage-price-hikes/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "DRAM/NAND shortage doubles Tesla AI4 BOM; automotive chip supply crisis deepens.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "The Enigma of SoftBank's $1 Trillion SK Hynix Buyout Attempt",
+            url: "https://www.eetimes.com/the-enigma-of-softbanks-1-trillion-sk-hynix-buyout-attempt/",
+            source: "EE Times",
+            image: null,
+            oneliner: "SoftBank's failed $1T SK Hynix acquisition reveals memory supply desperation in AI era.",
+          },
+          {
+            headline: "The problem with the circular AI economy",
+            url: "https://www.ft.com/content/e49add11-3cc8-4edd-8daa-db8daaf994dd?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Nvidia vendor financing model fragile; AI capex tower built on leverage risks collapse.",
+          },
+          {
+            headline: "Employees at Eric Trump-backed robot startup lose health benefits as company's cash crunch deepens",
+            url: "https://www.cnbc.com/2026/11/22/foundation-future-industries-health-benefits-payroll-base-group.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108313716-17800536432026-03-12t071236z_1666355942_rc27fjaubt68_rtrmadp_0_tech-robots-conflict-zones.jpeg?v=1780053657&amp;w=1920&amp;h=1080",
+            oneliner: "Foundation robotics seeks $150M from Base Group; burn rate signals foundry capex pressure.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "TSMC reportedly pauses shipments to Chinese designers after U.S. export rules flag decade-old 16nm and 14nm nodes",
+            url: "https://www.tomshardware.com/tech-industry/policy/tsmc-reportedly-pauses-shipments-to-chinese-designers-after-u-s-export-rules-flag-decade-old-16nm-and-14nm-nodes-new-bis-controls-threaten-smartphone-tv-and-automotive-chips",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/wPT2pgJDrMKWtsy78z2WnY-1920-80.jpg",
+            oneliner: "TSMC halts China orders; BIS export regs threaten smartphone/auto chip supply chains globally.",
+          },
+          {
+            headline: "U.S. probes Megaspeed, Alice Huang as new figure emerges in Nvidia chip case",
+            url: "https://www.cnbc.com/2026/11/23/nvidia-megaspeed-chipmaker-us.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108547468-1794318020652-gettyimages-2303986898-AFP_D6ZC9G6.jpeg?v=1794530723&amp;w=1920&amp;h=1080",
+            oneliner: "DOJ widens Nvidia illegal export probe to include new associates; regulatory risk persists.",
+          },
+          {
+            headline: "Bessent refuses to rule out Huang's return to Nvidia",
+            url: "https://www.ft.com/content/91b7a3a6-8ac5-4327-ad03-6d951f287346?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Treasury signals Nvidia founder Huang may return; political pressure compounds export control uncertainty.",
+          },
+          {
+            headline: "Google claims last week's critical VMware bug was under attack in September",
+            url: "https://www.theregister.com/virtualization/2026/11/23/google-claims-last-weeks-critical-vmware-bug-was-under-attack-in-september/5311547",
+            source: "The Register",
+            image: "https://image.theregister.com/261387.jpg?imageId=261387&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "ARMORY CASTLE VMware 0-day; datacenter security threat to AI/foundry infrastructure.",
+          },
+          {
+            headline: "Banks Have Had It Up to Here With Your AI Agent",
+            url: "https://www.wired.com/story/banks-are-cracking-down-on-ai-agents/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6b0080a25f35c47a5c116087/191:100/w_1280,c_limit/GettyImages-2285133719.jpg",
+            oneliner: "Major banks ban third-party AI agents; LLM inference liability shifts to consumers.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "CEO Interview with Tobias Pohl of CELUS",
+            url: "https://semiwiki.com/ceo-interviews/376273-ceo-interview-with-tobias-pohl-of-celus/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "CELUS AI PCB design platform serves 70K engineers; EDA automation reshaping design workflows.",
+          },
+          {
+            headline: "CEO Interview with Dr. Sameer Pawanekar of Ramtera",
+            url: "https://semiwiki.com/ceo-interviews/376107-ceo-interview-with-dr-sameer-pawanekar-of-ramtera/",
+            source: "SemiWiki",
+            image: null,
+            oneliner: "Ramtera DRC/LVS/ERC/place-and-route EDA tools target advanced node verification.",
+          },
+          {
+            headline: "As cars go digital, US consumers pay an extra $12 billion a year for repairs",
+            url: "https://www.theregister.com/personal-tech/2026/11/22/as-cars-go-digital-us-consumers-pay-an-extra-12-billion-a-year-for-repairs/5311412",
+            source: "The Register",
+            image: "https://image.theregister.com/5311508.jpg?imageId=5311508&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "$12B annual auto repair software tax; semiconductors embedded in vehicles drive aftermarket.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 77,
     date: "November 20, 2026",
     slug: "issue-77",

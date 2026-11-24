@@ -60,6 +60,135 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 79,
+    date: "November 24, 2026",
+    slug: "issue-79",
+    title: "Huang Returns, Nvidia Soars $1T. Market Rebounds. Geopolitics Tighten.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Amazon acquires key assets of AI startup Decart for reported $7.5B",
+            url: "https://siliconangle.com/2026/11/23/amazon-acquires-key-assets-of-ai-startup-decart-for-reported-7-5b/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Decart.png",
+            oneliner: "Amazon buys Decart AI tech for $7.5B; accelerates custom chip efficiency gains for AWS.",
+          },
+          {
+            headline: "Amazon may have just found a 'cheap' way to get a lot more out of its chips",
+            url: "https://www.marketwatch.com/story/amazon-may-have-just-found-a-cheap-way-to-get-a-lot-more-out-of-its-chips-bd822bd5?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Decart acquisition positions Amazon to slash custom silicon development costs; reduces NVIDIA dependency.",
+          },
+          {
+            headline: "PFN and SEMIFIVE Collaborate to Develop the MN-Core L2000 Series of Next-Generation AI Inference Chips",
+            url: "https://www.semiconductor-digest.com/pfn-and-semifive-collaborate-to-develop-the-mn-core-l2000-series-of-next-generation-ai-inference-chips/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=pfn-and-semifive-collaborate-to-develop-the-mn-core-l2000-series-of-next-generation-ai-inference-chips",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "PFN-SEMIFIVE build MN-Core L2000; Japanese AI inference chip enters competitive market vs NVIDIA.",
+          },
+          {
+            headline: "Anthropic says Claude solved an age-old math problem, but the written proof is 250,000 pages of slop",
+            url: "https://www.theregister.com/ai-and-ml/2026/11/24/anthropic-says-claude-solved-an-age-old-math-problem-but-the-written-proof-is-250000-pages-of-slop/5311775",
+            source: "The Register",
+            image: "https://image.theregister.com/5264648.jpg?imageId=5264648&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Claude's opaque proof-solving raises AI transparency concerns; implications for verification in chip design.",
+          },
+          {
+            headline: "NSING Featured CRA, AI Robotics, Motor Control and Digital Energy at electronica 2026",
+            url: "https://www.eetimes.com/nsing-featured-cra-ai-robotics-motor-control-and-digital-energy-at-electronica-2026/",
+            source: "EE Times",
+            image: null,
+            oneliner: "NSING showcases N32 MCUs and BLE SoCs for robotics; expands AI-at-edge silicon portfolio.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "Nvidia adds nearly $1tn to market value after it reinstates Jensen Huang",
+            url: "https://www.ft.com/content/08914b05-bbfa-478d-b38a-549acfc1aae6?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Huang reinstatement triggers $1T market cap recovery; confidence restored in AI capex cycle.",
+          },
+          {
+            headline: "Jensen Huang is 'too big to fire,' putting Nvidia's governance in focus: analysts",
+            url: "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-governance.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108558111-1795509261630-gettyimages-2300714586-GERMANY_NVIDIA.jpeg?v=1795509280&amp;w=1920&amp;h=1080",
+            oneliner: "Huang's reinstatement exposes Nvidia board weakness; founder-dependency poses long-term succession risk.",
+          },
+          {
+            headline: "Six key questions raised by Jensen Huang's return to Nvidia",
+            url: "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-politics-market.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108550584-1794519112118-gettyimages-2297269641-TRUMP_TECH_AI.jpeg?v=1795450322&amp;w=1920&amp;h=1080",
+            oneliner: "Huang return raises governance, political influence, and AI strategy clarity questions for investors.",
+          },
+          {
+            headline: "HPE just posted its strongest growth ever — but its stock is sinking",
+            url: "https://www.marketwatch.com/story/hpe-just-posted-its-strongest-growth-ever-and-its-stock-is-tacking-on-more-big-gains-4421cebb?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "HPE hits record revenue on AI server demand; raised guidance but stock stumbles on profit concerns.",
+          },
+          {
+            headline: "HPE's stock slides despite record revenue growth and upbeat forecast",
+            url: "https://siliconangle.com/2026/11/23/hpes-stock-slides-despite-record-revenue-growth-and-upbeat-forecast/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Neri.png",
+            oneliner: "HPE revenue surges on AI servers but stock declines; Nvidia-fueled rotation overwhelms solid results.",
+          },
+          {
+            headline: "Inside Nvidia, Not Everyone Is Celebrating Jensen Huang's Return",
+            url: "https://www.wired.com/story/inside-nvidia-not-everyone-is-celebrating-jensen-huangs-return/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6b0489fe20864bfc4bb456b5/191:100/w_1280,c_limit/Jensen-Huang-Tells-Nvidia-Employees-Business-2300373740.jpg",
+            oneliner: "Nvidia staff skeptical of Huang return; cultural concerns persist despite market enthusiasm.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Inside the 'war room' that lobbied Trump to bring back Jensen Huang",
+            url: "https://www.ft.com/content/82d3be02-8ac7-4acb-aefa-6e3722ee05cc?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Trump, Musk, and VC titans pressured Nvidia board to reverse Huang ouster for AI dominance.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "Cisco and OpenAI pitch eBPF kernel plugins as the way to tame the patchpocalypse",
+            url: "https://www.theregister.com/security/2026/11/24/cisco-and-openai-pitch-ebpf-kernel-plugins-as-the-way-to-tame-the-patchpocalypse/5311795",
+            source: "The Register",
+            image: "https://image.theregister.com/1682068.jpg?imageId=1682068&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Shirudo project deploys eBPF patches in seconds; addresses critical vulnerability response in AI era.",
+          },
+          {
+            headline: "SCHMID Launches QuantumLine P+ for Void-Free Bottom-Up Copper Filling of Through-Glass Vias",
+            url: "https://www.semiconductor-digest.com/schmid-launches-quantumline-p-for-void-free-bottom-up-copper-filling-of-through-glass-vias/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=schmid-launches-quantumline-p-for-void-free-bottom-up-copper-filling-of-through-glass-vias",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "SCHMID QuantumLine P+ advances through-glass via copper fill; enables next-gen chiplet packaging.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 78,
     date: "November 24, 2026",
     slug: "issue-78",

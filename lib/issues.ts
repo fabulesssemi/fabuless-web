@@ -60,6 +60,142 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 80,
+    date: "November 25, 2026",
+    slug: "issue-80",
+    title: "Huang Back. Huawei Guilty. Debt Markets Shudder.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "Dell and HP beat expectations, but their fortunes are diverging as AI dynamics crush the PC market",
+            url: "https://siliconangle.com/2026/11/24/dell-and-hp-beat-expectations-but-their-fortunes-are-diverging-as-ai-dynamics-crush-the-pc-market/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/IMG_4227-1-2048x1365-1.jpg",
+            oneliner: "Dell thrives on AI servers; HP suffers as traditional PC market crushed by AI infrastructure shift.",
+          },
+          {
+            headline: "Dell and HPE both say they've become 'different companies'",
+            url: "https://www.theregister.com/systems/2026/11/25/dell-and-hpe-both-say-theyve-become-different-companies/5312003",
+            source: "The Register",
+            image: "https://image.theregister.com/262697.jpg?imageId=262697&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Dell and HPE pivot from hardware to AI infrastructure and services; supply chain implications for silicon, cooling, power.",
+          },
+          {
+            headline: "NVIDIA's GPU Display Driver Bug Writing Excessive To The SSD Can Also Impact Gaming Performance",
+            url: "https://wccftech.com/nvidia-driver-bug-ssd-writes-impacts-gaming-performance-mw4/",
+            source: "WCCFtech",
+            image: null,
+            oneliner: "Nvidia driver bug causes excessive SSD writes, 20FPS performance loss in MW4; immediate update or rollback needed.",
+          },
+          {
+            headline: "From AI Platforms to Industry Innovation: How NVIDIA Connects Startups to Build an AI Ecosystem",
+            url: "https://www.eetimes.com/from-ai-platforms-to-industry-innovation-how-nvidia-connects-startups-to-build-an-ai-ecosystem/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Nvidia platforms enable AI startups to scale production workloads; software-hardware lock-in deepens.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Micron's stock falls as an analyst warns about a future supply glut",
+            url: "https://www.marketwatch.com/story/microns-stock-falls-as-an-analyst-warns-about-a-future-supply-glut-f7fbeefb?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "BNP Paribas warns Micron faces memory oversupply risk; pricing power threatened despite AI demand.",
+          },
+          {
+            headline: "Southchip Showcases Automotive Power, Charging, and Load-Control Solutions at electronica Munich",
+            url: "https://www.eetimes.com/southchip-showcases-automotive-power-charging-and-load-control-solutions-at-electronica-munich/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Southchip demonstrates automotive PMICs, 240W USB charging, wireless charging; EV power management chip diversification.",
+          },
+          {
+            headline: "Nutanix CEO announces gradual departure, intent to complete set of storage links",
+            url: "https://www.theregister.com/virtualization/2026/11/25/nutanix-ceo-announces-gradual-departure-intent-to-complete-set-of-storage-links/5312010",
+            source: "The Register",
+            image: "https://image.theregister.com/226792.jpg?imageId=226792&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "Ramaswami exits Nutanix; completion of storage partnerships before transition.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "AI debt markets shudder as Nvidia's top 'banker' returns",
+            url: "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108550383-17945082062026-11-12t182457z_38244363_rc2imoa59cm1_rtrmadp_0_nvidia-ceo.jpeg?v=1794508225&amp;w=1920&amp;h=1080",
+            oneliner: "Huang reinstatement raises AI debt market jitters; lenders worry about capex sustainability and credit quality.",
+          },
+          {
+            headline: "Dell's stock rises as the AI boom helps sales more than double",
+            url: "https://www.marketwatch.com/story/dells-stock-rises-as-the-ai-boom-helps-sales-more-than-double-cfb8cf65?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "Dell backlogs rigorously vetted for customer quality, capital, and power; server demand accelerating.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "U.S. jury convicts Huawei in a criminal trial over fraud and trade secrets",
+            url: "https://www.cnbc.com/2026/11/25/huawei-fraud-trade-trial.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108364994-1789747785768-gettyimages-2295274096-boivin-photoill260918_npjnP.jpeg?v=1789747819&amp;w=1920&amp;h=1080",
+            oneliner: "Huawei convicted of bank fraud, money laundering, trade secret theft; narrows supplier options for non-US chipmakers.",
+          },
+          {
+            headline: "Huawei convicted in US trial that exposed corporate espionage and sanctions evasion",
+            url: "https://www.ft.com/content/6c64b8b8-531c-4eea-8fd0-90c4c4967ab9?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Eight-year legal battle ends with guilty verdict; reinforces US enforcement against sanctioned Chinese telecoms.",
+          },
+          {
+            headline: "Will the Nvidia fallout kill off Asia's data centre boom?",
+            url: "https://www.ft.com/content/e5df32d1-1801-4d81-b2f5-b83e93377c1c?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "US scrutiny of Asia data-centre projects threatens chip access deals; Chinese customers face tighter export controls.",
+          },
+          {
+            headline: "Congress scrutinizes Jensen Huang's return to Nvidia as Megaspeed restrictions raise questions",
+            url: "https://siliconangle.com/2026/11/24/congress-scrutinizes-jensen-huangs-return-as-megaspeed-restrictions-raise-questions/",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Jensen-Huang-1.png",
+            oneliner: "Commerce Department applies new export restrictions to Megaspeed; lawmakers question Huang reinstatement amid national security concerns.",
+          },
+          {
+            headline: "Jensen Huang's Return Shows Nvidia Is Too Big to Police",
+            url: "https://www.wired.com/story/jensen-huang-nvidia-us-national-security-risks/",
+            source: "Wired",
+            image: "https://media.wired.com/photos/6b05a2cb470266bfec0ce9be/191:100/w_1280,c_limit/GettyImages-2306037065.jpg",
+            oneliner: "National security experts say Nvidia's economic centrality to US AI overrides vetting of CEO's foreign ties.",
+          },
+          {
+            headline: "US DOJ touts \"largest-ever\" crackdown on scammers across the globe as it seizes 14,000 devices and $17 billion",
+            url: "https://www.tomshardware.com/tech-industry/cyber-security/us-doj-touts-largest-ever-crackdown-on-scammers-across-the-globe-as-it-seizes-14-000-devices-and-usd17-billion-in-illicit-funds-operation-results-in-800-defendants-and-frees-2-200-forced-laborers",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/iNhiQPvhodMPdeZqQC78aX-1920-80.jpg",
+            oneliner: "DOJ seizes 14K devices, recovers $8B in largest anti-scam operation; cybersecurity infrastructure demand accelerates.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 79,
     date: "November 24, 2026",
     slug: "issue-79",

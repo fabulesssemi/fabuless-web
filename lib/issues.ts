@@ -60,6 +60,140 @@ export type Issue = {
 
 export const issues: Issue[] = [
   {
+    number: 81,
+    date: "November 26, 2026",
+    slug: "issue-81",
+    title: "Nvidia Halts SE Asia Chips. TSMC Texas Delayed to 2031. AI Trade Unravels.",
+    sections: [
+      {
+        category: "Compute",
+        stories: [
+          {
+            headline: "AI infrastructure stocks continue their slide, but Anthropic closes higher",
+            url: "https://siliconangle.com/2026/11/25/ai-infrastructure-stocks-continue-their-slide-but-anthropic-closes-higher",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/Unsplash3.png",
+            oneliner: "AI chipmakers crater; Anthropic software play outperforms amid infrastructure spending doubt.",
+          },
+        ],
+      },
+      {
+        category: "Memory & Networking",
+        stories: [
+          {
+            headline: "Seoul Semiconductor Enables Beyond-OLED Picture Quality with LCD",
+            url: "https://www.semiconductor-digest.com/seoul-semiconductor-enables-beyond-oled-picture-quality-with-lcd/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=seoul-semiconductor-enables-beyond-oled-picture-quality-with-lcd",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "Seoul Semi WICOP Pixel packaging enables ultra-fine-pitch RGB; display chiplet architecture disrupts LCD-OLED economics.",
+          },
+        ],
+      },
+      {
+        category: "Capital Flows",
+        stories: [
+          {
+            headline: "TSMC's $22.6 billion Texas plan wouldn't make 2nm-or-better chips until 2031",
+            url: "https://www.tomshardware.com/tech-industry/semiconductors/tsmc-files-for-usd22-6-billion-texas-fab-campus-with-local-tax-breaks-just-one-county-over-from-musks-terafab-proposed-brazos-county-plant-wont-make-2nm-class-chips-until-2031",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/xPVAVkLgv5xCxXmyTAXzVX-1920-80.jpg",
+            oneliner: "TSMC US foundry delayed 5+ years; domestic advanced chip capacity remains geopolitical liability.",
+          },
+          {
+            headline: "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
+            url: "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108559274-1795616819098-gettyimages-2306584360-vcg111684383907.jpeg?v=1795616838&amp;w=1920&amp;h=1080",
+            oneliner: "S&P downgrades NVIDIA outlook over Huang scandal; borrowing costs, investor confidence at risk.",
+          },
+          {
+            headline: "Software stocks spared in tech rout as AI narrative shifts",
+            url: "https://www.ft.com/content/90b82a64-4f58-45d7-8a6a-4c2730545b65?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "Semiconductor and software stocks now neck-and-neck; AI capex ROI thesis under investor review.",
+          },
+          {
+            headline: "Nvidia's stock has given back a big chunk of Monday's rally as dip buyers cash in",
+            url: "https://www.marketwatch.com/story/nvidias-stock-is-giving-back-more-than-half-of-mondays-rally-as-dip-buyers-cash-in-ee4fa52c?mod=mw_rss_topstories",
+            source: "MarketWatch",
+            image: null,
+            oneliner: "NVIDIA retail dip-buy profits evaporate; institutional conviction wanes on AI capex sustainability.",
+          },
+        ],
+      },
+      {
+        category: "Geopolitics & Policy",
+        stories: [
+          {
+            headline: "Nvidia halts chip shipments to south-east Asia",
+            url: "https://www.ft.com/content/7838a715-07d4-4605-aa60-21f5af2b2370?syn-25a6b1a6=1",
+            source: "Financial Times",
+            image: null,
+            oneliner: "NVIDIA export controls hit Malaysia, Singapore, Thailand, Indonesia; China workaround risk rises.",
+          },
+          {
+            headline: "Trump says a pardon for Nvidia CEO Jensen Huang is 'always an option'",
+            url: "https://www.tomshardware.com/tech-industry/big-tech/trump-says-a-pardon-for-nvidia-ceo-jensen-huang-is-always-an-option-urges-him-not-to-plead-the-fifth-ahead-of-house-committee-grilling",
+            source: "Tom's Hardware",
+            image: "https://cdn.mos.cms.futurecdn.net/MtvzW6bzjpUC6wKfyCAg8-1920-80.jpg",
+            oneliner: "Trump offers Huang pardon; political backing reduces legal/governance risk on NVIDIA leadership.",
+          },
+          {
+            headline: "SIA Applauds Introduction of Bipartisan Legislation to Extend Semiconductor Investment Credit",
+            url: "https://www.semiconductor-digest.com/sia-applauds-introduction-of-bipartisan-legislation-to-extend-semiconductor-investment-credit/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=sia-applauds-introduction-of-bipartisan-legislation-to-extend-semiconductor-investment-credit",
+            source: "Semiconductor Digest",
+            image: null,
+            oneliner: "CHIPS Act investment credit faces year-end cliff; extension bill critical for US foundry capex sustainability.",
+          },
+          {
+            headline: "India's government ponders cradle to grave AI oversight",
+            url: "https://www.theregister.com/public-sector/2026/11/26/indias-government-ponders-cradle-to-grave-ai-oversight/5312275",
+            source: "The Register",
+            image: "https://image.theregister.com/5312280.jpg?imageId=5312280&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+            oneliner: "India AI regulation framework proposed; emerging market controls on model deployment, semiconductor procurement.",
+          },
+        ],
+      },
+      {
+        category: "Other",
+        stories: [
+          {
+            headline: "SpaceX wins FCC approval to deploy 1 million orbital data center satellites",
+            url: "https://www.cnbc.com/2026/11/25/spacex-fcc-satellite-approval.html",
+            source: "CNBC",
+            image: "https://image.cnbcfm.com/api/v1/image/108368728-1790601399956-Screenshot_2026-09-28_at_91434_AM.png?v=1790601411&amp;w=1920&amp;h=1080",
+            oneliner: "SpaceX Starmind satellites approved for orbital compute; AWS, cloud providers face new competition vector.",
+          },
+          {
+            headline: "FCC clears SpaceX to put up to 1 million Starmind data centers in space",
+            url: "https://siliconangle.com/2026/11/25/fcc-clears-spacex-to-put-up-to-1-million-starmind-data-centers-in-space",
+            source: "SiliconAngle",
+            image: "https://images.siliconangle.com/blogs.dir/1/files/2026/11/spacexstarmind-800x450.png",
+            oneliner: "1M orbital data center satellites; long latency but distributed AI inference capex model emerges.",
+          },
+          {
+            headline: "Infineon CoolSET™ SiP Enables Efficient, 'First-Time-Right' Auxiliary Power Designs",
+            url: "https://www.eetimes.com/infineon-coolset-sip-enables-efficient-first-time-right-auxiliary-power-designs/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Infineon CoolSET SiP reduces power supply complexity; data center auxiliary PSU efficiency gains.",
+          },
+          {
+            headline: "MCRPS Power Supply for Enterprise Data Centers",
+            url: "https://www.eetimes.com/mcrps-power-supply-for-enterprise-data-centers/",
+            source: "EE Times",
+            image: null,
+            oneliner: "Infineon MCRPS reference design for redundant enterprise PSUs; data center power architecture standardization.",
+          },
+        ],
+      },
+    ],
+    podcasts: [],
+    earnings: [],
+    quotes: [],
+  },
+  {
     number: 80,
     date: "November 25, 2026",
     slug: "issue-80",
